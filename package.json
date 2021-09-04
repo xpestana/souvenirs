@@ -17,12 +17,21 @@
         "@vue/compiler-sfc": "^3.0.5",
         "autoprefixer": "^10.2.4",
         "axios": "^0.21",
+        "bootstrap": "^4.6.0",
+        "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
+        "popper.js": "^1.16.1",
         "postcss": "^8.2.13",
         "postcss-import": "^14.0.1",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.32.11",
+        "sass-loader": "^11.0.1",
         "tailwindcss": "^2.1.2",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.10.1"
     }
 }
