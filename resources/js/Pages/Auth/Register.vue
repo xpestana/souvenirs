@@ -2,7 +2,15 @@
     <Head title="Register" />
 
     <BreezeValidationErrors class="mb-4" />
-
+    <div>
+        <p>formulario para registro de hotel (aun incompleto, faltan los datos necesarios para el hotel)</p>
+        <p>El registro le crea el rol Hotel, para el admin del hotel</p>
+        <p>ruta: route('register')</p>
+        <p>Validaciones</p>
+        <p>'name' => 'required|string|max:255',</p>
+         <p>   'email' => 'required|string|email|max:255|unique:users',</p>
+          <p>  'password' => ['required', 'confirmed', Rules\Password::defaults()],</p>
+    </div>
     <form @submit.prevent="submit">
         <div>
             <BreezeLabel for="name" value="Name" />

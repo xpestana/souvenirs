@@ -6,7 +6,11 @@
     <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
         {{ status }}
     </div>
-
+    <div class="mt-4">
+        <p>Logueo de usuario, ruta a utilizar route('login') method post:</p>
+        <p>los names a utilizar son los explicitos en el formulario</p>        
+        <p>email, password, remember</p>
+    </div>
     <form @submit.prevent="submit">
         <div>
             <BreezeLabel for="email" value="Email" />
