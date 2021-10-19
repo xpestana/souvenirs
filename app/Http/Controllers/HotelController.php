@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\hotel;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Redirect;
 
 class HotelController extends Controller
 {
@@ -35,7 +39,35 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validator = $this->validate($request, [
+            'name'              => 'required|string',
+            'email'             => 'required|string|email|max:255|unique:users',
+            'type'              => 'required|string', 'in:apartament,hotel',
+            'address'           => 'required|string',
+            'zone'              => 'required|string',
+        ]);
+
+        try {
+            $id = mt_Rand(1000000, 9999999);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make(Str::lower(Str::random(8))),
+            ]);
+
+            $hotel = hotel::create([
+                'user_id' => $user->id,
+                'type' => $request->type,
+                'address' => $request->address,
+                'zone' => $request->zone,
+            ]);
+            $user->assignRole('Hotel');
+        return Redirect::route('register.hotel')->with(['id'=>$id, 'message' => 'Update Success', 'code' => 200, 'status' => 'success']);  
+        } catch (Exception $e) {
+            
+        }
+       
     }
 
     /**
