@@ -54,7 +54,7 @@ class UserSeeder extends Seeder
             $userHotelProfile = $userHotel->hotel()->create([
                 'type'       => 'hotel',
                 'address'    => 'Direccion',
-                'zone'    => 'Merida',
+                'zone'       => 'Merida',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
             );
 
             $userOperatorProfile = $userOperator->profile()->create([
-                'hotel_id'   => $userHotelProfile->id,
+                'hotel_id'   => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

@@ -7,6 +7,7 @@
         <p>El registro le crea el rol Hotel, para el admin del hotel</p>
         <p>en cada input describe el tipo de datoq que recibe</p>
         <p>ruta a utilizar para guardar: route('hotels.store') / URL: /hotel / metodo POST</p>
+        <p>Controlador: HotelController funcion store</p>
         <p>Validaciones</p>
         <p>'name' => 'required|string|max:255' - nombre del hotel o del dueño del apartamento</p>
         <p>'email' => 'required|string|email|max:255|unique:users' - email o correo del hotel o del apartamento</p>
