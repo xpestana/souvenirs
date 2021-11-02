@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\hotel;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeReceived;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -51,10 +53,11 @@ class HotelController extends Controller
 
         try {
             $id = mt_Rand(1000000, 9999999);
+            $password = Str::random(8);
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make(Str::lower(Str::random(8))),
+                'password' => Hash::make(Str::lower($password)),
             ]);
 
             $hotel = hotel::create([
@@ -64,6 +67,7 @@ class HotelController extends Controller
                 'zone' => $request->zone,
             ]);
             $user->assignRole('Hotel');
+            Mail::to($user->email)->send(new WelcomeReceived($user, $password));
         return Redirect::route('register.hotel')->with(['id'=>$id, 'message' => 'Update Success', 'code' => 200, 'status' => 'success']);  
         } catch (Exception $e) {
             
