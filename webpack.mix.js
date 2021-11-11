@@ -11,7 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 mix.js('resources/js/app.js', 'public/js')
-    .vue()
+    .copyDirectory('resources/img', 'public/vendor_asset/img')
+	.copyDirectory('resources/css/custom', 'public/vendor_asset/css')
+	.copyDirectory('resources/fonts', 'public/vendor_asset/fonts')
+	.copyDirectory('resources/vendor_asset/js', 'public/vendor_asset/js')
+	.vue()
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps()
     .postCss('resources/css/app.css', 'public/css', [
@@ -21,7 +25,7 @@ mix.js('resources/js/app.js', 'public/js')
     ])
     .styles([
         'resources/css/custom.css',
-        ], 'public/css/all.css')
+		], 'public/css/all.css')
     .webpackConfig(require('./webpack.config'));
 
 if (mix.inProduction()) {
