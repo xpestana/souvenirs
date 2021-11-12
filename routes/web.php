@@ -6,6 +6,7 @@ use Inertia\Inertia;
 
 /*Controladores*/
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PruebaController;
 /*
 |--------------------------------------------------------------------------
@@ -52,13 +53,27 @@ Route::resource(
     ],
 );
 
+/*
+ADMINS
+ */
 
-
-
+Route::resource(
+    'admin',
+    AdminController::class, [
+        'names' => [
+            'index'     => 'admin.index',
+            'create'    => 'admin.create',
+            'edit'      => 'admin.edit',
+            'show'      => 'admin.show',
+            'store'     => 'admin.store',
+            'update'    => 'admin.update',
+            'destroy'   => 'admin.destroy',
+        ],
+    ],
+);
 
 /*************RUTAS PARA REALIZAR PRUEBAS ****************************/
 Route::get('/prueba', [PruebaController::class, 'index'])->name('prueba.index');
-Route::get('/register/hotel', [PruebaController::class, 'hotel'])->name('register.hotel');
 
 
 

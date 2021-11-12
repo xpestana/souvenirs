@@ -31,7 +31,7 @@ class HotelController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Pruebas/Register_hotel');
     }
 
     /**
