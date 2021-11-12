@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li><a href="#">¿Quiénes somos?</a></li>
+                                        <li><Link :href="route('quienes-somos')">¿Quiénes somos?</Link></li>
                                         <li><a href="account.html">Contacto</a></li>
                                         <li><a href="wishlist.html">Blog</a></li>
                                         <li><a href="cart.html">Soporte</a></li>

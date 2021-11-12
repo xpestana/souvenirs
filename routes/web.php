@@ -93,4 +93,8 @@ Route::get('/producto', function () {
     return Inertia::render('Product');
 })->name('producto');
 
+Route::get('/quienes-somos', function () {
+    return Inertia::render('AboutUs');
+})->name('quienes-somos');
+
 require __DIR__.'/auth.php';
