@@ -109,4 +109,9 @@ Route::get('/detalles-actividad', function () {
     return Inertia::render('DetailTours');
 })->name('detalles-actividad');
 
+
+Route::get('/checkout', function () {
+    return Inertia::render('Checkout');
+})->name('checkout');
+
 require __DIR__.'/auth.php';

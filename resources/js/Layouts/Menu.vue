@@ -83,7 +83,7 @@
                                                     <li>Total <span>$64.95</span></li>
                                                 </ul>
                                                 <div class="cart-actions text-center">
-                                                    <a class="cart-checkout" href="checkout.html">Checkout</a>
+                                                    <Link class="cart-checkout" :href="route('checkout')">Checkout</Link>
                                                 </div>
                                             </li>
                                             <!-- Cart Footer Inner End -->
