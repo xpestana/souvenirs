@@ -75,4 +75,18 @@ Route::resource(
 /*************RUTAS PARA REALIZAR PRUEBAS ****************************/
 Route::get('/prueba', [PruebaController::class, 'index'])->name('prueba.index');
 
+
+
+Route::get('/home', function () {
+    return Inertia::render('Home');
+})->name('home');
+
+Route::get('/actividades', function () {
+    return Inertia::render('Tours');
+})->name('actividades');
+
+Route::get('/souvenirs', function () {
+    return Inertia::render('Souvenirs');
+})->name('souvenirs');
+
 require __DIR__.'/auth.php';

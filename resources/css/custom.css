@@ -1,0 +1,33 @@
+#welcome {
+    height: 100vh;
+    background-image: url(/vendor_asset/img/bg-image/home.png);
+}
+
+#logo-welcome {
+    height: 85px;
+}
+
+#button-souvernirs, #button-activities {
+    color: white;
+}
+
+#welcome-text {
+    font-size: 3em;
+    line-height: 1em;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+    #logo-welcome {
+        height: 50px;
+    }
+    #welcome-text {
+        font-size: 1.5em;
+    }
+    #button-souvernirs, #button-activities {
+        padding: 10px;
+        font-size: 11px;
+    }
+}
