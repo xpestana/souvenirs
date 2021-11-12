@@ -6,8 +6,8 @@
                     <div class="row">
                        <!-- Logo Start Here -->
                         <div class="col-xl-2 col-lg-3 col-md-5 col-sm-6 col-5">
-                            <div class="logo">
-                                <a href="index.html"><img src="img/logo/logo.png" alt="logo"></a>
+                            <div id="container-logo">
+                                <Link :href="route('home')"><img id="logo-menu" src="/vendor_asset/img/logo/logo.png" alt="logo"></Link>
                             </div>
                         </div>
                         <!-- Logo End Here -->

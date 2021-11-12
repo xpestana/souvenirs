@@ -2,7 +2,7 @@
     <!-- Main Wrapper Start Here -->
     <div id="welcome" class="bg-image">
         <div class="row m-0 pt-50 justify-content-center w-100">
-            <img id="logo-welcome" src="vendor_asset/img/logo/logo.png">
+            <img id="logo-welcome" src="/vendor_asset/img/logo/logo.png">
         </div>
         <div class="row m-0 justify-content-center w-100">
             <div class="col-8 col-md-10 p-5">

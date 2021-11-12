@@ -1,14 +1,14 @@
 <template>
-    <Head title="Souvenirs" />
+    <Head title="Souvenirs"/>
 	<Layout>
     <!-- Main Wrapper Start Here -->
     <div class="wrapper">
-        <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(img/bg-image/hop-brech-bg.jpg);">
+        <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
             <div class="container">
                 <div class="breadcrumb-wrap text-center">
                     <h3>Souvenirs</h3>
                     <ol class="breadcrumb breadcrumb-list">
-                        <Link :href="route('home')"><li class="breadcrumb-item">Inicio</li></Link>
+                        <li class="breadcrumb-item"><Link :href="route('home')">Inicio</Link></li>
                         <li class="breadcrumb-item active">Souvenirs</li>
                     </ol>
                 </div>
@@ -94,7 +94,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p1.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -118,7 +118,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p2.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -142,7 +142,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p3.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -166,7 +166,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p4.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -190,7 +190,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p5.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -214,7 +214,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p6.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -238,7 +238,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p7.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -262,7 +262,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p8.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -286,7 +286,7 @@
                                             <!-- Single Product Start -->
                                             <div class="single-aboss-product mb-3">
                                                 <div class="pro-img">
-                                                    <a href="product-details.html"><img src="img/products/p1.jpg" alt=""></a>
+                                                    <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                                     <div class="pro-actions">
                                                         <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                                     </div>
@@ -314,7 +314,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-aboss-product">
                                         <div class="pro-img">
-                                            <a href="product-details.html"><img src="img/products/p1.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                             <div class="pro-actions">
                                                 <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                             </div>
@@ -341,7 +341,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-aboss-product">
                                         <div class="pro-img">
-                                            <a href="product-details.html"><img src="img/products/p2.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                             <div class="pro-actions">
                                                 <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                             </div>
@@ -368,7 +368,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-aboss-product">
                                         <div class="pro-img">
-                                            <a href="product-details.html"><img src="img/products/p3.jpg" alt="product-img"></a>
+                                            <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt="product-img"></a>
                                             <div class="pro-actions">
                                                 <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                             </div>
@@ -395,7 +395,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-aboss-product">
                                         <div class="pro-img">
-                                            <a href="product-details.html"><img src="img/products/p4.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                             <div class="pro-actions">
                                                 <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                             </div>
@@ -422,7 +422,7 @@
                                     <!-- Single Product Start -->
                                     <div class="single-aboss-product">
                                         <div class="pro-img">
-                                            <a href="product-details.html"><img src="img/products/p5.jpg" alt=""></a>
+                                            <a href="product-details.html"><img src="/vendor_asset/img/products/p1.png" alt=""></a>
                                             <div class="pro-actions">
                                                 <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
                                             </div>
@@ -497,16 +497,16 @@
                                         <!-- Thumbnail Large Image start -->
                                         <div class="tab-content">
                                             <div id="pro-1" class="tab-pane fade show active">
-                                                <a data-fancybox="images" href="img/products/p3.jpg"><img src="img/products/p3.jpg" alt="product-view"></a>
+                                                <a data-fancybox="images" href="/vendor_asset/img/products/p1.png"><img src="/vendor_asset/img/products/p1.png" alt="product-view"></a>
                                             </div>
                                             <div id="pro-2" class="tab-pane fade">
-                                                <a data-fancybox="images" href="img/products/p5.jpg"><img src="img/products/p5.jpg" alt="product-view"></a>
+                                                <a data-fancybox="images" href="/vendor_asset/img/products/p1.png"><img src="/vendor_asset/img/products/p1.png" alt="product-view"></a>
                                             </div>
                                             <div id="pro-3" class="tab-pane fade">
-                                                <a data-fancybox="images" href="img/products/p7.jpg"><img src="img/products/p7.jpg" alt="product-view"></a>
+                                                <a data-fancybox="images" href="/vendor_asset/img/products/p1.png"><img src="/vendor_asset/img/products/p1.png" alt="product-view"></a>
                                             </div>
                                             <div id="pro-4" class="tab-pane fade">
-                                                <a data-fancybox="images" href="img/products/p2.jpg"><img src="img/products/p2.jpg" alt="product-view"></a>
+                                                <a data-fancybox="images" href="/vendor_asset/img/products/p1.png"><img src="/vendor_asset/img/products/p1.png" alt="product-view"></a>
                                             </div>
                                         </div>
                                         <!-- Thumbnail Large Image End -->

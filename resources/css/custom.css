@@ -7,6 +7,19 @@
     height: 85px;
 }
 
+#logo-footer {
+    height: 120px;
+}
+
+#container-logo {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+#logo-menu {
+    height: 60px;
+}
+
 #button-souvernirs, #button-activities {
     color: white;
 }

@@ -23,9 +23,9 @@
 			<div class="col-lg-3 col-sm-6 col-md-4">
                             <div class="footer-widget">
                                 <div class="footer-logo mb-43">
-                                    <a href="index.html">
-                                        <img alt="brand-image" src="img/logo/footer-logo.png">
-                                    </a>
+                                    <Link :href="route('home')">
+                                        <img id="logo-footer" alt="brand-image" src="/vendor_asset/img/logo/logo.png">
+                                    </Link>
                                 </div>
                                 <div class="footer-addres">
                                     <p>Dirección</p>
@@ -113,3 +113,13 @@
         <!-- Footer Area End Here -->
 
 </template>
+
+<script>
+    import { Link } from '@inertiajs/inertia-vue3';
+
+    export default {
+        components: {
+            Link,
+        },
+    }
+</script>
