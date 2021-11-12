@@ -109,9 +109,12 @@ Route::get('/detalles-actividad', function () {
     return Inertia::render('DetailTours');
 })->name('detalles-actividad');
 
-
 Route::get('/checkout', function () {
     return Inertia::render('Checkout');
 })->name('checkout');
+
+Route::get('/carrito', function () {
+    return Inertia::render('Cart');
+})->name('carrito');
 
 require __DIR__.'/auth.php';

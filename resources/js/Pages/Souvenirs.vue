@@ -585,7 +585,6 @@ import Footer from '@/Layouts/Footer.vue'
 
 export default {
     components: {
-        Layout,
         Head,
         Link,
         Footer
