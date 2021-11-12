@@ -77,9 +77,9 @@
                                 <div class="footer-content">
                                     <ul>
                                         <li><Link :href="route('quienes-somos')">¿Quiénes somos?</Link></li>
-                                        <li><a href="account.html">Contacto</a></li>
-                                        <li><a href="wishlist.html">Blog</a></li>
-                                        <li><a href="cart.html">Soporte</a></li>
+                                        <li><Link :href="route('contactanos')">Contáctanos</Link></li>
+                                        <li><a href="#">Blog</a></li>
+                                        <li><a href="#">Soporte</a></li>
                                     </ul>
                                 </div>
                             </div>

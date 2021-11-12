@@ -97,4 +97,8 @@ Route::get('/quienes-somos', function () {
     return Inertia::render('AboutUs');
 })->name('quienes-somos');
 
+Route::get('/contactanos', function () {
+    return Inertia::render('ContactUs');
+})->name('contactanos');
+
 require __DIR__.'/auth.php';
