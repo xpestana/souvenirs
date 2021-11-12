@@ -32,13 +32,14 @@
                             <div class="form-group row">
                                 <label for="inputPassword" class="col-sm-3 col-form-label">Contraseña</label>
                                 <div class="col-sm-7">
-                                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                                    <button class="btn show-btn" type="button">Ver</button>
+                                    <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                                    <button class="btn show-btn" type="button" v-on:click="showPass('inputPassword')">Ver</button>
                                 </div>
                             </div>
                             <div class="login-details text-center mb-25">
                                 <Link :href="route('password.request')" style="text-transform: none;">¿Olvidó su contraseña? </Link>
-                                <button type="submit" class="login-btn bg-info">Entrar</button>
+                                <Link class="view-cart bg-info" :href="route('dashboard')">Entrar</Link>
+                                <!--<button type="" class="login-btn bg-info"><Link :href="route('dashboard')">Entrar</Link></button>-->
                             </div>
                             <div class="login-footer text-center">
                                 <p>¿No tienes cuenta? <a href="register.html">Regístrate</a></p>
@@ -142,6 +143,10 @@ export default {
             this.form.post(this.route('login'), {
                 onFinish: () => this.form.reset('password'),
             })
+        },
+        showPass: function (id){
+            let x = document.getElementById(id);
+            x.type = x.type == 'password' ? 'text' : 'password';            
         }
     }
 }

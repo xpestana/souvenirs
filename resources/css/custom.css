@@ -3,6 +3,10 @@
     background-image: url(/vendor_asset/img/bg-image/home.png);
 }
 
+.links-orders {
+    font-weight: 700;
+}
+
 #thumb-desc-inner{
     padding-top: 0;
 }

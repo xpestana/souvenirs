@@ -28,9 +28,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboardb', function () {
+    return Inertia::render('DashboardBack');
+})->middleware(['auth', 'verified'])->name('dashboardb');
 
 
 /*********REGISTROS**********************/
@@ -116,5 +116,9 @@ Route::get('/checkout', function () {
 Route::get('/carrito', function () {
     return Inertia::render('Cart');
 })->name('carrito');
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
 
 require __DIR__.'/auth.php';

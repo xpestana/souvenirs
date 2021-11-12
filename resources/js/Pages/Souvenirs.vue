@@ -587,7 +587,8 @@ export default {
     components: {
         Head,
         Link,
-        Footer
+        Footer,
+        Menu,
     },
 }
 
