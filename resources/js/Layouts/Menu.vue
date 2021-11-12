@@ -57,8 +57,6 @@
                                                 <div class="cart-content">
                                                     <h6><a href="product-details.html">Printed Summer Red </a></h6>
                                                     <span class="cart-price">27.45</span>
-                                                    <span>Size: S</span>
-                                                    <span>Color: Yellow</span>
                                                 </div>
                                                 <a class="del-icone" href="#"><i class="ion-close"></i></a>
                                             </li>
@@ -72,8 +70,6 @@
                                                 <div class="cart-content">
                                                     <h6><a href="product-details.html">Printed Round Neck</a></h6>
                                                     <span class="cart-price">45.00</span>
-                                                    <span>Size: XL</span>
-                                                    <span>Color: Green</span>
                                                 </div>
                                                 <a class="del-icone" href="#"><i class="ion-close"></i></a>
                                             </li>

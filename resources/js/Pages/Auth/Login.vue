@@ -1,4 +1,58 @@
 <template>
+    <Head title="Login"/>
+    <Menu />
+    <!-- Breadcrumb Area Start Here -->
+    <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
+        <div class="container">
+            <div class="breadcrumb-wrap text-center">
+                <h3>Login</h3>
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item"><Link :href="route('home')">Inicio</Link></li>
+                    <li class="breadcrumb-item active">Login</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Area End Here -->
+
+    <!-- Login Page Start Here -->
+    <div class="login white-bg ptb-80">
+        <div class="container">
+          <h3 class="login-header text-info">Ingresa a tu cuenta </h3>
+           <div class="row">
+               <div class="col-lg-6 offset-lg-3">
+                    <div class="login-form">
+                        <form>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-3 col-form-label">Correo</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" id="email" placeholder="Correo">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-3 col-form-label">Contraseña</label>
+                                <div class="col-sm-7">
+                                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                    <button class="btn show-btn" type="button">Ver</button>
+                                </div>
+                            </div>
+                            <div class="login-details text-center mb-25">
+                                <Link :href="route('password.request')" style="text-transform: none;">¿Olvidó su contraseña? </Link>
+                                <button type="submit" class="login-btn bg-info">Entrar</button>
+                            </div>
+                            <div class="login-footer text-center">
+                                <p>¿No tienes cuenta? <a href="register.html">Regístrate</a></p>
+                            </div>
+                        </form>
+                    </div>
+               </div>
+           </div>
+        </div>
+    </div>
+    <!-- Login Page End Here -->
+
+    <Footer/>
+    <!---
     <Head title="Log in" />
 
     <BreezeValidationErrors class="mb-4" />
@@ -38,29 +92,34 @@
                 Log in
             </BreezeButton>
         </div>
-    </form>
+    </form>-->
 </template>
 
 <script>
-import BreezeButton from '@/Components/Button.vue'
-import BreezeCheckbox from '@/Components/Checkbox.vue'
-import BreezeGuestLayout from '@/Layouts/Guest.vue'
-import BreezeInput from '@/Components/Input.vue'
-import BreezeLabel from '@/Components/Label.vue'
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+//import BreezeButton from '@/Components/Button.vue'
+//import BreezeCheckbox from '@/Components/Checkbox.vue'
+//import BreezeGuestLayout from '@/Layouts/Guest.vue'
+//import BreezeInput from '@/Components/Input.vue'
+//import BreezeLabel from '@/Components/Label.vue'
+//import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
+import Menu from '@/Layouts/Menu.vue'
+import Footer from '@/Layouts/Footer.vue'
+
 export default {
-    layout: BreezeGuestLayout,
+    //layout: BreezeGuestLayout,
 
     components: {
-        BreezeButton,
-        BreezeCheckbox,
-        BreezeInput,
-        BreezeLabel,
-        BreezeValidationErrors,
+        //BreezeButton,
+        //BreezeCheckbox,
+        //BreezeInput,
+        //BreezeLabel,
+        //BreezeValidationErrors,
         Head,
         Link,
+        Menu,
+        Footer,
     },
 
     props: {

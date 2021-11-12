@@ -101,4 +101,8 @@ Route::get('/contactanos', function () {
     return Inertia::render('ContactUs');
 })->name('contactanos');
 
+Route::get('/login', function () {
+    return Inertia::render('Login');
+})->name('login');
+
 require __DIR__.'/auth.php';
