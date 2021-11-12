@@ -89,4 +89,8 @@ Route::get('/souvenirs', function () {
     return Inertia::render('Souvenirs');
 })->name('souvenirs');
 
+Route::get('/producto', function () {
+    return Inertia::render('Product');
+})->name('producto');
+
 require __DIR__.'/auth.php';

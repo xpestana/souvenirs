@@ -3,6 +3,10 @@
     background-image: url(/vendor_asset/img/bg-image/home.png);
 }
 
+#thumb-desc-inner{
+    padding-top: 0;
+}
+
 #logo-welcome {
     height: 85px;
 }
