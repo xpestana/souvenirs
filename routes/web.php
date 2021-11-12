@@ -105,4 +105,8 @@ Route::get('/login', function () {
     return Inertia::render('Login');
 })->name('login');
 
+Route::get('/detalles-actividad', function () {
+    return Inertia::render('DetailTours');
+})->name('detalles-actividad');
+
 require __DIR__.'/auth.php';
