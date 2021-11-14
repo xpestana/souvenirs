@@ -105,7 +105,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,7 +129,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,7 +153,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -177,7 +177,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,7 +201,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -225,7 +225,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,7 +249,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,7 +273,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -297,7 +297,7 @@
                                                     </div>
                                                     <div class="pro-cart">
                                                         <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -354,7 +354,7 @@
                                             <i class="fa fa-star" aria-hidden="true"></i>
                                         </div>
                                         <p><span class="prev-price">$25.55</span><span class="price">$28.55</span></p>
-                                         <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
+                                        <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
                                         <div class="pro-cart">
                                             <a href="#" title="Añadir Al Carrito">
                                                 <i class="icon-cart"></i>
@@ -475,121 +475,50 @@
     </div>
     <!-- Shop Page End -->
     <Footer />
-    <!-- Quick View Content Start -->
-    <div class="main-product-thumbnail quick-thumb-content">
-        <div class="container">
-            <!-- The Modal -->
-            <div class="modal fade" id="product-window">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="row">
-                                <!-- Main Thumbnail Image Start -->
-                                <div class="col-lg-6 col-md-6 mb-all-40">
-                                    <!-- Thumbnail Large Image start -->
-                                    <div class="tab-content">
-                                        <div id="pro-1" class="tab-pane fade show active">
-                                            <a data-fancybox="images" href="/vendor_asset/img/products/p1.png"><img src="/vendor_asset/img/products/p1.png" alt="product-view"></a>
-                                        </div>
-                                        <div id="pro-2" class="tab-pane fade">
-                                            <a data-fancybox="images" href="/vendor_asset/img/products/p1.png"><img src="/vendor_asset/img/products/p1.png" alt="product-view"></a>
-                                        </div>
-                                        <div id="pro-3" class="tab-pane fade">
-                                            <a data-fancybox="images" href="/vendor_asset/img/products/p1.png"><img src="/vendor_asset/img/products/p1.png" alt="product-view"></a>
-                                        </div>
-                                        <div id="pro-4" class="tab-pane fade">
-                                            <a data-fancybox="images" href="/vendor_asset/img/products/p1.png"><img src="/vendor_asset/img/products/p1.png" alt="product-view"></a>
-                                        </div>
-                                    </div>
-                                    <!-- Thumbnail Large Image End -->
-                                    <!-- Thumbnail Image End -->
-                                    <div class="product-thumbnail">
-                                        <div class="thumb-menu owl-carousel nav nav-style tabs-area" role="tablist">
-                                            <a class="active" data-toggle="tab" href="#pro-1"><img src="img/thumbail/t1.jpg" alt="product-thumbnail"></a>
-                                            <a data-toggle="tab" href="#pro-2"><img src="img/thumbail/t2.jpg" alt="product-thumbnail"></a>
-                                            <a data-toggle="tab" href="#pro-3"><img src="img/thumbail/t3.jpg" alt="product-thumbnail"></a>
-                                            <a data-toggle="tab" href="#pro-4"><img src="img/thumbail/t4.jpg" alt="product-thumbnail"></a>
-                                        </div>
-                                    </div>
-                                    <!-- Thumbnail image end -->
-                                </div>
-                                <!-- Main Thumbnail Image End -->
-                                <!-- Thumbnail Description Start -->
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="thubnail-desc fix">
-                                        <h3 class="product-header">Faded Short Sleeves T-shirt</h3>
-                                        <ul class="rating-summary">
-                                            <li class="rating-pro">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                                <i class="fa fa-star-o"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </li>
-                                            <li class="read-review"><a href="#">Leer los reviews (1)</a></li>
-                                            <li class="write-review"><a href="#">Escribir un review</a></li>
-                                        </ul>
-                                        <div class="pro-price mt-10">
-                                            <p class="d-flex align-items-center"><span class="prev-price">16.51</span><span class="price">$15.19</span><span class="saving-price">-5%</span></p>
-                                        </div>
-                                        <p class="pro-desc-details">Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessor- ize with a straw hat and you're ready for summer!</p>
-                                        
-                                        <div class="quatity-stock">
-                                           <label>Cantidad</label>
-                                            <ul class="d-flex flex-wrap  align-items-center">
-                                                <li class="box-quantity">
-                                                    <form action="#">
-                                                        <input class="quantity" type="number" min="1" value="1">
-                                                    </form>
-                                                </li>
-                                                <li>
-                                                    <button class="pro-cart">Añadir Al Carrito</button>
-                                                </li>
-                                                <li class="pro-ref">
-                                                    <p><span class="in-stock"><i class="ion-checkmark-round"></i> in stock</span></p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="social-sharing mt-30">
-                                            <ul>
-                                                <li><label>Compartir</label></li>
-                                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Thumbnail Description End -->
-                            </div>
-                        </div>
-                        <!-- Modal footer -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Quick View Content End -->
+    <QuickView />
 </template>
 
 <script>
 
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import Menu from '@/Layouts/Menu.vue';
-import Footer from '@/Layouts/Footer.vue'
+    import { Inertia } from '@inertiajs/inertia';
+    import { Head, Link } from '@inertiajs/inertia-vue3';
+    
+    import Menu from '@/Layouts/Menu.vue';
+    import Footer from '@/Layouts/Footer.vue';
+    import QuickView from '@/Components/QuickView.vue';
 
-export default {
-    components: {
-        Head,
-        Link,
-        Footer,
-        Menu,
-    },
+    import '/vendor_asset/js/vendor/jquery-3.2.1.min.js';
+    import '/vendor_asset/js/jquery-ui.min.js';
+
+    export default {
+        components: {
+            Head,
+            Link,
+            Footer,
+            Menu,
+            QuickView,
+        },
+        created () {
+            this.sliderPrice()
+        },
+        methods: {
+            sliderPrice: function () {
+                /*const sliderrange = $('#slider-range');
+                const amountprice = $('#amount');
+
+                sliderrange.slider({
+                    range: true,
+                    min: 0,
+                    max: 100,
+                    values: [0, 85],
+                    slide: function (event, ui) {
+                        amountprice.val("$" + ui.values[0] + "  $" + ui.values[1]);
+                    }
+                });
+                amountprice.val("$" + sliderrange.slider("values", 0) +
+                    "  $" + sliderrange.slider("values", 1));*/
+            }
+    }
 }
 
 </script>

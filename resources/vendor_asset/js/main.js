@@ -21,19 +21,19 @@ Version: 1.0;
 
     /*----------------------------
         Mobile Menu Activation
-    -----------------------------*/
+    -----------------------------
     jQuery('.mobile-menu nav').meanmenu({
         meanScreenWidth: "991",
-    });
+    });*/
 
     /*----------------------------
         Tooltip Activation
-    ------------------------------ */
+    ------------------------------ 
     $('.pro-actions a').tooltip({
         animated: 'fade',
         placement: 'top',
         container: 'body'
-    });
+    });*/
 
     /*----------------------------
         Checkout Page Activation
@@ -236,7 +236,7 @@ Version: 1.0;
 
     /*----------------------------
         Sticky-Menu Activation
-    ------------------------------ */
+    ------------------------------ 
     var HeaderSticky = $('.header-sticky');
     var win = $(window);
     
@@ -246,7 +246,7 @@ Version: 1.0;
         } else {
             HeaderSticky.removeClass("sticky");
         }
-    });
+    });*/
     
     /*----------------------------
         Nice Select Activation
@@ -255,7 +255,7 @@ Version: 1.0;
     
     /*----------------------------
         Price Slider Activation
-    -----------------------------*/
+    -----------------------------
     var sliderrange = $('#slider-range');
     var amountprice = $('#amount');
     
@@ -270,7 +270,7 @@ Version: 1.0;
     });
     amountprice.val("$" + sliderrange.slider("values", 0) +
         "  $" + sliderrange.slider("values", 1));
-    
+        */
     /*----------------------------------------------------
         Single Categorie Activation
     -----------------------------------------------------*/

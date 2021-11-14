@@ -51,11 +51,11 @@
                                             <!-- Single Cart Box Start -->
                                             <li class="single-cart-box">
                                                 <div class="cart-img">
-                                                    <a href="#"><img src="img/products/p1.jpg" alt="cart-image"></a>
+                                                    <a href="#"><img src="/vendor_asset/img/products/p1.png" alt="cart-image"></a>
                                                     <span class="pro-quantity">1X</span>
                                                 </div>
                                                 <div class="cart-content">
-                                                    <h6><a href="product-details.html">Printed Summer Red </a></h6>
+                                                    <h6><Link :href="route('carrito')">Printed Summer Red </Link></h6>
                                                     <span class="cart-price">27.45</span>
                                                 </div>
                                                 <a class="del-icone" href="#"><i class="ion-close"></i></a>
@@ -64,11 +64,11 @@
                                             <!-- Single Cart Box Start -->
                                             <li class="single-cart-box">
                                                 <div class="cart-img">
-                                                    <a href="#"><img src="img/products/p2.jpg" alt="cart-image"></a>
+                                                    <a href="#"><img src="/vendor_asset/img/products/p1.png" alt="cart-image"></a>
                                                     <span class="pro-quantity">1X</span>
                                                 </div>
                                                 <div class="cart-content">
-                                                    <h6><a href="product-details.html">Printed Round Neck</a></h6>
+                                                    <h6><Link :href="route('carrito')">Printed Round Neck</Link></h6>
                                                     <span class="cart-price">45.00</span>
                                                 </div>
                                                 <a class="del-icone" href="#"><i class="ion-close"></i></a>
@@ -116,9 +116,31 @@
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
 
+import '/vendor_asset/js/jquery.meanmenu.min.js';
+
 export default{
     components: {
         Link,
+    },
+    mounted () {
+        this.mobileMenu()
+    },
+    methods: {
+        mobileMenu: function (){
+            //Make responsive the menu
+            jQuery('.mobile-menu nav').meanmenu({
+                meanScreenWidth: "991",
+            });
+
+            //Make sticky the menu
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.header-sticky').addClass("sticky");
+                } else {
+                    $('.header-sticky').removeClass("sticky");
+                }
+            });
+        }
     },
 }
 </script>

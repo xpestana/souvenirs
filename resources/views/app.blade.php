@@ -41,22 +41,22 @@
     </head>
     <body>
         @inertia
-        <!-- jquery 3.2.1 -->
-        <script src="vendor_asset/js/vendor/jquery-3.2.1.min.js" defer></script>
+        <!-- jquery 3.2.1
+        <script src="vendor_asset/js/vendor/jquery-3.2.1.min.js" defer></script>-->
         <!-- Modernizer js -->
     	<script src="vendor_asset/js/vendor/modernizr-3.5.0.min.js" defer></script>
         <!-- Countdown js -->
         <script src="vendor_asset/js/jquery.countdown.min.js" defer></script>
-        <!-- Mobile menu js -->
-        <script src="vendor_asset/js/jquery.meanmenu.min.js" defer></script>
+        <!-- Mobile menu js
+        <script src="vendor_asset/js/jquery.meanmenu.min.js" defer></script>-->
         <!-- ScrollUp js -->
         <script src="vendor_asset/js/jquery.scrollUp.js" defer></script>
         <!-- Fancybox js -->
         <script src="vendor_asset/js/jquery.fancybox.min.js" defer></script>
         <!-- Jquery nice select js -->
         <script src="vendor_asset/js/jquery.nice-select.min.js" defer></script>
-        <!-- Jquery ui price slider js -->
-        <script src="vendor_asset/js/jquery-ui.min.js" defer></script>
+        <!-- Jquery ui price slider js 
+        <script src="vendor_asset/js/jquery-ui.min.js" defer></script>-->
         <!-- Owl carousel -->
         <script src="vendor_asset/js/owl.carousel.min.js" defer></script>
         <!-- Plugin js -->
