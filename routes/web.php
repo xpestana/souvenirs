@@ -19,14 +19,61 @@ use App\Http\Controllers\PruebaController;
 |
 */
 
+/*
+    STATICS PAGE
+ */
+
 Route::get('/', function () {
+    return Inertia::render('Home');
+})->name('home');
+
+Route::get('/actividades', function () {
+    return Inertia::render('Tours');
+})->name('actividades');
+
+Route::get('/souvenirs', function () {
+    return Inertia::render('Souvenirs');
+})->name('souvenirs');
+
+Route::get('/producto', function () {
+    return Inertia::render('Product');
+})->name('producto');
+
+Route::get('/quienes-somos', function () {
+    return Inertia::render('AboutUs');
+})->name('quienes-somos');
+
+Route::get('/contactanos', function () {
+    return Inertia::render('ContactUs');
+})->name('contactanos');
+
+Route::get('/login', function () {
+    return Inertia::render('Login');
+})->name('login');
+
+Route::get('/detalles-actividad', function () {
+    return Inertia::render('DetailTours');
+})->name('detalles-actividad');
+
+Route::get('/checkout', function () {
+    return Inertia::render('Checkout');
+})->name('checkout');
+
+Route::get('/carrito', function () {
+    return Inertia::render('Cart');
+})->name('carrito');
+
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+/*Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => false,
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+});*/
 
 Route::get('/dashboardb', function () {
     return Inertia::render('DashboardBack');
@@ -77,48 +124,8 @@ Route::get('/prueba', [PruebaController::class, 'index'])->name('prueba.index');
 
 
 
-Route::get('/home', function () {
-    return Inertia::render('Home');
-})->name('home');
 
-Route::get('/actividades', function () {
-    return Inertia::render('Tours');
-})->name('actividades');
 
-Route::get('/souvenirs', function () {
-    return Inertia::render('Souvenirs');
-})->name('souvenirs');
 
-Route::get('/producto', function () {
-    return Inertia::render('Product');
-})->name('producto');
-
-Route::get('/quienes-somos', function () {
-    return Inertia::render('AboutUs');
-})->name('quienes-somos');
-
-Route::get('/contactanos', function () {
-    return Inertia::render('ContactUs');
-})->name('contactanos');
-
-Route::get('/login', function () {
-    return Inertia::render('Login');
-})->name('login');
-
-Route::get('/detalles-actividad', function () {
-    return Inertia::render('DetailTours');
-})->name('detalles-actividad');
-
-Route::get('/checkout', function () {
-    return Inertia::render('Checkout');
-})->name('checkout');
-
-Route::get('/carrito', function () {
-    return Inertia::render('Cart');
-})->name('carrito');
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
 
 require __DIR__.'/auth.php';

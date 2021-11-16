@@ -6,7 +6,6 @@
 
 </template>
 
-
 <script>
 
 import Menu from '@/Layouts/Menu.vue'
