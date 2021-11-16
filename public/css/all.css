@@ -3,8 +3,29 @@
     background-image: url(/vendor_asset/img/bg-image/home.png);
 }
 
+.links-orders {
+    font-weight: 700;
+}
+
+#thumb-desc-inner{
+    padding-top: 0;
+}
+
 #logo-welcome {
     height: 85px;
+}
+
+#logo-footer {
+    height: 120px;
+}
+
+#container-logo {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+#logo-menu {
+    height: 60px;
 }
 
 #button-souvernirs, #button-activities {
