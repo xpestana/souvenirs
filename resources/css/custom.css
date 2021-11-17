@@ -25,7 +25,7 @@
 }
 
 #logo-menu {
-    height: 60px;
+    height: 90px;
 }
 
 #button-souvernirs, #button-activities {
@@ -39,7 +39,9 @@
     font-weight: 600;
     text-transform: uppercase;
 }
-
+.bg-img{
+    background-position:  bottom !important;
+}
 @media (max-width: 600px) {
     #logo-welcome {
         height: 50px;

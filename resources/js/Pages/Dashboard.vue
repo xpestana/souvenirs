@@ -1,6 +1,6 @@
 <template>
     <Head title="Perfil"/>
-	<Menu />
+	<Layout>
 
     <!-- Breadcrumb Area Start Here -->
     <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
@@ -198,21 +198,18 @@
     </div>
     <!-- My Account Page End Here -->
 
-    <Footer />
+    </Layout>
 </template>
 
 <script>
 
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import Menu from '@/Layouts/Menu.vue';
-import Footer from '@/Layouts/Footer.vue';
-
+import Layout from '@/Layouts/Layout.vue'      
 export default {
     components: {
         Head,
         Link,
-        Footer,
-        Menu,
+        Layout,
     },
     methods: {
         showPass: function (id){

@@ -1,6 +1,6 @@
 <template>
     <Head title="Carrito" />
-    <Menu />
+    <Layout>
 
     <!-- Breadcrumb Area Start Here -->
     <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
@@ -126,21 +126,18 @@
     </div>
     <!-- Cart Main Area End -->
     
-    <Footer />
+    </Layout>
 </template>
 
 <script>
     import { Link, Head } from '@inertiajs/inertia-vue3'
-
-    import Menu from '@/Layouts/Menu.vue'
-    import Footer from '@/Layouts/Footer.vue'
+    import Layout from '@/Layouts/Layout.vue'        
 
     export default {
         components: {
-            Menu,
-            Footer,
             Link,
             Head,
+            Layout,
         },
     }
 </script>

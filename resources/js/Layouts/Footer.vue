@@ -47,8 +47,8 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li><Link :href="route('quienes-somos')">¿Quiénes somos?</Link></li>
-                                        <li><Link :href="route('contactanos')">Contáctanos</Link></li>
+                                        <li><Link :href="route('about.us')">¿Quiénes somos?</Link></li>
+                                        <li><Link :href="route('contact')">Contáctanos</Link></li>
                                         <li><a href="#">Blog</a></li>
                                         <li><a href="#">Soporte</a></li>
                                     </ul>

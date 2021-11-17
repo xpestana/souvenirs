@@ -1,146 +1,139 @@
 <template>
-        <!-- Main Header Area Start Here -->
-        <header class="header-sticky">
-            <div class="coustom-container">
-                <div class="main-header">
-                    <div class="row">
-                       <!-- Logo Start Here -->
-                        <div class="col-xl-2 col-lg-3 col-md-5 col-sm-6 col-5">
-                            <div id="container-logo">
-                                <Link :href="route('home')"><img id="logo-menu" src="/vendor_asset/img/logo/logo.png" alt="logo"></Link>
-                            </div>
-                        </div>
-                        <!-- Logo End Here -->
-                        <!-- Header Menu & Cart Area Start Here -->
-                        <div class="col-xl-7 col-lg-6 d-none d-lg-block">
-                            <div class="maain-menu-area maain-menu-area-three  position-relative pl-155">
-                                <!-- Primary Menu Start -->
-                                <div class="primary-menu">
-                                    <nav>
-                                        <ul class="primary-menu-list d-flex justify-content-center">
-                                            <li><Link :href="route('souvenirs')">Souvenirs</Link></li>
-                                            <li><Link :href="route('actividades')">Actividades</Link></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <!-- Primary Menu End -->
-                            </div>
-                        </div>
-                        <!-- Header Menu & Cart Area End Here -->
-                        <!-- Cart Box Start Here -->
-                        <div class="col-xl-3 col-lg-3 col-md-7 col-sm-6 col-7">
-                            <!-- Cart & Search Area Start -->
-                            <div class="search-cart-area pr-all-50 float-right">
-                                <ul class="d-flex">
-                                    <li class="header-search"><Link :href="route('login')"><i class="fa fa-user" style="font-size:24px"></i></Link></li>
-                                    <li class="search-mrg"><i class="header-search icon-search"></i>
-                                        <!-- Search Area Start -->
-                                        <ul class="ht-dropdown search-box-view">
-                                            <li>
-                                                <form action="#" class="position-relative">
-                                                    <input class="email" placeholder="Search our catalog" name="email" type="text">
-                                                    <button type="submit" class="submit"><i class="icon-search" aria-hidden="true"></i></button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                        <!-- Search Area End -->
-                                    </li>
-                                    <li><a href="#"><i class="header-cart icon-cart"></i><span>02</span></a>
-                                        <!-- Cart Box Start -->
-                                        <ul class="ht-dropdown cart-box-width">
-                                            <!-- Single Cart Box Start -->
-                                            <li class="single-cart-box">
-                                                <div class="cart-img">
-                                                    <a href="#"><img src="/vendor_asset/img/products/p1.png" alt="cart-image"></a>
-                                                    <span class="pro-quantity">1X</span>
-                                                </div>
-                                                <div class="cart-content">
-                                                    <h6><Link :href="route('carrito')">Printed Summer Red </Link></h6>
-                                                    <span class="cart-price">27.45</span>
-                                                </div>
-                                                <a class="del-icone" href="#"><i class="ion-close"></i></a>
-                                            </li>
-                                            <!-- Single Cart Box End -->
-                                            <!-- Single Cart Box Start -->
-                                            <li class="single-cart-box">
-                                                <div class="cart-img">
-                                                    <a href="#"><img src="/vendor_asset/img/products/p1.png" alt="cart-image"></a>
-                                                    <span class="pro-quantity">1X</span>
-                                                </div>
-                                                <div class="cart-content">
-                                                    <h6><Link :href="route('carrito')">Printed Round Neck</Link></h6>
-                                                    <span class="cart-price">45.00</span>
-                                                </div>
-                                                <a class="del-icone" href="#"><i class="ion-close"></i></a>
-                                            </li>
-                                            <!-- Single Cart Box End -->
-                                            <!-- Cart Footer Inner Start -->
-                                            <li class="cart-footer">
-                                                <ul class="price-content">
-                                                    <li>Subtotal <span>$57.95</span></li>
-                                                    <li>Shipping <span>Free</span></li>
-                                                    <li>Taxes <span>$0.00</span></li>
-                                                    <li>Total <span>$64.95</span></li>
-                                                </ul>
-                                                <div class="cart-actions text-center">
-                                                    <Link class="cart-checkout" :href="route('checkout')">Checkout</Link>
-                                                </div>
-                                            </li>
-                                            <!-- Cart Footer Inner End -->
-                                        </ul>
-                                        <!-- Cart Box End -->
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Cart & Search Area End -->
-                        </div>
-                        <!-- Cart Box End Here -->
-                    </div>
-                    <!-- Mobile Menu Start -->
-                    <div class="mobile-menu d-block d-lg-none">
-                        <nav>
-                            <ul>
-                                <li><Link :href="route('souvenirs')">Souvenirs</Link></li>
-                                <li><Link :href="route('actividades')">Actividades</Link></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <!-- Mobile Menu End -->
-                </div>
+    <!-- Header Menu & Cart Area Start Here -->
+    <div class="col-xl-7 col-lg-6 d-none d-lg-block">
+        <div class="maain-menu-area maain-menu-area-three  position-relative pl-155">
+            <!-- Primary Menu Start -->
+            <div class="primary-menu">
+                <nav>
+                    <ul class="primary-menu-list d-flex">
+                        <li class="active"><Link :href="route('home')">Inicio</Link></li>
+                        <li class="position-static"><Link :href="route('souvenirs')">Souvenirs</Link></li>
+                        <li><Link :href="route('activities')">Actividades</Link></li>
+                        <li><Link :href="route('contact')">Contacto</Link></li>
+                    </ul>
+                </nav>
             </div>
-            <!-- Container End -->
-        </header>
-        <!-- Main Header Area End Here -->
+            <!-- Primary Menu End -->
+        </div>
+    </div>
+    <!-- Header Menu & Cart Area End Here -->
+    <!-- Cart Box Start Here -->
+    <div class="col-xl-3 col-lg-3 col-md-7 col-sm-6 col-7">
+        <!-- Cart & Search Area Start -->
+        <div class="search-cart-area pr-all-50 float-right">
+            <ul class="d-flex">
+                <li><i class="header-menu icon-menu"></i>
+                <!-- Currency & Language Selection Start -->
+                <ul class="ht-dropdown cart-box-width currency-selector" >
+                    <li id="cart-area">
+                        <ul>
+                            <template v-if="this.$page.props.auth.user">
+                                <li><a href="account.html">Mi cuenta</a></li>
+                                <li><a href="checkout.html">Carrito</a></li>
+                                <li><a href="login.html">Cerrar sesión</a></li>
+                            </template>
+                            <template v-else>
+                                <li><Link :href="route('login')">Iniciar Sesión</Link></li>
+                                <li><Link :href="route('contact')">Contacto</Link></li>
+                            </template>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Currency & Language Selection End -->
+                </li>
+                <li class="search-mrg"><i class="header-search icon-search"></i>
+                    <!-- Search Area Start -->
+                    <ul class="ht-dropdown search-box-view">
+                        <li>
+                            <form action="#" class="position-relative">
+                                <input class="email" placeholder="Search our catalog" name="email" type="text">
+                                <button type="submit" class="submit"><i class="icon-search" aria-hidden="true"></i></button>
+                            </form>
+                        </li>
+                    </ul>
+                    <!-- Search Area End -->
+                </li>
+                <li><a href="#"><i class="header-cart icon-cart"></i><span>02</span></a>
+                <!-- Cart Box Start -->
+                <ul class="ht-dropdown cart-box-width">
+                    <!-- Single Cart Box Start -->
+                    <li class="single-cart-box">
+                        <div class="cart-img">
+                            <a href="#"><img src="/vendor_asset/img/products/p1.png" alt="cart-image"></a>
+                            <span class="pro-quantity">1X</span>
+                        </div>
+                        <div class="cart-content">
+                            <h6><a href="product-details.html">Printed Summer Red </a></h6>
+                            <span class="cart-price">27.45</span>
+                            <span>Size: S</span>
+                            <span>Color: Yellow</span>
+                        </div>
+                        <a class="del-icone" href="#"><i class="ion-close"></i></a>
+                    </li>
+                    <!-- Single Cart Box End -->
+                    <!-- Single Cart Box Start -->
+                    <li class="single-cart-box">
+                        <div class="cart-img">
+                            <a href="#"><img src="/vendor_asset/img/products/p1.png" alt="cart-image"></a>
+                            <span class="pro-quantity">1X</span>
+                        </div>
+                        <div class="cart-content">
+                            <h6><a href="product-details.html">Printed Round Neck</a></h6>
+                            <span class="cart-price">45.00</span>
+                            <span>Size: XL</span>
+                            <span>Color: Green</span>
+                        </div>
+                        <a class="del-icone" href="#"><i class="ion-close"></i></a>
+                    </li>
+                    <!-- Single Cart Box End -->
+                    <!-- Cart Footer Inner Start -->
+                    <li class="cart-footer">
+                        <ul class="price-content">
+                            <li>Subtotal <span>$57.95</span></li>
+                            <li>Shipping <span>Free</span></li>
+                            <li>Taxes <span>$0.00</span></li>
+                            <li>Total <span>$64.95</span></li>
+                        </ul>
+                        <div class="cart-actions text-center">
+                            <a class="cart-checkout" href="checkout.html">Checkout</a>
+                        </div>
+                    </li>
+                    <!-- Cart Footer Inner End -->
+                </ul>
+                <!-- Cart Box End -->
+            </li>
+        </ul>
+    </div>
+    <!-- Cart & Search Area End -->
+</div>
+<!-- Cart Box End Here -->
+
 </template>
-
 <script>
-import { Link } from '@inertiajs/inertia-vue3';
+    import { Link } from '@inertiajs/inertia-vue3';
+    
+    export default{
+        components: {
+            Link,
 
-import '/vendor_asset/js/jquery.meanmenu.min.js';
-
-export default{
-    components: {
-        Link,
-    },
-    mounted () {
-        this.mobileMenu()
-    },
-    methods: {
-        mobileMenu: function (){
-            //Make responsive the menu
-            jQuery('.mobile-menu nav').meanmenu({
-                meanScreenWidth: "991",
-            });
-
-            //Make sticky the menu
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 100) {
-                    $('.header-sticky').addClass("sticky");
-                } else {
-                    $('.header-sticky').removeClass("sticky");
-                }
-            });
-        }
-    },
-}
+        },
+    }
 </script>
+<style scope>
+    #cart-area{
+        width: 180px !important;
+        padding: 10px !important;
+    }
+    .search-cart-area > ul > li:first-child{
+        padding: 45px 0 0px 0px !important;
+    }
+    .search-cart-area > ul > li.search-mrg{
+        padding: 45px 0 0px 39px !important;
+    }
+    .search-cart-area > ul > li{
+        padding: 45px 0 0px 47px !important;
+    }
+    .search-cart-area > ul > li ul.currency-selector{
+        width: 180px !important;
+    }
+</style>

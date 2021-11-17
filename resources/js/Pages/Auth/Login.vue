@@ -1,6 +1,6 @@
 <template>
     <Head title="Login"/>
-    <Menu />
+    <Layout>
     <!-- Breadcrumb Area Start Here -->
     <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
         <div class="container">
@@ -52,7 +52,7 @@
     </div>
     <!-- Login Page End Here -->
 
-    <Footer/>
+    </Layout>
     <!---
     <Head title="Log in" />
 
@@ -105,8 +105,7 @@
 //import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
-import Menu from '@/Layouts/Menu.vue'
-import Footer from '@/Layouts/Footer.vue'
+import Layout from '@/Layouts/Layout.vue'     
 
 export default {
     //layout: BreezeGuestLayout,
@@ -119,8 +118,7 @@ export default {
         //BreezeValidationErrors,
         Head,
         Link,
-        Menu,
-        Footer,
+        Layout,
     },
 
     props: {

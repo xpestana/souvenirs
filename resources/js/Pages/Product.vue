@@ -1,6 +1,6 @@
 <template>
     <Head title="Producto"/>
-    <Menu />
+    <Layout>
     <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
         <div class="container">
             <div class="breadcrumb-wrap text-center">
@@ -245,21 +245,18 @@
             </div>
         </div>
     </div>
-    <Footer/>
+    </Layout>
     <QuickView />
 </template>
 
 <script>
     import { Link, Head } from '@inertiajs/inertia-vue3'
-
-    import Menu from '@/Layouts/Menu.vue'
-    import Footer from '@/Layouts/Footer.vue'
+    import Layout from '@/Layouts/Layout.vue'     
     import QuickView from '@/Components/QuickView.vue'
 
     export default {
         components: {
-            Menu,
-            Footer,
+            Layout,
             Link,
             Head,
             QuickView,

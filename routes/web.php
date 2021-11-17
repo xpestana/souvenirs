@@ -24,37 +24,58 @@ use App\Http\Controllers\PruebaController;
  */
 
 Route::get('/', function () {
-    return Inertia::render('Home');
+    return Inertia::render('Statics/Home');
 })->name('home');
 
-Route::get('/actividades', function () {
-    return Inertia::render('Tours');
-})->name('actividades');
-
-Route::get('/souvenirs', function () {
-    return Inertia::render('Souvenirs');
-})->name('souvenirs');
-
-Route::get('/producto', function () {
-    return Inertia::render('Product');
-})->name('producto');
-
 Route::get('/quienes-somos', function () {
-    return Inertia::render('AboutUs');
-})->name('quienes-somos');
+    return Inertia::render('Statics/AboutUs');
+})->name('about.us');
 
 Route::get('/contactanos', function () {
-    return Inertia::render('ContactUs');
-})->name('contactanos');
+    return Inertia::render('Statics/ContactUs');
+})->name('contact');
+
+
+/*
+    Auth
+ */
 
 Route::get('/login', function () {
     return Inertia::render('Login');
 })->name('login');
 
+/*
+    Dashboard
+ */
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
+/*
+    Shop
+ */
+
+Route::get('/tienda/actividades', function () {
+    return Inertia::render('Shop/Tours');
+})->name('activities');
+
+Route::get('/tienda/souvenirs', function () {
+    return Inertia::render('Shop/Souvenirs');
+})->name('souvenirs');
+
+Route::get('/producto', function () {
+    return Inertia::render('Product');
+})->name('producto');
 Route::get('/detalles-actividad', function () {
     return Inertia::render('DetailTours');
 })->name('detalles-actividad');
 
+/*
+    Admin
+ */
+
+/*
+    Payment
+ */
 Route::get('/checkout', function () {
     return Inertia::render('Checkout');
 })->name('checkout');
@@ -62,18 +83,6 @@ Route::get('/checkout', function () {
 Route::get('/carrito', function () {
     return Inertia::render('Cart');
 })->name('carrito');
-
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-/*Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => false,
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});*/
 
 Route::get('/dashboardb', function () {
     return Inertia::render('DashboardBack');

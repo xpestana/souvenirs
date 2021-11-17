@@ -25,6 +25,8 @@ mix.js('resources/js/app.js', 'public/js')
     ])
     .styles([
         'resources/css/custom.css',
+        'resources/css/custom/style.css',
+        'resources/css/custom/default.css',
 		], 'public/css/all.css')
     .webpackConfig(require('./webpack.config'));
 
