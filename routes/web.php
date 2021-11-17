@@ -82,7 +82,7 @@ Route::get('/checkout', function () {
 
 Route::get('/carrito', function () {
     return Inertia::render('Cart');
-})->name('carrito');
+})->name('cart');
 
 Route::get('/dashboardb', function () {
     return Inertia::render('DashboardBack');

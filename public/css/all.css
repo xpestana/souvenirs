@@ -40,7 +40,10 @@
     text-transform: uppercase;
 }
 .bg-img{
-    background-position:  bottom !important;
+        background-position: 50% 20% !important;
+}
+.breadcrumb-wrap h3, .breadcrumb-item a{
+    color:  #fff !important;
 }
 @media (max-width: 600px) {
     #logo-welcome {

@@ -28,8 +28,8 @@
                     <li id="cart-area">
                         <ul>
                             <template v-if="this.$page.props.auth.user">
-                                <li><a href="account.html">Mi cuenta</a></li>
-                                <li><a href="checkout.html">Carrito</a></li>
+                                <li><Link :href="route('dashboard')">Mi cuenta</Link></li>
+                                <li><Link :href="route('cart')">Carrito</Link></li>
                                 <li><a href="login.html">Cerrar sesión</a></li>
                             </template>
                             <template v-else>

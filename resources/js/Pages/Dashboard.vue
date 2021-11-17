@@ -41,7 +41,7 @@
                        </div>
                        <div class="col-xl-3 col-lg-2 col-md-6">
                            <div class="d-single-info text-lg-center">
-                               <Link class="view-cart bg-info" :href="route('carrito')">Ver Carrito</Link>
+                               <Link class="view-cart bg-info" :href="route('cart')">Ver Carrito</Link>
                            </div>
                        </div>
                    </div>
@@ -135,56 +135,56 @@
                                                 <td style="font-size: 15px;">165 €</td>
                                                 <td style="font-size: 15px;">1</td>
                                                 <td style="font-size: 15px;">165 €</td>
-                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('carrito')">Ver</Link></td>
+                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('cart')">Ver</Link></td>
                                             </tr>
                                             <tr>
                                                 <td class ="text-orders" style="font-size: 15px;">Summer Dress</td>
                                                 <td style="font-size: 15px;">165 €</td>
                                                 <td style="font-size: 15px;">1</td>
                                                 <td style="font-size: 15px;">165 €</td>
-                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('carrito')">Ver</Link></td>
+                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('cart')">Ver</Link></td>
                                             </tr>
                                             <tr>
                                                 <td class ="text-orders" style="font-size: 15px;">Summer Dress</td>
                                                 <td style="font-size: 15px;">165 €</td>
                                                 <td style="font-size: 15px;">1</td>
                                                 <td style="font-size: 15px;">165 €</td>
-                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('carrito')">Ver</Link></td>
+                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('cart')">Ver</Link></td>
                                             </tr>
                                             <tr>
                                                 <td class ="text-orders" style="font-size: 15px;">Summer Dress</td>
                                                 <td style="font-size: 15px;">165 €</td>
                                                 <td style="font-size: 15px;">1</td>
                                                 <td style="font-size: 15px;">165 €</td>
-                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('carrito')">Ver</Link></td>
+                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('cart')">Ver</Link></td>
                                             </tr>
                                             <tr>
                                                 <td class ="text-orders" style="font-size: 15px;">Summer Dress</td>
                                                 <td style="font-size: 15px;">165 €</td>
                                                 <td style="font-size: 15px;">1</td>
                                                 <td style="font-size: 15px;">165 €</td>
-                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('carrito')">Ver</Link></td>
+                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('cart')">Ver</Link></td>
                                             </tr>
                                             <tr>
                                                 <td class ="text-orders" style="font-size: 15px;">Summer Dress</td>
                                                 <td style="font-size: 15px;">165 €</td>
                                                 <td style="font-size: 15px;">1</td>
                                                 <td style="font-size: 15px;">165 €</td>
-                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('carrito')">Ver</Link></td>
+                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('cart')">Ver</Link></td>
                                             </tr>
                                             <tr>
                                                 <td class ="text-orders" style="font-size: 15px;">Summer Dress</td>
                                                 <td style="font-size: 15px;">165 €</td>
                                                 <td style="font-size: 15px;">1</td>
                                                 <td style="font-size: 15px;">165 €</td>
-                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('carrito')">Ver</Link></td>
+                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('cart')">Ver</Link></td>
                                             </tr>
                                             <tr>
                                                 <td class ="text-orders" style="font-size: 15px;">Summer Dress</td>
                                                 <td style="font-size: 15px;">165 €</td>
                                                 <td style="font-size: 15px;">1</td>
                                                 <td style="font-size: 15px;">165 €</td>
-                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('carrito')">Ver</Link></td>
+                                                <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('cart')">Ver</Link></td>
                                             </tr>
                                         </tbody>
                                     </table>
