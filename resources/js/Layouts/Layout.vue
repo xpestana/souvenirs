@@ -10,8 +10,8 @@
 
 <script>
 
-import Header from '@/Layouts/Header.vue'
-import Footer from '@/Layouts/Footer.vue'
+import Header from '@/Layouts/Components/Header.vue'
+import Footer from '@/Layouts/Components/Footer.vue'
 
 export default {
     components: {

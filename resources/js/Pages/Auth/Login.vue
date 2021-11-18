@@ -21,7 +21,7 @@
               <h3 class="login-header text-info">Bienvenido, Ingresa a tu cuenta</h3>
                <div class="row">
                    <div class="col-lg-6 offset-lg-3">
-                        <BreezeValidationErrors class="mb-4" />
+                        <BreezeValidationErrors class="mb-3" />
                         <div class="login-footer text-center">
                             <div v-if="status" class="mb-4 font-medium text-sm text-danger">
                                 {{ status }}
@@ -39,6 +39,7 @@
                                     <label for="password" class="col-sm-3 col-form-label">Contraseña</label>
                                     <div class="col-sm-7">
                                         <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" v-model="form.password" required>
+                                        <button class="btn show-btn" type="button" v-on:click="showPass('password')"><i class="far fa-eye"></i></button>
                                     </div>
                                     <div class="col-sm-7 mt-3 ml-2">
                                         <label class="flex items-center">
@@ -130,9 +131,6 @@ export default {
     props: {
         canResetPassword: Boolean,
         status: String,
-    },
-    created(){
-        console.log(this.status);
     },
     data() {
         return {

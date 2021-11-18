@@ -1,0 +1,60 @@
+<template>
+    <!-- Main Header Area Start Here -->
+        <header class="header-sticky">
+            <div class="coustom-container">
+                <div class="main-header">
+                    <div class="row">
+                       <!-- Logo Start Here -->
+                        <div class="col-xl-2 col-lg-3 col-md-5 col-sm-6 col-5">
+                            <div class="logo">
+                                <Link :href="route('home')"><img id="logo-menu" src="/vendor_asset/img/logo/logo.png" alt="logo"></Link>
+                            </div>
+                        </div>
+                        <!-- Logo End Here -->
+                        <Menu />
+                    </div>
+                    <mobile-menu />
+                </div>
+            </div>
+            <!-- Container End -->
+        </header>
+    <!-- Main Header Area End Here -->
+</template>
+<script>
+    import { Link } from '@inertiajs/inertia-vue3';
+    import Menu from '@/Layouts/Components/Menu.vue';
+    import MobileMenu from '@/Layouts/Components/MobileMenu.vue';
+    import '/vendor_asset/js/jquery.meanmenu.min.js';
+
+    export default{
+        components: {
+            Link,
+            Menu,
+            MobileMenu,
+        },
+        mounted () {
+            this.mobileMenu()
+        },
+        methods: {
+            mobileMenu: function (){
+                //Make responsive the menu
+                jQuery('.mobile-menu nav').meanmenu({
+                    meanScreenWidth: "991",
+                });
+                //Make sticky the menu
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 100) {
+                        $('.header-sticky').addClass("sticky");
+                    } else {
+                        $('.header-sticky').removeClass("sticky");
+                    }
+                });
+            }
+        },
+    }
+</script>
+<style>
+    .logo {
+        padding: 15px 0 !important;
+    }   
+</style>

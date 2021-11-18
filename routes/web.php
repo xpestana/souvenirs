@@ -49,7 +49,7 @@ Route::get('/login', function () {
  */
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 /*
     Shop
  */

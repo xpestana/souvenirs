@@ -34,6 +34,7 @@
         <!--<link rel="stylesheet" href="/vendor_asset/css/style.css">-->
         <!-- Responsive css -->
         <link rel="stylesheet" href="/vendor_asset/css/responsive.css">
+        <script src="https://kit.fontawesome.com/186f069b67.js" crossorigin="anonymous"></script>
 
         <!-- Scripts -->
         @routes
