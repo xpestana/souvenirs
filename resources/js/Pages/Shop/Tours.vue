@@ -1,19 +1,7 @@
 <template>
     <Head title="Actividades"/>
 <Layout>
-    <!-- Main Wrapper Start Here -->
-    <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
-        <div class="container">
-            <div class="breadcrumb-wrap text-center">
-                <h3>Actividades</h3>
-                <ol class="breadcrumb breadcrumb-list">
-                    <li class="breadcrumb-item"><Link :href="route('home')">Inicio</Link></li>
-                    <li class="breadcrumb-item active">Actividades</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Area End Here -->
+    <Breadcrumb title="Actividades"/>
     <!-- Shop Page Start -->
     <div class="main-shop-page white-bg ptb-80">
         <div class="container">
@@ -483,13 +471,14 @@
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Layout from '@/Layouts/Layout.vue'     
     import QuickView from '@/Components/QuickView.vue'
-
+    import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
     export default {
         components: {
             Head,
             Link,
             Layout,
             QuickView,
+            Breadcrumb,
         },
 }
 

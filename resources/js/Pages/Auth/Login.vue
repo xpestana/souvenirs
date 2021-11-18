@@ -1,20 +1,7 @@
 <template>
     <Head title="Inicio de Sesión"/>
     <Layout>
-    <!-- Breadcrumb Area Start Here -->
-    <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
-        <div class="container">
-            <div class="breadcrumb-wrap text-center">
-                <h3>Login</h3>
-                <ol class="breadcrumb breadcrumb-list">
-                    <li class="breadcrumb-item"><Link :href="route('home')">Inicio</Link></li>
-                    <li class="breadcrumb-item active">sesión</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Area End Here -->
-
+    <Breadcrumb title="Sesión"/>
     <!-- Login Page Start Here -->
         <div class="login white-bg ptb-80">
             <div class="container">
@@ -106,12 +93,9 @@
 <script>
 import BreezeButton from '@/Components/Button.vue'
 import BreezeCheckbox from '@/Components/Checkbox.vue'
-//import BreezeGuestLayout from '@/Layouts/Guest.vue'
-//import BreezeInput from '@/Components/Input.vue'
-//import BreezeLabel from '@/Components/Label.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
-
+import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue' 
 import Layout from '@/Layouts/Layout.vue'     
 
 export default {
@@ -120,8 +104,7 @@ export default {
     components: {
         BreezeButton,
         BreezeCheckbox,
-        //BreezeInput,
-        //BreezeLabel,
+        Breadcrumb,
         BreezeValidationErrors,
         Head,
         Link,

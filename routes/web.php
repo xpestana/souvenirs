@@ -47,9 +47,20 @@ Route::get('/login', function () {
 /*
     Dashboard
  */
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/tablero/perfil', function () {
+        return Inertia::render('Dashboard/Profile');
+    })->name('dashboard');
+    Route::get('/tablero/hoteles', function () {
+        return Inertia::render('Dashboard/Hotels');
+    })->name('dashboard.hotels');
+    Route::get('/tablero/compras', function () {
+        return Inertia::render('Dashboard/Shoppings');
+    })->name('dashboard.shopping');
+});
+    
+
+
 /*
     Shop
  */
