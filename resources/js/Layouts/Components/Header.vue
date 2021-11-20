@@ -13,7 +13,7 @@
                         <!-- Logo End Here -->
                         <Menu />
                     </div>
-                    <mobile-menu />
+                    <mobile-menu /> 
                 </div>
             </div>
             <!-- Container End -->
@@ -55,6 +55,6 @@
 </script>
 <style>
     .logo {
-        padding: 15px 0 !important;
+        padding: 20px 0 !important;
     }   
 </style>

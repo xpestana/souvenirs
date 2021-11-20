@@ -15,7 +15,6 @@ class CreateHotelsTable extends Migration
     {
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('type');
             $table->string('address');
             $table->string('zone');

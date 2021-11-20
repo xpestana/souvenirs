@@ -7,6 +7,7 @@ use Inertia\Inertia;
 /*Controladores*/
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PruebaController;
 /*
 |--------------------------------------------------------------------------
@@ -47,18 +48,39 @@ Route::get('/login', function () {
 /*
     Dashboard
  */
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/tablero/perfil', function () {
+Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
+    Route::get('/perfil', function () {
         return Inertia::render('Dashboard/Profile');
     })->name('dashboard');
-    Route::get('/tablero/hoteles', function () {
+    Route::get('/hoteles', function () {
         return Inertia::render('Dashboard/Hotels');
-    })->name('dashboard.hotels');
-    Route::get('/tablero/compras', function () {
+    })->middleware(['role:Admin'])->name('dashboard.hotels');
+    Route::get('mis-actividades', function () {
+        return Inertia::render('Dashboard/Activities');
+    })->name('dashboard.activities');
+    Route::get('mis-souvenirs', function () {
+        return Inertia::render('Dashboard/Souvenirs');
+    })->name('dashboard.souvenirs');
+    Route::get('/compras', function () {
         return Inertia::render('Dashboard/Shoppings');
     })->name('dashboard.shopping');
-});
+
     
+});
+Route::resource(
+    'perfil',
+    ProfileController::class, [
+        'names' => [
+            'create'    => 'profile.create',
+            'edit'      => 'profile.edit',
+            'show'      => 'profile.show',
+            'store'     => 'profile.store',
+            'update'    => 'profile.update',
+            'destroy'   => 'profile.destroy',
+        ],
+        ['except' => ['index']]
+    ],
+)->middleware(['auth', 'verified']); 
 
 
 /*

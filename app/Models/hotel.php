@@ -21,23 +21,10 @@ class hotel extends Model
     ];
 
     /**
-     * Método que obtiene el usuario asociado al perfil
-     *
-     * @author  
-     * @return object 
+     * The users that belong to the role.
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
-    /**
-  * Método que obtiene el perfil del operador
-  *
-  * @author  Xavier Pestana 
-  * @return object 
-  */
-    public function profile()
-  {
-    return $this->hasMany(profile::class);
-  }
 }

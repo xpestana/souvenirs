@@ -53,14 +53,12 @@ class User extends Authenticatable
   {
     return $this->hasOne(profile::class);
   }
-   /**
-  * Método que obtiene el perfil del hotel
-  *
-  * @author  Xavier Pestana 
-  * @return object 
-  */
+
+  /**
+     * The hotels that belong to the user.
+     */
     public function hotel()
-  {
-    return $this->hasOne(hotel::class);
-  }
+    {
+        return $this->belongsToMany(hotel::class);
+    }
 }
