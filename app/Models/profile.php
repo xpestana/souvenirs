@@ -15,7 +15,9 @@ class profile extends Model
      */
     protected $fillable = [
         'user_id',
-        'hotel_id',
+        'firstname',
+        'lastname',
+        'gender',
     ];
 
     /**
@@ -27,15 +29,5 @@ class profile extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-    /**
-     * Método que obtiene el usuario asociado al perfil
-     *
-     * @author  
-     * @return object 
-     */
-    public function hotel()
-    {
-        return $this->belongsTo(hotel::class);
     }
 }

@@ -1,10 +1,10 @@
 <template>
 	<Layout>
-	<div class="tab-content dashboard-content mt-all-40">
-    	<div id="hotels" class="tab-pane fade show active">
-    		<h3>Hoteles Registrados</h3>
+		<div class="tab-content dashboard-content mt-all-40">
+    		<div id="hotels" class="tab-pane fade show active">
+    			<h3>Administrador de Hoteles Registrados</h3>
+			</div>
 		</div>
-	</div>
 	</Layout>
 </template>
 <script>

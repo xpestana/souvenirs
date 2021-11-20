@@ -32,13 +32,16 @@ class UserSeeder extends Seeder
                 ]
             );
 
-            $userAdminProfile = $userAdmin->profile()->create([
+            $userAdminProfile = $userAdmin->profile()->updateOrCreate([
+                'firstname'  => 'Usuario Admin',
+                'lastname'   => 'Administrador principal',
+                'gender'     => 'M',
                 'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
             ]);
 
             $userAdmin->assignRole('Admin');
-
+            /*******************************************************/
             /*Usuario Hotel*/
 
             $userHotel = User::updateOrCreate(
@@ -51,16 +54,25 @@ class UserSeeder extends Seeder
                 ]
             );
 
-            $userHotelProfile = $userHotel->hotel()->create([
+            $userHotelProfile = $userHotel->profile()->updateOrCreate([
+                'firstname'  => 'Usuario',
+                'lastname'   => 'Gerente Hotel',
+                'gender'     => 'M',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+
+            $hotel = hotel::updateOrCreate([
                 'type'       => 'hotel',
                 'address'    => 'Direccion',
                 'zone'       => 'Merida',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
-
             $userHotel->assignRole('Hotel');
-
+            $userHotel->hotel()->attach($hotel->id, ['manager' => true]);
+            
+            /**********************************************************/
             /*Usuario operator: creados para ayudar a los hoteles*/
 
             $userOperator = User::updateOrCreate(
@@ -73,13 +85,16 @@ class UserSeeder extends Seeder
                 ]
             );
 
-            $userOperatorProfile = $userOperator->profile()->create([
-                'hotel_id'   => 1,
+            $userOperatorProfile = $userOperator->profile()->updateOrCreate([
+                'firstname'  => 'Usuario',
+                'lastname'   => 'Operador Hotel',
+                'gender'     => 'F',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
 
             $userOperator->assignRole('Operator');
+            $userOperator->hotel()->attach($hotel->id, ['manager' => false]);
 
     }
 }

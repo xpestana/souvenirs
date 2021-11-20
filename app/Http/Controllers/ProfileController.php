@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\profile;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class ProfileController extends Controller
 {
@@ -67,9 +70,33 @@ class ProfileController extends Controller
      * @param  \App\Models\profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, profile $profile)
+    
+    public function update(Request $request, $profile)
     {
-        //
+        
+        $id = mt_Rand(1000000, 9999999);
+        if ($request->password) {
+            $request->validate([
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+        }
+            
+        $profile = profile::find($profile);
+        $profile->firstname = $request->firstname;
+        $profile->lastname = $request->lastname;
+        $profile->gender = $request->gender;
+        $profile->save();
+
+        $profile->user()->update([
+                    'name' => $request->firstname." ".$request->lastname,
+                    'email' => $request->email,
+                ]);
+        if ($request->password) {
+            $profile->user()->update([
+                    'password' => Hash::make($request->password),
+                ]);  
+        }
+        return back()->with(['id'=>$id, 'message' => 'Actualizado correctamente', 'code' => 200, 'status' => 'success']);
     }
 
     /**

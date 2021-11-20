@@ -37,10 +37,36 @@
                     <div class="col-lg-2">
                         <!-- Nav tabs -->
                         <ul class="nav flex-column dashboard-list" role="tablist">
-                            <li><Link class="nav-link" data-toggle="tab" :href="route('dashboard')">Detalles de la Cuenta</Link></li>
-                            <li><Link class="nav-link" data-toggle="tab" :href="route('dashboard.hotels')">Hoteles Registrados</Link></li>
-                            <li><Link class="nav-link" data-toggle="tab" :href="route('dashboard.shopping')">Compras</Link></li>
-                            <li><Link class="nav-link"  @click.prevent="logout">Cerrar Sesión</Link></li>
+                            <li>
+                                <a :class="(route().current('dashboard') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="dashboard">
+                                    Detalles de la Cuenta
+                                </a>
+                            </li>
+                            <li v-if="$page.props.auth.role == 'Admin'">
+                                <a :class="(route().current('dashboard.hotels') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="hotels">
+                                    Administrador de Hoteles Registrados
+                                </a>
+                            </li>
+                            <li>
+                                <a :class="(route().current('dashboard.activities') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="activity">
+                                    Mis Actividades
+                                </a>
+                            </li>
+                            <li>
+                                <a :class="(route().current('dashboard.souvenirs') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="souvenirs">
+                                    Mis Souvenirs
+                                </a>
+                            </li>
+                            <li>
+                                <a :class="(route().current('dashboard.shopping') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="shopings">
+                                    Mis Compras
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-info" href="javascript:void(0)" @click.prevent="logout">
+                                    Cerrar Sesión
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-10">
@@ -80,7 +106,32 @@ export default {
                 this.$inertia.post(route('logout'), {
                     _token: this.$page.props.csrf_token,
                 })
-            },
+        },
+        dashboard(){
+                this.$inertia.get(route('dashboard'),{}, {
+                    preserveScroll: true
+                })
+        },
+        hotels(){
+                this.$inertia.get(route('dashboard.hotels'),{}, {
+                    preserveScroll: true
+                })
+        },
+        activity(){
+                this.$inertia.get(route('dashboard.activities'),{}, {
+                    preserveScroll: true
+                })
+        },
+        souvenirs(){
+                this.$inertia.get(route('dashboard.souvenirs'),{}, {
+                    preserveScroll: true
+                })
+        },
+        shopings(){
+                this.$inertia.get(route('dashboard.shopping'),{}, {
+                    preserveScroll: true
+                })
+        },
     }
 }
 
