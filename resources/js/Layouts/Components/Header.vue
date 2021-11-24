@@ -55,6 +55,6 @@
 </script>
 <style>
     .logo {
-        padding: 20px 0 !important;
+        padding: 18px 0 !important;
     }   
 </style>

@@ -22,7 +22,7 @@
 }
 
 #logo-menu {
-    height: 75px;
+    height: 80px;
 }
 
 #button-souvernirs, #button-activities {
@@ -33,8 +33,7 @@
     font-size: 2.5em;
     line-height: 1em;
     color: white;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-weight: 400;
 }
 .bg-img{
         background-position: 50% 20% !important;
@@ -47,7 +46,7 @@
 }
 @media (max-width: 600px) {
     #logo-welcome {
-        height: 50px;
+        height: 90px;
     }
     #welcome-text {
         font-size: 1.5em;

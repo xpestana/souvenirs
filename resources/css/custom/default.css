@@ -4,8 +4,17 @@ Description:   eCommerce Bootstrap 4 Template;
 Version: 1.0;
 -----------------------------------------------------*/
 /* by default css */
+@font-face {
+    font-family: 'Futur';
+    src: url('/vendor_asset/fonts/Futura Medium Italic font.ttf'),
+         url('/vendor_asset/fonts/futura medium bt.ttf'),
+         url('/vendor_asset/fonts/futura medium condensed bt.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 h1,h2,h3,h4,h5,h5{
-    font-family: 'Futur', sans-serif;
+    font-family: 'Futur';
     font-weight: 400;
     color: #333333;
     margin: 0;

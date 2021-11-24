@@ -107,7 +107,6 @@
     <!-- Cart & Search Area End -->
 </div>
 <!-- Cart Box End Here -->
-
 </template>
 <script>
     import { Link } from '@inertiajs/inertia-vue3';
@@ -115,7 +114,6 @@
     export default{
         components: {
             Link,
-
         },
         methods: {
             logout(){
@@ -132,15 +130,37 @@
         padding: 10px !important;
     }
     .search-cart-area > ul > li:first-child{
-        padding: 45px 0 0px 0px !important;
+        padding: 43px 0 0px 0px;
     }
     .search-cart-area > ul > li.search-mrg{
-        padding: 45px 0 0px 39px !important;
+        padding: 43px 0 0px 39px;
     }
     .search-cart-area > ul > li{
-        padding: 45px 0 0px 47px !important;
+        padding: 43px 0 0px 47px;
     }
     .search-cart-area > ul > li ul.currency-selector{
-        width: 180px !important;
+        width: 180px;
+    }
+    .primary-menu-list > li > a{
+        line-height:  110px;
+    }
+    @media (max-width: 767px){
+        .search-cart-area > ul > li > a > span{
+            font-size: 9px;
+            height: 16px;
+            line-height: 17px;
+            right: -16px;
+            top: 3px;
+            width: 17px;
+        }
+        .search-cart-area > ul > li > i.header-search{
+            font-size: 28px;
+        }
+        .search-cart-area > ul > li > a i.header-cart{
+            font-size: 28px;
+        }
+        .search-cart-area > ul > li{
+            padding: 43px 0 0px 15px;
+        }
     }
 </style>

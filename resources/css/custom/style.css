@@ -37,15 +37,10 @@ Version: 1.0;
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700,800,900');
 
 @font-face {
-font-family: 'Futur';
-   src: url('/vendor_asset/fonts/Futura-CondensedLight.otf'),
-        url('/vendor_asset/fonts/futur.ttf'),
-        url('/vendor_asset/fonts/Futura Bold font.ttf'),
-        url('/vendor_asset/fonts/Futura Extra Black font.ttf'),
-        url('/vendor_asset/fonts/Futura Light font.ttf'),
-        url('/vendor_asset/fonts/futura medium bt.ttf'),
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Futur';
+    src: url('/vendor_asset/fonts/futura medium bt.ttf');
+    font-weight: normal;
+    font-style: normal;
 }
 /*----------------------------------------*/
 /* 1. Template Default CSS
@@ -53,7 +48,7 @@ font-family: 'Futur';
 
 body {
    /* font-family: 'Work Sans', sans-serif;*/
-   font-family: 'Futur', sans-serif;
+   font-family: 'Futur';
     font-weight: 400;
     color: #333333;
     font-size: 14px;

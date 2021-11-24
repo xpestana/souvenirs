@@ -22,7 +22,7 @@
 }
 
 #logo-menu {
-    height: 75px;
+    height: 80px;
 }
 
 #button-souvernirs, #button-activities {
@@ -33,8 +33,7 @@
     font-size: 2.5em;
     line-height: 1em;
     color: white;
-    font-weight: 600;
-    text-transform: uppercase;
+    font-weight: 400;
 }
 .bg-img{
         background-position: 50% 20% !important;
@@ -47,7 +46,7 @@
 }
 @media (max-width: 600px) {
     #logo-welcome {
-        height: 50px;
+        height: 90px;
     }
     #welcome-text {
         font-size: 1.5em;
@@ -96,15 +95,10 @@ Version: 1.0;
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700,800,900');
 
 @font-face {
-font-family: 'Futur';
-   src: url('/vendor_asset/fonts/Futura-CondensedLight.otf'),
-        url('/vendor_asset/fonts/futur.ttf'),
-        url('/vendor_asset/fonts/Futura Bold font.ttf'),
-        url('/vendor_asset/fonts/Futura Extra Black font.ttf'),
-        url('/vendor_asset/fonts/Futura Light font.ttf'),
-        url('/vendor_asset/fonts/futura medium bt.ttf'),
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Futur';
+    src: url('/vendor_asset/fonts/futura medium bt.ttf');
+    font-weight: normal;
+    font-style: normal;
 }
 /*----------------------------------------*/
 /* 1. Template Default CSS
@@ -112,7 +106,7 @@ font-family: 'Futur';
 
 body {
    /* font-family: 'Work Sans', sans-serif;*/
-   font-family: 'Futur', sans-serif;
+   font-family: 'Futur';
     font-weight: 400;
     color: #333333;
     font-size: 14px;
@@ -4898,8 +4892,17 @@ Description:   eCommerce Bootstrap 4 Template;
 Version: 1.0;
 -----------------------------------------------------*/
 /* by default css */
+@font-face {
+    font-family: 'Futur';
+    src: url('/vendor_asset/fonts/Futura Medium Italic font.ttf'),
+         url('/vendor_asset/fonts/futura medium bt.ttf'),
+         url('/vendor_asset/fonts/futura medium condensed bt.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 h1,h2,h3,h4,h5,h5{
-    font-family: 'Futur', sans-serif;
+    font-family: 'Futur';
     font-weight: 400;
     color: #333333;
     margin: 0;
