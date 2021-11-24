@@ -3,7 +3,7 @@
     <Slide :key="'0'">
       <div style="background-image: url(/vendor_asset/img/bg-image/home.png);" class="bg-image welcome w-100  pt-50">
         <div class="row justify-content-center pt-50 m-0">
-            <div align="center" class="col-7 mb-4 p-0">
+            <div  align="center" class="col-7 mb-4 p-0">
                 <img id="logo-welcome" src="/vendor_asset/img/logo/logo-white.png">
             </div>
             <div class="w-100"></div>
@@ -39,7 +39,7 @@
     <Slide :key="'1'">
       <div style="background-image: url(/vendor_asset/img/bg-image/home-2.jpg);" class="bg-image welcome w-100  pt-50">
         <div class="row justify-content-center pt-50 m-0">
-            <div align="center" class="col-7 mb-4 p-0">
+            <div  align="center" class="col-7 mb-4 p-0">
                 <img id="logo-welcome" src="/vendor_asset/img/logo/logo-white.png">
             </div>
             <div class="w-100"></div>
