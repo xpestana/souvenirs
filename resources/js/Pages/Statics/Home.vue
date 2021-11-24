@@ -30,6 +30,36 @@
         </div>
         </div>
     </Slide>
+    <Slide :key="1">
+      <div style="background-image: url(/vendor_asset/img/bg-image/home-2.jpg);" class="bg-image welcome w-100  pt-50">
+        <div class="row justify-content-center pt-50 m-0">
+            <div class="col-7 mb-4 p-0">
+                <img id="logo-welcome" src="/vendor_asset/img/logo/logo-white.png" class="mx-auto">
+            </div>
+            <div class="w-100"></div>
+            <div class="col-7 mb-4  p-0">
+                <p id="welcome-text" class="text-center">Un viaje lleno de experiencias y<br>recuerdos</p>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-7 my-4 p-0 row justify-content-center">
+                <div class="blog-btn text-center col-md-4 col-sm-12">
+                    <Link 
+                        class="bg-info" 
+                        :href="route('souvenirs')">
+                        Souvenirs
+                    </Link>
+                </div>
+                <div class="blog-btn text-center col-md-4 col-sm-12">
+                    <Link
+                        class="bg-info"
+                        :href="route('activities')">
+                            Actividades
+                    </Link>
+                </div>
+            </div>
+        </div>
+        </div>
+    </Slide>
   </Carousel>
 
 </template>
