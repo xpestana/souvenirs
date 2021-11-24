@@ -51,32 +51,7 @@ Version: 1.0;
         $('#ship-box-info').slideToggle();
     });
 
-    /*----------------------------
-        Slider Activation
-    -----------------------------*/
-    $(".slider-activation").owlCarousel({
-        loop: true, 
-        margin: 0,
-        nav: true,
-        autoplay: false,
-        animateOut: 'fadeOut',
-        animateIn: 'fadeIn',
-        autoplayTimeout: 10000,
-        items: 1,
-        navText: ["Prev", "Next"],
-        dots: true,
-        dotsContainer: '.slide-item-number',
-        autoHeight:true,
-        lazyLoad: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            1920: {
-                items: 1
-            }
-        }
-    });
+    
 
 
     var i = 1;
@@ -87,7 +62,7 @@ Version: 1.0;
 
 
     /* bestseller active  */ 
-    $('.best-seller-active').owlCarousel({
+    /*$('.best-seller-active').owlCarousel({
         loop:true,
         autoplay: false,
         autoplayTimeout: 5000,
@@ -114,11 +89,11 @@ Version: 1.0;
                 items:4
             }
         }
-    })
+    })*/
     /*----------------------------------------------------
         Hot Deal Product Activation
     -----------------------------------------------------*/
-    $('.blog-slider-active').owlCarousel({
+   /* $('.blog-slider-active').owlCarousel({
         loop: true,
         nav: true,
         dots: false,
@@ -145,12 +120,12 @@ Version: 1.0;
                 items: 1
             }
         }
-    })
+    })*/
     
     /*----------------------------------------------------
         Brand Logo  Activation
     -----------------------------------------------------*/
-    $('.brand-logo-active').owlCarousel({
+  /*  $('.brand-logo-active').owlCarousel({
         loop: false,
         nav: false,
         dots: false,
@@ -178,12 +153,12 @@ Version: 1.0;
                 items: 5
             }
         }
-    })
+    })*/
     
     /*-------------------------------------
         Thumbnail Product activation
     --------------------------------------*/
-    $('.thumb-menu').owlCarousel({
+  /*  $('.thumb-menu').owlCarousel({
         loop: false,
         navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
         margin: 15,
@@ -203,7 +178,7 @@ Version: 1.0;
                 items: 3
             }
         }
-    })
+    })*/
     $('.thumb-menu a').on('click', function () {
         $('.thumb-menu a').removeClass('active');
     })
@@ -274,7 +249,7 @@ Version: 1.0;
     /*----------------------------------------------------
         Single Categorie Activation
     -----------------------------------------------------*/
-    $('.single-img-categorie-active').owlCarousel({
+ /*   $('.single-img-categorie-active').owlCarousel({
         loop: false,
         nav: false,
         dots: true,
@@ -299,6 +274,6 @@ Version: 1.0;
                 items: 4
             }
         }
-    })
+    })*/
     
 })(jQuery);

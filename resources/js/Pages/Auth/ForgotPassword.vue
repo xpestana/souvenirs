@@ -1,40 +1,60 @@
 <template>
-    <Head title="Forgot Password" />
+    <Head title="Reestablecer contraseña"/>
+    <Layout>
+    <Breadcrumb title="Reestablecer contraseña"/>
+    <!-- Login Page Start Here -->
+        <div class="login white-bg ptb-80">
+            <div class="container">
+              <h3 class="login-header text-info">Bienvenido, Reestablece tu contraseña</h3>
+               <div class="row">
+                   <div class="col-lg-6 offset-lg-3">
+                    <div class="mb-4 text-sm text-gray-600">
+                                ¿Olvidaste tu contraseña? No hay problema. Simplemente háganos saber su dirección de correo electrónico y le enviaremos un enlace para restablecer la contraseña que le permitirá elegir una nueva..
+                            </div>
+                        <BreezeValidationErrors class="mb-3" />
+                        <div class="login-footer text-center">
+                            <div v-if="status" class="mb-4 font-medium text-sm text-danger">
+                                {{ status }}
+                            </div>
+                            
+                        </div>
+                        <div class="login-form">
+                            <form @submit.prevent="submit">
+                                <div class="form-group row">
+                                    <label for="email" class="col-sm-3 col-form-label">Correo Electrónico</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" id="email" name="email" placeholder="Correo Electrónico"  v-model="form.email" required autofocus autocomplete="username">
+                                    </div>
+                                </div>
+                                <div class="login-details text-center mb-25">
+                                    <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                            Reestablecer contraseña
+                                    </BreezeButton>
+                                </div>
 
-    <div class="mb-4 text-sm text-gray-600">
-        Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.
-    </div>
-
-    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
-        {{ status }}
-    </div>
-
-    <BreezeValidationErrors class="mb-4" />
-
-    <form @submit.prevent="submit">
-        <div>
-            <BreezeLabel for="email" value="Email" />
-            <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
+                            </form>
+                        </div>
+                        
+                   </div>
+               </div>
+            </div>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Email Password Reset Link
-            </BreezeButton>
-        </div>
-    </form>
+    <!-- Login Page End Here -->
+    </Layout>
+ 
 </template>
 
 <script>
+import Layout from '@/Layouts/Layout.vue'  
+import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'  
 import BreezeButton from '@/Components/Button.vue'
-import BreezeGuestLayout from '@/Layouts/Guest.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeLabel from '@/Components/Label.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
-    layout: BreezeGuestLayout,
+    //layout: Layout,
 
     components: {
         BreezeButton,
@@ -42,6 +62,8 @@ export default {
         BreezeLabel,
         BreezeValidationErrors,
         Head,
+        Breadcrumb,
+        Layout,
     },
 
     props: {

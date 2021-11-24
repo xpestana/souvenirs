@@ -43,7 +43,7 @@
                                 </a>
                             </li>
                             <li v-if="$page.props.auth.role == 'Admin'">
-                                <a :class="(route().current('dashboard.hotels') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="hotels">
+                                <a :class="(route().current('dashboard.hotels') === true || route().current('hotels.create') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="hotels">
                                     Administrador de Hoteles Registrados
                                 </a>
                             </li>

@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                                 <div class="login-details text-center mb-25">
-                                    <Link href="forgot-password.html">¿Ólvido su contraseña? </Link>
+                                    <Link :href="route('password.request')">¿Ólvido su contraseña? </Link>
                                     <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                         Entrar
                                     </BreezeButton>
@@ -51,43 +51,7 @@
         </div>
     <!-- Login Page End Here -->
     </Layout>
-    <!---
-    <Head title="Log in" />
-
-    
-
-    
-    <div class="mt-4">
-        <p>Logueo de usuario, ruta a utilizar route('login') method post:</p>
-        <p>los names a utilizar son los explicitos en el formulario</p>        
-        <p>email, password, remember</p>
-    </div>
-    <form >
-        <div>
-            <BreezeLabel for="email" value="Email" />
-            <BreezeInput id="email" type="email" class="mt-1 block w-full"  autofocus autocomplete="username" />
-        </div>
-
-        <div class="mt-4">
-            <BreezeLabel for="password" value="Password" />
-            <BreezeInput id="password" type="password" class="mt-1 block w-full"required autocomplete="current-password" />
-        </div>
-
-        <div class="block mt-4">
-            <label class="flex items-center">
-                <BreezeCheckbox name="remember" v-model:checked="form.remember" />
-                <span class="ml-2 text-sm text-gray-600">Remember me</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                Forgot your password?
-            </Link>
-
-            
-        </div>
-    </form>-->
+ 
 </template>
 
 <script>

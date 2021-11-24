@@ -1,7 +1,4 @@
-#welcome {
-    height: 100vh;
-    background-image: url(/vendor_asset/img/bg-image/home.png);
-}
+
 
 .links-orders {
     font-weight: 700;
@@ -12,7 +9,7 @@
 }
 
 #logo-welcome {
-    height: 85px;
+    height: 140px;
 }
 
 #logo-footer {
@@ -33,7 +30,7 @@
 }
 
 #welcome-text {
-    font-size: 3em;
+    font-size: 2.5em;
     line-height: 1em;
     color: white;
     font-weight: 600;

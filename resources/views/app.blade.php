@@ -26,8 +26,6 @@
         <link rel="stylesheet" href="/vendor_asset/css/jquery-ui.min.css">
         <!-- Meanmenu css -->
         <link rel="stylesheet" href="/vendor_asset/css/meanmenu.min.css">
-        <!-- Owl carousel css -->
-        <link rel="stylesheet" href="/vendor_asset/css/owl.carousel.min.css">
         <!-- Custom css -->
         <!--<link rel="stylesheet" href="/vendor_asset/css/default.css">-->
         <!-- Main css -->
@@ -56,8 +54,6 @@
         <script src="/vendor_asset/js/jquery.nice-select.min.js" defer></script>
         <!-- Jquery ui price slider js 
         <script src="vendor_asset/js/jquery-ui.min.js" defer></script>-->
-        <!-- Owl carousel -->
-        <script src="/vendor_asset/js/owl.carousel.min.js" defer></script>
         <!-- Plugin js -->
         <script src="/vendor_asset/js/plugins.js" defer></script>
         <!-- Main activaion js -->

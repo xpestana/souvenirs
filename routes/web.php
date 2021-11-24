@@ -65,7 +65,24 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
         return Inertia::render('Dashboard/Shoppings');
     })->name('dashboard.shopping');
 
-    
+    /*
+        HOTELES ADMIN
+    */
+    Route::resource(
+        '/hotel',
+        HotelController::class, [
+            'names' => [
+                'index'     => 'hotels.index',
+                'create'    => 'hotels.create',
+                'edit'      => 'hotels.edit',
+                'show'      => 'hotels.show',
+                'store'     => 'hotels.store',
+                'update'    => 'hotels.update',
+                'destroy'   => 'hotels.destroy',
+            ],
+        ],
+    );
+  
 });
 Route::resource(
     'perfil',
@@ -124,23 +141,6 @@ Route::get('/dashboardb', function () {
 
 /*********REGISTROS**********************/
 
-/*
-HOTELES
- */
-Route::resource(
-    '/hotel',
-    HotelController::class, [
-        'names' => [
-            'index'     => 'hotels.index',
-            'create'    => 'hotels.create',
-            'edit'      => 'hotels.edit',
-            'show'      => 'hotels.show',
-            'store'     => 'hotels.store',
-            'update'    => 'hotels.update',
-            'destroy'   => 'hotels.destroy',
-        ],
-    ],
-);
 
 /*
 ADMINS

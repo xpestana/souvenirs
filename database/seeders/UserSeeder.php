@@ -63,6 +63,7 @@ class UserSeeder extends Seeder
             ]);
 
             $hotel = hotel::updateOrCreate([
+                'name'       => 'nombre hotel',
                 'type'       => 'hotel',
                 'address'    => 'Direccion',
                 'zone'       => 'Merida',

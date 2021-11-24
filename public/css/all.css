@@ -1,7 +1,4 @@
-#welcome {
-    height: 100vh;
-    background-image: url(/vendor_asset/img/bg-image/home.png);
-}
+
 
 .links-orders {
     font-weight: 700;
@@ -12,7 +9,7 @@
 }
 
 #logo-welcome {
-    height: 85px;
+    height: 140px;
 }
 
 #logo-footer {
@@ -33,7 +30,7 @@
 }
 
 #welcome-text {
-    font-size: 3em;
+    font-size: 2.5em;
     line-height: 1em;
     color: white;
     font-weight: 600;
@@ -98,12 +95,24 @@ Version: 1.0;
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700,800,900');
 
+@font-face {
+font-family: 'Futur';
+   src: url('/vendor_asset/fonts/Futura-CondensedLight.otf'),
+        url('/vendor_asset/fonts/futur.ttf'),
+        url('/vendor_asset/fonts/Futura Bold font.ttf'),
+        url('/vendor_asset/fonts/Futura Extra Black font.ttf'),
+        url('/vendor_asset/fonts/Futura Light font.ttf'),
+        url('/vendor_asset/fonts/futura medium bt.ttf'),
+  font-weight: normal;
+  font-style: normal;
+}
 /*----------------------------------------*/
 /* 1. Template Default CSS
 /*----------------------------------------*/
 
 body {
-    font-family: 'Work Sans', sans-serif;
+   /* font-family: 'Work Sans', sans-serif;*/
+   font-family: 'Futur', sans-serif;
     font-weight: 400;
     color: #333333;
     font-size: 14px;
@@ -120,7 +129,7 @@ a:focus {
     text-decoration: none
 }
 h4 a:hover {
-    color: #3498db;
+    color: #31516B;
 }
 ul {
     list-style: outside none none;
@@ -4890,7 +4899,7 @@ Version: 1.0;
 -----------------------------------------------------*/
 /* by default css */
 h1,h2,h3,h4,h5,h5{
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Futur', sans-serif;
     font-weight: 400;
     color: #333333;
     margin: 0;

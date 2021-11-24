@@ -31,7 +31,7 @@ class HotelController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Pruebas/Register_hotel');
+        return Inertia::render('Dashboard/Create/Hotel');
     }
 
     /**
@@ -42,7 +42,6 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = $this->validate($request, [
             'name'              => 'required|string',
             'email'             => 'required|string|email|max:255|unique:users',
@@ -68,7 +67,7 @@ class HotelController extends Controller
             ]);
             $user->assignRole('Hotel');
             Mail::to($user->email)->send(new WelcomeReceived($user, $password));
-        return Redirect::route('register.hotel')->with(['id'=>$id, 'message' => 'Update Success', 'code' => 200, 'status' => 'success']);  
+        return back()->with(['id'=>$id, 'message' => 'Update Success', 'code' => 200, 'status' => 'success']);  
         } catch (Exception $e) {
             
         }
