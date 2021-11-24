@@ -3,8 +3,8 @@
     <Slide :key="'0'">
       <div style="background-image: url(/vendor_asset/img/bg-image/home.png);" class="bg-image welcome w-100  pt-50">
         <div class="row justify-content-center pt-50 m-0">
-            <div  align="center" class="col-7 mb-4 p-0">
-                <img id="logo-welcome" src="/vendor_asset/img/logo/logo-white.png">
+            <div class="col-7 mb-4 p-0">
+                <img id="logo-welcome" src="/vendor_asset/img/logo/logo-white.png" class="mx-auto">
             </div>
             <div class="w-100"></div>
             <div class="col-7 mb-4  p-0">
@@ -14,7 +14,7 @@
             <div class="col-7 my-4  p-0">
                 <div class="container">
                 <div class="row m-0 w-100 justify-content-center">
-                    <div class="col-4 d-flex justify-content-center pr-1 pt-10 discount">
+                    <div class="col-md-4 d-flex justify-content-center pr-1 pt-10 discount">
                         <Link
                             id="button-souvernirs"
                             class="bg-info" 
@@ -22,7 +22,7 @@
                                 Souvenirs
                         </Link>
                     </div>
-                    <div class="col-4 d-flex justify-content-center pl-1 pt-10 discount">
+                    <div class="col-md-4 d-flex justify-content-center pl-1 pt-10 discount">
                             <Link
                                 id="button-activities"
                                 class="bg-info"
