@@ -31,7 +31,7 @@
                                     <div class="col-sm-7 mt-3 ml-2">
                                         <label class="flex items-center">
                                             <BreezeCheckbox name="remember" v-model:checked="form.remember" />
-                                                <span class="ml-2 text-sm text-gray-600">Recordarme</span>
+                                                <span class="ml-2 text-sm text-gray-600 mt-3">Recordarme</span>
                                         </label>
                                     </div>
                                 </div>

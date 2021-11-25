@@ -19,6 +19,7 @@ class CreateHotelsTable extends Migration
             $table->string('type');
             $table->string('address');
             $table->string('zone');
+            $table->string('image')->default('default.png');
             $table->timestamps();
         });
     }

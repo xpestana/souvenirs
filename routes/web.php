@@ -52,9 +52,6 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     Route::get('/perfil', function () {
         return Inertia::render('Dashboard/Profile');
     })->name('dashboard');
-    Route::get('/hoteles', function () {
-        return Inertia::render('Dashboard/Hotels');
-    })->middleware(['role:Admin'])->name('dashboard.hotels');
     Route::get('mis-actividades', function () {
         return Inertia::render('Dashboard/Activities');
     })->name('dashboard.activities');
@@ -81,7 +78,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
                 'destroy'   => 'hotels.destroy',
             ],
         ],
-    );
+    )->middleware(['role:Admin']);
   
 });
 Route::resource(

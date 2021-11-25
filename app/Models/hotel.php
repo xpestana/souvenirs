@@ -19,6 +19,7 @@ class hotel extends Model
         'type',
         'address',
         'zone',
+        'image',
     ];
 
     /**

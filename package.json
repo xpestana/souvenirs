@@ -34,7 +34,6 @@
     "dependencies": {
         "@meforma/vue-toaster": "^1.2.2",
         "@popperjs/core": "^2.10.1",
-        "vue3-carousel": "^0.1.30",
-        "vue3-dropzone": "0.0.7"
+        "vue3-carousel": "^0.1.30"
     }
 }

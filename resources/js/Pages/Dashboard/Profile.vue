@@ -10,7 +10,7 @@
                         <div class="col-lg-6 col-md-8">
                             <span class="custom-radio">
                                 <input name="gender" v-model="form.gender" value="M" type="radio"> H
-                            </span>
+                            </span> 
                             <span class="custom-radio pl-1">
                                 <input name="gender" v-model="form.gender" value="F" type="radio"> M
                             </span>

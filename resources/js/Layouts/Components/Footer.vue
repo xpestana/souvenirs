@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-info col-12 p-20 m-10"></div>
+    <div class="bg-footer col-12 p-20 my-10"></div>
         <!-- Footer Area Start Here -->
         <footer class="footer-area bg-img">
             <div class="footer-top bg-img pt-82 pb-50">
@@ -94,3 +94,8 @@
         },
     }
 </script>
+<style type="text/css">
+    .bg-footer{
+        background-color: #31516B;
+    }
+</style>
