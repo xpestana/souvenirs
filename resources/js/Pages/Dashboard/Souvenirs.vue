@@ -1,8 +1,37 @@
 <template>
 	<Layout>
 	<div class="tab-content dashboard-content mt-all-40">
-    	<div id="hotels" class="tab-pane fade show active">
-    		<h3>Mis Souvenirs</h3>
+    	<div class="row">
+   			<div class="col-md-6">
+   				<h3>Gestión de souvenirs</h3>	
+   			</div>
+    		<div align="center" class="col-md-6 mb-3">
+    			<div class="d-single-info text-lg-center">
+                	<Link class="view-cart bg-info" :href="route('souvenirs.create')">Agregar Souvenir</Link>
+                </div>
+    		</div> 
+    	</div>
+    	<div class="table-responsive">
+        	<table class="table table-striped table-bordered table-hover">
+            	<thead>
+            		<tr>
+            			<th>Titulo</th>
+            			<th>Precio</th>
+            			<th>Stock</th>
+            			<th>Destacado</th>
+            			<th>Acciones</th>
+            		</tr>
+            	</thead>
+                <tbody>
+                	<tr>
+                		<td></td>
+                		<td></td>
+                		<td></td>
+                		<td></td>
+                		<td></td>
+                	</tr>
+                </tbody>
+            </table>
 		</div>
 	</div>
 	</Layout>
@@ -16,7 +45,8 @@
         	Link,
         	Layout,
     	},
-    	created(){
+    	props: {
+        	souvenirs: Object,
     	},
 	}
 

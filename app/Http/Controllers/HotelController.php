@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\hotel;
 use App\Models\User;
+use App\Models\profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeReceived;
@@ -21,7 +22,7 @@ class HotelController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Dashboard/Hotels',['hotels' => hotel::all()]);
+        return Inertia::render('Dashboard/Hotels',['hotels' => hotel::paginate(10)]);
     }
 
     /**
@@ -152,7 +153,7 @@ class HotelController extends Controller
             $user->hotel()->attach($hotel->id, ['manager' => true]);
 
             //Mail::to($user->email)->send(new WelcomeReceived($user, $password));
-        return back()->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
+        return Redirect::route('hotels.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
         } catch (Exception $e) {
             
         }
@@ -167,7 +168,15 @@ class HotelController extends Controller
      */
     public function show(hotel $hotel)
     {
-        //
+        $hotel= hotel::with([
+                    'user' => function ($query) {
+                        $query->where('hotel_user.manager', 1);
+                    },'user.profile'
+                ])
+                ->where('id', $hotel->id)
+                ->first();
+
+        return Inertia::render('Dashboard/Show/Hotel',compact('hotel'));
     }
 
     /**
@@ -178,8 +187,14 @@ class HotelController extends Controller
      */
     public function edit(hotel $hotel)
     {
-        $hotel = $hotel->load('user');
-        return Inertia::render('Pruebas/Edit_hotel',compact('hotel'));
+        $hotel= hotel::with([
+                    'user' => function ($query) {
+                        $query->where('hotel_user.manager', 1);
+                    },'user.profile'
+                ])
+                ->where('id', $hotel->id)
+                ->first();
+        return Inertia::render('Dashboard/Edit/Hotel',compact('hotel'));
     }
 
     /**
@@ -191,25 +206,52 @@ class HotelController extends Controller
      */
     public function update(Request $request, hotel $hotel)
     {
-         $validator = $this->validate($request, [
-            'name'              => 'required|string',
-            'email'             => 'required|string|email|max:255',
-            'type'              => 'required|string', 'in:apartament,hotel',
-            'address'           => 'required|string',
-            'zone'              => 'required|string',
-        ]);
-         $id = mt_Rand(1000000, 9999999);  
-         /*actualizo usuario*/
-        $user=User::find($hotel->user_id);
-         $user->name = $request->name;
-         $user->email = $request->email;
-         $user->save();
 
-         /*actualizo hotel*/
-         $hotel->type = $request->type;
-         $hotel->address = $request->address;
-         $hotel->zone = $request->zone;
-         $hotel->save();
+         $id = mt_Rand(1000000, 9999999);  
+            /*actualizo usuario*/
+            $user=User::find($request->user_id);
+            $user->name = $request->firstname." ".$request->lastname ;
+            $user->email = $request->email;
+            $user->save();
+
+         if ($request->featured) {
+            $featured = $request->featured;
+            $msg =$this->valid($featured);
+            if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
+
+            $Path = public_path('storage/hotel/'.$user->id.'/');
+            $pathName = $user->id.'/';
+
+            if (!file_exists($Path)) {
+                mkdir($Path, 777, true);
+            }
+
+            $nameFile =$this->FileName($featured); //nombre de archivo original
+            $imgFileOriginal = Image::make($featured->getRealPath());
+            $imgFileOriginal->save($Path.$nameFile['fileName']);
+
+        }
+
+       
+
+        $profile=profile::find($user->profile->id);
+        $profile->firstname = $request->firstname;
+        $profile->lastname = $request->lastname;
+        $profile->gender = $request->gender;
+        $profile->save();
+
+        /*actualizo hotel*/
+        $hotel = hotel::find($request->hotel);
+        $hotel->name = $request->name;
+        $hotel->type = $request->type;
+        $hotel->address = $request->address;
+        $hotel->zone = $request->zone;
+        if ($request->featured) {
+            $hotel->image = $pathName.$nameFile['fileName'];
+        }
+        $hotel->zone = $request->zone;
+        $hotel->save();
+       
         return Redirect::route('hotels.index')->with(['id'=>$id, 'message' => 'Update Success', 'code' => 200, 'status' => 'success']);
     }
 
@@ -221,9 +263,12 @@ class HotelController extends Controller
      */
     public function destroy(hotel $hotel)
     {
-        $id = mt_Rand(1000000, 9999999);  
-        $user=User::find($hotel->user_id)->delete();
+        $id = mt_Rand(1000000, 9999999); 
+        
+        foreach ($hotel->user as $user) {
+            $user=User::find($user->id)->delete();
+        }
         $hotel->delete();
-     return Redirect::route('hotels.index')->with(['id'=>$id, 'message' => 'Update Success', 'code' => 200, 'status' => 'success']);   
+     return back()->with(['id'=>$id, 'message' => 'Eliminado con exito', 'code' => 200, 'status' => 'success']);   
     }
 }

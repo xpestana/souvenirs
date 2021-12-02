@@ -24,34 +24,42 @@
             				</tr>
             			</thead>
                 		<tbody>
-                    		<tr v-for="hotel in hotels" :key="hotel.id">
+                    		<tr v-for="hotel in hotels.data" :key="hotel.id">
                         		<td class ="text-orders p-2 mb-1">
                         			<div :style="'background:url(/storage/hotel/'+hotel.image+')'" class="img-back"></div>
                         		</td>
-                        		<td class="mb-1" style="font-size: 15px;">{{ hotel.name }}</td>
-                        		<td class="mb-1" style="font-size: 15px;">{{ hotel.type }}</td>
-                        		<td class="mb-1" style="font-size: 15px;">{{ hotel.address }} {{ hotel.zone }}</td>
-                        		<td class="mb-1" style="font-size: 15px;">
-                        			<Link class="view-cart bg-info ml-2" :href="route('hotels.show',{hotel : hotel.id})" title="Ver Hotel"> Ver </Link>
-                        			<Link class="view-cart bg-secundary ml-2" :href="route('hotels.edit',{hotel : hotel.id})" title="Ver Hotel"> Editar </Link>
-                    				<Link class="view-cart bg-danger ml-2" title="eliminar hotel" @click="deleteHotel(hotel.id)"> Eliminar </Link>
+                        		<td class="mb-1">{{ hotel.name }}</td>
+                        		<td class="mb-1">{{ hotel.type }}</td>
+                        		<td class="mb-1">{{ hotel.address }} {{ hotel.zone }}</td>
+                        		<td class="mb-1">
+                        			<Link class="view-cart bg-info ml-2" :href="route('hotels.show',{hotel: hotel.id})" title="Ver Hotel"> Ver </Link>
+                        			<Link class="view-cart bg-secundary ml-2" :href="route('hotels.edit',{hotel: hotel.id})" title="Ver Hotel"> Editar </Link>
+                    				<button class="view-cart bg-danger ml-2" title="eliminar hotel" @click="deleteHotel(hotel.id)"> Eliminar </button>
                         		</td>
                     		</tr>
                 		</tbody>
             		</table>
+            		<div class="row justify-content-center mb-3">
+                    	<div class="col-9">
+                        	<paginator :paginator="hotels"/>
+                        </div>
+                    </div>
         		</div>
 			</div>
 		</div>
 	</Layout>
 </template>
 <script>
-    import { Head, Link } from '@inertiajs/inertia-vue3';
-	import Layout from '@/Layouts/LayoutProfile.vue'      
+    import { Head, Link } from '@inertiajs/inertia-vue3'
+	import Layout from '@/Layouts/LayoutProfile.vue'   
+	import Paginator from '@/Components/Paginator.vue'   
+
 	export default {
     	components: {
         	Head,
         	Link,
         	Layout,
+        	Paginator,
     	},
     	props: {
         	hotels: Object,
@@ -60,7 +68,24 @@
     	},
     	methods: {
         	deleteHotel(hotel){
-            	this.$inertia.delete(route('hotels.destroy',{hotel : hotel}))
+        		this.$swal({
+  					title: '¿Estas seguro?',
+  					text: "Esta acción no se puede revertir!",
+  					icon: 'warning',
+  					showCancelButton: true,
+  					confirmButtonColor: '#3085d6',
+  					cancelButtonColor: '#d33',
+  					confirmButtonText: 'Si, eliminar!',
+  					cancelButtonText: 'Cancelar',
+				}).then((result) => {
+  						if (result.isConfirmed) {
+  							this.$inertia.delete(route('hotels.destroy',{hotel : hotel}),
+  							{
+								preserveScroll: true,
+  							})
+  						}
+					})
+            	
         	}
     	}
 	}

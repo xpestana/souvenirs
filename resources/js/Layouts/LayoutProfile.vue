@@ -38,23 +38,28 @@
                         <!-- Nav tabs -->
                         <ul class="nav flex-column dashboard-list" role="tablist">
                             <li>
-                                <a :class="(route().current('dashboard') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="dashboard">
+                                <a :class="(route().current('profile.index') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="dashboard">
                                     Detalles de la Cuenta
                                 </a>
                             </li>
                             <li v-if="$page.props.auth.role == 'Admin'">
-                                <a :class="(route().current('hotels.index') === true || route().current('hotels.create') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="hotels">
+                                <a :class="(route().current('hotels.index') === true || route().current('hotels.create') === true || route().current('hotels.show') === true || route().current('hotels.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="hotels">
                                     Administrador de Hoteles Registrados
                                 </a>
                             </li>
-                            <li>
-                                <a :class="(route().current('dashboard.activities') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="activity">
-                                    Mis Actividades
+                            <li v-if="$page.props.auth.role == 'Admin'">
+                                <a :class="(route().current('admin.index') === true || route().current('admin.create') === true || route().current('admin.show') === true || route().current('admin.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="admin">
+                                    Gestión de administradores
                                 </a>
                             </li>
-                            <li>
-                                <a :class="(route().current('dashboard.souvenirs') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="souvenirs">
-                                    Mis Souvenirs
+                            <li v-if="$page.props.auth.role == 'Admin'">
+                                <a :class="(route().current('souvenirs.index') === true || route().current('souvenirs.create') === true || route().current('souvenirs.show') === true || route().current('souvenirs.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="souvenirs">
+                                    Gestión de Souvenirs
+                                </a>
+                            </li>
+                            <li v-if="$page.props.auth.role == 'Admin'">
+                                <a :class="(route().current('activities.index') === true || route().current('activities.create') === true || route().current('activities.show') === true || route().current('activities.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="activity">
+                                    Gestión de Actividades
                                 </a>
                             </li>
                             <li>
@@ -108,7 +113,7 @@ export default {
                 })
         },
         dashboard(){
-                this.$inertia.get(route('dashboard'),{}, {
+                this.$inertia.get(route('profile.index'),{}, {
                     preserveScroll: true
                 })
         },
@@ -117,13 +122,18 @@ export default {
                     preserveScroll: true
                 })
         },
+        admin(){
+                this.$inertia.get(route('admin.index'),{}, {
+                    preserveScroll: true
+                })
+        },
         activity(){
-                this.$inertia.get(route('dashboard.activities'),{}, {
+                this.$inertia.get(route('activities.index'),{}, {
                     preserveScroll: true
                 })
         },
         souvenirs(){
-                this.$inertia.get(route('dashboard.souvenirs'),{}, {
+                this.$inertia.get(route('souvenirs.index'),{}, {
                     preserveScroll: true
                 })
         },

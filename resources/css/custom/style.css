@@ -4563,7 +4563,7 @@ a.shipping-calculator-button:hover {
 .view-cart {
     background: #9db5d9 none repeat scroll 0 0;
     color: #fff;
-    padding: 5px 12px;
+    padding: 5px 10px;
     text-transform: capitalize;
 }
 .user-name::before {

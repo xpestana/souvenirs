@@ -2,7 +2,7 @@
 	<Layout>
 	<div class="tab-content dashboard-content mt-all-40">
     	<div id="hotels" class="tab-pane fade show active">
-    		<h3>Mis Actividades</h3>
+    		<h3>Gestión de Actividades</h3>
 		</div>
 	</div>
 	</Layout>

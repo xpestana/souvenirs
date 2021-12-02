@@ -8,7 +8,9 @@ use Inertia\Inertia;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\Products\SouvenirsController;
+use App\Http\Controllers\Products\ActivitiesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,24 +48,11 @@ Route::get('/login', function () {
 })->name('login');
 
 /*
-    Dashboard
+    Dashboard Admin
  */
-Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
-    Route::get('/perfil', function () {
-        return Inertia::render('Dashboard/Profile');
-    })->name('dashboard');
-    Route::get('mis-actividades', function () {
-        return Inertia::render('Dashboard/Activities');
-    })->name('dashboard.activities');
-    Route::get('mis-souvenirs', function () {
-        return Inertia::render('Dashboard/Souvenirs');
-    })->name('dashboard.souvenirs');
-    Route::get('/compras', function () {
-        return Inertia::render('Dashboard/Shoppings');
-    })->name('dashboard.shopping');
-
+Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(function () {
     /*
-        HOTELES ADMIN
+        Hoteles
     */
     Route::resource(
         '/hotel',
@@ -74,28 +63,131 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
                 'edit'      => 'hotels.edit',
                 'show'      => 'hotels.show',
                 'store'     => 'hotels.store',
-                'update'    => 'hotels.update',
                 'destroy'   => 'hotels.destroy',
             ],
+            ['except' => ['update']]
         ],
-    )->middleware(['role:Admin']);
-  
-});
-Route::resource(
-    'perfil',
-    ProfileController::class, [
-        'names' => [
-            'create'    => 'profile.create',
-            'edit'      => 'profile.edit',
-            'show'      => 'profile.show',
-            'store'     => 'profile.store',
-            'update'    => 'profile.update',
-            'destroy'   => 'profile.destroy',
-        ],
-        ['except' => ['index']]
-    ],
-)->middleware(['auth', 'verified']); 
+    );
+    Route::post('/update/hotel', [HotelController::class, 'update'])->name('hotels.update');
 
+    /*
+        Admins
+     */
+    Route::resource(
+        'admin',
+        AdminController::class, [
+            'names' => [
+                'index'     => 'admin.index',
+                'create'    => 'admin.create',
+                'store'     => 'admin.store',
+                'destroy'   => 'admin.destroy',
+            ],
+            ['except' => ['edit','show','update']]
+        ],
+    );
+
+    /*
+        Souvenirs
+     */
+    Route::resource(
+        'souvenirs',
+        SouvenirsController::class, [
+            'names' => [
+                'index'     => 'souvenirs.index',
+                'edit'      => 'souvenirs.edit',
+                'create'    => 'souvenirs.create',
+                'show'      => 'souvenirs.show',
+                'store'     => 'souvenirs.store',
+                'update'    => 'souvenirs.update',
+                'destroy'   => 'souvenirs.destroy',
+            ],
+        ],
+    );
+
+    /*
+        Activities
+     */
+    Route::resource(
+        'actividades',
+        ActivitiesController::class, [
+            'names' => [
+                'index'     => 'activities.index',
+                'edit'      => 'activities.edit',
+                'create'    => 'activities.create',
+                'show'      => 'activities.show',
+                'store'     => 'activities.store',
+                'update'    => 'activities.update',
+                'destroy'   => 'activities.destroy',
+            ],
+        ],
+    );
+
+});
+
+
+/*
+    Dashboard Común
+*/
+Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
+    /*
+        Profile
+     */
+    Route::resource(
+        'perfil',
+        ProfileController::class, [
+            'names' => [
+                'index'     => 'profile.index',
+                'create'    => 'profile.create',
+                'edit'      => 'profile.edit',
+                'show'      => 'profile.show',
+                'store'     => 'profile.store',
+                'update'    => 'profile.update',
+                'destroy'   => 'profile.destroy',
+            ],
+        ],
+    ); 
+    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Route::get('/compras', function () {
+        return Inertia::render('Dashboard/Shoppings');
+    })->name('dashboard.shopping');
 
 /*
     Shop
@@ -130,41 +222,5 @@ Route::get('/checkout', function () {
 Route::get('/carrito', function () {
     return Inertia::render('Cart');
 })->name('cart');
-
-Route::get('/dashboardb', function () {
-    return Inertia::render('DashboardBack');
-})->middleware(['auth', 'verified'])->name('dashboardb');
-
-
-/*********REGISTROS**********************/
-
-
-/*
-ADMINS
- */
-
-Route::resource(
-    'admin',
-    AdminController::class, [
-        'names' => [
-            'index'     => 'admin.index',
-            'create'    => 'admin.create',
-            'edit'      => 'admin.edit',
-            'show'      => 'admin.show',
-            'store'     => 'admin.store',
-            'update'    => 'admin.update',
-            'destroy'   => 'admin.destroy',
-        ],
-    ],
-);
-
-/*************RUTAS PARA REALIZAR PRUEBAS ****************************/
-Route::get('/prueba', [PruebaController::class, 'index'])->name('prueba.index');
-
-
-
-
-
-
 
 require __DIR__.'/auth.php';

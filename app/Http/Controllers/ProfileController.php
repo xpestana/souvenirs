@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Inertia\Inertia;
+use Redirect;
 
 class ProfileController extends Controller
 {
@@ -17,7 +19,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Dashboard/Profile');
     }
 
     /**

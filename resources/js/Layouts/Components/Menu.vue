@@ -28,7 +28,7 @@
                     <li id="cart-area">
                         <ul>
                             <template v-if="this.$page.props.auth.user">
-                                <li><Link :href="route('dashboard')">Mi cuenta</Link></li>
+                                <li><Link :href="route('profile.index')">Mi cuenta</Link></li>
                                 <li><Link :href="route('cart')">Carrito</Link></li>
                                 <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
                             </template>

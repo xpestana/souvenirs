@@ -22,7 +22,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::role('Admin')->with('profile')->paginate(10);
+        return Inertia::render('Dashboard/Admins', compact('users'));
     }
 
     /**
@@ -32,7 +33,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Pruebas/Register_admin');
+        return Inertia::render('Dashboard/Create/Admin');
     }
 
     /**
@@ -43,7 +44,26 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $this->validate($request, [
+            'firstname'         => 'required|string',
+            'lastname'          => 'required|string',
+            'gender'            => 'required|string', 'in:H,M',
+            'email'             => 'required|string|email|max:255|unique:users',
+        ]);
+        $id = mt_Rand(1000000, 9999999);
+        $password = Str::random(8);
+        $user = User::create([
+                'name' => $request->email,
+                'email' => $request->email,
+                'password' => Hash::make(Str::lower($password)),
+            ]);
+        $user->assignRole('Admin');
+        $userProfile = $user->profile()->create([
+                'firstname'  => $request->firstname,
+                'lastname'   => $request->lastname,
+                'gender'     => $request->gender,
+            ]);
+            return Redirect::route('admin.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
     }
 
     /**
@@ -88,6 +108,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::find($id)->delete();
+        return back()->with(['id'=>$id, 'message' => 'Eliminado con exito', 'code' => 200, 'status' => 'success']); 
     }
 }
