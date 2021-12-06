@@ -23,12 +23,19 @@
             		</tr>
             	</thead>
                 <tbody>
-                	<tr>
-                		<td></td>
-                		<td></td>
-                		<td></td>
-                		<td></td>
-                		<td></td>
+                	<tr v-for="product in products" :key="product.id">
+                		<td>{{ product.title }}</td>
+                		<td>{{ product.price }} €</td>
+                		<td>{{ product.stock }}</td>
+                		<td style="font-size: 13px;">
+                			<template v-if="product.featured==0"><i class="fas fa-times-circle text-danger"></i></template>
+                			<template v-if="product.featured==1"><i class="fas fa-check-square text-success"></i></template>
+                		</td>
+                		<td>
+                			<Link class="view-cart bg-info ml-2" :href="route('souvenirs.show',{souvenir: product.id})" title="Ver Souvenir"> Ver </Link>
+                        	<Link class="view-cart bg-secundary ml-2" :href="route('souvenirs.edit',{souvenir: product.id})" title="Ver Hotel"> Editar </Link>
+                    		<button class="view-cart bg-danger ml-2" title="eliminar hotel" @click="deleteProduct(product.id)"> Eliminar </button>
+                		</td>
                 	</tr>
                 </tbody>
             </table>
@@ -46,8 +53,33 @@
         	Layout,
     	},
     	props: {
-        	souvenirs: Object,
+        	products: Object,
     	},
+    	created(){
+    		console.log(this.products);
+    	},
+    	methods: {
+        	deleteProduct(product){
+        		this.$swal({
+  					title: '¿Estas seguro?',
+  					text: "Esta acción no se puede revertir!",
+  					icon: 'warning',
+  					showCancelButton: true,
+  					confirmButtonColor: '#3085d6',
+  					cancelButtonColor: '#d33',
+  					confirmButtonText: 'Si, eliminar!',
+  					cancelButtonText: 'Cancelar',
+				}).then((result) => {
+  						if (result.isConfirmed) {
+  							this.$inertia.delete(route('souvenirs.destroy',{souvenir : product}),
+  							{
+								preserveScroll: true,
+  							})
+  						}
+					})
+            	
+        	}
+    	}
 	}
 
 </script>

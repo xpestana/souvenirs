@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Products\SouvenirsController;
 use App\Http\Controllers\Products\ActivitiesController;
+use App\Http\Controllers\Products\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,10 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
     /*
         Souvenirs
      */
+    Route::post('/update/souvenirs', [SouvenirsController::class, 'update'])->name('update.souvenirs');
+    Route::post('/souvenirs/image', [SouvenirsController::class, 'image'])->name('souvenirs.image');
+    Route::post('/souvenirs/update/image', [SouvenirsController::class, 'updt_image'])->name('souvenirs.update.image');
+
     Route::resource(
         'souvenirs',
         SouvenirsController::class, [
@@ -98,9 +103,9 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
                 'create'    => 'souvenirs.create',
                 'show'      => 'souvenirs.show',
                 'store'     => 'souvenirs.store',
-                'update'    => 'souvenirs.update',
                 'destroy'   => 'souvenirs.destroy',
             ],
+            ['except' => ['update']]
         ],
     );
 
@@ -122,6 +127,23 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
         ],
     );
 
+    /*
+        Categorias
+     */
+    Route::resource(
+        'categorias',
+        CategoriesController::class, [
+            'names' => [
+                'index'     => 'categories.index',
+                'edit'      => 'categories.edit',
+                'create'    => 'categories.create',
+                'show'      => 'categories.show',
+                'store'     => 'categories.store',
+                'update'    => 'categories.update',
+                'destroy'   => 'categories.destroy',
+            ],
+        ],
+    );
 });
 
 

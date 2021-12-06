@@ -32,8 +32,12 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "github:ckeditor/ckeditor5-build-classic",
+        "@ckeditor/ckeditor5-vue": "github:ckeditor/ckeditor5-vue",
         "@meforma/vue-toaster": "^1.2.2",
         "@popperjs/core": "^2.10.1",
+        "@vueform/multiselect": "^2.2.1",
+        "dropzone": "^6.0.0-beta.2",
         "vue-sweetalert2": "^5.0.2",
         "vue3-carousel": "^0.1.30"
     }

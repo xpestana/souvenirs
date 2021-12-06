@@ -22,8 +22,5 @@
         props: {
         	title: String,
     	},
-    	created(){
-    		console.log(this.title)
-    	},
     }
 </script>
