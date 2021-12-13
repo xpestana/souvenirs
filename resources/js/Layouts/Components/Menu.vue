@@ -17,6 +17,7 @@
         </div>
     </div>
     <!-- Header Menu & Cart Area End Here -->
+
     <!-- Cart Box Start Here -->
     <div class="col-xl-3 col-lg-3 col-md-7 col-sm-6 col-7">
         <!-- Cart & Search Area Start -->
@@ -28,12 +29,14 @@
                     <li id="cart-area">
                         <ul>
                             <template v-if="this.$page.props.auth.user">
-                                <li><Link :href="route('profile.index')">Mi cuenta</Link></li>
-                                <li><Link :href="route('cart')">Carrito</Link></li>
+                                <li v-if="$page.props.auth.role != 'Client'"><Link :href="route('profile.index')">Mi cuenta</Link></li>
+                                <li><Link :href="route('cart.index')">Carrito</Link></li>
+                                <li><Link :href="route('contact')">Contacto</Link></li>
                                 <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
                             </template>
                             <template v-else>
                                 <li><Link :href="route('login')">Iniciar Sesión</Link></li>
+                                <li><Link :href="route('cart.index')">Carrito</Link></li>
                                 <li><Link :href="route('contact')">Contacto</Link></li>
                             </template>
                         </ul>
@@ -53,67 +56,22 @@
                     </ul>
                     <!-- Search Area End -->
                 </li>
-                <li><a href="#"><i class="header-cart icon-cart"></i><span>02</span></a>
-                <!-- Cart Box Start -->
-                <ul class="ht-dropdown cart-box-width">
-                    <!-- Single Cart Box Start -->
-                    <li class="single-cart-box">
-                        <div class="cart-img">
-                            <a href="#"><img src="/vendor_asset/img/products/p1.png" alt="cart-image"></a>
-                            <span class="pro-quantity">1X</span>
-                        </div>
-                        <div class="cart-content">
-                            <h6><a href="product-details.html">Printed Summer Red </a></h6>
-                            <span class="cart-price">27.45</span>
-                            <span>Size: S</span>
-                            <span>Color: Yellow</span>
-                        </div>
-                        <a class="del-icone" href="#"><i class="ion-close"></i></a>
-                    </li>
-                    <!-- Single Cart Box End -->
-                    <!-- Single Cart Box Start -->
-                    <li class="single-cart-box">
-                        <div class="cart-img">
-                            <a href="#"><img src="/vendor_asset/img/products/p1.png" alt="cart-image"></a>
-                            <span class="pro-quantity">1X</span>
-                        </div>
-                        <div class="cart-content">
-                            <h6><a href="product-details.html">Printed Round Neck</a></h6>
-                            <span class="cart-price">45.00</span>
-                            <span>Size: XL</span>
-                            <span>Color: Green</span>
-                        </div>
-                        <a class="del-icone" href="#"><i class="ion-close"></i></a>
-                    </li>
-                    <!-- Single Cart Box End -->
-                    <!-- Cart Footer Inner Start -->
-                    <li class="cart-footer">
-                        <ul class="price-content">
-                            <li>Subtotal <span>$57.95</span></li>
-                            <li>Shipping <span>Free</span></li>
-                            <li>Taxes <span>$0.00</span></li>
-                            <li>Total <span>$64.95</span></li>
-                        </ul>
-                        <div class="cart-actions text-center">
-                            <a class="cart-checkout" href="checkout.html">Checkout</a>
-                        </div>
-                    </li>
-                    <!-- Cart Footer Inner End -->
-                </ul>
-                <!-- Cart Box End -->
-            </li>
-        </ul>
+                <Cart :key="$page.props.flash.id"/>
+            </ul>
     </div>
     <!-- Cart & Search Area End -->
 </div>
 <!-- Cart Box End Here -->
+    
 </template>
 <script>
     import { Link } from '@inertiajs/inertia-vue3';
-    
+    import Cart from '@/Layouts/Components/Cart.vue' 
+
     export default{
         components: {
             Link,
+            Cart
         },
         methods: {
             logout(){

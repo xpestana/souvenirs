@@ -41,6 +41,18 @@ class UserSeeder extends Seeder
             ]);
 
             $userAdmin->assignRole('Admin');
+
+             $userClientAdmin = User::updateOrCreate(
+                ['email' => 'clientAdmin@email.com'],
+                [
+                    'name' => 'User Client',
+                    'password' =>  Hash::make('usuario12345'),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]
+            );
+
+            $userClientAdmin->assignRole('Client');
             /*******************************************************/
             /*Usuario Hotel*/
 
@@ -74,28 +86,20 @@ class UserSeeder extends Seeder
             $userHotel->hotel()->attach($hotel->id, ['manager' => true]);
             
             /**********************************************************/
-            /*Usuario operator: creados para ayudar a los hoteles*/
+            /*Usuario cliente: creados para realizar las compras*/
 
-            $userOperator = User::updateOrCreate(
-                ['email' => 'operator@email.com'],
+            $userClientr = User::updateOrCreate(
+                ['email' => 'client@email.com'],
                 [
-                    'name' => 'User Operator',
+                    'name' => 'User Client',
                     'password' =>  Hash::make('usuario12345'),
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
                 ]
             );
 
-            $userOperatorProfile = $userOperator->profile()->updateOrCreate([
-                'firstname'  => 'Usuario',
-                'lastname'   => 'Operador Hotel',
-                'gender'     => 'F',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
-
-            $userOperator->assignRole('Operator');
-            $userOperator->hotel()->attach($hotel->id, ['manager' => false]);
+            $userClientr->assignRole('Client');
+            $userClientr->hotel()->attach($hotel->id, ['manager' => false]);
 
     }
 }

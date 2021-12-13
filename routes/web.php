@@ -8,9 +8,13 @@ use Inertia\Inertia;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\UtilitiesController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\Products\SouvenirsController;
 use App\Http\Controllers\Products\ActivitiesController;
 use App\Http\Controllers\Products\CategoriesController;
+use App\Http\Controllers\Products\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,19 +30,13 @@ use App\Http\Controllers\Products\CategoriesController;
 /*
     STATICS PAGE
  */
-
-Route::get('/', function () {
-    return Inertia::render('Statics/Home');
-})->name('home');
-
-Route::get('/quienes-somos', function () {
-    return Inertia::render('Statics/AboutUs');
-})->name('about.us');
-
-Route::get('/contactanos', function () {
-    return Inertia::render('Statics/ContactUs');
-})->name('contact');
-
+Route::get('/', [UtilitiesController::class, 'home'])->name('home');
+Route::get('/tienda/actividades', [UtilitiesController::class, 'activities'])->name('activities');
+Route::get('/tienda/souvenirs', [UtilitiesController::class, 'souvenirs'])->name('souvenirs');
+Route::get('/quienes-somos', [UtilitiesController::class, 'about'])->name('about.us');
+Route::get('/contactanos', [UtilitiesController::class, 'contact'])->name('contact');
+Route::get('/souvenir/{product}/show', [ProductsController::class, 'souvenirs'])->name('product.souvenir.show');
+Route::get('/activities/{product}/show', [ProductsController::class, 'activities'])->name('product.activities.show');
 
 /*
     Auth
@@ -47,6 +45,31 @@ Route::get('/contactanos', function () {
 Route::get('/login', function () {
     return Inertia::render('Login');
 })->name('login');
+
+/*
+        Cart and sales
+     */
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+    Route::resource(
+        '/checkout',
+        CartController::class, [
+            'names' => [
+                'create'    => 'cart.create',
+                'edit'      => 'cart.edit',
+                'show'      => 'cart.show',
+                'store'     => 'cart.store',
+                'update'    => 'cart.update',
+                'destroy'   => 'cart.destroy',
+            ],
+            ['except' => ['index']]
+        ],
+    ); 
+
+    Route::get('/purchase/souvenirs', [SalesController::class, 'checkout_souvenirs'])->name('checkout.souvenirs');
+    Route::post('/sale/souvenirs', [SalesController::class, 'sale_souvenirs'])->name('sale.souvenirs');
+    Route::post('/sale/activities', [SalesController::class, 'sale_activities'])->name('sale.activities');
+    Route::get('/purchase', [SalesController::class, 'purchase'])->name('purchase');
 
 /*
     Dashboard Admin
@@ -75,7 +98,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
         Admins
      */
     Route::resource(
-        'admin',
+        '/admin',
         AdminController::class, [
             'names' => [
                 'index'     => 'admin.index',
@@ -95,7 +118,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
     Route::post('/souvenirs/update/image', [SouvenirsController::class, 'updt_image'])->name('souvenirs.update.image');
 
     Route::resource(
-        'souvenirs',
+        '/souvenirs',
         SouvenirsController::class, [
             'names' => [
                 'index'     => 'souvenirs.index',
@@ -112,8 +135,11 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
     /*
         Activities
      */
+    Route::post('/update/activities/{activities}', [ActivitiesController::class, 'update'])->name('update.activities');
+    Route::post('/activities/image', [ActivitiesController::class, 'image'])->name('activities.image');
+    Route::post('/activities/update/image', [ActivitiesController::class, 'updt_image'])->name('activities.update.image');
     Route::resource(
-        'actividades',
+        '/actividades',
         ActivitiesController::class, [
             'names' => [
                 'index'     => 'activities.index',
@@ -131,7 +157,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
         Categorias
      */
     Route::resource(
-        'categorias',
+        '/categorias',
         CategoriesController::class, [
             'names' => [
                 'index'     => 'categories.index',
@@ -150,12 +176,12 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
 /*
     Dashboard Común
 */
-Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
+Route::middleware(['auth', 'verified', 'role:Admin|Hotel'])->prefix('tablero')->group(function () {
     /*
         Profile
      */
     Route::resource(
-        'perfil',
+        '/perfil',
         ProfileController::class, [
             'names' => [
                 'index'     => 'profile.index',
@@ -168,8 +194,11 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
             ],
         ],
     ); 
-    
+
+    Route::get('/download/qr', [UtilitiesController::class, 'qr'])->name('qr.download');
 });
+
+    
 
 
 
@@ -211,38 +240,5 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
         return Inertia::render('Dashboard/Shoppings');
     })->name('dashboard.shopping');
 
-/*
-    Shop
- */
-
-Route::get('/tienda/actividades', function () {
-    return Inertia::render('Shop/Tours');
-})->name('activities');
-
-Route::get('/tienda/souvenirs', function () {
-    return Inertia::render('Shop/Souvenirs');
-})->name('souvenirs');
-
-Route::get('/producto', function () {
-    return Inertia::render('Product');
-})->name('producto');
-Route::get('/detalles-actividad', function () {
-    return Inertia::render('DetailTours');
-})->name('detalles-actividad');
-
-/*
-    Admin
- */
-
-/*
-    Payment
- */
-Route::get('/checkout', function () {
-    return Inertia::render('Checkout');
-})->name('checkout');
-
-Route::get('/carrito', function () {
-    return Inertia::render('Cart');
-})->name('cart');
 
 require __DIR__.'/auth.php';

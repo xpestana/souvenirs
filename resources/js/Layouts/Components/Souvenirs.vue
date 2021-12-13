@@ -27,7 +27,7 @@
                                         <span>€ {{ product.price }}</span>
                                     </div>
                                     <div class="pro-cart">
-                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
+                                        <Link title="Añadir Al Carrito" @click="cart(product.id)"><i class="icon-cart"></i></Link>
                                     </div>
                                 </div>
                             </div>
@@ -73,6 +73,13 @@
             }
             
         },
+        methods: {
+            cart(id){
+                this.$inertia.put(route('cart.update',{checkout: id}),{
+                    preserveScroll: true
+                })
+            }
+        }
 	}
 </script>
 <style scope>

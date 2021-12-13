@@ -7,6 +7,7 @@ use Inertia\Middleware;
 use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Support\Arr;
+use Cart;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -48,11 +49,14 @@ class HandleInertiaRequests extends Middleware
             'auth.role' => fn() => auth()->user() ? auth()->user()->getRoleNames()->first() : null,
             'categories' => fn() => Categories::all(),
             'categories_explain' => fn() => $categories,
+            'cart' => fn() => Cart::getContent(),
+            'cart.total' => fn() => Cart::getTotal(),
+            'cart.count' => fn() => Cart::getTotalQuantity(),
             'souvenirs' => Products::with('images')
                                     ->where('del',false)
                                     ->where('type', 'Souvenirs')
                                     ->limit(5)->inRandomOrder()->get(),
-            'activities' => Products::with('images')
+            'activities' => Products::with('images', 'activities')
                                     ->where('del',false)
                                     ->where('type', 'Activities')
                                     ->limit(5)->inRandomOrder()->get(),

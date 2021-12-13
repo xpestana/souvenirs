@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Redirect;
 use Image;
+
 class HotelController extends Controller
 {
     /**
@@ -148,9 +149,17 @@ class HotelController extends Controller
                 'zone'       => $request->zone,
                 'image'      => $pathName.$nameFile['fileName'],
             ]);
+            $clientUser = User::create([
+                'name' => $request->email,
+                'email' => $request->email.$user->id,
+                'password' => Hash::make(Str::lower($password)),
+            ]);
 
             $user->assignRole('Hotel');
             $user->hotel()->attach($hotel->id, ['manager' => true]);
+            
+            $clientUser->assignRole('Client');
+            $clientUser->hotel()->attach($hotel->id, ['manager' => false]);
 
             //Mail::to($user->email)->send(new WelcomeReceived($user, $password));
         return Redirect::route('hotels.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  

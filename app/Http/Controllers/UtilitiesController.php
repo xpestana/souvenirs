@@ -1,0 +1,110 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Codedge\Fpdf\Fpdf\Fpdf;
+use App\Models\hotel;
+use App\Models\User;
+use App\Models\Products;
+use Inertia\Inertia;
+use Redirect;
+use Image;
+
+class UtilitiesController extends Controller
+{
+    /*STATICS PAGES*/
+    public function handle_auth($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            if ($user->getRoleNames()->first() == "Client") {
+                $auth = Auth::login($user, true);
+            }
+        }
+        return 0;        
+    }
+    public function home(Request $request)
+    {
+        $this->handle_auth($request->h);
+        return Inertia::render('Statics/Home');
+    }
+    public function activities(Request $request)
+    {
+        $this->handle_auth($request->h);
+        $items = 20;
+        $search =$category =  null;
+        if ($request) {
+            $search = $request->search;
+            $category = $request->category;
+            $items = $request->items;
+            $min = (isset($request->price[0])) ? $request->price[0] : null;
+            $max = (isset($request->price[1])) ? $request->price[1] : null;
+        }
+
+        //dd($request->all());
+        $products = Products::with('images', 'activities')
+                            ->where('del',false)
+                            ->where('type', 'Activities')
+                            ->search(trim($request->search))
+                            ->Cat($request->category)
+                            ->priceA($min,$max)
+                            ->inRandomOrder()
+                            ->paginate($items);
+
+        $max = $products->max('activities.priceA')+($products->max('activities.priceA')*2);
+
+        return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'category', 'items'));
+    }
+    public function souvenirs(Request $request)
+    {
+        $this->handle_auth($request->h);
+
+        $items = 20;
+        $search =$category =  null;
+        if ($request) {
+            $search = $request->search;
+            $category = $request->category;
+            $items = $request->items;
+            $min = (isset($request->price[0])) ? $request->price[0] : null;
+            $max = (isset($request->price[1])) ? $request->price[1] : null;
+        }
+
+        $products = Products::with('images')
+                            ->where('del',false)
+                            ->where('type', 'Souvenirs')
+                             ->search(trim($request->search))
+                            ->Cat($request->category)
+                            ->price($min,$max)
+                            ->inRandomOrder()
+                            ->paginate($items);
+
+        $max = $products->max('price')+($products->max('price')*2);
+
+        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search', 'category', 'items'));
+    }
+    public function about(Request $request)
+    {
+        $this->handle_auth($request->h);
+        return Inertia::render('Statics/AboutUs');
+    }
+    public function contact(Request $request)
+    {
+        $this->handle_auth($request->h);
+        return Inertia::render('Statics/ContactUs');
+    }
+    /**
+     * Muestra los codigos QR del hotel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function qr()
+    {
+        $hotel = hotel::find(auth()->user()->hotel->first()->id);
+        $url = env('APP_URL');
+        $client = $hotel->user()->wherePivot('manager', false)->first();
+        
+        return Inertia::render('Dashboard/Qr', compact('url', 'client'));
+    }
+}

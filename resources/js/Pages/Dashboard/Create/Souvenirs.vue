@@ -17,7 +17,7 @@
                                 <BreezeLabel for="precio" value="Precio" />
                                 <BreezeInput id="precio" type="number" class="form-control mt-1 block w-full" v-model="form.precio" autocomplete="precio" step="0.01" placeholder="Precio" />
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" hidden>
                                 <BreezeLabel for="stock" value="Stock" />
                                 <BreezeInput id="stock" type="number" class="form-control mt-1 block w-full" v-model="form.stock" autocomplete="stock"  min="0" placeholder="Stock" />
                             </div>

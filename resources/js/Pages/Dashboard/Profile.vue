@@ -2,6 +2,11 @@
     <Layout>
     <div class="tab-content dashboard-content mt-all-40">
         <div id="account-details" class="tab-pane fade show active">
+            <div class="row mb-4" v-if="$page.props.auth.role == 'Hotel'">
+                <div class="col-md-12">
+                    <h3>Mis codigos QR:  <Link class="view-cart bg-info mt-3 ml-4" :href="route('qr.download')" ><small>Descargar QR</small></Link></h3>
+                </div>
+            </div>
             <h3>Detalles de la Cuenta</h3>
             <div class="register-form login-form clearfix">
                 <form  @submit.prevent="submit">
@@ -87,10 +92,6 @@ export default {
         Link,
         Layout,
         BreezeValidationErrors,
-    },
-    created(){
-        console.log("user", this.$page.props.auth.user);
-        console.log("profile", this.$page.props.auth.profile);
     },
     data() {
         return {

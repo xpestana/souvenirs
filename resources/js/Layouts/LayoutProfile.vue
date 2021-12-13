@@ -28,7 +28,7 @@
                        </div>
                        <div class="col-xl-3 col-lg-2 col-md-6">
                            <div class="d-single-info text-lg-center">
-                               <Link class="view-cart bg-info" :href="route('cart')">Ver Carrito</Link>
+                               <Link class="view-cart bg-info" :href="route('cart.index')">Ver Carrito</Link>
                            </div>
                        </div>
                    </div>
@@ -38,7 +38,7 @@
                         <!-- Nav tabs -->
                         <ul class="nav flex-column dashboard-list" role="tablist">
                             <li>
-                                <a :class="(route().current('profile.index') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="dashboard">
+                                <a :class="(route().current('profile.index') === true || route().current('qr.download') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="dashboard">
                                     Detalles de la Cuenta
                                 </a>
                             </li>
@@ -67,9 +67,9 @@
                                     Gestión de Actividades
                                 </a>
                             </li>
-                            <li>
+                            <li v-if="$page.props.auth.role == 'Hotel'">
                                 <a :class="(route().current('dashboard.shopping') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="shopings">
-                                    Mis Compras
+                                    Mis Ventas
                                 </a>
                             </li>
                             <li>

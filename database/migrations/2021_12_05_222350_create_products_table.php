@@ -18,11 +18,9 @@ class CreateProductsTable extends Migration
             $table->string('type')->comment('souvenir/activity');
             $table->string('title')->comment('titulo');
             $table->text('description');
-            $table->float('price',8,2);
+            $table->float('price',8,2)->nullable();
             $table->integer('stock')->nullable();
             $table->boolean('featured')->default(0);
-            $table->dateTime('init', $precision = 0)->nullable();
-            $table->dateTime('end', $precision = 0)->nullable();
             $table->timestamps();
         });
     }

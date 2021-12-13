@@ -13,6 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         '/tablero/souvenirs/image/',
-        '/tablero/souvenirs/update/image'
+        '/tablero/souvenirs/update/image',
+        '/tablero/activities/image',
+        '/tablero/activities/update/image'
     ];
 }

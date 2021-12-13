@@ -28,7 +28,6 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "tailwindcss": "^2.1.2",
-        "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
@@ -36,8 +35,14 @@
         "@ckeditor/ckeditor5-vue": "github:ckeditor/ckeditor5-vue",
         "@meforma/vue-toaster": "^1.2.2",
         "@popperjs/core": "^2.10.1",
+        "@stripe/stripe-js": "^1.22.0",
         "@vueform/multiselect": "^2.2.1",
+        "@vueform/slider": "^2.0.8",
         "dropzone": "^6.0.0-beta.2",
+        "moment": "^2.29.1",
+        "qrcode-reader-vue3": "^3.1.2",
+        "qrcode-vue3": "^1.4.17",
+        "v-calendar": "^3.0.0-alpha.6",
         "vue-sweetalert2": "^5.0.2",
         "vue3-carousel": "^0.1.30"
     }

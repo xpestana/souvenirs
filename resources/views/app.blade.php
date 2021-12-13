@@ -29,6 +29,11 @@
         <!-- Custom css -->
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+
         <!--<link rel="stylesheet" href="/vendor_asset/css/default.css">-->
         <!-- Main css -->
         <!--<link rel="stylesheet" href="/vendor_asset/css/style.css">-->
@@ -38,10 +43,11 @@
 
         <!-- Scripts -->
         @routes
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        
     </head>
     <body>
         @inertia
+        <script src="{{ mix('js/app.js') }}" defer></script>
         <!-- Modernizer js -->
     	<script src="{{ asset('vendor_asset/js/vendor/modernizr-3.5.0.min.js') }}" defer></script>
         <!-- Countdown js -->
@@ -60,5 +66,12 @@
         <script src="{{ asset('vendor_asset/js/plugins.js') }}" defer></script>
         <!-- Main activaion js -->
         <script src="{{ asset('vendor_asset/js/main.js') }}" defer></script>
+        
+        
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+      
+        
     </body>
 </html>

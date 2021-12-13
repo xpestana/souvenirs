@@ -7,7 +7,6 @@
    					<div class="col-md-6">
                     		<BreezeLabel for="category" value="Nueva Categoria" />
                 			<BreezeInput id="category" type="text" class="form-control mt-1 mb-3 block w-full" v-model="form.category" autocomplete="category" placeholder="Categoria" />
-                			
    					</div>
     				<div align="center" class="col-md-6 mb-3">
     					<div v-if="$page.props.flash"> {{ $page.props.flash.message }}</div>

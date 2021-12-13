@@ -1,6 +1,6 @@
 <template>
     <Head title="Actividades"/>
-<Layout>
+    <Layout>
     <Breadcrumb title="Actividades"/>
     <!-- Shop Page Start -->
     <div class="main-shop-page white-bg ptb-80">
@@ -10,37 +10,46 @@
                 <!-- Sidebar Shopping Option Start -->
                 <div class="col-lg-3 col-md-4">
                     <div class="sidebar">
+                        <form @submit.prevent="submit">
                         <!-- Price Filter Options Start -->
                         <div class="search-filter mb-30">
                             <h3 class="sidebar-title">Filtrar por precio</h3>
-                            <form action="#" class="sidbar-style">
-                                <div id="slider-range"></div>
-                                <input type="text" id="amount" class="amount-range" readonly>
-                            </form>
+                            <div class="product-price mt-1 mb-4">
+                                <h6 class="filter-heading  text-center text-md-left mb-5">Price</h6>
+                                <Slider 
+                                    v-model="form.price"
+                                    :max="max"
+                                />
+                            </div>
                         </div>
                         <!-- Price Filter Options End -->
+
                         <!-- Sidebar Categorie Start -->
                         <div class="sidebar-categorie mb-30">
                             <h3 class="sidebar-title">Categorias</h3>
                             <ul class="sidbar-style">
-                                <li class="form-check">
-                                    <input class="form-check-input" value="#" id="camera" type="checkbox">
-                                    <label class="form-check-label" for="camera">Aventura (10)</label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" value="#" id="GamePad" type="checkbox">
-                                    <label class="form-check-label" for="GamePad">Historia (3)</label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" value="#" id="Digital" type="checkbox">
-                                    <label class="form-check-label" for="Digital">Cultura (5)</label>
-                                </li>
-                                <li class="form-check">
-                                    <input class="form-check-input" value="#" id="Virtual" type="checkbox">
-                                    <label class="form-check-label" for="Virtual"> Arte (2) </label>
+                                <li class="form-check mb-3" v-for="cat in $page.props.categories" :key="cat.id">
+                                    <input :id="'category'+cat.id" type="radio" class="form-check-input" v-model="form.category" :value="cat.id">
+                                    <label class="form-check-label mt-1" :for="'category'+cat.id">{{ cat.name }}</label>
                                 </li>
                             </ul>
                         </div>
+                        <div class="row">
+                            <div class="col-12 mb-4 w-100">
+                                <h3 class="sidebar-title">Items por pagina</h3>
+                                <select v-model="form.items" name="items" id="items" class="mt-1 block w-100">
+                                    <option value="20">20</option>
+                                    <option value="40">40</option>
+                                    <option value="60">60</option>
+                                    <option value="80">80</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                            <div align="center" class="col-md-12 mb-3">
+                                <button type="submit" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Filtrar</button>
+                            </div> 
+                        </div>
+                    </form>
                     </div>
                 </div>
                 <!-- Sidebar Shopping Option End -->
@@ -49,25 +58,19 @@
                     <!-- Grid & List View Start -->
                     <div class="grid-list-top border-default universal-padding d-lg-flex justify-content-md-between align-items-center mb-30">
                         <div class="grid-list-view d-flex align-items-center  mb-sm-15">
-                            <ul class="nav tabs-area d-flex align-items-center">
-                                <li><a data-toggle="tab" href="#grid-view"><i class="fa fa-th"></i></a></li>
-                                <li><a class="active" data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a></li>
-                            </ul>
                         </div>
                         <!-- Toolbar Short Area Start -->
                         <div class="main-toolbar-sorter clearfix">
+                            <form @submit.prevent="submit">
                             <div class="toolbar-sorter d-md-flex align-items-center">
-                                <!--<label>Buscar</label>
-                                <form action="#" class="position-relative">
-                                    <input class="email" name="search_inp" type="text"><i class="icon-search" aria-hidden="true"></i></input>
-                                </form>-->
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary" type="button"><i class="icon-search" aria-hidden="true"></i></button>
+                                        <button class="btn btn-outline-secondary" type="submit"><i class="icon-search" aria-hidden="true"></i></button>
                                     </div>
-                                    <input type="text" class="form-control" aria-label="" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" aria-label="" aria-describedby="basic-addon1" v-model="form.search">
                                 </div>
                             </div>
+                            </form>
                         </div>
                         <!-- Toolbar Short Area End -->
                     </div>
@@ -75,218 +78,44 @@
                     <div class="shop-area mb-all-40">
                         <!-- Grid & List Main Area End -->
                         <div class="tab-content Products-area">
-                            <div id="grid-view" class="tab-pane fade">
+                            <div id="grid-view" class="tab-pane fade  show active">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div v-for="product in products.data" :key="product.id" class="col-md-6 col-sm-6">
                                         <!-- Single Product Start -->
                                         <div class="single-aboss-product mb-3">
                                             <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
+                                                <Link :href="route('product.activities.show',{product : product.id})">
+                                                    <div :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'" class="img-prod"></div>
+                                                </Link>
                                                 <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
+                                                    <Link class="quick-view" :href="route('product.activities.show',{product : product.id})"><i class="icon-zoom"></i></Link>
                                                 </div>
                                             </div>
                                             <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
+                                                <h4><Link :href="route('product.activities.show',{product : product.id})">{{ product.title }}</Link></h4>
+                                                <div class="col-12 mb-3">
+                                                        <template v-if="product.activities.end">
+                                                            De {{ moment(product.activities.init).format('DD/MM/YYYY') }} a {{ moment(product.activities.end).format('DD/MM/YYYY') }}
+                                                        </template>
+                                                        <template v-else>
+                                                            El {{ moment(product.activities.init).format('DD/MM/YYYY')}}
+                                                        </template>
+                                                    </div>
                                                 <div class="pro-price-cart">
+                                                    
                                                     <div class="pro-home-price">
-                                                        <span>$199.99</span>
+                                                        <span>
+                                                            <template v-if="product.activities.priceN">
+                                                                Adulto: {{ product.activities.priceA }} € / Niño: {{ product.activities.priceN }} €
+                                                            </template>
+                                                            <template v-else>
+                                                                Precio: {{ product.activities.priceA }} €
+                                                            </template>
+                                                        </span>
                                                     </div>
                                                     <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                                <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
-                                                        <span>$199.99</span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                                <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
-                                                        <span>$199.99</span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                                <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
-                                                        <span>$199.99</span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                                <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
-                                                        <span>$199.99</span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                                <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
-                                                        <span>$199.99</span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                                <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
-                                                        <span>$199.99</span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                                <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
-                                                        <span>$199.99</span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                                <div class="pro-actions">
-                                                    <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('producto')">Dorji bari East Long Style</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
-                                                        <span>$199.99</span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#"><i class="icon-cart"></i></a>
-                                                         
+                                                        <a title="Añadir Al Carrito" href="#" hidden><i class="icon-cart"></i></a>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -296,161 +125,14 @@
                                 </div>
                                 <!-- Row End -->
                             </div>
-                            <!-- #grid view End -->
-                            <div id="list-view" class="tab-pane fade show active">
-                                <!-- Single Product Start -->
-                                <div class="single-aboss-product">
-                                    <div class="pro-img">
-                                        <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                        <div class="pro-actions">
-                                            <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="pro-content">
-                                        <h4><Link :href="route('detalles-actividad')">Dorji bari East Long Style</Link></h4>
-                                        <div class="rating">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        </div>
-                                        <p><span class="prev-price">$14.99</span><span class="price">$18.99</span></p>
-                                        <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
-                                        <div class="pro-cart">
-                                            <a href="#" title="Añadir Al Carrito">
-                                                <i class="icon-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <div class="single-aboss-product">
-                                    <div class="pro-img">
-                                        <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                        <div class="pro-actions">
-                                            <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="pro-content">
-                                        <h4><Link :href="route('detalles-actividad')">Dorji bari East Long Style</Link></h4>
-                                        <div class="rating">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        </div>
-                                        <p><span class="prev-price">$14.99</span><span class="price">$18.99</span></p>
-                                        <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
-                                        <div class="pro-cart">
-                                            <a href="#" title="Añadir Al Carrito">
-                                                <i class="icon-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <div class="single-aboss-product">
-                                    <div class="pro-img">
-                                        <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                        <div class="pro-actions">
-                                            <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="pro-content">
-                                        <h4><Link :href="route('detalles-actividad')">Dorji bari East Long Style</Link></h4>
-                                        <div class="rating">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        </div>
-                                        <p><span class="prev-price">$14.99</span><span class="price">$18.99</span></p>
-                                        <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
-                                        <div class="pro-cart">
-                                            <a href="#" title="Añadir Al Carrito">
-                                                <i class="icon-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <div class="single-aboss-product">
-                                    <div class="pro-img">
-                                        <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                        <div class="pro-actions">
-                                            <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="pro-content">
-                                        <h4><Link :href="route('detalles-actividad')">Dorji bari East Long Style</Link></h4>
-                                        <div class="rating">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        </div>
-                                        <p><span class="prev-price">$14.99</span><span class="price">$18.99</span></p>
-                                        <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
-                                        <div class="pro-cart">
-                                            <a href="#" title="Añadir Al Carrito">
-                                                <i class="icon-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-                                <!-- Single Product Start -->
-                                <div class="single-aboss-product">
-                                    <div class="pro-img">
-                                        <Link :href="route('detalles-actividad')"><img src="/vendor_asset/img/products/p1.png" alt=""></Link>
-                                        <div class="pro-actions">
-                                            <a data-toggle="modal" data-target="#product-window" class="quick-view" href="#"><i class="icon-zoom"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="pro-content">
-                                        <h4><Link :href="route('detalles-actividad')">Dorji bari East Long Style</Link></h4>
-                                        <div class="rating">
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        </div>
-                                        <p><span class="prev-price">$14.99</span><span class="price">$18.99</span></p>
-                                        <p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
-                                        <div class="pro-cart">
-                                            <a href="#" title="Añadir Al Carrito">
-                                                <i class="icon-cart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Product End -->
-                            </div>
-                            <!-- #list view End -->
                         </div>
                         <!-- Grid & List Main Area End -->
                     </div>
                     <!-- Shop Breadcrumb Area Start -->
                     <div class="shop-breadcrumb-area border-default mt-40">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-5">
-                                <span class="show-items">Ver 1-12 de 13 item(s) </span>
-                            </div>
+                        <div class="row justify-content-center">
                             <div class="col-lg-8 col-md-6 col-sm-7">
-                                <ul class="pfolio-breadcrumb-list text-center">
-                                    <li class="float-left prev"><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i>Anterior</a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li class="float-right next"><a href="#">Siguiente<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                                </ul>
+                                <paginator :paginator="products"/>
                             </div>
                         </div>
                     </div>
@@ -464,14 +146,20 @@
     </div>
     <!-- Shop Page End -->
 </Layout>
-    <QuickView />
+<QuickView /> <!--Sidebar-->
 </template>
 
 <script>
+
+    import { Inertia } from '@inertiajs/inertia';
     import { Head, Link } from '@inertiajs/inertia-vue3';
-    import Layout from '@/Layouts/Layout.vue'     
-    import QuickView from '@/Components/QuickView.vue'
+    import Layout from '@/Layouts/Layout.vue'        
+    import QuickView from '@/Components/QuickView.vue';
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
+    import Paginator from '@/Components/Paginator.vue'   
+    import Moment from 'moment'
+    import Slider from '@vueform/slider'
+
     export default {
         components: {
             Head,
@@ -479,7 +167,52 @@
             Layout,
             QuickView,
             Breadcrumb,
+            Slider,
+            Paginator
         },
+        props: {
+            products: Object,
+            max: Number,
+            search: String,
+            items: String,
+            category: Number,
+        },
+        created () {
+            this.moment=Moment;
+        },
+        data(){
+            return {
+                moment:null,
+                max: this.max,
+                form: this.$inertia.form({
+                    search: this.search,
+                    items:this.items,
+                    category: this.category,
+                    price: [20,150],
+                }),
+            }
+        },
+        methods: {
+
+            submit() {
+                this.form.get(route('activities'),{
+                    _token: this.$page.props.csrf_token,
+                    errorBag: 'submit',
+                    preserveScroll: true,
+                    
+                })
+            },
+        }
 }
 
 </script>
+<style src="@vueform/slider/themes/default.css"></style>
+<style scope>
+    .img-prod{
+        width: 100%;
+        height: 250px;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+    }
+</style>

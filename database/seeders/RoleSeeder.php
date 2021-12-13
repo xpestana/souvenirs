@@ -22,7 +22,7 @@ class RoleSeeder extends Seeder
                     'guard_name' => 'web', 
                 ],
                 [
-                    'name' => 'Operator',
+                    'name' => 'Client',
                     'guard_name' => 'web', 
                 ],
                 [

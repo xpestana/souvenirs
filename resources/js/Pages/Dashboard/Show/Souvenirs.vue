@@ -55,19 +55,21 @@
                         <p class="pro-desc-details" hidden>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
                         <div class="pt-10 quatity-stock">
                            <label>Quantity</label>
+                           <form @submit.prevent="submit">
                             <ul class="d-flex flex-wrap  align-items-center">
                                 <li class="box-quantity">
-                                    <form action="#">
-                                        <input class="quantity" type="number" min="1" value="1">
-                                    </form>
+                                    
+                                    <input class="quantity" v-model="form.quantity" type="number" min="1">
+                                    
                                 </li>
                                 <li>
-                                    <button class="pro-cart">Añadir Al Carrito</button>
+                                    <button type="submit" class="pro-cart">Añadir Al Carrito</button>
                                 </li>
-                                <li class="pro-ref">
+                                <li class="pro-ref" hidden>
                                     <p><span class="in-stock"><i class="ion-checkmark-round"></i>{{ product.stock }} disponibles</span></p>
                                 </li>
                             </ul>
+                            </form>
                         </div>
                         <div class="pt-10 quatity-stock" v-if="$page.props.auth.role == 'Admin'">
                             <Link :href="route('souvenirs.edit',{souvenir:product.id})" class="pro-cart">Editar Souvenir</Link>
@@ -110,6 +112,7 @@
 <script>
     import { Link, Head } from '@inertiajs/inertia-vue3'
     import Layout from '@/Layouts/Layout.vue' 
+    import { Inertia } from '@inertiajs/inertia'
     import Back from '@/Layouts/Components/Back.vue' 
     import Souvenirs from '@/Layouts/Components/Souvenirs.vue' 
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'  
@@ -128,8 +131,9 @@
             Slide,
             Navigation,
         },
-        data: () => {
+        data() {
             return {
+                
             settings: {
                 itemsToShow: 1,
                 snapAlign: 'center',
@@ -144,14 +148,26 @@
                 snapAlign: 'start',
                 },
                 },
+                form: this.$inertia.form({
+                    quantity: 1,
+                    
+                }),
             }
 
         },
         props: {
             product: Object,
         },
-        created(){
-            console.log(this.product.description);
+        methods: {
+            submit() {
+                this.form.put(route('cart.update',{checkout: this.product.id}),{
+                    _token: this.$page.props.csrf_token,
+                    errorBag: 'submit',
+                    preserveScroll: true,
+                    
+                })
+            },
+                
         }
     }
 </script>

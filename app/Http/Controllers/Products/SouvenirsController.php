@@ -49,7 +49,6 @@ class SouvenirsController extends Controller
             'title'         => 'required|string|max:255',
             'precio'        => 'required',
             'description'   => 'required',
-            'stock'         => 'required',
             'featured'      => 'required',
         ]);
         
@@ -58,10 +57,12 @@ class SouvenirsController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
                 'price' => $request->precio,
-                'stock' => $request->stock,
+                'stock' => 0,
                 'featured' => $request->featured,
             ]);
+
         $souvenir->categories()->attach($request->category);
+        
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
         return back()->with(['id'=>$id, 'message' => 'Agregado con exito, Espere un momento porfavor', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
@@ -164,14 +165,12 @@ class SouvenirsController extends Controller
             'title'         => 'required|string|max:255',
             'precio'        => 'required',
             'description'   => 'required',
-            'stock'         => 'required',
             'featured'      => 'required',
         ]);
 
         $souvenir = Products::find($request->souvenir);
         $souvenir->title = $request->title;
         $souvenir->price = $request->precio;
-        $souvenir->stock = $request->stock;
         $souvenir->description = $request->description;
         $souvenir->featured = $request->featured;
         $souvenir->save();

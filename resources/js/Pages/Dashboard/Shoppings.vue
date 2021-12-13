@@ -2,7 +2,7 @@
 <Layout>
 <div class="tab-content dashboard-content mt-all-40">
 	<div id="orders" class="tab-pane fade show active">
-        <h3>Compras</h3>
+        <h3>Mis ventas</h3>
         <div class="table-responsive">
             <table class="table">
                 <tbody>

@@ -17,7 +17,7 @@
             		<tr>
             			<th>Titulo</th>
             			<th>Precio</th>
-            			<th>Stock</th>
+            			<th hidden>Stock</th>
             			<th>Destacado</th>
             			<th>Acciones</th>
             		</tr>
@@ -26,7 +26,7 @@
                 	<tr v-for="product in products" :key="product.id">
                 		<td>{{ product.title }}</td>
                 		<td>{{ product.price }} €</td>
-                		<td>{{ product.stock }}</td>
+                		<td hidden>{{ product.stock }}</td>
                 		<td style="font-size: 13px;">
                 			<template v-if="product.featured==0"><i class="fas fa-times-circle text-danger"></i></template>
                 			<template v-if="product.featured==1"><i class="fas fa-check-square text-success"></i></template>
