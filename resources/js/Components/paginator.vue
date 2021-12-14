@@ -28,7 +28,7 @@
                           fill-rule="evenodd"/>
                 </svg>
             </Link>
-            <span v-else
+            <span v-else 
                   class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-gray-100 border border-gray-300 cursor-default leading-5 rounded-md">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path clip-rule="evenodd"
