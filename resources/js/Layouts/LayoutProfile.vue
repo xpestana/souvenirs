@@ -68,7 +68,12 @@
                                 </a>
                             </li>
                             <li v-if="$page.props.auth.role == 'Hotel'">
-                                <a :class="(route().current('dashboard.shopping') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="shopings">
+                                <a :class="(route().current('dashboard.shopping') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="sales_hotel">
+                                    Mis Ventas
+                                </a>
+                            </li>
+                            <li v-if="$page.props.auth.role == 'Admin'">
+                                <a :class="(route().current('dashboard.shopping') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="sales_admin">
                                     Mis Ventas
                                 </a>
                             </li>
@@ -139,8 +144,13 @@ export default {
                     preserveScroll: true
                 })
         },
-        shopings(){
-                this.$inertia.get(route('dashboard.shopping'),{}, {
+        sales_hotel(){
+                this.$inertia.get(route('purchases.hotel'),{}, {
+                    preserveScroll: true
+                })
+        },
+        sales_admin(){
+                this.$inertia.get(route('purchases.admin'),{}, {
                     preserveScroll: true
                 })
         },

@@ -72,6 +72,7 @@ Route::get('/login', function () {
     Route::post('/sale/activities', [SalesController::class, 'sale_activities'])->name('sale.activities');
     Route::get('/purchase', [SalesController::class, 'purchase'])->name('purchase');
 
+
 /*
     Dashboard Admin
  */
@@ -171,9 +172,13 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
             ],
         ],
     );
+    /*
+        Ventas
+     */
+    Route::get('/compras/admin', [SalesController::class, 'sale_admin'])->name('purchases.admin');
 });
 
-
+Route::get('/shoppings/show/{order}', [SalesController::class, 'purchase_show'])->name('purchase.show');
 /*
     Dashboard Común
 */
@@ -197,49 +202,7 @@ Route::middleware(['auth', 'verified', 'role:Admin|Hotel'])->prefix('tablero')->
     ); 
 
     Route::get('/download/qr', [UtilitiesController::class, 'qr'])->name('qr.download');
+    Route::get('/compras/hotel', [SalesController::class, 'sale_hotel'])->name('purchases.hotel');
 });
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    Route::get('/compras', function () {
-        return Inertia::render('Dashboard/Shoppings');
-    })->name('dashboard.shopping');
-
 
 require __DIR__.'/auth.php';

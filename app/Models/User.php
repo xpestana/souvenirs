@@ -63,4 +63,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(hotel::class)->withPivot('manager');
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

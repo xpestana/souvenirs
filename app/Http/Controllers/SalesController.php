@@ -10,6 +10,7 @@ use App\Models\Products;
 use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\User;
+use App\Models\hotel;
 use Stripe\Stripe;
 use Inertia\Inertia;
 use Redirect;
@@ -153,5 +154,22 @@ class SalesController extends Controller
         $order = Order::find($request->oi)->load('shippings.product.images');
         $id = mt_Rand(1000000, 9999999);
         return Inertia::render('Sales/Purchase', compact('order'))->with(['id'=>$id, 'message' => 'Registro de pago exitoso', 'code' => 200, 'status' => 'success']);
+    }
+    public function sale_admin()
+    {
+        $orders = Order::all()->load('shippings.product.images');
+
+        return Inertia::render('Dashboard/Shoppings', compact('orders'));
+    }
+    public function sale_hotel()
+    {
+        $hotel = hotel::find(auth()->user()->hotel->first()->id);
+        $orders = $hotel->user()->wherePivot('manager', false)->first()->orders->load('shippings.product.images');
+
+        return Inertia::render('Dashboard/Shoppings', compact('orders'));
+    }
+    public function purchase_show($order){
+        $order = Order::find($order)->load('shippings.product.images');
+        return Inertia::render('Dashboard/Show/Shoppings', compact('order'));
     }
 }
