@@ -228,8 +228,8 @@ class HotelController extends Controller
             $msg =$this->valid($featured);
             if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
 
-            $Path = public_path('storage/hotel/'.$user->id.'/');
-            $pathName = $user->id.'/';
+            $Path = public_path('storage/hotel/');
+            $pathName = '/';
 
             if (!file_exists($Path)) {
                 mkdir($Path, 777, true);
