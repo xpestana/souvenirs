@@ -131,8 +131,8 @@ class HotelController extends Controller
                 'gender'     => $request->gender,
             ]);
 
-            $Path = public_path('storage/hotel/'.$user->id.'/');
-            $pathName = $user->id.'/';
+            $Path = public_path('storage/hotel/');
+            $pathName = '/';
 
             if (!file_exists($Path)) {
                 mkdir($Path, 777, true);
