@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SaleSouvenirReceived;
+use App\Mail\SaleActivityReceived;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Products;
 use App\Models\Order;
 use App\Models\Shipping;
@@ -75,7 +78,11 @@ class SalesController extends Controller
                 ]);
             }
             Cart::clear();
-            
+
+            foreach ([$request->email, 'xpestana4@gmail.com'] as $recipient) {
+                Mail::to($recipient)->send(new SaleSouvenirReceived($order));
+            }
+
             return Redirect::route('purchase',['oi' => $order->id]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
@@ -131,6 +138,10 @@ class SalesController extends Controller
                     'adult' => $request->adult,
                     'children' => $request->children,
                 ]);
+
+            foreach ([$request->email, 'xpestana4@gmail.com'] as $recipient) {
+                Mail::to($recipient)->send(new SaleActivityReceived($order));
+            }
 
             return Redirect::route('purchase',['oi' => $order->id]);
         } catch (\Exception $e) {

@@ -1,11 +1,6 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-  <title>titulo</title>
+@extends('Mails.layout')
 
-</head>
-<body>
+@section('content')
   <h1>Bienvenido a {{ $appName }}</h1>
 
 <p>Se ha registrado un usuario en la plataforma con las siguientes credenciales de acceso:</p>
@@ -21,5 +16,4 @@
 <p>Este correo es enviado de manera automática por la aplicación {{ $appName }}.</p>
 
   </div>
-</body>
-</html>
+@endsection

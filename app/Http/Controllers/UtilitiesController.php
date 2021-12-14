@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use App\Mail\ContactReceived;
 use App\Models\hotel;
 use App\Models\User;
 use App\Models\Products;
@@ -93,6 +95,22 @@ class UtilitiesController extends Controller
     {
         $this->handle_auth($request->h);
         return Inertia::render('Statics/ContactUs');
+    }
+    public function contact_mail(Request $request)
+    {
+        
+        $data = array(
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        );
+        
+        Mail::to('xpestana4@gmail.com')->send(new ContactReceived($data));
+        $pin = mt_Rand(1000000, 9999999);
+        return back()->with(['id'=>$pin, 'message' => 'Mensaje enviado con exito', 'code' => 200, 'status' => 'success']);
     }
     /**
      * Muestra los codigos QR del hotel.

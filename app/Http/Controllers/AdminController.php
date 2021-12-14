@@ -51,11 +51,12 @@ class AdminController extends Controller
             'email'             => 'required|string|email|max:255|unique:users',
         ]);
         $id = mt_Rand(1000000, 9999999);
-        $password = Str::random(8);
+        $password = Str::lower(Str::random(8));
+        
         $user = User::create([
                 'name' => $request->email,
                 'email' => $request->email,
-                'password' => Hash::make(Str::lower($password)),
+                'password' => Hash::make($password),
             ]);
         $user->assignRole('Admin');
         $userProfile = $user->profile()->create([
@@ -63,6 +64,7 @@ class AdminController extends Controller
                 'lastname'   => $request->lastname,
                 'gender'     => $request->gender,
             ]);
+        Mail::to($user->email)->send(new WelcomeReceived($user, $password));
             return Redirect::route('admin.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
     }
 
