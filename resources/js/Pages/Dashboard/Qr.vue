@@ -4,74 +4,39 @@
 	<div id="orders" class="tab-pane fade show active">
         <h3>Mi codigo qr</h3>
 
-        <div class="row mt-4">
+        <div class="row mt-4 justify-content-center">
             <div align="center" class="col-md-6">
-                <h3 class="mt-4">Souvenirs</h3>
                 <QRCodeVue3
-          :width="200"
-          :height="200"
-          imgclass="souvenirs_img"
-          :value="url+'/tienda/souvenirs?h='+client.id"
-          :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
-          :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
-          :dotsOptions="{
-            type: 'square',
-            color: '#31516B',
-            gradient: {
-              type: 'linear',
-              rotation: 0,
-              colorStops: [
-                { offset: 0, color: '#31516B' },
-                { offset: 1, color: '#31516B' },
-              ],
-            },
-          }"
-          fileExt="jpeg"
-          :backgroundOptions="{ color: '#ffffff' }"
-          :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
-          :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
-          :download="false"
-          downloadButton="view-cart bg-info mt-3 souvenirs_btn"
-          :downloadOptions="{ name: 'souvenirs', extension: 'jpeg' }"
-          crossOrigin="anonymous"
-        />
-        <a class="view-cart bg-info mt-3" href="javascript:void(0)" @click="souvenirs_btn">Descargar</a>
-            </div>
-            <div align="center" class="col-md-6">
-                <h3 class="mt-4">Actividades</h3>
-                <QRCodeVue3
-          :width="200"
-          :height="200"
-          :value="url+'/tienda/actividades?h='+client.id"
-          imgclass="activities_img"
-          :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
-          :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
-          crossOrigin="anonymous"
-          :dotsOptions="{
-            type: 'square',
-            color: '#31516B',
-            gradient: {
-              type: 'linear',
-              rotation: 0,
-              colorStops: [
-                { offset: 0, color: '#31516B' },
-                { offset: 1, color: '#31516B' },
-              ],
-            },
-          }"
-          fileExt="jpeg"
-          :backgroundOptions="{ color: '#ffffff' }"
-          :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
-          :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
-          :download="false"
-          downloadButton="view-cart bg-info mt-3 activities_btn"
-          :downloadOptions="{ name: 'actividades', extension: 'jpeg' }"
-        />
-        <a class="view-cart bg-info mt-3" href="javascript:void(0)" @click="activities_btn">Descargar</a>
+                    :width="200"
+                    :height="200"
+                    imgclass="souvenirs_img"
+                    :value="url+'?h='+client.id"
+                    :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
+                    :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
+                    :dotsOptions="{
+                        type: 'square',
+                        color: '#31516B',
+                        gradient: {
+                            type: 'linear',
+                            rotation: 0,
+                            colorStops: [
+                                { offset: 0, color: '#31516B' },
+                                { offset: 1, color: '#31516B' },
+                            ],
+                        },
+                    }"
+                    fileExt="jpeg"
+                    :backgroundOptions="{ color: '#ffffff' }"
+                    :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
+                    :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
+                    :download="false"
+                    downloadButton="view-cart bg-info mt-3 souvenirs_btn"
+                    :downloadOptions="{ name: 'souvenirs', extension: 'jpeg' }"
+                    crossOrigin="anonymous"
+                />
+                <a class="view-cart bg-info mt-3" href="javascript:void(0)" @click="souvenirs_btn">Descargar</a>
             </div>
         </div>
-
-   
     </div>
 </div>
 </Layout>
