@@ -59,10 +59,12 @@ class UtilitiesController extends Controller
 
         return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'category', 'items'));
     }
+
+
     public function souvenirs(Request $request)
     {
         $this->handle_auth($request->h);
-
+        //$request->all();
         $items = 20;
         $search =$category =  null;
         if ($request) {
@@ -99,6 +101,16 @@ class UtilitiesController extends Controller
     public function contact_mail(Request $request)
     {
         
+
+        $validator = $this->validate($request, [
+            'firstname'         => 'required|string',
+            'lastname'          => 'required|string',
+            'phone'             => 'required',
+            'subject'           => 'required',
+            'message'           => 'required',
+            'contact'           => 'required',
+            'email'             => 'required|string|email|max:255|unique:users',
+        ]);
         $data = array(
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -106,6 +118,7 @@ class UtilitiesController extends Controller
             'phone' => $request->phone,
             'subject' => $request->subject,
             'message' => $request->message,
+            'type' => $request->contact,
         );
         
         Mail::to('xpestana4@gmail.com')->send(new ContactReceived($data));

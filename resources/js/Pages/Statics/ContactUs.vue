@@ -32,10 +32,18 @@
                                         <input class="form-control" type="number" v-model="form.phone" placeholder="Teléfono">
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="address-subject">
                                         <input class="form-control" type="text" v-model="form.subject" placeholder="Asunto">
                                     </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="type">Nos contacta por:</label>
+                                    <select id="type" class="form-control mt-1 block w-100" v-model="form.contact">
+                                        <option value="Venta">Venta</option>
+                                        <option value="Información">Información</option>
+                                        <option value="Devolución">Devolución</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="address-textarea">
@@ -91,11 +99,14 @@
                     phone: null,
                     subject: null,
                     message: null,
+                    contact: 'Venta',
                 })
             }
         },
         methods: {
             submit() {
+                var type = $('#type').val();
+                this.form.contact = type;
                 this.form.post(route('contact.send'),{
                     _token: this.$page.props.csrf_token,
                     errorBag: 'submit',
