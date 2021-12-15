@@ -10,7 +10,8 @@
             	<template v-if="this.$page.props.auth.user">
                 	<li v-if="$page.props.auth.role != 'Client'"><Link :href="route('profile.index')">Mi cuenta</Link></li>
                     <li><Link :href="route('cart.index')">Carrito</Link></li>
-                    <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
+                    <li><Link :href="route('logout.destroy')">Cerrar sesión</Link></li>
+                    <li><a href="javascript:void(0);" ></a></li>
                 </template>
                 <template v-else>
                 	<li><Link :href="route('login')">Iniciar Sesión</Link></li>
@@ -29,7 +30,7 @@
             Link,
         },
         methods: {
-            logout(){
+            logout(){alert('hola');
                 this.$inertia.post(route('logout'), {
                     _token: this.$page.props.csrf_token,
                 })

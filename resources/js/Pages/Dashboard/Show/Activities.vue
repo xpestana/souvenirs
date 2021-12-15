@@ -108,7 +108,7 @@
                 <div id="point" class="col-md-12 mt-4  border-bottom">
                     <h3 style="font-size: 2rem;" class="mt-3">Punto de encuentro</h3> 
                 </div>
-                <div class="col-md-12 mt-3 pb-15" v-html="product.activities.iframe">
+                <div style="overflow-x: scroll;" class="col-md-12 mt-3 pb-15" v-html="product.activities.iframe">
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 mb-all-40">
@@ -167,7 +167,6 @@
         },
         created(){
             this.moment=Moment;
-            console.log(this.product);
         }
     }
 </script>

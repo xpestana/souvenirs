@@ -15,6 +15,7 @@ use App\Http\Controllers\Products\SouvenirsController;
 use App\Http\Controllers\Products\ActivitiesController;
 use App\Http\Controllers\Products\CategoriesController;
 use App\Http\Controllers\Products\CartController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::get('/contactanos', [UtilitiesController::class, 'contact'])->name('conta
 Route::post('/contactanos/send', [UtilitiesController::class, 'contact_mail'])->name('contact.send');
 Route::get('/souvenir/{product}/show', [ProductsController::class, 'souvenirs'])->name('product.souvenir.show');
 Route::get('/activities/{product}/show', [ProductsController::class, 'activities'])->name('product.activities.show');
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout.destroy');
 
 /*
     Auth
