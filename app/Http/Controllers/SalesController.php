@@ -157,7 +157,7 @@ class SalesController extends Controller
     }
     public function sale_admin()
     {
-        $orders = Order::all()->load('shippings.product.images');
+        $orders = Order::all()->load('shippings.product.images', 'user.hotel');//dd($orders);
 
         return Inertia::render('Dashboard/Shoppings', compact('orders'));
     }

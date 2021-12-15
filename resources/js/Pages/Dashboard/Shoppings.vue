@@ -8,6 +8,7 @@
                 <thead>
                     <tr>
                         <th>ID de transaccion</th>
+                        <th>Hotel</th>
                         <th>Monto</th>
                         <th>Fecha</th>
                         <th></th>
@@ -16,6 +17,7 @@
                 <tbody>
                     <tr v-for="order in orders" :key="order.id">
                         <td class ="text-orders" style="font-size: 15px;">{{ order.transaction_id }}</td>
+                        <td class ="text-orders" style="font-size: 15px;">{{ order.user.hotel[0].name }}</td>
                         <td style="font-size: 15px;">{{ order.total/100 }} €</td>
                         <td style="font-size: 15px;">{{ moment(order.created_at).format('DD/MM/YYYY')}}</td>
                         <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('purchase.show', {order:order.id})">Ver compra</Link></td>
