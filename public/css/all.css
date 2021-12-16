@@ -20,6 +20,9 @@
     max-width: 540;
 } 
 }
+.pro-home-price > span::before {
+        background-color: transparent !important;
+}
 .img-back{
     width: 100%;
     height: 50px;
@@ -131,7 +134,8 @@ Version: 1.0;
 
 @font-face {
     font-family: 'Futur';
-    src: url('/vendor_asset/fonts/futura medium bt.ttf');
+    src: url('/vendor_asset/fonts/futura medium condensed bt.ttf'),
+         url('/vendor_asset/fonts/futura medium bt.ttf');
     font-weight: normal;
     font-style: normal;
 }
@@ -4929,9 +4933,9 @@ Version: 1.0;
 /* by default css */
 @font-face {
     font-family: 'Futur';
-    src: url('/vendor_asset/fonts/Futura Medium Italic font.ttf'),
-         url('/vendor_asset/fonts/futura medium bt.ttf'),
-         url('/vendor_asset/fonts/futura medium condensed bt.ttf');
+    src: url('/vendor_asset/fonts/futura medium condensed bt.ttf'),
+         url('/vendor_asset/fonts/futura medium bt.ttf');
+         
     font-weight: normal;
     font-style: normal;
 }

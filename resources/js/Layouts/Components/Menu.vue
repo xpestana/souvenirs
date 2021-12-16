@@ -6,10 +6,10 @@
             <div class="primary-menu">
                 <nav>
                     <ul class="primary-menu-list d-flex">
-                        <li class="active"><Link :href="route('home')">Inicio</Link></li>
+                        <li class="active" hidden><Link :href="route('home')">Inicio</Link></li>
                         <li class="position-static"><Link :href="route('souvenirs')">Souvenirs</Link></li>
                         <li><Link :href="route('activities')">Actividades</Link></li>
-                        <li><Link :href="route('contact')">Contacto</Link></li>
+                        <li hidden><Link :href="route('contact')">Contacto</Link></li>
                     </ul>
                 </nav>
             </div>
@@ -19,32 +19,32 @@
     <!-- Header Menu & Cart Area End Here -->
 
     <!-- Cart Box Start Here -->
-    <div class="col-xl-3 col-lg-3 col-md-7 col-sm-6 col-7">
+       <div class="col-xl-3 col-lg-3 col-md-7 col-sm-6 col-7  d-lg-block lg">
         <!-- Cart & Search Area Start -->
         <div class="search-cart-area pr-all-50 float-right">
             <ul class="d-flex">
-                <li><i class="header-menu icon-menu"></i>
+                <li  hidden=""><i class="header-menu icon-menu"></i>
                 <!-- Currency & Language Selection Start -->
                 <ul class="ht-dropdown cart-box-width currency-selector" >
-                    <li id="cart-area">
+                    <li >
                         <ul>
                             <template v-if="this.$page.props.auth.user">
                                 <li v-if="$page.props.auth.role != 'Client'"><Link :href="route('profile.index')">Mi cuenta</Link></li>
                                 <li><Link :href="route('cart.index')">Carrito</Link></li>
-                                <li><Link :href="route('contact')">Contacto</Link></li>
+                                <li hidden><Link :href="route('contact')">Contacto</Link></li>
                                 <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
                             </template>
                             <template v-else>
                                 <li><Link :href="route('login')">Iniciar Sesión</Link></li>
                                 <li><Link :href="route('cart.index')">Carrito</Link></li>
-                                <li><Link :href="route('contact')">Contacto</Link></li>
+                                <li hidden><Link :href="route('contact')">Contacto</Link></li>
                             </template>
                         </ul>
                     </li>
                 </ul>
                 <!-- Currency & Language Selection End -->
                 </li>
-                <li class="search-mrg"><i class="header-search icon-search"></i>
+                <li class="search-mrg"  hidden=""><i class="header-search icon-search"></i>
                     <!-- Search Area Start -->
                     <ul class="ht-dropdown search-box-view">
                         <li>
@@ -57,6 +57,8 @@
                     <!-- Search Area End -->
                 </li>
                 <Cart :key="$page.props.flash.id"/>
+
+                <li class="icon-login"><Link :href="route('login')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="fas fa-sign-in-alt mt-1 "></i></Link></li>
             </ul>
     </div>
     <!-- Cart & Search Area End -->
@@ -94,7 +96,7 @@
         padding: 43px 0 0px 39px;
     }
     .search-cart-area > ul > li{
-        padding: 43px 0 0px 47px;
+        padding: 43px 0 0px 35px;
     }
     .search-cart-area > ul > li ul.currency-selector{
         width: 180px;
@@ -103,8 +105,14 @@
         line-height:  110px;
     }
     @media (max-width: 767px){
+        .lg{
+            display: none !important;
+        }
+        .icon-login{
+            display: none !important;
+        }
         .search-cart-area > ul > li > a > span{
-            font-size: 9px;
+            font-size: 11px;
             height: 16px;
             line-height: 17px;
             right: -16px;
@@ -120,5 +128,16 @@
         .search-cart-area > ul > li{
             padding: 43px 0 0px 15px;
         }
+        
     }
+    .pl-155{
+        padding-left: 220px !important;
+    }
+.search-cart-area > ul > li > a > span{
+    top: -2px !important;
+    right: -4px !important;
+}
+[class^="icon-"]:before, [class*=" icon-"]:before{
+    font-size: 120% !important;
+}
 </style>

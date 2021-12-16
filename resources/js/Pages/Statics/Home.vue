@@ -12,7 +12,7 @@
     </Slide>
   </Carousel>
   <div class="row justify-content-center pt-50 m-0 text-home">
-            <div class="col-7  mt-4 p-0">
+            <div class="col-12  mt-4 p-0">
                 <img id="logo-welcome" src="/vendor_asset/img/logo/logo-white.png" class="mx-auto">
                 <div class="w-100"></div>
             <div class="col-12  mt-4  p-0">
@@ -57,11 +57,15 @@
 <style scope>
     .text-home{
         position: absolute;
-        top: 13%;
+        top: 10%;
         left: 0;
         right: 0;
         bottom: 0;
         margin: auto !important;
+    }
+    .blog-btn > a{
+        padding: 13px 50px !important;
+        font-size: 23px !important;
     }
     .welcome{
         background-position: center center;

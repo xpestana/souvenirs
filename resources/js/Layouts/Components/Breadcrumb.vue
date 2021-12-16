@@ -4,7 +4,7 @@
         <div class="container">
             <div class="breadcrumb-wrap text-center">
                 <h3>{{ this.title }}</h3>
-                <ol class="breadcrumb breadcrumb-list">
+                <ol class="breadcrumb breadcrumb-list" hidden>
                     <li class="breadcrumb-item"><Link :href="route('home')">Inicio</Link></li>
                     <li class="breadcrumb-item active">{{ this.title }}</li>
                 </ol>
