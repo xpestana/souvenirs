@@ -35,12 +35,10 @@ class UtilitiesController extends Controller
     public function activities(Request $request)
     {
         $this->handle_auth($request->h);
-        $items = 20;
         $search =$category =  null;
         if ($request) {
             $search = $request->search;
             $category = $request->category;
-            $items = $request->items;
             $min = (isset($request->price[0])) ? $request->price[0] : null;
             $max = (isset($request->price[1])) ? $request->price[1] : null;
         }
@@ -53,11 +51,11 @@ class UtilitiesController extends Controller
                             ->Cat($request->category)
                             ->priceA($min,$max)
                             ->inRandomOrder()
-                            ->paginate($items);
+                            ->paginate(20);
 
         $max = $products->max('activities.priceA')+($products->max('activities.priceA')*2);
 
-        return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'category', 'items'));
+        return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'category'));
     }
 
 
@@ -65,12 +63,10 @@ class UtilitiesController extends Controller
     {
         $this->handle_auth($request->h);
         //$request->all();
-        $items = 20;
         $search =$category =  null;
         if ($request) {
             $search = $request->search;
             $category = $request->category;
-            $items = $request->items;
             $min = (isset($request->price[0])) ? $request->price[0] : null;
             $max = (isset($request->price[1])) ? $request->price[1] : null;
         }
@@ -82,11 +78,11 @@ class UtilitiesController extends Controller
                             ->Cat($request->category)
                             ->price($min,$max)
                             ->inRandomOrder()
-                            ->paginate($items);
+                            ->paginate(20);
 
         $max = $products->max('price')+($products->max('price')*2);
 
-        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search', 'category', 'items'));
+        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search', 'category'));
     }
     public function about(Request $request)
     {

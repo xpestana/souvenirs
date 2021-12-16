@@ -36,16 +36,6 @@
                             </ul>
                         </div>
                         <div class="row">
-                            <div class="col-12 mb-4 w-100">
-                                <h3 class="sidebar-title">Items por pagina</h3>
-                                <select v-model="form.items" name="items" id="items" class="mt-1 block w-100">
-                                    <option value="20">20</option>
-                                    <option value="40">40</option>
-                                    <option value="60">60</option>
-                                    <option value="80">80</option>
-                                    <option value="100">100</option>
-                                </select>
-                            </div>
                             <div align="center" class="col-md-12 mb-3">
                                 <button type="submit" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Filtrar</button>
                             </div> 
@@ -178,7 +168,6 @@
             products: Object,
             max: Number,
             search: String,
-            items: String,
             category: Number,
         },
         data(){
@@ -186,7 +175,6 @@
                 max: this.max,
                 form: this.$inertia.form({
                     search: this.search,
-                    items:this.items,
                     category: this.category,
                     price: [20,150],
                 }),
