@@ -17,12 +17,6 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Compañía</label>
-                                    <input type="text" placeholder="" v-model="customer.company"/>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
                                 <div class="checkout-form-list">
                                     <label>Dirección <span class="required">*</span></label>
                                     <input type="text" placeholder="Calle" v-model="customer.address"/>
@@ -196,7 +190,6 @@
                     lastname: null,
                     email: null,
                     address: null,
-                    company: null,
                     apart: null,
                     city: null,
                     state: null,

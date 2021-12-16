@@ -6,7 +6,7 @@
         <div class="container">
             <div class="breadcrumb-wrap text-center">
                 <h3>Checkout</h3>
-                <ol class="breadcrumb breadcrumb-list">
+                <ol class="breadcrumb breadcrumb-list" hidden>
                     <li class="breadcrumb-item"><Link :href="route('home')">Inicio</Link></li>
                     <li class="breadcrumb-item active">Checkout</li>
                 </ol>
@@ -41,12 +41,6 @@
                                 <div class="checkout-form-list mb-30">
                                     <label>Apellido <span class="required">*</span></label>
                                     <input type="text" placeholder="" v-model="form.lastname"/>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Compañía</label>
-                                    <input type="text" placeholder="" v-model="form.company"/>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -189,7 +183,6 @@
                     lastname: null,
                     email: null,
                     address: null,
-                    company: null,
                     apart: null,
                     city: null,
                     state: null,
