@@ -7,6 +7,7 @@
         <div class="container">
             <!-- Row End -->
             <div class="row">
+
                 <!-- Sidebar Shopping Option Start -->
                 <div class="col-lg-3 col-md-4">
                     <div class="sidebar">
@@ -55,6 +56,24 @@
                 <!-- Sidebar Shopping Option End -->
                 <!-- Product Categorie List Start -->
                 <div class="col-lg-9 col-md-8">
+                     <div class="col-lg-12">
+                        <div class="container">
+                            <div class="row py-4">
+                                <div class="col-lg-7">
+                                    <div class="about-content mb-all-40">
+                                    <!-- Section Title Start -->
+                                        <div class="section-title section-heading">
+                                            <h2 class="text-info">Disclaimer</h2>
+                                        </div>
+                                        <!-- Section Title End -->
+                                        <p class="mb-20">Si compras un souvenir, llegará aproximadamente en 20 minutos al hotel o apartamento donde te alojas.</p>
+
+                                        <p>Los últimos pedidos deberán realizarse antes de las 22:30, en caso contrario, llegará al día siguiente.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Grid & List View Start -->
                     <div class="grid-list-top border-default universal-padding d-lg-flex justify-content-md-between align-items-center mb-30">
                         <div class="grid-list-view d-flex align-items-center  mb-sm-15">
