@@ -33,13 +33,6 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="category">Categoria <small>Las categorias que se anexen reemplazaran las existentes</small></label>
-                                <Multiselect
-                                    v-model="form.category"
-                                    mode="multiple"
-                                    :closeOnSelect="false"
-                                    :options="categories"
-                                />
                             </div>
                             <div class="col-md-12 mt-4">
                                 <label class="col-form-label">Descripción del producto</label>
@@ -151,7 +144,6 @@
         data() {
             return {
                 form: this.$inertia.form({
-                    category: null,
                     title: this.product.title,
                     precio: this.product.price,
                     description: this.product.description,
@@ -159,7 +151,6 @@
                     featured: this.product.featured,
                 }),
                 id: this.$page.props.flash.id,
-                categories: this.$page.props.categories_explain,
                 status: null,
                 dropzone:null,
                 editor: ClassicEditor,

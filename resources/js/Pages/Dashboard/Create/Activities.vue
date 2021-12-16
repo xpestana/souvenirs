@@ -33,13 +33,6 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="category">Categoria</label>
-                                <Multiselect
-                                    v-model="form.category"
-                                    mode="multiple"
-                                    :closeOnSelect="false"
-                                    :options="categories"
-                                />
                             </div>
                             <div class="col-md-4">
                                 <BreezeLabel for="fechaI" value="Fecha de Inicio" />
@@ -105,7 +98,6 @@
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
     import Dropzone from 'dropzone'
     import Layout from '@/Layouts/LayoutProfile.vue'  
-    import Multiselect from '@vueform/multiselect'
 
     export default {
         components: {
@@ -117,7 +109,6 @@
             Layout,
             Head,
             Link,
-            Multiselect,
         },
        async mounted() {
             const dropzone = new Dropzone("div#dropRef", { 
@@ -147,7 +138,6 @@
         data() {
             return {
                 form: this.$inertia.form({
-                    category: null,
                     details: null,
                     title: null,
                     precioA: null,
@@ -159,7 +149,6 @@
                     iframe: null
                 }),
                 id: this.$page.props.flash.id,
-                categories: this.$page.props.categories_explain,
                 status: null,
                 dropzone:null,
                 editor: ClassicEditor,

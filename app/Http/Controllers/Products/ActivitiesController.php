@@ -45,7 +45,6 @@ class ActivitiesController extends Controller
     public function store(Request $request)
     {
         $validator = $this->validate($request, [
-            'category'      => 'required',
             'title'         => 'required|string|max:255',
             'precioA'        => 'required',
             'description'   => 'required',
@@ -61,7 +60,6 @@ class ActivitiesController extends Controller
                     'featured' => $request->featured,
                     ]);
 
-        $activities->categories()->attach($request->category);
 
         $activities->activities()
                         ->create([
@@ -193,10 +191,6 @@ class ActivitiesController extends Controller
                             'details' => $request->details,
                             'iframe' => $request->iframe,
                         ]);
-
-        if ($request->category) {
-            $activities->categories()->sync($request->category);
-        }
 
         $id= $activities->id;
         $cookie = Cookie::make('product_id', $id, 5);

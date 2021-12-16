@@ -45,7 +45,6 @@ class SouvenirsController extends Controller
     public function store(Request $request)
     {
         $validator = $this->validate($request, [
-            'category'      => 'required',
             'title'         => 'required|string|max:255',
             'precio'        => 'required',
             'description'   => 'required',
@@ -61,8 +60,6 @@ class SouvenirsController extends Controller
                 'featured' => $request->featured,
             ]);
 
-        $souvenir->categories()->attach($request->category);
-        
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
         return back()->with(['id'=>$id, 'message' => 'Agregado con exito, Espere un momento porfavor', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
@@ -147,7 +144,7 @@ class SouvenirsController extends Controller
      */
     public function edit($id)
     {
-        $product = Products::with('images', 'categories')->where('id', $id)->first();
+        $product = Products::with('images')->where('id', $id)->first();
 
         return Inertia::render('Dashboard/Edit/Souvenirs', compact('product'));
     }
@@ -174,10 +171,6 @@ class SouvenirsController extends Controller
         $souvenir->description = $request->description;
         $souvenir->featured = $request->featured;
         $souvenir->save();
-
-        if ($request->category) {
-            $souvenir->categories()->sync($request->category);
-        }
 
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);

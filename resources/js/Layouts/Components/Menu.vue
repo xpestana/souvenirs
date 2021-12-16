@@ -57,8 +57,15 @@
                     <!-- Search Area End -->
                 </li>
                 <Cart :key="$page.props.flash.id"/>
-
-                <li class="icon-login"><Link :href="route('login')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="fas fa-sign-in-alt mt-1 "></i></Link></li>
+                <li class="icon-login " v-if="this.$page.props.auth.user">
+                    <Link :href="route('profile.index')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="far fa-user-circle"></i></Link>
+                    <ul class="ht-dropdown cart-box-width currency-selector" >
+                        <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+                <li class="icon-login" v-else>
+                    <Link :href="route('login')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="fas fa-sign-in-alt mt-1 "></i></Link>
+                </li>
             </ul>
     </div>
     <!-- Cart & Search Area End -->
@@ -128,7 +135,7 @@
         .search-cart-area > ul > li{
             padding: 43px 0 0px 15px;
         }
-        
+
     }
     .pl-155{
         padding-left: 220px !important;

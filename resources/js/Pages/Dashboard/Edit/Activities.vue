@@ -33,13 +33,6 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="category">Categoria <small>Las categorias que se anexen reemplazaran las existentes</small></label>
-                                <Multiselect
-                                    v-model="form.category"
-                                    mode="multiple"
-                                    :closeOnSelect="false"
-                                    :options="categories"
-                                />
                             </div>
                             <div class="col-md-4">
                                 <BreezeLabel for="fechaI" value="Fecha de Inicio" />
@@ -175,7 +168,6 @@
         data() {
             return {
                 form: this.$inertia.form({
-                    category: null,
                     details: this.product.activities.details,
                     title: this.product.title,
                     precioA: this.product.activities.priceA,
@@ -187,7 +179,6 @@
                     iframe: this.product.activities.iframe
                 }),
                 id: this.$page.props.flash.id,
-                categories: this.$page.props.categories_explain,
                 status: null,
                 dropzone:null,
                 editor: ClassicEditor,

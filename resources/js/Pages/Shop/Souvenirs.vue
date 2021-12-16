@@ -24,17 +24,6 @@
                             </div>
                         </div>
                         <!-- Price Filter Options End -->
-
-                        <!-- Sidebar Categorie Start -->
-                        <div class="sidebar-categorie mb-30">
-                            <h3 class="sidebar-title">Categorias</h3>
-                            <ul class="sidbar-style">
-                                <li class="form-check mb-3" v-for="cat in $page.props.categories" :key="cat.id">
-                                    <input :id="'category'+cat.id" type="radio" class="form-check-input" v-model="form.category" :value="cat.id">
-                                    <label class="form-check-label mt-1" :for="'category'+cat.id">{{ cat.name }}</label>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="row">
                             <div align="center" class="col-md-12 mb-3">
                                 <button type="submit" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Filtrar</button>
@@ -168,14 +157,12 @@
             products: Object,
             max: Number,
             search: String,
-            category: Number,
         },
         data(){
             return {
                 max: this.max,
                 form: this.$inertia.form({
                     search: this.search,
-                    category: this.category,
                     price: [20,150],
                 }),
             }

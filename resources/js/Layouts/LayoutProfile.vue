@@ -52,11 +52,11 @@
                                     Gestión de administradores
                                 </a>
                             </li>
-                            <li v-if="$page.props.auth.role == 'Admin'">
+                           <!-- <li v-if="$page.props.auth.role == 'Admin'">
                                 <a :class="(route().current('categories.index') === true || route().current('categories.create') === true || route().current('categories.show') === true || route().current('categories.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="categories">
                                     Gestión de categorías
                                 </a>
-                            </li>
+                            </li>-->
                             <li v-if="$page.props.auth.role == 'Admin'">
                                 <a :class="(route().current('souvenirs.index') === true || route().current('souvenirs.create') === true || route().current('souvenirs.show') === true || route().current('souvenirs.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="souvenirs">
                                     Gestión de Souvenirs

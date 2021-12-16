@@ -33,13 +33,6 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label for="category">Categoria</label>
-                                <Multiselect
-                                    v-model="form.category"
-                                    mode="multiple"
-                                    :closeOnSelect="false"
-                                    :options="categories"
-                                />
                             </div>
                             <div class="col-md-12 mt-4">
                                 <label class="col-form-label">Descripción del producto</label>
@@ -84,7 +77,6 @@
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
     import Dropzone from 'dropzone'
     import Layout from '@/Layouts/LayoutProfile.vue'  
-    import Multiselect from '@vueform/multiselect'
 
     export default {
         components: {
@@ -96,7 +88,6 @@
             Layout,
             Head,
             Link,
-            Multiselect
         },
         mounted() {
             const dropzone = new Dropzone("div#dropRef", { 
@@ -125,7 +116,6 @@
         data() {
             return {
                 form: this.$inertia.form({
-                    category: null,
                     title: null,
                     precio: null,
                     description: null,
@@ -133,7 +123,6 @@
                     featured: 0,
                 }),
                 id: this.$page.props.flash.id,
-                categories: this.$page.props.categories_explain,
                 status: null,
                 dropzone:null,
                 editor: ClassicEditor,
