@@ -88,7 +88,7 @@
             font-size: 28px;
         }
         .cart-area > ul > li{
-            padding: 43px 0 0px 15px;
+            padding: 43px 0 0px 0px;
         }
 
         .cart-area > ul > li > a > span {
@@ -106,7 +106,7 @@
         }
         .cart-area > ul > li > a > span {
             top: 56px !important;
-            right: 25px !important;
+            left: 40px !important;
         }
     }
 </style>
