@@ -74,7 +74,7 @@
                                             </div>
                                             <div class="pro-content">
                                                 <h4><Link :href="route('product.activities.show',{product : product.id})">{{ product.title }}</Link></h4>
-                                                <div class="col-12 mb-3">
+                                                <div class="col-12 mb-3" hidden>
                                                         <template v-if="product.activities.end">
                                                             De {{ moment(product.activities.init).format('DD/MM/YYYY') }} a {{ moment(product.activities.end).format('DD/MM/YYYY') }}
                                                         </template>
@@ -165,7 +165,7 @@
                 max: this.max,
                 form: this.$inertia.form({
                     search: this.search,
-                    price: [20,150],
+                    price: [0,100],
                 }),
             }
         },

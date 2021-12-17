@@ -163,7 +163,7 @@
                 max: this.max,
                 form: this.$inertia.form({
                     search: this.search,
-                    price: [20,150],
+                    price: [0,100],
                 }),
             }
         },

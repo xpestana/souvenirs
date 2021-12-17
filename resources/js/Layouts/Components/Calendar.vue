@@ -1,38 +1,30 @@
 <template>
 	<div align="center">
-  			<DatePicker v-model="form.range" :min-date='product.activities.init' :max-date='product.activities.end' is-range/>
+  			<DatePicker v-model="form.range" :min-date='product.activities.init' :max-date='product.activities.end'/>
   			<div class="form-group row mt-4">
-  				<div class="col-md-6">
-  					<label for="adult">Número de adultos</label>
-  					<input type="number" class="form-control mt-1 block w-full" min="0" v-model="form.adult">
+  				<div class="col-8">
+  					<label class="mt-2" for="adult">Número de adultos</label>
                 </div>
-                <div class="col-md-6">
-                	<label for="adult">Número de niños</label>
-  					<input type="number" class="form-control mt-1 block w-full" min="0" v-model="form.children">
+                <div class="col-3">
+                    <input type="number" class="form-control mt-1 block w-full" min="0" v-model="form.adult">
+                </div>
+                <div class="col-8">
+                	<label class="mt-2" for="adult">Número de niños</label>
+                </div>
+                <div class="col-3">
+                    <input type="number" class="form-control mt-1 block w-full" min="0" v-model="form.children">
                 </div>
                 <div align="center" class="col-md-12 mt-4">
                 	<div class="d-single-info text-lg-center">
-                    	<button class="view-cart bg-info" @click="OpenModal()">Reservar</button>
+                    	<button class="view-cart bg-info" >Agregar al carrito</button>
                     </div>
                 </div>
   			</div>
-        <dialog-modal :show="modal">
-            <template v-slot:title>
-                <h1>Reservar: {{ product.title }}</h1>
-            </template>
-            <template v-slot:content>
-                <checkout :form="this.form" :product="product" :key="random"/>
-            </template>
-            <template v-slot:footer>
-                <a href="javascript:void(0)" class="btn btn-danger ml-auto" @click="CloseModal()">CLOSE</a>
-            </template>
-        </dialog-modal>
   	</div>
 </template>
 <script>
 	import { Calendar, DatePicker } from 'v-calendar'
 	import { Head, Link } from '@inertiajs/inertia-vue3'
-    import DialogModal from '@/Components/DialogModal.vue'
     import Checkout from '@/Pages/Checkout_activities.vue'
 
 	export default {
@@ -40,7 +32,6 @@
         	Calendar,
             DatePicker,
             Head,
-            DialogModal,
             Checkout,
             Link
         },
@@ -58,9 +49,6 @@
             	}),
             	 
             }
-        },
-        created(){
-            console.log(this.product)
         },
         props: {
             product: Object,

@@ -47,8 +47,6 @@ class HandleInertiaRequests extends Middleware
             'auth.user' => fn() => auth()->user() ? auth()->user() : null,
             'auth.profile' => fn() => auth()->user() ? auth()->user()->profile : null,
             'auth.role' => fn() => auth()->user() ? auth()->user()->getRoleNames()->first() : null,
-            'categories' => fn() => Categories::all(),
-            'categories_explain' => fn() => $categories,
             'cart' => fn() => Cart::getContent(),
             'cart.total' => fn() => Cart::getTotal(),
             'cart.count' => fn() => Cart::getTotalQuantity(),

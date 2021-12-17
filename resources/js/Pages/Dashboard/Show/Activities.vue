@@ -11,39 +11,25 @@
             <div class="col-md-3">
                 <div align="center" class="col-md-12">
                     <template v-if="product.activities.priceN">
-                        <h3 style="font-size: 1.175rem;" class="text-white">Adulto: {{ product.activities.priceA }} € / Niño: {{ product.activities.priceN }} € </h3>
+                        <h3 style="font-size: 1.5rem;" class="text-white">Adulto: {{ product.activities.priceA }} € <br>Niño: {{ product.activities.priceN }} € </h3>
                     </template>
                     <template v-else>
-                       <h3 style="font-size: 1.175rem;" class="text-white">Precio: {{ product.activities.priceA }} € </h3>
+                       <h3 style="font-size: 1.5rem;" class="text-white">Precio: {{ product.activities.priceA }} € </h3>
                     </template>
                 </div>
-                <div align="center" class="col-md-12 mt-3">
-                    <div class="d-single-info text-lg-center">
-                       <a style="background-color: #31516B;" class="view-cart p-15" href="javascript:void(0)">Ver disponbilidad</a>
-                    </div>
-                </div>
-                <div class="col-md-12 mt-3 row">
-                    <div class="main-toolbar-sorter clearfix col-md-5">
-                            <div class="toolbar-sorter d-md-flex align-items-center">
-                                <div style="width: auto !important;" class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <button style="background-color: #31516B;" class="btn btn-outline-secondary" type="button"><i class="icon-search text-white" aria-hidden="true"></i></button>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="" aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            <div class="col-md-12 mt-2">
-                <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="7000">
-                    <Slide v-for=" image in product.images" :key="image.id">
-                        <div :style="'background:url(/storage/souvenirs/'+image.url+')'" class="img-act"></div>
-                    </Slide>
-                </Carousel>
             </div>
         </div>
-        
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-2">
+            <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="7000">
+                <Slide v-for=" image in product.images" :key="image.id">
+                    <div :style="'background:url(/storage/souvenirs/'+image.url+')'" class="img-act"></div>
+                </Slide>
+            </Carousel>
+        </div>
     </div>
 </div>
 <!-- Breadcrumb Area End Here -->
@@ -66,36 +52,22 @@
                 </div>
                 <div class="col-md-12 mt-3 pb-15" v-html="product.description"> 
                 </div>
-                <div class="col-md-12 mt-4 border-bottom">
-                    <h3 style="font-size: 2rem;">Fechas</h3> 
-                </div>
-                <div class="col-md-12 mt-3 pb-15"> 
-                    <template v-if="product.activities.end">
-                        De {{ moment(product.activities.init).format('DD/MM/YYYY') }} a {{ moment(product.activities.end).format('DD/MM/YYYY') }}
-                    </template>
-                    <template v-else>
-                        El {{ moment(product.activities.init).format('DD/MM/YYYY')}}
-                    </template>
-                </div>
                 <div id="price" class="col-md-12 mt-4 pb-15">
                     <h3 style="font-size: 2rem;" class="mt-3 border-bottom">Precio</h3> 
                     <div class="row ">
-                        <div class="col-md-2"></div>
                         <template v-if="product.activities.priceN">
-                            <div class="col-md-3 mt-4">
-                                <h3 class="mb-4" style="font-size: 1.175rem;">Adultos</h3>
-                                <span class="price mt-3 bg-info text-white">{{ product.activities.priceA }} €</span>
+                            <div class="col-md-6 mt-4">
+                                <ul>
+                                    <li class="mt-4"><h3 class="mb-4" style="font-size: 1.175rem;">Adultos <i style="color: #6cb2eb !important" class="fas fa-arrow-right"></i> {{ product.activities.priceA }} €</h3></li>
+                                    <li class="mt-4"><h3 class="mb-4" style="font-size: 1.175rem;">Niños <i style="color: #6cb2eb !important" class="fas fa-arrow-right"></i> {{ product.activities.priceN }} €</h3></li>
+                                </ul>
                             </div>
-                            <div class="col-md-3 mt-4">
-                                <h3 class="mb-4" style="font-size: 1.175rem;">Niños</h3>
-                                <span class="price mt-3 bg-info text-white">{{ product.activities.priceN }} €</span>
-                            </div>    
                         </template>
                         <template v-else>
                             <div class="col-md-6">
-                                <div class="col-md-6 mt-4">
-                                    <span class="price mt-3 bg-info text-white">{{ product.activities.priceA }} €</span>
-                                </div>
+                                <ul>
+                                    <li class="mt-4"><h3 class="mb-4" style="font-size: 1.175rem;"><i style="color: #6cb2eb !important" class="fas fa-arrow-right"></i> {{ product.activities.priceA }} €</h3></li>
+                                </ul>
                             </div>    
                         </template>
                     </div>

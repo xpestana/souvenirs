@@ -57,6 +57,9 @@
                     <!-- Search Area End -->
                 </li>
                 <Cart :key="$page.props.flash.id"/>
+                <li>
+                    <a href="javascript:void(0)"><i class="fas fa-globe lang"></i></a>
+                </li>
                 <li class="icon-login " v-if="this.$page.props.auth.user">
                     <Link :href="route('profile.index')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="far fa-user-circle"></i></Link>
                     <ul class="ht-dropdown cart-box-width currency-selector" >
@@ -80,7 +83,9 @@
     export default{
         components: {
             Link,
-            Cart
+            Cart,
+        },
+        created(){
         },
         methods: {
             logout(){
@@ -92,6 +97,14 @@
     }
 </script>
 <style scope>
+    .lang{
+        background-color: #000;
+        color: #fff !important;
+        border-radius: 100%;
+        padding: 5px;
+        font-size: 18px;
+    }
+
     #cart-area{
         width: 180px !important;
         padding: 10px !important;
@@ -100,7 +113,7 @@
         padding: 43px 0 0px 0px;
     }
     .search-cart-area > ul > li.search-mrg{
-        padding: 43px 0 0px 39px;
+        padding: 43px 0 0px 20px;
     }
     .search-cart-area > ul > li{
         padding: 43px 0 0px 35px;

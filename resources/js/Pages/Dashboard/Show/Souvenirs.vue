@@ -49,10 +49,13 @@
                             <li class="read-review"><a href="#">Lee los reviews (1)</a></li>
                             <li class="write-review"><a href="#">Escribe un review</a></li>
                         </ul>
+                        <div class="pro-desc-details mt-4"> 
+                            <span v-html="product.description"></span>
+                        </div>
                         <div class="pro-price mt-30">
                             <p class="d-flex align-items-center"><span class="prev-price" hidden>16.51</span><span class="price">Precio:  € {{ product.price }}</span><span class="saving-price" hidden>-5%</span></p>
                         </div>
-                        <p class="pro-desc-details" hidden>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
+                        
                         <div class="pt-10 quatity-stock">
                            <label>Quantity</label>
                            <form @submit.prevent="submit">
@@ -84,7 +87,7 @@
     </div>
         <!-- Product Thumbnail End -->
     <!-- Product Thumbnail Description Start -->
-    <div class="thumnail-desc white-bg">
+    <div class="thumnail-desc white-bg" hidden="">
         <div class="container">
             <div id="thumb-desc-inner" class="thumb-desc-inner">
                 <div class="row">
