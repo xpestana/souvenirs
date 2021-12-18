@@ -55,9 +55,6 @@
     	props: {
         	products: Object,
     	},
-    	created(){
-    		console.log(this.products);
-    	},
     	methods: {
         	deleteProduct(product){
         		this.$swal({
@@ -77,7 +74,6 @@
   							})
   						}
 					})
-            	
         	}
     	}
 	}

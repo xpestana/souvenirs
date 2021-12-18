@@ -24,7 +24,14 @@
                                 <h4><Link :href="route('product.activities.show',{product : product.id})">{{ product.title }}</Link></h4>
                                 <div class="pro-price-cart">
                                     <div class="pro-home-price">
-                                        <span>{{ product.activities.priceA }} €</span>
+                                        <span>
+                                            <template v-if="product.activities.priceN">
+                                                Adulto: {{ product.activities.priceA }} € / Niño: {{ product.activities.priceN }} €
+                                            </template>
+                                            <template v-else>
+                                                Precio: {{ product.activities.priceA }} €
+                                            </template>
+                                        </span>
                                     </div>
                                     <div class="pro-cart">
                                     </div>

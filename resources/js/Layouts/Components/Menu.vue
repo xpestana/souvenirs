@@ -60,13 +60,19 @@
                 <li>
                     <a href="javascript:void(0)"><i class="fas fa-globe lang"></i></a>
                 </li>
-                <li class="icon-login " v-if="this.$page.props.auth.user">
+                <li class="icon-login " v-if="this.$page.props.auth.user && $page.props.auth.role != 'Client'">
                     <Link :href="route('profile.index')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="far fa-user-circle"></i></Link>
                     <ul class="ht-dropdown cart-box-width currency-selector" >
                         <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
                     </ul>
                 </li>
-                <li class="icon-login" v-else>
+                <li class="icon-login " v-if="this.$page.props.auth.user && $page.props.auth.role == 'Client'">
+                    <a href="javascript:void(0)"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="far fa-user-circle"></i></a>
+                    <ul class="ht-dropdown cart-box-width currency-selector" >
+                        <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
+                    </ul>
+                </li>
+                <li class="icon-login" v-if="this.$page.props.auth.user == null">
                     <Link :href="route('login')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="fas fa-sign-in-alt mt-1 "></i></Link>
                 </li>
             </ul>

@@ -188,9 +188,28 @@
             Layout,
         },
         props: {
-            countries: Object,
+            hotel: Object,
         },
         created(){
+            var text = 'No hay dirección!!!';
+            var address = 'No entro por medio de un codigo QR, asegurese que la dirección de envío que coloque, sea la correcta';
+
+            if (this.hotel) {
+                address = this.hotel.address + " Zona: " + this.hotel.zone;
+                text = '<strong>Por favor asegúrese que la <u>dirección de envio</u> sea la correcta:</strong>';
+            }
+            this.$swal({
+                    title: text,
+                    icon: 'info',
+                    html: address,
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    focusConfirm: false,
+                    confirmButtonText:
+                        '<i class="fa fa-thumbs-up"></i> Aceptar!',
+                    confirmButtonAriaLabel: 'Aceptar!',
+                })
+            console.log(this.hotel);
             var cart = this.$page.props.cart;
             var total = 0;
             var total_souvenirs = 0;
@@ -227,10 +246,10 @@
                     firstname: null,
                     lastname: null,
                     email: null,
-                    address: null,
+                    address: (this.hotel) ? this.hotel.address : null,
                     apart: null,
                     city: null,
-                    state: null,
+                    state: (this.hotel) ? this.hotel.zone : null,
                     zip_code: null,
                     phone: null,
                     country: null,
@@ -296,3 +315,8 @@
         },
     }
 </script>
+<style>
+    .swal2-select{
+        display: none;
+    }
+</style>

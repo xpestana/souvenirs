@@ -6,8 +6,9 @@
   <p>Se ha registrado una compra en la plataforma {{ $appName }}, los productos son:</p>
 
   <ul>
-    @foreach($order->shippings as $product )
+    @foreach($order->shippings as $product)
       <li>{{ $product->product->title }}</li>
+      
     @endforeach
   </ul>
 
@@ -19,7 +20,6 @@
     <li>{{ $shipping->firstname }} {{ $shipping->lastname }}</li>
     <li>{{ $shipping->email }}</li>
     <li>{{ $shipping->address  }}</li>
-    <li>{{ $shipping->company  }}</li>
     <li>{{ $shipping->apart  }}</li>
     <li>{{ $shipping->city  }}</li>
     <li>{{ $shipping->state  }}</li>

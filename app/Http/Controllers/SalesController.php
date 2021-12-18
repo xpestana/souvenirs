@@ -25,12 +25,18 @@ class SalesController extends Controller
 
     public function checkout(Request $request)
     {
-        return Inertia::render('Checkout');
+        $hotel = null;
+
+        if (auth()->user()) {
+            if (!auth()->user()->hotel->isEmpty()) {
+                $hotel = hotel::find(auth()->user()->hotel->first()->id);
+            }
+        }
+        return Inertia::render('Checkout', compact('hotel'));
     }
     
     public function sale(Request $request)
     {
-        dd($request->all());
         $request->validate([
             'email' => 'required|string|email|max:255',
             'firstname' => 'required',
@@ -61,7 +67,8 @@ class SalesController extends Controller
             ]);
             $products = Cart::getContent();
             foreach($products as $product){
-                $shipping = Shipping::create([ 
+                if ($product->attributes->type == 'souvenir') {
+                    $shipping = Shipping::create([ 
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'quantity' => $product->quantity,
@@ -75,7 +82,26 @@ class SalesController extends Controller
                     'zip_code' => $request->zip_code,
                     'phone' => $request->phone,
                     'amount' => $product->price,
+                    ]);
+                }else{
+                    $shipping = Shipping::create([ 
+                    'order_id' => $order->id,
+                    'product_id' => $product->id,
+                    'firstname' => $request->firstname,
+                    'lastname' => $request->lastname,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'apart' => $request->apart,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'zip_code' => $request->zip_code,
+                    'phone' => $request->phone,
+                    'date_init' => $product->attributes->date,
+                    'adult' => $product->attributes->adult,
+                    'children' => $product->attributes->children,
                 ]);
+                }
+                
             }
             Cart::clear();
 
