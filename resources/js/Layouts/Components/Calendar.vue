@@ -1,6 +1,7 @@
 <template>
 	<div align="center">
-  			<DatePicker v-model="form.range" :min-date='product.activities.init' :max-date='product.activities.end'/>
+        <form @submit.prevent="submit">
+  			<DatePicker v-model="form.date" :min-date='product.activities.init' :max-date='product.activities.end'/>
   			<div class="form-group row mt-4">
   				<div class="col-8">
   					<label class="mt-2" for="adult">Número de adultos</label>
@@ -16,16 +17,27 @@
                 </div>
                 <div align="center" class="col-md-12 mt-4">
                 	<div class="d-single-info text-lg-center">
-                    	<button class="view-cart bg-info" >Agregar al carrito</button>
+                        <BreezeButton id="submit" type="submit" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                            Agregar al carrito
+                        </BreezeButton>
+                        <BreezeValidationErrors class="my-3" />
+                        <div class="login-footer text-center">
+                            <div v-if="status" class="mb-4 font-medium text-sm text-danger">
+                                {{ status }}
+                            </div>
+                        </div>
                     </div>
                 </div>
   			</div>
+        </form>
   	</div>
 </template>
 <script>
 	import { Calendar, DatePicker } from 'v-calendar'
 	import { Head, Link } from '@inertiajs/inertia-vue3'
     import Checkout from '@/Pages/Checkout_activities.vue'
+    import BreezeButton from '@/Components/Button.vue'
+    import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 
 	export default {
         components: {
@@ -33,19 +45,19 @@
             DatePicker,
             Head,
             Checkout,
-            Link
+            Link,
+            BreezeButton,
+            BreezeValidationErrors
         },
         data() {
             return {
                 modal: false,
                 random: 1,
             	form: this.$inertia.form({
+                    product_id: this.product.id,
                 	adult: 0,
                 	children: 0,
-                    range: {
-                       start: this.product.activities.init,
-                        end: this.product.activities.end
-                    }
+                    date: this.product.activities.init
             	}),
             	 
             }
@@ -54,12 +66,13 @@
             product: Object,
         },
         methods: {
-            OpenModal(){
-                var random = Math.floor(Math.random() * 9999);
-                this.modal=true;
-            },
-            CloseModal(){
-                this.modal=false;
+            submit(){
+                this.form.post(route('cart.activity'),{
+                    _token: this.$page.props.csrf_token,
+                    errorBag: 'submit',
+                    preserveScroll: true,
+                    forceFormData: true,
+                })
             }
     	}
     }

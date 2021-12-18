@@ -28,14 +28,30 @@
                                                     <div :style="'background:url(/storage/souvenirs/'+product.attributes.url+')'" class="img-cart-2"></div>
                                                 </Link>
                                             </td>
-                                            <td class="product-name"><Link :href="route('product.souvenir.show',{product : product.id})">{{ product.name }}</Link></td>
-                                            <td class="product-price"><span class="amount">{{ product.price }} €</span></td>
-                                            <td class="product-quantity">
+                                            <td class="product-name">
+                                                <Link :href="route('product.souvenir.show',{product : product.id})">{{ product.name }}</Link>
+                                            </td>
+                                            <td class="product-price" v-if="product.attributes.type == 'souvenir'">
+                                                <span class="amount">{{ product.price }} €</span>
+                                            </td>
+                                            <td class="product-price"  v-if="product.attributes.type == 'activity'">
+                                                <template v-if="product.attributes.priceN">
+                                                    Adultos: {{ product.attributes.priceA }} € <br>Niños: {{ product.attributes.priceN }} €
+                                                </template>
+                                                <template v-else>
+                                                    Precio: {{ product.attributes.priceA }} €
+                                                </template>
+                                            </td>
+                                            <td class="product-quantity" v-if="product.attributes.type == 'souvenir'">
                                                 <a href="javascript:void(0)" class="mr-3" @click="upCart(product.id)"><i style="color: #31516B" class="fas fa-plus"></i></a> 
                                                 <strong>{{ product.quantity }}</strong> 
                                                 <a href="javascript:void(0)" class="ml-3" @click="downCart(product.id)"><i style="color: #31516B" class="fas fa-minus"></i></a>
                                             </td>
-                                            <td class="product-subtotal">{{ product.quantity * product.price }} €</td>
+                                            <td class="product-quantity"   v-if="product.attributes.type == 'activity'"> </td>
+                                            <td class="product-subtotal"  v-if="product.attributes.type == 'souvenir'">{{ product.quantity * product.price }} €</td>
+                                            <td class="product-subtotal"  v-if="product.attributes.type == 'activity'">
+                                                
+                                            </td>
                                             <td class="product-remove"> <a href="javascript:void(0)"  @click="deleteCart(product.id)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                         </tr>
                                     </template>

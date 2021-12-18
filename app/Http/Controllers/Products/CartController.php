@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use Inertia\Inertia;
+use Carbon\Carbon;
 use Redirect;
 use Cart;
 
@@ -84,7 +85,8 @@ class CartController extends Controller
             'price'=> $product->price,
             'quantity' => $quantity,
             'attributes' => array(
-                'url' => $product->images[0]->url
+                'url' => $product->images[0]->url,
+                'type' => 'souvenir'
                 ),
             'associatedModel' => $product
         ));
@@ -109,5 +111,28 @@ class CartController extends Controller
         }
         $pin = mt_Rand(1000000, 9999999);
         return back()->with(['id'=>$pin, 'message' => 'Producto eliminado exitosamente', 'code' => 200, 'status' => 'success']);  
+    }
+    public function activity(Request $request)
+    {
+        $datetime = new Carbon($request->date);
+        $product = Products::find($request->product_id)->load('images');
+        $addCart = \Cart::add(array(
+            'id' => $product->id,
+            'name'=>$product->title,
+            'price'=> 20,
+            'quantity' => 1,
+            'attributes' => array(
+                'type' => 'activity',
+                'url' => $product->images[0]->url,
+                'date' => $datetime->subDay(1),
+                'adult' => $request->adult,
+                'children' => $request->children,
+                'priceA' => $product->activities->priceA,
+                'priceN' => $product->activities->priceN
+                ),
+            'associatedModel' => $product
+        ));
+        $pin = mt_Rand(1000000, 9999999);
+        return back()->with(['id'=>$pin, 'message' => 'Producto agregado al carrito', 'code' => 200, 'status' => 'success']);  
     }
 }

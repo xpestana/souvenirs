@@ -95,7 +95,7 @@
                                                         </span>
                                                     </div>
                                                     <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="#" hidden><i class="icon-cart"></i></a>
+                                                       <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id)" hidden><i class="icon-cart"></i></a>
                                                         
                                                     </div>
                                                 </div>
@@ -127,7 +127,6 @@
     </div>
     <!-- Shop Page End -->
 </Layout>
-<QuickView /> <!--Sidebar-->
 </template>
 
 <script>
@@ -135,7 +134,6 @@
     import { Inertia } from '@inertiajs/inertia';
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Layout from '@/Layouts/Layout.vue'        
-    import QuickView from '@/Components/QuickView.vue';
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
     import Paginator from '@/Components/Paginator.vue'   
     import Moment from 'moment'
@@ -146,7 +144,6 @@
             Head,
             Link,
             Layout,
-            QuickView,
             Breadcrumb,
             Slider,
             Paginator
@@ -170,7 +167,6 @@
             }
         },
         methods: {
-
             submit() {
                 this.form.get(route('activities'),{
                     _token: this.$page.props.csrf_token,
@@ -179,6 +175,11 @@
                     
                 })
             },
+            cart(id){
+                this.$inertia.post(route('cart.activity',{checkout: id}),{
+                    preserveScroll: true
+                })
+            }
         }
 }
 

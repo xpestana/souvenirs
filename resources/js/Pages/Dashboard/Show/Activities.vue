@@ -43,7 +43,7 @@
                     <ul class="nav tabs-area d-flex align-items-center">
                         <li><a class="active mr-3 mb-4" href="#description"><i class="fas fa-clipboard-list"></i> Descripción</a></li>
                         <li><a class="active mr-3 mb-4" href="#price"><i class="fas fa-euro-sign"></i> Precios de la actividad</a></li>
-                        <li><a class="active mr-3 mb-4" href="#details"><i class="fas fa-info-circle"></i> Detalles</a></li>
+                        <li><a class="active mr-3 mb-4" href="#details"><i class="fas fa-info-circle"></i> Cancelación</a></li>
                         <li><a class="active mr-3 mb-4" href="#point"><i class="fas fa-map-marker-alt"></i> Punto de encuentro</a></li>
                     </ul>
                 </div>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div id="details" class="col-md-12 mt-4 border-bottom">
-                    <h3 style="font-size: 2rem;" class="mt-3">Detalles</h3> 
+                    <h3 style="font-size: 2rem;" class="mt-3">Detalles de cancelación</h3> 
                 </div>
                 <div class="col-md-12 mt-3 pb-15" v-html="product.activities.details">
                 </div>

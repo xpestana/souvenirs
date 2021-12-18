@@ -53,6 +53,7 @@ Route::get('/login', function () {
         Cart and sales
      */
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/activity/cart/', [CartController::class, 'activity'])->name('cart.activity');
 
     Route::resource(
         '/checkout',

@@ -13,8 +13,16 @@
                         </div>
                         <div class="cart-content">
                             <h6><a :href="route('product.souvenir.show',{product : product.id})">{{ product.name }} </a></h6>
-                            <span class="cart-price">{{ product.price }} €</span>
-                            <span>Cantidad: {{ product.quantity }}</span>
+                            <span class="cart-price" v-if="product.attributes.type == 'souvenir'">{{ product.price }} €</span>
+                            <span class="cart-price" v-if="product.attributes.type == 'activity'">
+                                <template v-if="product.attributes.priceN">
+                                    Adultos: {{ product.attributes.priceA }} € <br>Niños: {{ product.attributes.priceN }} €
+                                </template>
+                                <template v-else>
+                                    Precio: {{ product.attributes.priceA }} €
+                                </template>
+                            </span>
+                            <span v-if="product.attributes.type == 'souvenir'">Cantidad: {{ product.quantity }}</span>
                             <span><a href="javascript:void(0)" class="text-danger" @click="deleteCart(product.id)"><i class="ion-close"></i> Eliminar</a></span>
                         </div>
                     </li>
@@ -46,6 +54,9 @@
             return {
             	count: null,
             }
+        },
+        created(){
+            console.log(this.$page.props.cart)
         },
         methods: {
             deleteCart(id){
