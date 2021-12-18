@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\profile;
 use App\Models\User;
+use App\Models\hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -19,7 +20,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Dashboard/Profile');
+        $hotel = hotel::find(auth()->user()->hotel->first()->id);
+        $url = env('APP_URL');
+        $client = $hotel->user()->wherePivot('manager', false)->first();
+        return Inertia::render('Dashboard/Profile', compact('url', 'client'));
     }
 
     /**
