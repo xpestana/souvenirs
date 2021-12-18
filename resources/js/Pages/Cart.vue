@@ -47,10 +47,13 @@
                                                 <strong>{{ product.quantity }}</strong> 
                                                 <a href="javascript:void(0)" class="ml-3" @click="downCart(product.id)"><i style="color: #31516B" class="fas fa-minus"></i></a>
                                             </td>
-                                            <td class="product-quantity"   v-if="product.attributes.type == 'activity'"> </td>
+                                            <td class="product-quantity"   v-if="product.attributes.type == 'activity'"> 
+                                                Adultos: {{ product.attributes.adult }}<br>
+                                                Niños: {{ product.attributes.children }}
+                                            </td>
                                             <td class="product-subtotal"  v-if="product.attributes.type == 'souvenir'">{{ product.quantity * product.price }} €</td>
                                             <td class="product-subtotal"  v-if="product.attributes.type == 'activity'">
-                                                
+                                                {{ calculate(product.attributes.priceA, product.attributes.priceN, product.attributes.adult, product.attributes.children) }} €
                                             </td>
                                             <td class="product-remove"> <a href="javascript:void(0)"  @click="deleteCart(product.id)"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                         </tr>
@@ -68,29 +71,8 @@
                             </div>
                             <!-- Cart Button Start -->
                             <!-- Cart Totals Start -->
-                            <div class="col-md-4 col-sm-12">
-                                <div class="cart_totals float-md-right text-md-right">
-                                    <h2>Total carrito</h2>
-                                    <br />
-                                    <table class="float-md-right">
-                                        <tbody>
-                                            <tr class="cart-subtotal">
-                                                <th>Productos</th>
-                                                <td><span class="amount">{{ $page.props.cart.count }}</span></td>
-                                            </tr>
-                                            <tr class="order-total">
-                                                <th>Total</th>
-                                                <td>
-                                                    <strong><span class="amount">{{ this.$page.props.cart.total }} €</span></strong>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="wc-proceed-to-checkout">
-                                        <Link class="bg-info" :href="route('checkout.souvenirs')">Checkout</Link>
-                                    </div>
-                                </div>
-                            </div>
+                            <Total :key="$page.props.flash.id"/>
+                            
                             <!-- Cart Totals End -->
                         </div>
                         <!-- Row End -->
@@ -109,7 +91,8 @@
     import { Inertia } from '@inertiajs/inertia';
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Layout from '@/Layouts/Layout.vue'        
-    import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
+    import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'    
+    import Total from '@/Pages/Total.vue' 
 
     export default {
         components: {
@@ -117,6 +100,40 @@
             Link,
             Layout,
             Breadcrumb,
+            Total
+        },
+        created(){
+            var cart = this.$page.props.cart;
+            var total = 0;
+            var total_souvenirs = 0;
+
+            Object.keys(cart).forEach(function(key) {
+                if (cart[key].name) {
+                    if (cart[key].attributes.type == 'souvenir') {
+                        total += (cart[key].price * cart[key].quantity);
+                        total_souvenirs += (cart[key].price * cart[key].quantity);
+                    }else{
+                        if (cart[key].attributes.priceN) {
+                            total += ((cart[key].attributes.adult * cart[key].attributes.priceA) +  (cart[key].attributes.children * cart[key].attributes.priceN));
+                        }else{
+                            total += ((cart[key].attributes.adult * cart[key].attributes.priceA) +  (cart[key].attributes.children * cart[key].attributes.priceA));
+                        }
+                    }
+                }
+            });
+            this.total_souvenirs = total_souvenirs;
+            this.sub_total = total;
+            if (total_souvenirs <= 40 && total_souvenirs > 0) {
+                total += 5 ;
+            }
+            this.total = total;
+        },
+        data() {
+            return {
+                sub_total: null,
+                total_souvenirs: 0,
+                total: null
+            }
         },
         methods: {
             upCart(id) {
@@ -135,6 +152,14 @@
                     {
                         preserveScroll: true,
                     })
+            },
+            calculate(priceA, priceN, adult, children){
+                if (priceN) {
+                    var amount = ((adult * priceA) +  (children * priceN));
+                }else{
+                    var amount = ((adult * priceA) +  (children * priceA));
+                }
+                return amount;
             }
         }
 }

@@ -70,8 +70,8 @@ Route::get('/login', function () {
         ],
     ); 
 
-    Route::get('/purchase/souvenirs', [SalesController::class, 'checkout_souvenirs'])->name('checkout.souvenirs');
-    Route::post('/sale/souvenirs', [SalesController::class, 'sale_souvenirs'])->name('sale.souvenirs');
+    Route::get('/store/checkout', [SalesController::class, 'checkout'])->name('checkout.souvenirs');
+    Route::post('/purchase/sale', [SalesController::class, 'sale'])->name('sale');
     Route::post('/sale/activities', [SalesController::class, 'sale_activities'])->name('sale.activities');
     Route::get('/purchase', [SalesController::class, 'purchase'])->name('purchase');
 

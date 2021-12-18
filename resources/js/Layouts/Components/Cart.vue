@@ -2,7 +2,6 @@
 	<li><Link :href="route('cart.index')"><i class="header-cart icon-cart"></i><span>{{ $page.props.cart.count }}</span></Link>
                 <!-- Cart Box Start -->
                 <ul class="ht-dropdown cart-box-width">
-                    <!-- Single Cart Box Start -->
                     <template v-for="product in $page.props.cart" :key="product.id">
                     	
                     <li class="single-cart-box" v-if="product.name">
@@ -27,20 +26,17 @@
                         </div>
                     </li>
                     </template>
-                    <!-- Single Cart Box End -->
-                    <!-- Cart Footer Inner Start -->
                     <li class="cart-footer">
                         <ul class="price-content">
-                            <li>Productos <span>{{ $page.props.cart.count }}</span></li>
-                            <li>Total <span>{{ this.$page.props.cart.total }} €</span></li>
+                            <li>Sub-total <span>{{ sub_total }} €</span></li>
+                            <li v-if="total_souvenirs<40  && total_souvenirs > 0">Envío <span>5 €</span></li>
+                            <li>Total <span>{{ total }} €</span></li>
                         </ul>
                         <div class="cart-actions text-center">
                             <Link class="cart-checkout" :href="route('checkout.souvenirs')">Checkout</Link>
                         </div>
                     </li>
-                    <!-- Cart Footer Inner End -->
                 </ul>
-                <!-- Cart Box End -->
             </li>
 </template>
 <script>
@@ -53,10 +49,36 @@
         data(){
             return {
             	count: null,
+                sub_total: null,
+                total_souvenirs: 0,
+                total: null
             }
         },
         created(){
-            console.log(this.$page.props.cart)
+            var cart = this.$page.props.cart;
+            var total = 0;
+            var total_souvenirs = 0;
+
+            Object.keys(cart).forEach(function(key) {
+                if (cart[key].name) {
+                    if (cart[key].attributes.type == 'souvenir') {
+                        total += (cart[key].price * cart[key].quantity);
+                        total_souvenirs += (cart[key].price * cart[key].quantity);
+                    }else{
+                        if (cart[key].attributes.priceN) {
+                            total += ((cart[key].attributes.adult * cart[key].attributes.priceA) +  (cart[key].attributes.children * cart[key].attributes.priceN));
+                        }else{
+                            total += ((cart[key].attributes.adult * cart[key].attributes.priceA) +  (cart[key].attributes.children * cart[key].attributes.priceA));
+                        }
+                    }
+                }
+            });
+            this.total_souvenirs = total_souvenirs;
+            this.sub_total = total;
+            if (total_souvenirs < 40 && total_souvenirs > 0) {
+                total += 5 ;
+            }
+            this.total = total;
         },
         methods: {
             deleteCart(id){

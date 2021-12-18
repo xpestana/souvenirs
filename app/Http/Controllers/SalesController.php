@@ -23,14 +23,14 @@ class SalesController extends Controller
          Stripe::setApiKey(env('STRIPE_KEY'));
     }
 
-    public function checkout_souvenirs(Request $request)
+    public function checkout(Request $request)
     {
-        $countries = config('countries');
-        return Inertia::render('Checkout_souvenirs', compact('countries'));
+        return Inertia::render('Checkout');
     }
     
-    public function sale_souvenirs(Request $request)
+    public function sale(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'email' => 'required|string|email|max:255',
             'firstname' => 'required',

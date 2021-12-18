@@ -11,17 +11,17 @@
                     <Slide v-for=" product in $page.props.activities" :key="product.id">
                         <div  class="single-aboss-product w-100 p-4">
                             <div class="pro-img">
-                                <Link :href="route('souvenirs.show',{souvenir: product.id})">
+                                <Link :href="route('product.activities.show',{product : product.id})">
                                     <template v-if="product.images.length != 0">
                                         <div :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'" class="img-slide"></div>
                                     </template>
                                 </Link>
                                 <div class="pro-actions">
-                                    <Link :href="route('souvenirs.show',{souvenir: product.id})" data-toggle="modal" data-target="#product-window" class="quick-view"><i class="far fa-eye"></i></Link>
+                                    <Link :href="route('product.activities.show',{product : product.id})" data-toggle="modal" data-target="#product-window" class="quick-view"><i class="far fa-eye"></i></Link>
                                 </div>
                             </div>
                             <div class="pro-content">
-                                <h4><Link :href="route('souvenirs.show',{souvenir: product.id})">{{ product.title }}</Link></h4>
+                                <h4><Link :href="route('product.activities.show',{product : product.id})">{{ product.title }}</Link></h4>
                                 <div class="pro-price-cart">
                                     <div class="pro-home-price">
                                         <span>{{ product.activities.priceA }} €</span>
