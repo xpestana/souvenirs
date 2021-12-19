@@ -22,7 +22,7 @@
                 </tbody>
             </table>
          	<div class="wc-proceed-to-checkout">
-            	<Link class="bg-info" :href="route('checkout.souvenirs')">Checkout</Link>
+            	<Link class="bg-info" :href="route('checkout.souvenirs')">Pagar Ahora</Link>
             </div>
         </div>
     </div>

@@ -111,6 +111,8 @@
                                                     Adultos: {{ product.attributes.adult }}
                                                     <br>
                                                     Niños: {{ product.attributes.children }}
+                                                    <br>
+                                                    Cantidad: {{ product.quantity }}
                                             </span>
                                         </td>
                                         <td class="product-total" v-if="product.attributes.type == 'souvenir'">

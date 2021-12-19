@@ -49,7 +49,8 @@
                                             </td>
                                             <td class="product-quantity"   v-if="product.attributes.type == 'activity'"> 
                                                 Adultos: {{ product.attributes.adult }}<br>
-                                                Niños: {{ product.attributes.children }}
+                                                Niños: {{ product.attributes.children }}<br>
+                                                Cantidad: {{ product.quantity }}
                                             </td>
                                             <td class="product-subtotal"  v-if="product.attributes.type == 'souvenir'">{{ product.quantity * product.price }} €</td>
                                             <td class="product-subtotal"  v-if="product.attributes.type == 'activity'">

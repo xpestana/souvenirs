@@ -15,7 +15,7 @@
                 <div class="col-3">
                     <input type="number" class="form-control mt-1 block w-full" min="0" v-model="form.children">
                 </div>
-                <div align="center" class="col-md-12 mt-4">
+                <div align="center" class="col-md-6 mt-4">
                 	<div class="d-single-info text-lg-center">
                         <BreezeButton id="submit" type="submit" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                             Agregar al carrito
@@ -28,6 +28,11 @@
                         </div>
                     </div>
                 </div>
+                <div align="center" class="col-md-6 mt-4">
+                    <div class="d-single-info text-lg-center">
+                        <BreezeButton type="button" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="reserve">Reservar directo</BreezeButton>
+                    </div>
+                </div>
   			</div>
         </form>
   	</div>
@@ -38,6 +43,7 @@
     import Checkout from '@/Pages/Checkout_activities.vue'
     import BreezeButton from '@/Components/Button.vue'
     import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+    import { Inertia } from '@inertiajs/inertia'
 
 	export default {
         components: {
@@ -72,6 +78,17 @@
                     errorBag: 'submit',
                     preserveScroll: true,
                     forceFormData: true,
+                })
+            },
+            reserve(){
+                this.form.post(route('cart.activity'),{
+                    _token: this.$page.props.csrf_token,
+                    errorBag: 'submit',
+                    preserveScroll: true,
+                    forceFormData: true,
+                    onSuccess: (result) => {
+                        Inertia.visit(route('checkout.souvenirs'), { method: 'get' }, { preserveScroll: true });
+                    }
                 })
             }
     	}

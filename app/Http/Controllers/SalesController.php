@@ -181,16 +181,16 @@ class SalesController extends Controller
     }
     public function sale_admin()
     {
-        $orders = Order::all()->load('shippings.product.images', 'user.hotel');//dd($orders);
-
-        return Inertia::render('Dashboard/Shoppings', compact('orders'));
+        $orders = Order::all()->load('shippings.product.images', 'user.hotel');
+        $total = $orders->sum('total');
+        return Inertia::render('Dashboard/Shoppings', compact('orders', 'total'));
     }
     public function sale_hotel()
     {
         $hotel = hotel::find(auth()->user()->hotel->first()->id);
         $orders = $hotel->user()->wherePivot('manager', false)->first()->orders->load('shippings.product.images');
-
-        return Inertia::render('Dashboard/Shoppings', compact('orders'));
+        $total = $orders->sum('total');
+        return Inertia::render('Dashboard/Shoppings', compact('orders', 'total'));
     }
     public function purchase_show($order){
         $order = Order::find($order)->load('shippings.product.images');
