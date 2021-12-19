@@ -4,12 +4,15 @@
 	<div id="orders" class="tab-pane fade show active">
         <h3>Mis ventas</h3>
         <div class="table-responsive">
-            <table class="table">
+            <table id="orders_table" class="table datatable">
                 <thead>
                     <tr>
                         <th>ID de transaccion</th>
-                        <th>Hotel</th>
-                        <th>Monto</th>
+                        <th>Correo del cliente</th>
+                        <th>Telefono del cliente</th>
+                        <th v-if="$page.props.auth.role == 'Admin'">Hotel</th>
+                        <th v-if="$page.props.auth.role == 'Hotel'">Ganancias</th>
+                        <th v-if="$page.props.auth.role == 'Admin'">Monto</th>
                         <th>Fecha</th>
                         <th></th>
                     </tr>
@@ -17,8 +20,14 @@
                 <tbody>
                     <tr v-for="order in orders" :key="order.id">
                         <td class ="text-orders" style="font-size: 15px;">{{ order.transaction_id }}</td>
-                        <td class ="text-orders" style="font-size: 15px;">{{ order.user.hotel[0].name }}</td>
-                        <td style="font-size: 15px;">{{ order.total/100 }} €</td>
+                        <td class ="text-orders" style="font-size: 15px;"> {{ order.shippings[0].email }}</td>
+                        <td class ="text-orders" style="font-size: 15px;"> {{ order.shippings[0].phone }}</td>
+                        <td class ="text-orders" style="font-size: 15px;" v-if="$page.props.auth.role == 'Admin'">
+                            {{ order.user.hotel[0].name }}
+                        </td>
+                        <td style="font-size: 15px;" v-if="$page.props.auth.role == 'Hotel'">{{ (order.total/100)*0.2 }} €
+                        </td>
+                        <td style="font-size: 15px;" v-if="$page.props.auth.role == 'Admin'">{{ order.total/100 }} €</td>
                         <td style="font-size: 15px;">{{ moment(order.created_at).format('DD/MM/YYYY')}}</td>
                         <td style="font-size: 15px;"><Link class="text-info links-orders" :href="route('purchase.show', {order:order.id})">Ver compra</Link></td>
                     </tr>
@@ -65,7 +74,7 @@
             },
             CloseModal(){
                 this.modal=false;
-            }
+            },
         }
     }
 </script>

@@ -20,9 +20,16 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $hotel = hotel::find(auth()->user()->hotel->first()->id);
-        $url = env('APP_URL');
-        $client = $hotel->user()->wherePivot('manager', false)->first();
+        if (auth()->user()->getRoleNames()->first() == 'Hotel') {
+            $hotel = hotel::find(auth()->user()->hotel->first()->id);
+            $url = env('APP_URL');
+            $client = $hotel->user()->wherePivot('manager', false)->first();
+        }else{
+            $hotel = null;
+            $url = null;
+            $client = null;
+        }
+        
         return Inertia::render('Dashboard/Profile', compact('url', 'client'));
     }
 
