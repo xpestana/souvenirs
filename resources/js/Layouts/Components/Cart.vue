@@ -33,7 +33,7 @@
                             <li>Total <span>{{ total }} €</span></li>
                         </ul>
                         <div class="cart-actions text-center">
-                            <Link class="cart-checkout" :href="route('checkout.souvenirs')">Checkout</Link>
+                            <Link class="cart-checkout" :href="route('checkout.souvenirs')">Pagar Ahora</Link>
                         </div>
                     </li>
                 </ul>
