@@ -36,7 +36,7 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-8"></div>
-            <div align="right" class="col-md-2"><p style="font-size:25px;"><strong>Total</strong></p></div>
+            <div align="center" class="col-md-2"><p style="font-size:25px;"><strong>Total</strong></p></div>
             <div align="center" class="col-md-2" style="font-size: 25px;" v-if="$page.props.auth.role == 'Hotel'">{{ total/100 * 0.2 }} €</div>
             <div align="center" class="col-md-2" style="font-size: 25px;" v-if="$page.props.auth.role == 'Admin'">{{ total/100 }} €</div>
         </div>

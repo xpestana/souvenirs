@@ -17,9 +17,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Cashier::ignoreMigrations();
-        if (env('APP_ENV') === 'production') {
-            URL::forceScheme('https');
-        }
+        
     }
 
     /**
