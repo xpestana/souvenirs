@@ -157,7 +157,7 @@
 
     }
     .pl-155{
-        padding-left: 220px !important;
+        padding-left: 245px !important;
     }
 .search-cart-area > ul > li > a > span{
     top: -2px !important;
