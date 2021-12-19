@@ -15,3 +15,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/app/Http/Kernel.php
+/app/Http/Middleware/HttpsProtocol.php
