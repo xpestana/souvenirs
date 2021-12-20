@@ -73,14 +73,14 @@ class Products extends Model
     }
     public function scopePrice($query, $min, $max) 
     {
-        if ($min) {
+        if ($min != null) {
             $query->where('price','<=',$max)
                   ->where('price','>=',$min);
         }
     }
     public function scopePriceA($query, $min, $max) 
     {
-        if ($min) {
+        if ($min != null) {
            $query->whereHas('activities', function($query) use ($min, $max) {
                 $query->where('priceA','<=',$max)
                     ->where('priceA','>=',$min);

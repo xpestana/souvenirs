@@ -36,13 +36,11 @@ class UtilitiesController extends Controller
     {
         $this->handle_auth($request->h);
         $search = null;
-        if ($request) {
-            $search = $request->search;
-            $min = (isset($request->price[0])) ? $request->price[0] : null;
-            $max = (isset($request->price[1])) ? $request->price[1] : null;
-        }
+        $search = $request->search;
+        $min = (isset($request->price[0])) ? $request->price[0] : null;
+        $max = (isset($request->price[1])) ? $request->price[1] : null;
 
-        //dd($request->all());
+//        dd($max);
         $products = Products::with('images', 'activities')
                             ->where('del',false)
                             ->where('type', 'Activities')
@@ -60,7 +58,6 @@ class UtilitiesController extends Controller
     public function souvenirs(Request $request)
     {
         $this->handle_auth($request->h);
-        //$request->all();
         $search =  null;
         if ($request) {
             $search = $request->search;
