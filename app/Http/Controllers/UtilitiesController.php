@@ -46,7 +46,6 @@ class UtilitiesController extends Controller
                             ->where('type', 'Activities')
                             ->search(trim($request->search))
                             ->priceA($min,$max)
-                            ->inRandomOrder()
                             ->paginate(20);
 
         $max = $products->max('activities.priceA')+($products->max('activities.priceA')*2);
@@ -70,7 +69,6 @@ class UtilitiesController extends Controller
                             ->where('type', 'Souvenirs')
                              ->search(trim($request->search))
                             ->price($min,$max)
-                            ->inRandomOrder()
                             ->paginate(20);
 
         $max = $products->max('price')+($products->max('price')*2);
