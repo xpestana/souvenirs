@@ -98,8 +98,38 @@ class UserSeeder extends Seeder
                 ]
             );
 
+            $userHotelClient = $userClientr->profile()->updateOrCreate([
+                'firstname'  => 'Usuario',
+                'lastname'   => 'Client',
+                'gender'     => 'M',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+
             $userClientr->assignRole('Client');
-            $userClientr->hotel()->attach($hotel->id, ['manager' => false]);
+
+            /**********************************************************/
+            /*Usuario ryder: creados para realizar envios*/
+
+            $userRyder = User::updateOrCreate(
+                ['email' => 'ryder@email.com'],
+                [
+                    'name' => 'User Ryder',
+                    'password' =>  Hash::make('usuario12345'),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]
+            );
+
+            $userRyderProfile = $userRyder->profile()->updateOrCreate([
+                'firstname'  => 'Usuario',
+                'lastname'   => 'Ryder',
+                'gender'     => 'M',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+
+            $userRyder->assignRole('Ryder');
 
     }
 }

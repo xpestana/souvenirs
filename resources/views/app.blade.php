@@ -1,11 +1,22 @@
+@include('inc.function')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
-        <title inertia>{{ config('app.name') }}</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ setTitle($page_name) }}</title>
+    <link rel="icon" type="image/x-icon" href="{{asset('storage/img/favicon.ico')}}"/>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+
+    <!-- Styles -->
+    @include('inc.styles')  
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">

@@ -185,7 +185,7 @@ Route::get('/shoppings/show/{order}', [SalesController::class, 'purchase_show'])
 /*
     Dashboard Común
 */
-Route::middleware(['auth', 'verified', 'role:Admin|Hotel'])->prefix('tablero')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     /*
         Profile
      */

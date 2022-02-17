@@ -52,6 +52,11 @@
                                     Gestión de administradores
                                 </a>
                             </li>
+                            <li v-if="$page.props.auth.role == 'Admin'">
+                                <a :class="(route().current('admin.index') === true || route().current('admin.create') === true || route().current('admin.show') === true || route().current('admin.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="ryders">
+                                    Gestión de Ryders
+                                </a>
+                            </li>
                            <!-- <li v-if="$page.props.auth.role == 'Admin'">
                                 <a :class="(route().current('categories.index') === true || route().current('categories.create') === true || route().current('categories.show') === true || route().current('categories.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="categories">
                                     Gestión de categorías
@@ -154,8 +159,8 @@ export default {
                     preserveScroll: true
                 })
         },
-        categories(){
-                this.$inertia.get(route('categories.index'),{}, {
+        ryders(){
+                this.$inertia.get(route('ryders.index'),{}, {
                     preserveScroll: true
                 })
         },
