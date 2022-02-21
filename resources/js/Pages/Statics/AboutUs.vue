@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <img src="/vendor_asset/img/team/Quienes-somos.jpg" />
+                    <img src="/vendor_asset/img/recurso_3.png" />
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="skill-area white-bg ptb-80 row justify-content-center">
+    <div class="skill-area white-bg ptb-80 row justify-content-center numbers">
         <div class="col-md-7">
             <div class="row justify-content-center">
                 <div align="center" class="col-md-12 mb-20">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div align="center" class="col-md-5 mb-3">
-                    <img src="/vendor_asset/img/team/Quienes-somos.jpg" width="50" height="50" class=""/>
+                    <img src="/vendor_asset/img/recurso_4.png" width="70" height="70" class=""/>
                     <p class="my-10">El viajero se encontrará un pequeño marco en su
                         habitación o apartamento con un folleto informativo
                     y un código QR.</p>
@@ -61,13 +61,13 @@
                 <div align="center" class="col-md-2 mb-3">
                 </div>
                 <div align="center" class="col-md-5 mb-3">
-                    <img src="/vendor_asset/img/team/Quienes-somos.jpg" width="50" height="50" class=""/>
+                    <img src="/vendor_asset/img/recurso_5.png" width="70" height="70" class=""/>
                     <p class="my-10">Al escanear el código QR, el inquilino será dirigido
                         a nuestra plataforma, donde podrá hacer reservas, sacar
                     entradas o comprar un souvenir.</p>
                 </div>
                 <div align="center" class="col-md-6 mb-3">
-                    <img src="/vendor_asset/img/team/Quienes-somos.jpg" width="50" height="50" class=""/>
+                    <img src="/vendor_asset/img/recurso_6.png" width="70" height="70" class=""/>
                     <p class="my-10">¡Listo! Si decide hacer una
                         reserva o adquirir una entrada
                         para una actividad o un monumento, recibirá un correo de
@@ -139,6 +139,13 @@
         background-color: #6cb2eb !important;
     }
     .bg-sec{
-        background-color: rgb(49 81 107 / 80%) !important;
+        background-image: url("/vendor_asset/img/recurso_1.png");
+        /*background-url: rgb(49 81 107 / 80%) !important;*/
+    }
+    .numbers{
+        background-image: url("/vendor_asset/img/recurso_2.png");
+        background-repeat: no-repeat;
+        background-size: 25%;
+        background-position: 85% 100%;
     }
 </style>
