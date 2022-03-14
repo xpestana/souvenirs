@@ -20,6 +20,10 @@ use App\Http\Controllers\Ryders\ShippingController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
+
+/*Controladores COLLABORATORS*/
+use App\Http\Controllers\Collaborator\CollaboratorController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -252,4 +256,12 @@ Route::middleware(['auth', 'verified', 'role:Ryder'])->prefix('tablero')->group(
     Route::get('/envios/', [ShippingController::class, 'my'])->name('shipping.my');
     Route::get('/envios/finish/{order}', [ShippingController::class, 'finish'])->name('shipping.finish');
 });
+/*Colaboradores*/
+Route::post('/register/collaborator', [CollaboratorController::class, 'register'])->name('register.collaborator');
+
+
+
+/*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
+Route::get('/collaborators/form', [CollaboratorController::class, 'vista']);
+
 require __DIR__.'/auth.php';
