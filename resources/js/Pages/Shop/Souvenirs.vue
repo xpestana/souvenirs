@@ -155,13 +155,15 @@
             products: Object,
             max: Number,
             search: String,
+            min_r:Number,
+            max_r:Number,
         },
         data(){
             return {
                 max: this.max,
                 form: this.$inertia.form({
                     search: this.search,
-                    price: [0,100],
+                    price: [this.min_r,this.max_r],
                 }),
             }
         },

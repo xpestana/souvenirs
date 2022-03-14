@@ -151,6 +151,8 @@
         props: {
             products: Object,
             max: Number,
+            min_r:Number,
+            max_r:Number,
             search: String,
         },
         created () {
@@ -162,7 +164,7 @@
                 max: this.max,
                 form: this.$inertia.form({
                     search: this.search,
-                    price: [0,100],
+                    price: [this.min_r,this.max_r],
                 }),
             }
         },

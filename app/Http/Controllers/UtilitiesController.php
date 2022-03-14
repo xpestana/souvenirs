@@ -37,20 +37,24 @@ class UtilitiesController extends Controller
         $this->handle_auth($request->h);
         $search = null;
         $search = $request->search;
-        $min = (isset($request->price[0])) ? $request->price[0] : null;
-        $max = (isset($request->price[1])) ? $request->price[1] : null;
+        $min_r = (isset($request->price[0])) ? $request->price[0] : 0;
+        $max_r = (isset($request->price[1])) ? $request->price[1] : 100;
 
 //        dd($max);
         $products = Products::with('images', 'activities')
                             ->where('del',false)
                             ->where('type', 'Activities')
                             ->search(trim($request->search))
-                            ->priceA($min,$max)
+                            ->priceA($min_r,$max_r)
                             ->paginate(20);
 
-        $max = $products->max('activities.priceA')+($products->max('activities.priceA')*2);
+        $max = Products::with('images', 'activities')
+                            ->where('del',false)
+                            ->where('type', 'Activities')->get()
+                            ->max('activities.priceA');
+       
 
-        return Inertia::render('Shop/Tours', compact('products', 'max', 'search'));
+        return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'min_r', 'max_r'));
     }
 
 
@@ -60,20 +64,23 @@ class UtilitiesController extends Controller
         $search =  null;
         if ($request) {
             $search = $request->search;
-            $min = (isset($request->price[0])) ? $request->price[0] : null;
-            $max = (isset($request->price[1])) ? $request->price[1] : null;
+            $min_r = (isset($request->price[0])) ? $request->price[0] : 0;
+            $max_r = (isset($request->price[1])) ? $request->price[1] : 100;
         }
 
         $products = Products::with('images')
                             ->where('del',false)
                             ->where('type', 'Souvenirs')
                              ->search(trim($request->search))
-                            ->price($min,$max)
+                            ->price($min_r,$max_r)
                             ->paginate(20);
 
-        $max = $products->max('price')+($products->max('price')*2);
+        $max = Products::with('images', 'activities')
+                            ->where('del',false)
+                            ->where('type', 'Souvenirs')->get()
+                            ->max('price');
 
-        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search'));
+        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search', 'min_r', 'max_r'));
     }
     public function about(Request $request)
     {
