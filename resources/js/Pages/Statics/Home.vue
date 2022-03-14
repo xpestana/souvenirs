@@ -64,8 +64,8 @@
         margin: auto !important;
     }
     .blog-btn > a{
-        padding: 13px 50px !important;
-        font-size: 23px !important;
+        padding: 20px 60px !important;
+        font-size: 25px !important;
     }
     .welcome{
         background-position: center center;

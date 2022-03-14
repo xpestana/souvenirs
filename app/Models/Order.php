@@ -13,6 +13,7 @@ class Order extends Model
         'user_id',
         'transaction_id',
         'total',
+        'ryder_id',
     ];
 
     /**
@@ -25,5 +26,9 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function ryder()
+    {
+        return $this->belongsTo(Ryder::class);
     }
 }

@@ -44,6 +44,7 @@ class SalesController extends Controller
             'address' => 'required',
             'city' => 'required',
             'phone' => 'required',
+            'hab' => 'required',
         ]);
 
         if (auth()->user()) {
@@ -81,6 +82,7 @@ class SalesController extends Controller
                     'state' => $request->state,
                     'zip_code' => $request->zip_code,
                     'phone' => $request->phone,
+                    'hab' => $request->hab,
                     'amount' => $product->price,
                     ]);
                 }else{
@@ -96,6 +98,7 @@ class SalesController extends Controller
                     'state' => $request->state,
                     'zip_code' => $request->zip_code,
                     'phone' => $request->phone,
+                    'hab' => $request->hab,
                     'date_init' => $product->attributes->date,
                     'adult' => $product->attributes->adult,
                     'children' => $product->attributes->children,
@@ -123,6 +126,7 @@ class SalesController extends Controller
             'address' => 'required',
             'city' => 'required',
             'phone' => 'required',
+            'hab' => 'required',
         ]);
         
         if (auth()->user()) {
@@ -162,6 +166,7 @@ class SalesController extends Controller
                     'days' => $request->days,
                     'adult' => $request->adult,
                     'children' => $request->children,
+                    'hab' => $request->hab,
                 ]);
 
             foreach ([$request->email, 'xpestana4@gmail.com'] as $recipient) {

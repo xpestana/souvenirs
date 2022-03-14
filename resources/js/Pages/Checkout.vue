@@ -68,6 +68,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="checkout-form-list mb-30">
+                                    <label>Nro de habitación <span class="required">*</span></label>
+                                    <input type="text" placeholder="Nro de habitación" v-model="form.hab"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="checkout-form-list mb-30">
                                     <label>Código Postal <span class="required">*</span></label>
                                     <input type="text" placeholder="Código postal" v-model="form.zip_code"/>
                                 </div>
@@ -211,7 +217,6 @@
                         '<i class="fa fa-thumbs-up"></i> Aceptar!',
                     confirmButtonAriaLabel: 'Aceptar!',
                 })
-            console.log(this.hotel);
             var cart = this.$page.props.cart;
             var total = 0;
             var total_souvenirs = 0;
@@ -255,7 +260,8 @@
                     zip_code: null,
                     phone: null,
                     country: null,
-                    amount: null
+                    amount: null,
+                    hab: null
                 },
                 paymentProcessing: false
             }

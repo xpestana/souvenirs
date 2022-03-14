@@ -52,8 +52,8 @@ class AdminController extends Controller
         ]);
         $id = mt_Rand(1000000, 9999999);
         $password = Str::lower(Str::random(8));
-        
-        $user = User::create([
+        try {
+             $user = User::create([
                 'name' => $request->email,
                 'email' => $request->email,
                 'password' => Hash::make($password),
@@ -63,7 +63,11 @@ class AdminController extends Controller
                 'firstname'  => $request->firstname,
                 'lastname'   => $request->lastname,
                 'gender'     => $request->gender,
-            ]);
+            ]); 
+        } catch (Exception $e) {
+            dd($e);
+        }
+       
         Mail::to($user->email)->send(new WelcomeReceived($user, $password));
             return Redirect::route('admin.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
     }

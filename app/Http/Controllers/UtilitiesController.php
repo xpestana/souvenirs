@@ -28,7 +28,7 @@ class UtilitiesController extends Controller
         return 0;        
     }
     public function home(Request $request)
-    {
+    {   
         $this->handle_auth($request->h);
         return Inertia::render('Statics/Home');
     }

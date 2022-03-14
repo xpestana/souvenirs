@@ -30,4 +30,13 @@ class profile extends Model
     {
         return $this->belongsTo(User::class);
     }
+    /* Método que obtiene el perfil del cliente y del operador
+  *
+  * @author  Xavier Pestana 
+  * @return object 
+  */
+    public function ryder()
+  {
+    return $this->hasOne(Ryder::class);
+  }
 }

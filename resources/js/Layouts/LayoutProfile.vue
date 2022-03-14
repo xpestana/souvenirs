@@ -53,7 +53,7 @@
                                 </a>
                             </li>
                             <li v-if="$page.props.auth.role == 'Admin'">
-                                <a :class="(route().current('admin.index') === true || route().current('admin.create') === true || route().current('admin.show') === true || route().current('admin.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="ryders">
+                                <a :class="(route().current('ryders.index') === true || route().current('ryders.create') === true || route().current('ryders.show') === true || route().current('ryders.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="ryders">
                                     Gestión de Ryders
                                 </a>
                             </li>
@@ -65,6 +65,21 @@
                             <li v-if="$page.props.auth.role == 'Admin'">
                                 <a :class="(route().current('souvenirs.index') === true || route().current('souvenirs.create') === true || route().current('souvenirs.show') === true || route().current('souvenirs.edit') === true)? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="souvenirs">
                                     Gestión de Souvenirs
+                                </a>
+                            </li>
+                            <li v-if="$page.props.auth.role == 'Ryder'">
+                                <a :class="(route().current('shipping.pending') === true )? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="pending">
+                                    Envios pendientes por tomar
+                                </a>
+                            </li>
+                            <li v-if="$page.props.auth.role == 'Ryder'">
+                                <a :class="(route().current('shipping.my') === true )? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="my">
+                                    Mis envíos
+                                </a>
+                            </li>
+                            <li v-if="$page.props.auth.role == 'Ryder'">
+                                <a :class="(route().current('shipping.my') === true )? 'active nav-link' : 'nav-link text-info'" data-toggle="tab" href="javascript:void(0)" @click.prevent="my">
+                                    Ordenes enviadas
                                 </a>
                             </li>
                             <li v-if="$page.props.auth.role == 'Admin'">
@@ -146,6 +161,16 @@ export default {
         },
         souvenirs(){
                 this.$inertia.get(route('souvenirs.index'),{}, {
+                    preserveScroll: true
+                })
+        },
+        pending(){
+                this.$inertia.get(route('shipping.pending'),{}, {
+                    preserveScroll: true
+                })
+        },
+        my(){
+                this.$inertia.get(route('shipping.my'),{}, {
                     preserveScroll: true
                 })
         },

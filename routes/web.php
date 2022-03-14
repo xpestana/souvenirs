@@ -15,7 +15,10 @@ use App\Http\Controllers\Products\SouvenirsController;
 use App\Http\Controllers\Products\ActivitiesController;
 use App\Http\Controllers\Products\CategoriesController;
 use App\Http\Controllers\Products\CartController;
+use App\Http\Controllers\Admin\RyderController;
+use App\Http\Controllers\Ryders\ShippingController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -179,6 +182,25 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
         Ventas
      */
     Route::get('/compras/admin', [SalesController::class, 'sale_admin'])->name('purchases.admin');
+
+    /*
+        Ryders
+     */
+    
+    Route::resource(
+        'ryders',
+        RyderController::class, [
+            'names' => [
+                'index'     => 'ryders.index',
+                'create'    => 'ryders.create',
+                'edit'      => 'ryders.edit',
+                'show'      => 'ryders.show',
+                'store'     => 'ryders.store',
+                'update'     => 'ryders.update',
+                'destroy'   => 'ryders.destroy',
+            ]
+        ],
+    );
 });
 
 Route::get('/shoppings/show/{order}', [SalesController::class, 'purchase_show'])->name('purchase.show');
@@ -207,5 +229,27 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     Route::get('/download/qr', [UtilitiesController::class, 'qr'])->name('qr.download');
     Route::get('/compras/hotel', [SalesController::class, 'sale_hotel'])->name('purchases.hotel');
 });
-
+Route::middleware(['auth', 'verified', 'role:Ryder'])->prefix('tablero')->group(function () {
+    /*
+        Ryders
+     */
+    Route::resource(
+        'shippings',
+        RyderController::class, [
+            'names' => [
+                'index'     => 'shippings.index',
+                'create'    => 'shippings.create',
+                'edit'      => 'shippings.edit',
+                'show'      => 'shippings.show',
+                'store'     => 'shippings.store',
+                'update'    => 'shippings.update',
+                'destroy'   => 'shippings.destroy',
+            ],
+        ],
+    ); 
+    Route::get('/envios/pendientes', [ShippingController::class, 'pending'])->name('shipping.pending');
+    Route::get('/tomar/envio/{order}', [ShippingController::class, 'take'])->name('shipping.take');
+    Route::get('/envios/', [ShippingController::class, 'my'])->name('shipping.my');
+    Route::get('/envios/finish/{order}', [ShippingController::class, 'finish'])->name('shipping.finish');
+});
 require __DIR__.'/auth.php';

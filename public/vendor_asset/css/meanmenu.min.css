@@ -9,9 +9,7 @@
 
 @font-face {
     font-family: 'Futur';
-    src: url('/vendor_asset/fonts/Futura Medium Italic font.ttf'),
-         url('/vendor_asset/fonts/futura medium bt.ttf'),
-         url('/vendor_asset/fonts/futura medium condensed bt.ttf');
+    src: url('/vendor_asset/fonts/futura medium bt.ttf');
     font-weight: normal;
     font-style: normal;
 }

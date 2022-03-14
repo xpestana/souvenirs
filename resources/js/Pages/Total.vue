@@ -5,7 +5,7 @@
             <br />
             <table class="float-md-right">
             	<tbody>
-                	<tr class="cart-subtotal">
+                	<tr class="cart-subtotal" hidden>
                     	<th>Sub-total</th>
                         <td><span class="amount">{{ sub_total }} €</span></td>
                     </tr>

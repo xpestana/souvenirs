@@ -37,7 +37,7 @@
                 <!-- Product Categorie List Start -->
                 <div class="col-lg-9 col-md-8">
                     <!-- Grid & List View Start -->
-                    <div class="grid-list-top border-default universal-padding d-lg-flex justify-content-md-between align-items-center mb-30">
+                    <div class="grid-list-top border-default universal-padding d-lg-flex justify-content-md-center align-items-center mb-30">
                         <div class="grid-list-view d-flex align-items-center  mb-sm-15">
                         </div>
                         <!-- Toolbar Short Area Start -->

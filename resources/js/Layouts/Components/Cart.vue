@@ -28,7 +28,7 @@
                     </template>
                     <li class="cart-footer">
                         <ul class="price-content">
-                            <li>Sub-total <span>{{ sub_total }} €</span></li>
+                            <li hidden>Sub-total <span>{{ sub_total }} €</span></li>
                             <li v-if="total_souvenirs<40  && total_souvenirs > 0">Envío <span>5 €</span></li>
                             <li>Total <span>{{ total }} €</span></li>
                         </ul>

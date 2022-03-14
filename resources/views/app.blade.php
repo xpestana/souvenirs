@@ -1,4 +1,3 @@
-@include('inc.function')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -9,14 +8,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ setTitle($page_name) }}</title>
+    <title>Hicity</title>
     <link rel="icon" type="image/x-icon" href="{{asset('storage/img/favicon.ico')}}"/>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
     <!-- Styles -->
-    @include('inc.styles')  
+    
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
