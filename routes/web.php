@@ -259,9 +259,13 @@ Route::middleware(['auth', 'verified', 'role:Ryder'])->prefix('tablero')->group(
 /*Colaboradores*/
 Route::post('/register/collaborator', [CollaboratorController::class, 'register'])->name('register.collaborator');
 
+Route::get('/colaborador/inicio', function(){
+    return Inertia::render('Collaborator/Home');
+})->name('collaborator.home');
+
+Route::get('/colaborador/registrarse', [CollaboratorController::class, 'registerForm'])->name('collaborator.register');  
 
 
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
-Route::get('/collaborators/form', [CollaboratorController::class, 'vista']);
 
 require __DIR__.'/auth.php';

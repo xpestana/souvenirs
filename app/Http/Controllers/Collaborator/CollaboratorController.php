@@ -22,9 +22,9 @@ use Image;
 class CollaboratorController extends Controller
 {
 
-    public function vista()
+    public function registerForm()
     {
-        return Inertia::render('Test');
+        return Inertia::render('Collaborator/RegisterForm');
     }
     /**
      * Display a listing of the resource.
