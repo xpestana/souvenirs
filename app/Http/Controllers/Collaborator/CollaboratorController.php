@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use App\Mail\WelcomeReceived;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,8 +23,17 @@ use Image;
 
 class CollaboratorController extends Controller
 {
-
-    public function registerForm()
+    public function index()
+    {
+        /*Redirección si no tiene perfil*/
+        if (auth()->user()->profile == null) {
+            return Redirect::route('collaborator.data');
+        }
+        /*******************************/
+        
+        return Inertia::render('Collaborator/Dashboard/Index');
+    }
+    public function create()
     {
         return Inertia::render('Collaborator/RegisterForm');
     }
@@ -31,7 +42,7 @@ class CollaboratorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users|confirmed',
@@ -50,7 +61,41 @@ class CollaboratorController extends Controller
 
         Auth::login($user);
 
-        return back()->with(['id'=>$user->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
-       // return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function data()
+    {
+        return Inertia::render('Collaborator/Data');
+    }
+
+    public function register_data(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'gestor' => ['required','string', Rule::in([1, 2])],
+            'razon' => 'required|string',
+            'nif' => 'required|string',
+            'id' => 'required|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'address' => 'required|string',
+        ]);
+
+        $user = profile::create([
+            'user_id' => auth()->user()->id,
+            'firstname' => $request->name,
+            'phone' => $request->phone,
+            'gestor' => $request->gestor,
+            'razon' => $request->razon,
+            'nif' => $request->nif,
+            'identify' => $request->identify,
+            'city' => $request->city,
+            'cp' => $request->cp,
+            'address' => $request->address,
+        ]);
+
+        return Redirect::route('collaborator.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
     }
 }

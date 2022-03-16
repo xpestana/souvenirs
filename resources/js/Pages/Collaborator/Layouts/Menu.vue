@@ -1,0 +1,107 @@
+<template>
+    <!-- Header Menu & Cart Area Start Here -->
+    <div class="col-xl-7 col-lg-6 d-none d-lg-block ml-auto">
+        <div class="maain-menu-area maain-menu-area-three  position-relative pl-155">
+            <!-- Primary Menu Start -->
+            <div class="primary-menu">
+                <nav>
+                    <ul class="primary-menu-list d-flex">
+                        <li><a href="javascript:void(0)"><i class="fas fa-user iconNav"></i> Mis alojamientos</a></li>
+                        <li><a href="javascript:void(0)"><i class="fas fa-wrench iconNav"></i> Actividades</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Primary Menu End -->
+        </div>
+    </div>
+
+</template>
+<script>
+    import { Link } from '@inertiajs/inertia-vue3';
+    import Cart from '@/Layouts/Components/Cart.vue' 
+
+    export default{
+        components: {
+            Link,
+            Cart,
+        },
+        created(){
+        },
+        methods: {
+            logout(){
+                this.$inertia.post(route('logout'), {
+                    _token: this.$page.props.csrf_token,
+                })
+            },
+        }
+    }
+</script>
+<style scope>
+    .lang{
+        background-color: #000;
+        color: #fff !important;
+        border-radius: 100%;
+        padding: 5px;
+        font-size: 18px;
+    }
+    .iconNav{
+        color: #6fb2c6;
+        font-size: 21px !important;
+        margin-right: 10px;
+    }   
+    #cart-area{
+        width: 180px !important;
+        padding: 10px !important;
+    }
+    .search-cart-area > ul > li:first-child{
+        padding: 43px 0 0px 0px;
+    }
+    .search-cart-area > ul > li.search-mrg{
+        padding: 43px 0 0px 20px;
+    }
+    .search-cart-area > ul > li{
+        padding: 43px 0 0px 35px;
+    }
+    .search-cart-area > ul > li ul.currency-selector{
+        width: 180px;
+    }
+    .primary-menu-list > li > a{
+        line-height:  110px;
+    }
+    @media (max-width: 767px){
+        .lg{
+            display: none !important;
+        }
+        .icon-login{
+            display: none !important;
+        }
+        .search-cart-area > ul > li > a > span{
+            font-size: 11px;
+            height: 16px;
+            line-height: 17px;
+            right: -16px;
+            top: 3px;
+            width: 17px;
+        }
+        .search-cart-area > ul > li > i.header-search{
+            font-size: 28px;
+        }
+        .search-cart-area > ul > li > a i.header-cart{
+            font-size: 28px;
+        }
+        .search-cart-area > ul > li{
+            padding: 43px 0 0px 15px;
+        }
+
+    }
+    .pl-155{
+        padding-left: 245px !important;
+    }
+.search-cart-area > ul > li > a > span{
+    top: -2px !important;
+    right: -4px !important;
+}
+[class^="icon-"]:before, [class*=" icon-"]:before{
+    font-size: 120% !important;
+}
+</style>

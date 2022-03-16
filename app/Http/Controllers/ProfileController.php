@@ -20,6 +20,12 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        /*Redirección si no tiene perfil*/
+        if (auth()->user()->profile == null) {
+            return Redirect::route('collaborator.data');
+        }
+        /*******************************/
+
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
             $hotel = hotel::find(auth()->user()->hotel->first()->id);
             $url = env('APP_URL');

@@ -18,6 +18,14 @@ class profile extends Model
         'firstname',
         'lastname',
         'gender',
+        'phone',
+        'gestor',
+        'razon',
+        'nif',
+        'identify',
+        'city',
+        'cp',
+        'address',
     ];
 
     /**

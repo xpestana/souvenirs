@@ -256,16 +256,27 @@ Route::middleware(['auth', 'verified', 'role:Ryder'])->prefix('tablero')->group(
     Route::get('/envios/', [ShippingController::class, 'my'])->name('shipping.my');
     Route::get('/envios/finish/{order}', [ShippingController::class, 'finish'])->name('shipping.finish');
 });
-/*Colaboradores*/
-Route::post('/register/collaborator', [CollaboratorController::class, 'register'])->name('register.collaborator');
+/******************Colaboradores*******************/
 
-Route::get('/colaborador/inicio', function(){
+/*Static Page*/
+Route::get('/colaboradores', function(){
     return Inertia::render('Collaborator/Home');
 })->name('collaborator.home');
 
-Route::get('/colaborador/registrarse', [CollaboratorController::class, 'registerForm'])->name('collaborator.register');  
+/*Auth*/
 
+Route::get('/colaboradores/registro', [CollaboratorController::class, 'create'])->name('collaborator.register');  
+Route::post('/register/collaborator', [CollaboratorController::class, 'store'])->name('register.collaborator');
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('registro/datos', [CollaboratorController::class, 'data'])->name('collaborator.data');  
+    Route::post('register/data', [CollaboratorController::class, 'register_data'])->name('collaborator.register.data');
+});
+/*Dashboard*/
+Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
+    
+    Route::get('/colaboradores', [CollaboratorController::class, 'index'])->name('collaborator.index');  
+});
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 
 require __DIR__.'/auth.php';
