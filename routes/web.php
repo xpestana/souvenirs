@@ -275,7 +275,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 /*Dashboard*/
 Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     
-    Route::get('/colaboradores', [CollaboratorController::class, 'index'])->name('collaborator.index');  
+    Route::get('/alojamientos', [CollaboratorController::class, 'index'])->name('collaborator.index');  
+    Route::get('/alojamientos/crear', [CollaboratorController::class, 'create_hab'])->name('collaborator.create.hab');  
+    Route::post('/alojamientos/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');  
+    Route::get('/alojamientos/ventas', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
 });
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 

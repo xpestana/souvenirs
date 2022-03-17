@@ -31,7 +31,8 @@ class CollaboratorController extends Controller
         }
         /*******************************/
         
-        return Inertia::render('Collaborator/Dashboard/Index');
+        $hotels = auth()->user()->hotel;
+        return Inertia::render('Collaborator/Dashboard/Index', compact('hotels'));
     }
     public function create()
     {
@@ -95,7 +96,137 @@ class CollaboratorController extends Controller
             'cp' => $request->cp,
             'address' => $request->address,
         ]);
+        auth()->user()->assignRole('Hotel');
 
         return Redirect::route('collaborator.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
+    }
+    public function create_hab()
+    {
+        return Inertia::render('Collaborator/Dashboard/Lodging/Create');
+    }
+    /**
+     * Validaciones.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function valid($file)
+    {
+        if ($file) {
+            /*** Extraccion de la extension ***/
+            $nameFile = $file->getClientOriginalName();
+            $extension = pathinfo($nameFile, PATHINFO_EXTENSION);
+            $id = mt_Rand(1000000, 9999999);
+
+            $images=array("JPG", "JPEG", "PNG");
+            if (!in_array(strtoupper($extension), $images)) {
+                return ['id' => $id, 'code' => 404, 'msg' => 'Formato de imagen incorrecto', 'status' => 'error'];
+            }
+            
+            $response = [
+                'id' => $id,
+                'code' => 200,
+                'msg' => 'Acepted'
+            ];
+            return $response;
+        }
+    }
+    /**
+     * Cambias nombres de los archivos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function FileName($file)
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $images=array("jpg", "jpeg", "png");
+        
+        $pin = mt_Rand(1000000, 9999999)
+               . mt_Rand(1000000, 9999999)
+               . $characters[Rand(0, strlen($characters) - 1)];
+        
+        $nameFile = $file->getClientOriginalName();
+
+        $extension = pathinfo($nameFile, PATHINFO_EXTENSION);
+        $fileName  = 'file_'.$pin.'.'.$extension;
+
+        $response = [
+            'extension' => $extension,
+            'fileName' => $fileName,
+        ];
+
+        return $response;
+    }
+    public function store_hab(Request $request)
+    {
+        $request->validate([
+            'calle' => 'required|string',
+            'planta' => 'required|string',
+            'address' => 'nullable|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'code' => 'nullable|string',
+            'url' => 'nullable|url',
+            'area' => 'nullable|string',
+        ]);
+
+        $image = $request->image;
+        if ($image) {
+            $msg =$this->valid($image);
+
+            if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
+        }
+        
+
+        try {
+            $id = mt_Rand(1000000, 9999999);
+            
+            $user = auth()->user();
+
+            $Path = public_path('storage/hotel/');
+            $pathName = '/';
+
+            if (!file_exists($Path)) {
+                mkdir($Path, 777, true);
+            }
+
+            if ($image) {
+                $nameFile =$this->FileName($image); //nombre de archivo original
+                $imgFileOriginal = Image::make($image->getRealPath());
+                $imgFileOriginal->save($Path.$nameFile['fileName']);
+                $name_file = $nameFile['fileName'];
+            }else{
+                $name_file ="default.jpeg";
+            }
+            $hotel = hotel::create([
+                'calle'       => $request->calle,
+                'type'        => (auth()->user()->profile->gestor == 1) ? "hotel" : "apartament",
+                'address'     => $request->address,
+                'zone'        => $request->city,
+                'cp'          => $request->cp,
+                'code'        => $request->code,
+                'url'         => $request->url,
+                'area'        => $request->area,
+                'image'       => $pathName.$name_file,
+            ]);
+
+            $clientUser = User::create([
+                'name' => auth()->user()->email,
+                'email' => auth()->user()->email.$hotel->id,
+                'password' => Hash::make("usuario123456"),
+            ]);
+            
+            $user->hotel()->attach($hotel->id, ['manager' => true]);
+            
+            $clientUser->assignRole('Client');
+            $clientUser->hotel()->attach($hotel->id, ['manager' => false]);
+
+        return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
+        } catch (Exception $e) {
+            
+        }
     }
 }

@@ -20,6 +20,13 @@ class hotel extends Model
         'address',
         'zone',
         'image',
+        'calle',
+        'planta',
+        'cp',
+        'code',
+        'url',
+        'area',
+
     ];
 
     /**

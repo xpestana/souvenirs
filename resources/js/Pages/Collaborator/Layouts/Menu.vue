@@ -6,7 +6,7 @@
             <div class="primary-menu">
                 <nav>
                     <ul class="primary-menu-list d-flex">
-                        <li><a href="javascript:void(0)"><i class="fas fa-user iconNav"></i> Mis alojamientos</a></li>
+                        <li><Link :href="route('collaborator.index')"><i class="fas fa-user iconNav"></i> Mis alojamientos</Link></li>
                         <li><a href="javascript:void(0)"><i class="fas fa-wrench iconNav"></i> Actividades</a></li>
                     </ul>
                 </nav>
@@ -18,14 +18,10 @@
 </template>
 <script>
     import { Link } from '@inertiajs/inertia-vue3';
-    import Cart from '@/Layouts/Components/Cart.vue' 
 
     export default{
         components: {
             Link,
-            Cart,
-        },
-        created(){
         },
         methods: {
             logout(){
