@@ -1,11 +1,11 @@
 <template>
     <!-- Header Menu & Cart Area Start Here -->
-    <div class="col-xl-7 col-lg-6 d-none d-lg-block ml-auto">
-        <div class="maain-menu-area maain-menu-area-three  position-relative pl-155">
+    <div class="col-lg-8 d-none d-lg-block ml-auto">
+        <div class="maain-menu-area maain-menu-area-three  position-relative">
             <!-- Primary Menu Start -->
             <div class="primary-menu">
                 <nav>
-                    <ul class="primary-menu-list d-flex">
+                    <ul class="primary-menu-list d-flex justify-content-end pr-5">
                         <li><Link :href="route('collaborator.index')"><i class="fas fa-user iconNav"></i> Mis alojamientos</Link></li>
                         <li><a href="javascript:void(0)"><i class="fas fa-wrench iconNav"></i> Actividades</a></li>
                     </ul>
@@ -89,9 +89,6 @@
             padding: 43px 0 0px 15px;
         }
 
-    }
-    .pl-155{
-        padding-left: 245px !important;
     }
 .search-cart-area > ul > li > a > span{
     top: -2px !important;

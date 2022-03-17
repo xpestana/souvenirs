@@ -4,15 +4,15 @@
             <div class="coustom-container">
                 <div class="main-header">
                     <div class="row">
-                        <div class="col-xl-2 col-lg-3 col-md-5 col-sm-6 col-5">
+                        <div class="col-lg-3 d-none d-lg-block">
                             <div class="logo">
                                 <Link :href="route('collaborator.index')"><img id="logo-menu" src="/vendor_asset/img/logo/logo.png" alt="logo"></Link>
                             </div>
                         </div>
                         <!-- Logo End Here -->
                         <Menu />
-                    </div>
-                    <mobile-menu /> 
+                        <mobile-menu />
+                    </div> 
                 </div>
             </div>
             <!-- Container End -->
@@ -60,8 +60,13 @@
         display: none !important;
     }
     @media (max-width: 767px){
-     .sm{
-        display: inherit !important;
-    }   
+        .sm{
+            display: inherit !important;
+        }   
+    }
+    @media (min-width:992px){
+        header{
+            box-shadow:0px 0px 5px 0px rgb(0 0 0 / 46%);
+        }
     }
 </style>

@@ -280,6 +280,9 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     Route::post('/alojamientos/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');  
     Route::get('/alojamientos/ventas', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
 });
-/*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 
+/*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
+Route::get('/test',function(){
+    return Inertia::render('Collaborator/Dashboard/Lodging/Details');
+});
 require __DIR__.'/auth.php';

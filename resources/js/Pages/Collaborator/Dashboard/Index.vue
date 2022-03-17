@@ -1,7 +1,7 @@
 <template>
  <Head title="Alojamientos"/>
  <div class="container">
-    <div class="caja">
+    <div class="main">
         <div class="row mt-4">
             <div class="col-12 text-center">
                 <h1>¿Necesitas ayuda?</h1>
@@ -10,13 +10,13 @@
             </div>
             <div class="col-12 text-center">
                 <template v-if="hotels.length == 0">
-                    <a href="javascript:void(0)" class="btn btn-outline-info boton" @click.prevent="lodging"> <i class="fas fa-plus"></i>Añadir alojamiento</a>
+                    <a href="javascript:void(0)" class="btn btn-outline-info boton-inicio" @click.prevent="lodging"> <i class="fas fa-plus"></i>Añadir alojamiento</a>
                 </template>
                 <template v-else>
                     <section id="cabecera">
                         <div class="container">
                             <div class="row caja-info">
-                                <div class="col info-boton">
+                                <div class="col-12 col-md-9 info-boton">
                                     <Link type="button" class="btn btn-outline-info boton" as="button"><i class="fas fa-plus"></i>Añadir alojamiento</Link>
                                     <h5 class="text-info p-3">Ventas totales<i class="fas fa-angle-right p-1"></i></h5>
                                 </div>
@@ -31,13 +31,13 @@
 
                     <section id="alojamientos">
                         <div class="container">
-                            <div class="row tarjeta mt-2 p-3">
+                            <div v-for="hotel in hotels" :key="hotel.id" class="row tarjeta mt-2 p-3">
                                 <div class="col-12 col-md-2 p-0">
-                                    <img class="img-foto w-100" src="/vendor_asset/img/team/Quienes-somos.jpg" >
+                                    <img class="img-foto w-100" :src="'/storage/hotel'+hotel.image" >
                                 </div>
                                 <div class="col-12 col-md-8 texto">
-                                    <p>APARTAMENTO</p>
-                                    <h1 class="pt-1 pb-2">C/Real N.2 Letra A</h1>
+                                    <p>{{hotel.type.toUpperCase()}}</p>
+                                    <h1 class="pt-1 pb-2">{{hotel.calle}} {{hotel.planta}}</h1>
                                     <div class="estadistica">
                                         <p class="px-2">Benefecio total 334€</p>
                                         <p class="px-2">Pedidos totales: 8</p>
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-12 col-md-2 p-0 my-auto botones">
                                     <button class="btn btn-info w-75 my-1 py-0 text-white">Ver más</button>
-                                    <button class="btn btn-secondary w-75    my-1 py-0 ">Editar</button>
+                                    <button class="btn btn-secondary w-75  my-1 py-0">Editar</button>
                                 </div>
                             </div>
                         </div>  
@@ -58,6 +58,7 @@
 </div>  
 </template>
 <script>
+    import { Inertia } from '@inertiajs/inertia'
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 	import { Head, Link } from '@inertiajs/inertia-vue3'
 
@@ -75,42 +76,43 @@
                 this.$inertia.get(route('collaborator.create.hab'),{}, {
                     preserveScroll: true
             })
-        },
+        }
     }
 }
 </script>
 <style scope>
-	body{
-		background-color: transparent;
-	}
-	.caja h1{
-        font-size: 2em;
-        font-weight: bolder;
-    }
-    .caja .boton{
-        padding: 10px 50px;
-        font-size: 25px;
-        margin-top: 50px;
-        border-radius:20px;
-    }
-    .caja .boton i{
-        padding-right: 20px;
-    }
-    .caja .boton:hover{
-        color:#fff;
-    }
+body{
+    background-color: transparent;
+}
+.main h1{
+    font-size: 2em;
+    font-weight: bolder;
+}
+.main .boton-inicio{
+    padding: 10px 50px;
+    font-size: 25px;
+    margin-top: 50px;
+    border-radius:20px;
+}
+.main .boton-inicio i{
+    padding-right: 20px;
+}
+.main .boton-inicio:hover{
+    color:#fff;
+}
 
-/* responsive */
+/* responsive main */
 @media (max-width:450px){
-    .caja .boton{
+    .main .boton-inicio{
         padding: 10px;
     }
-    .caja .boton i{
+    .main .boton-inicio i{
         padding-right: 5px;
     }
 }
+/*estilo templates*/ 
 .containter{
-    max-width: 75%;
+    max-width: 75% !important;
 }
 #cabecera h1{
     font-size: 2em;
@@ -119,6 +121,9 @@
 #cabecera .boton{
     padding: 5px 40px;
     border-radius:20px;
+}
+#cabecera .info-boton{
+    text-align: left;
 }
 #cabecera .info-boton .boton i{
     padding-right: 20px;
@@ -140,6 +145,7 @@
 }
 #alojamientos .tarjeta .texto p{
     color:#999;
+    text-align: left;
 }
 #alojamientos .tarjeta .botones{
     text-align: right;
@@ -147,12 +153,14 @@
 #alojamientos .tarjeta h1{
     font-size: 30px;
     font-weight: bold;
+    text-align: left;
 }
 #alojamientos .tarjeta img{
     max-height: 100px;
 }
 #alojamientos .tarjeta .estadistica{
     display: inline-flex;
+    float:left;
 }
 #alojamientos .tarjeta .estadistica p{
     padding-top:0.5em;
@@ -189,6 +197,9 @@
         text-align: center;
         margin-top: 20px;
         margin-bottom: 20px;
+    }
+    #cabecera .info-boton{
+        text-align: center;
     }
 }
 </style>

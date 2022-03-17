@@ -229,4 +229,5 @@ class CollaboratorController extends Controller
             
         }
     }
+
 }
