@@ -229,5 +229,8 @@ class CollaboratorController extends Controller
             
         }
     }
-
+    public function sales_hab_details()
+    {
+        return Inertia::render('Collaborator/Dashboard/Lodging/Details');
+    }
 }

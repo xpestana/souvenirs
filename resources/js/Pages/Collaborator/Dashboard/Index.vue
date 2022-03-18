@@ -17,7 +17,7 @@
                         <div class="container">
                             <div class="row caja-info">
                                 <div class="col-12 col-md-9 info-boton">
-                                    <Link type="button" class="btn btn-outline-info boton" as="button"><i class="fas fa-plus"></i>Añadir alojamiento</Link>
+                                    <a type="button" class="btn btn-outline-info boton"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
                                     <h5 class="text-info p-3">Ventas totales<i class="fas fa-angle-right p-1"></i></h5>
                                 </div>
                                 <div class="col-12 col-md-3 info-total">
@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-2 p-0 my-auto botones">
-                                    <button class="btn btn-info w-75 my-1 py-0 text-white">Ver más</button>
+                                    <Link :href="route('collaborator.sales.details',{hab:hotel.id})" class="btn btn-info w-75 my-1 py-0 text-white">Ver más</Link>
                                     <button class="btn btn-secondary w-75  my-1 py-0">Editar</button>
                                 </div>
                             </div>
