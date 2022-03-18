@@ -47,7 +47,13 @@ class CollaboratorController extends Controller
     {
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users|confirmed',
-            'password' => ['required', Rules\Password::defaults()],
+            'password' => 
+            ['required', 
+                Rules\Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->uncompromised()
+            ],
         ]);
 
         $user = User::create([
@@ -165,7 +171,7 @@ class CollaboratorController extends Controller
         $request->validate([
             'calle' => 'required|string',
             'planta' => 'required|string',
-            'address' => 'nullable|string',
+            'address' => 'required|string',
             'city' => 'required|string',
             'cp' => 'required|string',
             'code' => 'nullable|string',
@@ -199,11 +205,11 @@ class CollaboratorController extends Controller
                 $imgFileOriginal->save($Path.$nameFile['fileName']);
                 $name_file = $nameFile['fileName'];
             }else{
-                $name_file ="default.jpeg";
+                $name_file ="default.jpg";
             }
             $hotel = hotel::create([
                 'calle'       => $request->calle,
-                'type'        => (auth()->user()->profile->gestor == 1) ? "hotel" : "apartament",
+                'type'        => (auth()->user()->profile->gestor == 1) ? "hotel" : "apartamento",
                 'address'     => $request->address,
                 'zone'        => $request->city,
                 'cp'          => $request->cp,
@@ -229,8 +235,9 @@ class CollaboratorController extends Controller
             
         }
     }
-    public function sales_hab_details()
-    {
-        return Inertia::render('Collaborator/Dashboard/Lodging/Details');
+    public function sales_hab_details($id)
+    {   
+        $hotel = hotel::find($id);
+        return Inertia::render('Collaborator/Dashboard/Lodging/Details', compact('hotel'));
     }
 }

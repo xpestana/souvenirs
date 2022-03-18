@@ -1,60 +1,57 @@
 <template>
   
 <div class="section cuerpo">
- <div class="section cabezera"> 
-  <div class="container">
-    <div class="row">
-         
-        <div class="col-6 logo-caja">
+    <div class="section cabezera"> 
+        <div class="container">
+            <div class="row">
+                <div class="col-6 logo-caja">
                     <img src="/vendor_asset/img/logo/logo.png">
                 </div>
-
                 <div class="col-6 text-right boton">
-                    
                     <Link :href="route('login')" class="btn btn-primary iniciar">Iniciar sesión<i class="fas fa-user-friends pl-2"></i> </Link>
                 </div>
             </div>
-</div>
-</div>
-
-<div class="section inicio"> 
-  <div class="container">
-     <div class="row">
-        <div class="col-md-6 text-left head-registra">
-                    <h1 class="titulo">Registra <br>tu <br> alojamiento</h1>
-                    <p class="r-1"><small>Darse de alta son solo unos minutos¡Empieza hoy mismo!</small></p>
-                    <p class="r-2"><small>Crea un cuenta de <b>colaborador</b> para empezar</small></p>
-                        
-                    <Link :href="route('collaborator.register')" type="button" class="btn btn-primary empezar">Empezar</Link>
-                        
         </div>
-                        
-               <div class="col-md-6 beneficios">     
+    </div>
+
+    <div class="section inicio"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left head-registra">
+                <h1 class="titulo">Registra <br>tu <br> alojamiento</h1>
+                <p class="r-1"><small>Darse de alta son sólo unos minutos ¡Empieza hoy mismo!</small></p>
+                <p class="r-2"><small>Crea un cuenta de <b>colaborador</b> para empezar</small></p>
                     
-                        <div class="d-flex fs-beneficios my-2">
-                            <i class="far fa-check-circle pt-2 pe-3"></i>
-                            <p class="fw-bold beneficios-text m-2">Darse de alta es gratis</p>
-                        </div>
-                        <div class="d-flex fs-beneficios my-2">
-                            <i class="far fa-check-circle pt-2 pe-3"></i>
-                            <p class="fw-bold beneficios-text m-2">Nueva linea de ingresos sin trabajo adicional</p>
-                        </div>
-                        <div class="d-flex fs-beneficios my-2">
-                            <i class="far fa-check-circle pt-2 pe-3"></i>
-                            <p class="fw-bold beneficios-text m-2">Aumentamos tus valoraciones</p>
-                        </div>
-                        <div class="d-flex fs-beneficios my-2">
-                            <i class="far fa-check-circle pt-2 pe-3"></i>
-                            <p class="fw-bold beneficios-text m-2">Mejoramos la experiencia de tus inquilinos</p>
-                        </div>
+                <Link :href="route('collaborator.register')" type="button" class="btn btn-primary empezar">Empezar</Link>
                     
             </div>
-
+                            
+            <div class="col-md-6 beneficios">     
+                
+                <div class="d-flex fs-beneficios my-2">
+                    <i class="far fa-check-circle pt-2 pe-3"></i>
+                    <p class="fw-bold beneficios-text m-2">Darse de alta es gratis</p>
+                </div>
+                <div class="d-flex fs-beneficios my-2">
+                    <i class="far fa-check-circle pt-2 pe-3"></i>
+                    <p class="fw-bold beneficios-text m-2">Nueva línea de ingresos sin trabajo adicional</p>
+                </div>
+                <div class="d-flex fs-beneficios my-2">
+                    <i class="far fa-check-circle pt-2 pe-3"></i>
+                    <p class="fw-bold beneficios-text m-2">Aumentamos tus valoraciones</p>
+                </div>
+                <div class="d-flex fs-beneficios my-2">
+                    <i class="far fa-check-circle pt-2 pe-3"></i>
+                    <p class="fw-bold beneficios-text m-2">Mejoramos la experiencia de tus inquilinos</p>
+                </div>
+                
             </div>
 
-</div>
-</div>
-    </div>    
+        </div>
+
+    </div>
+    </div>
+</div>    
     
 
 

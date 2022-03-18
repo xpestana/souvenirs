@@ -4,7 +4,6 @@
 		<notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
 		<slot>
 		</slot>
-		
 	</div>
 </template>
 <script>

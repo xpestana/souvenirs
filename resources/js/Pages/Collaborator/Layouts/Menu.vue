@@ -6,9 +6,10 @@
             <div class="primary-menu">
                 <nav>
                     <ul class="primary-menu-list d-flex justify-content-end pr-5">
-                        <li><Link :href="route('collaborator.index')"><i class="fas fa-user iconNav"></i> Mis alojamientos</Link></li>
-                        <li><a href="javascript:void(0)"><i class="fas fa-wrench iconNav"></i> Actividades</a></li>
+                        <li><Link :href="route('collaborator.index')" :class="{ 'border-bottom border-dark': $page.url === '/tablero/alojamientos' }"><i class="fas fa-user iconNav"></i> Mis alojamientos</Link></li>
+                        <li><a href="javascript:void(0)"><i class="fas fa-wrench iconNav"></i> Ajustes</a></li>
                     </ul>
+                    
                 </nav>
             </div>
             <!-- Primary Menu End -->

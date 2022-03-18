@@ -4,17 +4,17 @@
         <div class="container mt-5">
             <div class="row cabeza">
                 <div class="col-1 text-white volver-icon">
-                    <i class="fas fa-angle-left"></i>
+                    <Link :href="route('collaborator.index')"><i class="fas fa-angle-left"></i></Link>	
                 </div>
                 <div class="col-11">
-                    <h1 class="text-center mb-4 titulo"><strong>Ventas de C/Calle puerta</strong></h1>
+                    <h1 class="text-center mb-4 titulo text-info"><strong>Ventas de {{hotel.calle}} {{hotel.planta}}</strong></h1>
                 </div>
             </div>
             <div class="row cuerpo">
                 <div class="col-12 col-md-3 text-center">
                     <p class="text-info mb-4"><strong class="pr-2">Ventas totales</strong><i class="fas fa-angle-right rounded-circle bg-info text-white px-2 py-1"></i></p>
-                    <img class="rounded-circle m-auto" src="/vendor_asset/img/default.png" alt="">
-                    <h6 class="mt-3"><strong>Piso C/Real</strong></h6>
+                    <img class="rounded-circle m-auto" :src="'/storage/hotel'+hotel.image" alt="">
+                    <h6 class="mt-3"><strong>Piso {{hotel.planta}}</strong></h6>
                     <p class="ventas">VENTAS</p>
                 </div>
                 <div class="col-12 col-md-9">
@@ -72,6 +72,9 @@ import { Head, Link } from '@inertiajs/inertia-vue3'
 
 export default {
     layout:TemplateApp,
+    props:{
+        hotel:Object
+    },
     components:{
         Head,
         Link,
@@ -82,7 +85,6 @@ export default {
 <style scope>
 .cabeza .titulo{
     font-size: 4em;
-    color: #7bbdd1;
     padding: 0 110px;
 }
 .cabeza .volver-icon i{
@@ -94,13 +96,11 @@ export default {
 }
 .pie h2{
     font-size: 2em;
-    color: #7bbdd1;
 }
 /* responsive*/
 @media (max-width:767px){
     .cabeza .titulo{
         font-size: 2em;
-        color: #7bbdd1;
         padding: 0 5px;
     }
     .pie h2{

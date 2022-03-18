@@ -20,7 +20,7 @@
                                     <a type="button" class="btn btn-outline-info boton"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
                                     <h5 class="text-info p-3">Ventas totales<i class="fas fa-angle-right p-1"></i></h5>
                                 </div>
-                                <div class="col-12 col-md-3 info-total">
+                                <div class="col-12 col-md-3 info-total text-right">
                                     <h3 class="text-info"><strong>Total</strong></h3><br>
                                     <h4><strong>Beneficio 334€</strong></h4><br>
                                     <h4><strong>Pedidos 15</strong></h4><br>
@@ -31,7 +31,7 @@
 
                     <section id="alojamientos">
                         <div class="container">
-                            <div v-for="hotel in hotels" :key="hotel.id" class="row tarjeta mt-2 p-3">
+                            <div v-for="hotel in hotels" :key="hotel.id" class="row tarjeta my-4 p-3">
                                 <div class="col-12 col-md-2 p-0">
                                     <img class="img-foto w-100" :src="'/storage/hotel'+hotel.image" >
                                 </div>

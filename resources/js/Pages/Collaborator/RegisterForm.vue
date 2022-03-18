@@ -3,7 +3,7 @@
         <div class="row w-100 p-0 m-0">
             <div class="col-md-7 up py-4">
                 <div class="col-md-12 text-center">
-                    <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/logo.png">
+                    <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/logopequeño.png">
 
                     <h1 class="title">Lo hacemos por ti</h1>
                     <div class="caja-info mt-4">
@@ -23,9 +23,9 @@
                         <form @submit.prevent="submit" class=" mt-10">
                             <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="E-mail*" v-model="form.email" required/>
                             <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="Confirmar E-mail" v-model="form.email_confirmation" required/>
-                            <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="off" placeholder="Contraseña" v-model="form.password" required/>
+                            <BreezeInput type="password" class="form-control my-2 py-4" autocomplete="off" placeholder="Contraseña" v-model="form.password" required/>
                             <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Regístrate ahora</button>
-                            <BreezeValidationErrors class="my-3" />
+                            <ValidationErrors class="my-3" />
                         </form>
                     </div>
                 </div>
@@ -37,13 +37,13 @@
 <script>
     import BreezeInput from '@/Components/Input.vue'
     import BreezeButton from '@/Components/Button.vue'
-    import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+    import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors'
 
     export default {
         components:{
             BreezeInput,
             BreezeButton,
-            BreezeValidationErrors
+            ValidationErrors
         },
         data(){
             return {
@@ -98,6 +98,9 @@
     @media (max-width:992px){
         .up{
             height: 100%;
+        }
+        .title_white{
+            font-size: 20px;
         }
     }
 </style>

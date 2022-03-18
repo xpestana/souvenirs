@@ -1,5 +1,6 @@
 <template>
 	<div class="container mt-4 p-10 pb-4">
+		<form @submit.prevent="submit">
 		<div class="row justify-content-center">
 			<div class="col-md-6">
 				<h3 class="h3 text-center text-md-left pb-2">Alojamiento de {{ profile.firstname }}</h3>
@@ -13,7 +14,7 @@
 				</div>
 
 				<div class="col-md-12">
-					<form @submit.prevent="submit">
+					
 					<h4 class="h4 text-center text-md-left my-3 pt-4">Registra un alojamiento</h4>
 					<div class="row justify-content-between">
 						<div class="col-md-12 mb-3">
@@ -23,13 +24,13 @@
                     		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.planta" placeholder="N° - Letra - Planta *" required>
                     	</div>
                     	<div class="col-md-12 mb-3">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" placeholder="Otras indicaciones sobre la dirección	" required>
+                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" placeholder="Otras indicaciones sobre la dirección">
                     	</div>
                     	<div class="col-md-6 mb-3">
                     		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" placeholder="Ciudad *" >
                     	</div>
                     	<div class="col-md-6 mb-3">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" placeholder="CP *" >
+                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" placeholder="CP *" required>
                     	</div>
                     	<div class="col-md-6 mb-3">
                     		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.code" placeholder="Codigo del apartamento" >
@@ -70,38 +71,42 @@
                     	<div class="col-md-12 mb-3">
                     		<textarea id="area" cols="10" rows="3" class="form-control w-100 mb-2 py-3" v-model="form.area" placeholder="Otros datos de interés"></textarea>
                     	</div>
-                    	<div class="w-100"></div>
-						<div align="center" class="col-md-5 mt-3">
-							<Link :href="route('collaborator.index')" class="btn btn-primary  rounded-pill  w-75 py-1 mt-3">
-								Volver
-							</Link>	
-						</div>
-						<div align="center" class="col-md-5 mt-3">
-							<button type="submit" class="btn btn-primary  rounded-pill  w-75 py-1 mt-3 text-white" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-								Siguiente
-							</button>
-						<BreezeValidationErrors class="my-3" />
+                    	<div class="w-100">
+							<ValidationErrors class="my-3" />
 						</div>
                 	</div>
-                	</form>
+                	
 				</div>				
 			</div>
-			<div class="col-md-6">
-				<img style="width: 100%" src="/vendor_asset/img/logo/logo.png">
+			<div class="col-md-6 d-flex">
+				<div class="container-logo my-auto">
+					<img src="/vendor_asset/img/logo/logosintexto.png" class="w-100">
+				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-12 d-inline-flex justify-content-between">
+				<Link :href="route('collaborator.index')" class="btn btn-primary rounded-pill px-3 mt-3">
+					Volver
+				</Link>	
+				<button type="submit" class="btn btn-primary rounded-pill px-3 mt-3 text-white" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+					Siguiente
+				</button>
+			</div>
+		</div>
+		</form>
 	</div>
 </template>
 <script>
 	import { Head, Link } from '@inertiajs/inertia-vue3'
     import { Inertia } from '@inertiajs/inertia'
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
-	import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+	import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
 
 	export default {
 		layout:TemplateApp,
 		components:{
-            BreezeValidationErrors,
+            ValidationErrors,
             Head,
             Link
 		},
@@ -157,10 +162,15 @@
 </script>
 <style scoped>
 	input, textarea{
-		border-color: transparent;
-    	border-width: 0px;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
 	}
 	button{
 		color: #495057;
+	}
+	@media (max-width:767px){
+		.container-logo img{
+			display: none;
+		}
 	}
 </style>
