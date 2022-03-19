@@ -50,7 +50,6 @@
 
         <!-- Scripts -->
         @routes
-        
     </head>
     <body>
         @inertia

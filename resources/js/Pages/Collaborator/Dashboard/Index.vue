@@ -17,7 +17,7 @@
                         <div class="container">
                             <div class="row caja-info">
                                 <div class="col-12 col-md-9 info-boton">
-                                    <a type="button" class="btn btn-outline-info boton"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
+                                    <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
                                     <h5 class="text-info p-3">Ventas totales<i class="fas fa-angle-right p-1"></i></h5>
                                 </div>
                                 <div class="col-12 col-md-3 info-total text-right">
@@ -28,7 +28,6 @@
                             </div>
                         </div>
                     </section>
-
                     <section id="alojamientos">
                         <div class="container">
                             <div v-for="hotel in hotels" :key="hotel.id" class="row tarjeta my-4 p-3">
@@ -41,12 +40,65 @@
                                     <div class="estadistica">
                                         <p class="px-2">Benefecio total 334€</p>
                                         <p class="px-2">Pedidos totales: 8</p>
-                                        <p class="text-primary px-2">Obtener QR</p>
+                                        <button class="btn btn-link px-2" data-toggle="modal" data-target="#centralModal">Obtener QR</button>
+                                            <!-- Central Modal Small -->
+                                            <div class="modal fade" id="centralModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                            aria-hidden="true">
+                                            <!-- Change class .modal-sm to change the size of the modal -->
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body p-0">
+                                                            <div class="row mt-5 mb-2">
+                                                                <div class="col-12 my-4 d-flex justify-content-center">
+                                                                    <QRCodeVue3
+                                                                        :width="200"
+                                                                        :height="200"
+                                                                        imgclass="souvenirs_img"
+                                                                        :value="url+'?h='+hotel.id"
+                                                                        :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
+                                                                        :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
+                                                                        :dotsOptions="{
+                                                                            type: 'square',
+                                                                            color: '#31516B',
+                                                                            gradient: {
+                                                                            type: 'linear',
+                                                                            rotation: 0,
+                                                                            colorStops: [
+                                                                                { offset: 0, color: '#31516B' },
+                                                                                { offset: 1, color: '#31516B' },
+                                                                            ],
+                                                                        },
+                                                                        }"
+                                                                        fileExt="jpeg"
+                                                                        :backgroundOptions="{ color: '#ffffff' }"
+                                                                        :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
+                                                                        :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
+                                                                        :download="false"
+                                                                        downloadButton="view-cart bg-info mt-3 souvenirs_btn"
+                                                                        :downloadOptions="{ name: 'souvenirs', extension: 'jpeg' }"
+                                                                        crossOrigin="anonymous"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div class="row px-3 pt-4 pb-5">
+                                                                <div class="col-6 text-left">
+                                                                    <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Volver</a>
+                                                                </div>
+                                                                <div class="col-6 text-right">
+                                                                    <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn">Descargar</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Central Modal Small -->
+
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-2 p-0 my-auto botones">
                                     <Link :href="route('collaborator.sales.details',{hab:hotel.id})" class="btn btn-info w-75 my-1 py-0 text-white">Ver más</Link>
-                                    <button class="btn btn-secondary w-75  my-1 py-0">Editar</button>
+                                    <Link  :href="route('collaborator.edit.hab',{hab:hotel.id})" class="btn btn-secondary w-75  my-1 py-0">Editar</Link>
                                 </div>
                             </div>
                         </div>  
@@ -61,28 +113,57 @@
     import { Inertia } from '@inertiajs/inertia'
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 	import { Head, Link } from '@inertiajs/inertia-vue3'
+    import QRCodeVue3 from "qrcode-vue3"
 
 	export default {
 		layout:TemplateApp,
 		components:{
 			Head,
-           Link,
+            Link,
+            QRCodeVue3
        },
        props: {
         hotels: Object,
+        url:String
+        },
+        data(){
+            return{
+                showModal:false
+            }
         },
         methods: {
             lodging(){
                 this.$inertia.get(route('collaborator.create.hab'),{}, {
                     preserveScroll: true
-            })
-        }
+                })
+            },
+            souvenirs_btn(){
+            var urlItem = $('.souvenirs_img').attr('src');
+            axios({
+                    url: urlItem,
+                    method: 'GET',
+                    responseType: 'blob'
+                })
+                .then((response) => {
+                        const url = window.URL
+                            .createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', 'souvenirs.jpg');
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                })                
+            }
     }
 }
 </script>
 <style scope>
 body{
     background-color: transparent;
+}
+.modal .btn-modal{
+    background-color: #5a80fb;
 }
 .main h1{
     font-size: 2em;
@@ -118,10 +199,7 @@ body{
     font-size: 2em;
     font-weight: bolder;
 }
-#cabecera .boton{
-    padding: 5px 40px;
-    border-radius:20px;
-}
+
 #cabecera .info-boton{
     text-align: left;
 }
@@ -155,7 +233,7 @@ body{
     font-weight: bold;
     text-align: left;
 }
-#alojamientos .tarjeta img{
+#alojamientos .tarjeta .img-foto{
     max-height: 100px;
 }
 #alojamientos .tarjeta .estadistica{

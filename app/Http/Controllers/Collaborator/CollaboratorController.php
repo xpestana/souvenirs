@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use App\Mail\WelcomeReceived;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -32,7 +33,8 @@ class CollaboratorController extends Controller
         /*******************************/
         
         $hotels = auth()->user()->hotel;
-        return Inertia::render('Collaborator/Dashboard/Index', compact('hotels'));
+        $url = env('APP_URL');
+        return Inertia::render('Collaborator/Dashboard/Index', compact('hotels','url'));
     }
     public function create()
     {
@@ -212,6 +214,7 @@ class CollaboratorController extends Controller
                 'type'        => (auth()->user()->profile->gestor == 1) ? "hotel" : "apartamento",
                 'address'     => $request->address,
                 'zone'        => $request->city,
+                'planta'      => $request->planta,
                 'cp'          => $request->cp,
                 'code'        => $request->code,
                 'url'         => $request->url,
@@ -235,6 +238,69 @@ class CollaboratorController extends Controller
             
         }
     }
+
+    public function edit_hab($id){
+
+        $hotel = hotel::find($id);
+        return Inertia::render('Collaborator/Dashboard/Lodging/Edit',compact('hotel'));
+    }
+
+    public function update_hab($id,Request $request){
+        
+        $request->validate([
+            'calle' => 'required|string',
+            'planta' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'code' => 'nullable|string'
+        ]);
+
+        // try{
+            
+         if ($request->image) {
+            $image = $request->image;
+            $msg =$this->valid($image);
+            if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
+
+            $Path = public_path('storage/hotel/');
+            $pathName = '/';
+
+            if (!file_exists($Path)) {
+                mkdir($Path, 777, true);
+            }
+
+            $nameFile =$this->FileName($image); //nombre de archivo original
+            $imgFileOriginal = Image::make($image->getRealPath());
+            $imgFileOriginal->save($Path.$nameFile['fileName']);
+
+            }
+
+            $hotel = hotel::find($id);
+            
+            $hotel->calle = $request->calle;
+            $hotel->address = $request->address;
+            $hotel->zone = $request->city;
+            $hotel->planta = $request->planta;
+            $hotel->cp = $request->cp;
+            $hotel->code = $request->code;
+            $hotel->url = $request->url;
+            $hotel->area = $request->area;            
+            if ($request->image) {
+                $hotel->image = $pathName.$nameFile['fileName'];
+            }
+            $hotel->save();
+
+            return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
+        // }catch (Exception $e) 
+        // {
+        
+        // }
+
+        
+
+    }
+
     public function sales_hab_details($id)
     {   
         $hotel = hotel::find($id);

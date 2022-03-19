@@ -277,7 +277,9 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     
     Route::get('/alojamientos', [CollaboratorController::class, 'index'])->name('collaborator.index');  
     Route::get('/alojamientos/crear', [CollaboratorController::class, 'create_hab'])->name('collaborator.create.hab');  
-    Route::post('/alojamientos/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');  
+    Route::post('/alojamientos/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');
+    Route::get('/alojamientos/edit/{hab}',[CollaboratorController::class, 'edit_hab'])->name('collaborator.edit.hab');
+    Route::post('/alojamientos/update/{id}',[CollaboratorController::class, 'update_hab'])->name('collaborator.update.hab');    
     Route::get('/alojamientos/ventas', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
     Route::get('/alojamientos/ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
 });
