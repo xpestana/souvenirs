@@ -173,7 +173,7 @@ class CollaboratorController extends Controller
         $request->validate([
             'calle' => 'required|string',
             'planta' => 'required|string',
-            'address' => 'required|string',
+            'address' => 'nullable|string',
             'city' => 'required|string',
             'cp' => 'required|string',
             'code' => 'nullable|string',
