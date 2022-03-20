@@ -256,7 +256,7 @@ class CollaboratorController extends Controller
             'code' => 'nullable|string'
         ]);
 
-        // try{
+         try{
             
          if ($request->image) {
             $image = $request->image;
@@ -292,10 +292,10 @@ class CollaboratorController extends Controller
             $hotel->save();
 
             return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
-        // }catch (Exception $e) 
-        // {
+         }catch (Exception $e) 
+         {
         
-        // }
+         }
 
         
 
