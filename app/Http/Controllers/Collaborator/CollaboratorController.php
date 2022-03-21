@@ -33,7 +33,7 @@ class CollaboratorController extends Controller
         /*******************************/
         
         $hotels = auth()->user()->hotel;
-        $url = env('APP_URL');
+        $url = config('app.url');
         return Inertia::render('Collaborator/Dashboard/Index', compact('hotels','url'));
     }
     public function create()
