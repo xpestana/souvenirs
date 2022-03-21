@@ -42,7 +42,7 @@
                 });
                 //Make sticky the menu
                 $(window).scroll(function () {
-                    if ($(this).scrollTop() > 90) {
+                    if ($(this).scrollTop() > 200) {
                         $('.header-sticky').addClass("sticky");
                     } else {
                         $('.header-sticky').removeClass("sticky");

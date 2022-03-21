@@ -99,7 +99,7 @@ class CollaboratorController extends Controller
             'gestor' => $request->gestor,
             'razon' => $request->razon,
             'nif' => $request->nif,
-            'identify' => $request->identify,
+            'identify' => $request->id,
             'city' => $request->city,
             'cp' => $request->cp,
             'address' => $request->address,

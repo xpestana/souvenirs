@@ -23,6 +23,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*Controladores COLLABORATORS*/
 use App\Http\Controllers\Collaborator\CollaboratorController;
+use App\Http\Controllers\Collaborator\ProfileCollaboratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -273,19 +274,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('register/data', [CollaboratorController::class, 'register_data'])->name('collaborator.register.data');
 });
 /*Dashboard*/
-Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(function () {
     
-    Route::get('/alojamientos', [CollaboratorController::class, 'index'])->name('collaborator.index');  
-    Route::get('/alojamientos/crear', [CollaboratorController::class, 'create_hab'])->name('collaborator.create.hab');  
-    Route::post('/alojamientos/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');
-    Route::get('/alojamientos/edit/{hab}',[CollaboratorController::class, 'edit_hab'])->name('collaborator.edit.hab');
-    Route::post('/alojamientos/update/{id}',[CollaboratorController::class, 'update_hab'])->name('collaborator.update.hab');    
-    Route::get('/alojamientos/ventas', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
-    Route::get('/alojamientos/ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
+    Route::get('/', [CollaboratorController::class, 'index'])->name('collaborator.index');  
+    Route::get('/crear', [CollaboratorController::class, 'create_hab'])->name('collaborator.create.hab');  
+    Route::post('/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');
+    Route::get('/edit/{hab}',[CollaboratorController::class, 'edit_hab'])->name('collaborator.edit.hab');
+    Route::post('/update/{id}',[CollaboratorController::class, 'update_hab'])->name('collaborator.update.hab');    
+    Route::get('/ventas', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
+    Route::get('/ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
+    
 });
-
+/*Ajustes*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
+    Route::get('/ajustes/', [ProfileCollaboratorController::class, 'index'])->name('collaborator.ajustes.index');  
+    Route::put('/ajustes/profile', [ProfileCollaboratorController::class, 'profile'])->name('collaborator.profile.update');  
+    Route::put('/ajustes/fiscal', [ProfileCollaboratorController::class, 'fiscal'])->name('collaborator.fiscal.update');  
+});
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
-Route::get('/test',function(){
-    return Inertia::render('Collaborator/Dashboard/Lodging/Details');
-});
+
 require __DIR__.'/auth.php';
