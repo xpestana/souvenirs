@@ -33,7 +33,7 @@
                     		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" placeholder="CP *" required>
                     	</div>
                     	<div class="col-md-6 mb-3">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.code" placeholder="Codigo del apartamento" >
+                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.code" placeholder="N° de licencia VFT/SE/12345" >
                     	</div>
                     	<div class="col-md-6 mb-3">
                     		<input type="url" class="form-control w-100 mb-2 py-3" v-model="form.url" placeholder="Link web" >

@@ -18,7 +18,7 @@ class ProfileCollaboratorController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Test');
+        return Inertia::render('Collaborator/Dashboard/Settings');
     }
     public function profile(Request $request)
     {
@@ -53,7 +53,7 @@ class ProfileCollaboratorController extends Controller
         $request->validate([
             'razon' => 'required|string',
             'nif' => 'required|string',
-            'id' => 'required|string',
+            'identifier' => 'required|string',
             'city' => 'required|string',
             'cp' => 'required|string',
             'address' => 'required|string',
@@ -61,7 +61,7 @@ class ProfileCollaboratorController extends Controller
         $profile = profile::find(auth()->user()->profile->id);
         $profile->razon = $request->razon;
         $profile->nif = $request->nif;
-        $profile->identify = $request->id;
+        $profile->identify = $request->identifier;
         $profile->city = $request->city;
         $profile->cp = $request->cp;
         $profile->address = $request->address;

@@ -40,14 +40,6 @@
                 jQuery('.mobile-menu nav').meanmenu({
                     meanScreenWidth: "991",
                 });
-                //Make sticky the menu
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 200) {
-                        $('.header-sticky').addClass("sticky");
-                    } else {
-                        $('.header-sticky').removeClass("sticky");
-                    }
-                });
             }
         },
     }
