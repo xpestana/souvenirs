@@ -8,7 +8,7 @@
                 <section id="alojamiento">
                     <div class="row tarjeta my-5 p-3 shadow-md">
                         <div class="col-12 col-md-2 p-0">
-                            <img class="img-foto w-100" :src="'/storage/hotel/'+hotel.image" >
+                            <img class="img-foto w-100" :src="'/storage/hotel'+hotel.image" >
                         </div>
                         <div class="col-12 col-md-10 texto">
                             <p class="text-left text-muted">{{hotel.type.toUpperCase()}}</p>
@@ -25,12 +25,7 @@
                     <form @submit.prevent="submit">
                     <div class="row my-3 justify-content-start">
                         <div class="col-12 col-md-6">
-                            <h1>Modifica tu alijamiento</h1>
-                        </div>
-                    </div>
-                    <div class="row my-3 justify-content-start">
-                        <div class="col-12 col-md-6">
-                            <input type="text" class="form-control w-100" v-model="form.code" disabled>
+                            <h1>Modifica tu alojamiento</h1>
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">
@@ -55,7 +50,10 @@
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-3">
+                            <input type="text" class="form-control w-100" v-model="form.code" placeholder="N° de licencia VFT/SE/12345">
+                        </div>
+                        <div class="col-12 col-md-3">
                             <input type="text" class="form-control w-100" placeholder="Link-web"  v-model="form.url">
                         </div>
                     </div>
@@ -92,7 +90,7 @@
                     	</div>
                     </div>
                     <div class="my-3 justify-content-start">
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 pl-0">
                             <textarea class="form-control w-100" placeholder="Otros datos de interés" v-model="form.area"></textarea>
                         </div>
                     </div>
@@ -175,7 +173,7 @@
         }
 	}
 </script>
-<style>
+<style scoped>
 input, textarea{
     border: 1px solid #ced4da;
     border-radius: 0.25rem;

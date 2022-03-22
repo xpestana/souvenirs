@@ -4,7 +4,7 @@
         <div class="container mt-5">
             <div class="row cabeza">
                 <div class="col-1 text-white volver-icon">
-                    <Link :href="route('collaborator.index')"><i class="fas fa-angle-left"></i></Link>	
+                    <Link :href="route('collaborator.index')"><i class="fas fa-angle-left bg-info"></i></Link>	
                 </div>
                 <div class="col-11">
                     <h1 class="text-center mb-4 titulo text-info"><strong>Ventas de {{hotel.calle}} {{hotel.planta}}</strong></h1>
@@ -22,34 +22,34 @@
                         <table class="table table-striped table-active">
                             <thead>
                                 <tr>
-                                    <th scope="col">First</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">ID transacción</th>
+                                    <th scope="col">Devuelto</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Beneficio</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">FirstFirstFirst</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>OttoOttoOttoOtto</td>
+                                    <td>00labc</td>
+                                    <td>M 20</td>
+                                    <td>hola@email.com</td>
+                                    <td>04/02/2022</td>
+                                    <td>10</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">FirstFirstFirst</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td>OttoOttoOttoOtto</td>
+                                    <td>00labc</td>
+                                    <td>M 20</td>
+                                    <td>hola@email.com</td>
+                                    <td>04/02/2022</td>
+                                    <td>10</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">FirstFirstFirst</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>OttoOttoOttoOtto</td>
+                                    <td>00labc</td>
+                                    <td>M 20</td>
+                                    <td>hola@email.com</td>
+                                    <td>04/02/2022</td>
+                                    <td>10</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -88,7 +88,7 @@ export default {
     padding: 0 110px;
 }
 .cabeza .volver-icon i{
-    background-color: #7bbdd1;
+    
     padding: 5px 10px;
 }
 .cuerpo img{
