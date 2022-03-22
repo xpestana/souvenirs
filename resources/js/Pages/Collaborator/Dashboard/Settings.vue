@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-12 text-center">
                 <h1 class="display-4 text-info">Información personal</h1>
             </div>
@@ -35,25 +35,18 @@
                             <button type="button" class="btn btn-primary ml-4" data-toggle="modal" data-target="#datosModal">Editar</button>
                         </div>
                 </div>
-            </div>
-            <div class="row  mt-4 py-2 justify-content-center justify-content-md-start cerrar-sesion">
-                <div class="col-12 col-md-5">
-                    <a href="javascript:void(0);" @click.prevent="logout" class="btn btn-lg text-white">Cerrar sesión<i class="fas fa-key pl-1 pr-2"></i></a>
-                    
+                <div class="col-12 mt-3 text-left" v-if="errors.submitProfile">
+                    <div class="font-medium text-danger">Whoops! Algo salió mal.</div>
+                    <ul class="mt-3 list-disc list-inside text-sm text-danger">
+                        <li v-for="(error, key) in errors.submitProfile" :key="key">{{ error }}</li>
+                    </ul>
                 </div>
             </div>
-            <div class="row justify-content-start my-2">
-                <div class="col-12 text-left">
-                    <div v-if="errors.submitProfile">
-                        <div class="font-medium text-danger">Whoops! Algo salió mal.</div>
-                        <ul class="mt-3 list-disc list-inside text-sm text-danger">
-                            <li v-for="(error, key) in errors.submitProfile" :key="key">{{ error }}</li>
-                        </ul>
-                    </div>
+            <div class="row justify-content-between my-2 h-100">
+                <div class="col-12 col-md-5 align-self-start">
+                    <a href="javascript:void(0);" @click.prevent="logout" class="btn btn-lg text-white btn-cerrar mt-4">Cerrar sesión<i class="fas fa-key pl-1 pr-2"></i></a>
                 </div>
-            </div>
-            <div class="row  my-2  justify-content-end text-right">
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-md-5 text-right align-self-end">
                     <button class="btn btn-primary px-3 py-1 rounded-pill">Guardar cambios</button>
                 </div>
             </div>
@@ -171,6 +164,9 @@
                 this.formF.put(route('collaborator.fiscal.update'), {
                     preserveScroll: true,
                     errorBag: 'submitFiscal',
+                    onSuccess:()=>{
+                        $('#datosModal').modal('hide')
+                    }
                 })
             },
             logout(){
@@ -200,7 +196,7 @@ form label{
 form .boton-modal{
     background-color: #5a80fb;
 }
-.cerrar-sesion a{
+.btn-cerrar{
     background-color: #e2e2e2;
 }
 .modal input{
@@ -210,5 +206,7 @@ form .boton-modal{
 .modal-content{
     width: 100% !important;
 }
-
+.h-100{
+    height: 100px !important;
+}
 </style>

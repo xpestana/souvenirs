@@ -18,7 +18,7 @@
                             <div class="row caja-info">
                                 <div class="col-12 col-md-9 info-boton">
                                     <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
-                                    <h5 class="text-info p-3">Ventas totales<i class="fas fa-angle-right p-1"></i></h5>
+                                    <h5 class="text-info p-3"><Link :href="route('collaborator.sales.hab')">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
                                 </div>
                                 <div class="col-12 col-md-3 info-total text-right">
                                     <h3 class="text-info"><strong>Total</strong></h3><br>
@@ -46,13 +46,13 @@
                                             aria-hidden="true">
                                             <!-- Change class .modal-sm to change the size of the modal -->
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
+                                                    <div class="modal-content mx-auto">
                                                         <div class="modal-body p-0">
                                                             <div class="row mt-5 mb-2">
                                                                 <div class="col-12 my-4 d-flex justify-content-center">
                                                                     <QRCodeVue3
-                                                                        :width="200"
-                                                                        :height="200"
+                                                                        :width="1080"
+                                                                        :height="1080"
                                                                         imgclass="souvenirs_img"
                                                                         :value="url+'?h='+hotel.id"
                                                                         :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
@@ -69,13 +69,13 @@
                                                                             ],
                                                                         },
                                                                         }"
-                                                                        fileExt="jpeg"
+                                                                        fileExt="png"
                                                                         :backgroundOptions="{ color: '#ffffff' }"
                                                                         :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
                                                                         :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
                                                                         :download="false"
                                                                         downloadButton="view-cart bg-info mt-3 souvenirs_btn"
-                                                                        :downloadOptions="{ name: 'souvenirs', extension: 'jpeg' }"
+                                                                        :downloadOptions="{ name: 'souvenirs', extension: 'png' }"
                                                                         crossOrigin="anonymous"
                                                                     />
                                                                 </div>
@@ -149,7 +149,7 @@
                             .createObjectURL(new Blob([response.data]));
                         const link = document.createElement('a');
                         link.href = url;
-                        link.setAttribute('download', 'souvenirs.jpg');
+                        link.setAttribute('download', 'souvenirs.png');
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
@@ -164,6 +164,10 @@ body{
 }
 .modal .btn-modal{
     background-color: #5a80fb;
+}
+.modal .souvenirs_img{
+    max-width: 50%;
+    margin: auto;
 }
 .main h1{
     font-size: 2em;

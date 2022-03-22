@@ -12,7 +12,7 @@
             </div>
             <div class="row cuerpo">
                 <div class="col-12 col-md-3 text-center">
-                    <p class="text-info mb-4"><strong class="pr-2">Ventas totales</strong><i class="fas fa-angle-right rounded-circle bg-info text-white px-2 py-1"></i></p>
+                    <Link :href="route('collaborator.sales.hab')"><p class="text-info mb-4"><strong class="pr-2">Ventas totales</strong><i class="fas fa-angle-right rounded-circle bg-info text-white px-2 py-1"></i></p></Link>
                     <img class="rounded-circle m-auto" :src="'/storage/hotel'+hotel.image" alt="">
                     <h6 class="mt-3"><strong>Piso {{hotel.planta}}</strong></h6>
                     <p class="ventas">VENTAS</p>
