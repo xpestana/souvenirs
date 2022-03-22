@@ -29,11 +29,6 @@
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">
-                        <div class="col-12 col-md-6">
-                            <input type="text" class="form-control w-100" v-model="form.code" disabled>
-                        </div>
-                    </div>
-                    <div class="row my-3 justify-content-start">
                         <div class="col-12 col-md-3 mb-2 mb-md-0">
                             <input type="text" class="form-control w-100" placeholder="Calle" v-model="form.calle">
                         </div>
@@ -55,7 +50,10 @@
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-3">
+                            <input type="text" class="form-control w-100" v-model="form.code" placeholder="N° de licencia VFT/SE/12345">
+                        </div>
+                        <div class="col-12 col-md-3">
                             <input type="text" class="form-control w-100" placeholder="Link-web"  v-model="form.url">
                         </div>
                     </div>
