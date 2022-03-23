@@ -284,6 +284,17 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::get('/ventas', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
     Route::get('/ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
     
+    
+    /* Politicas */
+    Route::get('/politicas/avisolegal',function(){
+         return Inertia::render('Collaborator/Politicas/AvisoLegal'); 
+    });
+    Route::get('/politicas/cookies',function(){
+        return Inertia::render('Collaborator/Politicas/Cookies'); 
+    });
+    Route::get('/politicas/privacidad',function(){
+        return Inertia::render('Collaborator/Politicas/Privacidad'); 
+    });
 });
 /*Ajustes*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {

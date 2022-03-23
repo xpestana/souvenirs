@@ -1,6 +1,7 @@
 <template>
  <Head title="Alojamientos"/>
  <div class="container">
+     <ModalCookies/>
     <div class="main">
         <div class="row mt-4">
             <div class="col-12 text-center">
@@ -111,7 +112,8 @@
 </template>
 <script>
     import { Inertia } from '@inertiajs/inertia'
-	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
+	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
+    import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
 	import { Head, Link } from '@inertiajs/inertia-vue3'
     import QRCodeVue3 from "qrcode-vue3"
 
@@ -120,7 +122,8 @@
 		components:{
 			Head,
             Link,
-            QRCodeVue3
+            QRCodeVue3,
+            ModalCookies
        },
        props: {
         hotels: Object,

@@ -1,5 +1,6 @@
 <template>
 	<div class="container">
+        <ModalCookies/>
         <div class="row mt-3">
             <div class="col-12 text-center">
                 <h1 class="display-4 text-info">Información personal</h1>
@@ -125,12 +126,13 @@
 	import { Head, Link } from '@inertiajs/inertia-vue3'
     import { Inertia } from '@inertiajs/inertia'
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
-
+    import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
 	export default {
 		layout:TemplateApp,
 		components:{
             Head,
-            Link
+            Link,
+            ModalCookies
 		},
 		data() {
         	return {

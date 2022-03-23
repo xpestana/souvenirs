@@ -1,5 +1,6 @@
 <template>
 	<div class="container mt-4 p-10 pb-4">
+		<ModalCookies/>
 		<form @submit.prevent="submit">
 		<div class="row justify-content-center">
 			<div class="col-md-6">
@@ -102,13 +103,15 @@
     import { Inertia } from '@inertiajs/inertia'
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 	import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
+	import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
 
 	export default {
 		layout:TemplateApp,
 		components:{
             ValidationErrors,
             Head,
-            Link
+            Link,
+			ModalCookies
 		},
 		data() {
         	return {
