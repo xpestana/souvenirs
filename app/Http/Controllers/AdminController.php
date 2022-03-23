@@ -117,4 +117,12 @@ class AdminController extends Controller
         $user=User::find($id)->delete();
         return back()->with(['id'=>$id, 'message' => 'Eliminado con exito', 'code' => 200, 'status' => 'success']); 
     }
+
+    /*Admin nuevo*/
+
+
+    public function home()
+    {
+        return Inertia::render('Admin/index');
+    }
 }

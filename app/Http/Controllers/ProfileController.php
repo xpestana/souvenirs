@@ -28,6 +28,9 @@ class ProfileController extends Controller
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
             return Redirect::route('collaborator.index');
         }
+        if (auth()->user()->getRoleNames()->first() == 'Admin') {
+            return Redirect::route('admin.home');
+        }
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
             $hotel = hotel::find(auth()->user()->hotel->first()->id);
             $url = env('APP_URL');
