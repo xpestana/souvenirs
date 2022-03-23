@@ -291,6 +291,14 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
     Route::put('/ajustes/profile', [ProfileCollaboratorController::class, 'profile'])->name('collaborator.profile.update');  
     Route::put('/ajustes/fiscal', [ProfileCollaboratorController::class, 'fiscal'])->name('collaborator.fiscal.update');  
 });
+
+/*Admin*/
+
+Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(function () {
+
+    Route::get('/inicio', [AdminController::class, 'home'])->name('admin.home');
+
+});
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 
 require __DIR__.'/auth.php';
