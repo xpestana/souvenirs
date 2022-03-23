@@ -1,83 +1,67 @@
-<template>
-    <Head title="Inicio de Sesión"/>
-    <Layout>
-    <Breadcrumb title="Sesión"/>
-    <!-- Login Page Start Here -->
-        <div class="login white-bg ptb-80">
-            <div class="container">
-              <h3 class="login-header text-info">Bienvenido, Ingresa a tu cuenta</h3>
-               <div class="row">
-                   <div class="col-lg-6 offset-lg-3">
-                        <BreezeValidationErrors class="mb-3" />
-                        <div class="login-footer text-center">
-                            <div v-if="status" class="mb-4 font-medium text-sm text-danger">
-                                {{ status }}
-                            </div>
-                        </div>
-                        <div class="login-form">
-                            <form @submit.prevent="submit">
-                                <div class="form-group row">
-                                    <label for="email" class="col-sm-3 col-form-label">Correo Electrónico</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" class="form-control" id="email" name="email" placeholder="Correo Electrónico" v-model="form.email" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="password" class="col-sm-3 col-form-label">Contraseña</label>
-                                    <div class="col-sm-7">
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" v-model="form.password" required>
-                                        <button class="btn show-btn" type="button" v-on:click="showPass('password')"><i class="far fa-eye"></i></button>
-                                    </div>
-                                    <div class="col-sm-7 mt-3 ml-2">
-                                        <label class="flex items-center">
-                                            <BreezeCheckbox name="remember" v-model:checked="form.remember" />
-                                                <span class="ml-2 text-sm text-gray-600 mt-3">Recordarme</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="login-details text-center mb-25">
-                                    <Link :href="route('password.request')">¿Ólvido su contraseña? </Link>
-                                    <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                        Entrar
-                                    </BreezeButton>
-                                </div>
+<template>          
+<!-- <input type="text" class="form-control" id="email" name="email" placeholder="Correo Electrónico" v-model="form.email" required>
+<input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" v-model="form.password" required>
+<button class="btn show-btn" type="button" v-on:click="showPass('password')"><i class="far fa-eye"></i></button>
+    <BreezeCheckbox name="remember" v-model:checked="form.remember" />
+<Link :href="route('password.request')">¿Ólvido su contraseña? </Link>
+<BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+    Entrar 
+</BreezeButton>-->
+                            
 
-                            </form>
-                        </div>
-                        
-                   </div>
-               </div>
+ 
+
+ <section>
+        <div class="row w-100 p-0 m-0">
+            <div class="col-md-7 up py-4">
+                <div class="col-md-12 text-center">
+                    <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/logopequeño.png">
+
+                    <h1 class="title">Lo hacemos por ti</h1>
+                    <div class="caja-info mt-4">
+                        <p>
+                            Horario disponible: <br>
+                            8:30-14:30 h. <br>
+                            (+34) 777 777 777
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 up degrad py-4">
+                <div class="col-md-12 text-center">
+                    <h1 class="text-white mb-4 title_white">¡Bienvenido a HiCitty!</h1>
+                    <div class="col-md-10 mx-auto">
+                        <form @submit.prevent="submit" class=" mt-10">
+                            <BreezeInput type="email" class="form-control my-3 py-4" id="email" name="email" autocomplete="on" placeholder="E-mail" v-model="form.email" required/>
+                            <BreezeInput type="password" class="form-control my-3 py-4" name="password" id="password" autocomplete="off" placeholder="Contraseña" v-model="form.password" required/>
+                            <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Iniciar sesión</button>
+                            <BreezeValidationErrors class="my-3" />
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    <!-- Login Page End Here -->
-    </Layout>
- 
+    </section>  
 </template>
 
 <script>
 import BreezeButton from '@/Components/Button.vue'
+import BreezeInput from '@/Components/Input.vue'
 import BreezeCheckbox from '@/Components/Checkbox.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue' 
-import Layout from '@/Layouts/Layout.vue'     
+import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
-    //layout: BreezeGuestLayout,
-
     components: {
         BreezeButton,
+        BreezeInput,
         BreezeCheckbox,
-        Breadcrumb,
         BreezeValidationErrors,
-        Head,
         Link,
-        Layout,
     },
 
     props: {
-        canResetPassword: Boolean,
-        status: String,
+        canResetPassword: Boolean
     },
     data() {
         return {
@@ -103,3 +87,41 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .up{
+        display: flex;
+        align-items: center;
+        height: 100vh;
+    }
+    .caja-info p {
+        border-radius: 30px;
+        border: 1px solid #70b3c6;
+        display: inline-block;
+        padding: 15px;
+        color:#70b3c6;
+        line-height: 1.5;
+        font-size: 16px;
+    }
+    .title{
+        font-size: 33px;
+        font-weight: 600;
+    }
+    .degrad{
+        background-image: linear-gradient(175deg, #cff3fb 0, #b7e3ee 25%, #9dd2e1 50%, #82c1d4 75%, #69b2c9 100%);
+    }
+    .title_white{
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .register_btn{
+        font-size: 20px;
+    }
+    @media (max-width:992px){
+        .up{
+            height: 100%;
+        }
+        .title_white{
+            font-size: 20px;
+        }
+    }
+</style>

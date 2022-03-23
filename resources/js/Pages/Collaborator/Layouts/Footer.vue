@@ -8,14 +8,14 @@
                         <div class="col-12 col-md-3">
                             <div class="footer-widget mb-40">
                                 <div class="footer-title mb-55">
-                                    <h4>HiCity</h4>
+                                    <h4>HiCitty</h4>
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li class="pb-4"><Link :href="route('about.us')">¿Quiénes somos?</Link></li>
-                                        <li class="pb-4"><Link :href="route('contact')">Contáctanos</Link></li>
-                                        <li class="pb-4"><a href="#">Blog</a></li>
-                                        <li class="pb-4"><a href="#">Trabaja con nosotros</a></li>
+                                        <li class="pb-2"><Link :href="route('about.us')">¿Quiénes somos?</Link></li>
+                                        <li class="pb-2"><Link :href="route('contact')">Contáctanos</Link></li>
+                                        <li class="pb-2"><a href="#">Blog</a></li>
+                                        <li class="pb-2"><a href="#">Trabaja con nosotros</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -27,8 +27,8 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li class="pb-4"><Link :href="route('activities')">Actividades</Link></li>
-                                        <li class="pb-4"><Link :href="route('souvenirs')">Souvenirs</Link></li>
+                                        <li class="pb-2"><Link :href="route('activities')">Actividades</Link></li>
+                                        <li class="pb-2"><Link :href="route('souvenirs')">Souvenirs</Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -40,10 +40,10 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li><a href="#">Políticas de privacidad</a></li>
-                                        <li><a href="#">Términos y condiciones</a></li>
-                                        <li><a href="#">Políticas de envío</a></li>
-                                        <li><a href="#">Políticas de reembolso</a></li>
+                                        <li class="pb-2"><a href="#">Políticas de privacidad</a></li>
+                                        <li class="pb-2"><a href="#">Términos y condiciones</a></li>
+                                        <li class="pb-2"><a href="#">Políticas de envío</a></li>
+                                        <li class="pb-2"><a href="#">Políticas de reembolso</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -55,10 +55,7 @@
                                 <a href="#" class="btn btn-success mx-3 px-2 py-1">
                                     <i class="fab fa-whatsapp p-1"></i>
                                 </a>
-                                <a href="#" class="btn mx-3 px-2 py-1 text-white" style="background-color: #3b5998;">
-                                    <i class="fab fa-facebook p-1"></i>
-                                </a>
-                                <a href="#" class="btn mx-3 px-2 py-1 text-white btn-danger">
+                                <a href="#" class="btn mx-3 px-2 py-1 text-white insta">
                                     <i class="fab fa-instagram p-1"></i>
                                 </a>
                                 <a href="#" class="btn btn-info text-white mx-3 px-2 py-1">
@@ -96,6 +93,9 @@
 }
 .footer-social i{
     font-size:20px;
+}
+.footer-social .insta{
+    background: linear-gradient(201deg, rgba(131,58,180,1) 10%, rgb(255 0 84) 50%, rgba(252,176,69,1) 100%);
 }
 .footer-top .footer-whatsapp i{
     font-size: 1.8em;

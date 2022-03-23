@@ -20,8 +20,8 @@
             </div>
             <div class="row mt-2 py-2 justify-content-center justify-content-md-start">
                 <div class="col-12 col-md-5">
-                    <label class="py-2">Numero de teléfono</label>
-                    <input type="text" class="input-datos" placeholder="Numero de teléfono"  v-model="formP.phone">
+                    <label class="py-2">Número de teléfono</label>
+                    <input type="text" class="input-datos" placeholder="Número de teléfono"  v-model="formP.phone">
                 </div>
                 <div class="col-12 col-md-5">
                     <label class="py-2">Contraseña</label>
@@ -43,11 +43,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="row justify-content-between my-2 h-100">
-                <div class="col-12 col-md-5 align-self-start">
-                    <a href="javascript:void(0);" @click.prevent="logout" class="btn btn-lg text-white btn-cerrar mt-4">Cerrar sesión<i class="fas fa-key pl-1 pr-2"></i></a>
+            <div class="row justify-content-between my-2 align-items-center">
+                <div class="col-12 col-md-5">
+                    <a href="javascript:void(0);" @click.prevent="logout" class="btn btn-lg text-white btn-cerrar">Cerrar sesión<i class="fas fa-key pl-1 pr-2"></i></a>
                 </div>
-                <div class="col-12 col-md-5 text-right align-self-end">
+                <div class="col-12 col-md-5 text-right btn-guardar">
                     <button class="btn btn-primary px-3 py-1 rounded-pill">Guardar cambios</button>
                 </div>
             </div>
@@ -208,7 +208,10 @@ form .boton-modal{
 .modal-content{
     width: 100% !important;
 }
-.h-100{
-    height: 100px !important;
+@media (max-width:767px){
+    form .btn-guardar{
+        text-align: left !important;
+        margin-top:20px
+    }   
 }
 </style>
