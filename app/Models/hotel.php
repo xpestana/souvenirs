@@ -36,4 +36,8 @@ class hotel extends Model
     {
         return $this->belongsToMany(User::class)->withPivot('manager');
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

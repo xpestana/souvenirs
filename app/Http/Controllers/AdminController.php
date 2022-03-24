@@ -125,4 +125,11 @@ class AdminController extends Controller
     {
         return Inertia::render('Admin/index');
     }
+
+    public function colaboradores()
+    {
+        $collaborators = User::role('Hotel')->with('profile','hotel.orders.shippings')->paginate(10);
+        //dd($collaborators);
+        return Inertia::render('Admin/Collaborators',compact('collaborators'));
+    }
 }
