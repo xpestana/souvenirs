@@ -49,8 +49,10 @@ class SalesController extends Controller
 
         if (auth()->user()) {
             $user = auth()->user();
+            $hotel_id = auth()->user()->hotel->first()->id;
         }else{
             $user = User::where('email','clientAdmin@email.com')->first();
+            $hotel_id= null;
         }
         try {
             $payment = $user->charge(
@@ -64,7 +66,8 @@ class SalesController extends Controller
             $order = Order::create([ 
                 'user_id' => $user->id,
                 'transaction_id' => $payment->charges->data[0]->id,
-                'total' => $payment->charges->data[0]->amount
+                'total' => $payment->charges->data[0]->amount,
+                'hotel_id' => $hotel_id,
             ]);
             $products = Cart::getContent();
             foreach($products as $product){

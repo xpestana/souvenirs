@@ -309,6 +309,8 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
 
     Route::get('/inicio', [AdminController::class, 'home'])->name('admin.home');
 
+    Route::get('/colaboradores', [AdminController::class, 'colaboradores'])->name('admin.colaboradores');
+
 });
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 
