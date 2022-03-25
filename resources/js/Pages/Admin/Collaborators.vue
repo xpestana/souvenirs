@@ -32,7 +32,7 @@
 		<div class="container px-0 cuerpo">
 			<div v-for="clbtr in colaboradores" :key="clbtr.id" class="row colaborador my-4 p-2 w-75 mx-auto bg-light">
 				<div class="col-12 col-md-7">
-					<h1 class="pt-1 pb-2 font-weight-bolder">{{clbtr.name}}</h1>
+					<h1 class="pt-1 pb-2 font-weight-bolder">{{clbtr.profile.firstname}}</h1>
 				</div>
 				<div class="col-12 col-md-5">
 					<p class="font-weight-bolder text-muted mt-3">{{clbtr.email}}</p>
