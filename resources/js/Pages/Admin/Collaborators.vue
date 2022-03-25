@@ -32,7 +32,7 @@
 		<div class="container px-0 cuerpo">
 			<div v-for="clbtr in colaboradores" :key="clbtr.id" class="row colaborador my-4 p-2 w-75 mx-auto bg-light">
 				<div class="col-12 col-md-7">
-					<h1 class="pt-1 pb-2 font-weight-bolder">{{clbtr.profile.firstname}}</h1>
+					<h1 class="pt-1 pb-2 font-weight-bolder">{{clbtr.name}}</h1>
 				</div>
 				<div class="col-12 col-md-5">
 					<p class="font-weight-bolder text-muted mt-3">{{clbtr.email}}</p>
@@ -45,15 +45,27 @@
 					</div>
 				</div>
 			</div>
+			<div class="row justify-content-center mb-3">
+            	<div class="col-9">
+                	<paginator :paginator="collaborators"/>
+                </div>
+            </div>
 		</div>
 	</section>
 </template>
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
+import Paginator from '@/Components/Paginator.vue'
 export default {
 	layout:Layout,
+	components: {
+		Paginator
+	},
 	props: {
 	collaborators: Object
+	},
+	created(){
+		console.log(this.collaborators.data);
 	},
 	data(){
 		return{
@@ -64,7 +76,7 @@ export default {
 		datacol(){
 			const obj = this.collaborators.data.map((col)=>{
 				return {
-					name : col.name,
+					name : col.profile.firstname,
 					email : col.email,
 					lodgings: col.hotel.length,
 					hotel: col.hotel,
