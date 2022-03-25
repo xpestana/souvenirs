@@ -186,9 +186,14 @@ class AdminController extends Controller
 
          return back()->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
     }
+
     public function collaborator_details($id)
     {
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
         return Inertia::render('Admin/Collaborators/Show',compact('collaborator'));
+    }
+
+    public function collaborator_lodging_edit(){
+        return 'Editar alojamiento';
     }
 }

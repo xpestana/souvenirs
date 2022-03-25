@@ -313,6 +313,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/crear/colaborador', [AdminController::class, 'collaborator_create'])->name('admin.collaborator.create');
     Route::post('/colaborador/store', [AdminController::class, 'collaborator_store'])->name('admin.collaborator.store');
     Route::get('/colaborador/{id}', [AdminController::class, 'collaborator_details'])->name('admin.collaborator.show');
+    Route::get('/colaborador/alojamiento/edit', [AdminController::class, 'collaborator_lodging_edit'])->name('admin.collaborator.lodging.edit');
 
 });
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/

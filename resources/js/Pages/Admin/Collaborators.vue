@@ -8,7 +8,7 @@
 			</div>
 			<div class="row justify-content-around opciones w-75 mx-auto align-items-center">
 				<div class="col-12 col-md-4 my-2 my-md-0">
-					<button class="btn btn-primary py-1 w-100 px-0">Agregar colaborador<i class="fas fa-plus px-3"></i></button>
+					<a type="button" class="btn btn-primary py-1 w-100 px-0" @click.prevent="createCollaborator" >Agregar colaborador<i class="fas fa-plus px-3"></i></a>
 				</div>
 				<div class="col-12 col-md-4 my-2 my-md-0">
 					<div class="input-search m-0">
@@ -30,23 +30,25 @@
 			</div>
 			</div>
 		<div class="container px-0 cuerpo">
-			<div v-for="clbtr in colaboradores" :key="clbtr.id" class="row colaborador my-4 p-2 w-75 mx-auto bg-light">
-				<div class="col-12 col-md-7">
-					<h1 class="pt-1 pb-2 font-weight-bolder">{{clbtr.name}}</h1>
-				</div>
-				<div class="col-12 col-md-5">
-					<p class="font-weight-bolder text-muted mt-3">{{clbtr.email}}</p>
-				</div>
-				<div class="col-12">
-					<div class="d-md-inline-flex mt-3">
-						<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Benefecio total <br> 0€</p>
-						<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Pedidos totales: <br>{{clbtr.orders }} </p>
-						<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Alojamientos registrados: <br> {{clbtr.lodgings}}</p>
+			<Link v-for="clbtr in colaboradores" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
+				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light">
+					<div class="col-12 col-md-7">
+						<h1 class="pt-1 pb-2 font-weight-bolder">{{clbtr.name}}</h1>
+					</div>
+					<div class="col-12 col-md-5">
+						<p class="font-weight-bolder text-muted mt-3">{{clbtr.email}}</p>
+					</div>
+					<div class="col-12">
+						<div class="d-md-inline-flex mt-3">
+							<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Benefecio total <br> 0€</p>
+							<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Pedidos totales: <br>{{clbtr.orders }} </p>
+							<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Alojamientos registrados: <br> {{clbtr.lodgings}}</p>
+						</div>
 					</div>
 				</div>
-			</div>
+			</Link>
 			<div class="row justify-content-center mb-3">
-            	<div class="col-9">
+            	<div class="col-4">
                 	<paginator :paginator="collaborators"/>
                 </div>
             </div>
@@ -56,10 +58,12 @@
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import Paginator from '@/Components/Paginator.vue'
+import { Link } from '@inertiajs/inertia-vue3'
 export default {
 	layout:Layout,
 	components: {
-		Paginator
+		Paginator,
+		Link
 	},
 	props: {
 	collaborators: Object
@@ -72,11 +76,19 @@ export default {
 			search:''
 		}
 	},
+	methods:{
+		createCollaborator(){
+			this.$inertia.get(route('admin.collaborator.create'),{}, {
+				preserveScroll: true
+			})
+		},
+	},
 	computed:{
 		datacol(){
 			const obj = this.collaborators.data.map((col)=>{
 				return {
-					name : col.profile.firstname,
+					id : col.id,
+					name : col.profile == null ? 'Sin nombre' : col.profile.firstname,
 					email : col.email,
 					lodgings: col.hotel.length,
 					hotel: col.hotel,
@@ -103,8 +115,6 @@ export default {
 			}
 			return this.datacol;
 		}
-	},
-	methods:{
 	}
 }
 </script>
