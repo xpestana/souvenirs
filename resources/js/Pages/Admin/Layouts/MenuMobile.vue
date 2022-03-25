@@ -23,7 +23,7 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-              <Link :href="route('admin.home')" class="nav-link py-0">
+              <Link :href="route('admin.colaboradores')" class="nav-link py-0">
                   <div class="d-inline-flex">
                       <i class="fas fa-city my-auto pr-1"></i>
                       <p class="p-2 font-weight-bolder">Gestor de colaboradores</p>
@@ -80,7 +80,11 @@
 
 </template>
 <script>
+import { Link } from '@inertiajs/inertia-vue3';
 export default {
+    components:{
+        Link,
+    },
     methods:{
         navIcon(){
             $('.animated-icon1').toggleClass('open');

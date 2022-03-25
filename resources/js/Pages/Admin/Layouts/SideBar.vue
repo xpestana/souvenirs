@@ -6,15 +6,15 @@
     <div class="items">
         <ul>
             <li class="mb-3 pl-2 pb-2">
-                <Link :href="route('admin.home')" class="link">
+                <Link :href="route('admin.colaboradores')" class="link" :class="{ 'active': $page.url === '/admin/colaboradores' }">
                     <div class="d-inline-flex">
                         <i class="fas fa-city my-auto pr-1"></i>
-                        <p class="p-2 font-weight-bolder">Gestor de colaboradores</p>
+                        <p class="p-2 font-weight-bolder" :class="{ 'active': $page.url === '/admin/colaboradores' }">Gestor de colaboradores</p>
                     </div>
                 </Link>
             </li>
             <li class="mb-3 pl-2 pb-2">    
-                <Link :href="route('admin.home')"  class="link">
+                <Link :href="route('admin.home')" class="link">
                     <div class="d-inline-flex">
                         <i class="fas fa-biking my-auto pr-1"></i>
                         <p class="p-2 font-weight-bolder">Gestión de actividades</p>
@@ -46,7 +46,7 @@
                 </Link>
             </li>
             <li class="mb-3 pl-2 pb-2">
-                <Link :href="route('admin.home')"  class="link">
+                <Link :href="route('logout')"  class="link">
                     <div class="d-inline-flex">
                         <i class="fas fa-power-off my-auto pr-1"></i>
                         <p class="p-2 font-weight-bolder">Cerrar Sesión</p>
@@ -67,6 +67,9 @@ export default {
 </script>
 
 <style scoped>
+.active{
+    color:#70baf7;
+}
 #sidebar{
     height: 100vh;
     position: sticky;

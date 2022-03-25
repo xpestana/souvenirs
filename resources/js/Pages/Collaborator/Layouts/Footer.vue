@@ -51,15 +51,15 @@
                     </div>
                     <div class="footer-social">
                         <div class="row justify-content-center pb-3">
-                            <div class="col-12 col-md-6 text-center">
-                                <a href="#" class="btn btn-success mx-3 px-2 py-1">
-                                    <i class="fab fa-whatsapp p-1"></i>
+                            <div class="col-8 col-md-3 text-center d-inline-flex">
+                                <a href="#" class="my-auto mx-3">
+                                    <i class="fab fa-whatsapp text-white rounded-circle bg-success p-2"></i>
                                 </a>
-                                <a href="#" class="btn mx-3 px-2 py-1 text-white insta">
-                                    <i class="fab fa-instagram p-1"></i>
+                                <a href="#" class="">
+                                    <img src="/vendor_asset/img/social/inst.png"  height="70" width="70" class="px-2">
                                 </a>
-                                <a href="#" class="btn btn-info text-white mx-3 px-2 py-1">
-                                    <i class="fab fa-twitter p-1"></i>
+                                <a href="#" class="">
+                                    <img src="/vendor_asset/img/social/tw.png"  height="70" width="70" class="px-2">
                                 </a>
                             </div>
                         </div>
@@ -91,19 +91,10 @@
 .bg-footer{
     background-color: #31516B;
 }
-.footer-social i{
-    font-size:20px;
+.footer-social .fa-whatsapp{
+    font-size: 2em;
+    padding: 4px 6px;
 }
-.footer-social .insta{
-    background: linear-gradient(201deg, rgba(131,58,180,1) 10%, rgb(255 0 84) 50%, rgba(252,176,69,1) 100%);
-}
-.footer-top .footer-whatsapp i{
-    font-size: 1.8em;
-}
-.footer-top .footer-whatsapp p{
-    /* font-family: 'Work Sans', sans-serif; */
-    font-family: 'Futur';
-    font-weight: 400;
-    font-size: 16px;
-}
+
+
 </style>
