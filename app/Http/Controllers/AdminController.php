@@ -168,7 +168,7 @@ class AdminController extends Controller
         ]);
 
         $userProfile = profile::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => $user->id,
             'firstname' => $request->name,
             'phone' => $request->phone,
             'gestor' => $request->gestor,
