@@ -60,6 +60,9 @@
 					<Link  :href="route('admin.collaborator.lodging.edit')" class="btn btn-sm btn-secondary w-75 py-0">Editar</Link>
 				</div>
 			</div>
+			<div class="text-center mt-5" v-if="collaborator.hotel.length == 0">
+				<h1 class="text-muted font-font-weight-bolder pb-5">No hay alojamientos registrados para este usuario</h1>
+			</div>
 		</section>	
 	</div>  
 </template>

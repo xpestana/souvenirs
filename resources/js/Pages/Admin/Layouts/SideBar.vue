@@ -5,51 +5,51 @@
     </div>
     <div class="items">
         <ul>
-            <li class="mb-3 pl-2 pb-2">
-                <Link :href="route('admin.colaboradores')" class="link" :class="{ 'active': $page.url === '/admin/colaboradores' }">
+            <li class="mb-3 item pl-2 pb-2">
+                <Link :href="route('admin.colaboradores')" class="link" :class="{ 'active': urlLimpia === '/admin/colaboradores'}">
                     <div class="d-inline-flex">
                         <i class="fas fa-city my-auto pr-1"></i>
-                        <p class="p-2 font-weight-bolder" :class="{ 'active': $page.url === '/admin/colaboradores' }">Gestor de colaboradores</p>
+                        <p class="p-2" :class="{ 'active': urlLimpia === '/admin/colaboradores'}">Gestor de <br> colaboradores</p>
                     </div>
                 </Link>
             </li>
-            <li class="mb-3 pl-2 pb-2">    
+            <li class="mb-3 item pl-2 pb-2">    
                 <Link :href="route('admin.home')" class="link">
                     <div class="d-inline-flex">
                         <i class="fas fa-biking my-auto pr-1"></i>
-                        <p class="p-2 font-weight-bolder">Gestión de actividades</p>
+                        <p class="p-2">Gestión de <br> actividades</p>
                     </div>
                 </Link>
             </li>
-            <li class="mb-3 pl-2 pb-2">
+            <li class="mb-3 item pl-2 pb-2">
                 <Link :href="route('admin.home')"  class="link">
                     <div class="d-inline-flex">
                         <i class="fas fa-gift my-auto pr-1"></i>
-                        <p class="p-2 font-weight-bolder">Gestión de souvenirs</p>
+                        <p class="p-2">Gestión de <br>souvenirs</p>
                     </div>
                 </Link>
             </li>
-            <li class="mb-3 pl-2 pb-2">
+            <li class="mb-3 item pl-2 pb-2">
                 <Link :href="route('admin.home')"  class="link">
                     <div class="d-inline-flex">
                         <i class="fas fa-shopping-cart my-auto pr-1"></i>
-                        <p class="p-2 font-weight-bolder">Mis ventas</p>
+                        <p class="p-2">Mis ventas</p>
                     </div>
                 </Link>
             </li>
-            <li class="mb-3 pl-2 pb-2">
+            <li class="mb-3 item pl-2 pb-2">
                 <Link :href="route('admin.home')"  class="link">
                     <div class="d-inline-flex">
                         <i class="fas fa-cog my-auto pr-1"></i>
-                        <p class="p-2 font-weight-bolder">Ajustes</p>
+                        <p class="p-2">Ajustes</p>
                     </div>
                 </Link>
             </li>
-            <li class="mb-3 pl-2 pb-2">
+            <li class="mb-3 item pl-2 pb-2">
                 <Link :href="route('logout')"  class="link">
                     <div class="d-inline-flex">
                         <i class="fas fa-power-off my-auto pr-1"></i>
-                        <p class="p-2 font-weight-bolder">Cerrar Sesión</p>
+                        <p class="p-2">Cerrar Sesión</p>
                     </div>
                 </Link>
             </li>
@@ -62,6 +62,13 @@ import { Link } from '@inertiajs/inertia-vue3';
 export default {
     components:{
         Link
+    },
+    computed:{
+        urlLimpia(){
+            let url = this.$page.url;
+            console.log(url.split("?","1")[0]);
+            return url.split("?","1")[0];
+        }
     }
 }
 </script>
@@ -83,5 +90,16 @@ export default {
 #sidebar .items .link:hover,
 #sidebar .items p:hover{
     color: #70baf7;
+}
+@media (min-width:1300px){
+    #sidebar .items li i{
+        font-size: 20px;
+    }
+    #sidebar .items li p{
+        font-size: 16px;
+    }
+    #sidebar .items .item{
+        margin: 16px 0;
+    }
 }
 </style>

@@ -7,8 +7,8 @@
 				</div>
 			</div>
 			<div class="row justify-content-around opciones w-75 mx-auto align-items-center">
-				<div class="col-12 col-md-4 my-2 my-md-0">
-					<a type="button" class="btn btn-primary py-1 w-100 px-0" @click.prevent="createCollaborator" >Agregar colaborador<i class="fas fa-plus px-3"></i></a>
+				<div class="col-12 col-md-5 my-lg-2 my-md-0">
+					<a type="button" class="btn btn-primary py-1 px-2 agregar" @click.prevent="createCollaborator" >Agregar colaborador<i class="fas fa-plus px-1 px-lg-3"></i></a>
 				</div>
 				<div class="col-12 col-md-4 my-2 my-md-0">
 					<div class="input-search m-0">
@@ -16,7 +16,7 @@
 						<input type="text" class="form-control rounded-sm" placeholder="Search" v-model="search">
 					</div>
 				</div>
-				<div class="col-12 col-md-4 pl-md-5 my-2 my-md-0 select-aloj">
+				<div class="col-12 col-md-3 pl-md-5 my-2 my-md-0 select-aloj">
 					<div class="dropdown">
 						<button class="text-muted dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Alojamiento
@@ -30,23 +30,34 @@
 			</div>
 			</div>
 		<div class="container px-0 cuerpo">
-			<Link v-for="clbtr in colaboradores" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
-				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light">
+			
+				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light" v-for="clbtr in colaboradores" :key="clbtr.id">
+					<Link  :href="route('admin.collaborator.show',clbtr.id)">
 					<div class="col-12 col-md-7">
-						<h1 class="pt-1 pb-2 font-weight-bolder">{{clbtr.name}}</h1>
+						<h1 class="pt-1 pb-2 font-weight-bolder text-center text-md-left">{{clbtr.name}}</h1>
 					</div>
 					<div class="col-12 col-md-5">
-						<p class="font-weight-bolder text-muted mt-3">{{clbtr.email}}</p>
+						<p class="font-weight-bolder text-muted mt-3 text-center text-md-left">{{clbtr.email}}</p>
 					</div>
 					<div class="col-12">
-						<div class="d-md-inline-flex mt-3">
-							<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Benefecio total <br> 0€</p>
-							<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Pedidos totales: <br>{{clbtr.orders }} </p>
-							<p class="pr-md-4 font-weight-bolder text-muted text-md-center">Alojamientos registrados: <br> {{clbtr.lodgings}}</p>
+						<div class="d-md-inline-flex mt-3 pb-2 pb-md-0">
+							<div class="pr-md-4 text-md-center">
+								<p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
+								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0€</p>
+							</div>
+							<div class="pr-md-4 text-md-center"> 
+								<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
+								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.orders }}</p>
+							</div>
+							<div class="pr-md-4 text-md-center"> 
+								<p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
+								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.lodgings}}</p>
+							</div>
 						</div>
 					</div>
+					</Link>
 				</div>
-			</Link>
+			
 			<div class="row justify-content-center mb-3">
             	<div class="col-4">
                 	<paginator :paginator="collaborators"/>
@@ -147,10 +158,13 @@ export default {
 .cuerpo .colaborador h1{
     font-size: 30px;
 }
+.cabeza .agregar{
+	font-size: 17px;
+}
 @media (max-width: 900px)
 {
 	.cabeza .titulo h1{
 	 font-size: 2.5em;
-}
+	}
 }
 </style>
