@@ -196,4 +196,26 @@ class AdminController extends Controller
     public function collaborator_lodging_edit(){
         return 'Editar alojamiento';
     }
+
+    public function admins(Request $request)
+    {
+        $admins = User::role('Admin')
+                ->search($request->search)
+                ->email($request->search)
+                ->with('profile')
+                ->paginate(10);
+        return Inertia::render('Admin/Admin',compact('admins'));
+    }
+    public function administrator_create(Request $request)
+    {
+        return Inertia::render('Admin/Admins/Create');
+    }
+    public function administrator_store(Request $request)
+    {
+        return back();
+    }
+    public function administrator_details(Request $request)
+    {
+        return Inertia::render('Admin/Admins/Update');
+    }
 }
