@@ -55,7 +55,7 @@
               </Link>
               </li>
               <li class="nav-item">
-              <Link :href="route('admin.home')"  class="nav-link py-0">
+              <Link :href="route('admin.administradores')"  class="nav-link py-0">
                   <div class="d-inline-flex">
                       <i class="fas fa-cog my-auto pr-1"></i>
                       <p class="p-2 font-weight-bolder">Ajustes</p>

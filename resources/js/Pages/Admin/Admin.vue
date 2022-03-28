@@ -1,13 +1,69 @@
 <template>
-	<form @submit.prevent="submit">
-		<input type="text" name="search" v-model="form.search">
-		<button class="btn btn-primary rounded-pill py-0 px-3 mt-3">Buscar</button>
-	</form>
+	<div class="container px-0 px-lg-5 pt-md-5">
+		<div class="tabla-container">
+			<div class="row text-center">
+				<div class="col-12 py-4">
+					<h1 class="display-4 text-azulc font-weight-bolder">Gestión de administradores</h1>
+				</div>
+			</div>
+			<div class="row justify-content-center justify-content-md-between px-lg-5 pt-4">
+				<div class="col-11 col-md-6 col-lg-5 text-center text-md-left">
+					<Link type="button" :href="route('admin.administrator.create')" class="btn btn-azulc py-1 px-3 text-white">Agregar administrador<i class="fas fa-plus px-1 px-lg-2"></i></Link>
+				</div>
+				<div class="col-8 col-sm-5 col-md-5 col-lg-3 mt-2 mt-md-0">
+					<div class="input-search m-0">
+						<span class="fa fa-search text-muted d-block position-absolute text-center"></span>
+						<input type="text" class="form-control rounded-sm" placeholder="Search" v-model="form.search" @keyup.prevent="submit">
+					</div>
+				</div>
+			</div>
+			<div class="row px-lg-5 pt-3">
+				<div class="col-12">
+					<div class="table-responsive-md bg-white">
+						<table class="table table-striped table-borderless">
+							<thead class="table-active text-center">
+								<tr>
+									<th scope="col">Nombre</th>
+									<th scope="col">Apellido</th>
+									<th scope="col">Dirección de correo</th>
+									<th scope="col">Acciones</th>
+								</tr>
+							</thead>
+							<tbody class="text-center" id="tbody">
+								<tr v-for="admin in admins.data" :key="admin.id">
+									<td>{{admin.profile.firstname}}</td>
+									<td>{{admin.profile.lastname}}</td>
+									<td>{{admin.email}}</td>
+									<td>
+										<Link :href="route('admin.administrator.show',admin.id)" class="btn btn-sm btn-editar d-inline text-white">Editar</Link>
+										<a href="#" class="btn btn-sm btn-danger d-inline ml-1" @click="eliminar">Eliminar</a>
+									</td>
+								</tr>
+								<tr v-if="admins.data.length < 1">
+									<td colspan="4">No hay resultados para la busqueda</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-md-center px-lg-5 py-2 mb-3 mx-md-5">
+				<div class="col-12 col-md-6 px-auto px-sm-0 py-3 py-sm-0">
+					<paginator :paginator="admins" />
+				</div>
+			</div>
+		</div>
+		<div class="img-container d-none d-md-block">
+			<img src="/vendor_asset/img/userimg.png" height="800" width="1000">
+		</div>
+	</div>
 </template>
 <script>
 import Paginator from '@/Components/Paginator.vue'
 import { Link } from '@inertiajs/inertia-vue3'
+import Layout from '@/Pages/Admin/Layouts/Layout'
 export default {
+	layout:Layout,
 	components: {
 		Paginator,
 		Link
@@ -17,6 +73,7 @@ export default {
 	},
 	created(){
 		console.log("usuarios administradores: ",this.admins.data);
+		console.log("admins: ",this.admins);
 		//console.log("datos de perfil administradores: ",this.admins.data[0].profile);
 	},
 	data(){
@@ -26,13 +83,80 @@ export default {
 			})
 		}
 	},
-	methods: {
-        submit() {
-            this.form.get(this.route('admin.administradores'), {
-                preserveScroll: true,
-            });
-        }
-    }
+	mounted(){
+		this.busqueda()
+	},
+	methods:{
+		busqueda(){
+			let input = this.$page.url.split("?search=","2")[1];
+			if(input !== undefined){
+				this.form.search = input;	
+			}
+		},
+		submit() {
+			this.admins.data = {};
+			let nodos = document.getElementById('tbody').childNodes.length;
+			if(nodos == 3 || nodos > 4){
+				let tr =`<tr><td colspan="4">
+					<div class="spinner-border text-info" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</td></tr>`
+				document.getElementById('tbody').insertAdjacentHTML("afterbegin",tr);
+			}
+			setTimeout(()=>{
+				this.form.get(this.route('admin.administradores'), {
+					preserveScroll: true,
+				});
+			},1500);
+		},
+		eliminar(){
+			this.$swal({
+                    title: '¿Esta seguro de eliminar a este usuario?',
+                    icon: 'warning',
+                    showCloseButton: false,
+                    showCancelButton: true,
+					showConfirmButton: false,
+                    focusConfirm: false,
+                    confirmButtonAriaLabel: 'Aceptar!',
+                })
+		}
+	},
+	computed: {
+	}
 	
 }
 </script>
+<style scoped>
+.tabla-container{
+	z-index: 30;
+	position: relative;
+}
+.img-container{
+	position:absolute;
+	left: -340px;
+	bottom: 0;
+	z-index: 3;
+}
+.tabla-container .input-search span{
+    z-index: 2;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    pointer-events: none;
+}
+.tabla-container .input-search input{
+    padding-left: 35px;
+}
+.tabla-container .btn-editar{
+	background-color: #2b59a2;
+}
+@media (max-width:767px){
+	.tabla-container{
+		position:static;
+	}
+	.tabla-container .display-4{
+		font-size: 35px;
+	}
+}
+</style>

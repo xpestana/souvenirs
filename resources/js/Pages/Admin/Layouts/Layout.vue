@@ -2,7 +2,7 @@
     <div class="pantalla">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-md-2 p-0">
+                <div class="col-12 col-md-2 p-0" id="sidebar">
                     <SideBar/>
                     <MenuMobile/>
                 </div>
@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style scoped>
+#sidebar{
+    z-index: 10;
+}
 #contenido{
     overflow-wrap: break-word;
 }

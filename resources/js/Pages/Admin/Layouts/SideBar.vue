@@ -38,10 +38,10 @@
                 </Link>
             </li>
             <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.home')"  class="link">
+                <Link :href="route('admin.administradores')"  class="link" :class="{ 'active': urlLimpia === '/admin/ajustes/administradores'}">
                     <div class="d-inline-flex">
                         <i class="fas fa-cog my-auto pr-1"></i>
-                        <p class="p-2">Ajustes</p>
+                        <p class="p-2" :class="{ 'active': urlLimpia === '/admin/ajustes/administradores'}">Ajustes</p>
                     </div>
                 </Link>
             </li>
@@ -66,7 +66,6 @@ export default {
     computed:{
         urlLimpia(){
             let url = this.$page.url;
-            console.log(url.split("?","1")[0]);
             return url.split("?","1")[0];
         }
     }

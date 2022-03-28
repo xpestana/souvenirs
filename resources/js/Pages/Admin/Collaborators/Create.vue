@@ -109,14 +109,15 @@ export default {
 form .row h3{
     font-size: 1.7em;
 }
-form .select{
-    font-size: 1.1em;
-    color: #6c757d;
-    padding-top: 0px;
-    padding-left: 10px;
-}
 form .my-pais{
-    margin-top: 55px;
+    margin-top: 14px;
+}
+form .select{
+    border:1px solid #d1d2d3;
+    border-radius: 5px;
+}
+form .select:hover{
+    border:1px solid red;
 }
 form .credenciales{
     border:none !important;

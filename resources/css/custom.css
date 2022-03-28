@@ -180,3 +180,10 @@ body .modal-backdrop{
     -o-transform: rotate(-135deg);
     transform: rotate(-135deg);
   }
+  
+  .btn-azulc{
+    background-color:#0076ff;
+  }
+  .text-azulc{
+    color: #65b4ce; 
+  }

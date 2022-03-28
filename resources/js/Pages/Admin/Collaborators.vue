@@ -3,12 +3,12 @@
 		<div class="container cabeza">
 			<div class="row titulo">
 				<div class="col-12 p-3 p-md-5 text-center">
-					<h1 class="text-info font-weight-bolder display-4">Gestor de colaboradores</h1>
+					<h1 class="text-azulc font-weight-bolder display-4">Gestor de colaboradores</h1>
 				</div>
 			</div>
 			<div class="row justify-content-around opciones w-75 mx-auto align-items-center">
 				<div class="col-12 col-md-5 my-lg-2 my-md-0">
-					<a type="button" class="btn btn-primary py-1 px-2 agregar" @click.prevent="createCollaborator" >Agregar colaborador<i class="fas fa-plus px-1 px-lg-3"></i></a>
+					<a type="button" class="btn btn-azulc text-white py-1 px-2 agregar" @click.prevent="createCollaborator" >Agregar colaborador<i class="fas fa-plus px-1 px-lg-3"></i></a>
 				</div>
 				<div class="col-12 col-md-4 my-2 my-md-0">
 					<div class="input-search m-0">
