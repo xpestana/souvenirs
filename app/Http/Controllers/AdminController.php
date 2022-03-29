@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Redirect;
+use Image;
 
 
 class AdminController extends Controller
@@ -240,9 +241,10 @@ class AdminController extends Controller
         return Inertia::render('Admin/Collaborators/Show',compact('collaborator'));
     }
 
-    public function collaborator_lodging_edit($id){
+    public function collaborator_lodging_edit($id,$idCol){
+        $collaborator = User::find($idCol)->load('profile','hotel.orders.shippings');
         $lodging = Hotel::find($id);
-        return Inertia::render('Admin/Collaborators/Lodging/Edit',compact('lodging'));
+        return Inertia::render('Admin/Collaborators/Lodging/Edit',compact('lodging','collaborator'));
     }
 
     public function collaborator_lodging_update(Request $request, $id){
@@ -288,7 +290,8 @@ class AdminController extends Controller
             }
             $hotel->save();
 
-            return back()->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
+            // return back()->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
+            return Redirect::route('admin.collaborator.show',$request->idCol)->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']); 
     }
 
     public function admins(Request $request)
@@ -311,5 +314,49 @@ class AdminController extends Controller
     public function administrator_details(Request $request)
     {
         return Inertia::render('Admin/Admins/Update');
+    }
+
+    public function valid($file)
+    {
+        if ($file) {
+            /*** Extraccion de la extension ***/
+            $nameFile = $file->getClientOriginalName();
+            $extension = pathinfo($nameFile, PATHINFO_EXTENSION);
+            $id = mt_Rand(1000000, 9999999);
+
+            $images=array("JPG", "JPEG", "PNG");
+            if (!in_array(strtoupper($extension), $images)) {
+                return ['id' => $id, 'code' => 404, 'msg' => 'Formato de imagen incorrecto', 'status' => 'error'];
+            }
+            
+            $response = [
+                'id' => $id,
+                'code' => 200,
+                'msg' => 'Acepted'
+            ];
+            return $response;
+        }
+    }
+
+    public function FileName($file)
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $images=array("jpg", "jpeg", "png");
+        
+        $pin = mt_Rand(1000000, 9999999)
+               . mt_Rand(1000000, 9999999)
+               . $characters[Rand(0, strlen($characters) - 1)];
+        
+        $nameFile = $file->getClientOriginalName();
+
+        $extension = pathinfo($nameFile, PATHINFO_EXTENSION);
+        $fileName  = 'file_'.$pin.'.'.$extension;
+
+        $response = [
+            'extension' => $extension,
+            'fileName' => $fileName,
+        ];
+
+        return $response;
     }
 }

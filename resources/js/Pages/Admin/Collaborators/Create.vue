@@ -1,5 +1,4 @@
 <template>
-    <notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
 	<div class="container">
         <div class="row p-2">
             <div class="col-1">
@@ -61,7 +60,6 @@ import Layout from '@/Pages/Admin/Layouts/Layout'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeButton from '@/Components/Button.vue'
 import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors'
-import Notify from '@/Layouts/Components/Toast.vue'
 import { Link } from '@inertiajs/inertia-vue3'
 export default {
     layout:Layout,
@@ -69,7 +67,6 @@ export default {
         BreezeInput,
         BreezeButton,
         ValidationErrors,
-        Notify,
         Link
     },
     mounted(){

@@ -7,6 +7,7 @@
                     <MenuMobile/>
                 </div>
                 <div class="col-12 col-md-10 pt-100 p-md-2" id="contenido">
+                    <notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
                     <slot></slot>
                 </div>
             </div>
@@ -17,10 +18,12 @@
 <script>
 import SideBar from '@/Pages/Admin/Layouts/SideBar'
 import MenuMobile from '@/Pages/Admin/Layouts/MenuMobile'
+import Notify from '@/Layouts/Components/Toast.vue'
 export default {
     components:{
         SideBar,
-        MenuMobile
+        MenuMobile,
+        Notify
     },
 }
 </script>

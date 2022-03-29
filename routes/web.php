@@ -315,7 +315,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::put('/actualizar/colaborador/{id}', [AdminController::class, 'collaborator_updt'])->name('admin.collaborator.updt');
     Route::post('/colaborador/store', [AdminController::class, 'collaborator_store'])->name('admin.collaborator.store');
     Route::get('/colaborador/{id}', [AdminController::class, 'collaborator_details'])->name('admin.collaborator.show');
-    Route::get('/editar/alojamiento/{id}', [AdminController::class, 'collaborator_lodging_edit'])->name('admin.lodging.edit');
+    Route::get('/editar/alojamiento/{id}/colaborador/{idcol}', [AdminController::class, 'collaborator_lodging_edit'])->name('admin.lodging.edit');
     Route::post('/update/alojamiento/{id}', [AdminController::class, 'collaborator_lodging_update'])->name('admin.lodging.update');
 
     /*ADMINISTRADORES*/

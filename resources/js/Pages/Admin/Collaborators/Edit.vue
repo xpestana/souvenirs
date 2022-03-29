@@ -1,9 +1,8 @@
 <template>
-    <notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
-    <div class="container">
+	<div class="container">
         <div class="row p-2">
             <div class="col-1">
-                <Link :href="route('admin.colaboradores')"><i class="fas fa-angle-left bg-info text-white px-2 py-1"></i></Link>    
+                <Link :href="route('admin.collaborator.show',user.id)"><i class="fas fa-angle-left bg-info text-white px-2 py-1"></i></Link>
             </div>
         </div>
         <form @submit.prevent="submit">
@@ -12,7 +11,7 @@
                 <div class="col-12 col-md-6">
                     <BreezeInput type="text" class="form-control my-2 py-4 credenciales" autocomplete="on" placeholder="E-mail*" v-model="form.email" required/>
                     <BreezeInput type="text" class="form-control my-2 py-4 credenciales" autocomplete="on" placeholder="Confirmar E-mail" v-model="form.email_confirmation" required/>
-                    <BreezeInput type="password" class="form-control my-2 py-4 credenciales" autocomplete="off" placeholder="Contraseña" v-model="form.password" />
+                    <BreezeInput type="password" class="form-control my-2 py-4 credenciales" autocomplete="off" placeholder="Contraseña" v-model="form.password"/>
                 </div>
                 <div class="col-12 col-md-6">
                     <BreezeInput  type="text" class="form-control  my-3" v-model="form.name" autocomplete="name" placeholder="Persona en contacto *" required/>
@@ -43,11 +42,12 @@
                     <BreezeInput  type="text" class="form-control w-100 my-pais py-3" v-model="form.country" autocomplete="country" placeholder="País *" value="España" readonly=""/>
                     <BreezeInput  type="text" class="form-control w-100 my-3 py-3" v-model="form.cp" autocomplete="cp" placeholder="Codigo Postal *" required/>
                 </div>
-                <div class="col-12 col-lg-9">
+                <div class="col-12 col-lg-8">
                     <BreezeInput  type="text" class="form-control w-100 py-3" v-model="form.address" autocomplete="address" placeholder="Dirección fiscal *" required/>
                 </div>
-                <div class="col-12 col-lg-3 text-center text-lg-right">
-                    <button class="btn btn-primary rounded-pill py-0 px-3 mt-3">Crear cuenta</button>
+                <div class="col-12 col-lg-4 text-center text-lg-right pt-3 pt-lg-0">
+                    <button class="btn btn-danger-c rounded-pill py-0 mr-sm-1 mr-lg-0" type="button" @click="eliminar">Eliminar colaborador</button>
+                    <button class="btn btn-primary-c rounded-pill py-0 px-4 mt-2 mt-sm-0 mt-lg-2 ml-sm-1 ml-lg-0" type="submit">Guardar cambios</button>
                 </div>
                 <div class="col-12">
                     <ValidationErrors/>
@@ -61,7 +61,6 @@ import Layout from '@/Pages/Admin/Layouts/Layout'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeButton from '@/Components/Button.vue'
 import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors'
-import Notify from '@/Layouts/Components/Toast.vue'
 import { Link } from '@inertiajs/inertia-vue3'
 export default {
     layout:Layout,
@@ -69,10 +68,9 @@ export default {
         BreezeInput,
         BreezeButton,
         ValidationErrors,
-        Notify,
         Link
     },
-    props: {
+     props: {
         user: Object
     },
     data(){
@@ -104,6 +102,51 @@ export default {
                 preserveScroll: true,
             })
         },
+        eliminar(){
+			this.$swal({
+                title: '¿Esta seguro de eliminar esta cuenta?',
+                icon: 'warning',
+                showCloseButton: false,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+            }).then((res)=>{
+                if(res.isConfirmed)
+                {
+                    // alert('Aceptado')
+                }
+            })
+		}
     }
 }
 </script>
+<style scoped>
+form .row h3{
+    font-size: 1.7em;
+}
+form .my-pais{
+    margin-top: 14px;
+}
+form .select{
+    border:1px solid #d1d2d3;
+    border-radius: 5px;
+}
+form .credenciales{
+    border:none !important;
+}
+
+@media (max-width:1045px){
+    form .row{
+        min-width: 100% !important;
+    }   
+    form .select{
+        font-size: 1.1em;
+        color: #6c757d;
+        padding-top: 0px;
+        padding-left: 10px;
+    }
+}
+</style>

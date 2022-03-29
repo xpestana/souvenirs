@@ -1,5 +1,4 @@
 <template>
-	
 	<div class="container px-lg-5 mt-4">	
 		<section id="colaborador">
 			<div class="row">
@@ -9,18 +8,27 @@
 			</div>
 			<div class="row ficha mx-lg-4 my-4 p-2 bg-light border">
 				<div class="col-12 col-md-9">
-					<div class="d-flex justify-content-between w-75">
-						<h1 class="pt-1 pb-2 font-weight-bolder">{{collaborator.profile.firstname}}</h1>
-						<p class="font-weight-bolder text-muted mt-3">{{collaborator.email}}</p>
+					<div class="d-flex flex-column flex-md-row justify-content-between">
+						<h1 class="pt-1 pb-2 font-weight-bolder text-center text-md-left">{{collaborator.profile.firstname}}</h1>
+						<p class="font-weight-bolder text-muted mt-md-3 text-center text-md-left">{{collaborator.email}}</p>
 					</div>
 					<div class="d-md-inline-flex mt-1">
-						<p class="pr-md-5 font-weight-bolder text-muted text-md-center">Benefecio total <br> 0€</p>
-						<p class="pr-md-5 font-weight-bolder text-muted text-md-center">Pedidos totales: <br></p>
-						<p class="pr-md-5 font-weight-bolder text-muted text-md-center">Alojamientos registrados:<br>{{collaborator.hotel.length}}</p>
+						<div class="pr-md-4 text-md-center">
+							<p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
+							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0€</p>
+						</div>
+						<div class="pr-md-4 text-md-center"> 
+							<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
+							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0</p>
+						</div>
+						<div class="pr-md-4 text-md-center"> 
+							<p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
+							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{collaborator.hotel.length}}</p>
+						</div>
 					</div>
 				</div>
 				<div class="col-12 col-md-3 text-right mt-5">
-					<button class="btn btn-sm btn-secondary py-0 px-2 mt-3 px-4">Editar</button>
+					<Link :href="route('admin.collaborator.edit',collaborator.id)" class="btn btn-sm btn-secondary py-0 px-2 mt-3 px-4">Editar</Link>
 				</div>
 			</div>
 		</section>
@@ -57,7 +65,7 @@
 				</div>
 				<div class="col-12 col-md-2 p-0 mt-auto px-auto text-center">
 					<Link href="#" class="btn btn-sm btn-info w-75 my-1 py-0 text-white">Ver más</Link>
-					<Link  :href="route('admin.collaborator.lodging.edit')" class="btn btn-sm btn-secondary w-75 py-0">Editar</Link>
+					<Link  :href="route('admin.lodging.edit',[hotel.id,collaborator.id])" class="btn btn-sm btn-secondary w-75 py-0">Editar</Link>
 				</div>
 			</div>
 			<div class="text-center mt-5" v-if="collaborator.hotel.length == 0">
