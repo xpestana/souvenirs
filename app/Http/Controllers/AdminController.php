@@ -140,6 +140,53 @@ class AdminController extends Controller
     public function collaborator_create(){
         return Inertia::render('Admin/Collaborators/Create');
     }
+    public function collaborator_edit($id){
+        $user = User::find($id)->load('profile');
+        return Inertia::render('Admin/Collaborators/Edit', compact('user'));
+    }
+    public function collaborator_updt(Request $request, $id){
+        $request->validate([
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore(auth()->user()->id)],
+            'password' => 
+            ['nullable', 
+                Rules\Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->uncompromised()
+            ],
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'gestor' => ['required','string', Rule::in([1, 2])],
+            'razon' => 'required|string',
+            'nif' => 'required|string',
+            'id' => 'required|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'address' => 'required|string',
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->email;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        
+        $profile = profile::find($user->profile->id);
+        $profile->firstname = $request->name;
+        $profile->phone = $request->phone;
+        $profile->gestor = $request->gestor;
+        $profile->razon = $request->razon;
+        $profile->nif = $request->nif;
+        $profile->identify = $request->id;
+        $profile->city = $request->city;
+        $profile->cp = $request->cp;
+        $profile->address = $request->address;
+        $profile->save();
+
+        return back()->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
+    }
     public function collaborator_store(Request $request){
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users|confirmed',
@@ -193,8 +240,55 @@ class AdminController extends Controller
         return Inertia::render('Admin/Collaborators/Show',compact('collaborator'));
     }
 
-    public function collaborator_lodging_edit(){
-        return 'Editar alojamiento';
+    public function collaborator_lodging_edit($id){
+        $lodging = Hotel::find($id);
+        return Inertia::render('Admin/Collaborators/Lodging/Edit',compact('lodging'));
+    }
+
+    public function collaborator_lodging_update(Request $request, $id){
+        $request->validate([
+            'calle' => 'required|string',
+            'planta' => 'required|string',
+            'address' => 'nullable|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'code' => 'nullable|string'
+        ]);
+
+         if ($request->image) {
+            $image = $request->image;
+            $msg =$this->valid($image);
+            if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
+
+            $Path = public_path('storage/hotel/');
+            $pathName = '/';
+
+            if (!file_exists($Path)) {
+                mkdir($Path, 777, true);
+            }
+
+            $nameFile =$this->FileName($image); //nombre de archivo original
+            $imgFileOriginal = Image::make($image->getRealPath());
+            $imgFileOriginal->save($Path.$nameFile['fileName']);
+
+            }
+
+            $hotel = hotel::find($id);
+            
+            $hotel->calle = $request->calle;
+            $hotel->address = $request->address;
+            $hotel->zone = $request->city;
+            $hotel->planta = $request->planta;
+            $hotel->cp = $request->cp;
+            $hotel->code = $request->code;
+            $hotel->url = $request->url;
+            $hotel->area = $request->area;            
+            if ($request->image) {
+                $hotel->image = $pathName.$nameFile['fileName'];
+            }
+            $hotel->save();
+
+            return back()->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
     }
 
     public function admins(Request $request)
