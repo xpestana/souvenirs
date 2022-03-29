@@ -311,6 +311,8 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
 
     Route::get('/colaboradores', [AdminController::class, 'colaboradores'])->name('admin.colaboradores');
     Route::get('/crear/colaborador', [AdminController::class, 'collaborator_create'])->name('admin.collaborator.create');
+    Route::get('/editar/colaborador/{id}', [AdminController::class, 'collaborator_edit'])->name('admin.collaborator.edit');
+    Route::put('/actualizar/colaborador/{id}', [AdminController::class, 'collaborator_updt'])->name('admin.collaborator.updt');
     Route::post('/colaborador/store', [AdminController::class, 'collaborator_store'])->name('admin.collaborator.store');
     Route::get('/colaborador/{id}', [AdminController::class, 'collaborator_details'])->name('admin.collaborator.show');
     Route::get('/colaborador/alojamiento/edit', [AdminController::class, 'collaborator_lodging_edit'])->name('admin.collaborator.lodging.edit');
@@ -320,6 +322,8 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/crear/administrador', [AdminController::class, 'administrator_create'])->name('admin.administrator.create');
     Route::post('/administrador/store', [AdminController::class, 'administrator_store'])->name('admin.administrator.store');
     Route::get('/administrador/{id}', [AdminController::class, 'administrator_details'])->name('admin.administrator.show');
+
+    /*Colaboradores*/
 });
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 
