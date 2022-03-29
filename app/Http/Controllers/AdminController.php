@@ -240,8 +240,55 @@ class AdminController extends Controller
         return Inertia::render('Admin/Collaborators/Show',compact('collaborator'));
     }
 
-    public function collaborator_lodging_edit(){
-        return 'Editar alojamiento';
+    public function collaborator_lodging_edit($id){
+        $lodging = Hotel::find($id);
+        return Inertia::render('Admin/Collaborators/Lodging/Edit',compact('lodging'));
+    }
+
+    public function collaborator_lodging_update(Request $request, $id){
+        $request->validate([
+            'calle' => 'required|string',
+            'planta' => 'required|string',
+            'address' => 'nullable|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'code' => 'nullable|string'
+        ]);
+
+         if ($request->image) {
+            $image = $request->image;
+            $msg =$this->valid($image);
+            if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
+
+            $Path = public_path('storage/hotel/');
+            $pathName = '/';
+
+            if (!file_exists($Path)) {
+                mkdir($Path, 777, true);
+            }
+
+            $nameFile =$this->FileName($image); //nombre de archivo original
+            $imgFileOriginal = Image::make($image->getRealPath());
+            $imgFileOriginal->save($Path.$nameFile['fileName']);
+
+            }
+
+            $hotel = hotel::find($id);
+            
+            $hotel->calle = $request->calle;
+            $hotel->address = $request->address;
+            $hotel->zone = $request->city;
+            $hotel->planta = $request->planta;
+            $hotel->cp = $request->cp;
+            $hotel->code = $request->code;
+            $hotel->url = $request->url;
+            $hotel->area = $request->area;            
+            if ($request->image) {
+                $hotel->image = $pathName.$nameFile['fileName'];
+            }
+            $hotel->save();
+
+            return back()->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
     }
 
     public function admins(Request $request)
