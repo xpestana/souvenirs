@@ -52,14 +52,16 @@
                     <div class="footer-social">
                         <div class="row justify-content-center pb-3">
                             <div class="col-8 col-md-3 text-center d-inline-flex">
-                                <a href="#" class="my-auto mx-3">
-                                    <i class="fab fa-whatsapp text-white rounded-circle bg-success p-2"></i>
+                                <a href="#" class="">
+                                <!-- <a href="#" class="my-auto mx-3"> -->
+                                    <!-- <i class="fab fa-whatsapp text-white rounded-circle bg-success p-2"></i> -->
+                                    <img src="/vendor_asset/img/social/wt.png" class="">
                                 </a>
                                 <a href="#" class="">
-                                    <img src="/vendor_asset/img/social/inst.png"  height="70" width="70" class="px-2">
+                                    <img src="/vendor_asset/img/social/inst.png" class="px-2">
                                 </a>
                                 <a href="#" class="">
-                                    <img src="/vendor_asset/img/social/tw.png"  height="70" width="70" class="px-2">
+                                    <img src="/vendor_asset/img/social/tw.png" class="px-2">
                                 </a>
                             </div>
                         </div>
@@ -95,6 +97,15 @@
     font-size: 2em;
     padding: 4px 6px;
 }
-
+.footer-social img{
+    height: 4em;
+    width: 5em;
+}
+@media (max-width:767px){
+    .footer-social .fa-whatsapp{
+        font-size: 1.6em;
+        padding: 4px 6px;
+    }
+}
 
 </style>

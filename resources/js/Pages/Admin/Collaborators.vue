@@ -7,16 +7,16 @@
 				</div>
 			</div>
 			<div class="row justify-content-around opciones w-75 mx-auto align-items-center">
-				<div class="col-12 col-md-5 my-lg-2 my-md-0">
-					<a type="button" class="btn btn-azulc text-white py-1 px-2 agregar" @click.prevent="createCollaborator" >Agregar colaborador<i class="fas fa-plus px-1 px-lg-3"></i></a>
+				<div class="col-12 col-md-5 col-lg-5 my-lg-2 my-md-0 my-2 px-0">
+					<a type="button" class="btn btn-azulc text-white py-1 px-xl-2 agregar" @click.prevent="createCollaborator" >Agregar colaborador<i class="fas fa-plus px-1 px-lg-3"></i></a>
 				</div>
-				<div class="col-12 col-md-4 my-2 my-md-0">
+				<div class="col-12 col-md-4 col-lg-4 my-lg-2 my-md-0 my-2 px-0">
 					<div class="input-search m-0">
-						<span class="fa fa-search"></span>
+						<span class="fa fa-search text-muted position-absolute d-block text-center"></span>
 						<input type="text" class="form-control rounded-sm" placeholder="Search" v-model="search">
 					</div>
 				</div>
-				<div class="col-12 col-md-3 pl-md-5 my-2 my-md-0 select-aloj">
+				<div class="col-12 col-md-3 col-lg-3 pl-md-5 my-lg-2 my-md-0 my-2 px-0 select-aloj">
 					<div class="dropdown">
 						<button class="text-muted dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Alojamiento
@@ -30,13 +30,12 @@
 			</div>
 			</div>
 		<div class="container px-0 cuerpo">
-			
-				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light" v-for="clbtr in colaboradores" :key="clbtr.id">
-					<Link  :href="route('admin.collaborator.show',clbtr.id)">
-					<div class="col-12 col-md-7">
-						<h1 class="pt-1 pb-2 font-weight-bolder text-center text-md-left">{{clbtr.name}}</h1>
+				<Link v-for="clbtr in colaboradores" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
+				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light justify-content-center justify-content-md-between" >
+					<div class="col-10 col-md-6">
+						<h1 class="font-weight-bolder text-center text-md-left">{{clbtr.name}}</h1>
 					</div>
-					<div class="col-12 col-md-5">
+					<div class="col-10 col-md-6">
 						<p class="font-weight-bolder text-muted mt-3 text-center text-md-left">{{clbtr.email}}</p>
 					</div>
 					<div class="col-12">
@@ -55,11 +54,11 @@
 							</div>
 						</div>
 					</div>
-					</Link>
 				</div>
+				</Link>
 			
 			<div class="row justify-content-center mb-3">
-            	<div class="col-4">
+            	<div class="col-10 col-sm-6 col-lg-4 px-0">
                 	<paginator :paginator="collaborators"/>
                 </div>
             </div>
@@ -131,15 +130,11 @@ export default {
 </script>
 <style scoped>
 .opciones .input-search span{
-    position: absolute;
     z-index: 2;
-    display: block;
     width: 2.375rem;
     height: 2.375rem;
     line-height: 2.375rem;
-    text-align: center;
     pointer-events: none;
-    color: #aaa;
 }
 .opciones .form-control{
 	border: 1px solid #dedede;
@@ -165,6 +160,12 @@ export default {
 {
 	.cabeza .titulo h1{
 	 font-size: 2.5em;
+	}
+}
+@media (max-width: 1025px)
+{
+	#section .row{
+	 width: 100% !important;
 	}
 }
 </style>

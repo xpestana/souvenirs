@@ -116,14 +116,8 @@ form .select{
     border:1px solid #d1d2d3;
     border-radius: 5px;
 }
-form .select:hover{
-    border:1px solid red;
-}
 form .credenciales{
     border:none !important;
-}
-.select .nice-select{
-    background-color: red !important;
 }
 
 @media (max-width:900px){

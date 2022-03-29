@@ -184,6 +184,19 @@ body .modal-backdrop{
   .btn-azulc{
     background-color:#0076ff;
   }
+  .btn-primary-c{
+    background-color:#5a80fb;
+    color:#fff;
+  }
+  .btn-danger-c{
+    background-color:#fa7470;
+    color:#fff;
+  }
+  .btn-danger-c:hover,
+  .btn-primary-c:hover{
+    color: #fff;
+    opacity: 0.8;
+  }
   .text-azulc{
     color: #65b4ce; 
   }

@@ -63,7 +63,7 @@
               </Link>
               </li>
               <li class="nav-item">
-              <Link :href="route('admin.home')"  class="nav-link py-0">
+              <Link :href="route('logout')"  class="nav-link py-0">
                   <div class="d-inline-flex">
                       <i class="fas fa-power-off my-auto pr-1"></i>
                       <p class="p-2 font-weight-bolder">Cerrar Sesión</p>

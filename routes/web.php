@@ -322,5 +322,4 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/administrador/{id}', [AdminController::class, 'administrator_details'])->name('admin.administrator.show');
 });
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
-
 require __DIR__.'/auth.php';

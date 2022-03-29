@@ -18,10 +18,9 @@
                 <div class="col-7 offset-5 col-md-5 col-offset-7 offset-5 shadow-md p-3">
                     <ul class="navbar-nav">
                         <li class="py-1"><Link :href="route('collaborator.index')"><i class="fas fa-user iconNav"></i> Mis alojamientos</Link></li>
-                        <li class="py-1"><a href="javascript:void(0)"><i class="fas fa-wrench iconNav"></i> Actividades</a></li>
+                        <li class="py-1"><Link :href="route('collaborator.ajustes.index')" ><i class="fas fa-wrench iconNav"></i>Ajustes</Link></li>
                         <template v-if="this.$page.props.auth.user">
-                            <li class="py-1"><Link :href="route('logout.destroy')">Cerrar sesión</Link></li>
-                            <li class="py-1"><a href="javascript:void(0);" ></a></li>
+                            <li class="py-1"><Link :href="route('logout.destroy')"><i class="fas fa-power-off iconNav"></i>Cerrar sesión</Link></li>
                         </template>
                         <template v-else>
                             <li class="py-1"><Link :href="route('login')">Iniciar Sesión</Link></li>
