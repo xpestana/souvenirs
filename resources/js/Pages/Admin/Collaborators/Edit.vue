@@ -116,7 +116,11 @@ export default {
             }).then((res)=>{
                 if(res.isConfirmed)
                 {
-                    // alert('Aceptado')
+                    this.form.delete(route('admin.collaborator.delete',{id:this.user.id}),{
+                        _token: this.$page.props.csrf_token,
+                        errorBag: 'submit',
+                        preserveScroll: true,
+                    })
                 }
             })
 		}

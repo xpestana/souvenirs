@@ -147,7 +147,7 @@ class AdminController extends Controller
     }
     public function collaborator_updt(Request $request, $id){
         $request->validate([
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore(auth()->user()->id)],
+            'email' => ['nullable', 'email', 'confirmed', 'max:255', Rule::unique('users')->ignore($id)],
             'password' => 
             ['nullable', 
                 Rules\Password::min(8)
@@ -187,6 +187,13 @@ class AdminController extends Controller
         $profile->save();
 
         return back()->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
+    }
+    public function collaborator_delete($id){
+
+        $user = User::find($id)->delete();
+        $id = mt_Rand(1000000, 9999999);
+
+        return Redirect::route('admin.colaboradores')->with(['id'=>$id, 'message' => "Eliminado exitosamente", 'code' => 200, 'status' => 'success']);
     }
     public function collaborator_store(Request $request){
         $request->validate([
