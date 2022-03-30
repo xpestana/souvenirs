@@ -322,6 +322,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::post('/store/alojamiento', [AdminController::class, 'lodging_store'])->name('admin.lodging.store');
     Route::get('/editar/alojamiento/{id}/colaborador/{idcol}', [AdminController::class, 'collaborator_lodging_edit'])->name('admin.lodging.edit');
     Route::post('/update/alojamiento/{id}', [AdminController::class, 'collaborator_lodging_update'])->name('admin.lodging.update');
+    Route::delete('/eliminar/alojamiento/{hotel}/{collaborator}', [AdminController::class, 'lodging_delete'])->name('admin.lodging.delete');
 
     /*ADMINISTRADORES*/
     Route::get('/ajustes/administradores', [AdminController::class, 'admins'])->name('admin.administradores');

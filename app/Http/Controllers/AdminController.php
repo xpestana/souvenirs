@@ -363,7 +363,13 @@ class AdminController extends Controller
             // return back()->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
             return Redirect::route('admin.collaborator.show',$request->idCol)->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']); 
     }
+    public function lodging_delete($hotel, $collaborator){
 
+        $user = hotel::find($hotel)->delete();
+        $id = mt_Rand(1000000, 9999999);
+
+        return Redirect::route('admin.collaborator.show', ['id' => $collaborator])->with(['id'=>$id, 'message' => "Eliminado exitosamente", 'code' => 200, 'status' => 'success']);
+    }
     public function admins(Request $request)
     {
         $admins = User::role('Admin')

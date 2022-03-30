@@ -205,7 +205,11 @@ export default {
             }).then((res)=>{
                 if(res.isConfirmed)
                 {
-                    // alert('Aceptado')
+                    this.form.delete(route('admin.lodging.delete',{hotel: this.lodging.id, collaborator: this.collaborator.id}),{
+                        _token: this.$page.props.csrf_token,
+                        errorBag: 'submit',
+                        preserveScroll: true,
+                    })
                 }
             })
 		}
