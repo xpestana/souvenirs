@@ -9,7 +9,7 @@
 			<div class="row ficha mx-lg-4 my-4 p-2 bg-light border">
 				<div class="col-12 col-md-9">
 					<div class="d-flex flex-column flex-md-row justify-content-between">
-						<h1 class="pt-1 pb-2 font-weight-bolder text-center text-md-left">{{collaborator.profile.firstname}}</h1>
+						<h1 class="pt-1 pb-2 font-weight-bolder text-center text-md-left">{{ collaborator.profile.firstname}}</h1>
 						<p class="font-weight-bolder text-muted mt-md-3 text-center text-md-left">{{collaborator.email}}</p>
 					</div>
 					<div class="d-md-inline-flex mt-1">

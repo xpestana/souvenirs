@@ -145,6 +145,7 @@ class AdminController extends Controller
         $user = User::find($id)->load('profile');
         return Inertia::render('Admin/Collaborators/Edit', compact('user'));
     }
+    
     public function collaborator_updt(Request $request, $id){
         $request->validate([
             'email' => ['nullable', 'email', 'confirmed', 'max:255', Rule::unique('users')->ignore($id)],
@@ -247,7 +248,67 @@ class AdminController extends Controller
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
         return Inertia::render('Admin/Collaborators/Show',compact('collaborator'));
     }
+    public function lodging_create($collaborator){
+        return Inertia::render('Admin/Collaborators/Lodging/Create', compact('collaborator'));
+    }
+    public function lodging_store(Request $request){
+        $request->validate([
+            'collaborator' => 'required',
+            'calle' => 'required|string',
+            'planta' => 'required|string',
+            'address' => 'nullable|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'code' => 'nullable|string',
+            'url' => 'nullable|url',
+            'area' => 'nullable|string',
+            'image' => 'nullable|mimes:jpeg,jpg,png',
+        ]);
 
+            $id = mt_Rand(1000000, 9999999);
+            $image = $request->image;
+            $user = User::find($request->collaborator);
+            $Path = public_path('storage/hotel/');
+            $pathName = '/';
+
+            if (!file_exists($Path)) {
+                mkdir($Path, 777, true);
+            }
+
+            if ($image) {
+                $nameFile =$this->FileName($image); //nombre de archivo original
+                $imgFileOriginal = Image::make($image->getRealPath());
+                $imgFileOriginal->save($Path.$nameFile['fileName']);
+                $name_file = $nameFile['fileName'];
+            }else{
+                $name_file ="default.jpg";
+            }
+            $hotel = hotel::create([
+                'calle'       => $request->calle,
+                'type'        => ($user->profile->gestor == 1) ? "hotel" : "apartamento",
+                'address'     => $request->address,
+                'zone'        => $request->city,
+                'planta'      => $request->planta,
+                'cp'          => $request->cp,
+                'code'        => $request->code,
+                'url'         => $request->url,
+                'area'        => $request->area,
+                'image'       => $pathName.$name_file,
+            ]);
+
+            $clientUser = User::create([
+                'name' => auth()->user()->email,
+                'email' => auth()->user()->email.$hotel->id,
+                'password' => Hash::make("usuario123456"),
+            ]);
+            
+            $user->hotel()->attach($hotel->id, ['manager' => true]);
+            
+            $clientUser->assignRole('Client');
+            $clientUser->hotel()->attach($hotel->id, ['manager' => false]);
+
+        return Redirect::route('admin.collaborator.show',["id" => $request->collaborator])->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
+    }
     public function collaborator_lodging_edit($id,$idCol){
         $collaborator = User::find($idCol)->load('profile','hotel.orders.shippings');
         $lodging = Hotel::find($id);
