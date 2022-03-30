@@ -249,7 +249,8 @@ class AdminController extends Controller
         $url = config('app.url');
         return Inertia::render('Admin/Collaborators/Show',compact('collaborator','url'));
     }
-    public function lodging_create($collaborator){
+    public function lodging_create($id){
+        $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
         return Inertia::render('Admin/Collaborators/Lodging/Create', compact('collaborator'));
     }
     public function lodging_store(Request $request){

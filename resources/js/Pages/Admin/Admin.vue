@@ -112,14 +112,21 @@ export default {
 		},
 		eliminar(){
 			this.$swal({
-                    title: '¿Esta seguro de eliminar a este usuario?',
-                    icon: 'warning',
-                    showCloseButton: false,
-                    showCancelButton: true,
-					showConfirmButton: false,
-                    focusConfirm: false,
-                    confirmButtonAriaLabel: 'Aceptar!',
-                })
+                title: '¿Esta seguro de eliminar este usuario?',
+                icon: 'warning',
+                showCloseButton: false,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+            }).then((res)=>{
+                if(res.isConfirmed)
+                {
+                    // alert('Aceptado')
+                }
+            })
 		}
 	},
 	computed: {

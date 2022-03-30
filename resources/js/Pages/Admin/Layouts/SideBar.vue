@@ -6,10 +6,10 @@
     <div class="items">
         <ul>
             <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.colaboradores')" class="link" :class="{ 'active': urlLimpia === '/admin/colaboradores'}">
+                <Link :href="route('admin.colaboradores')" class="link" :class="{ 'active': urlColaboradores}">
                     <div class="d-inline-flex">
                         <i class="fas fa-city my-auto pr-1"></i>
-                        <p class="p-2" :class="{ 'active': urlLimpia === '/admin/colaboradores'}">Gestor de <br> colaboradores</p>
+                        <p class="p-2" :class="{ 'active': urlColaboradores}">Gestor de <br> colaboradores</p>
                     </div>
                 </Link>
             </li>
@@ -38,10 +38,10 @@
                 </Link>
             </li>
             <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.administradores')"  class="link" :class="{ 'active': urlLimpia === '/admin/ajustes/administradores'}">
+                <Link :href="route('admin.administradores')"  class="link" :class="{ 'active': urlLimpiarPagination === '/admin/ajustes/administradores'}">
                     <div class="d-inline-flex">
                         <i class="fas fa-cog my-auto pr-1"></i>
-                        <p class="p-2" :class="{ 'active': urlLimpia === '/admin/ajustes/administradores'}">Ajustes</p>
+                        <p class="p-2" :class="{ 'active': urlLimpiarPagination === '/admin/ajustes/administradores'}">Ajustes</p>
                     </div>
                 </Link>
             </li>
@@ -64,9 +64,22 @@ export default {
         Link
     },
     computed:{
-        urlLimpia(){
+        urlLimpiarPagination(){
             let url = this.$page.url;
             return url.split("?","1")[0];
+        },
+        urlColaboradores(){
+            let url = this.$page.url;
+            let url1 = url.includes('/admin/colaboradores')
+            let url2 = url.includes('/admin/colaborador/')
+            let url3 = url.includes('/admin/crear/colaborador')
+            let url4 = url.includes('/admin/editar/colaborador/')
+            let url5 = url.includes('/admin/editar/alojamiento/')
+            let url6 = url.includes('/admin/crear/alojamiento/')
+            if(url1 || url2 || url3 || url4 || url5 || url6){
+                return true;
+            }
+            return false;
         }
     }
 }
