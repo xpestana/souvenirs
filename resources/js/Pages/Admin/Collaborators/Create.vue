@@ -46,7 +46,7 @@
                     <BreezeInput  type="text" class="form-control w-100 py-3" v-model="form.address" autocomplete="address" placeholder="Dirección fiscal *" required/>
                 </div>
                 <div class="col-12 col-lg-3 text-center text-lg-right">
-                    <button class="btn btn-primary rounded-pill py-0 px-3 mt-3">Crear cuenta</button>
+                    <button class="btn btn-primary-c rounded-pill py-0 px-3 mt-3">Crear cuenta</button>
                 </div>
                 <div class="col-12">
                     <ValidationErrors/>

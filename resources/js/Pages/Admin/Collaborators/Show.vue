@@ -60,7 +60,60 @@
 					<div class="d-md-inline-flex">
 						<p class="pr-md-2 font-weight-bolder text-muted">Benefecio total 334€</p>
 						<p class="pl-md-2 pr-md-3 font-weight-bolder text-muted">Pedidos totales: 8</p>
-						<button class="btn btn-link p-0" data-toggle="modal" data-target="#centralModal">Obtener QR</button>
+						<button class="btn btn-link p-0" data-toggle="modal" :data-target="'#modalLodging'+hotel.id">Obtener QR</button>
+                                            <!-- Central Modal Small -->
+						<div class="modal fade" :id="'modalLodging'+hotel.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+						aria-hidden="true">
+						<!-- Change class .modal-sm to change the size of the modal -->
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content mx-auto">
+									<div class="modal-body p-0">
+										<div class="row mt-5 mb-2">
+											<div class="col-12 my-4 d-flex justify-content-center">
+												<QRCodeVue3
+													:width="1080"
+													:height="1080"
+													style="max-width: 50%;"
+													:imgclass="'souvenirs_img'+hotel.id"
+													:value="url+'?h='+hotel.id"
+													:qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
+													:imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
+													:dotsOptions="{
+														type: 'square',
+														color: '#31516B',
+														gradient: {
+														type: 'linear',
+														rotation: 0,
+														colorStops: [
+															{ offset: 0, color: '#31516B' },
+															{ offset: 1, color: '#31516B' },
+														],
+													},
+													}"
+													fileExt="png"
+													:backgroundOptions="{ color: '#ffffff' }"
+													:cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
+													:cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
+													:download="false"
+													downloadButton="bg-info mt-3 souvenirs_btn"
+													:downloadOptions="{ name: 'souvenirs', extension: 'png' }"
+													crossOrigin="anonymous"
+												/>
+											</div>
+										</div>
+										<div class="row px-3 py-4 mb-3">
+											<div class="col-6 text-left">
+												<a class="bnt btn-primary-c text-white rounded-pill px-2 px-md-5 py-1" href="#" data-dismiss="modal" >Volver</a>
+											</div>
+											<div class="col-6 text-right">
+												<a class="bnt btn-primary-c text-white rounded-pill px-2 px-md-5 py-1" href="javascript:void(0)" @click="souvenirs_btn(hotel.id,hotel.calle+'-'+hotel.planta)">Descargar</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Central Modal Small -->
 					</div>
 				</div>
 				<div class="col-12 col-md-2 p-0 mt-auto px-auto text-center">
@@ -77,17 +130,44 @@
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import { Link } from '@inertiajs/inertia-vue3'
+import QRCodeVue3 from "qrcode-vue3"
 export default {
 	layout:Layout,
 	components:{
-		Link
+		Link,
+		QRCodeVue3
 	},
 	props: {
-		collaborator: Object
+		collaborator: Object,
+		url:String
 	},
+	methods:{
+		souvenirs_btn(id,lodging){
+		var urlItem = $('.souvenirs_img'+id).attr('src');
+		axios({
+				url: urlItem,
+				method: 'GET',
+				responseType: 'blob'
+			})
+			.then((response) => {
+					const url = window.URL
+						.createObjectURL(new Blob([response.data]));
+					console.log(url);
+					const link = document.createElement('a');
+					link.href = url;
+					link.setAttribute('download',`lodging:${lodging}.png`);
+					document.body.appendChild(link);
+					link.click();
+					document.body.removeChild(link);
+			})                
+		}
+	}
 }
 </script>
 <style scoped>
+.modal-content {
+    width: 100% !important;
+}
 #colaborador .ficha h1{
 	font-size: 30px;
 }

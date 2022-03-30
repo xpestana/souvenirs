@@ -41,9 +41,9 @@
                                     <div class="estadistica">
                                         <p class="px-2">Benefecio total 334€</p>
                                         <p class="px-2">Pedidos totales: 8</p>
-                                        <button class="btn btn-link px-2" data-toggle="modal" data-target="#centralModal">Obtener QR</button>
+                                        <button class="btn btn-link px-2" data-toggle="modal" :data-target="'#centralModal'+hotel.id">Obtener QR</button>
                                             <!-- Central Modal Small -->
-                                            <div class="modal fade" id="centralModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                            <div class="modal fade" :id="'centralModal'+hotel.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                             aria-hidden="true">
                                             <!-- Change class .modal-sm to change the size of the modal -->
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -54,7 +54,8 @@
                                                                     <QRCodeVue3
                                                                         :width="1080"
                                                                         :height="1080"
-                                                                        imgclass="souvenirs_img"
+                                                                        :imgclass="'souvenirs_img'+hotel.id"
+                                                                        style="max-width: 50%;"
                                                                         :value="url+'?h='+hotel.id"
                                                                         :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
                                                                         :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
@@ -86,7 +87,7 @@
                                                                     <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Volver</a>
                                                                 </div>
                                                                 <div class="col-6 text-right">
-                                                                    <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn">Descargar</a>
+                                                                    <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(hotel.id,hotel.calle+' '+hotel.planta)">Descargar</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -140,8 +141,8 @@
                     preserveScroll: true
                 })
             },
-            souvenirs_btn(){
-            var urlItem = $('.souvenirs_img').attr('src');
+            souvenirs_btn(id,lodging){
+            var urlItem = $('.souvenirs_img'+id).attr('src');
             axios({
                     url: urlItem,
                     method: 'GET',
@@ -152,7 +153,7 @@
                             .createObjectURL(new Blob([response.data]));
                         const link = document.createElement('a');
                         link.href = url;
-                        link.setAttribute('download', 'souvenirs.png');
+                        link.setAttribute('download', `lodging-${lodging}.png`);
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
@@ -167,10 +168,6 @@ body{
 }
 .modal .btn-modal{
     background-color: #5a80fb;
-}
-.modal .souvenirs_img{
-    max-width: 50%;
-    margin: auto;
 }
 .main h1{
     font-size: 2em;

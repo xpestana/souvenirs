@@ -245,7 +245,8 @@ class AdminController extends Controller
     public function collaborator_details($id)
     {
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
-        return Inertia::render('Admin/Collaborators/Show',compact('collaborator'));
+        $url = config('app.url');
+        return Inertia::render('Admin/Collaborators/Show',compact('collaborator','url'));
     }
 
     public function collaborator_lodging_edit($id,$idCol){
