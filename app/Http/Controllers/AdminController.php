@@ -40,7 +40,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Dashboard/Create/Admin');
+        return Inertia::render('Admin/Admins/Create');
     }
 
     /**
@@ -54,29 +54,33 @@ class AdminController extends Controller
         $validator = $this->validate($request, [
             'firstname'         => 'required|string',
             'lastname'          => 'required|string',
-            'gender'            => 'required|string', 'in:H,M',
-            'email'             => 'required|string|email|max:255|unique:users',
+            'email'             => 'required|string|email|max:255|unique:users|confirmed',
+            'password'          => 
+            ['required', 'confirmed', 
+                Rules\Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->uncompromised()
+            ],
         ]);
         $id = mt_Rand(1000000, 9999999);
-        $password = Str::lower(Str::random(8));
+
         try {
              $user = User::create([
                 'name' => $request->email,
                 'email' => $request->email,
-                'password' => Hash::make($password),
+                'password' => Hash::make($request->password),
             ]);
         $user->assignRole('Admin');
         $userProfile = $user->profile()->create([
                 'firstname'  => $request->firstname,
                 'lastname'   => $request->lastname,
-                'gender'     => $request->gender,
             ]); 
         } catch (Exception $e) {
             dd($e);
         }
-       
-        Mail::to($user->email)->send(new WelcomeReceived($user, $password));
-            return Redirect::route('admin.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
+        Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
+    return Redirect::route('admin.administradores')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
     }
 
     /**
@@ -98,7 +102,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id)->load('profile');
+        return Inertia::render('Admin/Admins/Update', compact('user'));
     }
 
     /**
@@ -110,7 +115,36 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = $this->validate($request, [
+            'firstname'         => 'required|string',
+            'lastname'          => 'required|string',
+            'email'             => ['nullable', 'email', 'confirmed', 'max:255', Rule::unique('users')->ignore($id)],
+            'password'          => 
+            ['nullable', 'confirmed', 
+                Rules\Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->uncompromised()
+            ],
+        ]);
+        $ran = mt_Rand(1000000, 9999999);
+        //dd($request->email);
+             $user = User::find($id);
+             $user->email = $request->email;
+
+             if ($request->password != null) {
+                 $user->password = Hash::make($request->password);
+             }
+             $user->save();
+
+        $user->assignRole('Admin');
+
+        $profile = profile::find($user->profile->id);
+        $profile->firstname = $request->firstname;
+        $profile->lastname = $request->lastname;
+        $profile->save();
+        
+        return Redirect::route('admin.administradores')->with(['id'=>$ran, 'message' => 'Actualizado exitosamente', 'code' => 200, 'status' => 'success']); 
     }
 
     /**
