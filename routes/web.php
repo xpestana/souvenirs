@@ -110,18 +110,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
     /*
         Admins
      */
-    Route::resource(
-        '/admin',
-        AdminController::class, [
-            'names' => [
-                'index'     => 'admin.index',
-                'create'    => 'admin.create',
-                'store'     => 'admin.store',
-                'destroy'   => 'admin.destroy',
-            ],
-            ['except' => ['edit','show','update']]
-        ],
-    );
+    
 
     /*
         Souvenirs
@@ -325,12 +314,28 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::delete('/eliminar/alojamiento/{hotel}/{collaborator}', [AdminController::class, 'lodging_delete'])->name('admin.lodging.delete');
 
     /*ADMINISTRADORES*/
+    
     Route::get('/ajustes/administradores', [AdminController::class, 'admins'])->name('admin.administradores');
     Route::get('/crear/administrador', [AdminController::class, 'administrator_create'])->name('admin.administrator.create');
     Route::post('/administrador/store', [AdminController::class, 'administrator_store'])->name('admin.administrator.store');
     Route::get('/administrador/{id}', [AdminController::class, 'administrator_details'])->name('admin.administrator.show');
 
     /*Colaboradores*/
+});
+Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {
+Route::resource(
+        'admin',
+        AdminController::class, [
+            'names' => [
+                'index'     => 'admin.index',
+                'create'    => 'admin.create',
+                'store'     => 'admin.store',
+                'update'     => 'admin.update',
+                'destroy'   => 'admin.destroy',
+            ],
+            ['except' => ['edit','show']]
+        ],
+    );
 });
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 require __DIR__.'/auth.php';
