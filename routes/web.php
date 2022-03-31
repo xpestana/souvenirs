@@ -284,6 +284,15 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::get('/politicas/privacidad',function(){
         return Inertia::render('Collaborator/Politicas/Privacidad'); 
     });
+    Route::get('/politicas/terminosycondiciones',function(){
+        return Inertia::render('Collaborator/Politicas/Terminos'); 
+    });
+    Route::get('/politicas/reembolso',function(){
+        return Inertia::render('Collaborator/Politicas/Reembolso'); 
+    });
+    Route::get('/politicas/entregas',function(){
+        return Inertia::render('Collaborator/Politicas/Entregas'); 
+    });
 });
 /*Ajustes*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {

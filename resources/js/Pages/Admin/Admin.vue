@@ -17,25 +17,30 @@
 							<div class="modal-dialog modal-dialog-centered" role="document">
 								<div class="modal-content mx-auto" style="width:100% !important">
 									<div class="modal-body p-0">
-										<form action="#">
+										<form @submit.prevent="submitAdmin">
 											<div class="row mt-5 mb-2 px-5 mx-0 mx-md-2">
 												<div class="col-12 col-md-6 my-1 pr-md-1">
-													<BreezeInput type="text" class="w-100 p-input" placeholder="Nombre" required/>
+													<BreezeInput type="text" class="w-100 p-input" placeholder="Nombre" v-model="formadmin.firstname" required/>
 												</div>
 												<div class="col-12 col-md-6 my-1 pl-md-1">
-													<BreezeInput type="text" class="w-100 p-input" placeholder="Apellido" required/>
+													<BreezeInput type="text" class="w-100 p-input" placeholder="Apellido" v-model="formadmin.lastname" required/>
 												</div>
 												<div class="col-12 my-1">
-													<BreezeInput type="text" class="w-100 p-input" autocomplete="on" placeholder="Correo electrónico" required/>
+													<BreezeInput type="email" class="w-100 p-input" autocomplete="on" placeholder="Correo electrónico" v-model="formadmin.email" required/>
 												</div>
 												<div class="col-12 my-1">
-													<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Repetir correo electrónico" required/>
+													<BreezeInput type="email" class="w-100 p-input" autocomplete="off" placeholder="Repetir correo electrónico" v-model="formadmin.email_confirmation" required/>
 												</div>
 												<div class="col-12 my-1">
-													<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Contraseña" required/>
+													<BreezeInput type="password" class="w-100 p-input" autocomplete="off" placeholder="Contraseña" v-model="formadmin.password" required/>
 												</div>
 												<div class="col-12 my-1">
-													<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Confirmar contraseña" required/>
+													<BreezeInput type="password" class="w-100 p-input" autocomplete="off" placeholder="Confirmar contraseña" v-model="formadmin.password_confirmation" required/>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12 px-5 py-2">
+													<ValidationErrors/>
 												</div>
 											</div>
 											<div class="row px-3 py-4 mb-3">
@@ -79,7 +84,7 @@
 									<td>{{admin.email}}</td>
 									<td>
 										<div class="d-inline-flex">
-											<button type="button" class="btn btn-sm btn-editar text-white d-inline" data-toggle="modal" :data-target="'#editAdmin'+admin.id">Editar</button>
+											<button type="button" class="btn btn-sm btn-editar text-white d-inline" data-toggle="modal" :data-target="'#editAdmin'+admin.id" @click="asignarDatos(admin.profile.firstname,admin.profile.lastname,admin.email)">Editar</button>
 											<button type="button" class="btn btn-sm btn-danger ml-1 d-inline" @click="eliminar">Eliminar</button>
 										</div>
 										<!-- Central Modal Small -->
@@ -89,25 +94,29 @@
 											<div class="modal-dialog modal-dialog-centered" role="document">
 												<div class="modal-content mx-auto" style="width:100% !important">
 													<div class="modal-body p-0">
-														<form action="#">
+														<form @submit.prevent="submitEdit(admin.id)">
 															<div class="row mt-5 mb-2 px-5 mx-0 mx-md-2">
 																<div class="col-12 col-md-6 my-1 pr-md-1">
-																	<BreezeInput type="text" class="w-100 p-input" placeholder="Nombre" required/>
+																	<BreezeInput type="text" class="w-100 p-input" placeholder="Nombre" v-model="formedit.firstname" required/>
 																</div>
 																<div class="col-12 col-md-6 my-1 pl-md-1">
-																	<BreezeInput type="text" class="w-100 p-input" placeholder="Apellido" required/>
+																	<BreezeInput type="text" class="w-100 p-input" placeholder="Apellido" v-model="formedit.lastname" required/>
 																</div>
 																<div class="col-12 my-1">
-																	<BreezeInput type="text" class="w-100 p-input" autocomplete="on" placeholder="Correo electrónico" required/>
+																	<BreezeInput type="email" class="w-100 p-input" autocomplete="on"  placeholder="Correo electrónico" v-model="formedit.email" required/>
 																</div>
 																<div class="col-12 my-1">
-																	<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Repetir correo electrónico" required/>
+																	<BreezeInput type="email" class="w-100 p-input" autocomplete="off" placeholder="Repetir correo electrónico" v-model="formedit.email_confirmation" required/>																</div>
+																<div class="col-12 my-1">
+																	<BreezeInput type="password" class="w-100 p-input" autocomplete="off" placeholder="Contraseña"  v-model="formedit.password"/>
 																</div>
 																<div class="col-12 my-1">
-																	<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Contraseña" required/>
+																	<BreezeInput type="password" class="w-100 p-input" autocomplete="off" placeholder="Confirmar contraseña" v-model="formedit.password_confirmation" />
 																</div>
-																<div class="col-12 my-1">
-																	<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Confirmar contraseña" required/>
+															</div>
+															<div class="row">
+																<div class="col-12">
+																	<ValidationErrors/>
 																</div>
 															</div>
 															<div class="row px-3 py-4 mb-3">
@@ -134,8 +143,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="row justify-content-md-center px-lg-5 py-2 mb-3 mx-md-5">
-				<div class="col-12 col-md-6 px-auto px-sm-0 py-3 py-sm-0">
+			<div class="row justify-content-md-center px-0 px-lg-5 py-2 mb-3 mx-md-5">
+				<div class="col-12 col-md-6 px-1 px-sm-auto py-3 py-sm-0">
 					<paginator :paginator="admins" />
 				</div>
 			</div>
@@ -148,12 +157,14 @@ import Paginator from '@/Components/Paginator'
 import { Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import BreezeInput from '@/Components/Input'
+import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors'
 export default {
 	layout:Layout,
 	components: {
 		Paginator,
 		Link,
-		BreezeInput
+		BreezeInput,
+		ValidationErrors
 	},
 	props: {
 		admins: Object
@@ -167,6 +178,23 @@ export default {
 		return{
 			form: this.$inertia.form({
 				search: null,
+			}),
+			formadmin: this.$inertia.form({
+				firstname: null,
+				lastname: null,
+				email: null,
+				email_confirmation: null,
+				password: null,
+				password_confirmation: null,
+			}),
+			formedit: this.$inertia.form({
+				_method:"PUT",
+				firstname: null,
+				lastname: null,
+				email: null,
+				email_confirmation: null,
+				password: null,
+				password_confirmation: null,
 			})
 		}
 	},
@@ -197,6 +225,45 @@ export default {
 				});
 			},1500);
 		},
+		submitAdmin() {
+			this.formadmin.post(route('admin.store'),{
+				_token: this.$page.props.csrf_token,
+				errorBag: 'submitedit',
+				preserveScroll: true,
+				forceFormData: true,
+				onSuccess: (result) => {
+					if(this.$page.props.flash.code == 200){
+						this.form.reset();
+						this.eraseFeatured();
+						$('#createAdmin').modal('hide')
+					};
+				}
+				
+			})
+		},
+		submitEdit(id) {
+			const modal = $('#editAdmin'+id);
+			this.formedit.post(route('admin.update',{admin: id}),{
+				_token: this.$page.props.csrf_token,
+				errorBag: 'submit',
+				preserveScroll: true,
+				forceFormData: true,
+				onSuccess: (result) => {
+					modal.modal('hide')
+					if(this.$page.props.flash.code == 200){
+						this.form.reset();
+						this.eraseFeatured();
+					};
+				}
+				
+			})
+		},
+		asignarDatos(nombre,apellido,email){
+			this.formedit.firstname = nombre;
+			this.formedit.lastname = apellido;	
+			this.formedit.email = email;
+			this.formedit.email_confirmation = email;
+		},
 		eliminar(){
 			this.$swal({
                 title: '¿Esta seguro de eliminar este usuario?',
@@ -225,6 +292,7 @@ export default {
 .fondo{
 	background:no-repeat url('/vendor_asset/img/fadmins2.png');
 	background-size: cover;
+	height: 100%;
 }
 .tabla-container .input-search span{
     z-index: 2;
