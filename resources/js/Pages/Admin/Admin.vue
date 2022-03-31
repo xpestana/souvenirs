@@ -1,4 +1,5 @@
 <template>
+<div class="fondo">
 	<div class="container px-0 px-lg-5 pt-md-5">
 		<div class="tabla-container">
 			<div class="row text-center">
@@ -8,7 +9,49 @@
 			</div>
 			<div class="row justify-content-center justify-content-md-between px-lg-5 pt-4">
 				<div class="col-11 col-md-6 col-lg-5 text-center text-md-left">
-					<Link type="button" :href="route('admin.administrator.create')" class="btn btn-azulc py-1 px-3 text-white">Agregar administrador<i class="fas fa-plus px-1 px-lg-2"></i></Link>
+					<button type="button" class="btn btn-azulc py-1 px-3 text-white" data-toggle="modal" data-target="#createAdmin">Agregar administrador<i class="fas fa-plus px-1 px-lg-2"></i></button>
+						<!-- Central Modal Small -->
+						<div class="modal fade" id="createAdmin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+						aria-hidden="true">
+						<!-- Change class .modal-sm to change the size of the modal -->
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content mx-auto" style="width:100% !important">
+									<div class="modal-body p-0">
+										<form action="#">
+											<div class="row mt-5 mb-2 px-5 mx-0 mx-md-2">
+												<div class="col-12 col-md-6 my-1 pr-md-1">
+													<BreezeInput type="text" class="w-100 p-input" placeholder="Nombre" required/>
+												</div>
+												<div class="col-12 col-md-6 my-1 pl-md-1">
+													<BreezeInput type="text" class="w-100 p-input" placeholder="Apellido" required/>
+												</div>
+												<div class="col-12 my-1">
+													<BreezeInput type="text" class="w-100 p-input" autocomplete="on" placeholder="Correo electrónico" required/>
+												</div>
+												<div class="col-12 my-1">
+													<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Repetir correo electrónico" required/>
+												</div>
+												<div class="col-12 my-1">
+													<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Contraseña" required/>
+												</div>
+												<div class="col-12 my-1">
+													<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Confirmar contraseña" required/>
+												</div>
+											</div>
+											<div class="row px-3 py-4 mb-3">
+												<div class="col-6 text-left">
+													<button type="button" class="bnt btn-primary-c text-white rounded-pill px-2 px-md-5 py-1" href="#" data-dismiss="modal" >Volver</button>
+												</div>
+												<div class="col-6 text-right">
+													<button type="submit" class="bnt btn-primary-c text-white rounded-pill px-2 px-md-5 py-1" >Guardar</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Central Modal Small -->
 				</div>
 				<div class="col-8 col-sm-5 col-md-5 col-lg-3 mt-2 mt-md-0">
 					<div class="input-search m-0">
@@ -35,8 +78,52 @@
 									<td>{{admin.profile.lastname}}</td>
 									<td>{{admin.email}}</td>
 									<td>
-										<Link :href="route('admin.administrator.show',admin.id)" class="btn btn-sm btn-editar d-inline text-white">Editar</Link>
-										<a href="#" class="btn btn-sm btn-danger d-inline ml-1" @click="eliminar">Eliminar</a>
+										<div class="d-inline-flex">
+											<button type="button" class="btn btn-sm btn-editar text-white d-inline" data-toggle="modal" :data-target="'#editAdmin'+admin.id">Editar</button>
+											<button type="button" class="btn btn-sm btn-danger ml-1 d-inline" @click="eliminar">Eliminar</button>
+										</div>
+										<!-- Central Modal Small -->
+										<div class="modal fade" :id="'editAdmin'+admin.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+										aria-hidden="true">
+										<!-- Change class .modal-sm to change the size of the modal -->
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content mx-auto" style="width:100% !important">
+													<div class="modal-body p-0">
+														<form action="#">
+															<div class="row mt-5 mb-2 px-5 mx-0 mx-md-2">
+																<div class="col-12 col-md-6 my-1 pr-md-1">
+																	<BreezeInput type="text" class="w-100 p-input" placeholder="Nombre" required/>
+																</div>
+																<div class="col-12 col-md-6 my-1 pl-md-1">
+																	<BreezeInput type="text" class="w-100 p-input" placeholder="Apellido" required/>
+																</div>
+																<div class="col-12 my-1">
+																	<BreezeInput type="text" class="w-100 p-input" autocomplete="on" placeholder="Correo electrónico" required/>
+																</div>
+																<div class="col-12 my-1">
+																	<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Repetir correo electrónico" required/>
+																</div>
+																<div class="col-12 my-1">
+																	<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Contraseña" required/>
+																</div>
+																<div class="col-12 my-1">
+																	<BreezeInput type="text" class="w-100 p-input" autocomplete="off" placeholder="Confirmar contraseña" required/>
+																</div>
+															</div>
+															<div class="row px-3 py-4 mb-3">
+																<div class="col-6 text-left">
+																	<button type="button" class="bnt btn-primary-c text-white rounded-pill px-2 px-md-5 py-1" href="#" data-dismiss="modal" >Volver</button>
+																</div>
+																<div class="col-6 text-right">
+																	<button type="submit" class="bnt btn-primary-c text-white rounded-pill px-2 px-md-5 py-1" >Guardar</button>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- Central Modal Small -->
 									</td>
 								</tr>
 								<tr v-if="admins.data.length < 1">
@@ -53,20 +140,20 @@
 				</div>
 			</div>
 		</div>
-		<div class="img-container d-none d-md-block">
-			<img src="/vendor_asset/img/userimg.png" height="800" width="1000">
-		</div>
 	</div>
+</div>
 </template>
 <script>
-import Paginator from '@/Components/Paginator.vue'
+import Paginator from '@/Components/Paginator'
 import { Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Pages/Admin/Layouts/Layout'
+import BreezeInput from '@/Components/Input'
 export default {
 	layout:Layout,
 	components: {
 		Paginator,
-		Link
+		Link,
+		BreezeInput
 	},
 	props: {
 		admins: Object
@@ -135,15 +222,9 @@ export default {
 }
 </script>
 <style scoped>
-.tabla-container{
-	z-index: 30;
-	position: relative;
-}
-.img-container{
-	position:absolute;
-	left: -340px;
-	bottom: 0;
-	z-index: 3;
+.fondo{
+	background:no-repeat url('/vendor_asset/img/fadmins2.png');
+	background-size: cover;
 }
 .tabla-container .input-search span{
     z-index: 2;
@@ -158,6 +239,9 @@ export default {
 .tabla-container .btn-editar{
 	background-color: #2b59a2;
 }
+.tabla-container .p-input{
+    padding: 12px 10px;
+}
 @media (max-width:767px){
 	.tabla-container{
 		position:static;
@@ -165,5 +249,9 @@ export default {
 	.tabla-container .display-4{
 		font-size: 35px;
 	}
+	.fondo{
+		background:none;
+		background-size: static;
+	}	
 }
 </style>

@@ -29,9 +29,6 @@ export default {
 </script>
 
 <style scoped>
-#sidebar{
-    z-index: 10;
-}
 #contenido{
     overflow-wrap: break-word;
 }
