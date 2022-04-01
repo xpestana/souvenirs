@@ -40,10 +40,10 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li class="pb-2"><a target="_blank" href="/tablero/alojamientos/politicas/privacidad">Políticas de privacidad</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/tablero/alojamientos/politicas/terminosycondiciones">Términos y condiciones</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/tablero/alojamientos/politicas/entregas">Políticas de envío</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/tablero/alojamientos/politicas/reembolso">Políticas de reembolso</a></li>
+                                        <li class="pb-2"><a target="_blank" href="/tablero/politicas/privacidad">Políticas de privacidad</a></li>
+                                        <li class="pb-2"><a target="_blank" href="/tablero/politicas/terminosycondiciones">Términos y condiciones</a></li>
+                                        <li class="pb-2"><a target="_blank" href="/tablero/politicas/entregas">Políticas de envío</a></li>
+                                        <li class="pb-2"><a target="_blank" href="/tablero/politicas/reembolso">Políticas de reembolso</a></li>
                                     </ul>
                                 </div>
                             </div>

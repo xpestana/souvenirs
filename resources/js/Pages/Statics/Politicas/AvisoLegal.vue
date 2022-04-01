@@ -4,7 +4,9 @@
             <div class="titulo">
                 <div class="row">
                     <div class="col-5 col-md-2">
-                        <img src="/vendor_asset/img/logo/logopequeño.png">
+                        <a :href="'/'">
+                            <img src="/vendor_asset/img/logo/logopequeño.png">
+                        </a>
                     </div>
                     <div class="col-7 col-md-10 pt-5">
                         <h1 class="pt-5 pb-2"><strong>AVISO LEGAL</strong></h1>
@@ -50,6 +52,15 @@
         </div>
     </div>
 </template>
+<script>
+    import { Link, Head } from '@inertiajs/inertia-vue3'
+    export default {
+        components: {
+            Link,
+            Head,
+        },
+    }
+</script>
 <style scoped>
 .cuerpo .titulo h1{
     font-size: 1.5em;

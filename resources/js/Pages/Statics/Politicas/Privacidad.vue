@@ -4,7 +4,9 @@
             <div class="titulo">
                 <div class="row">
                     <div class="col-5 col-md-2 px-0">
-                        <img src="/vendor_asset/img/logo/logopequeño.png">
+                        <a :href="'/'">
+                            <img src="/vendor_asset/img/logo/logopequeño.png">
+                        </a>
                     </div>
                     <div class="col-7 col-md-10 pt-5">
                         <h1 class="pt-5 pb-2"><strong>POLÍTICA DE PRIVACIDAD</strong></h1>

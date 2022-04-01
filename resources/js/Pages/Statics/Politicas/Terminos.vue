@@ -4,7 +4,9 @@
             <div class="titulo">
                 <div class="row">
                     <div class="col-12 col-md-2 px-0">
-                        <img src="/vendor_asset/img/logo/logopequeño.png" class="mx-auto mx-md-0">
+                        <a :href="'/'">
+                            <img src="/vendor_asset/img/logo/logopequeño.png" class="mx-auto mx-md-0">
+                        </a>
                     </div>
                     <div class="col-12 col-md-10 pt-0 pt-md-5">
                         <h1 class="pt-5 pb-2"><strong>TÉRMINOS Y CONDICIONES DEL SERVICIO DE PAGO ON-LINE</strong></h1>
