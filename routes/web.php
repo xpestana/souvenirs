@@ -287,7 +287,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::get('/politicas/terminosycondiciones',function(){
         return Inertia::render('Collaborator/Politicas/Terminos'); 
     });
-    Route::get('/politicas/reembolso',function(){
+    Route::get('/politicas/devolucion',function(){
         return Inertia::render('Collaborator/Politicas/Reembolso'); 
     });
     Route::get('/politicas/entregas',function(){

@@ -40,7 +40,7 @@
 											</div>
 											<div class="row">
 												<div class="col-12 px-5 py-2">
-													<ValidationErrors/>
+													<breeze-valid/>
 												</div>
 											</div>
 											<div class="row px-3 py-4 mb-3">
@@ -158,13 +158,15 @@ import { Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import BreezeInput from '@/Components/Input'
 import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors'
+import BreezeValid from '@/Components/ValidationErrors.vue'
 export default {
 	layout:Layout,
 	components: {
 		Paginator,
 		Link,
 		BreezeInput,
-		ValidationErrors
+		ValidationErrors,
+		BreezeValid
 	},
 	props: {
 		admins: Object
@@ -228,7 +230,6 @@ export default {
 		submitAdmin() {
 			this.formadmin.post(route('admin.store'),{
 				_token: this.$page.props.csrf_token,
-				errorBag: 'submitedit',
 				preserveScroll: true,
 				forceFormData: true,
 				onSuccess: (result) => {
