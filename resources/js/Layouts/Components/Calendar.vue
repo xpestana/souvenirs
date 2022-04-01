@@ -58,6 +58,7 @@
         data() {
             return {
                 modal: false,
+                status: null,
                 random: 1,
             	form: this.$inertia.form({
                     product_id: this.product.id,
@@ -73,6 +74,12 @@
         },
         methods: {
             submit(){
+                var total = parseInt(this.form.adult) + parseInt(this.form.children);
+
+                if (total == 0) {
+                    this. status = "Error, No hay nadie por registrar";
+                return;
+                }
                 this.form.post(route('cart.activity'),{
                     _token: this.$page.props.csrf_token,
                     errorBag: 'submit',
@@ -81,6 +88,12 @@
                 })
             },
             reserve(){
+                var total = parseInt(this.form.adult) + parseInt(this.form.children);
+
+                if (total == 0) {
+                    this. status = "Error, No hay nadie por registrar";
+                return;
+                }
                 this.form.post(route('cart.activity'),{
                     _token: this.$page.props.csrf_token,
                     errorBag: 'submit',
