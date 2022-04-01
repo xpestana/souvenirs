@@ -277,22 +277,22 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
 
     /* Politicas */
     Route::get('/politicas/avisolegal',function(){
-         return Inertia::render('Collaborator/Politicas/AvisoLegal'); 
+         return Inertia::render('Statics/Politicas/AvisoLegal'); 
     });
     Route::get('/politicas/cookies',function(){
-        return Inertia::render('Collaborator/Politicas/Cookies'); 
+        return Inertia::render('Statics/Politicas/Cookies'); 
     });
     Route::get('/politicas/privacidad',function(){
-        return Inertia::render('Collaborator/Politicas/Privacidad'); 
+        return Inertia::render('Statics/Politicas/Privacidad'); 
     });
     Route::get('/politicas/terminosycondiciones',function(){
-        return Inertia::render('Collaborator/Politicas/Terminos'); 
+        return Inertia::render('Statics/Politicas/Terminos'); 
     });
     Route::get('/politicas/reembolso',function(){
-        return Inertia::render('Collaborator/Politicas/Reembolso'); 
+        return Inertia::render('Statics/Politicas/Reembolso'); 
     });
     Route::get('/politicas/entregas',function(){
-        return Inertia::render('Collaborator/Politicas/Entregas'); 
+        return Inertia::render('Statics/Politicas/Entregas'); 
     });
     
     Route::get('/colaboradores', [CollaboratorController::class, 'index'])->name('collaborator.index');  
