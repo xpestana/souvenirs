@@ -92,7 +92,7 @@
   					cancelButtonText: 'Cancelar',
 				}).then((result) => {
   						if (result.isConfirmed) {
-  							this.$inertia.delete(route('souvenirs.destroy',{activities : product}),
+  							this.$inertia.delete(route('activities.destroy',{actividade : product}),
   							{
 								preserveScroll: true,
   							})

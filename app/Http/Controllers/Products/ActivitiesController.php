@@ -220,9 +220,7 @@ class ActivitiesController extends Controller
                 'name'          => $nameFile['fileName'],
                 'url'           => $pathName.$nameFile['fileName'],
             ]);
-
         }
-
         return back(); 
     }
     /**
@@ -231,12 +229,12 @@ class ActivitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($actividade)
     {
-        $product = Products::find($id);
+        $product = Products::find($actividade);
         $product->del = true;
         $product->save();
         
-        return Redirect::route('activities.index')->with(['id'=>$id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
+        return Redirect::route('activities.index')->with(['id'=>$actividade, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
     }
 }

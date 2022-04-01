@@ -2,12 +2,14 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/vendor_asset/img/favicon.ico": "/vendor_asset/img/favicon.ico",
+    "/vendor_asset/img/fondo-inicio.jpg": "/vendor_asset/img/fondo-inicio.jpg",
     "/vendor_asset/img/recurso_1.png": "/vendor_asset/img/recurso_1.png",
     "/vendor_asset/img/recurso_2.png": "/vendor_asset/img/recurso_2.png",
     "/vendor_asset/img/recurso_3.png": "/vendor_asset/img/recurso_3.png",
     "/vendor_asset/img/recurso_4.png": "/vendor_asset/img/recurso_4.png",
     "/vendor_asset/img/recurso_5.png": "/vendor_asset/img/recurso_5.png",
     "/vendor_asset/img/recurso_6.png": "/vendor_asset/img/recurso_6.png",
+    "/vendor_asset/img/skyline.png": "/vendor_asset/img/skyline.png",
     "/vendor_asset/css/animate.css": "/vendor_asset/css/animate.css",
     "/vendor_asset/css/default.css": "/vendor_asset/css/default.css",
     "/vendor_asset/css/font-awesome.min.css": "/vendor_asset/css/font-awesome.min.css",
@@ -58,10 +60,5 @@
     "/vendor_asset/js/main.js": "/vendor_asset/js/main.js",
     "/vendor_asset/js/owl.carousel.min.js": "/vendor_asset/js/owl.carousel.min.js",
     "/vendor_asset/js/plugins.js": "/vendor_asset/js/plugins.js",
-    "/css/all.css": "/css/all.css",
-<<<<<<< HEAD
-    "/vendor_asset/img/skyline.png": "/vendor_asset/img/skyline.png"
-=======
-    "/vendor_asset/img/fondo-inicio.jpg": "/vendor_asset/img/fondo-inicio.jpg"
->>>>>>> dev
+    "/css/all.css": "/css/all.css"
 }

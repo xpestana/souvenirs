@@ -127,7 +127,7 @@
                 snapAlign: 'center',
                 },
               1024: {
-                itemsToShow: 2.5,
+                itemsToShow: 3,
                 snapAlign: 'start',
                 },
                 },

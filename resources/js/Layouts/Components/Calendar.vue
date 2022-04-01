@@ -21,16 +21,17 @@
                             Agregar al carrito
                         </BreezeButton>
                         <BreezeValidationErrors class="my-3" />
-                        <div class="login-footer text-center">
-                            <div v-if="status" class="mb-4 font-medium text-sm text-danger">
-                                {{ status }}
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <div align="center" class="col-md-6 mt-4">
                     <div class="d-single-info text-lg-center">
                         <BreezeButton type="button" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="reserve">Reservar directo</BreezeButton>
+                    </div>
+                </div>
+                <div class="login-footer text-center">
+                    <div v-if="status" class="mb-4 font-medium text-sm text-danger">
+                        {{ status }}
                     </div>
                 </div>
   			</div>
@@ -59,6 +60,7 @@
             return {
                 modal: false,
                 random: 1,
+                status,
             	form: this.$inertia.form({
                     product_id: this.product.id,
                 	adult: 0,
@@ -73,6 +75,12 @@
         },
         methods: {
             submit(){
+                var total = parseInt(this.form.adult) + parseInt(this.form.children);
+
+                if (total == 0) {
+                    this. status = "Error, No hay nadie por registrar";
+                return;
+                }
                 this.form.post(route('cart.activity'),{
                     _token: this.$page.props.csrf_token,
                     errorBag: 'submit',
@@ -81,6 +89,12 @@
                 })
             },
             reserve(){
+               /* var total = parseInt(this.form.adult) + parseInt(this.form.children);
+
+                if (total == 0) {
+                    this. status = "Error, No hay nadie por registrar";
+                return;
+                }*/
                 this.form.post(route('cart.activity'),{
                     _token: this.$page.props.csrf_token,
                     errorBag: 'submit',
