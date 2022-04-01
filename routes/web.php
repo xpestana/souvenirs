@@ -274,6 +274,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 /*Dashboard*/
 Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
+
+    /* Politicas */
+    Route::get('/politicas/avisolegal',function(){
+         return Inertia::render('Collaborator/Politicas/AvisoLegal'); 
+    });
+    Route::get('/politicas/cookies',function(){
+        return Inertia::render('Collaborator/Politicas/Cookies'); 
+    });
+    Route::get('/politicas/privacidad',function(){
+        return Inertia::render('Collaborator/Politicas/Privacidad'); 
+    });
+    Route::get('/politicas/terminosycondiciones',function(){
+        return Inertia::render('Collaborator/Politicas/Terminos'); 
+    });
+    Route::get('/politicas/reembolso',function(){
+        return Inertia::render('Collaborator/Politicas/Reembolso'); 
+    });
+    Route::get('/politicas/entregas',function(){
+        return Inertia::render('Collaborator/Politicas/Entregas'); 
+    });
     
     Route::get('/colaboradores', [CollaboratorController::class, 'index'])->name('collaborator.index');  
 });
