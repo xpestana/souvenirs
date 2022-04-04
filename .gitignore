@@ -17,3 +17,4 @@ yarn-error.log
 /.vscode
 /app/Http/Kernel.php
 app/Http/Middleware/HttpsProtocol.php
+/app/Http/Middleware/HttpsProtocol.php
