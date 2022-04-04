@@ -83,7 +83,7 @@
         	deleteProduct(product){
         		this.$swal({
   					title: '¿Estas seguro?',
-  					text: "Esta acción no se puede revertir!",
+  					text: "¡Esta acción no se puede revertir!",
   					icon: 'warning',
   					showCancelButton: true,
   					confirmButtonColor: '#3085d6',

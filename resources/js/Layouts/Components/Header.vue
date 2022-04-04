@@ -51,13 +51,13 @@
                     meanScreenWidth: "991",
                 });
                 //Make sticky the menu
-                $(window).scroll(function () {
+               /* $(window).scroll(function () {
                     if ($(this).scrollTop() > 100) {
                         $('.header-sticky').addClass("sticky");
                     } else {
                         $('.header-sticky').removeClass("sticky");
                     }
-                });
+                });*/
             }
         },
     }
