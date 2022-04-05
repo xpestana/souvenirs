@@ -411,12 +411,12 @@ class AdminController extends Controller
     }
     public function admins(Request $request)
     {
-        $admins = User::role('Admin')
+        $admins = User::join('profiles', 'users.id', '=', 'profiles.user_id')
+                ->role('Admin')
                 ->search($request->search)
                 ->email($request->search)
-                ->with('profile')
-                ->orderBy('email')
-                ->paginate(10);
+                ->orderBy('profiles.firstname','ASC')
+                ->paginate(10);//dd($admins);
         return Inertia::render('Admin/Admin',compact('admins'));
     }
     public function administrator_create(Request $request)

@@ -79,12 +79,12 @@
 							</thead>
 							<tbody class="text-center" id="tbody">
 								<tr v-for="admin in admins.data" :key="admin.id">
-									<td>{{admin.profile.firstname}}</td>
-									<td>{{admin.profile.lastname}}</td>
+									<td>{{admin.firstname}}</td>
+									<td>{{admin.lastname}}</td>
 									<td>{{admin.email}}</td>
 									<td>
 										<div class="d-inline-flex">
-											<button type="button" class="btn btn-sm btn-editar text-white d-inline" data-toggle="modal" :data-target="'#editAdmin'+admin.id" @click="asignarDatos(admin.profile.firstname,admin.profile.lastname,admin.email)">Editar</button>
+											<button type="button" class="btn btn-sm btn-editar text-white d-inline" data-toggle="modal" :data-target="'#editAdmin'+admin.id" @click="asignarDatos(admin.firstname,admin.lastname,admin.email)">Editar</button>
 											<button type="button" class="btn btn-sm btn-danger ml-1 d-inline" @click="eliminar">Eliminar</button>
 										</div>
 										<!-- Central Modal Small -->
@@ -173,7 +173,6 @@ export default {
 	},
 	created(){
 		console.log("usuarios administradores: ",this.admins.data);
-		console.log("admins: ",this.admins);
 		//console.log("datos de perfil administradores: ",this.admins.data[0].profile);
 	},
 	data(){
