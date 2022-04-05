@@ -37,7 +37,7 @@
 <div class="main-product-thumbnail white-bg pt-90 pb-50">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-8 mb-all-40">
+            <div style="word-break: break-word;" class="col-lg-8 col-md-8 mb-all-40">
                 <Back/>
                 <div class="grid-list-view d-flex align-items-center  mb-sm-15 mt-4">
                     <ul class="nav tabs-area d-flex align-items-center">
