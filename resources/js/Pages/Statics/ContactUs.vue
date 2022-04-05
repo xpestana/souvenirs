@@ -7,7 +7,7 @@
     
     <Breadcrumb title="Contáctanos"/>
     <!-- Regester Page Start Here -->
-    <div class="register-area white-bg ptb-80">
+     <div class="register-area white-bg ptb-80">
         <div class="container">
         <h3 class="login-header text-info">Contáctanos</h3>
             <div class="row">
@@ -71,6 +71,29 @@
                     </div>
                 </div>
             </div>
+            <div class="row datos mt-5">
+                <div class="col-12 text-center">
+                    <h1>Si prefieres llama al +34722193903  o envíanos <br>un correo a info@hicitty.es</h1>
+                </div>
+            </div>
+            <div class="row mt-3 datos justify-content-center">
+                <div class="col-2 col-md-1">
+                    <div class="p-3">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <div class="p-3">
+                        <i class="far fa-address-card"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-3 pl-0 pt-1">
+                    <div class="p-3">
+                        <p>info@hicitty.es</p>
+                    </div>
+                    <div class="p-3">
+                        <p>+34 722 19 39 03</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Register Page End Here -->
@@ -126,3 +149,20 @@
         }
     }
 </script>
+<style scoped>
+.datos h1{
+    font-size: 2.5em;
+}
+.datos i{
+    font-size: 2em;
+}
+.datos p{
+    font-size: 1.5em;
+}
+@media (max-width:700px)
+{
+    .datos h1{
+        font-size: 2em;
+    }   
+}
+</style>
