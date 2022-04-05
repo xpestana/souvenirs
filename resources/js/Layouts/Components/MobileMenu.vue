@@ -1,5 +1,5 @@
 <template>
-	<nav class="navbar navbar-light bg-white d-block d-md-none" id="mobile">
+	<nav class="navbar fixed-top navbar-light bg-white d-block" id="mobile">
                             <!-- Navbar brand -->
         <div class="row justify-content-between">
           <div class="col-4 text-left pl-0">
@@ -9,11 +9,11 @@
             </button>
           </div>
 		  <div class="col-4">
-			  <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" height="70" width="70">
+			  <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" height="70" width="70" @click="home">
 		  </div>
 		  <div class="col-4 pt-3 text-right pr-0 d-inline-flex">
-				<div class="dropdown dropleft">
-					<button class="btn dropdown-toggle dropleft" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+				<div class="dropdown">
+					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
 						<img class="d-inline" src="/vendor_asset/img/spanish.png" alt="logo" height="30" width="30">
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -21,7 +21,7 @@
 					</div>
 				</div>
 				<Link :href="route('cart.index')">
-				<i class="fas fa-shopping-cart pt-2 mt-1" style="font-size:22px"></i>
+				<i class="fas fa-shopping-cart pt-2 mt-1"></i>
 				</Link>
           </div>
         </div>
@@ -116,14 +116,27 @@
                     _token: this.$page.props.csrf_token,
                 })
             },
+			home(){
+              this.$inertia.get(route('home'),{}, {
+                    preserveScroll: true
+                })
+            },
         }
 	}
 </script>
 <style scoped>
+#mobile .dropdown-menu.show {
+    left: -80px !important;
+}
 #mobile .titulo-nav{
 	font-size: 25px;
 }
 #mobile .items i{
 	font-size: 35px;
 }
+#mobile  i{
+	font-size:22px;
+	opacity: 0.4;
+}
+
 </style>

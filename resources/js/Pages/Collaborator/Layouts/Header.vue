@@ -1,6 +1,6 @@
 <template>
     <!-- Main Header Area Start Here -->
-        <header class="header-sticky">
+        <header class="header-sticky bg-white">
             <div class="coustom-container">
                 <div class="main-header">
                     <div class="row">
@@ -45,6 +45,11 @@
     }
 </script>
 <style>
+    header{
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
     .logo {
         padding: 10px 0 !important;
     }   

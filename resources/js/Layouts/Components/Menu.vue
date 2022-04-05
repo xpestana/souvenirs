@@ -1,30 +1,38 @@
 <template>
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar fixed-top navbar-light bg-light">
   
     <div class="row justify-content-between w-100">
-        <div class="col-lg-3 col-2">
-                <img src="/vendor_asset/img/logo/logo.png" alt="logo" height="80" width="80">
-        </div>
-        <div class="enlaces col-4 col-lg-4 d-flex align-items-center">
-            <Link class="d-inline px-4" :href="route('souvenirs')">Souvenirs</Link>
-            <Link class="d-inline px-4" :href="route('activities')">Actividades</Link>
-            <Link class="d-inline px-4" :href="route('contact')">Contacto</Link>
+        <div class="col-4 col-lg-4 enlaces mt-4">
+            <div class="dropdown">
+            <button class="btn border rounded pb-0 pt-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <Link class="dropdown-item" :href="route('souvenirs')">Souvenirs</Link>
+                <Link class="dropdown-item" :href="route('activities')">Actividades</Link>
+                <Link class="dropdown-item" :href="route('contact')">Contacto</Link>
+                <Link class="dropdown-item" href="#">Ayuda</Link>
+            </div>
+            </div>
         </div>
               <!-- Cart Box Start Here -->
+        <div class="col-lg-3 col-2">
+            <img src="/vendor_asset/img/logo/logo.png" alt="logo" height="80" width="80">
+        </div>
         <div class="col-lg-3 col-5">
             <div class="search-cart-area text-right">
             <ul class="d-inline-flex">
-                <Cart :key="$page.props.flash.id"/>
-                <li class="icon-login pt-3 pb-0 mb-0 mt-1">
-                    <div class="dropdown dropleft">
-					<button class="btn dropdown-toggle dropleft" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-						<img class="d-inline" src="/vendor_asset/img/spanish.png" alt="logo" height="70" width="70">
+                <li class="icon-login pt-3 pb-0 mb-0">
+                    <div class="dropdown">
+					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+						<img class="d-inline" src="/vendor_asset/img/spanish.png" alt="logo" height="50" width="50">
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/spanish.png" alt="logo" height="30" width="30"></a>
 					</div>
 				</div>
                 </li>
+                <Cart :key="$page.props.flash.id"/>
             </ul>
         </div>    
         </div>
@@ -53,7 +61,7 @@
     }
 </script>
 <style scope>
-nav .enlaces{
-    font-size: 20px;
+nav .enlaces i{
+    font-size: 1.5em;
 }
 </style>
