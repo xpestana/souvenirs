@@ -33,7 +33,7 @@
 				<Link v-for="clbtr in collaborators.data" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
 				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light justify-content-center justify-content-md-between" >
 					<div class="col-10 col-md-6">
-						<h1 class="font-weight-bolder text-center text-md-left">{{clbtr.profile.firstname}}</h1>
+						<h1 class="font-weight-bolder text-center text-md-left">{{clbtr.firstname}}</h1>
 					</div>
 					<div class="col-10 col-md-6">
 						<p class="font-weight-bolder text-muted mt-3 text-center text-md-left">{{clbtr.email}}</p>

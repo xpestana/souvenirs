@@ -80,9 +80,13 @@ class User extends Authenticatable
             });
         }
     }
-    public function scopeEmail($query, $email) 
+    public function scopeEmail($query, $email, $roll) 
     {
-        if ($email) {
+        if ($email && $roll =="Hotel") {
+            $query->orWhere("email",'like',  '%'.$email.'%');
+            $query->role('Hotel');
+        }
+        if ($email && $roll =="Admin") {
             $query->orWhere("email",'like',  '%'.$email.'%');
             $query->role('Admin');
         }
