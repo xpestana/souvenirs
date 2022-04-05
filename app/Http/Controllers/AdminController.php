@@ -167,9 +167,14 @@ class AdminController extends Controller
         return Inertia::render('Admin/index');
     }
 
-    public function colaboradores()
+    public function colaboradores(Request $request)
     {
-        $collaborators = User::role('Hotel')->with('profile','hotel.orders.shippings')->paginate(10);
+        $collaborators = User::role('Hotel')
+        ->search($request->search)
+        ->email($request->search)
+        ->with('profile','hotel.orders.shippings')
+        ->orderBy('email')
+        ->paginate(10);
         return Inertia::render('Admin/Collaborators',compact('collaborators'));
     }
     public function collaborator_create(){
@@ -410,6 +415,7 @@ class AdminController extends Controller
                 ->search($request->search)
                 ->email($request->search)
                 ->with('profile')
+                ->orderBy('email')
                 ->paginate(10);
         return Inertia::render('Admin/Admin',compact('admins'));
     }

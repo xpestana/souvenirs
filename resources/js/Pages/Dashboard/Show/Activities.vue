@@ -50,7 +50,7 @@
                 <div id="description" class="col-md-12 mt-4 border-bottom">
                     <h3 style="font-size: 2rem;">Descripción</h3> 
                 </div>
-                <div class="col-md-12 mt-3 pb-15" v-html="product.description"> 
+                <div class="col-md-12 mt-3 pb-15" style="word-wrap: break-word ;" v-html="product.description"> 
                 </div>
                 <div id="price" class="col-md-12 mt-4 pb-15">
                     <h3 style="font-size: 2rem;" class="mt-3 border-bottom">Precio</h3> 
@@ -75,12 +75,12 @@
                 <div id="details" class="col-md-12 mt-4 border-bottom">
                     <h3 style="font-size: 2rem;" class="mt-3">Detalles de cancelación</h3> 
                 </div>
-                <div class="col-md-12 mt-3 pb-15" v-html="product.activities.details">
+                <div style="word-wrap: break-word ;" class="col-md-12 mt-3 pb-15" v-html="product.activities.details">
                 </div>
                 <div id="point" class="col-md-12 mt-4  border-bottom">
                     <h3 style="font-size: 2rem;" class="mt-3">Punto de encuentro</h3> 
                 </div>
-                <div style="overflow-x: scroll;" class="col-md-12 mt-3 pb-15" v-html="product.activities.iframe">
+                <div style="word-wrap: break-word ;" class="col-md-12 mt-3 pb-15" v-html="product.activities.iframe">
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 mb-all-40">

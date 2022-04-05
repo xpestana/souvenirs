@@ -19,10 +19,7 @@
                     <ul class="navbar-nav">
                         <li class="py-1"><Link :href="route('collaborator.index')"><i class="fas fa-user iconNav"></i> Mis alojamientos</Link></li>
                         <li class="py-1"><Link :href="route('collaborator.ajustes.index')" ><i class="fas fa-wrench iconNav"></i>Ajustes</Link></li>
-                        <template v-if="this.$page.props.auth.user">
-                            <li class="py-1"><Link :href="route('logout.destroy')"><i class="fas fa-power-off iconNav"></i>Cerrar sesión</Link></li>
-                        </template>
-                        <template v-else>
+                        <template v-if="!this.$page.props.auth.user">
                             <li class="py-1"><Link :href="route('login')">Iniciar Sesión</Link></li>
                         </template>
                     </ul>

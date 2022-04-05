@@ -1,5 +1,9 @@
 <template>
-	<li><Link :href="route('cart.index')"><i class="header-cart icon-cart"></i><span>{{ $page.props.cart.count }}</span></Link>
+	<li class="pt-4 pb-0 mb-0 mt-2">
+                <Link :href="route('cart.index')" class="pr-0">
+                    <i class="header-cart fas fa-shopping-cart"></i>
+                    <span>{{ $page.props.cart.count }}</span>
+                </Link>
                 <!-- Cart Box Start -->
                 <ul class="ht-dropdown cart-box-width">
                     <template v-for="product in $page.props.cart" :key="product.id">

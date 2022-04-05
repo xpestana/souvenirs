@@ -13,7 +13,7 @@
 				<div class="col-12 col-md-4 col-lg-4 my-lg-2 my-md-0 my-2 px-0">
 					<div class="input-search m-0">
 						<span class="fa fa-search text-muted position-absolute d-block text-center"></span>
-						<input type="text" class="form-control rounded-sm" placeholder="Search" v-model="search">
+						<input type="text" class="form-control rounded-sm" placeholder="Search" v-model="formSearch.search" @keyup.prevent="search">
 					</div>
 				</div>
 				<div class="col-12 col-md-3 col-lg-3 pl-md-5 my-lg-2 my-md-0 my-2 px-0 select-aloj">
@@ -30,10 +30,10 @@
 			</div>
 			</div>
 		<div class="container px-0 cuerpo">
-				<Link v-for="clbtr in colaboradores" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
+				<Link v-for="clbtr in collaborators.data" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
 				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light justify-content-center justify-content-md-between" >
 					<div class="col-10 col-md-6">
-						<h1 class="font-weight-bolder text-center text-md-left">{{clbtr.name}}</h1>
+						<h1 class="font-weight-bolder text-center text-md-left">{{clbtr.profile.firstname}}</h1>
 					</div>
 					<div class="col-10 col-md-6">
 						<p class="font-weight-bolder text-muted mt-3 text-center text-md-left">{{clbtr.email}}</p>
@@ -57,7 +57,12 @@
 				</div>
 				</Link>
 			
-			<div class="row justify-content-center mb-3">
+			<div class="row justify-content-center mt-5" v-if="collaborators.data.length <= 0">
+				<div class="col-4 text-center">
+					<h3 class="text-muted">No existen resultados</h3>
+				</div>
+			</div>
+			<div class="row justify-content-center mb-3" v-if="collaborators.data.length > 0">
             	<div class="col-10 col-sm-6 col-lg-4 px-0">
                 	<paginator :paginator="collaborators"/>
                 </div>
@@ -78,53 +83,46 @@ export default {
 	props: {
 	collaborators: Object
 	},
-	created(){
-		console.log(this.collaborators.data);
+	mounted(){
+		this.busqueda()
 	},
 	data(){
 		return{
-			search:''
+			formSearch: this.$inertia.form({
+				search: null,
+			}),
 		}
 	},
 	methods:{
+		busqueda(){
+			let input = this.$page.url.split("?search=","2")[1];
+			if(input !== undefined){
+				this.formSearch.search = input;	
+			}
+		},
 		createCollaborator(){
 			this.$inertia.get(route('admin.collaborator.create'),{}, {
 				preserveScroll: true
 			})
 		},
-	},
-	computed:{
-		datacol(){
-			const obj = this.collaborators.data.map((col)=>{
-				return {
-					id : col.id,
-					name : col.profile == null ? 'Sin nombre' : col.profile.firstname,
-					email : col.email,
-					lodgings: col.hotel.length,
-					hotel: col.hotel,
-					orders: col.hotel.orders !== undefined ? clbtr.hotel.orders.length : 0,
-				}
-			});
-			obj.sort(function (x, y) {
-				if (x.name.toLowerCase() < y.name.toLowerCase()) {return -1;}
-				if (x.name.toLowerCase() > y.name.toLowerCase()) {return 1;}
-				return 0;
-			});
-			
-			return obj;
+		search() {
+			this.collaborators.data = {};
+				let template =`
+					<div class="row mt-5 justify-content-center">
+						<div class="col-4 text-center">
+							<div class="spinner-border text-info" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+						</div>
+					</div>
+					`
+				$('.cuerpo').html(template);
+			setTimeout(()=>{
+				this.formSearch.get(this.route('admin.colaboradores'), {
+					preserveScroll: true,
+				});
+			},1500);
 		},
-		colaboradores(){
-			let filter1 = '';
-			let filter2 = '';
-			if(this.search != ''){
-				return this.datacol.filter((col)=>{
-					filter1 = col.name.toLowerCase().includes(this.search.toLowerCase());
-					filter2 = col.email.toLowerCase().includes(this.search.toLowerCase());
-					return (filter1 == true || filter2 == true) ? true : false;
-				})
-			}
-			return this.datacol;
-		}
 	}
 }
 </script>

@@ -1,22 +1,108 @@
 <template>
-	<!-- Mobile Menu Start -->
-    <div class="mobile-menu d-block d-lg-none">
-    	<nav>
-        	<ul>
-            	<li><Link :href="route('souvenirs')">Souvenirs</Link></li>
-            	<li><Link :href="route('activities')">Actividades</Link></li>
-            	<template v-if="this.$page.props.auth.user">
-                	<li v-if="$page.props.auth.role != 'Client'"><Link :href="route('profile.index')">Mi cuenta</Link></li>
-                    <li><Link :href="route('logout.destroy')">Cerrar sesión</Link></li>
-                    <li><a href="javascript:void(0);" ></a></li>
-                </template>
-                <template v-else>
-                	<li><Link :href="route('login')">Iniciar Sesión</Link></li>
-                </template>
-        	</ul>
-    	</nav>
-	</div>
-	<!-- Mobile Menu End -->
+	<nav class="navbar navbar-light bg-white d-block d-md-none" id="mobile">
+                            <!-- Navbar brand -->
+        <div class="row justify-content-between">
+          <div class="col-4 text-left pl-0">
+            <button class="navbar-toggler first-button m-3 p-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent20"
+                aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation" id="burger">
+                <div class="animated-icon1"><span></span><span></span><span></span></div>
+            </button>
+          </div>
+		  <div class="col-4">
+			  <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" height="70" width="70">
+		  </div>
+		  <div class="col-4 pt-3 text-right pr-0 d-inline-flex">
+				<div class="dropdown dropleft">
+					<button class="btn dropdown-toggle dropleft" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+						<img class="d-inline" src="/vendor_asset/img/spanish.png" alt="logo" height="30" width="30">
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/spanish.png" alt="logo" height="30" width="30"></a>
+					</div>
+				</div>
+				<Link :href="route('cart.index')">
+				<i class="fas fa-shopping-cart pt-2 mt-1" style="font-size:22px"></i>
+				</Link>
+          </div>
+        </div>
+
+        <!-- Collapse button -->
+        
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent20">
+
+            <!-- Links -->
+			<div class="row border-bottom titulo-nav mt-2">
+				<div class="col-12">
+					<ul class="navbar-nav">
+						<li class="nav-item d-flex justify-between">
+							<h3 class="font-weight-bolder">Menú</h3>
+							<button type="button" data-toggle="collapse" data-target="#navbarSupportedContent20"
+								aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation">
+								<i class="fas fa-times font-weight-bolder"></i>
+							</button>
+							
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row border-bottom items">
+				<div class="col-6 p-4 border-right text-center">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+						<Link :href="route('activities')" class="nav-link py-0">
+							<div class="">
+								<i class="fas fa-biking text-azulc"></i>
+								<p class="font-weight-bolder">Actividades</p>
+							</div>
+						</Link>
+						</li>
+					</ul>
+				</div>
+				<div class="col-6 p-4 text-center">
+					<ul class="navbar-nav">
+						<li class="nav-item">
+						<Link :href="route('souvenirs')" class="nav-link py-0">
+							<div class="">
+								<i class="fas fa-gift text-azulc"></i>
+								<p class="font-weight-bolder">Souvenirs</p>
+							</div>
+						</Link>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row items">
+				<div class="col-6 p-4 border-right text-center">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+						<Link :href="route('contact')" class="nav-link py-0">
+							<div class="">
+								<i class="fas fa-comment text-azulc"></i>
+								<p class="p-2 font-weight-bolder">Contacto</p>
+							</div>
+						</Link>
+						</li>
+					</ul>
+				</div>
+				<div class="col-6 p-4 text-center">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+						<Link href="#" class="nav-link py-0">
+							<div class="">
+								<i class="fas fa-question-circle text-azulc"></i>
+								<p class="p-2 font-weight-bolder">Ayuda</p>
+							</div>
+						</Link>
+						</li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <!-- Collapsible content -->
+
+    </nav>
 </template>
 <script>
 	import { Link } from '@inertiajs/inertia-vue3';
@@ -33,3 +119,11 @@
         }
 	}
 </script>
+<style scoped>
+#mobile .titulo-nav{
+	font-size: 25px;
+}
+#mobile .items i{
+	font-size: 35px;
+}
+</style>

@@ -62,10 +62,10 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li><a href="#">Políticas de privacidad</a></li>
-                                        <li><a href="#">Términos y condiciones</a></li>
-                                        <li><a href="#">Políticas de envío</a></li>
-                                        <li><a href="#">Políticas de reembolso</a></li>
+                                        <li><a target="_blank" href="/tablero/alojamientos/politicas/privacidad">Políticas de privacidad</a></li>
+                                        <li><a target="_blank" href="/tablero/alojamientos/politicas/terminosycondiciones">Términos y condiciones</a></li>
+                                        <li><a target="_blank" href="/tablero/alojamientos/politicas/entregas">Políticas de entrega</a></li>
+                                        <li><a target="_blank" href="/tablero/alojamientos/politicas/devolucion">Políticas de devolución</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -228,15 +228,16 @@ export default {
 			},1500);
 		},
 		submitAdmin() {
+			const modalcreate = $('#createAdmin');
 			this.formadmin.post(route('admin.store'),{
 				_token: this.$page.props.csrf_token,
 				preserveScroll: true,
 				forceFormData: true,
 				onSuccess: (result) => {
+					modalcreate.modal('hide');
 					if(this.$page.props.flash.code == 200){
 						this.form.reset();
 						this.eraseFeatured();
-						$('#createAdmin').modal('hide')
 					};
 				}
 				

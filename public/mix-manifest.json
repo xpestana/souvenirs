@@ -1,6 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/vendor_asset/img/cartp.png": "/vendor_asset/img/cartp.png",
     "/vendor_asset/img/default.png": "/vendor_asset/img/default.png",
     "/vendor_asset/img/fadmins2.png": "/vendor_asset/img/fadmins2.png",
     "/vendor_asset/img/favicon.ico": "/vendor_asset/img/favicon.ico",
@@ -12,6 +13,7 @@
     "/vendor_asset/img/recurso_5.png": "/vendor_asset/img/recurso_5.png",
     "/vendor_asset/img/recurso_6.png": "/vendor_asset/img/recurso_6.png",
     "/vendor_asset/img/skyline.png": "/vendor_asset/img/skyline.png",
+    "/vendor_asset/img/spanish.png": "/vendor_asset/img/spanish.png",
     "/vendor_asset/img/userimg.png": "/vendor_asset/img/userimg.png",
     "/vendor_asset/css/animate.css": "/vendor_asset/css/animate.css",
     "/vendor_asset/css/default.css": "/vendor_asset/css/default.css",
