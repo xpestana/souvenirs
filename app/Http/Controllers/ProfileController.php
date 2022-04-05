@@ -28,7 +28,7 @@ class ProfileController extends Controller
 
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
             $hotel = hotel::find(auth()->user()->hotel->first()->id);
-            $url = config('app.url');dd($url);
+            $url = config('app.url');
             $client = $hotel->user()->wherePivot('manager', false)->first();
         }else{
             $hotel = null;
