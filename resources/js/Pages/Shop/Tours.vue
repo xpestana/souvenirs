@@ -112,7 +112,7 @@
                     <!-- Shop Breadcrumb Area Start -->
                     <div class="shop-breadcrumb-area border-default mt-40">
                         <div class="row justify-content-center">
-                            <div style="overflow-x: scroll;" class="col-lg-8 col-md-6 col-sm-12 py-4">
+                            <div class="col-lg-8 col-md-6 col-sm-12 py-4 paginate_scroll">
                                 <paginator :paginator="products"/>
                             </div>
                         </div>
@@ -194,5 +194,11 @@
         background-size: cover !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
+    }
+    
+    @media (max-width: 800px){
+        .paginate_scroll{
+            overflow-x: scroll;
+        }
     }
 </style>
