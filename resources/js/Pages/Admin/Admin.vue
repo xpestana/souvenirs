@@ -85,7 +85,7 @@
 									<td>
 										<div class="d-inline-flex">
 											<button type="button" class="btn btn-sm btn-editar text-white d-inline" data-toggle="modal" :data-target="'#editAdmin'+admin.id" @click="asignarDatos(admin.firstname,admin.lastname,admin.email)">Editar</button>
-											<button type="button" class="btn btn-sm btn-danger ml-1 d-inline" @click="eliminar">Eliminar</button>
+											<button type="button" class="btn btn-sm btn-danger ml-1 d-inline" @click="eliminar(admin.user_id)">Eliminar</button>
 										</div>
 										<!-- Central Modal Small -->
 										<div class="modal fade" :id="'editAdmin'+admin.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -265,7 +265,7 @@ export default {
 			this.formedit.email = email;
 			this.formedit.email_confirmation = email;
 		},
-		eliminar(){
+		eliminar(id){
 			this.$swal({
                 title: '¿Esta seguro de eliminar este usuario?',
                 icon: 'warning',
@@ -279,7 +279,11 @@ export default {
             }).then((res)=>{
                 if(res.isConfirmed)
                 {
-                    // alert('Aceptado')
+                    this.form.delete(route('admin.destroy',{id: id}),{
+                        _token: this.$page.props.csrf_token,
+                        errorBag: 'submit',
+                        preserveScroll: true,
+                    })
                 }
             })
 		}
