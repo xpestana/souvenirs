@@ -70,7 +70,7 @@
             </div>
             <div class="row datos mt-5">
                 <div class="col-12 text-center">
-                    <h1>Si prefieres llama al +34722193903  o envíanos <br>un correo a info@hicitty.es</h1>
+                    <h1>Si prefieres llama al <br>+34722193903  o <br>envíanos un correo a <br>info@hicitty.es</h1>
                 </div>
             </div>
             <div class="row mt-3 datos justify-content-center">
