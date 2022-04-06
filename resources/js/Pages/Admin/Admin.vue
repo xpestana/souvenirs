@@ -78,23 +78,23 @@
 								</tr>
 							</thead>
 							<tbody class="text-center" id="tbody">
-								<tr v-for="admin in admins.data" :key="admin.id">
+								<tr v-for="admin in admins.data" :key="admin.user_id">
 									<td>{{admin.firstname}}</td>
 									<td>{{admin.lastname}}</td>
 									<td>{{admin.email}}</td>
 									<td>
 										<div class="d-inline-flex">
-											<button type="button" class="btn btn-sm btn-editar text-white d-inline" data-toggle="modal" :data-target="'#editAdmin'+admin.id" @click="asignarDatos(admin.firstname,admin.lastname,admin.email)">Editar</button>
+											<button type="button" class="btn btn-sm btn-editar text-white d-inline" data-toggle="modal" :data-target="'#editAdmin'+admin.user_id" @click="asignarDatos(admin.firstname,admin.lastname,admin.email)">Editar</button>
 											<button type="button" class="btn btn-sm btn-danger ml-1 d-inline" @click="eliminar">Eliminar</button>
 										</div>
 										<!-- Central Modal Small -->
-										<div class="modal fade" :id="'editAdmin'+admin.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+										<div class="modal fade" :id="'editAdmin'+admin.user_id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 										aria-hidden="true">
 										<!-- Change class .modal-sm to change the size of the modal -->
 											<div class="modal-dialog modal-dialog-centered" role="document">
 												<div class="modal-content mx-auto" style="width:100% !important">
 													<div class="modal-body p-0">
-														<form @submit.prevent="submitEdit(admin.id)">
+														<form @submit.prevent="submitEdit(admin.user_id)">
 															<div class="row mt-5 mb-2 px-5 mx-0 mx-md-2">
 																<div class="col-12 col-md-6 my-1 pr-md-1">
 																	<BreezeInput type="text" class="w-100 p-input" placeholder="Nombre" v-model="formedit.firstname" required/>
