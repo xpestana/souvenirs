@@ -279,7 +279,7 @@ export default {
             }).then((res)=>{
                 if(res.isConfirmed)
                 {
-                    this.form.delete(route('admin.destroy',{id:this.user.id}),{
+                    this.form.delete(route('admin.destroy',{id: user_id}),{
                         _token: this.$page.props.csrf_token,
                         errorBag: 'submit',
                         preserveScroll: true,
