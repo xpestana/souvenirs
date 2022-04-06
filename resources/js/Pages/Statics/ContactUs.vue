@@ -1,13 +1,10 @@
 <template>
     <Head title="Contáctanos"/>
-    
-    <Header />
-
-    <notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
+    <Layout>
     
     <Breadcrumb title="Contáctanos"/>
     <!-- Regester Page Start Here -->
-     <div class="register-area white-bg ptb-80">
+    <div class="register-area white-bg ptb-80">
         <div class="container">
         <h3 class="login-header text-info">Contáctanos</h3>
             <div class="row">
@@ -73,7 +70,7 @@
             </div>
             <div class="row datos mt-5">
                 <div class="col-12 text-center">
-                    <h1>Si prefieres llama al +34722193903  o envíanos <br>un correo a info@hicitty.es</h1>
+                    <h1>Si prefieres llama al <br>+34722193903  o <br>envíanos un correo a <br>info@hicitty.es</h1>
                 </div>
             </div>
             <div class="row mt-3 datos justify-content-center">
@@ -97,9 +94,8 @@
         </div>
     </div>
     <!-- Register Page End Here -->
-    
+    </Layout>
 </template>
-
 <script>
     import { Link, Head } from '@inertiajs/inertia-vue3'
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue' 
