@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			<div class="row justify-content-center mb-3" v-if="collaborators.data.length > 0">
-            	<div class="col-10 col-sm-6 col-lg-4 px-0">
+            	<div class="col-10 col-sm-6 col-lg-4 px-0 py-4 paginate_scroll">
                 	<paginator :paginator="collaborators"/>
                 </div>
             </div>
@@ -167,4 +167,9 @@ export default {
 	 width: 100% !important;
 	}
 }
+@media (max-width: 800px){
+        .paginate_scroll{
+            overflow-x: scroll;
+        }
+    }
 </style>
