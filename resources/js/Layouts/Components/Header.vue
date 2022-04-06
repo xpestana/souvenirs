@@ -2,7 +2,7 @@
     <!-- Main Header Area Start Here -->
         <header id="header">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row ptop-6">
                     <div class="col-12 d-md-none shadow-md">
                         <mobile-menu />    
                     </div> 
@@ -37,5 +37,7 @@
     }
 </script>
 <style>
-
+.ptop-6{
+    padding-top: 6em;
+}
 </style>

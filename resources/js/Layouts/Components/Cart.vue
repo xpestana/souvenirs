@@ -1,7 +1,7 @@
 <template>
-	<li class="pt-4 pb-0 mb-0 mt-2">
-                <Link :href="route('cart.index')" class="pr-0">
-                    <i class="header-cart fas fa-shopping-cart"></i>
+	<li class="pb-0 mb-0 pl-0" style="padding-top:2.1em">
+                <Link :href="route('cart.index')" class="pr-0" style="opacity:0.4">
+                    <i class="header-cart fas fa-shopping-cart" ></i>
                     <span>{{ $page.props.cart.count }}</span>
                 </Link>
                 <!-- Cart Box Start -->
