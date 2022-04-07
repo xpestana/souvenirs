@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row md:hidden mb-2">
                 <div class="col-12 text-center">
-                    <h5 class="text-muted">35 Souvenirs disponibles</h5>
+                    <h5 class="text-muted">{{ count }} Souvenirs disponibles</h5>
                 </div>
             </div>
             <!-- Row End -->
@@ -81,7 +81,7 @@
                         <div class="tab-content Products-area">
                             <div id="grid-view" class="tab-pane fade  show active">
                                 <div class="row">
-                                    <div v-for="product in products.data" :key="product.id" class="col-lg-4 col-md-4 col-6">
+                                    <div v-for="product in data" :key="product.id" class="col-lg-4 col-md-4 col-6">
                                         <!-- Single Product Start -->
                                         <div class="single-aboss-product mx-2 my-2">
                                             <div class="pro-img">
@@ -130,7 +130,11 @@
                     <div class="shop-breadcrumb-area mt-40 mb-5">
                         <div class="row justify-content-center">
                             <div class="col-12 d-md-none">
-                                <load-more :paginator="products"/>
+                                <div class="row justify-content-center mb-5">
+                                    <div class="col-6 text-center">
+                                        <a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill px-4 py-1" @click="load_more()">Ver más</a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-8 col-md-6 d-none d-md-block">
                                 <paginator :paginator="products"/>
@@ -159,7 +163,6 @@
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
     import '/vendor_asset/js/vendor/jquery-3.2.1.min.js';
     import '/vendor_asset/js/jquery-ui.min.js';
-    import LoadMore from '@/Components/LoadMore.vue'  
     import Paginator from '@/Components/Paginator.vue'
     import Slider from '@vueform/slider' 
 
@@ -171,7 +174,6 @@
             QuickView,
             Breadcrumb,
             Slider,
-            LoadMore,
             Paginator
         },
         props: {
@@ -180,13 +182,18 @@
             search: String,
             min_r:Number,
             max_r:Number,
+            count: Number,
         },
         data(){
             return {
+                data: (this.products.data) ? this.products.data : this.products,
                 max: this.max,
                 form: this.$inertia.form({
                     search: this.search,
                     price: [this.min_r,this.max_r],
+                }),
+                show: this.$inertia.form({
+                    show: null,
                 }),
             }
         },
@@ -202,6 +209,15 @@
             cart(id){
                 this.$inertia.put(route('cart.update',{checkout: id}),{
                     preserveScroll: true
+                })
+            },
+            load_more(){
+                this.show.show = 1;
+                this.show.get(route('souvenirs'),{
+                    _token: this.$page.props.csrf_token,
+                    errorBag: 'submit',
+                    preserveScroll: true,
+                    
                 })
             }
         }
