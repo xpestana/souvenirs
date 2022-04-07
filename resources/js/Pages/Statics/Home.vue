@@ -159,7 +159,7 @@
 </script>
 <style scope>
     #hicitty {
-      background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url('/vendor_asset/img/skyline.png');
+      background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url('/vendor_asset/img/hicity.png');
       background-position: bottom center;
       background-size: cover;
       background-repeat: no-repeat;

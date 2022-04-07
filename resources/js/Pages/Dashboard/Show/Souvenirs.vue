@@ -45,7 +45,11 @@
                         <h3 class="product-header d-none d-md-block">{{ product.title }}</h3>
                         <div class="product-header-mobile">
                             <h3 class="text-azulc font-weight-bolder text-lg d-md-none d-inline">{{ product.title }}</h3>
-                            <h3 class="text-azulc font-weight-bolder text-2xl d-md-none d-inline ml-3">{{ product.price }}€</h3>
+                            <div class="d-inline">
+                                <img v-if="this.product.offer > 0" class="raya-img d-inline d-md-none" src="/vendor_asset/img/slash.png" style="opacity:0.6">
+                                <h3 class="font-weight-bolder text-2xl d-md-none d-inline ml-3" :class="{'opacidad':this.product.offer > 0}">{{ product.price }}€</h3>
+                                <h3 v-if="this.product.offer > 0" class="font-weight-bolder text-2xl d-md-none d-inline ml-3">{{ product.offer }}€</h3>
+                            </div>
                             <div class="d-block d-md-none">
                                 <form @submit.prevent="submit">
                                 <div class="quatity-stock-mobile d-inline">
@@ -249,6 +253,15 @@
             border: none;
             width: 8px;
             margin: 0 2px;
+        }
+        .thubnail-desc .product-header-mobile .raya-img {
+            height: 33px;
+            width: 50px;
+            position: absolute;
+            margin-left: 4px;
+        }
+        .thubnail-desc .product-header-mobile .opacidad{
+            opacity: 0.8;
         }
     }
     

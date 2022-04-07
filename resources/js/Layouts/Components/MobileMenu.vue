@@ -50,7 +50,7 @@
 				<div class="col-6 p-4 border-right text-center">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-						<Link :href="route('activities')" class="nav-link py-0">
+						<Link :href="route('activities')" class="nav-link py-0 text-center">
 							<div class="">
 								<i class="fas fa-biking text-azulc"></i>
 								<p class="font-weight-bolder">Actividades</p>
@@ -62,7 +62,7 @@
 				<div class="col-6 p-4 text-center">
 					<ul class="navbar-nav">
 						<li class="nav-item">
-						<Link :href="route('souvenirs')" class="nav-link py-0">
+						<Link :href="route('souvenirs')" class="nav-link py-0 text-center">
 							<div class="">
 								<i class="fas fa-gift text-azulc"></i>
 								<p class="font-weight-bolder">Souvenirs</p>
@@ -76,7 +76,7 @@
 				<div class="col-6 p-4 border-right text-center">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
-						<Link :href="route('contact')" class="nav-link py-0">
+						<Link :href="route('contact')" class="nav-link py-0 text-center">
 							<div class="">
 								<i class="fas fa-comment text-azulc"></i>
 								<p class="p-2 font-weight-bolder">Contacto</p>
@@ -88,7 +88,7 @@
 				<div class="col-6 p-4 text-center">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
-						<Link href="#" class="nav-link py-0">
+						<Link href="#" class="nav-link py-0 text-center">
 							<div class="">
 								<i class="fas fa-question-circle text-azulc"></i>
 								<p class="p-2 font-weight-bolder">Ayuda</p>

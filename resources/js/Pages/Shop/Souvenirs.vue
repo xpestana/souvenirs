@@ -85,6 +85,11 @@
                                         <!-- Single Product Start -->
                                         <div class="single-aboss-product mx-2 my-2">
                                             <div class="pro-img">
+                                                <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id)">
+                                                    <div class="add-cart mt-1 p-1 md:hidden absolute block right-0">
+                                                        <img src="/vendor_asset/img/icons/plust.png" alt="">
+                                                    </div>
+                                                </a>
                                                 <Link :href="route('product.souvenir.show',{product : product.id})">
                                                     <div :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'" class="img-prod h-48"></div>
                                                 </Link>
@@ -94,20 +99,19 @@
                                             </div>
                                             <div class="pro-content  bg-white">
                                                 <h4 class="hidden md:block" ><Link :href="route('product.souvenir.show',{product : product.id})">{{ product.title }}</Link></h4>
-                                                <div class="pro-price-cart absolute top-0 right-0 md:static">
+                                                
+                                                <div class="pro-price-cart absolute top-0 right-0 md:static" style="z-index:19">
                                                     <div class="pro-home-price hidden md:block">
                                                         <span>{{ product.price }} €</span>
                                                     </div>
-                                                    <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id)">
+                                                    <!-- <div class="pro-cart">
                                                             <i class="icon-cart hidden md:block"></i>
                                                             <div class="add-cart mt-1 p-1 md:hidden">
-                                                                <img src="/vendor_asset/img/icons/plustrans.png" alt="">
+                                                                <img src="/vendor_asset/img/icons/plust.png" alt="">
                                                             </div>
-                                                        </a>
-                                                        
-                                                    </div>
+                                                    </div> -->
                                                 </div>
+                                                
                                             </div>
                                             <div class="pro-mobile p-2 flex justify-between md:hidden bg-white">
                                                 <div class="pro-mobile-title">
@@ -248,9 +252,6 @@
     }
     .shop-area .single-aboss-product img{
         width: 50%;
-    }
-    .shop-area .single-aboss-product img:active{
-        width: 0%;
     }
     .shop-area .tab-content span{
         color:#767676;

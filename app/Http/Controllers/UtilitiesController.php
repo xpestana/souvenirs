@@ -46,7 +46,7 @@ class UtilitiesController extends Controller
                             ->where('del',false)
                             ->where('type', 'Activities')
                             ->search(trim($request->search))
-                            ->priceA($min_r,$max_r)
+                            ->priceA($min_r,$max_r);
         if ($request->show) {
             $products = $products->get();
         }else{
