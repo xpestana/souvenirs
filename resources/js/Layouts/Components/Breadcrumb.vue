@@ -1,8 +1,8 @@
 <template>
 	<!-- Breadcrumb Area Start Here -->
-    <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
+    <div class="breadcrumb-area pt-65 pb-70 bg-img h-52" :class="{'opacity-50 md:opacity-100':this.title=='Souvenirs'}" :style="'background-image:url(/vendor_asset/img/bg-image/'+img+');'">
         <div class="container">
-            <div class="breadcrumb-wrap text-center">
+            <div class="breadcrumb-wrap text-center hidden md:block">
                 <h3>{{ this.title }}</h3>
                 <ol class="breadcrumb breadcrumb-list" hidden>
                     <li class="breadcrumb-item"><Link :href="route('home')">Inicio</Link></li>
@@ -10,6 +10,13 @@
                 </ol>
             </div>
         </div>
+    </div>
+    <div class="absolute md:hidden top-20 left-0 right-0 text-center">
+        <h3 class="text-3xl font-bold" :class="{'text-white': this.title !== 'Souvenirs'}">{{ this.title }}</h3>
+        <h5 v-if="this.title == 'Souvenirs'" class="text-sm font-bold mt-24">
+            Recibe tu souvenir en menos de 30 minutos <br>
+            Envío gratuito 
+        </h5>
     </div>
     <!-- Breadcrumb Area End Here -->
 </template>
@@ -22,5 +29,13 @@
         props: {
         	title: String,
     	},
+        computed:{
+            img(){
+                if(this.title == 'Souvenirs'){
+                    return 'souvenirsimg.png';
+                }
+                return 'hop-brech-bg.jpg';
+            }
+        }
     }
 </script>

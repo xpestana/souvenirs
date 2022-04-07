@@ -73,9 +73,9 @@
     color: white;
     font-weight: 400;
 }
-.bg-img{
+/* .bg-img{
         background-position: 50% 20% !important;
-}
+} */
 .breadcrumb-wrap h3, .breadcrumb-item a{
     color:  #fff !important;
 }
@@ -199,6 +199,10 @@ body .modal-backdrop{
   }
   .text-azulc{
     color: #65b4ce; 
+  }
+  
+  .opacidad{
+    opacity: 0.2;
   }
 
 /*--------------------------------------------------

@@ -1,27 +1,26 @@
 <template>
-	<nav class="navbar fixed-top navbar-light bg-white d-block" id="mobile">
+	<nav class="navbar fixed-top navbar-light bg-white d-block p-0 shadow-md" id="mobile">
                             <!-- Navbar brand -->
         <div class="row justify-content-between">
-          <div class="col-4 text-left pl-0">
-            <button class="navbar-toggler first-button m-3 p-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent20"
-                aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation" id="burger">
-                <div class="animated-icon1"><span></span><span></span><span></span></div>
-            </button>
+          <div class="col-4">
+			  <button class="burger p-3" type="button" data-toggle="collapse" data-target="#collapseb" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" @click="atenuar">
+				<i class="fas fa-bars"></i>
+				</button>
           </div>
 		  <div class="col-4">
-			  <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" height="70" width="70" @click="home">
+			  <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" width="55" @click="home">
 		  </div>
-		  <div class="col-4 pt-3 text-right pr-0 d-inline-flex">
-				<div class="dropdown">
+		  <div class="col-4 d-flex justify-end pr-4">
+				<div class="dropdown mt-2">
 					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-						<img class="d-inline" src="/vendor_asset/img/spanish.png" alt="logo" height="30" width="30">
+						<img class="d-inline" src="/vendor_asset/img/spain.png" alt="logo" width="20">
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/spanish.png" alt="logo" height="30" width="30"></a>
+						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/spain.png" alt="logo" width="20"></a>
 					</div>
 				</div>
 				<Link :href="route('cart.index')">
-				<i class="fas fa-shopping-cart pt-2 mt-1"></i>
+					<img class="d-inline pt-3" src="/vendor_asset/img/cart.png" alt="logo" width="20">
 				</Link>
           </div>
         </div>
@@ -30,16 +29,16 @@
         
 
         <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent20">
+        <div class="collapse navbar-collapse" id="collapseb">
 
             <!-- Links -->
 			<div class="row border-bottom titulo-nav mt-2">
 				<div class="col-12">
 					<ul class="navbar-nav">
-						<li class="nav-item d-flex justify-between">
+						<li class="nav-item d-flex justify-between px-3">
 							<h3 class="font-weight-bolder">Menú</h3>
-							<button type="button" data-toggle="collapse" data-target="#navbarSupportedContent20"
-								aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation">
+							<button type="button" data-toggle="collapse" data-target="#collapseb"
+								aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation" @click="atenuar">
 								<i class="fas fa-times font-weight-bolder"></i>
 							</button>
 							
@@ -121,6 +120,11 @@
                     preserveScroll: true
                 })
             },
+			atenuar(){
+				let inicio = document.getElementById('main-inicio');
+				let viejo = document.getElementById('main-viejo');
+				inicio != null ? inicio.classList.toggle('opacidad') : viejo.classList.toggle('opacidad')
+			}
         }
 	}
 </script>
@@ -138,5 +142,9 @@
 	font-size:22px;
 	opacity: 0.4;
 }
+
+  
+  
+  
 
 </style>
