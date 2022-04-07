@@ -3,7 +3,7 @@
     <Layout>
     <Breadcrumb title="Actividades"/>
     <!-- Shop Page Start -->
-    <div class="main-shop-page white-bg ptb-80">
+    <div class="main-shop-page white-bg ptb-80 overflow-hidden">
         <div class="container">
             <!-- Row End -->
             <div class="row">
