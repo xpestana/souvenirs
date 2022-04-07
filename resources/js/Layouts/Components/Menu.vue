@@ -25,10 +25,10 @@
                 <li class="icon-login pt-2 mt-1 pb-0">
                     <div class="dropdown">
 					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-						<img class="d-inline" src="/vendor_asset/img/spain.png" alt="logo" width="40">
+						<img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="40">
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/spain.png" alt="logo" width="30"></a>
+						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="30"></a>
 					</div>
 				</div>
                 </li>

@@ -15,7 +15,7 @@
         <h3 class="text-3xl font-bold" :class="{'text-white': this.title !== 'Souvenirs'}">{{ this.title }}</h3>
         <h5 v-if="this.title == 'Souvenirs'" class="text-sm font-bold mt-24">
             Recibe tu souvenir en menos de 30 minutos <br>
-            Envío gratuito 
+            Envío gratuito en pedidos superiores de X
         </h5>
     </div>
     <!-- Breadcrumb Area End Here -->
@@ -32,7 +32,7 @@
         computed:{
             img(){
                 if(this.title == 'Souvenirs'){
-                    return 'souvenirsimg.png';
+                    return 'souvenirs.png';
                 }
                 return 'hop-brech-bg.jpg';
             }

@@ -1,13 +1,15 @@
 <template>
     <Head title="Souvenir"/>
 <Layout>
-    <Breadcrumb :title="product.title"/>
+    <div class="d-none d-md-block">
+    <Breadcrumb :title="product.title" :class="true" />
+    </div>
     <!-- Product Thumbnail Start -->
-    <div class="main-product-thumbnail white-bg pt-90 pb-50">
+    <div class="main-product-thumbnail white-bg md:pt-24 pb-50">
         <div class="container">
             <div class="row">
                 <!-- Main Thumbnail Image Start -->
-                <div class="col-lg-5 col-md-6 mb-all-40">
+                <div class="col-lg-5 col-md-6 md:b-all-40 px-0 px-md-3">
                     <!-- Thumbnail Large Image start -->
                     <div class="tab-content" >
                         <div id="thumb1" class="tab-pane fade show active">
@@ -16,9 +18,12 @@
                             </a>
                         </div>
                     </div>
+                    <div class="alert d-md-none font-weight-bolder text-center py-1" role="alert" style="background:#d8edf3">
+                        Envío gratuito en pedidos superiores de X
+                    </div>
                     <!-- Thumbnail Large Image End -->
                     <!-- Thumbnail Image End -->
-                    <div v-if="product.images.length != 0" class="product-thumbnail">
+                    <div v-if="product.images.length != 0" class="product-thumbnail d-none d-md-block">
                          <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
                             <Slide v-for="image in product.images" :key="image.id">
                                 <a data-fancybox="images" :href="'/storage/souvenirs/'+image.url" class="w-100">
@@ -36,8 +41,24 @@
                 <!-- Thumbnail Description Start -->
                 <div class="col-lg-7 col-md-6">
                     <back/>
-                    <div class="thubnail-desc fix mt-4">
-                        <h3 class="product-header">{{ product.title }}</h3>
+                    <div class="thubnail-desc fix mt-1 mt-md-4">
+                        <h3 class="product-header d-none d-md-block">{{ product.title }}</h3>
+                        <div class="product-header-mobile">
+                            <h3 class="text-azulc font-weight-bolder text-lg d-md-none d-inline">{{ product.title }}</h3>
+                            <h3 class="text-azulc font-weight-bolder text-2xl d-md-none d-inline ml-3">{{ product.price }}€</h3>
+                            <div class="d-block d-md-none">
+                                <form @submit.prevent="submit">
+                                <div class="quatity-stock-mobile d-inline">
+                                    <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1" @click="form.quantity > 1 ? --form.quantity: ''"><i class="fas fa-minus"></i></button>
+                                    <p class="text-muted d-inline mx-2">Cantidad <input v-model="form.quantity" type="number" min="1"></p>
+                                    <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1" @click="++form.quantity"><i class="fas fa-plus"></i></button>
+                                </div>
+                                <div class="d-inline ml-3">
+                                    <button href="#" type="submit" class="text-azulc">añadir al carrito</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
                         <ul class="rating-summary" hidden>
                             <li class="rating-pro">
                                 <i class="fa fa-star"></i>
@@ -52,11 +73,11 @@
                         <div class="pro-desc-details mt-4"> 
                             <span v-html="product.description"></span>
                         </div>
-                        <div class="pro-price mt-30">
+                        <div class="pro-price mt-30 d-none d-md-block">
                             <p class="d-flex align-items-center"><span class="prev-price" hidden>16.51</span><span class="price">Precio:  € {{ product.price }}</span><span class="saving-price" hidden>-5%</span></p>
                         </div>
                         
-                        <div class="pt-10 quatity-stock">
+                        <div class="pt-10 quatity-stock d-none d-md-block">
                            <label>Quantity</label>
                            <form @submit.prevent="submit">
                             <ul class="d-flex flex-wrap  align-items-center">
@@ -109,7 +130,9 @@
         </div>
         <!-- Container End -->
     </div>
-    <souvenirs/>
+    <div class="d-none d-md-block">
+        <souvenirs/>
+    </div>
 </Layout>
 </template>
 <script>
@@ -158,17 +181,32 @@
             }
 
         },
+        created(){
+            console.log(this.product)
+        },
         props: {
             product: Object,
         },
         methods: {
             submit() {
-                this.form.put(route('cart.update',{checkout: this.product.id}),{
-                    _token: this.$page.props.csrf_token,
-                    errorBag: 'submit',
-                    preserveScroll: true,
-                    
-                })
+                if(this.form.quantity <= this.product.stock){
+                    this.form.put(route('cart.update',{checkout: this.product.id}),{
+                        _token: this.$page.props.csrf_token,
+                        errorBag: 'submit',
+                        preserveScroll: true,
+                    })
+                }else{
+                    this.$swal({
+                        title: 'Lo sentimos, no tenemos suficiente stock',
+                        icon: 'warning',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Cerrar'
+                    })
+                }
             },
                 
         }
@@ -192,4 +230,26 @@
     .pro-price{
         margin-bottom: 0px;
     }
+    @media(max-width:767px){
+        .main-product-thumbnail .tab-content {
+            margin-bottom: 0px;
+        }
+        .thubnail-desc .quatity-stock-mobile .text-xs{
+            font-size: 0.65rem !important;
+            line-height: 1.2rem !important;
+        }
+        .thubnail-desc .pro-desc-details p, ul {
+            line-height: 17px;
+            font-family: 'Futur';
+            font-size: 15px;
+            text-align: justify;
+        }
+        .thubnail-desc .quatity-stock-mobile input{
+            padding: 0;
+            border: none;
+            width: 8px;
+            margin: 0 2px;
+        }
+    }
+    
 </style>

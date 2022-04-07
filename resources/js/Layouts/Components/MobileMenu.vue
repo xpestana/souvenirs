@@ -13,14 +13,14 @@
 		  <div class="col-4 d-flex justify-end pr-4">
 				<div class="dropdown mt-2">
 					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-						<img class="d-inline" src="/vendor_asset/img/spain.png" alt="logo" width="20">
+						<img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="20">
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/spain.png" alt="logo" width="20"></a>
+						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="20"></a>
 					</div>
 				</div>
 				<Link :href="route('cart.index')">
-					<img class="d-inline pt-3" src="/vendor_asset/img/cart.png" alt="logo" width="20">
+					<img class="d-inline pt-3" src="/vendor_asset/img/carts.png" alt="logo" width="20">
 				</Link>
           </div>
         </div>

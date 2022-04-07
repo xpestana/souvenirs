@@ -200,6 +200,9 @@ body .modal-backdrop{
   .text-azulc{
     color: #65b4ce; 
   }
+  .bg-azulc{
+    background-color: #65b4ce; 
+  }
   
   .opacidad{
     opacity: 0.2;

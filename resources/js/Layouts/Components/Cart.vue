@@ -1,7 +1,7 @@
 <template>
             <li class="pb-0 mb-0 pl-0 lis" style="padding-top:1.2em">
                 <Link :href="route('cart.index')" class="pr-0" style="opacity:0.4">
-                    <img class="d-inline" src="/vendor_asset/img/cart.png" alt="logo"  width="30">
+                    <img class="d-inline" src="/vendor_asset/img/carts.png" alt="logo"  width="30">
                     <span>{{ $page.props.cart.count }}</span>
                 </Link>
                 <!-- Cart Box Start -->
