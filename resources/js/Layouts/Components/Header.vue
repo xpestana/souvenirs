@@ -2,7 +2,7 @@
     <!-- Main Header Area Start Here -->
         <header id="header">
             <div class="container-fluid">
-                <div class="row ptop-6">
+                <div class="row ptop-6 p-0">
                     <div class="col-12 d-md-none shadow-md">
                         <mobile-menu />    
                     </div> 
@@ -38,6 +38,17 @@
 </script>
 <style>
 .ptop-6{
-    padding-top: 6em;
+        padding-top: 5.8em !important;
+    }
+#header h3,p{
+	font-family:Montserrat Bold;
+}
+#header .burger{
+	color: #cacaca;
+}
+@media(max-width:900px){
+    .ptop-6{
+        padding-top: 4em !important;
+    }
 }
 </style>

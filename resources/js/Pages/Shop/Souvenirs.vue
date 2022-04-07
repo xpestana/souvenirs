@@ -3,13 +3,18 @@
 	<Layout>
     <Breadcrumb title="Souvenirs"/>
     <!-- Shop Page Start -->
-    <div class="main-shop-page white-bg ptb-80">
+    <div class="main-shop-page white-bg pt-10 md:ptb-80 bg-light">
         <div class="container">
+            <div class="row md:hidden mb-2">
+                <div class="col-12 text-center">
+                    <h5 class="text-muted">35 Souvenirs disponibles</h5>
+                </div>
+            </div>
             <!-- Row End -->
             <div class="row">
 
                 <!-- Sidebar Shopping Option Start -->
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 d-none d-md-block">
                     <div class="sidebar">
                         <form @submit.prevent="submit">
                         <!-- Price Filter Options Start -->
@@ -34,8 +39,8 @@
                 </div>
                 <!-- Sidebar Shopping Option End -->
                 <!-- Product Categorie List Start -->
-                <div class="col-lg-9 col-md-8">
-                     <div class="col-lg-12">
+                <div class="col-lg-9 col-md-12">
+                     <div class="col-md-12 d-none d-md-block">
                         <div class="container">
                             <div class="row py-4">
                                 <div class="col-lg-12">
@@ -52,7 +57,7 @@
                         </div>
                     </div>
                     <!-- Grid & List View Start -->
-                    <div class="grid-list-top border-default universal-padding d-lg-flex justify-content-md-center align-items-center mb-30">
+                    <div class="grid-list-top border-default universal-padding d-lg-flex justify-content-md-center align-items-center mb-30 hidden md:block">
                         <div class="grid-list-view d-flex align-items-center  mb-sm-15">
                         </div>
                         <!-- Toolbar Short Area Start -->
@@ -76,27 +81,40 @@
                         <div class="tab-content Products-area">
                             <div id="grid-view" class="tab-pane fade  show active">
                                 <div class="row">
-                                    <div v-for="product in products.data" :key="product.id" class="col-lg-4 col-md-6 col-sm-6">
+                                    <div v-for="product in products.data" :key="product.id" class="col-lg-4 col-md-4 col-6">
                                         <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
+                                        <div class="single-aboss-product mx-2 my-2">
                                             <div class="pro-img">
                                                 <Link :href="route('product.souvenir.show',{product : product.id})">
-                                                    <div :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'" class="img-prod"></div>
+                                                    <div :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'" class="img-prod h-48"></div>
                                                 </Link>
-                                                <div class="pro-actions">
+                                                <div class="pro-actions hidden md:block">
                                                     <Link class="quick-view" :href="route('product.souvenir.show',{product : product.id})"><i class="icon-zoom"></i></Link>
                                                 </div>
                                             </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('product.souvenir.show',{product : product.id})">{{ product.title }}</Link></h4>
-                                                <div class="pro-price-cart">
-                                                    <div class="pro-home-price">
+                                            <div class="pro-content  bg-white">
+                                                <h4 class="hidden md:block" ><Link :href="route('product.souvenir.show',{product : product.id})">{{ product.title }}</Link></h4>
+                                                <div class="pro-price-cart absolute top-0 right-0 md:static">
+                                                    <div class="pro-home-price hidden md:block">
                                                         <span>{{ product.price }} €</span>
                                                     </div>
                                                     <div class="pro-cart">
-                                                        <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id)"><i class="icon-cart"></i></a>
+                                                        <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id)">
+                                                            <i class="icon-cart hidden md:block"></i>
+                                                            <div class="add-cart mt-1 p-1 md:hidden">
+                                                                <img src="/vendor_asset/img/icons/plustrans.png" alt="">
+                                                            </div>
+                                                        </a>
                                                         
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="pro-mobile p-2 flex justify-between md:hidden bg-white">
+                                                <div class="pro-mobile-title">
+                                                    <h4 class="text-sm text-muted" ><Link :href="route('product.souvenir.show',{product : product.id})">{{ product.title }}</Link></h4>
+                                                </div>
+                                                <div class="pro-mobile-price text-xl font-bold mt-2">
+                                                    <span class="d-inline">{{ product.price }} </span><span class="d-inline">€</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,9 +127,12 @@
                         <!-- Grid & List Main Area End -->
                     </div>
                     <!-- Shop Breadcrumb Area Start -->
-                    <div class="shop-breadcrumb-area border-default mt-40">
+                    <div class="shop-breadcrumb-area mt-40 mb-5">
                         <div class="row justify-content-center">
-                            <div class="col-lg-8 col-md-6 col-sm-7">
+                            <div class="col-12 d-md-none">
+                                <load-more :paginator="products"/>
+                            </div>
+                            <div class="col-lg-8 col-md-6 d-none d-md-block">
                                 <paginator :paginator="products"/>
                             </div>
                         </div>
@@ -138,7 +159,8 @@
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
     import '/vendor_asset/js/vendor/jquery-3.2.1.min.js';
     import '/vendor_asset/js/jquery-ui.min.js';
-    import Paginator from '@/Components/Paginator.vue'  
+    import LoadMore from '@/Components/LoadMore.vue'  
+    import Paginator from '@/Components/Paginator.vue'
     import Slider from '@vueform/slider' 
 
     export default {
@@ -149,6 +171,7 @@
             QuickView,
             Breadcrumb,
             Slider,
+            LoadMore,
             Paginator
         },
         props: {
@@ -189,9 +212,35 @@
 <style scope>
     .img-prod{
         width: 100%;
-        height: 250px;
+        height: 13em !important;
         background-size: cover !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
     }
+    .bg-img{
+        background-repeat: no-repeat !important;
+        background-position: 50% 50% !important;
+        background-size: cover !important;
+    }
+    
+@media (max-width: 767px){
+    .pro-content{
+        padding: 5px 5px 10px 5px !important;
+    }
+    .shop-area .single-aboss-product{
+        border:none;
+    }
+    .shop-area .single-aboss-product img{
+        width: 50%;
+    }
+    .shop-area .single-aboss-product img:active{
+        width: 0%;
+    }
+    .shop-area .tab-content span{
+        color:#767676;
+    }
+    .shop-area .tab-content {
+        color:#acacac;  
+    }
+}
 </style>

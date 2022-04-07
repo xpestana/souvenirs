@@ -1,105 +1,107 @@
 <template>
   <Header/>
-    <div id="carousel">
-    <Carousel :autoplay="6000" :wrap-around="true" :transition="600">
-        <Slide :key="0">
-          <div class="bg-image welcome">
-              <img src="/vendor_asset/img/home/home1.png" alt="">
-          </div>
-        </Slide>
-        <Slide :key="1">
-          <div class="bg-image welcome">
-            <img src="/vendor_asset/img/home/home2.png" alt="">
-          </div>
-        </Slide>
-        <Slide :key="2">
-          <div class="bg-image welcome">
-          <img src="/vendor_asset/img/home/home3.png" alt=""></div>
-        </Slide>
-    </Carousel>
-    </div>
-    <section id="categorias">
-      <div class="container">
-        <div class="row my-3 my-md-5 px-md-5">
-          <div class="col-12 d-inline-flex justify-center px-1 px-md-5">
-            <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home1.png);" @click="actividades">
-              <p class="bg-light px-1 mx-2 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Actividades</p>
-            </div>
-            <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home2.png);" @click="souvenirs">
-              <p class="bg-light px-1 mx-2 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Souvenirs</p>
-            </div>
-            <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home3.png);">
-              <p class="bg-light px-1 mx-2 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Gastronomia</p>
+    <div id="main-inicio">
+      <div id="carousel">
+        <Carousel :autoplay="6000" :wrap-around="true" :transition="600">
+            <Slide :key="0">
+              <div class="bg-image welcome">
+                  <img src="/vendor_asset/img/home/home1.png" alt="">
+              </div>
+            </Slide>
+            <Slide :key="1">
+              <div class="bg-image welcome">
+                <img src="/vendor_asset/img/home/home2.png" alt="">
+              </div>
+            </Slide>
+            <Slide :key="2">
+              <div class="bg-image welcome">
+              <img src="/vendor_asset/img/home/home3.png" alt=""></div>
+            </Slide>
+        </Carousel>
+      </div>
+      <section id="categorias">
+        <div class="container">
+          <div class="row my-3 my-md-5 px-md-5">
+            <div class="col-12 d-inline-flex justify-center px-1 px-md-5">
+              <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home1.png);" @click="actividades">
+                <p class="bg-light px-1 mx-2 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Actividades</p>
+              </div>
+              <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home2.png);" @click="souvenirs">
+                <p class="bg-light px-1 mx-2 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Souvenirs</p>
+              </div>
+              <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home3.png);">
+                <p class="bg-light px-1 mx-2 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Gastronomia</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section id="actividades">
-      <div class="container">
-        <div class="row my-4 my-md-5 px-md-5">
-          <div class="col-12 text-left my-3 px-md-5">
-            <h2 class="h2 font-weight-bolder"> Conoce Sevilla con HiCitty</h2>
+      </section>
+      <section id="actividades">
+        <div class="container">
+          <div class="row my-4 my-md-5 px-md-5">
+            <div class="col-12 text-left my-3 px-md-5">
+              <h2 class="h2 font-weight-bolder"> Conoce Sevilla con HiCitty</h2>
+            </div>
+            <div class="col-12 px-md-5">
+              <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="10000">
+                <Slide v-for=" product in $page.props.activities" :key="product.id">
+                  <div class="tarjeta bg-light">
+                    <div class="tarjeta-img d-block">
+                      <Link :href="route('product.activities.show',{product : product.id})">
+                          <template v-if="product.images.length != 0">
+                              <img :src="'/storage/souvenirs/'+product.images[0].url" class="w-100">
+                          </template>
+                      </Link>
+                    </div>
+                    <div class="tarjeta-cuerpo py-2 px-1">
+                        <Link :href="route('product.activities.show',{product : product.id})" >
+                          <p class="font-weight-bolder text-center mb-2 text-wrap px-1">{{ product.title }}</p>
+                        </Link>
+                        <p class="text-left"><i class="far fa-clock"></i> Duración: 2horas</p>
+                        <h3 class="font-weight-bolder d-block text-left">
+                          <template v-if="product.activities.priceN">
+                                Desde: {{ product.activities.priceN }} €
+                            </template>
+                            <template v-else>
+                                Desde {{ product.activities.priceA }} €
+                            </template>
+                        </h3>
+                    </div>
+                  </div>
+                </Slide>
+              </Carousel>
+            </div>
+            <div class="col-12 px-md-5 mt-2">
+              <Link :href="route('activities')" class="text-azulc">Ver todas las actividades</Link>
+            </div>
           </div>
-          <div class="col-12 px-md-5">
-            <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="10000">
-              <Slide v-for=" product in $page.props.activities" :key="product.id">
-                <div class="tarjeta bg-light">
-                  <div class="tarjeta-img d-block">
-                    <Link :href="route('product.activities.show',{product : product.id})">
-                        <template v-if="product.images.length != 0">
-                            <img :src="'/storage/souvenirs/'+product.images[0].url" class="w-100">
-                        </template>
+        </div>
+      </section>
+      <section id="souvenirs">
+        <div class="container mb-5">
+          <div class="row my-4 my-md-5 px-md-5">
+            <div class="col-12 text-left my-3 px-md-5">
+              <h2 class="h2 font-weight-bolder"> ¡Llevate el mejor recuerdo de Sevilla!</h2>
+              <hr>
+            </div>
+            <div class="col-12 images">
+              <div class="row px-2 px-md-5">
+                  <div class="col-4 col-md-2 mt-3 px-2 px" v-for=" product in $page.props.souvenirs" :key="product.id">
+                    <Link :href="route('product.souvenir.show',{product : product.id})">
+                    <div class="rounded image text-center position-relative w-100" :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'">
+                      <p class="bg-light position-absolute fixed-bottom text-right py-2 px-1 font-weight-bolder text-muted" style="opacity:0.6">{{ product.price }}€</p>
+                    </div>
                     </Link>
                   </div>
-                  <div class="tarjeta-cuerpo py-2 px-1">
-                      <Link :href="route('product.activities.show',{product : product.id})" >
-                        <p class="font-weight-bolder text-center mb-2 text-wrap px-1">{{ product.title }}</p>
-                      </Link>
-                      <p class="text-left"><i class="far fa-clock"></i> Duración: 2horas</p>
-                      <h3 class="font-weight-bolder d-block text-left">
-                        <template v-if="product.activities.priceN">
-                              Desde: {{ product.activities.priceN }} €
-                          </template>
-                          <template v-else>
-                              Desde {{ product.activities.priceA }} €
-                          </template>
-                      </h3>
-                  </div>
-                </div>
-              </Slide>
-            </Carousel>
-          </div>
-          <div class="col-12 px-md-5 mt-2">
-            <Link :href="route('activities')" class="text-azulc">Ver todas las actividades</Link>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="souvenirs">
-      <div class="container mb-5">
-        <div class="row my-4 my-md-5 px-md-5">
-          <div class="col-12 text-left my-3 px-md-5">
-            <h2 class="h2 font-weight-bolder"> ¡Llevate el mejor recuerdo de Sevilla!</h2>
-            <hr>
-          </div>
-          <div class="col-12 images">
-            <div class="row px-2 px-md-5">
-                <div class="col-4 col-md-2 mt-3 px-2 px" v-for=" product in $page.props.souvenirs" :key="product.id">
-                  <Link :href="route('product.souvenir.show',{product : product.id})">
-                  <div class="rounded image text-center position-relative w-100" :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'">
-                    <p class="bg-light position-absolute fixed-bottom text-right py-2 px-1 font-weight-bolder text-muted" style="opacity:0.6">{{ product.price }}€</p>
-                  </div>
-                  </Link>
-                </div>
+              </div>
+            </div>
+            <div class="col-12 px-md-5 mt-2">
+              <Link :href="route('souvenirs')" class="text-azulc">Ver todas los Souvenirs</Link>
             </div>
           </div>
-          <div class="col-12 px-md-5 mt-2">
-            <Link :href="route('souvenirs')" class="text-azulc">Ver todas los Souvenirs</Link>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 </template>
 
 <script>

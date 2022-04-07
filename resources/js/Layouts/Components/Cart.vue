@@ -1,7 +1,7 @@
 <template>
-	<li class="pb-0 mb-0 pl-0" style="padding-top:2.1em">
+            <li class="pb-0 mb-0 pl-0 lis" style="padding-top:1.2em">
                 <Link :href="route('cart.index')" class="pr-0" style="opacity:0.4">
-                    <i class="header-cart fas fa-shopping-cart" ></i>
+                    <img class="d-inline" src="/vendor_asset/img/cart.png" alt="logo"  width="30">
                     <span>{{ $page.props.cart.count }}</span>
                 </Link>
                 <!-- Cart Box Start -->
@@ -102,4 +102,8 @@
     background-repeat: no-repeat !important;
     background-position: center !important;
 }
+    .lis > a > span {
+        right: -21px !important;
+        top: 5px !important;
+    }
 </style>
