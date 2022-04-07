@@ -46,7 +46,7 @@ class UtilitiesController extends Controller
                             ->where('type', 'Activities')
                             ->search(trim($request->search))
                             ->priceA($min_r,$max_r)
-                            ->paginate(20);
+                            ->paginate(8);
 
         $max = Products::with('images', 'activities')
                             ->where('del',false)
@@ -73,7 +73,7 @@ class UtilitiesController extends Controller
                             ->where('type', 'Souvenirs')
                              ->search(trim($request->search))
                             ->price($min_r,$max_r)
-                            ->paginate(20);
+                            ->paginate(8);
 
         $max = Products::with('images', 'activities')
                             ->where('del',false)
