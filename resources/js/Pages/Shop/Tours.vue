@@ -154,6 +154,7 @@
             min_r:Number,
             max_r:Number,
             search: String,
+            count: Number,
         },
         created () {
             this.moment=Moment;
