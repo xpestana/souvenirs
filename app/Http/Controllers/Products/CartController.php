@@ -79,19 +79,26 @@ class CartController extends Controller
         else
             $quantity = 1;
         $product = Products::find($id)->load('images');
-        $addCart = \Cart::add(array(
-            'id' => $product->id,
-            'name'=>$product->title,
-            'price'=> $product->price,
-            'quantity' => $quantity,
-            'attributes' => array(
-                'url' => $product->images[0]->url,
-                'type' => 'souvenir'
-                ),
-            'associatedModel' => $product
-        ));
         $pin = mt_Rand(1000000, 9999999);
-        return back()->with(['id'=>$pin, 'message' => 'Producto agregado al carrito', 'code' => 200, 'status' => 'success']);  
+
+        if ($product->stock > 0) {
+            $addCart = \Cart::add(array(
+                'id' => $product->id,
+                'name'=>$product->title,
+                'price'=> $product->price,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'url' => $product->images[0]->url,
+                    'type' => 'souvenir'
+                    ),
+                'associatedModel' => $product
+            ));
+        
+            return back()->with(['mensaje' => 'Producto agregado al carrito']);  
+        }else{
+            return back()->with(['mensaje' => 'No hay disponibilidad en este momento']);
+        }
+        
     }
 
     /**

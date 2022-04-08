@@ -53,16 +53,17 @@ class HandleInertiaRequests extends Middleware
             'souvenirs' => Products::with('images')
                                     ->where('del',false)
                                     ->where('type', 'Souvenirs')
-                                    ->limit(10)->get(),
+                                    ->limit(12)->get(),
             'activities' => Products::with('images', 'activities')
                                     ->where('del',false)
                                     ->where('type', 'Activities')
-                                    ->limit(10)->get(),
+                                    ->limit(12)->get(),
             'flash' => [
                 'id' => fn () => $request->session()->get('id'),
                 'message' => fn () => $request->session()->get('message'),
                 'code' => fn () => $request->session()->get('code'),
                 'status' => fn () => $request->session()->get('status'),
+                'mensaje' => fn () => $request->session()->get('mensaje'),
             ],
     ]);
     }
