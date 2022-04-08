@@ -94,9 +94,9 @@ class CartController extends Controller
                 'associatedModel' => $product
             ));
         
-            return back()->with(['id'=>$pin, 'message' => 'Producto agregado al carrito', 'code' => 200, 'status' => 'success', 'show' => 1]);  
+            return back()->with(['mensaje' => 'Producto agregado al carrito']);  
         }else{
-            return back()->with(['id'=>$pin, 'message' => 'No hay disponibilidad en este momento', 'code' => 400, 'status' => 'error', 'show' => 1]);
+            return back()->with(['mensaje' => 'No hay disponibilidad en este momento']);
         }
         
     }
