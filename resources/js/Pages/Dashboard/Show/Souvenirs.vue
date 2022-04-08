@@ -58,7 +58,7 @@
                                     <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1" @click="++form.quantity"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <div class="d-inline ml-3">
-                                    <button href="#" type="submit" class="text-azulc">añadir al carrito</button>
+                                    <button href="#" type="submit" class="text-azulc">Añadir al carrito</button>
                                 </div>
                                 </form>
                             </div>

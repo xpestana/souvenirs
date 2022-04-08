@@ -97,27 +97,21 @@
                                                     <Link class="quick-view" :href="route('product.souvenir.show',{product : product.id})"><i class="icon-zoom"></i></Link>
                                                 </div>
                                             </div>
-                                            <div class="pro-content  bg-white">
+                                            <div class="pro-content  bg-white hidden md:block">
                                                 <h4 class="hidden md:block" ><Link :href="route('product.souvenir.show',{product : product.id})">{{ product.title }}</Link></h4>
                                                 
                                                 <div class="pro-price-cart absolute top-0 right-0 md:static" style="z-index:19">
                                                     <div class="pro-home-price hidden md:block">
                                                         <span>{{ product.price }} €</span>
                                                     </div>
-                                                    <!-- <div class="pro-cart">
-                                                            <i class="icon-cart hidden md:block"></i>
-                                                            <div class="add-cart mt-1 p-1 md:hidden">
-                                                                <img src="/vendor_asset/img/icons/plust.png" alt="">
-                                                            </div>
-                                                    </div> -->
                                                 </div>
                                                 
                                             </div>
-                                            <div class="pro-mobile p-2 flex justify-between md:hidden bg-white">
-                                                <div class="pro-mobile-title">
-                                                    <h4 class="text-sm text-muted" ><Link :href="route('product.souvenir.show',{product : product.id})">{{ product.title }}</Link></h4>
+                                            <div class="pro-mobile p-2 md:hidden bg-white">
+                                                <div class="pro-mobile-title text-center">
+                                                    <h4 class="text-muted" style="font-size:0.9em"><Link :href="route('product.souvenir.show',{product : product.id})" v-html="filtroTitulo(product.title)"></Link></h4>
                                                 </div>
-                                                <div class="pro-mobile-price text-xl font-bold mt-2">
+                                                <div class="pro-mobile-price text-xl font-bold text-right">
                                                     <span class="d-inline">{{ product.price }} </span><span class="d-inline">€</span>
                                                 </div>
                                             </div>
@@ -223,7 +217,20 @@
                     preserveScroll: true,
                     
                 })
+            },
+            filtroTitulo(titulo){
+                let title = titulo.split(' ');
+                let template = '';
+                title[0] !== undefined ? 
+                template+=title[0] : template+='...';
+                title[1] !== undefined ?
+                 template+=`<br>`+title[1] : template+=` <br><br>`;
+                title[2] == undefined ?
+                 template+=`` : template+=`...` 
+                return template
             }
+        },
+        computed:{
         }
 }
 

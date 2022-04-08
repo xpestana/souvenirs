@@ -1,7 +1,6 @@
 <template>
-  <Header/>
     <div id="main-inicio">
-      <div id="carousel">
+      <div id="carrosel">
         <Carousel :autoplay="6000" :wrap-around="true" :transition="600">
             <Slide :key="0">
               <div class="bg-image welcome">
@@ -17,6 +16,9 @@
               <div class="bg-image welcome">
               <img src="/vendor_asset/img/home/home3.png" alt=""></div>
             </Slide>
+            <template #addons>
+              <Navigation />
+            </template>
         </Carousel>
       </div>
       <section id="categorias">
@@ -42,8 +44,8 @@
             <div class="col-12 text-left px-md-5">
               <h2 class="h2 font-weight-bolder"> Conoce Sevilla con HiCitty</h2>
             </div>
-            <div class="col-12 px-md-5">
-              <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="12000">
+            <div class="col-12 px-mobile px-md-5">
+              <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="5000">
                 <Slide v-for=" product in $page.props.activities" :key="product.id">
                   <div class="tarjeta bg-light">
                     <div class="tarjeta-img d-block">
@@ -101,25 +103,26 @@
           </div>
         </div>
       </section>
-      <section id="hicitty">
-
-      </section>
+      <section id="hicitty"></section>
     </div>
 </template>
 
 <script>
     import { Link } from '@inertiajs/inertia-vue3';
-    import { Carousel, Pagination, Slide } from 'vue3-carousel';
+    import { Carousel, Pagination, Slide,Navigation } from 'vue3-carousel';
     import Header from '@/Layouts/Components/Header';
     import 'vue3-carousel/dist/carousel.css';
+    import Layout from '@/Layouts/Layout.vue'
 
     export default{
+      layout:Layout,
         components: {
             Link,
             Carousel,
             Slide,
-            Pagination,
-            Header
+            Navigation,
+            Header,
+            Layout
         },
         data: () => {
             return {
@@ -164,18 +167,29 @@
       background-size: cover;
       background-repeat: no-repeat;
       padding: 135px 0;
+      margin-bottom: -3em;
     }
     .h2{
       font-size:2em
     }
-    #carousel .welcome img{
+    #carrosel .carousel__prev,.carousel__next{
+      background-color: #ffffff00;
+      padding: 200px 30px;
+    }
+    #carrosel .carousel__prev{
+      left:50px;
+    }
+    #carrosel .carousel__next{
+      right:50px !important;
+    }
+    #carrosel .welcome img{
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
         min-width: 100%!important;
         height: 40em;
     }
-    #carousel .welcome{
+    #carrosel .welcome{
         min-width: 100%!important;
     }
     #categorias .categoria-img{
@@ -201,13 +215,13 @@
       cursor:pointer;
     }
     @media (max-width: 800px){
-        #carousel .welcome img{
+        #carrosel .welcome img{
           background-position: center center;
           background-repeat: no-repeat;
           background-size: cover;
           height: 38vh;
         }
-        #carousel .welcome{
+        #carrosel .welcome{
             min-width: 100%!important;
         }
         #actividades .tarjeta{
@@ -217,16 +231,17 @@
         #hicitty {
           background-size: contain;
           padding: 5em 0;
+          margin-bottom: -3em;
         }
     }
     @media (max-width: 530px){
-      #carousel .welcome img{
+      #carrosel .welcome img{
           height: 25vh;
         }
         .h2{
           font-size:1.1em
         }
-        .carousel{
+        .carrosel{
             max-height: 240px;
         }
         #categorias .categoria-img{
@@ -234,7 +249,7 @@
           width: 100%;
           background-size: cover !important;
         }
-        #carousel .welcome{
+        #carrosel .welcome{
             background-size: contain;
         }
         #actividades .tarjeta{
@@ -250,7 +265,7 @@
         }
         
     }
-    @media (max-width: 380px){
+    @media (max-width: 374px){
       #actividades .tarjeta{
           height: 13em;
           width: 8.8em;
