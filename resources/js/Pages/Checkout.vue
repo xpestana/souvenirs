@@ -313,7 +313,7 @@
                     this.form.payment_method_id = paymentMethod.id;
                     Inertia.post(route('sale'),
                             this.form,{
-                                preserveScroll: true,
+                                preserveScroll: false,
                                 onFinish: visit => {
                                     this.paymentProcessing = false;
                                 },

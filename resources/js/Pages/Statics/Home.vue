@@ -173,8 +173,9 @@
       font-size:2em
     }
     #carrosel .carousel__prev,.carousel__next{
-      background-color: #ffffff00;
-      padding: 200px 30px;
+      background-color: #ffffff00 !important;
+      color: #ffffff00 !important;
+      /* padding: 200px 30px; */
     }
     #carrosel .carousel__prev{
       left:50px;
@@ -214,7 +215,7 @@
       background-size: cover !important;
       cursor:pointer;
     }
-    @media (max-width: 800px){
+    @media (max-width: 850px){
         #carrosel .welcome img{
           background-position: center center;
           background-repeat: no-repeat;

@@ -43,7 +43,7 @@
                                                 </template>
                                             </td>
                                             <td class="product-quantity" v-if="product.attributes.type == 'souvenir'">
-                                                <a href="javascript:void(0)" class="mr-3" @click="upCart(product.id)"><i style="color: #31516B" class="fas fa-plus"></i></a> 
+                                                <a href="javascript:void(0)" class="mr-3" @click="upCart(product.id,product.quantity)"><i style="color: #31516B" class="fas fa-plus"></i></a> 
                                                 <strong>{{ product.quantity }}</strong> 
                                                 <a href="javascript:void(0)" class="ml-3" @click="downCart(product.id)"><i style="color: #31516B" class="fas fa-minus"></i></a>
                                             </td>
@@ -83,6 +83,11 @@
         </div>
     </div>
     <!-- Cart Main Area End -->
+    <div class="row justify-content-md-end">
+        <div class="col-12 col-md-4">
+            <div class="fixed-bottom popup" id="popup"></div>
+        </div>
+    </div>
 </Layout>
 <QuickView /> <!--Sidebar-->
 </template>
@@ -129,17 +134,35 @@
             }
             this.total = total;
         },
+        updated(){
+            $('#popup').empty();
+            if(this.$page.props.flash.mensaje){
+                let template =`
+                <div class="alert alert-primary alert m-0 text-center py-4 text-muted" role="alert" style="background-color:#d8ecf3">
+                    <i class="fas fa-check mr-1"></i>
+                    ${this.$page.props.flash.mensaje}
+                </div>`;
+                $('#popup').html(template);
+            }
+            setTimeout(()=>$('#popup .alert').hide(500), 3000);
+        },
         data() {
             return {
                 sub_total: null,
                 total_souvenirs: 0,
-                total: null
+                total: null,
+                formCart: this.$inertia.form({
+                    quantity: 1,
+                    
+                }),
             }
         },
         methods: {
-            upCart(id) {
-               this.$inertia.put(route('cart.update',{checkout: id}),{
-                    preserveScroll: true
+            upCart(id,quantity) {
+                this.formCart.quantity = quantity;
+                this.formCart.put(route('cart.update',{checkout: id}),{
+                    _token: this.$page.props.csrf_token,
+                    preserveScroll: true,
                 })
             },
             downCart(id) {

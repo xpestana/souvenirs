@@ -85,7 +85,7 @@
                                         <!-- Single Product Start -->
                                         <div class="single-aboss-product mx-2 my-2">
                                             <div class="pro-img">
-                                                <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id)">
+                                                <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id,product.stock)">
                                                     <div class="add-cart mt-1 p-1 md:hidden absolute block right-0">
                                                         <img src="/vendor_asset/img/icons/plust.png" alt="">
                                                     </div>
@@ -103,6 +103,9 @@
                                                 <div class="pro-price-cart absolute top-0 right-0 md:static" style="z-index:19">
                                                     <div class="pro-home-price hidden md:block">
                                                         <span>{{ product.price }} €</span>
+                                                    </div>
+                                                    <div class="pro-cart hidden md:block">
+                                                        <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id,product.id)"><i class="icon-cart"></i></a>
                                                     </div>
                                                 </div>
                                                 
@@ -147,6 +150,12 @@
         </div>
         <!-- Container End -->
     </div>
+
+    <div class="row justify-content-md-end">
+        <div class="col-12 col-md-4">
+            <div class="fixed-bottom popup" id="popup"></div>
+        </div>
+    </div>
     <!-- Shop Page End -->
 </Layout>
 <QuickView /> <!--Sidebar-->
@@ -183,6 +192,18 @@
             count: Number,
             showr: Number,
         },
+        updated(){
+            $('#popup').empty();
+            if(this.$page.props.flash.mensaje){
+                let template =`
+                <div class="alert alert-primary alert m-0 text-center py-4 text-muted" role="alert" style="background-color:#d8ecf3">
+                    <i class="fas fa-check mr-1"></i>
+                    ${this.$page.props.flash.mensaje}
+                </div>`;
+                $('#popup').html(template);
+            }
+            setTimeout(()=>$('#popup .alert').hide(500), 3000);
+        },
         data(){
             return {
                 data: (this.products.data) ? this.products.data : this.products,
@@ -193,6 +214,10 @@
                 }),
                 show: this.$inertia.form({
                     show: this.showr,
+                }),
+                formCart: this.$inertia.form({
+                    quantity: 1,
+                    
                 }),
             }
         },
@@ -205,10 +230,24 @@
                     
                 })
             },
-            cart(id){
-                this.$inertia.put(route('cart.update',{checkout: id}),{
-                    preserveScroll: true
-                })
+            cart(id,stock){
+                // if(stock >= 1){
+                    this.formCart.put(route('cart.update',{checkout: id}),{
+                        _token: this.$page.props.csrf_token,
+                        preserveScroll: true,
+                    })
+                // }else{
+                //     this.$swal({
+                //         title: 'Lo sentimos, no tenemos suficiente stock',
+                //         icon: 'warning',
+                //         showCloseButton: false,
+                //         showCancelButton: false,
+                //         focusConfirm: false,
+                //         confirmButtonColor: '#3085d6',
+                //         cancelButtonColor: '#d33',
+                //         confirmButtonText: 'Cerrar'
+                //     })
+                // }
             },
             load_more(){
                 this.show.show = 1;
@@ -223,21 +262,29 @@
                 let title = titulo.split(' ');
                 let template = '';
                 title[0] !== undefined ? 
-                template+=title[0] : template+='...';
+                    template+=title[0] : template+='...';
                 title[1] !== undefined ?
-                 template+=`<br>`+title[1] : template+=` <br><br>`;
+                    template+=`<br>`+title[1] : template+=` <br><br>`;
+                if(title[1] !== undefined){
+                    title[1].length < 4  ?
+                        template+=` `+title[2] : '';                  
+                }  
                 title[2] == undefined ?
-                 template+=`` : template+=`...` 
+                    template+=`` : template+=`...` 
                 return template
             }
         },
-        computed:{
-        }
 }
 
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
 <style scope>
+    .popup{
+        transition: opacity 2s;
+    }
+    .opacidadpop{
+        opacity: 0; 
+    }
     .img-prod{
         width: 100%;
         height: 13em !important;

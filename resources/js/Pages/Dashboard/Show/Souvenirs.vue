@@ -137,6 +137,7 @@
     <div class="d-none d-md-block">
         <souvenirs/>
     </div>
+    <div class="fixed-bottom popup" id="popup"></div>
 </Layout>
 </template>
 <script>
@@ -188,29 +189,41 @@
         created(){
             console.log(this.product)
         },
+        updated(){
+            $('#popup').empty();
+            if(this.$page.props.flash.mensaje){
+                let template =`
+                <div class="alert alert-primary alert m-0 text-center py-4 text-muted" role="alert" style="background-color:#d8ecf3">
+                    <i class="fas fa-check mr-1"></i>
+                    ${this.$page.props.flash.mensaje}
+                </div>`;
+                $('#popup').html(template);
+            }
+            setTimeout(()=>$('#popup .alert').hide(500), 3000);
+        },
         props: {
             product: Object,
         },
         methods: {
             submit() {
-                if(this.form.quantity <= this.product.stock){
+                // if(this.form.quantity <= this.product.stock){
                     this.form.put(route('cart.update',{checkout: this.product.id}),{
                         _token: this.$page.props.csrf_token,
                         errorBag: 'submit',
                         preserveScroll: true,
                     })
-                }else{
-                    this.$swal({
-                        title: 'Lo sentimos, no tenemos suficiente stock',
-                        icon: 'warning',
-                        showCloseButton: false,
-                        showCancelButton: false,
-                        focusConfirm: false,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Cerrar'
-                    })
-                }
+                // }else{
+                //     this.$swal({
+                //         title: 'Lo sentimos, no tenemos suficiente stock',
+                //         icon: 'warning',
+                //         showCloseButton: false,
+                //         showCancelButton: false,
+                //         focusConfirm: false,
+                //         confirmButtonColor: '#3085d6',
+                //         cancelButtonColor: '#d33',
+                //         confirmButtonText: 'Cerrar'
+                //     })
+                // }
             },
                 
         }
