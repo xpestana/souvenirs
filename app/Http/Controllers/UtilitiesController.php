@@ -69,6 +69,7 @@ class UtilitiesController extends Controller
     {
         $this->handle_auth($request->h);
         $search =  null;
+        $showr = null;
         if ($request) {
             $search = $request->search;
             $min_r = (isset($request->price[0])) ? $request->price[0] : 0;
@@ -82,6 +83,7 @@ class UtilitiesController extends Controller
                             ->price($min_r,$max_r);
         if ($request->show) {
             $products = $products->get();
+            $showr = $request->show;
         }else{
             $products = $products->paginate(8);
         }
@@ -92,7 +94,7 @@ class UtilitiesController extends Controller
         $count= $products_responsives->count();
         $max = $products_responsives->max('price');
 
-        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search', 'min_r', 'max_r', 'count'));
+        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search', 'min_r', 'max_r', 'count', 'showr'));
     }
     public function about(Request $request)
     {

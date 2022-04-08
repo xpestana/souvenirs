@@ -49,6 +49,7 @@ class SouvenirsController extends Controller
             'precio'        => 'required',
             'description'   => 'required',
             'featured'      => 'required',
+            'stock'      => 'required',
         ]);
         
         $souvenir = Products::create([
@@ -56,7 +57,7 @@ class SouvenirsController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
                 'price' => $request->precio,
-                'stock' => 0,
+                'stock' => $request->stock,
                 'featured' => $request->featured,
             ]);
 

@@ -133,7 +133,7 @@
                     <!-- Shop Breadcrumb Area Start -->
                     <div class="shop-breadcrumb-area mt-40 mb-5">
                         <div class="row justify-content-center">
-                            <div class="col-12 d-md-none">
+                            <div v-if="show.show != 1" class="col-12 d-md-none">
                                 <div class="row justify-content-center mb-5">
                                     <div class="col-6 text-center">
                                         <a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill px-4 py-1" @click="load_more()">Ver más</a>
@@ -187,6 +187,7 @@
             min_r:Number,
             max_r:Number,
             count: Number,
+            showr: Number,
         },
         data(){
             return {
@@ -197,7 +198,7 @@
                     price: [this.min_r,this.max_r],
                 }),
                 show: this.$inertia.form({
-                    show: null,
+                    show: this.showr,
                 }),
             }
         },
