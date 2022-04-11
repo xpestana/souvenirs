@@ -44,7 +44,7 @@
             <div class="col-12 text-left px-md-5">
               <h2 class="h2 font-weight-bolder"> Conoce Sevilla con HiCitty</h2>
             </div>
-            <div class="col-12 px-mobile px-md-5">
+            <div class="col-12 px-md-5">
               <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="5000">
                 <Slide v-for=" product in $page.props.activities" :key="product.id">
                   <div class="tarjeta bg-light">
@@ -153,10 +153,6 @@
                     preserveScroll: true
                 })
             },
-            hiCitty(){
-              
-                // document.body.classList.add('city');
-            }
         },
     }
 </script>
@@ -175,7 +171,6 @@
     #carrosel .carousel__prev,.carousel__next{
       background-color: #ffffff00 !important;
       color: #ffffff00 !important;
-      /* padding: 200px 30px; */
     }
     #carrosel .carousel__prev{
       left:50px;

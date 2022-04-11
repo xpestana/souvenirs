@@ -207,7 +207,10 @@ body .modal-backdrop{
   .opacidad{
     opacity: 0.2;
   }
-
+  
+  .carousel ol .carousel__slide {
+    justify-content: start !important;
+  }
 /*--------------------------------------------------
 Template Name: Hopsop;
 Description:   Travel Accessories eCommerce Template;

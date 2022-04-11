@@ -111,7 +111,7 @@
                                                 
                                             </div>
                                             <div class="pro-mobile p-2 md:hidden bg-white">
-                                                <div class="pro-mobile-title text-center">
+                                                <div class="pro-mobile-title text-left">
                                                     <h4 class="text-muted" style="font-size:0.9em"><Link :href="route('product.souvenir.show',{product : product.id})" v-html="filtroTitulo(product.title)"></Link></h4>
                                                 </div>
                                                 <div class="pro-mobile-price text-xl font-bold text-right">
@@ -153,7 +153,12 @@
 
     <div class="row justify-content-md-end">
         <div class="col-12 col-md-4">
-            <div class="fixed-bottom popup" id="popup"></div>
+            <Transition>
+                <div v-if="showPopup" class="fixed-bottom" id="popup">
+                    <div class="alert alert-primary alert m-0 text-center py-4 text-muted" role="alert" style="background-color:#d8ecf3" v-html="$page.props.flash.mensaje">
+                    </div>
+                </div>
+            </Transition>
         </div>
     </div>
     <!-- Shop Page End -->
@@ -162,7 +167,6 @@
 </template>
 
 <script>
-
     import { Inertia } from '@inertiajs/inertia';
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Layout from '@/Layouts/Layout.vue'        
@@ -193,16 +197,10 @@
             showr: Number,
         },
         updated(){
-            $('#popup').empty();
             if(this.$page.props.flash.mensaje){
-                let template =`
-                <div class="alert alert-primary alert m-0 text-center py-4 text-muted" role="alert" style="background-color:#d8ecf3">
-                    <i class="fas fa-check mr-1"></i>
-                    ${this.$page.props.flash.mensaje}
-                </div>`;
-                $('#popup').html(template);
+                this.showPopup=true;
             }
-            setTimeout(()=>$('#popup .alert').hide(500), 3000);
+            setTimeout(()=>this.showPopup=false, 3000);
         },
         data(){
             return {
@@ -217,8 +215,8 @@
                 }),
                 formCart: this.$inertia.form({
                     quantity: 1,
-                    
                 }),
+                showPopup:false
             }
         },
         methods: {
@@ -231,23 +229,10 @@
                 })
             },
             cart(id,stock){
-                // if(stock >= 1){
-                    this.formCart.put(route('cart.update',{checkout: id}),{
-                        _token: this.$page.props.csrf_token,
-                        preserveScroll: true,
-                    })
-                // }else{
-                //     this.$swal({
-                //         title: 'Lo sentimos, no tenemos suficiente stock',
-                //         icon: 'warning',
-                //         showCloseButton: false,
-                //         showCancelButton: false,
-                //         focusConfirm: false,
-                //         confirmButtonColor: '#3085d6',
-                //         cancelButtonColor: '#d33',
-                //         confirmButtonText: 'Cerrar'
-                //     })
-                // }
+                this.formCart.put(route('cart.update',{checkout: id}),{
+                    _token: this.$page.props.csrf_token,
+                    preserveScroll: true,
+                })
             },
             load_more(){
                 this.show.show = 1;
@@ -260,18 +245,21 @@
             },
             filtroTitulo(titulo){
                 let title = titulo.split(' ');
-                let template = '';
-                title[0] !== undefined ? 
-                    template+=title[0] : template+='...';
-                title[1] !== undefined ?
-                    template+=`<br>`+title[1] : template+=` <br><br>`;
-                if(title[1] !== undefined){
-                    title[1].length < 4  ?
-                        template+=` `+title[2] : '';                  
-                }  
-                title[2] == undefined ?
-                    template+=`` : template+=`...` 
-                return template
+                let template = `${title[0]}`;
+                let suma=0;
+                title[0] !== undefined ? suma += Number(title[0].length) : suma += 0;
+                title[1] !== undefined ? suma += Number(title[1].length) : suma += 0;
+                title[2] !== undefined ? suma += Number(title[2].length) : suma += 0;
+                if(suma > 20)
+                {
+                    template += ' '+title[1]+'...' 
+                }else{
+                    title[1] !== undefined ? template += ' '+title[1] : '' 
+                    title[2] !== undefined ? template += ' '+title[2] : ''
+                    title[3] !== undefined ? template += '...' : ''
+                }
+                
+                return template;
             }
         },
 }
@@ -279,11 +267,14 @@
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
 <style scope>
-    .popup{
-        transition: opacity 2s;
+    .v-enter-active,
+    .v-leave-active {
+    transition: opacity 0.5s ease;
     }
-    .opacidadpop{
-        opacity: 0; 
+
+    .v-enter-from,
+    .v-leave-to {
+    opacity: 0;
     }
     .img-prod{
         width: 100%;

@@ -94,7 +94,7 @@ class CartController extends Controller
                 'associatedModel' => $product
             ));
         
-            return back()->with(['mensaje' => 'Articulo añadido a tu cesta']);  
+            return back()->with(['mensaje' => '<i class="fas fa-check mr-1"></i> Artículo añadido a tu cesta']);  
         }else{
             return back()->with(['mensaje' => 'Lo sentimos, no tenemos más stock de este producto']);
         }
