@@ -139,9 +139,6 @@
             }
             
         },
-        created(){
-          this.hiCitty()
-        },
         methods:{
           souvenirs(){
               this.$inertia.get(route('souvenirs'),{}, {
