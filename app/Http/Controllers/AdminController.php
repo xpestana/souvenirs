@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\hotel;
 use App\Models\User;
 use App\Models\profile;
+use App\Models\Settings;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -476,5 +477,36 @@ class AdminController extends Controller
         ];
 
         return $response;
+    }
+    public function shippings_show()
+    {
+        $settings = Settings::all();
+        return Inertia::render('Admin/Settings', compact('settings'));
+    }
+    public function shippings_create(Request $request)
+    {
+        $settings = Settings::where('active',1)->first();
+        if($settings){
+            $settings->active = 0;
+            $settings->save();
+        }
+        $settings = Settings::create([
+            'shippings' => $request->shippings,
+        ]);
+
+        return back()->with(['id'=>$settings->id, 'message' => "Actualizado exitosamente", 'code' => 200, 'status' => 'success']);
+    }
+    public function shippings_update($id, Request $request)
+    {
+        $settings = Settings::where('active',1)->first();
+        if($settings){
+            $settings->active = 0;
+            $settings->save();
+        }
+        $settings = Settings::find($id);
+        $settings->active = 1;
+        $settings->save();
+
+        return back()->with(['id'=>$settings->id, 'message' => "Actualizado exitosamente", 'code' => 200, 'status' => 'success']);
     }
 }
