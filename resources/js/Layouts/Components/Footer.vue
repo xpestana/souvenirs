@@ -63,7 +63,7 @@
                                 <div class="footer-content">
                                     <ul>
                                         <li><a target="_blank" href="/tablero/alojamientos/politicas/privacidad">Políticas de privacidad</a></li>
-                                        <li><a target="_blank" href="/tablero/alojamientos/politicas/terminosycondiciones">Términos y condiciones</a></li>
+                                        <li><a target="_blank" href="politicas/terminosycondiciones">Términos y condiciones</a></li>
                                         <li><a target="_blank" href="/tablero/alojamientos/politicas/entregas">Políticas de entrega</a></li>
                                         <li><a target="_blank" href="/tablero/alojamientos/politicas/devolucion">Políticas de devolución</a></li>
                                     </ul>

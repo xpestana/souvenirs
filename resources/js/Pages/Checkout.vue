@@ -93,83 +93,52 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="your-order">
-                        <h3>Tu orden</h3>
-                        <div class="your-order-table table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="product-name">Producto</th>
-                                        <th class="product-total">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <template v-for="product in $page.props.cart" :key="product.id">
-                                    <tr class="cart_item" v-if="product.name">
-                                        <td class="product-name"  v-if="product.attributes.type == 'souvenir'">
-                                            {{ product.name }} <span class="product-quantity"> × {{ product.quantity }}</span>
-                                        </td>
-                                        <td class="product-name"  v-if="product.attributes.type == 'activity'">
-                                            {{ product.name }} 
-                                            <span class="product-quantity"> 
-                                                    <br>
-                                                    Adultos: {{ product.attributes.adult }}
-                                                    <br>
-                                                    Niños: {{ product.attributes.children }}
-                                                    <br>
-                                                    Cantidad: {{ product.quantity }}
-                                            </span>
-                                        </td>
-                                        <td class="product-total" v-if="product.attributes.type == 'souvenir'">
-                                            <span class="amount">{{ product.quantity * product.price }} €</span>
-                                        </td>
-                                        <td class="product-total" v-if="product.attributes.type == 'activity'">
-                                            <span class="amount">
-                                                {{ calculate(product.attributes.priceA, product.attributes.priceN, product.attributes.adult, product.attributes.children) }} €
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    </template>
-                                </tbody>
-                                <tfoot>
-                                    <tr class="cart-subtotal">
-                                        <th>Sub-total</th>
-                                        <td><span class="amount">{{ sub_total }} €</span></td>
-                                    </tr>
-                                    <tr class="cart-subtotal" v-if="total_souvenirs<40 && total_souvenirs > 0">
-                                        <th>Envío</th>
-                                        <td><span class="amount">5 €</span></td>
-                                    </tr>
-                                    <tr class="order-total">
-                                        <th>Total</th>
-                                        <td><span class=" total amount">{{ total }} €</span>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                <div class="col-md-6">
+                    <div class="row px-0">
+                        <div class="col-12">
+                            <img src="/vendor_asset/img/logo/logo.png" class="mx-auto w-12">
                         </div>
-                        <div class="col-md-12">
-                            <div class="p-2 w-full">
-                                <div class="relative">
-                                    <label for="card-element" class="leading-7 text-sm text-gray-600">Información de pago</label>
-                                    <div id="card-element"></div>
-                                </div>
+                        <div class="col-12 border-bottom border-dark"></div>
+                        <div class="col-12 d-flex justify-between pt-1 px-1">
+                            <div>
+                                <img src="/vendor_asset/img/icons/visa.png" class="d-inline w-10">
+                                <img src="/vendor_asset/img/icons/mastercard.png" class="d-inline w-10">
+                                <img src="/vendor_asset/img/icons/redsys.png" class="d-inline ml-2 w-14">
+                            </div>
+                            <div>
+                                <img src="/vendor_asset/img/icons/padlock.png" class="d-inline mr-2 w-4">
+                                <p class="d-inline">Pago seguro</p>
                             </div>
                         </div>
-                        <BreezeValidationErrors class="mb-3" />
-                        <div class="col-md-12 login-footer text-center">
-                            <div v-if="status" class="mb-4 font-medium text-sm text-danger">
-                                {{ status }}
+                        <div class="col-12 mt-3">
+                            <p class="text-muted">Resumen:</p>
+                            <div class="d-flex justify-between">
+                                <p class="text-muted" v-if="totalSouvenirs.num > 1">{{totalSouvenirs.num}} souvenirs</p>
+                                <p class="text-muted" v-else>{{totalSouvenirs.num}} souvenir</p>
+                                <p class="font-weight-bolder text-muted">{{totalSouvenirs.precio.toLocaleString('de-DE')}}€</p>
+                            </div>
+                            <div class="d-flex justify-between">
+                                <p class="text-muted" v-if="totalActivities.num > 1">{{totalActivities.num}} actividades</p>
+                                <p class="text-muted" v-else>{{totalActivities.num}} actividad</p>
+                                <p class="font-weight-bolder text-muted">{{totalActivities.precio.toLocaleString('de-DE')}}€</p>
+                            </div>
+                            <div class="d-flex justify-between" v-if="totalSouvenirs.precio > 0 || totalActivities.precio > 0">
+                                <p class="text-muted">Envio</p>
+                                <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < 20">5€</p>
+                                <p class="font-weight-bolder text-muted" v-else>GRATIS</p>
+                            </div>
+                            <div class="d-flex justify-between mt-2">
+                                <p class="font-weight-bolder">Importe</p>
+                                <p class="font-weight-bolder text-lg">{{importeTotal.toLocaleString('de-DE')}} Euros</p>
                             </div>
                         </div>
-                        <div class="payment-method d-flex justify-content-center">
-                            <button
-                                class="login-btn bg-secondary"
-                                @click="processPayment"
-                                :disabled="paymentProcessing"
-                                v-text="paymentProcessing ? 'Procesando' : 'Pagar'"
-                            ></button>
+                        <div class="col-12 border-bottom border-dark mt-1 mb-3"></div>
+                        <div class="col-12 mt-2">
+                            <div class="d-block">
+                                <input type="checkbox" class="form-control mr-1">
+                                <a class="text-primary d-inline text-xs" target="_blank" href="politicas/terminosycondiciones">He leído y acepto los términos y condiciones</a>
+                            </div>
+                            <button class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2">Pagar</button>
                         </div>
                     </div>
                 </div>
@@ -199,6 +168,8 @@
             hotel: Object,
         },
         created(){
+            console.log(this.totalActivities)
+            console.log(this.cartList)
             var text = 'No hay dirección!!!';
             var address = 'No entro por medio de un codigo QR, asegurese que la dirección de envío que coloque, sea la correcta';
 
@@ -321,6 +292,39 @@
                 }
             }
         },
+        computed:{
+            cartList(){
+                let cart = this.$page.props.cart;
+                let largo = Number(Object.values(cart).length) - 2;
+                let array = Object.values(cart).splice(0,largo);
+                return array;
+            },
+            souvenirsList(){
+                return this.cartList.filter((product)=> product.attributes.type=="souvenir");
+            },
+            activitiesList(){
+                return this.cartList.filter((product)=> product.attributes.type=="activity");
+            },
+            totalSouvenirs(){
+                return this.souvenirsList.reduce((acc, el) => ({
+                    ...acc,
+                    num:Number(el.quantity) + acc.num,
+                    precio:Number(el.quantity*el.price) + acc.precio,
+                }),{num:0,precio:0});
+            },
+            totalActivities(){
+                return this.activitiesList.reduce((acc, el) => ({
+                    ...acc,
+                    num:++acc.num,
+                    precio:(Number(el.attributes.adult)*el.attributes.priceA + Number(el.attributes.children)*el.attributes.priceN) + acc.precio,
+                }),{num:0,precio:0});
+            },
+            importeTotal(){
+                let envio;
+                this.totalSouvenirs.precio > 20 ? envio=0 : envio=5;
+                return this.totalActivities.precio+this.totalSouvenirs.precio+envio;
+            }
+        }
     }
 </script>
 <style>

@@ -43,8 +43,8 @@
                             <h3 class="text-azulc font-weight-bolder text-lg d-inline">{{ product.title }}</h3>
                             <div class="d-inline">
                                 <img v-if="this.product.offer > 0" class="raya-img d-inline" src="/vendor_asset/img/slash.png" style="opacity:0.6">
-                                <h3 class="font-weight-bolder text-2xl d-inline ml-3" :class="{'opacidad':this.product.offer > 0}">{{ product.price }}€</h3>
-                                <h3 v-if="this.product.offer > 0" class="font-weight-bolder text-2xl d-inline ml-3">{{ product.offer }}€</h3>
+                                <h3 class="font-weight-bolder text-2xl d-inline ml-3" :class="{'opacidad':this.product.offer > 0}">{{ product.price.toLocaleString('de-DE') }}€</h3>
+                                <h3 v-if="this.product.offer > 0" class="font-weight-bolder text-2xl d-inline ml-3">{{ product.offer.toLocaleString('de-DE') }}€</h3>
                             </div>
                             <div class="d-block">
                                 <form @submit.prevent="submit">

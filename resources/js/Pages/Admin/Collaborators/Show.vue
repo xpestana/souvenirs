@@ -126,6 +126,8 @@
 			</div>
 		</section>	
 	</div>  
+<pre>{{collaborator}}</pre>
+	
 </template>
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'

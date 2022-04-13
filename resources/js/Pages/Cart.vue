@@ -56,25 +56,24 @@
                         <div class="product d-flex justify-between">
                             <div class="product-name">
                                 <p class="d-inline text-sm md:text-xl font-weight-bolder">
-                                {{ product.name }}
-                                    <!-- <Link :href="route('product.souvenir.show',{product : product.id})"></Link> -->
+                                <Link :href="route('product.souvenir.show',{product : product.id})">{{ filtroTitulo(product.name) }}</Link>
                                 </p>
                             </div>
                             <div class="product-price pr-1">
-                                <p class="text-sm md:text-xl font-weight-bolder">{{ product.price*product.quantity }} €</p>
+                                <p class="text-sm md:text-xl font-weight-bolder">{{ (product.price*product.quantity).toLocaleString('de-DE') }} €</p>
                             </div>
                         </div>
                         <div class="quantity-product d-inline-flex mb-md-1">
                             <p class="text-xs md:text-lg pr-2">Cantidad</p>
-                            <input type="text" class="w-11 h-5 border rounded ml-md-2 md:w-12 md:h-7" :value="product.quantity">
+                            <input type="text" class="w-11 h-5 cantidad ml-md-2 md:w-12 md:h-7" :value="product.quantity">
                             <div class="ml-1 ml-md-2 pt-md-1 quantity-buttons">
                                 <a href="javascript:void(0)"><i class="fas fa-angle-up d-block" @click="upCart(product.id,product.quantity)"></i></a>
-                                <a href="javascript:void(0)"><i class="fas fa-angle-down d-block" @click="downCart(product.id)"></i></a>
+                                <a href="javascript:void(0)"><i class="fas fa-angle-down d-block" @click="downCart(product.id,product.quantity)"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-1 px-2 text-right" v-if="product.name">
-                        <a href="javascript:void(0)"  @click="deleteCart(product.id)"><i id="trash" class="fas fa-trash" style="color:#9e9e9e"></i></a>
+                        <a href="javascript:void(0)"  @click="deleteCart(product.id)"><i :id="'trash'+product.id" class="fas fa-trash" style="color:#9e9e9e"></i></a>
                     </div>
                 </div>
             </template>
@@ -89,15 +88,15 @@
                     <p class="text-center text-muted">({{n_souvenirs}})</p>
                 </div>
                 <div class="col-6 text-right mt-3 px-0 pr-1">
-                    <p class="text-muted leading-4">Sub total: {{sub_total}} €</p>
-                    <p class="text-muted leading-4">Costes del envío:  {{costo_envio}}€</p>
-                    <p class="text-muted leading-4">Envío gratuito: -{{costo_gratuito}}€</p>
-                    <p class="leading-4">Total Souvenirs {{total_souvenirs}}€</p>
+                    <p class="text-muted leading-4">Sub total: {{sub_total.toLocaleString('de-DE')}} €</p>
+                    <p class="text-muted leading-4">Costes del envío:  {{costo_envio.toLocaleString('de-DE')}}€</p>
+                    <p class="text-muted leading-4" v-if="costo_gratuito > 0">Envío gratuito: -{{costo_gratuito.toLocaleString('de-DE')}}€</p>
+                    <p class="leading-4">Total Souvenirs {{total_souvenirs.toLocaleString('de-DE')}}€</p>
                 </div>
             </div>
             <div class="row mt-3" v-if="sub_total < n_gratuito">
                 <div class="col-12 px-0 text-center">
-                    <h4 class="text-sm text-muted">¡Te faltan {{diferencia.toFixed(2)}}€ para conseguir envío gratuito!</h4>
+                    <h4 class="text-sm text-muted">¡Te faltan {{diferencia.toLocaleString('de-DE')}}€ para conseguir envío gratuito!</h4>
                     <Link :href="route('souvenirs')"><h3 class="text-base text-primary">Añade otro souvenir</h3></Link>
                 </div>
             </div>
@@ -129,7 +128,7 @@
                     <div class="col-8 col-md-9 pl-2 pr-0 d-flex flex-column justify-content-between" v-if="act.name">
                         <div class="product">
                             <div class="product-name">
-                                <p class="text-sm md:text-xl">{{ act.name }}</p>
+                                <p class="text-sm md:text-xl">{{ filtroTitulo(act.name) }}</p>
                             </div>
                             <div class="product-price pr-1">
                                 <p class="text-sm md:text-xl">Adultos: {{ act.attributes.adult }}</p>
@@ -139,7 +138,7 @@
                         </div>
                     </div>
                     <div class="col-1 px-2 text-right" v-if="act.name">
-                        <a href="javascript:void(0)"  @click="deleteCart(act.id)"><i id="trash" class="fas fa-trash" style="color:#9e9e9e"></i></a>
+                        <a href="javascript:void(0)"  @click="deleteCart(act.id)"><i :id="'trash'+act.id" class="fas fa-trash" style="color:#9e9e9e"></i></a>
                     </div>
                 </div>
             </template>
@@ -152,8 +151,8 @@
     <div class="importe">
         <div class="container mt-3 px-md-5">
             <div class="row justify-content-between">
-            <div class="col-6 text-left">
-                <p class="d-inline text-base">Importe total: <b>{{total}}€</b> </p>
+            <div class="col-6 text-left pr-0">
+                <p class="d-inline text-base">Importe total: <b>{{total.toLocaleString('de-DE')}}€</b> </p>
             </div>
             <div class="col-5 text-right">
                 <Link class="btn btn-info rounded-xl px-3 py-1 text-white opacity-60" :href="route('checkout.souvenirs')">Pagar</Link>
@@ -226,14 +225,15 @@
                     preserveScroll: true,
                 })
             },
-            downCart(id) {
-               this.$inertia.delete(route('cart.destroy',{checkout : id, update:true}),
-                    {
+            downCart(id,quantity) {
+               if(quantity > 1){
+                   this.$inertia.delete(route('cart.destroy',{checkout : id, update:true}),{
                         preserveScroll: true,
                     })
+               }
             },
             deleteCart(id){
-                document.getElementById('trash').classList.add('text-danger');
+                document.getElementById('trash'+id).classList.add('text-danger');
                 this.$inertia.delete(route('cart.destroy',{checkout : id}),
                     {
                         preserveScroll: true,
@@ -281,7 +281,25 @@
                     this.costo_gratuito = this.costo_envio;
                 }
                 this.total = total+total_activities;
+            },
+            filtroTitulo(titulo){
+                let title = titulo.split(' ');
+                let template = `${title[0]}`;
+                let suma=0;
+                title[0] !== undefined ? suma += Number(title[0].length) : suma += 0;
+                title[1] !== undefined ? suma += Number(title[1].length) : suma += 0;
+                title[2] !== undefined ? suma += Number(title[2].length) : suma += 0;
+                if(suma > 20)
+                {
+                    template += ' '+title[1]+'...' 
+                }else{
+                    title[1] !== undefined ? template += ' '+title[1] : '' 
+                    title[2] !== undefined ? template += ' '+title[2] : ''
+                    title[3] !== undefined ? template += '...' : ''
                 }
+                
+                return template;
+            }
         },
         computed:{
             souvenirsList(){
@@ -302,6 +320,10 @@
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
 <style scope>
+.quantity-product .cantidad {
+    border: #d8d8d8 1px solid;
+    border-radius: 5px;
+}
 .v-enter-active,
 .v-leave-active {
     transition: opacity 0.5s ease;
