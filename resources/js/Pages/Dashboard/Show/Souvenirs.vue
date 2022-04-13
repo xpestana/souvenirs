@@ -43,8 +43,8 @@
                             <h3 class="text-azulc font-weight-bolder text-lg d-inline">{{ product.title }}</h3>
                             <div class="d-inline">
                                 <img v-if="this.product.offer > 0" class="raya-img d-inline" src="/vendor_asset/img/slash.png" style="opacity:0.6">
-                                <h3 class="font-weight-bolder text-2xl d-inline ml-3" :class="{'opacidad':this.product.offer > 0}">{{ product.price.toLocaleString('de-DE') }}€</h3>
-                                <h3 v-if="this.product.offer > 0" class="font-weight-bolder text-2xl d-inline ml-3">{{ product.offer.toLocaleString('de-DE') }}€</h3>
+                                <h3 class="font-weight-bolder text-2xl d-inline ml-3" :class="{'opacidad':this.product.offer > 0}"><Decimals :precio="product.price"/>€</h3>
+                                <h3 v-if="this.product.offer > 0" class="font-weight-bolder text-2xl d-inline ml-3"><Decimals :precio="product.offer"/>€</h3>
                             </div>
                             <div class="d-block">
                                 <form @submit.prevent="submit">
@@ -150,6 +150,7 @@
     import Back from '@/Layouts/Components/Back.vue' 
     import Souvenirs from '@/Layouts/Components/Souvenirs.vue' 
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'  
+    import Decimals from '@/Layouts/Components/Decimals.vue'
     import { Carousel, Navigation, Slide } from 'vue3-carousel'
     import 'vue3-carousel/dist/carousel.css';
 
@@ -164,6 +165,7 @@
             Carousel,
             Slide,
             Navigation,
+            Decimals
         },
         data() {
             return {

@@ -113,30 +113,48 @@
                         <div class="col-12 mt-3">
                             <p class="text-muted">Resumen:</p>
                             <div class="d-flex justify-between">
-                                <p class="text-muted" v-if="totalSouvenirs.num > 1">{{totalSouvenirs.num}} souvenirs</p>
-                                <p class="text-muted" v-else>{{totalSouvenirs.num}} souvenir</p>
-                                <p class="font-weight-bolder text-muted">{{totalSouvenirs.precio.toLocaleString('de-DE')}}€</p>
+                                <p class="text-muted">
+                                <template v-if="totalSouvenirs.num > 1">
+                                    {{totalSouvenirs.num}} souvenirs
+                                </template>
+                                <template v-if="totalSouvenirs.num == 1">
+                                    {{totalSouvenirs.num}} souvenir
+                                </template>
+                                <template v-if="totalSouvenirs.num == 0">
+                                    souvenir
+                                </template>
+                                </p>
+                                <p class="font-weight-bolder text-muted"><Decimals :precio="totalSouvenirs.precio"/>€</p>
                             </div>
                             <div class="d-flex justify-between">
-                                <p class="text-muted" v-if="totalActivities.num > 1">{{totalActivities.num}} actividades</p>
-                                <p class="text-muted" v-else>{{totalActivities.num}} actividad</p>
-                                <p class="font-weight-bolder text-muted">{{totalActivities.precio.toLocaleString('de-DE')}}€</p>
+                                <p class="text-muted">
+                                    <template v-if="totalActivities.num > 1">
+                                        {{totalActivities.num}} actividades
+                                    </template>
+                                    <template v-if="totalActivities.num == 1">
+                                        {{totalActivities.num}} actividad
+                                    </template>
+                                    <template v-if="totalActivities.num == 0">
+                                        actividad
+                                    </template>
+                                </p>
+                                <p class="font-weight-bolder text-muted"><Decimals :precio="totalActivities.precio"/>€</p>
                             </div>
                             <div class="d-flex justify-between" v-if="totalSouvenirs.precio > 0 || totalActivities.precio > 0">
-                                <p class="text-muted">Envio</p>
-                                <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < 20">5€</p>
+                                <p class="text-muted">Envío</p>
+                                <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < 20"><Decimals :precio="5"/>€</p>
                                 <p class="font-weight-bolder text-muted" v-else>GRATIS</p>
                             </div>
                             <div class="d-flex justify-between mt-2">
                                 <p class="font-weight-bolder">Importe</p>
-                                <p class="font-weight-bolder text-lg">{{importeTotal.toLocaleString('de-DE')}} Euros</p>
+                                <p class="font-weight-bolder text-lg"><Decimals :precio="importeTotal"/> Euros</p>
                             </div>
                         </div>
                         <div class="col-12 border-bottom border-dark mt-1 mb-3"></div>
                         <div class="col-12 mt-2">
                             <div class="d-block">
                                 <input type="checkbox" class="form-control mr-1">
-                                <a class="text-primary d-inline text-xs" target="_blank" href="politicas/terminosycondiciones">He leído y acepto los términos y condiciones</a>
+                                <a class="text-primary d-inline text-xs" target="_blank" href="/politicas/terminosycondiciones">He leído y acepto los términos y condiciones</a>
                             </div>
                             <button class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2">Pagar</button>
                         </div>
@@ -153,6 +171,7 @@
 <script>
     import { Link, Head } from '@inertiajs/inertia-vue3'
     import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
+    import Decimals from '@/Layouts/Components/Decimals.vue'
     import Layout from '@/Layouts/Layout.vue'   
     import { loadStripe } from '@stripe/stripe-js'
     import { Inertia } from '@inertiajs/inertia'  
@@ -163,6 +182,7 @@
             Head,
             BreezeValidationErrors,
             Layout,
+            Decimals
         },
         props: {
             hotel: Object,

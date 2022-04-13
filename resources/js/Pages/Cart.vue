@@ -60,7 +60,7 @@
                                 </p>
                             </div>
                             <div class="product-price pr-1">
-                                <p class="text-sm md:text-xl font-weight-bolder">{{ (product.price*product.quantity).toLocaleString('de-DE') }} €</p>
+                                <p class="text-sm md:text-xl font-weight-bolder"><Decimals :precio="(product.price*product.quantity)"/>€</p>
                             </div>
                         </div>
                         <div class="quantity-product d-inline-flex mb-md-1">
@@ -88,15 +88,15 @@
                     <p class="text-center text-muted">({{n_souvenirs}})</p>
                 </div>
                 <div class="col-6 text-right mt-3 px-0 pr-1">
-                    <p class="text-muted leading-4">Sub total: {{sub_total.toLocaleString('de-DE')}} €</p>
-                    <p class="text-muted leading-4">Costes del envío:  {{costo_envio.toLocaleString('de-DE')}}€</p>
-                    <p class="text-muted leading-4" v-if="costo_gratuito > 0">Envío gratuito: -{{costo_gratuito.toLocaleString('de-DE')}}€</p>
-                    <p class="leading-4">Total Souvenirs {{total_souvenirs.toLocaleString('de-DE')}}€</p>
+                    <p class="text-muted leading-4">Sub total: <Decimals :precio="sub_total"/>€</p>
+                    <p class="text-muted leading-4">Costes del envío:  <Decimals :precio="costo_envio"/>€</p>
+                    <p class="text-muted leading-4" v-if="costo_gratuito > 0">Envío gratuito: -<Decimals :precio="costo_gratuito"/>€</p>
+                    <p class="leading-4">Total Souvenirs <Decimals :precio="total_souvenirs"/>€</p>
                 </div>
             </div>
             <div class="row mt-3" v-if="sub_total < n_gratuito">
                 <div class="col-12 px-0 text-center">
-                    <h4 class="text-sm text-muted">¡Te faltan {{diferencia.toLocaleString('de-DE')}}€ para conseguir envío gratuito!</h4>
+                    <h4 class="text-sm text-muted">¡Te faltan <Decimals :precio="diferencia"/>€ para conseguir envío gratuito!</h4>
                     <Link :href="route('souvenirs')"><h3 class="text-base text-primary">Añade otro souvenir</h3></Link>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                             <div class="product-price pr-1">
                                 <p class="text-sm md:text-xl">Adultos: {{ act.attributes.adult }}</p>
                                 <p class="text-sm md:text-xl">Niños: {{ act.attributes.children }}</p>
-                                <p class="text-sm md:text-xl">Total: {{ act.attributes.priceA*Number(act.attributes.adult) + act.attributes.priceN*Number(act.attributes.children)}}€</p>
+                                <p class="text-sm md:text-xl">Total: <Decimals :precio="(act.attributes.priceA*Number(act.attributes.adult) + act.attributes.priceN*Number(act.attributes.children))"/>€</p>
                             </div>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
         <div class="container mt-3 px-md-5">
             <div class="row justify-content-between">
             <div class="col-6 text-left pr-0">
-                <p class="d-inline text-base">Importe total: <b>{{total.toLocaleString('de-DE')}}€</b> </p>
+                <p class="d-inline text-base">Importe total: <b><Decimals :precio="total"/>€</b> </p>
             </div>
             <div class="col-5 text-right">
                 <Link class="btn btn-info rounded-xl px-3 py-1 text-white opacity-60" :href="route('checkout.souvenirs')">Pagar</Link>
@@ -182,13 +182,15 @@
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Layout from '@/Layouts/Layout.vue'        
     import Total from '@/Pages/Total.vue' 
+    import Decimals from '@/Layouts/Components/Decimals.vue'
 
     export default {
         components: {
             Head,
             Link,
             Layout,
-            Total
+            Total,
+            Decimals
         },
         created(){
             this.totalesSouvenirs();

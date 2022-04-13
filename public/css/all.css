@@ -200,6 +200,14 @@ body .modal-backdrop{
   .text-azulc{
     color: #65b4ce; 
   }
+  .btn-outline-azulc {
+    color: #65b4ce;
+    border-color: #65b4ce;
+  }
+  .btn-outline-azulc:hover{
+    color: #ffffff;
+    background-color: #4aa1be;
+  }
   .bg-azulc{
     background-color: #65b4ce; 
   }

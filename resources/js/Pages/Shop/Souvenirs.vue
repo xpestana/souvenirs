@@ -102,7 +102,7 @@
                                                 
                                                 <div class="pro-price-cart absolute top-0 right-0 md:static" style="z-index:19">
                                                     <div class="pro-home-price hidden">
-                                                        <span>{{ product.price.toLocaleString('de-DE') }} €</span>
+                                                        <span><Decimals :precio="product.price" />€</span>
                                                     </div>
                                                     <div class="pro-cart hidden">
                                                         <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id,product.id)"><i class="icon-cart"></i></a>
@@ -115,7 +115,7 @@
                                                     <h4 class="md:text-base text-muted whitespace-nowrap truncate ..."><Link :href="route('product.souvenir.show',{product : product.id})" v-html="product.title"></Link></h4>
                                                 </div>
                                                 <div class="pro-mobile-price text-xl font-bold text-right">
-                                                    <span class="d-inline">{{ product.price }} </span><span class="d-inline">€</span>
+                                                    <span class="d-inline"><Decimals :precio="product.price" /></span><span class="d-inline">€</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,6 +169,7 @@
     import Layout from '@/Layouts/Layout.vue'        
     import QuickView from '@/Components/QuickView.vue';
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
+    import Decimals from '@/Layouts/Components/Decimals.vue'
     import '/vendor_asset/js/vendor/jquery-3.2.1.min.js';
     import '/vendor_asset/js/jquery-ui.min.js';
     import Paginator from '@/Components/Paginator.vue'
@@ -182,7 +183,8 @@
             QuickView,
             Breadcrumb,
             Slider,
-            Paginator
+            Paginator,
+            Decimals
         },
         props: {
             products: Object,
@@ -240,7 +242,11 @@
                     
                 })
             },
+            
         },
+        computed:{
+            
+        }
 }
 
 </script>

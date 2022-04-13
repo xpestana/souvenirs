@@ -329,6 +329,12 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::post('/administrador/store', [AdminController::class, 'administrator_store'])->name('admin.administrator.store');
     Route::get('/administrador/{id}', [AdminController::class, 'administrator_details'])->name('admin.administrator.show');
 
+    /*SOUVENIRS*/
+    
+    Route::get('/souvenirs',function(){
+        return Inertia::render('Admin/Souvenirs');
+    })->name('admin.souvenirs');
+    
     /*Colaboradores*/
 });
 Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {

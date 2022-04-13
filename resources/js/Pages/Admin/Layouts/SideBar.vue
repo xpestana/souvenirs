@@ -22,10 +22,10 @@
                 </Link>
             </li>
             <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.home')"  class="link">
+                <Link :href="route('admin.souvenirs')"  class="link" :class="{ 'active': urlSouvenirs}">
                     <div class="d-inline-flex">
                         <i class="fas fa-gift my-auto pr-1"></i>
-                        <p class="p-2">Gestión de <br>souvenirs</p>
+                        <p class="p-2" :class="{ 'active': urlSouvenirs}">Gestión de <br>souvenirs</p>
                     </div>
                 </Link>
             </li>
@@ -77,6 +77,14 @@ export default {
             let url5 = url.includes('/admin/editar/alojamiento/')
             let url6 = url.includes('/admin/crear/alojamiento/')
             if(url1 || url2 || url3 || url4 || url5 || url6){
+                return true;
+            }
+            return false;
+        },
+        urlSouvenirs(){
+            let url = this.$page.url;
+            let url1 = url.includes('/admin/souvenirs')
+            if(url1){
                 return true;
             }
             return false;
