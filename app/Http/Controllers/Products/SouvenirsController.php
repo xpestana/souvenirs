@@ -218,6 +218,6 @@ class SouvenirsController extends Controller
         $product->del = true;
         $product->save();
         
-        return Redirect::route('souvenirs.index')->with(['id'=>$id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
+        return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
     }
 }

@@ -6,6 +6,7 @@ use App\Models\hotel;
 use App\Models\User;
 use App\Models\profile;
 use App\Models\Settings;
+use App\Models\Products;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -478,13 +479,21 @@ class AdminController extends Controller
 
         return $response;
     }
-    public function shippings_show()
+
+    public function souvenirs(Request $request)
     {
+        $products = Products::where('type', 'Souvenirs')
+                            ->search($request->search)
+                            ->paginate(8);
+                            
         $settings = Settings::all();
-        return Inertia::render('Admin/Settings', compact('settings'));
+        return Inertia::render('Admin/Souvenirs', compact('settings','products'));
     }
     public function shippings_create(Request $request)
     {
+        $request->validate([
+            'shippings' => 'required|numeric',
+        ]);
         $settings = Settings::where('active',1)->first();
         if($settings){
             $settings->active = 0;
@@ -494,7 +503,7 @@ class AdminController extends Controller
             'shippings' => $request->shippings,
         ]);
 
-        return back()->with(['id'=>$settings->id, 'message' => "Actualizado exitosamente", 'code' => 200, 'status' => 'success']);
+        return back()->with(['id'=>$settings->id, 'message' => "Valor creado exitosamente", 'code' => 200, 'status' => 'success']);
     }
     public function shippings_update($id, Request $request)
     {

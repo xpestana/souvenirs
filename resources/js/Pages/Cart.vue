@@ -64,8 +64,8 @@
                             </div>
                         </div>
                         <div class="quantity-product d-inline-flex mb-md-1">
-                            <p class="text-xs md:text-lg pr-2">Cantidad</p>
-                            <input type="text" class="w-11 h-5 cantidad ml-md-2 md:w-12 md:h-7" :value="product.quantity">
+                            <p class="text-xs md:text-lg pr-2" mt-1>Cantidad</p>
+                            <input type="text" class="cantidad" :value="product.quantity">
                             <div class="ml-1 ml-md-2 pt-md-1 quantity-buttons">
                                 <a href="javascript:void(0)"><i class="fas fa-angle-up d-block" @click="upCart(product.id,product.quantity)"></i></a>
                                 <a href="javascript:void(0)"><i class="fas fa-angle-down d-block" @click="downCart(product.id,product.quantity)"></i></a>
@@ -325,6 +325,9 @@
 .quantity-product .cantidad {
     border: #d8d8d8 1px solid;
     border-radius: 5px;
+    width: 8%;
+    height: 100%;
+    padding: 0 5px;
 }
 .v-enter-active,
 .v-leave-active {
@@ -346,4 +349,10 @@
     margin-top: -4px;
     color:#cacaca;
 }
+@media(max-width:767px){
+    .quantity-product .cantidad {
+        width: 30%;
+        padding: 0 5px;
+    }
+} 
 </style>

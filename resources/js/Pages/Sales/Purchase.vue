@@ -63,7 +63,7 @@
             <h5 class="text-muted text-lg">En unos minutos recibirás tu pedido</h5>
         </div>
         <div class="logo">
-            <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo">
+            <img class="mx-auto" src="/vendor_asset/img/logo/logopequeño.png" alt="logo">
         <div class="order-num pb-5">
         </div>
             <h3 class="text-muted font-weight-bolder text-xl text-center">Número de pedido:S8GL</h3>

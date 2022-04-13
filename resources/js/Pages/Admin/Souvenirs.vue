@@ -24,19 +24,21 @@
                                                 <h2 class="text-lg">Envío gratuito a partir de</h2>
                                             </div>
                                             <div class="col-7 col-md-2 px-0 text-right text-md-left">
-                                                <input type="text" class="w-14 md:w-100 rounded-sm border mr-2 h-8">
+                                                <input type="text" class="w-14 md:w-100 rounded-sm border mr-2 h-8" id="shippings" v-model="form.shippings" autocomplete="settings" placeholder="..€">
                                             </div>
                                             <div class="col-1 col-md-1 text-left px-0"><p class="text-lg">€</p></div>
                                         </div>
                                         <div class="row px-5 mb-4 justify-content-center">
-                                            <div class="col-4 text-center px-0 mb-2"><p>ó</p></div>
+                                            <div class="col-4 text-center px-0 mb-2"><p>Actualizar valor</p></div>
                                             <div class="col-10 text-center px-0">
-                                                <select id="" class="border rounded-sm">
-                                                    <option value="">Actualizar valor</option>
-                                                    <option value="">14</option>
-                                                    <option value="">15</option>
-                                                </select>
-                                                
+                                                <form @submit.prevent="updt_current" @change="updt_current">
+                                                    <select id="current" v-model="form.current" class="border rounded-sm">
+                                                        <option v-for="setting in settings" :key="setting.id" :value="setting.id">{{ setting.shippings }}</option>
+                                                    </select>
+                                                </form>
+                                            </div>
+                                            <div class="col-12 my-2">
+                                                <ValidationErrors/>
                                             </div>
                                         </div>
                                         <div class="row justify-content-center justify-content-md-between px-5">
@@ -44,7 +46,7 @@
                                                 <button class="btn btn-primary-c rounded-pill py-0 px-5" data-dismiss="modal" >Volver</button>
                                             </div>
                                             <div class="col-12 col-md-6 my-2 my-md-0 text-center text-md-right">
-                                                <button class="btn btn-primary-c rounded-pill py-0">Crear nuevo valor</button>
+                                                <button class="btn btn-primary-c rounded-pill py-0" @click="submit">Crear nuevo valor</button>
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +64,6 @@
             </div>
         </div>
     </div>
-
     <div class="container tabla-souvenirs px-0 px-md-2 px-lg-5">
         <div class="row mt-2 px-md-5">
             <div class="col-12">
@@ -77,59 +78,151 @@
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td class="text-center">Mark</td>
-                                <td class="text-center">Otto</td>
-                                <td class="text-center">@mdo</td>
+                        <tbody id="tbody"> 
+                            <tr v-for="product in data" :key="product.id">
+                                <td class="text-center">{{ product.title }}</td>
+                                <td class="text-center">{{ product.price }}</td>
+                                <td class="text-center">{{ product.stock }}</td>
+                                <td class="text-center">{{ product.type }}</td>
                                 <td class="text-center d-inline-flex d-md-block">
-                                    <button class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" style="background-color: #c1d4f1">Ver</button>
+                                    <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('souvenirs.show',{souvenir: product.id})" title="Ver Souvenir" style="background-color: #c1d4f1"> Ver </Link>
                                     <button class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" style="background-color: #2b59a2">Editar</button>
-                                    <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1">Eliminar</button>
+                                    <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="deleteProduct(product.id)">Eliminar</button>
                                 </td>
+                            </tr>
+                            <tr v-if="data.length < 1">
+                                <td colspan="5" class="text-center">No hay resultados para la busqueda</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="col-12 flex justify-center mb-4">
+                <paginator :paginator="products" />
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue3';
 import Layout from '@/Pages/Admin/Layouts/Layout'
+import Paginator from '@/Components/Paginator.vue'
+import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors'
 export default {
     layout:Layout,
+    props: {
+		settings: Object,
+        products:Object
+	},
     components:{
-        
+        Paginator,
+        Link,
+        ValidationErrors
     },
+    mounted(){
+		this.busqueda()
+	},
     data(){
 		return{
+            data: (this.products.data) ? this.products.data : this.products,
 			formSearch: this.$inertia.form({
 				search: null,
 			}),
+            form: this.$inertia.form({
+                shippings: null,
+                current: null,
+            }),
+            error:false
 		}
 	},
     methods:{
+        busqueda(){
+			let input = this.$page.url.split("?search=","2")[1];
+			if(input !== undefined){
+				this.formSearch.search = input;	
+			}
+		},
         search() {
-			this.collaborators.data = {};
-				let template =`
-					<div class="row mt-5 justify-content-center">
-						<div class="col-4 text-center">
-							<div class="spinner-border text-info" role="status">
-								<span class="sr-only">Loading...</span>
-							</div>
-						</div>
+			this.data = {};
+            let nodos = document.getElementById('tbody').childNodes.length;
+            $('#tbody').empty();
+			
+				let tr =`<tr><td colspan="5" class="text-center">
+					<div class="spinner-border text-info text-center" role="status">
+						<span class="sr-only">Loading...</span>
 					</div>
-					`
-				$('.cuerpo').html(template);
+				</td></tr>`
+				document.getElementById('tbody').insertAdjacentHTML("afterbegin",tr);
+			
 			setTimeout(()=>{
-				this.formSearch.get(this.route('admin.colaboradores'), {
+				this.formSearch.get(this.route('admin.souvenirs'), {
 					preserveScroll: true,
 				});
 			},1500);
 		},
+        submit() {
+                var shippings = document.getElementById('shippings').value;
+                const idmodal = $('#envio');
+                this.form.shippings = shippings;
+                this.form.post(route('settings.shippings.create'),{
+                    _token: this.$page.props.csrf_token,
+                    errorBag: 'submit',
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        idmodal.modal('hide');
+                        this.form.shippings = '';
+                        this.error=false;
+                    },
+                })
+        },
+        updt_current() {
+            var current = document.getElementById('current').value;
+            const idmodal = $('#envio');
+        this.form.current = current;
+            this.form.post(route('settings.shippings.update', {id:current}),{
+                _token: this.$page.props.csrf_token,
+                errorBag: 'updt_current',
+                preserveScroll: true,
+                onSuccess: () => {
+                    idmodal.modal('hide');
+                },
+            })
+        },
+        deleteProduct(product){
+            this.$swal({
+                title: '¿Estas seguro?',
+                text: "Esta acción no se puede revertir!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$inertia.delete(route('souvenirs.destroy',{souvenir : product}),
+                        {
+                            preserveScroll: true,
+                        })
+                    }
+                })
+        }
+    },
+    computed:{
+        settings(){
+            const obj = this.settings.map((col)=>{
+                if(col.active == 1){
+                    this.form.current = col.id;
+                }
+                return {
+                    id : col.id,
+                    shippings: col.shippings,
+                    active: col.active,
+                }
+            });
+            return obj;
+        },
     }
 }
 </script>

@@ -328,20 +328,14 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/crear/administrador', [AdminController::class, 'administrator_create'])->name('admin.administrator.create');
     Route::post('/administrador/store', [AdminController::class, 'administrator_store'])->name('admin.administrator.store');
     Route::get('/administrador/{id}', [AdminController::class, 'administrator_details'])->name('admin.administrator.show');
-<<<<<<< HEAD
+    Route::get('/souvenirs', [AdminController::class, 'souvenirs'])->name('admin.souvenirs');
 
-    /*SOUVENIRS*/
-    
-    Route::get('/souvenirs',function(){
-        return Inertia::render('Admin/Souvenirs');
-    })->name('admin.souvenirs');
-    
-=======
     Route::post('/settings/shippings', [AdminController::class, 'shippings_create'])->name('settings.shippings.create');
     Route::post('/settings/shippings/{id}', [AdminController::class, 'shippings_update'])->name('settings.shippings.update');
-    Route::get('/settings/shippings/show', [AdminController::class, 'shippings_show'])->name('settings.shippings.show');
->>>>>>> dev
+
+    
     /*Colaboradores*/
+    
 });
 Route::middleware(['auth', 'verified', 'role:Admin'])->group(function () {
 
