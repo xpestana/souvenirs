@@ -141,6 +141,9 @@ export default {
 		collaborator: Object,
 		url:String
 	},
+	created(){
+		console.log("colaboradores", this.collaborator);
+	},
 	methods:{
 		souvenirs_btn(id,lodging){
 		var urlItem = $('.souvenirs_img'+id).attr('src');

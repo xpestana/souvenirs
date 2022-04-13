@@ -23,15 +23,15 @@
                                 </div>
                                 <div class="col-12 col-md-3 info-total text-right">
                                     <h3 class="text-info"><strong>Total</strong></h3><br>
-                                    <h4><strong>Beneficio 334€</strong></h4><br>
-                                    <h4><strong>Pedidos 15</strong></h4><br>
+                                    <h4><strong>Beneficio {{ total }} €</strong></h4><br>
+                                    <h4><strong>Pedidos {{ orders }}</strong></h4><br>
                                 </div>
                             </div>
                         </div>
                     </section>
                     <section id="alojamientos">
                         <div class="container">
-                            <div v-for="hotel in hotels" :key="hotel.id" class="row tarjeta my-4 p-3">
+                            <div v-for="hotel in hoteles" :key="hotel.id" class="row tarjeta my-4 p-3">
                                 <div class="col-12 col-md-2 p-0">
                                     <img class="img-foto w-100" :src="'/storage/hotel'+hotel.image" >
                                 </div>
@@ -39,8 +39,8 @@
                                     <p>{{hotel.type.toUpperCase()}}</p>
                                     <h1 class="pt-1 pb-2">{{hotel.calle}} {{hotel.planta}}</h1>
                                     <div class="estadistica">
-                                        <p class="px-2">Benefecio total 334€</p>
-                                        <p class="px-2">Pedidos totales: 8</p>
+                                        <p class="px-2">Benefecio total {{ hotel.total_benefit }} €</p>
+                                        <p class="px-2">Pedidos totales: {{ hotel.total_orders }}</p>
                                         <button class="btn btn-link px-2" data-toggle="modal" :data-target="'#centralModal'+hotel.id">Obtener QR</button>
                                             <!-- Central Modal Small -->
                                             <div class="modal fade" :id="'centralModal'+hotel.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -130,9 +130,34 @@
         hotels: Object,
         url:String
         },
+        computed:{
+            hoteles(){
+            const obj = this.hotels.map((col)=>{
+                var total_benefit = 0;
+                col.orders.forEach(function(order) {
+                    total_benefit = parseInt(total_benefit)  + parseInt(order.total);
+                });
+                this.total = this.total + (total_benefit/100)
+                this.orders = this.orders + (col.orders.length)
+            return {
+                id : col.id,
+                calle: col.calle,
+                planta: col.planta,
+                image : col.image,
+                type : col.type,
+                total_benefit : total_benefit/100,
+                total_orders : col.orders.length
+            }
+            });
+            return obj;
+        },
+
+        },
         data(){
             return{
-                showModal:false
+                showModal:false,
+                total: 0,
+                orders: 0
             }
         },
         methods: {

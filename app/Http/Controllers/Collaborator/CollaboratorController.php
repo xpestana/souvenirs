@@ -32,7 +32,7 @@ class CollaboratorController extends Controller
         }
         /*******************************/
         
-        $hotels = auth()->user()->hotel;
+        $hotels = auth()->user()->hotel->load('orders.shippings');
         $url = config('app.url');
         return Inertia::render('Collaborator/Dashboard/Index', compact('hotels','url'));
     }
@@ -296,18 +296,16 @@ class CollaboratorController extends Controller
          {
         
          }
-
-        
-
     }
 
     public function sales_hab(){
-        return Inertia::render('Collaborator/Dashboard/Lodging/TotalSales');
+        $hotels = auth()->user()->hotel->load('orders.shippings');       
+        return Inertia::render('Collaborator/Dashboard/Lodging/TotalSales', compact('hotels'));
     }
 
     public function sales_hab_details($id)
     {   
-        $hotel = hotel::find($id);
+        $hotel = hotel::find($id)->load('orders.shippings');
         return Inertia::render('Collaborator/Dashboard/Lodging/Details', compact('hotel'));
     }
 }

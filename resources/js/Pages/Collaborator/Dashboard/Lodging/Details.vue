@@ -30,26 +30,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>00labc</td>
-                                    <td>M 20</td>
-                                    <td>hola@email.com</td>
-                                    <td>04/02/2022</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>00labc</td>
-                                    <td>M 20</td>
-                                    <td>hola@email.com</td>
-                                    <td>04/02/2022</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>00labc</td>
-                                    <td>M 20</td>
-                                    <td>hola@email.com</td>
-                                    <td>04/02/2022</td>
-                                    <td>10</td>
+                                <tr v-for="order in hotel.orders">
+                                    <td>{{ order.transaction_id }}</td>
+                                    <td></td>
+                                    <td>{{ order.shippings[0].email }}</td>
+                                    <td>{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
+                                    <td>{{ parseInt(order.total)/100 }} €</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -59,7 +45,7 @@
             <div class="row pie">
                 <div class="col-md-5 offset-7 col-md-3 offset-md-9">
                     <h2 class="text-info">Total</h2>
-                    <p><b>Tu beneficio es de 13€</b></p>
+                    <p><b>Tu beneficio es de {{ total_benefit }}€</b></p>
                 </div>
             </div>
         </div>
@@ -69,11 +55,26 @@
 import { Inertia } from '@inertiajs/inertia'
 import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 import { Head, Link } from '@inertiajs/inertia-vue3'
+import Moment from 'moment'
 
 export default {
     layout:TemplateApp,
     props:{
         hotel:Object
+    },
+    data(){
+      return {
+        moment:null,
+        total_benefit: 0
+      }
+    },
+    created(){
+        this.moment=Moment;
+        var total_benefit = this.total_benefit;
+        this.hotel.orders.forEach(function(order) {
+            total_benefit = total_benefit  + (parseInt(order.total))/100;
+        });
+        this.total_benefit = total_benefit;
     },
     components:{
         Head,
