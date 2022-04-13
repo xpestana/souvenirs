@@ -15,11 +15,11 @@
 					<div class="d-md-inline-flex mt-1">
 						<div class="pr-md-4 text-md-center">
 							<p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0€</p>
+							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total }}€</p>
 						</div>
 						<div class="pr-md-4 text-md-center"> 
 							<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
-							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0</p>
+							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ orders }}</p>
 						</div>
 						<div class="pr-md-4 text-md-center"> 
 							<p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
@@ -40,17 +40,17 @@
 				</div>
 				<div class="col-12 col-md-5 col-lg-4 col-xl-3  my-1 my-md-0">
 					<h4 class="text-info font-weight-bolder pl-0 pl-xl-4">Total</h4><br>
-					<h4 class="font-weight-bolder pl-0 pl-xl-4">Beneficio 334€</h4><br>
+					<h4 class="font-weight-bolder pl-0 pl-xl-4">Beneficio {{ total }}€</h4><br>
 				</div>
 				<div class="col-12 col-md-4 col-lg-3 col-xl-3">
-					<h4 class="font-weight-bolder">Pedidos 15</h4><br>
+					<h4 class="font-weight-bolder">Pedidos {{ orders }}</h4><br>
 				</div>
 			</div>
 		</section>
 	</div>
 	<div class="container px-lg-5">
 		<section id="alojamientos">
-			<div v-for="hotel in collaborator.hotel" :key="hotel.id" class="row tarjeta my-4 p-3 mx-lg-4 ">
+			<div v-for="hotel in hoteles" :key="hotel.id" class="row tarjeta my-4 p-3 mx-lg-4 ">
 				<div class="col-12 col-md-2 p-0">
 					<img class="img-foto w-100" :src="'/storage/hotel/'+hotel.image" >
 				</div>
@@ -58,8 +58,8 @@
 					<p class="text-muted text-uppercase">{{hotel.type}}</p>
 					<h1 class="pb-3 pt-1 font-weight-bolder">{{hotel.calle}} {{hotel.planta}}</h1>
 					<div class="d-md-inline-flex">
-						<p class="pr-md-2 font-weight-bolder text-muted">Benefecio total 334€</p>
-						<p class="pl-md-2 pr-md-3 font-weight-bolder text-muted">Pedidos totales: 8</p>
+						<p class="pr-md-2 font-weight-bolder text-muted">Benefecio total {{ hotel.total_benefits }}€</p>
+						<p class="pl-md-2 pr-md-3 font-weight-bolder text-muted">Pedidos totales: {{ hotel.total_orders }}</p>
 						<button class="btn btn-link p-0" data-toggle="modal" :data-target="'#modalLodging'+hotel.id">Obtener QR</button>
                                             <!-- Central Modal Small -->
 						<div class="modal fade" :id="'modalLodging'+hotel.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -126,7 +126,6 @@
 			</div>
 		</section>	
 	</div>  
-<pre>{{collaborator}}</pre>
 	
 </template>
 <script>
@@ -143,6 +142,36 @@ export default {
 		collaborator: Object,
 		url:String
 	},
+	data(){
+            return{
+                total: 0,
+                orders: 0
+            }
+        },
+	computed:{
+            hoteles(){
+            const obj = this.collaborator.hotel.map((col)=>{
+                var total_orders = 0;
+                var total_benefits = 0;
+				this.orders = this.orders + col.orders.length;
+				col.orders.forEach(function(order) {
+                    total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+                });
+                this.total = this.total + (total_benefits/100)
+            return {
+                id : col.id,
+                calle: col.calle,
+                planta: col.planta,
+                image : col.image,
+                type : col.type,
+                total_orders : col.orders.length,
+                total_benefits: total_benefits/100
+            }
+            });
+            return obj;
+        },
+
+        },
 	created(){
 		console.log("colaboradores", this.collaborator);
 	},

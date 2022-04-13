@@ -30,7 +30,7 @@
 			</div>
 			</div>
 		<div class="container px-0 cuerpo">
-				<Link v-for="clbtr in collaborators.data" :key="clbtr.user_id" :href="route('admin.collaborator.show',clbtr.user_id)">
+				<Link v-for="clbtr in colaboradores" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
 				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light justify-content-center justify-content-md-between" >
 					<div class="col-10 col-md-6">
 						<h1 class="font-weight-bolder text-center text-md-left">{{clbtr.firstname}} </h1>
@@ -46,7 +46,7 @@
 							</div>
 							<div class="pr-md-4 text-md-center"> 
 								<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
-								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.orders }}</p>
+								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.total_orders }}</p>
 							</div>
 							<div class="pr-md-4 text-md-center"> 
 								<p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
@@ -83,6 +83,26 @@ export default {
 	props: {
 	collaborators: Object
 	},
+	computed:{
+            colaboradores(){
+            const obj = this.collaborators.data.map((col)=>{
+                var total_orders = 0;
+                col.hotel.forEach(function(hotel) {
+                    total_orders = total_orders + hotel.orders.length;
+                });
+                
+            return {
+                id : col.id,
+                firstname: col.firstname,
+                email: col.email,
+                lodgings : col.hotel.length,
+                total_orders : total_orders
+            }
+            });
+            return obj;
+        },
+
+        },
 	mounted(){
 		this.busqueda()
 		console.log(this.collaborators)

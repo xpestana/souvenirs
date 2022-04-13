@@ -169,7 +169,8 @@ class AdminController extends Controller
 
     public function colaboradores(Request $request)
     {
-        $collaborators = User::join('profiles', 'users.id', '=', 'profiles.user_id')
+        $collaborators = User::join('profiles', 'profiles.user_id', '=', 'users.id')
+                ->select('users.*', 'profiles.firstname','profiles.lastname')
                 ->role('Hotel')
                 ->search($request->search)
                 ->email($request->search, 'Hotel')
