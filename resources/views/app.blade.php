@@ -62,7 +62,7 @@
         <!-- Mobile menu js
         <script src="vendor_asset/js/jquery.meanmenu.min.js" defer></script>-->
         <!-- ScrollUp js -->
-        <script src="{{ asset('vendor_asset/js/jquery.scrollUp.js') }}" defer></script>
+        {{-- <script src="{{ asset('vendor_asset/js/jquery.scrollUp.js') }}" defer></script> --}}
         <!-- Fancybox js -->
         <script src="{{ asset('vendor_asset/js/jquery.fancybox.min.js') }}" defer></script>
         <!-- Jquery nice select js -->

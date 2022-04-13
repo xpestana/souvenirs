@@ -48,7 +48,9 @@ Route::post('/contactanos/send', [UtilitiesController::class, 'contact_mail'])->
 Route::get('/souvenir/{product}/show', [ProductsController::class, 'souvenirs'])->name('product.souvenir.show');
 Route::get('/activities/{product}/show', [ProductsController::class, 'activities'])->name('product.activities.show');
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout.destroy');
-
+Route::get('politicas/terminosycondiciones',function(){
+    return Inertia::render('Collaborator/Politicas/Terminos'); 
+});
 /*
     Auth
  */
@@ -262,6 +264,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('registro/datos', [CollaboratorController::class, 'data'])->name('collaborator.data');  
     Route::post('register/data', [CollaboratorController::class, 'register_data'])->name('collaborator.register.data');
 });
+
 /*Dashboard*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(function () {
     
@@ -272,27 +275,24 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::post('/update/{id}',[CollaboratorController::class, 'update_hab'])->name('collaborator.update.hab');    
     Route::get('/ventas', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
     Route::get('/ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
-    
+
     
     /* Politicas */
     Route::get('/politicas/avisolegal',function(){
-         return Inertia::render('Collaborator/Politicas/AvisoLegal'); 
-    });
-    Route::get('/politicas/cookies',function(){
-        return Inertia::render('Collaborator/Politicas/Cookies'); 
-    });
-    Route::get('/politicas/privacidad',function(){
-        return Inertia::render('Collaborator/Politicas/Privacidad'); 
-    });
-    Route::get('/politicas/terminosycondiciones',function(){
-        return Inertia::render('Collaborator/Politicas/Terminos'); 
-    });
-    Route::get('/politicas/devolucion',function(){
-        return Inertia::render('Collaborator/Politicas/Reembolso'); 
-    });
-    Route::get('/politicas/entregas',function(){
-        return Inertia::render('Collaborator/Politicas/Entregas'); 
-    });
+        return Inertia::render('Collaborator/Politicas/AvisoLegal'); 
+   });
+   Route::get('/politicas/cookies',function(){
+       return Inertia::render('Collaborator/Politicas/Cookies'); 
+   });
+   Route::get('/politicas/privacidad',function(){
+       return Inertia::render('Collaborator/Politicas/Privacidad'); 
+   });
+   Route::get('/politicas/devolucion',function(){
+       return Inertia::render('Collaborator/Politicas/Reembolso'); 
+   });
+   Route::get('/politicas/entregas',function(){
+       return Inertia::render('Collaborator/Politicas/Entregas'); 
+   });
 });
 /*Ajustes*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {

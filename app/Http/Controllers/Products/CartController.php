@@ -117,7 +117,7 @@ class CartController extends Controller
             Cart::remove($id);
         }
         $pin = mt_Rand(1000000, 9999999);
-        return back()->with(['id'=>$pin, 'message' => 'Producto eliminado exitosamente', 'code' => 200, 'status' => 'success']);  
+        return back()->with(['id'=>$pin, 'mensaje' => 'Producto eliminado exitosamente']);  
     }
     public function activity(Request $request)
     {

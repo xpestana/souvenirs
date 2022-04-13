@@ -60,7 +60,7 @@
     <div class="mobile-section bg-light p-0 d-md-none">
         <div class="titulos text-center pt-5">
             <h1 class="text-muted font-weight-bolder text-3xl">¡Tu pago se ha <br> realizado con éxito!</h1>
-            <h5 class="text-muted text-lg">En unos minutos recibirá su pedido</h5>
+            <h5 class="text-muted text-lg">En unos minutos recibirás tu pedido</h5>
         </div>
         <div class="logo">
             <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo">

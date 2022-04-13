@@ -130,6 +130,9 @@
         hotels: Object,
         url:String
         },
+        created(){
+            console.log(this.hotels)
+        },
         data(){
             return{
                 showModal:false

@@ -62,10 +62,10 @@
                         <p class="text-left"><i class="far fa-clock"></i> Duración: 2horas</p>
                         <h3 class="font-weight-bolder d-block text-left">
                           <template v-if="product.activities.priceN">
-                                Desde: {{ product.activities.priceN }} €
+                                Desde: {{ product.activities.priceN.toLocaleString('de-DE') }} €
                             </template>
                             <template v-else>
-                                Desde {{ product.activities.priceA }} €
+                                Desde {{ product.activities.priceA.toLocaleString('de-DE') }} €
                             </template>
                         </h3>
                     </div>
@@ -91,7 +91,7 @@
                   <div class="col-4 col-md-2 mt-3 px-2 px" v-for=" product in $page.props.souvenirs" :key="product.id">
                     <Link :href="route('product.souvenir.show',{product : product.id})">
                     <div class="rounded image text-center position-relative w-100" :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'">
-                      <p class="bg-light position-absolute fixed-bottom text-right py-2 px-1 font-weight-bolder text-muted" style="opacity:0.6;z-index:37">{{ product.price }}€</p>
+                      <p class="bg-light position-absolute fixed-bottom text-right py-2 px-1 font-weight-bolder text-muted" style="opacity:0.6;z-index:37">{{ product.price.toLocaleString('de-DE') }}€</p>
                     </div>
                     </Link>
                   </div>

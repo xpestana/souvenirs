@@ -70,16 +70,19 @@ import { Inertia } from '@inertiajs/inertia'
 import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 import { Head, Link } from '@inertiajs/inertia-vue3'
 
-export default {
-    layout:TemplateApp,
-    props:{
-        hotel:Object
-    },
-    components:{
-        Head,
-        Link,
+    export default {
+        layout:TemplateApp,
+        props:{
+            hotel:Object
+        },
+        components:{
+            Head,
+            Link,
+        },
+        created(){
+            console.log(this.hotel)
+        }
     }
-}
 </script>
 
 <style scope>
