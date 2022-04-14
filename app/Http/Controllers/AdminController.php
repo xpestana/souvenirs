@@ -484,6 +484,7 @@ class AdminController extends Controller
     {
         $products = Products::where('type', 'Souvenirs')
                             ->search($request->search)
+                            ->orderBy('title','ASC')
                             ->paginate(8);
                             
         $settings = Settings::all();
