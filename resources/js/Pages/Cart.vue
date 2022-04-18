@@ -12,7 +12,7 @@
         </div>
         <div class="text-center mt-3 mt-md-4">
             <h3 class="font-weight-bolder md:text-lg">Envío gratis</h3>
-            <p class="md:text-base">En compras superiores a X</p>
+            <p class="md:text-base">En compras superiores a <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€</p>
         </div>
         <div class="container mt-2 mb-2 px-md-5" v-if="souvenirsList.length > 0">
             <div class="row justify-content-between">
@@ -209,7 +209,7 @@
                 total_souvenirs: 0,
                 total: null,
                 n_souvenirs:0,
-                n_gratuito:20,
+                n_gratuito:this.$page.props.settings.shippings,
                 diferencia:0,
                 costo_envio:5,
                 costo_gratuito:0,
@@ -273,7 +273,7 @@
                 this.total_souvenirs = total_souvenirs;
                 this.sub_total = total;
                 this.diferencia = this.n_gratuito -this.sub_total;
-                if (total_souvenirs < 20 && total_souvenirs > 0) {
+                if (total_souvenirs < this.n_gratuito && total_souvenirs > 0) {
                     total += this.costo_envio ;
                     this.total_souvenirs+= this.costo_envio;
                     this.costo_gratuito = 0;

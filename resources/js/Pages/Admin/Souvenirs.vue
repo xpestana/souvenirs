@@ -79,25 +79,36 @@
                             </tr>
                         </thead>
                         <tbody id="tbody"> 
-                            <tr v-for="product in data" :key="product.id">
-                                <td class="text-center">{{ product.title }}</td>
-                                <td class="text-center">{{ product.price }}</td>
-                                <td class="text-center">{{ product.stock }}</td>
-                                <td class="text-center">{{ product.type }}</td>
-                                <td class="text-center d-inline-flex d-md-block">
-                                    <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('souvenirs.show',{souvenir: product.id})" title="Ver Souvenir" style="background-color: #c1d4f1"> Ver </Link>
-                                    <button class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" style="background-color: #2b59a2">Editar</button>
-                                    <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="deleteProduct(product.id)">Eliminar</button>
-                                </td>
-                            </tr>
+                            <template v-if="data.length > 0">
+                                <tr v-for="product in data" :key="product.id">
+                                    <td class="text-center">{{ product.title }}</td>
+                                    <td class="text-center">{{ product.price }}</td>
+                                    <td class="text-center">{{ product.stock }}</td>
+                                    <td class="text-center">{{ product.type }}</td>
+                                    <td class="text-center">
+                                        <div class="d-inline-flex">
+                                            <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('souvenirs.show',{souvenir: product.id})" title="Ver Souvenir" style="background-color: #c1d4f1"> Ver </Link>
+                                        <button class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" style="background-color: #2b59a2">Editar</button>
+                                        <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="deleteProduct(product.id)">Eliminar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
                             <tr v-if="data.length < 1">
                                 <td colspan="5" class="text-center">No hay resultados para la busqueda</td>
+                            </tr>
+                            <tr v-if="carga">
+                                <td colspan="5" class="text-center">
+                                    <div class="spinner-border text-info text-center" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-12 flex justify-center mb-4">
+            <div class="col-12 flex justify-center mb-4" v-if="showPagination">
                 <paginator :paginator="products" />
             </div>
         </div>
@@ -133,31 +144,32 @@ export default {
                 shippings: null,
                 current: null,
             }),
-            error:false
+            error:false,
+            carga:false,
+            showPagination:true
 		}
 	},
     methods:{
         busqueda(){
 			let input = this.$page.url.split("?search=","2")[1];
 			if(input !== undefined){
-				this.formSearch.search = input;	
+                let limpio = input.split('%')
+				this.formSearch.search = limpio[0];	
+                this.showPagination=false
 			}
+            if(input == ''){
+                this.showPagination=true
+            }
 		},
         search() {
 			this.data = {};
-            let nodos = document.getElementById('tbody').childNodes.length;
-            $('#tbody').empty();
-			
-				let tr =`<tr><td colspan="5" class="text-center">
-					<div class="spinner-border text-info text-center" role="status">
-						<span class="sr-only">Loading...</span>
-					</div>
-				</td></tr>`
-				document.getElementById('tbody').insertAdjacentHTML("afterbegin",tr);
-			
+            this.carga = true
 			setTimeout(()=>{
 				this.formSearch.get(this.route('admin.souvenirs'), {
 					preserveScroll: true,
+                    onSuccess: () => {
+                        this.carga = false
+                    },
 				});
 			},1500);
 		},

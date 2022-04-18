@@ -15,16 +15,18 @@
         <h3 class="text-3xl font-bold md:mt-3" :class="{'text-white': this.title !== 'Souvenirs'}">{{ this.title }}</h3>
         <h5 v-if="this.title == 'Souvenirs'" class="text-sm font-bold mt-24 md:text-lg">
             Recibe tu souvenir en menos de 30 minutos <br>
-            Envío gratuito en pedidos superiores de X
+            Envío gratuito en pedidos superiores de <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€
         </h5>
     </div>
     <!-- Breadcrumb Area End Here -->
 </template>
 <script>
+    import Decimals from '@/Layouts/Components/Decimals.vue'
 	import { Link } from '@inertiajs/inertia-vue3'
 	export default {
         components: {
             Link,
+            Decimals
         },
         props: {
         	title: String,

@@ -126,7 +126,7 @@
                                 </p>
                                 <p class="font-weight-bolder text-muted"><Decimals :precio="totalSouvenirs.precio"/>€</p>
                             </div>
-                            <div class="d-flex justify-between">
+                            <div class="d-flex justify-between" v-if="totalActivities.num > 0">
                                 <p class="text-muted">
                                     <template v-if="totalActivities.num > 1">
                                         {{totalActivities.num}} actividades
@@ -134,15 +134,12 @@
                                     <template v-if="totalActivities.num == 1">
                                         {{totalActivities.num}} actividad
                                     </template>
-                                    <template v-if="totalActivities.num == 0">
-                                        actividad
-                                    </template>
                                 </p>
                                 <p class="font-weight-bolder text-muted"><Decimals :precio="totalActivities.precio"/>€</p>
                             </div>
                             <div class="d-flex justify-between" v-if="totalSouvenirs.precio > 0 || totalActivities.precio > 0">
                                 <p class="text-muted">Envío</p>
-                                <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < 20"><Decimals :precio="5"/>€</p>
+                                <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < this.$page.props.settings.shippings"><Decimals :precio="5"/>€</p>
                                 <p class="font-weight-bolder text-muted" v-else>GRATIS</p>
                             </div>
                             <div class="d-flex justify-between mt-2">
@@ -228,7 +225,7 @@
             });
             this.total_souvenirs = total_souvenirs;
             this.sub_total = total;
-            if (total_souvenirs <= 40 && total_souvenirs > 0) {
+            if (total_souvenirs <= this.$page.props.settings.shippings && total_souvenirs > 0) {
                 total += 5 ;
             }
             this.total = total;
@@ -341,7 +338,7 @@
             },
             importeTotal(){
                 let envio;
-                this.totalSouvenirs.precio > 20 ? envio=0 : envio=5;
+                this.totalSouvenirs.precio > this.$page.props.settings.shippings ? envio=0 : envio=5;
                 return this.totalActivities.precio+this.totalSouvenirs.precio+envio;
             }
         }

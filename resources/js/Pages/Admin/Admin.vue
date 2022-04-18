@@ -143,7 +143,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row justify-content-md-center px-0 px-lg-5 py-2 mb-3 mx-md-5">
+			<div class="row justify-content-md-center px-0 px-lg-5 py-2 mb-3 mx-md-5" v-if="showPagination">
 				<div class="col-12 col-md-6 px-1 px-sm-auto py-3 py-sm-0">
 					<paginator :paginator="admins" />
 				</div>
@@ -196,7 +196,8 @@ export default {
 				email_confirmation: null,
 				password: null,
 				password_confirmation: null,
-			})
+			}),
+			showPagination: true
 		}
 	},
 	mounted(){
@@ -206,8 +207,13 @@ export default {
 		busqueda(){
 			let input = this.$page.url.split("?search=","2")[1];
 			if(input !== undefined){
-				this.form.search = input;	
+                let limpio = input.split('%')
+				this.form.search = limpio[0];	
+                this.showPagination=false
 			}
+            if(input == ''){
+                this.showPagination=true
+            }
 		},
 		submit() {
 			this.admins.data = {};
@@ -235,7 +241,7 @@ export default {
 				onSuccess: (result) => {
 					modalcreate.modal('hide');
 					if(this.$page.props.flash.code == 200){
-						this.form.reset();
+						this.formadmin.reset();
 						this.eraseFeatured();
 					};
 				}
@@ -252,7 +258,7 @@ export default {
 				onSuccess: (result) => {
 					modal.modal('hide')
 					if(this.$page.props.flash.code == 200){
-						this.form.reset();
+						this.formedit.reset();
 						this.eraseFeatured();
 					};
 				}

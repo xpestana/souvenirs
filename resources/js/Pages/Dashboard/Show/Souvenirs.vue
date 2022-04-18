@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="alert font-weight-bolder text-center py-1" role="alert" style="background:#d8edf3">
-                        Envío gratuito en pedidos superiores de X
+                        Envío gratuito en pedidos superiores de <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€
                     </div>
                     <!-- Thumbnail Large Image End -->
                     <!-- Thumbnail Image End -->

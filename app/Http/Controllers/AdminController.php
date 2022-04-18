@@ -484,8 +484,15 @@ class AdminController extends Controller
     {
         $products = Products::where('type', 'Souvenirs')
                             ->search($request->search)
-                            ->orderBy('title','ASC')
-                            ->paginate(8);
+                            ->orderBy('title','ASC');
+        if(!empty($request->search))
+        {
+            $products = $products->get();
+        }
+        else{
+            $products = $products->paginate(8);
+        }
+                            
                             
         $settings = Settings::all();
         return Inertia::render('Admin/Souvenirs', compact('settings','products'));
