@@ -46,15 +46,44 @@ class SouvenirsController extends Controller
     {
         $validator = $this->validate($request, [
             'title'         => 'required|string|max:255',
-            'precio'        => 'required',
+            'precio'        => 'required|numeric',
             'description'   => 'required',
             'featured'      => 'required',
-            'stock'      => 'required',
+            'stock'      => 'required|numeric',
             'category'      => 'required',
         ]);
         if ($request->precio < $request->offer) {
             return back()->with(['id'=>400, 'message' => 'El precio de oferta debe ser menor que el precio normal', 'code' => 400, 'status' => 'error']);
         }
+        
+        $image = $request->image;
+        if ($image) {
+            $msg =$this->valid($image);
+
+            if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
+        }
+        
+
+        try {
+            $id = mt_Rand(1000000, 9999999);
+            
+            $user = auth()->user();
+
+            $Path = public_path('storage/souvenirs/');
+            $pathName = '/';
+
+            if (!file_exists($Path)) {
+                mkdir($Path, 777, true);
+            }
+
+            if ($image) {
+                $nameFile =$this->FileName($image); //nombre de archivo original
+                $imgFileOriginal = Image::make($image->getRealPath());
+                $imgFileOriginal->save($Path.$nameFile['fileName']);
+                $name_file = $nameFile['fileName'];
+            }else{
+                $name_file ="default.jpg";
+            }
 
         $souvenir = Products::create([
                 'type' => 'Souvenirs',
@@ -70,6 +99,9 @@ class SouvenirsController extends Controller
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
         return back()->with(['id'=>$id, 'message' => 'Agregado con exito, Espere un momento porfavor', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+        } catch (Exception $e) {
+                
+        }
     }
     /**
      * Cambias nombres de los archivos.
@@ -98,6 +130,28 @@ class SouvenirsController extends Controller
         ];
 
         return $response;
+    }
+
+    public function valid($file)
+    {
+        if ($file) {
+            /*** Extraccion de la extension ***/
+            $nameFile = $file->getClientOriginalName();
+            $extension = pathinfo($nameFile, PATHINFO_EXTENSION);
+            $id = mt_Rand(1000000, 9999999);
+
+            $images=array("JPG", "JPEG", "PNG");
+            if (!in_array(strtoupper($extension), $images)) {
+                return ['id' => $id, 'code' => 404, 'msg' => 'Formato de imagen incorrecto', 'status' => 'error'];
+            }
+            
+            $response = [
+                'id' => $id,
+                'code' => 200,
+                'msg' => 'Acepted'
+            ];
+            return $response;
+        }
     }
      /**
      * Store a newly created resource in storage.
@@ -169,7 +223,6 @@ class SouvenirsController extends Controller
             'title'         => 'required|string|max:255',
             'precio'        => 'required',
             'description'   => 'required',
-            'featured'      => 'required',
             'stock'      => 'required',
             'category'      => 'required',
         ]);

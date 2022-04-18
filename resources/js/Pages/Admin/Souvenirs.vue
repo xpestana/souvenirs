@@ -7,7 +7,7 @@
         </div>
         <div class="row justify-content-center mt-3 mb-2 mt-md-5 mb-md-4 opciones px-md-5">
             <div class="col-10 col-md-12 col-lg-4 my-2 my-lg-0  text-center text-md-left">
-                <button class="btn btn-outline-azulc rounded-pill py-1 px-3"><i class="fas fa-plus pr-1 pr-lg-3"></i>Agregar souvenir</button>
+                <Link :href="route('admin.souvenirs.create')" class="btn btn-outline-azulc rounded-pill py-1 px-3"><i class="fas fa-plus pr-1 pr-lg-3"></i>Agregar souvenir</Link>
             </div>
             <div class="col-10 col-md-6 col-lg-4 pt-md-1 pl-lg-5 my-2 my-md-0 text-center text-md-left text-lg-center">
                 <button class="btn btn-sm bg-azulc text-white py-1 px-5" data-toggle="modal" data-target="#envio">Envío gratuito</button>
@@ -87,8 +87,8 @@
                                     <td class="text-center">{{ product.type }}</td>
                                     <td class="text-center">
                                         <div class="d-inline-flex">
-                                            <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('souvenirs.show',{souvenir: product.id})" title="Ver Souvenir" style="background-color: #c1d4f1"> Ver </Link>
-                                        <button class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" style="background-color: #2b59a2">Editar</button>
+                                        <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('souvenirs.show',{souvenir: product.id})" title="Ver Souvenir" style="background-color: #c1d4f1"> Ver </Link>
+                                        <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('admin.souvenirs.edit',product.id)" style="background-color: #2b59a2">Editar</Link>
                                         <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="deleteProduct(product.id)">Eliminar</button>
                                         </div>
                                     </td>

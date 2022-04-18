@@ -497,6 +497,19 @@ class AdminController extends Controller
         $settings = Settings::all();
         return Inertia::render('Admin/Souvenirs', compact('settings','products'));
     }
+
+    public function souvenirs_create(Request $request)
+    {
+        return Inertia::render('Admin/Souvenirs/Create');
+    }
+
+    public function souvenirs_edit(Request $request,$id)
+    {
+        $product = Products::with('images')->where('id', $id)->first();
+
+        return Inertia::render('Admin/Souvenirs/Edit', compact('product'));
+    }
+
     public function shippings_create(Request $request)
     {
         $request->validate([
