@@ -50,8 +50,12 @@ class SouvenirsController extends Controller
             'description'   => 'required',
             'featured'      => 'required',
             'stock'      => 'required',
+            'category'      => 'required',
         ]);
-        
+        if ($request->precio < $request->offer) {
+            return back()->with(['id'=>400, 'message' => 'El precio de oferta debe ser menor que el precio normal', 'code' => 400, 'status' => 'error']);
+        }
+
         $souvenir = Products::create([
                 'type' => 'Souvenirs',
                 'title' => $request->title,
@@ -59,6 +63,8 @@ class SouvenirsController extends Controller
                 'price' => $request->precio,
                 'stock' => $request->stock,
                 'featured' => $request->featured,
+                'offer' => $request->offer,
+                'category' => $request->category,
             ]);
 
         $id= $souvenir->id;
@@ -164,13 +170,21 @@ class SouvenirsController extends Controller
             'precio'        => 'required',
             'description'   => 'required',
             'featured'      => 'required',
+            'stock'      => 'required',
+            'category'      => 'required',
         ]);
-
+        if ($request->precio < $request->offer) {
+            return back()->with(['id'=>400, 'message' => 'El precio de oferta debe ser menor que el precio normal', 'code' => 400, 'status' => 'error']);
+        }
+                      
         $souvenir = Products::find($request->souvenir);
         $souvenir->title = $request->title;
         $souvenir->price = $request->precio;
         $souvenir->description = $request->description;
         $souvenir->featured = $request->featured;
+        $souvenir->stock = $request->stock;
+        $souvenir->offer = $request->offer;
+        $souvenir->category = $request->category;
         $souvenir->save();
 
         $id= $souvenir->id;

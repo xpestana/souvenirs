@@ -21,6 +21,8 @@ class Products extends Model
         'price',
         'stock',
         'featured',
+        'category',
+        'offer',
     ];
 
     /**

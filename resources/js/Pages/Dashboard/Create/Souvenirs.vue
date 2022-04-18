@@ -17,9 +17,13 @@
                                 <BreezeLabel for="precio" value="Precio" />
                                 <BreezeInput id="precio" type="number" class="form-control mt-1 block w-full" v-model="form.precio" autocomplete="precio" step="0.01" placeholder="Precio" />
                             </div>
-                            <div class="col-md-2" hidden>
+                            <div class="col-md-2" >
                                 <BreezeLabel for="stock" value="Stock" />
                                 <BreezeInput id="stock" type="number" class="form-control mt-1 block w-full" v-model="form.stock" autocomplete="stock"  min="0" placeholder="Stock" />
+                            </div>
+                            <div class="col-md-3">
+                                <BreezeLabel for="precio" value="Precio Oferta" />
+                                <BreezeInput id="offer" type="number" class="form-control mt-1 block w-full" v-model="form.offer" autocomplete="offer" step="0.01" placeholder="Precio Oferta" />
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label">Destacado</label>
@@ -32,7 +36,16 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
+                                <label class="col-form-label">Categoria</label>
+                                <div class="col-lg-6 col-md-8">
+                                    <div class="custom-radio">
+                                        <input name="category" v-model="form.category" value="Souvenir" type="radio"> Souvenir
+                                    </div> 
+                                    <div class="custom-radio pl-1">
+                                        <input name="category" v-model="form.category" value="Gastronomia" type="radio"> Gastronomia
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-12 mt-4">
                                 <label class="col-form-label">Descripción del producto</label>
@@ -118,8 +131,10 @@
                 form: this.$inertia.form({
                     title: null,
                     precio: null,
+                    offer: null,
                     description: null,
                     stock: null,
+                    category: null,
                     featured: 0,
                 }),
                 id: this.$page.props.flash.id,
@@ -140,7 +155,9 @@
                     preserveScroll: true,
                     forceFormData: true,
                     onSuccess: (result) => {
-                        this.dropzone.processQueue();
+                        if(!this.dropzone.processQueue()){
+                            Inertia.visit(route('souvenirs.index'), { method: 'get' }, { preserveScroll: true });
+                        }
                     }
                     
                 })
