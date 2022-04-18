@@ -49,7 +49,7 @@ class HandleInertiaRequests extends Middleware
             'auth.profile' => fn() => auth()->user() ? auth()->user()->profile : null,
             'auth.role' => fn() => auth()->user() ? auth()->user()->getRoleNames()->first() : null,
             'cart' => fn() => Cart::getContent(),
-            'shipping_price' => fn() => Settings::where('active',1)->first();,
+            'settings' => fn() => Settings::where('active',1)->first();,
             'cart.total' => fn() => Cart::getTotal(),
             'cart.count' => fn() => Cart::getTotalQuantity(),
             'souvenirs' => Products::with('images')
