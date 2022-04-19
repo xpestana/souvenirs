@@ -96,6 +96,11 @@ class SouvenirsController extends Controller
                 'category' => $request->category,
             ]);
 
+        Images::create([
+                'products_id'   => $souvenir->id,
+                'name'          => $name_file,
+                'url'           => $pathName.$name_file,
+            ]);
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
         return back()->with(['id'=>$id, 'message' => 'Agregado con exito, Espere un momento porfavor', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
@@ -240,17 +245,21 @@ class SouvenirsController extends Controller
         $souvenir->category = $request->category;
         $souvenir->save();
 
+        if ($request->image) {
+            $this->updt_image($souvenir->id, $request->image);
+        }
+
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
         return back()->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
     }
-    public function updt_image(Request $request)
+    public function updt_image($id, $file)
     {
-        Images::where('products_id', $request->id)->delete();
+        Images::where('products_id', $id)->delete();
 
-        $product = Products::find($request->id);
+        $product = Products::find($id);
         
-        foreach($request->file as $file){
+//        foreach($files as $file){
 
             $Path = public_path('storage/souvenirs/');
             $pathName = '/';
@@ -269,9 +278,9 @@ class SouvenirsController extends Controller
                 'url'           => $pathName.$nameFile['fileName'],
             ]);
 
-        }
+    //    }
 
-        return back(); 
+        //return back(); 
     }
     /**
      * Remove the specified resource from storage.
