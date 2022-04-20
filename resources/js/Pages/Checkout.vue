@@ -112,16 +112,13 @@
                         </div>
                         <div class="col-12 mt-3">
                             <p class="text-muted">Resumen:</p>
-                            <div class="d-flex justify-between">
+                            <div class="d-flex justify-between" v-if="totalSouvenirs.num > 0">
                                 <p class="text-muted">
                                 <template v-if="totalSouvenirs.num > 1">
                                     {{totalSouvenirs.num}} souvenirs
                                 </template>
                                 <template v-if="totalSouvenirs.num == 1">
                                     {{totalSouvenirs.num}} souvenir
-                                </template>
-                                <template v-if="totalSouvenirs.num == 0">
-                                    souvenir
                                 </template>
                                 </p>
                                 <p class="font-weight-bolder text-muted"><Decimals :precio="totalSouvenirs.precio"/>€</p>

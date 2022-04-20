@@ -133,7 +133,9 @@ export default {
                 preserveScroll: true,
                 forceFormData: true,
                 onSuccess: (result) => {
-                    //this.dropzone.processQueue();
+                    if(this.$page.props.flash.code == 200){
+                        this.$inertia.visit(route('admin.souvenirs'), { method: 'get' }, { preserveScroll: true });
+                    };
                 }
                 
             })
