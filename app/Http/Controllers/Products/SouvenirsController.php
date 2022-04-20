@@ -253,13 +253,13 @@ class SouvenirsController extends Controller
         $cookie = Cookie::make('product_id', $id, 5);
         return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
     }
-    public function updt_image($id, $file)
+    public function updt_image(Request $request)
     {
-        Images::where('products_id', $id)->delete();
+        Images::where('products_id', $request->id)->delete();
 
-        $product = Products::find($id);
+        $product = Products::find($request->id);
         
-        foreach($files as $file){
+        foreach($request->file as $file){
 
             $Path = public_path('storage/souvenirs/');
             $pathName = '/';
@@ -280,7 +280,7 @@ class SouvenirsController extends Controller
 
         }
 
-        //return back(); 
+        return back(); 
     }
     /**
      * Remove the specified resource from storage.
