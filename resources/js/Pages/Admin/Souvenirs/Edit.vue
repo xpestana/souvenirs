@@ -22,41 +22,11 @@
                           <option value="Gastronomia">Gastronomia</option>
                     </select>
                   </div>
-                  <div class="col-12 my-2">
+                  <div class="col-12 col-md-6 my-2">
                       <label class="text-base">Precio</label>
                       <input type="text" class="ml-2 border-0 rounded w-24 h-8" placeholder="..." style="background-color:#e4e4e4" v-model="form.precio">
                   </div>
-                  <div class="col-12 col-md-6 my-4">
-                      <label class="text-base">Imagen del producto</label> <button 
-                                    type="button"
-                                    size="sm"
-                                    style="background-color:#e4e4e4"
-                                    class="btn py-0" 
-                                    variant="info" 
-                                    @click="selectFeatured()"
-                                >
-                                    Examinar
-                                </button>
-                                <i v-if="showF==1"
-                                    id="eraseFile" 
-                                    style="cursor:pointer" 
-                                    class="fas fa-trash-alt text-danger ml-5"
-                                    @click="eraseFeatured()"
-                                ></i>
-                                <input 
-                                    ref="image" 
-                                    id="image" 
-                                    type="file" 
-                                    @input="form.image = $event.target.files[0]"
-                                    style="display:none"
-                                    @change="onFeaturedChange" 
-                                >
-                                <span id="fileFeatured" class="text-success"></span>
-                                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                                    {{ form.progress.percentage }}%
-                                </progress>
-                  </div>
-                  <div class="col-12 col-md-4 my-2 my-md-4">
+                  <div class="col-12 col-md-6 my-2">
                       <label class="text-base">Stock</label>
                       <input type="text" class="ml-2 border-0 rounded w-24 h-8" style="background-color:#e4e4e4" v-model="form.stock">
                   </div>
@@ -67,6 +37,14 @@
                         :config="editorConfig"
                         v-model="form.description"
                     ></ckeditor>
+                  </div>
+                  <div class="col-12 my-4">
+                        <label class="text-base">Imagenes del producto</label>
+                        <div id="dropRef" class="dropzone">
+                        </div>
+                        <button class="btn btn-success text-center mt-2" id="submit_image" type="button" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                Actualizar imagenes
+                        </button>
                   </div>
               </div>
           </div>
@@ -90,9 +68,11 @@
 </template>
 
 <script>
+import Dropzone from 'dropzone'
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { Carousel, Pagination, Slide,Navigation } from 'vue3-carousel';
 import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
 export default {
     layout:Layout,
@@ -103,6 +83,41 @@ export default {
     props:{
         product:Object
     },
+     mounted() {
+            const product_id = this.product.id;
+            const toast = this.$toast;
+
+            const dropzone = new Dropzone("div#dropRef", { 
+                url: route('souvenirs.update.image'),
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 5,
+                maxFiles: 5,
+                acceptedFiles: 'image/*',
+                resizeQuality: 0.8,
+                init: function() {
+                   const myDropzone = this;
+                   // First change the button to actually tell Dropzone to process the queue.
+                        document.getElementById("submit_image").addEventListener("click", function(e) {
+                        // Make sure that the form isn't actually being sent.
+                        e.preventDefault();
+                        e.stopPropagation();
+                        myDropzone.processQueue();
+                    });
+                      myDropzone.on("sending", function(file, xhr, formData) {
+                        formData.append("id", product_id);
+                    });
+                    myDropzone.on("complete", function(file) {
+                       toast.show("Actualizado exitosamente", {
+                            type: "success",
+                            position : "top-right",
+                            pauseOnHover: "true",
+                        });
+                    });
+                }
+            });
+            this.dropzone = dropzone;
+        },
     data() {
         return {
             form: this.$inertia.form({
@@ -122,6 +137,7 @@ export default {
             editorConfig:{
                 toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
             },
+            dropzone:null
         }
     },
     methods:{
@@ -158,5 +174,21 @@ export default {
 </script>
 
 <style>
-
+.dropzone {
+    padding: 10px;
+    border: 1px solid rgb(186 186 186 / 30%);
+    min-height: 70%;
+}
+.dropzone .dz-preview {
+    min-height: 70px;
+}
+.dropzone .dz-preview .dz-image {
+    width: 60%;
+    height: 60%;
+}
+.dropzone .dz-preview .dz-progress {
+    left: 40%;
+    top: 40%;
+    width: 60px;
+}
 </style>

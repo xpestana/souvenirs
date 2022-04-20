@@ -10,6 +10,18 @@
                     <!-- Thumbnail Large Image start -->
                     <div class="product-img">
                         <div id="thumb1" class="tab-pane fade show active">
+                            <!-- <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+                            <Slide v-for=" product in product.images" :key="product.id">
+                                <div  class="single-aboss-product w-100 p-4">
+                                    <div class="pro-img">
+                                        <div :style="'background:url(/storage/souvenirs/'+product.url+')'" class="img-slide"></div>
+                                    </div>
+                                </div>  
+                            </Slide>
+                            <template #addons>
+                                <Navigation />
+                            </template>
+                            </Carousel> -->
                             <a v-if="product.images.length != 0" data-fancybox="images" :href="'/storage/souvenirs/'+product.images[0].url">
                                 <img :src="'/storage/souvenirs/'+product.images[0].url" class="img-product">
                             </a>
@@ -173,16 +185,6 @@
             settings: {
                 itemsToShow: 1,
                 snapAlign: 'center',
-                },
-            breakpoints: {
-              700: {
-                itemsToShow: 3,
-                snapAlign: 'center',
-                },
-              1024: {
-                itemsToShow: 3,
-                snapAlign: 'start',
-                },
                 },
                 form: this.$inertia.form({
                     quantity: 1,

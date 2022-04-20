@@ -103,7 +103,7 @@ class SouvenirsController extends Controller
             ]);*/
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
-        return back()->with(['id'=>$id, 'message' => 'Agregado con exito, Espere un momento porfavor', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+        return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Agregado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
         } catch (Exception $e) {
                 
         }
