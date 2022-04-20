@@ -10,21 +10,15 @@
                     <!-- Thumbnail Large Image start -->
                     <div class="product-img">
                         <div id="thumb1" class="tab-pane fade show active">
-                            <!-- <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
-                            <Slide v-for=" product in product.images" :key="product.id">
-                                <div  class="single-aboss-product w-100 p-4">
-                                    <div class="pro-img">
-                                        <div :style="'background:url(/storage/souvenirs/'+product.url+')'" class="img-slide"></div>
-                                    </div>
-                                </div>  
+                            <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+                            <Slide v-for="img in product.images" :key="img.id">
+                                <img :src="'/storage/souvenirs/'+img.url" id="img-product">
                             </Slide>
                             <template #addons>
                                 <Navigation />
                             </template>
-                            </Carousel> -->
-                            <a v-if="product.images.length != 0" data-fancybox="images" :href="'/storage/souvenirs/'+product.images[0].url">
-                                <img :src="'/storage/souvenirs/'+product.images[0].url" class="img-product">
-                            </a>
+                            </Carousel>
+                            
                         </div>
                     </div>
                     <div class="alert font-weight-bolder text-center py-1" role="alert" style="background:#d8edf3">
@@ -219,7 +213,13 @@
     }
 </script>
 <style scope>
-    .img-product {
+    .carousel__prev {
+        left: 2%;
+    }
+    .carousel__next {
+        right: 2%;
+    }
+    .carousel #img-product {
         height: 30em;
         background-size: contain !important;
         background-repeat: no-repeat !important;
@@ -256,7 +256,7 @@
         opacity: 0.8;
     }
     @media(max-width:767px){
-        .img-product {
+        .carousel #img-product {
             height: 20em;
             background-size: cover !important;
             background-repeat: no-repeat !important;
@@ -273,6 +273,11 @@
             font-family: 'Futur';
             font-size: 15px;
             text-align: justify;
+        }
+
+        .carousel__prev,
+        .carousel__next {
+            display: none;
         }
     }
     

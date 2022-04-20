@@ -40,6 +40,7 @@
                   </div>
                   <div class="col-12 my-4">
                         <label class="text-base">Imagenes del producto</label>
+                        <p class="text-danger">Las imagenes introducidas aqui sustituiran las ya existentes</p>
                         <div id="dropRef" class="dropzone">
                         </div>
                         <button class="btn btn-success text-center mt-2" id="submit_image" type="button" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -92,9 +93,8 @@ export default {
                 autoProcessQueue: false,
                 uploadMultiple: true,
                 parallelUploads: 5,
-                maxFiles: 5,
                 acceptedFiles: 'image/*',
-                resizeQuality: 0.8,
+                maxFilesize:2,
                 init: function() {
                    const myDropzone = this;
                    // First change the button to actually tell Dropzone to process the queue.
@@ -190,5 +190,11 @@ export default {
     left: 40%;
     top: 40%;
     width: 60px;
+}
+.dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {
+    left: 30%;
+}
+.dropzone .dz-preview .dz-details {
+    left: -20px;
 }
 </style>

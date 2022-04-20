@@ -82,9 +82,8 @@ export default {
             autoProcessQueue: false,
             uploadMultiple: true,
             parallelUploads: 5,
-            maxFiles: 5,
             acceptedFiles: 'image/*',
-            resizeQuality: 0.8,
+            maxFilesize:2,
             init: function() {
                 const myDropzone = this;
                 myDropzone.on("complete", function(file) {
@@ -167,5 +166,11 @@ export default {
     left: 40%;
     top: 40%;
     width: 60px;
+}
+.dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark {
+    left: 30%;
+}
+.dropzone .dz-preview .dz-details {
+    left: -20px;
 }
 </style>
