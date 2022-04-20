@@ -251,7 +251,7 @@ class SouvenirsController extends Controller
 
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
-        return back()->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+        return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
     }
     public function updt_image($id, $file)
     {
@@ -294,6 +294,6 @@ class SouvenirsController extends Controller
         $product->del = true;
         $product->save();
         
-        return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
+        return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Eliminado exitosamente', 'code' => 200, 'status' => 'success']);    
     }
 }
