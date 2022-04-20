@@ -213,10 +213,7 @@ export default {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                     if (result.isConfirmed) {
-                        this.$inertia.delete(route('souvenirs.destroy',{souvenir : product}),
-                        {
-                            preserveScroll: true,
-                        })
+                        this.$inertia.delete(route('souvenirs.destroy',{souvenir : product}))
                     }
                 })
         }

@@ -485,15 +485,16 @@ class AdminController extends Controller
         $products = Products::where('type', 'Souvenirs')
                             ->search($request->search)
                             ->orderBy('title','ASC');
+                            
         if(!empty($request->search))
         {
-            $products = $products->get();
+            $products = $products->where('del', 0)->get();
         }
         else{
-            $products = $products->paginate(8);
+            $products = $products->where('del', 0)->paginate(8);
         }
                             
-                            
+                           // dd($products);
         $settings = Settings::all();
         return Inertia::render('Admin/Souvenirs', compact('settings','products'));
     }
