@@ -259,7 +259,7 @@ class SouvenirsController extends Controller
 
         $product = Products::find($id);
         
-//        foreach($files as $file){
+        foreach($files as $file){
 
             $Path = public_path('storage/souvenirs/');
             $pathName = '/';
@@ -278,7 +278,7 @@ class SouvenirsController extends Controller
                 'url'           => $pathName.$nameFile['fileName'],
             ]);
 
-    //    }
+        }
 
         //return back(); 
     }
