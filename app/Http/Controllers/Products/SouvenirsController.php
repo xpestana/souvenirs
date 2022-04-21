@@ -208,11 +208,11 @@ class SouvenirsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$numPage)
     {
         $product = Products::with('images')->where('id', $id)->first();
 
-        return Inertia::render('Dashboard/Edit/Souvenirs', compact('product'));
+        return Inertia::render('Dashboard/Edit/Souvenirs', compact('product','numPage'));
     }
 
     /**
@@ -294,6 +294,6 @@ class SouvenirsController extends Controller
         $product->del = true;
         $product->save();
         
-        return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Eliminado exitosamente', 'code' => 200, 'status' => 'success']);    
+        return back()->with(['id'=>$id, 'message' => 'Eliminado exitosamente', 'code' => 200, 'status' => 'success']);    
     }
 }

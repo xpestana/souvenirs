@@ -330,7 +330,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/administrador/{id}', [AdminController::class, 'administrator_details'])->name('admin.administrator.show');
     Route::get('/souvenirs', [AdminController::class, 'souvenirs'])->name('admin.souvenirs');
     Route::get('/souvenirs/crear', [AdminController::class, 'souvenirs_create'])->name('admin.souvenirs.create');
-    Route::get('/souvenirs/editar/{id}', [AdminController::class, 'souvenirs_edit'])->name('admin.souvenirs.edit');
+    Route::get('/souvenirs/editar/{id}/{numPage}', [AdminController::class, 'souvenirs_edit'])->name('admin.souvenirs.edit');
 
     Route::post('/settings/shippings', [AdminController::class, 'shippings_create'])->name('settings.shippings.create');
     Route::post('/settings/shippings/{id}', [AdminController::class, 'shippings_update'])->name('settings.shippings.update');

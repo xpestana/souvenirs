@@ -82,7 +82,8 @@ export default {
         Link
     },
     props:{
-        product:Object
+        product:Object,
+        numPage:Number
     },
      mounted() {
             const product_id = this.product.id;
@@ -151,6 +152,7 @@ export default {
                 onSuccess: (result) => {
                     if(this.$page.props.flash.code == 200){
                         this.$inertia.visit(route('admin.souvenirs'), { method: 'get' }, { preserveScroll: true });
+                        location.reload();
                     };
                 }
                 

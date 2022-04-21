@@ -55,19 +55,23 @@
                           </template>
                       </Link>
                     </div>
-                    <div class="tarjeta-cuerpo py-2 px-1">
-                        <Link :href="route('product.activities.show',{product : product.id})" >
-                          <p class="font-weight-bolder text-center mb-2 text-wrap px-1">{{ product.title }}</p>
-                        </Link>
-                        <p class="text-left"><i class="far fa-clock"></i> Duración: 2horas</p>
-                        <h3 class="font-weight-bolder d-block text-left">
-                          <template v-if="product.activities.priceN">
-                                Desde: <Decimals :precio="product.activities.priceN"/>€
-                            </template>
-                            <template v-else>
-                                Desde <Decimals :precio="product.activities.priceA"/>€
-                            </template>
-                        </h3>
+                    <div class="tarjeta-cuerpo py-2 px-1 d-flex flex-column">
+                        <div class="mb-auto">
+                          <Link :href="route('product.activities.show',{product : product.id})" >
+                            <p class="font-weight-bolder text-center mb-2 text-wrap px-1">{{ product.title }}</p>
+                          </Link>
+                        </div>
+                        <div class="">
+                          <p class="text-left"><i class="far fa-clock"></i> Duración: 2horas</p>
+                          <h3 class="font-weight-bolder d-block text-left">
+                            <template v-if="product.activities.priceN">
+                                  Desde: <Decimals :precio="product.activities.priceN"/>€
+                              </template>
+                              <template v-else>
+                                  Desde <Decimals :precio="product.activities.priceA"/>€
+                              </template>
+                          </h3>
+                        </div>
                     </div>
                   </div>
                 </Slide>

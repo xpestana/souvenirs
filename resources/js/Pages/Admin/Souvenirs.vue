@@ -84,11 +84,11 @@
                                     <td class="text-center">{{ product.title }}</td>
                                     <td class="text-center">{{ product.price }}</td>
                                     <td class="text-center">{{ product.stock }}</td>
-                                    <td class="text-center">{{ product.type }}</td>
+                                    <td class="text-center">{{ product.category }}</td>
                                     <td class="text-center">
                                         <div class="d-inline-flex">
                                         <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('souvenirs.show',{souvenir: product.id})" title="Ver Souvenir" style="background-color: #c1d4f1"> Ver </Link>
-                                        <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('admin.souvenirs.edit',product.id)" style="background-color: #2b59a2">Editar</Link>
+                                        <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('admin.souvenirs.edit',{id:product.id,numPage:numPaginate})" style="background-color: #2b59a2">Editar</Link>
                                         <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="deleteProduct(product.id)">Eliminar</button>
                                         </div>
                                     </td>
@@ -132,7 +132,7 @@ export default {
         ValidationErrors
     },
     mounted(){
-		this.busqueda()
+		this.busquedaInput()
 	},
     data(){
 		return{
@@ -146,11 +146,11 @@ export default {
             }),
             error:false,
             carga:false,
-            showPagination:true
+            showPagination:true,
 		}
 	},
     methods:{
-        busqueda(){
+        busquedaInput(){
 			let input = this.$page.url.split("?search=","2")[1];
 			if(input !== undefined){
                 let limpio = input.split('%')
@@ -213,7 +213,11 @@ export default {
                 cancelButtonText: 'Cancelar',
             }).then((result) => {
                     if (result.isConfirmed) {
-                        this.$inertia.delete(route('souvenirs.destroy',{souvenir : product}))
+                        this.$inertia.delete(route('souvenirs.destroy',{souvenir : product}),{
+                            onSuccess: () => {
+                                location.reload();
+                            }
+                        })
                     }
                 })
         }
@@ -232,6 +236,10 @@ export default {
             });
             return obj;
         },
+        numPaginate(){
+            let num = this.$page.url.split("?page=","2")[1];
+            return num == undefined ? 1 : num;
+        }
     }
 }
 </script>
