@@ -80,8 +80,8 @@ class CartController extends Controller
             $quantity = 1;
         $product = Products::find($id)->load('images');
         $pin = mt_Rand(1000000, 9999999);
-
-        if ($product->stock >= $request->quantity) {
+        $cartQuantity = (Cart::get($product->id)) ? Cart::get($product->id)->quantity : 0;
+        if ($product->stock >= $request->quantity + $cartQuantity) {
             $addCart = \Cart::add(array(
                 'id' => $product->id,
                 'name'=>$product->title,
