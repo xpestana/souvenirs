@@ -504,11 +504,11 @@ class AdminController extends Controller
         return Inertia::render('Admin/Souvenirs/Create');
     }
 
-    public function souvenirs_edit(Request $request,$id)
+    public function souvenirs_edit(Request $request,$id,$numPage)
     {
         $product = Products::with('images')->where('id', $id)->first();
 
-        return Inertia::render('Admin/Souvenirs/Edit', compact('product'));
+        return Inertia::render('Admin/Souvenirs/Edit', compact('product','numPage'));
     }
 
     public function shippings_create(Request $request)

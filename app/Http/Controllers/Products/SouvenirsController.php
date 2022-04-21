@@ -208,7 +208,7 @@ class SouvenirsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,$numPage)
+    public function edit($id)
     {
         $product = Products::with('images')->where('id', $id)->first();
 
@@ -251,7 +251,7 @@ class SouvenirsController extends Controller
 
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
-        return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+        return Redirect::route('admin.souvenirs',["page=".$request->idPage])->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
     }
     public function updt_image(Request $request)
     {

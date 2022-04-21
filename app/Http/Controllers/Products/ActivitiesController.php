@@ -23,8 +23,6 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        
-
         $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
                         'access_token'   => connect()['access_token'],
                         'data' => [
@@ -33,6 +31,20 @@ class ActivitiesController extends Controller
                     ])->collect()['data']['products'];
 //        dd($products);
         return Inertia::render('Dashboard/Activities', compact('products'));
+    }
+    
+    public function activities()
+    {
+        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+            'access_token'   => connect()['access_token'],
+            'data' => [
+                        'language_code: es'
+                    ]
+        ])->collect()['data']['products'];
+        $actList = Products::where("short_id","<>","null")
+                            ->where("del","0")                        
+                            ->get();
+        return Inertia::render('Admin/Activities', compact('products','actList'));
     }
 
     /**
@@ -225,16 +237,7 @@ class ActivitiesController extends Controller
         return back()->with(['id'=>$activities, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success']); 
         
     }
-    public function verify(Request $request)
-    {
-        $product = Products::where("short_id", $request->short_id)->first();
-
-        if($product){
-            return "existe";
-        }else{
-            return "no existe";
-        }   
-    }
+    
     public function updt_image(Request $request)
     {
         Images::where('products_id', $request->id)->delete();

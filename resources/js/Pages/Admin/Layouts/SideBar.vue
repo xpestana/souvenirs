@@ -14,10 +14,10 @@
                 </Link>
             </li>
             <li class="mb-3 item pl-2 pb-2">    
-                <Link :href="route('admin.home')" class="link">
+                <Link :href="route('admin.activities')" class="link" :class="{ 'active': urlActividades}">
                     <div class="d-inline-flex">
                         <i class="fas fa-biking my-auto pr-1"></i>
-                        <p class="p-2">Gestión de <br> actividades</p>
+                        <p class="p-2" :class="{ 'active': urlActividades}">Gestión de <br> actividades</p>
                     </div>
                 </Link>
             </li>
@@ -84,6 +84,14 @@ export default {
         urlSouvenirs(){
             let url = this.$page.url;
             let url1 = url.includes('/admin/souvenirs')
+            if(url1){
+                return true;
+            }
+            return false;
+        },
+        urlActividades(){
+            let url = this.$page.url;
+            let url1 = url.includes('/admin/activities')
             if(url1){
                 return true;
             }

@@ -83,7 +83,7 @@ export default {
     },
     props:{
         product:Object,
-        numPage:Number
+        numPage:Number,
     },
      mounted() {
             const product_id = this.product.id;
@@ -130,6 +130,7 @@ export default {
                 stock: this.product.stock,
                 category: this.product.category,
                 image: null,
+                idPage:this.numPage
             }),
             id: this.$page.props.flash.id,
             status: null,
@@ -149,13 +150,6 @@ export default {
                 errorBag: 'submit',
                 preserveScroll: true,
                 forceFormData: true,
-                onSuccess: (result) => {
-                    if(this.$page.props.flash.code == 200){
-                        this.$inertia.visit(route('admin.souvenirs'), { method: 'get' }, { preserveScroll: true });
-                        location.reload();
-                    };
-                }
-                
             })
         },
         selectFeatured(){
