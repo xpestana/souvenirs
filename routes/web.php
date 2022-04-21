@@ -139,6 +139,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
     /*
         Activities
      */
+    Route::post('/verify/activities/{activities}', [ActivitiesController::class, 'verify'])->name('verify.activities');
     Route::post('/update/activities/{activities}', [ActivitiesController::class, 'update'])->name('update.activities');
     Route::post('/activities/image', [ActivitiesController::class, 'image'])->name('activities.image');
     Route::post('/activities/update/image', [ActivitiesController::class, 'updt_image'])->name('activities.update.image');

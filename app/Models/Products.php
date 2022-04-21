@@ -23,6 +23,8 @@ class Products extends Model
         'featured',
         'category',
         'offer',
+        'short_id',
+        'summary'
     ];
 
     /**

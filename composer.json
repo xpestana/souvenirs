@@ -10,7 +10,7 @@
         "darryldecode/cart": "^4.2",
         "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.4",
         "inertiajs/inertia-laravel": "^0.4.3",
         "intervention/image": "^2.7",
         "laravel/cashier": "^13.6",
