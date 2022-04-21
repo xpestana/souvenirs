@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Images;
@@ -21,8 +23,15 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        $products = Products::where("type", "Activities")->where('del',false)->with('images', 'activities')->get();
+        
 
+        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+                        'access_token'   => connect()['access_token'],
+                        'data' => [
+                                    'language_code: es'
+                                ]
+                    ])->collect()['data']['products'];
+//        dd($products);
         return Inertia::render('Dashboard/Activities', compact('products'));
     }
 
@@ -165,36 +174,66 @@ class ActivitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $activities)
     {
-        $validator = $this->validate($request, [
-            'title'         => 'required|string|max:255',
-            'precioA'        => 'required',
-            'description'   => 'required',
-            'fechaI'         => 'required',
-            'iframe'         => 'required',
-            'featured'      => 'required',
-        ]);
+            $product = Products::where("short_id", $activities)->first();
 
-        $activities = Products::find($id);
-        $activities->title = $request->title;
-        $activities->description = $request->description;
-        $activities->featured = $request->featured;
-        $activities->save();
+            try {
+                if($product){
 
-        $activities->activities()
-                        ->update([
-                            'priceA' => $request->precioA,
-                            'priceN' => $request->precioN,
-                            'init' => $request->fechaI,
-                            'end' => $request->fechaF,
-                            'details' => $request->details,
-                            'iframe' => $request->iframe,
+                    if($product->del == 0){
+                        $product->del = 1;
+                        $product->save();
+                    }else{
+                        $product->del = 0;
+                        $product->save();
+                    }
+                
+                }else{
+                    $product = Products::create([
+                        'type' => 'Activities',
+                        'title' => $request->name,
+                        'description' => ($request->description) ? $request->description: $request->summary,
+                        'featured' => false,
+                        'category' => $request->type,
+                        'short_id' => $request->short_id,
+                        'summary' => $request->summary,
                         ]);
 
-        $id= $activities->id;
-        $cookie = Cookie::make('product_id', $id, 5);
-        return back()->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+                    $product->activities()
+                        ->create([
+                            'details' => ($request->pricing_notes) ? $request->pricing_notes: $request->summary,
+                            'flow' => $request->flow,
+                            'duration' => $request->duration,
+                            'coordinates' => $request->coordinates,
+                        ]);
+
+                if (!empty($request->images)) {
+                    foreach($request->images as $image){
+                        Images::create([
+                            'products_id'   => $product->id,
+                            'name'          => $image['url'],
+                            'url'           => $image['url'],
+                        ]);
+                    }
+                }
+                }
+            } catch (Exception $e) {
+                return back()->with(['id'=>400, 'message' => 'Ocurrio un error intente denuevo', 'code' => 400, 'status' => 'error']);     
+            }
+            
+        return back()->with(['id'=>$activities, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success']); 
+        
+    }
+    public function verify(Request $request)
+    {
+        $product = Products::where("short_id", $request->short_id)->first();
+
+        if($product){
+            return "existe";
+        }else{
+            return "no existe";
+        }   
     }
     public function updt_image(Request $request)
     {
