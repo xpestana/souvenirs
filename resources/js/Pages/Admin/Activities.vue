@@ -26,7 +26,7 @@
                         <p class="font-weight-bolder">Type</p>
                     </div>
                     <div class="col-2 px-0 text-center">
-                        <p class="font-weight-bolder">Activar</p>
+                        <p class="font-weight-bolder">Activar / Desactivar</p>
                     </div>
                 </div>
             </div>
@@ -87,14 +87,15 @@
                     </table>
                 </div>
             </div>
-            <div class="col-12 text-center mt-1">
-                <button class="btn btn-outline-azulc rounded-pill py-1 px-3"><i class="fas fa-spinner pr-1 pr-lg-3"></i>Actualizar lista</button>
+            <div class="col-12 text-center mt-3">
+                <button  class="btn btn-outline-azulc rounded-pill py-1 px-3" @click="updt()"><i class="fas fa-spinner pr-1 pr-lg-3"></i>Actualizar lista</button>
             </div>
         </div>
     </div>
 </template>
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
+import { Link } from '@inertiajs/inertia-vue3'
 export default {
     layout:Layout,
     props:{
@@ -122,13 +123,19 @@ export default {
         }
     },
     created(){
-        console.log("todos", this.products);
         // this.moment=Moment;
     },
     updated(){
         this.desabilitar = false
     },
     methods: {
+        updt(){
+            this.$inertia.get(route('update.api'),
+                {
+                    preserveScroll: true,
+                })
+            this.desabilitar = true
+        },
         update(product){
             this.product(product);
             this.form.post(route('update.activities',{activities : product}),
