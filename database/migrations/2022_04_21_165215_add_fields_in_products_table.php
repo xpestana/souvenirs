@@ -20,6 +20,7 @@ class AddFieldsInProductsTable extends Migration
             if (!Schema::hasColumn('products', 'summary')) {
                 $table->string('summary', 900)->nullable();
             }
+            $table->string('description', 900)->nullable()->change();
         });
     }
 
