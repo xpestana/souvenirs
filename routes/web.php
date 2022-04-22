@@ -358,5 +358,9 @@ Route::resource(
         ],
     );
 });
+
+/*API*/
+
+Route::get('/update/api', [ActivitiesController::class, 'api'])->name('update.api');
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 require __DIR__.'/auth.php';

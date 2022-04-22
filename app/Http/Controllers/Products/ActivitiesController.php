@@ -281,4 +281,82 @@ class ActivitiesController extends Controller
         
         return Redirect::route('activities.index')->with(['id'=>$id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
     }
+    /*update API*/
+    public function api()
+    {
+        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+            'access_token'   => connect()['access_token'],
+            'data' => [
+                        'language_code: es'
+                    ]
+        ])->collect()['data']['products'];
+        
+        foreach($products as $product){
+            $p = Products::where("short_id", $product['short_id'])->first();
+            try {
+                if($p){
+
+                    $p->type = 'Activities';
+                    $p->title = $product['name'];
+                    $p->description = ($product['description'] != '') ? $product['description']: $product['summary'];
+                    $p->category = $product['type']['name'];
+                    $p->short_id = $product['short_id'];
+                    $p->summary = $product['summary'];
+                    $p->save();
+
+                    $p->activities()
+                        ->update([
+                            'details' => ($product['pricing_notes'] != '') ? $product['pricing_notes']: $product['summary'],
+                            'flow' => $product['flow'],
+                            'duration' => $product['duration'],
+                            'coordinates' => $product['coordinates'],
+                        ]);
+
+                if (!empty($product['images'])) {
+                    foreach($product['images'] as $image){
+                        $p->images()->update([
+                            'name'          => $image['url'],
+                            'url'           => $image['url'],
+                        ]);
+                    }
+                }
+                     echo "actualizo: \n";
+                }else{
+                    $prod = Products::create([
+                        'type' => 'Activities',
+                        'title' => $product['name'],
+                        'description' => ($product['description'] != '') ? $product['description']: $product['summary'],
+                        'featured' => false,
+                        'category' => $product['type']['name'],
+                        'short_id' => $product['short_id'],
+                        'summary' => $product['summary'],
+                        ]);
+
+                    $prod->activities()
+                        ->create([
+                            'details' => ($product['pricing_notes'] != '') ? $product['pricing_notes']: $product['summary'],
+                            'flow' => $product['flow'],
+                            'duration' => $product['duration'],
+                            'coordinates' => $product['coordinates'],
+                        ]);
+
+                if (!empty($product['images'])) {
+                    foreach($product['images'] as $image){
+                        Images::create([
+                            'products_id'   => $prod->id,
+                            'name'          => $image['url'],
+                            'url'           => $image['url'],
+                        ]);
+                    }
+                }
+                }
+            } catch (Exception $e) {
+                return back()->with(['id'=>400, 'message' => 'Ocurrio un error intente denuevo', 'code' => 400, 'status' => 'error']);     
+            }
+              
+           
+        }
+        
+      return back()->with(['id'=>200, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success']); 
+    }
 }

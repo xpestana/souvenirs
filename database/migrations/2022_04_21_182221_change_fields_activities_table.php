@@ -23,6 +23,7 @@ class ChangeFieldsActivitiesTable extends Migration
             if (!Schema::hasColumn('activities', 'coordinates')) {
                 $table->string('coordinates')->nullable();
             }
+            $table->string('details', 500)->nullable()->change();
         });
 
     }
