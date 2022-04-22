@@ -18,7 +18,7 @@ class AddFieldsInProductsTable extends Migration
                 $table->string('short_id')->nullable();
             }
             if (!Schema::hasColumn('products', 'summary')) {
-                $table->string('summary')->nullable();
+                $table->string('summary', 900)->nullable();
             }
         });
     }
