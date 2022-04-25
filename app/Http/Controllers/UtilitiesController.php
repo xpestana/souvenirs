@@ -49,8 +49,10 @@ class UtilitiesController extends Controller
                             ->priceA($min_r,$max_r);
         if ($request->show) {
             $products = $products->get();
+            $showr = 1;
         }else{
             $products = $products->paginate(8);
+            $showr = 0;
         }
 
         $products_responsives = Products::with('images', 'activities')
@@ -61,7 +63,7 @@ class UtilitiesController extends Controller
 
         $max = $products_responsives->max('activities.priceA');
        
-        return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'min_r', 'max_r', 'count'));
+        return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'min_r', 'max_r', 'count','showr'));
     }
 
 
