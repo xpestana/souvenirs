@@ -14,10 +14,14 @@
             <h3 class="font-weight-bolder md:text-lg">Envío gratis</h3>
             <p class="md:text-base">En compras superiores a <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€</p>
         </div>
-        <div class="container mt-2 mb-2 px-md-5" v-if="souvenirsList.length > 0">
+        <div class="container mt-2 mb-2 px-md-5">
             <div class="row justify-content-between">
                 <div class="col-12 text-left">
-                    <h3 class="text-lg md:text-xl">Souvenirs</h3>
+                    <h3 class="text-lg md:text-xl" v-if="souvenirsList.length > 1 || activitiesList.length > 0">Souvenirs</h3>
+                </div>  
+                <div class="col-12 text-center" v-if="souvenirsList.length == 0 && activitiesList.length > 0">
+                    <p class="text-grayc my-2">¡Llevate un recuerdo de Sevilla!</p>
+                    <Link :href="route('souvenirs')" class="text-primary text-base mb-2">Añade un Souvenir</Link>
                 </div>  
             </div>
         </div>
@@ -55,8 +59,8 @@
                     <div class="col-8 col-md-9 pl-2 pr-0 d-flex flex-column justify-content-between" v-if="product.name">
                         <div class="product d-flex justify-between">
                             <div class="product-name">
-                                <p class="d-inline text-sm md:text-xl font-weight-bolder">
-                                <Link :href="route('product.souvenir.show',{product : product.id})">{{ filtroTitulo(product.name) }}</Link>
+                                <p class="d-inline text-sm md:text-xl font-weight-bolder truncate">
+                                <Link :href="route('product.souvenir.show',{product : product.id})">{{ product.name }}</Link>
                                 </p>
                             </div>
                             <div class="product-price pr-1">
@@ -125,15 +129,22 @@
                             <img :src="'/storage/souvenirs/'+act.attributes.url" alt="product" class="h-16  w-100 md:h-24">                    
                         </Link>
                     </div>
-                    <div class="col-8 col-md-9 pl-2 pr-0 d-flex flex-column justify-content-between" v-if="act.name">
-                        <div class="product">
-                            <div class="product-name">
-                                <p class="text-sm md:text-xl">{{ filtroTitulo(act.name) }}</p>
+                    <div class="col-8 col-md-9 pl-2 pr-0 d-flex flex-column justify-between" v-if="act.name">
+                        <div class="product d-flex justify-between">
+                            <div class="product-name truncate">
+                                <p class="text-sm md:text-xl truncate pr-3">{{ act.name }}</p>
                             </div>
-                            <div class="product-price pr-1">
-                                <p class="text-sm md:text-xl">Adultos: {{ act.attributes.adult }}</p>
-                                <p class="text-sm md:text-xl">Niños: {{ act.attributes.children }}</p>
-                                <p class="text-sm md:text-xl">Total: <Decimals :precio="(act.attributes.priceA*Number(act.attributes.adult) + act.attributes.priceN*Number(act.attributes.children))"/>€</p>
+                            <div class="product-price">
+                                <p class="text-sm md:text-xl font-weight-bolder"><Decimals :precio="(act.attributes.priceA*Number(act.attributes.adult) + act.attributes.priceN*Number(act.attributes.children))"/>€</p>
+                            </div>
+                        </div>
+                        <div class="activity-prices pt-1 pr-1 text-center d-flex justify-around">
+                            <div class="">
+                                <p class="text-sm md:text-xl" v-if="act.attributes.adult > 0">{{ act.attributes.adult }} Adultos</p>
+                                <p class="text-sm md:text-xl" v-if="act.attributes.children > 0">{{ act.attributes.children }} Niños</p>
+                            </div>
+                            <div class="pt-3">
+                                <Link :href="route('product.activities.show',{product : act.id})" class="btn btn-sm btn-azulc px-2 py-0 text-white rounded-pill">Modificar reserva</Link>
                             </div>
                         </div>
                     </div>
@@ -142,6 +153,30 @@
                     </div>
                 </div>
             </template>
+            <div class="row justify-content-between" v-if="activitiesList.length > 0">
+                <div class="col-5 text-center mt-3 px-0 pl-1">
+                    <p class="text-muted">Resumen del pedido</p>
+                    <p class="text-center text-muted" v-if="nadult > 0">
+                        <template v-if="nadult > 1">
+                            ({{ nadult }} adultos)
+                        </template>
+                        <template v-else>
+                            ({{ nadult }} adulto)
+                        </template>
+                    </p>
+                    <p class="text-center text-muted" v-if="nchildren > 0">
+                    <template v-if="nchildren > 1">
+                            ({{ nchildren }} niños)
+                        </template>
+                        <template v-else>
+                            ({{ nchildren }} niño)
+                        </template>    
+                    </p>
+                </div>
+                <div class="col-6 text-right mt-3 px-0 pr-1">
+                    <p class="leading-4 pt-3 font-weight-bolder text-muted">Total actividades <Decimals :precio="total_activities"/>€</p>
+                </div>
+            </div>
         </div>
     </div>
     </template>
@@ -216,7 +251,10 @@
                 formCart: this.$inertia.form({
                     quantity: 1, 
                 }),
-                showPopup:false
+                showPopup:false,
+                nchildren:0,
+                nadult:0,
+                total_activities:0,
             }
         },
         methods: {
@@ -250,12 +288,15 @@
                 return amount;
             },
             totalesSouvenirs(){
+                this.nchildren=0;
+                this.nadult=0;
                 var cart = this.$page.props.cart;
                 var total = 0;
                 var total_souvenirs = 0;
                 var total_activities = 0;
                 let numero_souvenirs = 0;
-
+                let adultn = 0;
+                let childrenn = 0;
                 Object.keys(cart).forEach(function(key) {
                     if (cart[key].name) {
                         if (cart[key].attributes.type == 'souvenir') {
@@ -263,12 +304,16 @@
                             numero_souvenirs +=cart[key].quantity;
                             total_souvenirs += (cart[key].price * cart[key].quantity);
                         }
+                        
                         if (cart[key].attributes.type == 'activity') {
-                            total_activities = (Number(cart[key].attributes.adult) * cart[key].attributes.priceA) + (Number(cart[key].attributes.children) * cart[key].attributes.priceN);
+                            adultn += Number(cart[key].attributes.adult);
+                            childrenn += Number(cart[key].attributes.children);
+                            total_activities += (Number(cart[key].attributes.adult) * cart[key].attributes.priceA) + (Number(cart[key].attributes.children) * cart[key].attributes.priceN);
                         }
                     }
                 });
-                    
+                this.nadult += adultn;
+                this.nchildren = childrenn;
                 this.n_souvenirs = numero_souvenirs == 1 ? numero_souvenirs+' artículo' : numero_souvenirs+' artículos';
                 this.total_souvenirs = total_souvenirs;
                 this.sub_total = total;
@@ -282,26 +327,9 @@
                     total = this.sub_total ;
                     this.costo_gratuito = this.costo_envio;
                 }
+                this.total_activities = total_activities;
                 this.total = total+total_activities;
             },
-            filtroTitulo(titulo){
-                let title = titulo.split(' ');
-                let template = `${title[0]}`;
-                let suma=0;
-                title[0] !== undefined ? suma += Number(title[0].length) : suma += 0;
-                title[1] !== undefined ? suma += Number(title[1].length) : suma += 0;
-                title[2] !== undefined ? suma += Number(title[2].length) : suma += 0;
-                if(suma > 20)
-                {
-                    template += ' '+title[1]+'...' 
-                }else{
-                    title[1] !== undefined ? template += ' '+title[1] : '' 
-                    title[2] !== undefined ? template += ' '+title[2] : ''
-                    title[3] !== undefined ? template += '...' : ''
-                }
-                
-                return template;
-            }
         },
         computed:{
             souvenirsList(){
@@ -316,7 +344,11 @@
                 let array = Object.values(cart).splice(0,largo);
                 return array.filter((product)=> product.attributes.type =="activity")
             }
+        },
+        updated(){
+            this.totalesSouvenirs()
         }
+    
 }
 
 </script>
