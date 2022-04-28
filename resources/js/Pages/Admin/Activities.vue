@@ -134,7 +134,7 @@ export default {
                 {
                     preserveScroll: true,
                 })
-            this.desabilitar = true
+            //this.desabilitar = true
         },
         update(product){
             this.product(product);

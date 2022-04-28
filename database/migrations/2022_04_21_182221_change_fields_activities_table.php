@@ -23,7 +23,9 @@ class ChangeFieldsActivitiesTable extends Migration
             if (!Schema::hasColumn('activities', 'coordinates')) {
                 $table->string('coordinates')->nullable();
             }
-            $table->string('details', 500)->nullable()->change();
+            if (!Schema::hasColumn('activities', 'events')) {
+                $table->json('events')->nullable();
+            }
         });
 
     }
@@ -44,6 +46,9 @@ class ChangeFieldsActivitiesTable extends Migration
             }
             if (Schema::hasColumn('activities', 'coordinates')) {
                 $table->dropColumn('coordinates');
+            }
+            if (Schema::hasColumn('activities', 'events')) {
+                $table->dropColumn('events');
             }
         });
 

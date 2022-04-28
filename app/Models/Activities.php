@@ -24,6 +24,7 @@ class Activities extends Model
         'duration',
         'flow',
         'coordinates',
+        'events',
     ];
 
     /**
