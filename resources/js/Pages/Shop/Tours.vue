@@ -42,7 +42,7 @@
                     <div class="footer-card-act d-flex flex-row justify-between align-items-end">
                         <div class="time">
                             <i class="far fa-hourglass mr-1 text-grayc md:text-base"></i>
-                            <p class="text-grayc d-inline md:text-base" v-if="product.activities.duration">{{ product.activities.duration }}</p>
+                            <p class="text-grayc d-inline md:text-base" v-if="product.activities">{{ product.activities.duration }}</p>
                         </div>
                         <div class="lenguage">
                             <i class="far fa-comment-alt mr-2 text-grayc md:text-base"></i>
