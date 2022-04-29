@@ -123,6 +123,10 @@ class CartController extends Controller
     {
         $datetime = new Carbon($request->date);
         $product = Products::find($request->product_id)->load('images');
+        $image = null;
+        if($product->image){
+            $image = $product->images[0]->url;
+        }
         $addCart = \Cart::add(array(
             'id' => $product->id,
             'name'=>$product->title,
@@ -130,12 +134,14 @@ class CartController extends Controller
             'quantity' => 1,
             'attributes' => array(
                 'type' => 'activity',
-                'url' => $product->images[0]->url,
-                'date' => $datetime->subDay(1),
+                'url' => $image,
+                'date' => $request->date,
                 'adult' => $request->adult,
                 'children' => $request->children,
-                'priceA' => $product->activities->priceA,
-                'priceN' => $product->activities->priceN
+                'student' => $request->student,
+                'priceAdult' => $request->priceAdult,
+                'priceChildren' => $request->priceChildren,
+                'priceStudent' => $request->priceStudent
                 ),
             'associatedModel' => $product
         ));

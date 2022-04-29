@@ -146,7 +146,10 @@
                 	adult: 0,
                 	children: 0,
                     student:0,
-                    date:null
+                    date:null,
+                    priceAdult:0,
+                    priceChildren:0,
+                    priceStudent:0
             	}),
                 attributes: [
                     {
