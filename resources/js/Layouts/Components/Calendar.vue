@@ -181,7 +181,7 @@
 
                 if (total == 0 || this.guardarFecha == null) {
                     let text=""
-                    if(total == 0) text = "Error, No hay nadie por registrar"
+                    if(total == 0) text = "Error, Debes agregar al menos una persona"
                     if(this.guardarFecha == null) text = "No ha seleccionado ninguna fecha"
                  
                     this.$swal({
