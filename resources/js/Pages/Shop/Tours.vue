@@ -31,7 +31,7 @@
                     <div class="header-card-act">
                         <div class="title">
                             <Link :href="route('product.activities.show',{product : product.id})">
-                                <p class="font-weight-bolder text-azulc md:text-2xl">{{ truncateTitle(product.title) }}</p>
+                                <p class="font-weight-bolder text-azulc md:text-2xl fuente">{{ truncateTitle(product.title) }}</p>
                             </Link>
                         </div>
                     </div>
@@ -149,5 +149,8 @@
 <style scope>
     .activity-card{
         background-color: #ededed;
+    }
+    .fuente{
+        font-family: Montserrat Bold !important;
     }
 </style>

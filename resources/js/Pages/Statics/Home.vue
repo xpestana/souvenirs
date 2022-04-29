@@ -46,29 +46,37 @@
             </div>
             <div class="col-12 px-md-5">
               <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="5000">
-                <Slide v-for=" product in $page.props.activities" :key="product.id">
+                <Slide v-for=" product in actList" :key="product.id">
                   <div class="tarjeta bg-light">
                     <div class="tarjeta-img d-block">
                       <Link :href="route('product.activities.show',{product : product.id})">
-                          <template v-if="product.images.length != 0">
-                              <img :src="'/storage/souvenirs/'+product.images[0].url" class="w-100">
+                          <template v-if="product.images.length !== 0">
+                              <img :src="'/storage/souvenirs/'+product.images[0].name" class="w-100">
+                          </template>
+                          <template v-else>
+                              <div class="bg-light h-12 md:h-28"></div>
                           </template>
                       </Link>
                     </div>
                     <div class="tarjeta-cuerpo py-2 px-1 d-flex flex-column">
-                        <div class="mb-auto">
+                        <div class="mb-auto h-6 md:h-16 overflow-hidden">
                           <Link :href="route('product.activities.show',{product : product.id})" >
                             <p class="font-weight-bolder text-center mb-2 text-wrap px-1">{{ product.title }}</p>
                           </Link>
                         </div>
                         <div class="">
-                          <p class="text-left"><i class="far fa-clock"></i> Duración: 2horas</p>
-                          <h3 class="font-weight-bolder d-block text-left">
-                            <template v-if="product.activities.priceN">
-                                  Desde: <Decimals :precio="product.activities.priceN"/>€
-                              </template>
-                              <template v-else>
-                                  Desde <Decimals :precio="product.activities.priceA"/>€
+                          <p class="text-left"><i class="far fa-clock"></i> Duración: {{product.duration}} </p>
+                          <h3 class="font-weight-bolder d-block text-left mt-3">
+                              <template v-if="product.precios.lenght !== null">
+                                <template v-if="product.precios[2]">
+                                    Desde: {{product.precios[2]}}€
+                                </template>
+                                <template v-else-if="product.precios[1]">
+                                    Desde: {{product.precios[1]}}€
+                                </template>
+                                <template v-else-if="product.precios[0]">
+                                    Desde {{product.precios[0]}}€
+                                </template>
                               </template>
                           </h3>
                         </div>
@@ -95,7 +103,7 @@
                   <div class="col-4 col-md-2 mt-3 px-2 px" v-for=" product in $page.props.souvenirs" :key="product.id">
                     <Link :href="route('product.souvenir.show',{product : product.id})">
                     <div class="rounded image text-center position-relative w-100" :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'">
-                      <p class="bg-light position-absolute fixed-bottom text-right py-2 px-1 font-weight-bolder text-muted" style="opacity:0.6;z-index:37"><Decimals :precio="product.price"/>€</p>
+                      <!-- <p class="bg-light position-absolute fixed-bottom text-right py-2 px-1 font-weight-bolder text-muted" style="opacity:0.6;z-index:37"><Decimals :precio="product.price"/>€</p> -->
                     </div>
                     </Link>
                   </div>
@@ -145,6 +153,9 @@
             }
             
         },
+        created(){
+          console.log(this.actList)
+        },
         methods:{
           souvenirs(){
               this.$inertia.get(route('souvenirs'),{}, {
@@ -157,6 +168,28 @@
                 })
             },
         },
+        computed:{
+          actList(){
+            return this.$page.props.activities.map((el)=>{
+              let precios = JSON.parse(el.activities.priceA);
+              let arr = [];
+              if(precios !== null){
+                  for(let val in precios.prices_per_ticket){
+                      arr.push(precios.prices_per_ticket[val])
+                  }
+              }else{
+                let arr = null;
+              }
+              return {
+                id:el.id,
+                precios:arr,
+                images:el.images,
+                title:el.title,
+                duration:el.activities.duration,
+              }
+            })
+          }
+        }
     }
 </script>
 <style scope>

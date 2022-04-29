@@ -2,7 +2,9 @@
     <form @submit.prevent="submit">
 	<div class="row">
         <div class="col-12 text-center">
-                <DatePicker v-model="form.date" :min-date='product.activities.init' :max-date='product.activities.end'/>
+                <DatePicker mode="date" v-model="form.date" 
+                :available-dates="this.dias_disponibles" 
+                :attributes="attributes" />
                 <div class="">
                     
                     <!-- <BreezeButton id="submit" type="submit" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -42,11 +44,23 @@
         </div>
         <div class="col-12 py-2" style="background-color:#e6e6e6d4">
             <div class="row pb-2 justify-content-md-center">
+                <template v-if="this.precios.length == 0">
+                    <div class="col-12 text-center my-2 text-danger">
+                        No hay precios establecidos para esta actividad
+                    </div>
+                </template>
                 <div class="col-5 col-md-3 pt-1 pl-4">
                     <p class="text-2xl d-inline mr-4">Adulto</p>
                 </div>
                 <div class="col-3 col-md-1 px-0 pt-2 text-center">
-                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">45€</h5>
+                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
+                        <template v-if="this.precios[0]">
+                            {{precios[0]}}€
+                        </template> 
+                        <template v-else>
+                            -
+                        </template>
+                    </h5>
                 </div>
                 <div class="col-4 col-md-1 px-0 pt-2">
                     <button type="button" @click="form.adult > 0 ? --form.adult : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
@@ -59,12 +73,39 @@
                     <p class="text-2xl d-inline mr-4">Niño</p>
                 </div>
                 <div class="col-3 col-md-1 px-0 pt-2 text-center">
-                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">45€</h5>
+                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
+                        <template v-if="this.precios[1]">
+                            {{precios[1]}}€
+                        </template> 
+                        <template v-else>
+                            -
+                        </template>
+                    </h5>
                 </div>
                 <div class="col-4 col-md-1 px-0 pt-2">
                     <button type="button" @click="form.children > 0 ? --form.children : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
                     <input type="text" v-model="form.children" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
                     <button type="button" @click="++form.children" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="row pb-2 justify-content-md-center">
+                <div class="col-5 col-md-3 pt-1 pl-4">
+                    <p class="text-2xl d-inline mr-4">Estudiantes</p>
+                </div>
+                <div class="col-3 col-md-1 px-0 pt-2 text-center">
+                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
+                        <template v-if="this.precios[2]">
+                            {{precios[2]}}€
+                        </template> 
+                        <template v-else>
+                            -
+                        </template>
+                    </h5>
+                </div>
+                <div class="col-4 col-md-1 px-0 pt-2">
+                    <button type="button" @click="form.student > 0 ? --form.student : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
+                    <input type="text" v-model="form.student" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
+                    <button type="button" @click="++form.student" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
         </div>
@@ -104,36 +145,72 @@
                     product_id: this.product.id,
                 	adult: 0,
                 	children: 0,
-                    date: this.product.activities.init
+                    student:0,
+                    date:null
             	}),
-            	 
+                attributes: [
+                    {
+                        highlight: true,
+                        dates: []
+                    }
+                ]
             }
         },
         props: {
             product: Object,
+            eventos: Object,
+            precios: Object
         },
         methods: {
+            fechas(){
+                if(this.eventos !== undefined){
+                    let newevents = this.eventos.map((el)=> el.time*1000)
+                    let valor = ""
+                    for(let val of newevents){
+                        valor = new Date(val)
+                        this.attributes[0].dates.push(valor.getFullYear()+'-'+valor.getMonth()+'-'+valor.getDate())
+                    }
+                    console.log(this.attributes[0].dates)
+                }
+            },
             submit(){
                 var total = parseInt(this.form.adult) + parseInt(this.form.children);
 
-                if (total == 0) {
-                    this. status = "Error, No hay nadie por registrar";
-                return;
+                if (total == 0 || this.guardarFecha == null) {
+                    let text=""
+                    if(total == 0) text = "Error, No hay nadie por registrar"
+                    if(this.guardarFecha == null) text = "No ha seleccionado ninguna fecha"
+                 
+                    this.$swal({
+                        title: text,
+                        icon: 'info',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonText:
+                            '<i class="fa fa-thumbs-up"></i> Aceptar!',
+                        confirmButtonAriaLabel: 'Aceptar!',
+                    })
                 }
-                this.form.post(route('cart.activity'),{
-                    _token: this.$page.props.csrf_token,
-                    errorBag: 'submit',
-                    preserveScroll: true,
-                    forceFormData: true,
-                })
+                if(total > 0 && this.guardarFecha !== null){
+                    console.log(this.form)
+                    this.form.date = this.guardarFecha;
+                    this.form.post(route('cart.activity'),{
+                        _token: this.$page.props.csrf_token,
+                        errorBag: 'submit',
+                        preserveScroll: true,
+                        forceFormData: true,
+                    })
+                }
             },
             reserve(){
                 var total = parseInt(this.form.adult) + parseInt(this.form.children);
 
                 if (total == 0) {
-                    this. status = "Error, No hay nadie por registrar";
+                    this.status = "Error, No hay nadie por registrar";
                 return;
                 }
+                this.form.date = this.guardarFecha;
                 this.form.post(route('cart.activity'),{
                     _token: this.$page.props.csrf_token,
                     errorBag: 'submit',
@@ -144,7 +221,31 @@
                     }
                 })
             }
-    	}
+    	},
+        computed: {
+            guardarFecha(){
+                return this.form.date;
+            },
+            dias_disponibles(){
+                let newevents = this.eventos.map((el)=> el.time*1000)
+                let valor='';
+                
+                return newevents.map((el) => {
+                    valor = new Date(el);
+                    return { 
+                        start:valor.getFullYear()+'-'+valor.getMonth()+'-'+valor.getDate(),
+                        end:valor.getFullYear()+'-'+valor.getMonth()+'-'+valor.getDate()
+                    }
+                })
+            },
+        },
+        created(){
+            this.fechas()
+        },
+        mounted(){
+            console.log(this.dias_disponibles)
+        }
+
     }
 </script>
 <style scoped>

@@ -139,9 +139,9 @@ export default {
         update(product){
             this.product(product);
             this.form.post(route('update.activities',{activities : product}),
-                {
-                    preserveScroll: true,
-                })
+            {
+                preserveScroll: true,
+            })
             this.desabilitar = true
         },
         product(short_id){

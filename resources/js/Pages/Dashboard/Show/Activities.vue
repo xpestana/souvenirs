@@ -78,16 +78,27 @@
                         </button>
 
                         <div id="precio" class="collapse p-3" aria-labelledby="headingtwo" data-parent="#accordionExample" style="background-color:#e6e6e6d4">
-                            <div class="text-right">
-                                <div class="mb-4">
-                                    <p class="text-xl d-inline mr-4">Adulto</p>
-                                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">45€</h5>
+                            <template v-if="this.precios.length == 0">
+                                <div class="text-center">
+                                    No hay precios establecidos para esta actividad
                                 </div>
-                                <div>
-                                    <p class="text-xl d-inline mr-4">Niños</p>
-                                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">45€</h5>
+                            </template>
+                            <template v-else>
+                                <div class="text-right">
+                                    <div class="mb-4" v-if="this.precios[0]">
+                                        <p class="text-xl d-inline mr-4">Adulto</p>
+                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">{{this.precios[0]}}€</h5>
+                                    </div>
+                                    <div class="mb-4" v-if="this.precios[1]">
+                                        <p class="text-xl d-inline mr-4">Niños</p>
+                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">{{this.precios[1]}}€</h5>
+                                    </div>
+                                    <div v-if="this.precios[2]">
+                                        <p class="text-xl d-inline mr-4">Estudiantes</p>
+                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">{{this.precios[2]}}€</h5>
+                                    </div>
                                 </div>
-                            </div>
+                            </template>
                         </div>
                     </div>
                     <div class="tarjeta border-bottom">
@@ -110,7 +121,7 @@
                                 </div>
                             </div>
                             <div class="px-3">
-                                <calendar :product="product"/>
+                                <calendar :product="product" :eventos="eventosAbiertos" :precios="precios" />
                             </div>
                         </div>
                     </div>
@@ -165,10 +176,15 @@
                         </button>
 
                         <div id="punto" class="collapse py-2 px-3" aria-labelledby="head6" data-parent="#accordionExample">
-                            <template v-if="product.activities.iframe !== null">
-                                <div v-html="product.activities.iframe"></div>
+                            <template v-if="product.activities">
+                                <div class="d-flex justify-center" v-if="product.activities.coordinates !== ''">
+                                    <iframe class="h-64 w-96" id="gmap_canvas" 
+                                     :src="'https://maps.google.com/maps?q='+product.activities.coordinates+'&t=&z=13&ie=UTF8&iwloc=&output=embed'"
+                                      frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                                    </iframe>
+                                </div>
                             </template>
-                            <template v-else>
+                            <template v-if="product.activities && product.activities.coordinates == ''">
                                 <div class="text-center">
                                     No hay punto de encuentro registrado para esta actividad. 
                                 </div>
@@ -179,10 +195,18 @@
             </div>
 
             <div class="col-12 mt-3 py-2" style="background-color:#bedfef;">
-                <h2 class="font-weight-bolder text-left d-inline text-xl">48€</h2>
-                <a @click="cambiarColor('horarios-color')" href="#" class="d-inline float-right" data-toggle="collapse" data-target="#horario" aria-expanded="true" aria-controls="horario">
+                <h2 class="font-weight-bolder text-left d-inline text-xl" v-if="this.precios[2]">
+                    {{precios[2]}}€
+                </h2>
+                <h2 class="font-weight-bolder text-left d-inline text-xl" v-if="this.precios[2] == undefined && this.precios[1] !== undefined">
+                    {{precios[1]}}€
+                </h2>
+                <h2 class="font-weight-bolder text-left d-inline text-xl" v-if="this.precios[1] == undefined && this.precios[0] !== undefined">
+                        {{precios[0]}}€
+                </h2>
+                <!-- <a @click="cambiarColor('horarios-color')" href="#" class="d-inline float-right" data-toggle="collapse" data-target="#horario" aria-expanded="true" aria-controls="horario">
                     <p class="font-weight-bolder text-md">Ver disponibilidad</p>
-                </a>
+                </a> -->
             </div>
         </div>
     </div>
@@ -214,6 +238,8 @@
         data: () => {
             return {
                 moment:null,
+                precios:[],
+                eventos:[],
             settings: {
                 itemsToShow: 1,
                 snapAlign: 'center',
@@ -226,6 +252,24 @@
         created(){
             this.moment=Moment;
             console.log(this.product)
+            if(this.product.activities.priceA !== "null")
+            {
+                let precios = JSON.parse(this.product.activities.priceA)
+                if(precios.status == 'ERROR'){}
+                else{
+                    for(let val in precios.prices_per_ticket){
+                        this.precios.push(precios.prices_per_ticket[val])
+                    }
+                }
+            }
+            
+            if(this.product.activities.events.length >0){
+                this.eventos = JSON.parse(this.product.activities.events)
+                if(this.eventos.status == 'ERROR'){}
+                else{
+                    
+                }
+            }   
         },
         methods:{
             cambiarColor(id){
@@ -241,6 +285,14 @@
                     return template;
                 }
                 return string;
+            }
+        },
+        computed:{
+            eventosAbiertos(){
+                if(this.eventos.status == 'ERROR'){}
+                else{
+                    return this.eventos.filter(evt => evt.status == "open")   
+                }
             }
         }
     }
