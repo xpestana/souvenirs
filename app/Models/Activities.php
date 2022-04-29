@@ -25,6 +25,7 @@ class Activities extends Model
         'flow',
         'coordinates',
         'events',
+        'price_notes',
     ];
 
     /**

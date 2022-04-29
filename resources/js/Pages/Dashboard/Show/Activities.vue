@@ -138,7 +138,13 @@
                         </button>
 
                         <div id="detalles" class="collapse py-3 px-3" aria-labelledby="head4" data-parent="#accordionExample">
-                            <p>-</p>
+                            <template v-if="product.activities.details !== null">
+                                <div v-html="filtroDetalles(product.activities.details)">
+                                </div>    
+                            </template>
+                            <template v-else>
+                                    No hay información para esta sección
+                            </template>
                         </div>
                     </div>
                     <div class="tarjeta border-bottom">
@@ -154,8 +160,8 @@
                         </button>
 
                         <div id="cancelaciones" class="collapse py-2 px-3" aria-labelledby="head5" data-parent="#accordionExample">
-                            <template v-if="product.activities.details !== null">
-                                <div v-html="filtroDetalles(product.activities.details)">
+                            <template v-if="product.activities.price_notes !== null">
+                                <div v-html="filtroDetalles(product.activities.price_notes)">
                                 </div>    
                             </template>
                             <template v-else>

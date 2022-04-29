@@ -79,15 +79,14 @@ class UtilitiesController extends Controller
         }
         
         $products = Products::with('images')
-                            ->where('del',false)
                             ->where('type', 'Souvenirs')
-                             ->search(trim($request->search))
+                            ->search(trim($request->search))
                             ->price($min_r,$max_r);
         if ($request->show) {
-            $products = $products->get();
+            $products = $products->where('del',false)->get();
             $showr = $request->show;
         }else{
-            $products = $products->paginate(8);
+            $products = $products->where('del',false)->paginate(8);
         }
 
         $products_responsives = Products::with('images', 'activities')

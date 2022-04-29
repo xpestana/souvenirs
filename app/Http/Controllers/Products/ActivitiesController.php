@@ -186,7 +186,12 @@ class ActivitiesController extends Controller
                             "end_date"=> strtotime($week),
                             'language_code'=> "es"
                         ]
-                    ])->collect()['data']['events'];
+                    ])->collect();
+
+                    if(isset($events['data']['events'])){
+                        $events = $events['data']['events'];
+                    }
+            
                     $prices=null;
                     if(isset($events[0])){
                         $prices = Http::post('https://apptest.turitop.com/v1/tickets/getprices', [
@@ -196,7 +201,11 @@ class ActivitiesController extends Controller
                             "date_event"=> $events[0]['time'],
                             'language_code'=> "es"
                         ]
-                        ])->collect()['data']['prices_per_ticket_full'];
+                        ])->collect();
+
+                        if(isset($prices['data'])){
+                            $prices = $prices['data'];
+                        }
                     }
                     
                     $product = Products::create([
@@ -219,6 +228,7 @@ class ActivitiesController extends Controller
                             'coordinates' => $request->coordinates,
                             'priceA' => json_encode($prices),
                             'events' => json_encode($events),
+                            'price_notes' => $request->pricing_notes,
                         ]);
 
                 if (!empty($request->images)) {
@@ -339,6 +349,7 @@ class ActivitiesController extends Controller
                             'flow' => $product['flow'],
                             'duration' => $product['duration'],
                             'coordinates' => $product['coordinates'],
+                            'price_notes' => $product['pricing_notes'],
                             'priceA' => json_encode($prices),
                             'events' => json_encode($events),
                         ]);
@@ -371,6 +382,7 @@ class ActivitiesController extends Controller
                             'coordinates' => $product['coordinates'],
                             'priceA' => json_encode($prices),
                             'events' => json_encode($events),
+                            'price_notes' => $product['pricing_notes'],
                         ]);
 
                 if (!empty($product['images'])) {
