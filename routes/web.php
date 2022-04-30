@@ -50,16 +50,16 @@ Route::get('/activities/{product}/show', [ProductsController::class, 'activities
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout.destroy');
 Route::get('politicas/terminosycondiciones',function(){
     return Inertia::render('Collaborator/Politicas/Terminos'); 
-});
+})->name('terminosycondiciones');
 Route::get('politicas/privacidad',function(){
     return Inertia::render('Collaborator/Politicas/Privacidad'); 
-});
+})->name('privacidad');
 Route::get('politicas/devolucion',function(){
     return Inertia::render('Collaborator/Politicas/Reembolso'); 
-});
+})->name('devolucion');
 Route::get('politicas/entregas',function(){
     return Inertia::render('Collaborator/Politicas/Entregas'); 
-});
+})->name('entregas');
 /*
     Auth
  */

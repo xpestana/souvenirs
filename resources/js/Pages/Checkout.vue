@@ -134,7 +134,7 @@
                                 </p>
                                 <p class="font-weight-bolder text-muted"><Decimals :precio="totalActivities.precio"/>€</p>
                             </div>
-                            <div class="d-flex justify-between" v-if="totalSouvenirs.precio > 0 || totalActivities.precio > 0">
+                            <div class="d-flex justify-between" v-if="totalSouvenirs.precio > 0">
                                 <p class="text-muted">Envío</p>
                                 <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < this.$page.props.settings.shippings"><Decimals :precio="5"/>€</p>
                                 <p class="font-weight-bolder text-muted" v-else>GRATIS</p>
@@ -335,7 +335,9 @@
             },
             importeTotal(){
                 let envio;
+                console.log(this.totalSouvenirs.precio)
                 this.totalSouvenirs.precio > this.$page.props.settings.shippings ? envio=0 : envio=5;
+                this.totalSouvenirs.precio == 0 ? envio=0 : '';
                 return this.totalActivities.precio+this.totalSouvenirs.precio+envio;
             }
         }

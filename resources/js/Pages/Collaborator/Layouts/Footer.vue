@@ -40,10 +40,18 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li class="pb-2"><a target="_blank" href="/politicas/privacidad">Políticas de privacidad</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/politicas/terminosycondiciones">Términos y condiciones</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/politicas/entregas">Políticas de entrega</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/politicas/devolucion">Políticas de devolución</a></li>
+                                        <li class="pb-2">
+                                            <Link :href="route('privacidad')">Políticas de privacidad</Link>
+                                        </li>
+                                        <li class="pb-2">
+                                            <Link :href="route('terminosycondiciones')">Términos y condiciones</Link>
+                                        </li>
+                                        <li class="pb-2">
+                                            <Link :href="route('entregas')">Políticas de entrega</Link>
+                                        </li>
+                                        <li class="pb-2">
+                                            <Link :href="route('devolucion')">Políticas de devolución</Link>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

@@ -95,7 +95,7 @@
                     <p class="text-muted leading-4">Sub total: <Decimals :precio="sub_total"/>€</p>
                     <p class="text-muted leading-4">Costes del envío:  <Decimals :precio="costo_envio"/>€</p>
                     <p class="text-muted leading-4" v-if="costo_gratuito > 0">Envío gratuito: -<Decimals :precio="costo_gratuito"/>€</p>
-                    <p class="leading-4">Total Souvenirs <Decimals :precio="total_souvenirs"/>€</p>
+                    <p class="leading-4 font-weight-bolder text-muted">Total Souvenirs <Decimals :precio="total_souvenirs"/>€</p>
                 </div>
             </div>
             <div class="row mt-3" v-if="sub_total < n_gratuito">
@@ -140,7 +140,7 @@
                         </div>
                         <div class="activity-prices pt-1 pr-1 text-center d-flex justify-around">
                             <div class="">
-                                <p class="text-sm md:text-xl" v-if="act.attributes.adult > 0">
+                                <p class="text-sm md:text-base" v-if="act.attributes.adult > 0">
                                     <template v-if="act.attributes.adult == 1">
                                         {{ act.attributes.adult }} Adulto    
                                     </template>
@@ -148,7 +148,7 @@
                                         {{ act.attributes.adult }} Adultos    
                                     </template>
                                 </p>
-                                <p class="text-sm md:text-xl" v-if="act.attributes.children > 0">
+                                <p class="text-sm md:text-base" v-if="act.attributes.children > 0">
                                     <template v-if="act.attributes.children == 1">
                                         {{ act.attributes.children }} Niño    
                                     </template>
@@ -156,7 +156,7 @@
                                         {{ act.attributes.children }} Niños    
                                     </template>
                                 </p>
-                                <p class="text-sm md:text-xl" v-if="act.attributes.student > 0">
+                                <p class="text-sm md:text-base" v-if="act.attributes.student > 0">
                                     <template v-if="act.attributes.student == 1">
                                         {{ act.attributes.student }} Estudiante    
                                     </template>
@@ -164,7 +164,7 @@
                                         {{ act.attributes.student }} Estudiantes    
                                     </template>
                                 </p>
-                                <p class="text-sm md:text-xl" v-if="act.attributes.baby > 0">
+                                <p class="text-sm md:text-base" v-if="act.attributes.baby > 0">
                                     <template v-if="act.attributes.baby == 1">
                                         {{ act.attributes.baby }} Bebe    
                                     </template>
@@ -186,7 +186,7 @@
             <div class="row justify-content-between" v-if="activitiesList.length > 0">
                 <div class="col-5 text-center mt-3 px-0 pl-1">
                     <p class="text-muted">Resumen del pedido</p>
-                    <p class="text-center text-muted" v-if="nadult > 0">
+                    <p class="text-center text-muted leading-4" v-if="nadult > 0">
                         <template v-if="nadult > 1">
                             ({{ nadult }} adultos)
                         </template>
@@ -194,7 +194,7 @@
                             ({{ nadult }} adulto)
                         </template>
                     </p>
-                    <p class="text-center text-muted" v-if="nchildren > 0">
+                    <p class="text-center text-muted leading-4" v-if="nchildren > 0">
                     <template v-if="nchildren > 1">
                             ({{ nchildren }} niños)
                         </template>
@@ -202,7 +202,7 @@
                             ({{ nchildren }} niño)
                         </template>    
                     </p>
-                    <p class="text-center text-muted" v-if="nstudent > 0">
+                    <p class="text-center text-muted leading-4" v-if="nstudent > 0">
                     <template v-if="nstudent > 1">
                             ({{ nstudent }} estudiantes)
                         </template>
@@ -210,7 +210,7 @@
                             ({{ nstudent }} estudiante)
                         </template>    
                     </p>
-                    <p class="text-center text-muted" v-if="nbaby > 0">
+                    <p class="text-center text-muted leading-4" v-if="nbaby > 0">
                     <template v-if="nbaby > 1">
                             ({{ nbaby }} bebes)
                         </template>
@@ -409,6 +409,9 @@
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
 <style scope>
+.md\:text-base {
+    line-height: 1.3rem !important;
+}
 .quantity-product .cantidad {
     border: #d8d8d8 1px solid;
     border-radius: 5px;
