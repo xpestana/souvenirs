@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use App\Models\Products;
 use Inertia\Inertia;
 use Carbon\Carbon;
@@ -123,6 +124,23 @@ class CartController extends Controller
     {
         $datetime = new Carbon($request->date);
         $product = Products::find($request->product_id)->load('images');
+        $codes = array_keys($request->codes);
+        $reserve = null;
+       /* $reserve = Http::post('https://apptest.turitop.com/v1/booking/tour/reserve', [
+                    'access_token'   => connect()['access_token'],
+                    'data' => [
+                        "product_short_id" => $product->short_id,
+                        "booking"=> [
+                                        "event_start"=> strtotime($datetime->format('Y-m-d')),
+                                        "ticket_type_count"=> [
+                                            $codes[0]=> $request->adult,
+                                        ],
+                                        "expires_in" => 259200,
+                                        "user_id"=> 15122,
+                                    ],
+                        'language_code'=> "es"
+                    ]
+                ])->collect();dd($reserve);*/
         $image = null;
         if($product->image){
             $image = $product->images[0]->url;
@@ -134,14 +152,16 @@ class CartController extends Controller
             'quantity' => 1,
             'attributes' => array(
                 'type' => 'activity',
+                'reserve' => $reserve,
                 'url' => $image,
-                'date' => $request->date,
+                'date' => $datetime->format('Y-m-d'),
                 'adult' => $request->adult,
                 'children' => $request->children,
                 'student' => $request->student,
                 'priceAdult' => $request->priceAdult,
                 'priceChildren' => $request->priceChildren,
-                'priceStudent' => $request->priceStudent
+                'priceStudent' => $request->priceStudent,
+                'codes' => $codes
                 ),
             'associatedModel' => $product
         ));

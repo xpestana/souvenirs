@@ -154,6 +154,7 @@
                     priceChildren:0,
                     priceStudent:0,
                     priceBaby:0,
+                    codes:0,
                     spinner:false
             	}),
                 attributes: [
@@ -206,6 +207,9 @@
                     this.form.priceChildren = this.preciosLista[1] !== undefined ? this.preciosLista[1] : 0
                     this.form.priceStudent = this.preciosLista[2] !== undefined ? this.preciosLista[2] : 0
                     this.form.priceBaby = this.preciosLista[3] !== undefined ? this.preciosLista[3] : 0
+
+                    this.form.codes = this.codeLista[0] !== undefined ? this.codeLista[0] : 0
+
                     this.form.post(route('cart.activity'),{
                         _token: this.$page.props.csrf_token,
                         errorBag: 'submit',
@@ -287,6 +291,18 @@
                 }else{
                     return 0
                 }
+            },
+            codeLista(){
+                if(this.preciosFecha !== {}){
+                    let arr =[];console.log(this.preciosFecha.prices_per_ticket)
+                    for(let val in this.preciosFecha.prices_per_ticket){
+                        arr.push(this.preciosFecha.prices_per_ticket);
+                    }
+                    
+                    return arr;
+                }else{
+                    return 0
+                }
             }
         },
         created(){
@@ -299,8 +315,8 @@
             })
         },
         mounted(){
-            console.log(this.eventos)
-            console.log(this.fechasObjeto)
+           
+            /*console.log(this.fechasObjeto)*/
         }
 
     }
