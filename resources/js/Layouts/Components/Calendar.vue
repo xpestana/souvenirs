@@ -5,23 +5,6 @@
                 <DatePicker mode="date" v-model="form.date" 
                 :available-dates="this.dias_disponibles" 
                 :attributes="attributes" />
-                <div class="">
-                    
-                    <!-- <BreezeButton id="submit" type="submit" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Agregar al carrito
-                    </BreezeButton>
-                    <BreezeValidationErrors class="my-3" />
-                    <div class="login-footer text-center">
-                        <div v-if="status" class="mb-4 font-medium text-sm text-danger">
-                            {{ status }}
-                        </div>
-                    </div> -->
-                    <!-- <div align="center" class="col-md-6 mt-4">
-                        <div class="d-single-info text-lg-center">
-                            <BreezeButton type="button" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="reserve">Reservar directo</BreezeButton>
-                        </div>
-                    </div> -->
-                </div>
             <!-- <div class="border mt-2 section-horarios d-inline-flex p-1 mb-1 w-3/4 md:w-1/4">
                 <div class="icon text-center">
                     <i class="far fa-clock text-xl text-grayc pl-1 pr-2"></i>
@@ -38,7 +21,7 @@
         <div class="col-12 my-2 text-center text-danger" v-if="this.eventos == null">
             Esta actividad no esta disponible
         </div>
-        <template v-if="this.preciosLista.length == 0 && this.eventos !== null">
+        <template v-if="this.preciosLista.length == 0 && this.eventos !== undefined">
             <div class="col-12 my-2 text-center text-azulc">
                 Seleccione una fecha para poder ver los precios!
             </div>
@@ -185,7 +168,7 @@
             },
             submit(){
                 let total = parseInt(this.form.adult) + parseInt(this.form.children) + parseInt(this.form.student) + parseInt(this.form.baby);
-                this.form.date = this.fechaForm;
+                this.form.date = this.guardarFecha;
                 if (total == 0) {
                     let text=""
                     if(total == 0) text = "Indica cuántas personas acudirán a esta actividad"
@@ -261,9 +244,6 @@
             }
                 return this.form.date;
             },
-            fechaForm(){
-                return this.form.date;
-            },
             dias_disponibles(){
                 let newevents = this.eventos.map((el)=> el.time*1000)
                 let valor='';
@@ -291,12 +271,14 @@
         },
         created(){
             this.fechas()
-            this.fechasObjeto = this.eventos.map((el)=>{ 
-                return { 
-                    codigo : el.time,
-                    fecha  : new Date(el.time*1000)
-                }
-            })
+                if(this.eventos !== undefined){
+                this.fechasObjeto = this.eventos.map((el)=>{ 
+                    return { 
+                        codigo : el.time,
+                        fecha  : new Date(el.time*1000)
+                    }
+                })
+            }
         },
         mounted(){
             console.log(this.eventos)

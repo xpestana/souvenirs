@@ -5,26 +5,37 @@
                     <span>{{ $page.props.cart.count }}</span>
                 </Link>
                 <!-- Cart Box Start -->
-                <ul class="ht-dropdown cart-box-width">
+                <ul class="ht-dropdown cart-box-width overflow-auto max-h-96">
                     <template v-for="product in $page.props.cart" :key="product.id">
                     	
                     <li class="single-cart-box" v-if="product.name">
                         <div class="cart-img">
-                            <Link :href="route('product.souvenir.show',{product : product.id})">
-                            	<div :style="'background:url(/storage/souvenirs/'+product.attributes.url+')'" class="img-cart"></div>
-                            </Link>
+                            <template v-if="product.attributes.type == 'souvenir'">
+                                <Link :href="route('product.souvenir.show',{product : product.id})">
+                            	    <div :style="'background:url(/storage/souvenirs/'+product.attributes.url+')'" class="img-cart"></div>
+                                </Link>    
+                            </template>
+                            <template v-if="product.attributes.type == 'activity'">
+                                <Link :href="route('product.activities.show',{product : product.id})">
+                                    <template v-if="product.images !== undefined">
+                                        <div :style="'background:url('+product.images[0].name+')'" class="img-cart"></div>
+                                    </template>
+                                </Link>
+                            </template>
                         </div>
                         <div class="cart-content">
-                            <h6><a :href="route('product.souvenir.show',{product : product.id})">{{ product.name }} </a></h6>
+                            <h6>
+                                <template v-if="product.attributes.type == 'activity'">
+                                    <a :href="route('product.activities.show',{product : product.id})">{{ product.name }} </a>
+                                </template>
+                                <template v-if="product.attributes.type == 'souvenir'">
+                                    <a :href="route('product.souvenir.show',{product : product.id})">{{ product.name }} </a>
+                                </template>
+                            </h6>
                             <span class="cart-price" v-if="product.attributes.type == 'souvenir'">{{ product.price }} €</span>
-                            <span class="cart-price" v-if="product.attributes.type == 'activity'">
-                                <template v-if="product.attributes.priceN">
-                                    Adultos: {{ product.attributes.priceA }} € <br>Niños: {{ product.attributes.priceN }} €
-                                </template>
-                                <template v-else>
-                                    Precio: {{ product.attributes.priceA }} €
-                                </template>
-                            </span>
+                            <template v-if="product.attributes.type == 'activity'">
+                                <span class="cart-price">Precio: {{ Number(product.attributes.adult) * Number(product.attributes.priceAdult) +  Number(product.attributes.children) * Number(product.attributes.priceChildren) +  Number(product.attributes.student) * Number(product.attributes.priceStudent) +  Number(product.attributes.baby) * Number(product.attributes.priceBaby) }} €</span>
+                            </template>
                             <span v-if="product.attributes.type == 'souvenir'">Cantidad: {{ product.quantity }}</span>
                             <span><a href="javascript:void(0)" class="text-danger" @click="deleteCart(product.id)"><i class="ion-close"></i> Eliminar</a></span>
                         </div>
@@ -33,8 +44,8 @@
                     <li class="cart-footer">
                         <ul class="price-content">
                             <li hidden>Sub-total <span>{{ sub_total }} €</span></li>
-                            <li v-if="total_souvenirs<40  && total_souvenirs > 0">Envío <span>5 €</span></li>
-                            <li>Total <span>{{ total }} €</span></li>
+                            <li v-if="total_souvenirs<40  && total_souvenirs > 0">Envío <span> 5 €</span></li>
+                            <li>Total <span> {{ total }}€</span></li>
                         </ul>
                         <div class="cart-actions text-center">
                             <Link class="cart-checkout" :href="route('checkout.souvenirs')">Pagar Ahora</Link>
@@ -69,10 +80,10 @@
                         total += (cart[key].price * cart[key].quantity);
                         total_souvenirs += (cart[key].price * cart[key].quantity);
                     }else{
-                        if (cart[key].attributes.priceN) {
-                            total += ((cart[key].attributes.adult * cart[key].attributes.priceA) +  (cart[key].attributes.children * cart[key].attributes.priceN));
+                        if (cart[key].attributes !== null) {
+                            total += Number(cart[key].attributes.adult) * Number(cart[key].attributes.priceAdult) +  Number(cart[key].attributes.children) * Number(cart[key].attributes.priceChildren) +  Number(cart[key].attributes.student) * Number(cart[key].attributes.priceStudent) +  Number(cart[key].attributes.baby) * Number(cart[key].attributes.priceBaby);
                         }else{
-                            total += ((cart[key].attributes.adult * cart[key].attributes.priceA) +  (cart[key].attributes.children * cart[key].attributes.priceA));
+                            total += 0;
                         }
                     }
                 }
