@@ -135,13 +135,43 @@
                                 <p class="text-sm md:text-xl truncate pr-3">{{ act.name }}</p>
                             </div>
                             <div class="product-price">
-                                <p class="text-sm md:text-xl font-weight-bolder"><Decimals :precio="(act.attributes.priceA*Number(act.attributes.adult) + act.attributes.priceN*Number(act.attributes.children))"/>€</p>
+                                <p class="text-sm md:text-xl font-weight-bolder"><Decimals :precio="(Number(act.attributes.priceAdult)*Number(act.attributes.adult) + Number(act.attributes.priceChildren)*Number(act.attributes.children) + Number(act.attributes.priceStudent)*Number(act.attributes.student) + Number(act.attributes.priceBaby)*Number(act.attributes.baby))"/>€</p>
                             </div>
                         </div>
                         <div class="activity-prices pt-1 pr-1 text-center d-flex justify-around">
                             <div class="">
-                                <p class="text-sm md:text-xl" v-if="act.attributes.adult > 0">{{ act.attributes.adult }} Adultos</p>
-                                <p class="text-sm md:text-xl" v-if="act.attributes.children > 0">{{ act.attributes.children }} Niños</p>
+                                <p class="text-sm md:text-xl" v-if="act.attributes.adult > 0">
+                                    <template v-if="act.attributes.adult == 1">
+                                        {{ act.attributes.adult }} Adulto    
+                                    </template>
+                                    <template v-if="act.attributes.adult > 1">
+                                        {{ act.attributes.adult }} Adultos    
+                                    </template>
+                                </p>
+                                <p class="text-sm md:text-xl" v-if="act.attributes.children > 0">
+                                    <template v-if="act.attributes.children == 1">
+                                        {{ act.attributes.children }} Niño    
+                                    </template>
+                                    <template v-if="act.attributes.children > 1">
+                                        {{ act.attributes.children }} Niños    
+                                    </template>
+                                </p>
+                                <p class="text-sm md:text-xl" v-if="act.attributes.student > 0">
+                                    <template v-if="act.attributes.student == 1">
+                                        {{ act.attributes.student }} Estudiante    
+                                    </template>
+                                    <template v-if="act.attributes.student > 1">
+                                        {{ act.attributes.student }} Estudiantes    
+                                    </template>
+                                </p>
+                                <p class="text-sm md:text-xl" v-if="act.attributes.baby > 0">
+                                    <template v-if="act.attributes.baby == 1">
+                                        {{ act.attributes.baby }} Bebe    
+                                    </template>
+                                    <template v-if="act.attributes.baby > 1">
+                                        {{ act.attributes.baby }} Bebes    
+                                    </template>
+                                </p>
                             </div>
                             <div class="pt-3">
                                 <Link :href="route('product.activities.show',{product : act.id})" class="btn btn-sm btn-azulc px-2 py-0 text-white rounded-pill">Modificar reserva</Link>
@@ -170,6 +200,22 @@
                         </template>
                         <template v-else>
                             ({{ nchildren }} niño)
+                        </template>    
+                    </p>
+                    <p class="text-center text-muted" v-if="nstudent > 0">
+                    <template v-if="nstudent > 1">
+                            ({{ nstudent }} estudiantes)
+                        </template>
+                        <template v-else>
+                            ({{ nstudent }} estudiante)
+                        </template>    
+                    </p>
+                    <p class="text-center text-muted" v-if="nbaby > 0">
+                    <template v-if="nbaby > 1">
+                            ({{ nbaby }} bebes)
+                        </template>
+                        <template v-else>
+                            ({{ nbaby }} bebe)
                         </template>    
                     </p>
                 </div>
@@ -254,6 +300,8 @@
                 showPopup:false,
                 nchildren:0,
                 nadult:0,
+                nstudent:0,
+                nbaby:0,
                 total_activities:0,
             }
         },
@@ -297,6 +345,8 @@
                 let numero_souvenirs = 0;
                 let adultn = 0;
                 let childrenn = 0;
+                let student = 0;
+                let baby = 0;
                 Object.keys(cart).forEach(function(key) {
                     if (cart[key].name) {
                         if (cart[key].attributes.type == 'souvenir') {
@@ -308,12 +358,17 @@
                         if (cart[key].attributes.type == 'activity') {
                             adultn += Number(cart[key].attributes.adult);
                             childrenn += Number(cart[key].attributes.children);
-                            total_activities += (Number(cart[key].attributes.adult) * cart[key].attributes.priceA) + (Number(cart[key].attributes.children) * cart[key].attributes.priceN);
+                            student += Number(cart[key].attributes.student);
+                            baby += Number(cart[key].attributes.baby);
+
+                            total_activities += (Number(cart[key].attributes.adult) * Number(cart[key].attributes.priceAdult) + Number(cart[key].attributes.children) * Number(cart[key].attributes.priceChildren) + Number(cart[key].attributes.student) * Number(cart[key].attributes.priceStudent) + Number(cart[key].attributes.baby) * Number(cart[key].attributes.priceBaby));
                         }
                     }
                 });
                 this.nadult += adultn;
                 this.nchildren = childrenn;
+                this.nstudent = student;
+                this.nbaby = baby;
                 this.n_souvenirs = numero_souvenirs == 1 ? numero_souvenirs+' artículo' : numero_souvenirs+' artículos';
                 this.total_souvenirs = total_souvenirs;
                 this.sub_total = total;

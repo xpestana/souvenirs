@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit">
 	<div class="row">
-        <div class="col-12 text-center">
+        <div class="col-12 text-center" v-if="this.precios.length > 0">
                 <DatePicker mode="date" v-model="form.date" 
                 :available-dates="this.dias_disponibles" 
                 :attributes="attributes" />
@@ -22,95 +22,100 @@
                         </div>
                     </div> -->
                 </div>
-            <div class="border mt-2 section-horarios d-inline-flex p-1 mb-1 w-3/4 md:w-1/4">
+            <!-- <div class="border mt-2 section-horarios d-inline-flex p-1 mb-1 w-3/4 md:w-1/4">
                 <div class="icon text-center">
                     <i class="far fa-clock text-xl text-grayc pl-1 pr-2"></i>
                 </div>
                 <div class="lista-horarios">
                     <div class="d-inline mr-2">
-                        <input type="radio" name="hora">
-                        <p class="hora d-inline pl-1 pt-1 text-base">11:00</p>
-                    </div>
-                    <div class="d-inline mr-2">
-                        <input type="radio" name="hora">
-                        <p class="hora d-inline pl-1 pt-1 text-base">11:00</p>
-                    </div>
-                    <div class="d-inline mr-2">
-                        <input type="radio" name="hora">
+                        <input type="radio" name="hora" class="mb-2">
                         <p class="hora d-inline pl-1 pt-1 text-base">11:00</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-12 py-2" style="background-color:#e6e6e6d4">
-            <div class="row pb-2 justify-content-md-center">
-                <template v-if="this.precios.length == 0">
-                    <div class="col-12 text-center my-2 text-danger">
-                        No hay precios establecidos para esta actividad
-                    </div>
-                </template>
-                <div class="col-5 col-md-3 pt-1 pl-4">
-                    <p class="text-2xl d-inline mr-4">Adulto</p>
-                </div>
-                <div class="col-3 col-md-1 px-0 pt-2 text-center">
-                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
-                        <template v-if="this.precios[0]">
-                            {{precios[0]}}€
-                        </template> 
-                        <template v-else>
-                            -
-                        </template>
-                    </h5>
-                </div>
-                <div class="col-4 col-md-1 px-0 pt-2">
-                    <button type="button" @click="form.adult > 0 ? --form.adult : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
-                    <input type="text" v-model="form.adult" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
-                    <button type="button" @click="++form.adult" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
-                </div>
-            </div>
-            <div class="row pb-2 justify-content-md-center">
-                <div class="col-5 col-md-3 pt-1 pl-4">
-                    <p class="text-2xl d-inline mr-4">Niño</p>
-                </div>
-                <div class="col-3 col-md-1 px-0 pt-2 text-center">
-                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
-                        <template v-if="this.precios[1]">
-                            {{precios[1]}}€
-                        </template> 
-                        <template v-else>
-                            -
-                        </template>
-                    </h5>
-                </div>
-                <div class="col-4 col-md-1 px-0 pt-2">
-                    <button type="button" @click="form.children > 0 ? --form.children : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
-                    <input type="text" v-model="form.children" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
-                    <button type="button" @click="++form.children" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
-                </div>
-            </div>
-            <div class="row pb-2 justify-content-md-center">
-                <div class="col-5 col-md-3 pt-1 pl-4">
-                    <p class="text-2xl d-inline mr-4">Estudiantes</p>
-                </div>
-                <div class="col-3 col-md-1 px-0 pt-2 text-center">
-                    <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
-                        <template v-if="this.precios[2]">
-                            {{precios[2]}}€
-                        </template> 
-                        <template v-else>
-                            -
-                        </template>
-                    </h5>
-                </div>
-                <div class="col-4 col-md-1 px-0 pt-2">
-                    <button type="button" @click="form.student > 0 ? --form.student : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
-                    <input type="text" v-model="form.student" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
-                    <button type="button" @click="++form.student" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
-                </div>
-            </div>
+            </div> -->
         </div>
         
-        <div class="col-12 text-center px-0 mb-2 py-1" style="background-color:#bedfef;">
+        <div class="col-12 my-2 text-center text-danger" v-if="this.eventos == null">
+            Esta actividad no esta disponible
+        </div>
+        <template v-if="this.preciosLista.length == 0 && this.eventos !== null">
+            <div class="col-12 my-2 text-center text-azulc">
+                Seleccione una fecha para poder ver los precios!
+            </div>
+        </template>
+        <template v-if="this.spinner">
+            <div class="col-12 my-1 text-center">
+                <div class="spinner-border text-azulc" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </template>
+        <template v-if="this.preciosLista.length !== 0 && this.eventos !== null">
+            <div  class="col-12 py-2 mt-1" style="background-color:#e6e6e6d4">
+                <div class="row pb-2 justify-content-md-center" v-if="this.preciosLista[0] !== undefined">
+                    <div class="col-5 col-md-3 pt-1 pl-4" >
+                        <p class="text-lg d-inline mr-4">Adultos</p>
+                    </div>
+                    <div class="col-3 col-md-1 px-0 pt-2 text-center">
+                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
+                            {{preciosLista[0]}}€
+                        </h5>
+                    </div>
+                    <div class="col-4 col-md-1 px-0 pt-2" v-if="this.preciosLista.length > 0">
+                        <button type="button" @click="form.adult > 0 ? --form.adult : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
+                        <input type="text" v-model="form.adult" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
+                        <button type="button" @click="++form.adult" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="row pb-2 justify-content-md-center" v-if="this.preciosLista[1] !== undefined">
+                    <div class="col-5 col-md-3 pt-1 pl-4">
+                        <p class="text-lg d-inline mr-4">Niños</p>
+                    </div>
+                    <div class="col-3 col-md-1 px-0 pt-2 text-center">
+                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
+                            {{preciosLista[1]}}€
+                        </h5>
+                    </div>
+                    <div class="col-4 col-md-1 px-0 pt-2">
+                        <button type="button" @click="form.children > 0 ? --form.children : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
+                        <input type="text" v-model="form.children" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
+                        <button type="button" @click="++form.children" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="row pb-2 justify-content-md-center" v-if="this.preciosLista[2] !== undefined">
+                    <div class="col-5 col-md-3 pt-1 pl-4">
+                        <p class="text-lg d-inline mr-4">Estudiantes</p>
+                    </div>
+                    <div class="col-3 col-md-1 px-0 pt-2 text-center">
+                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
+                            {{preciosLista[2]}}€
+                        </h5>
+                    </div>
+                    <div class="col-4 col-md-1 px-0 pt-2">
+                        <button type="button" @click="form.student > 0 ? --form.student : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
+                        <input type="text" v-model="form.student" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
+                        <button type="button" @click="++form.student" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="row pb-2 justify-content-md-center" v-if="this.preciosLista[3] !== undefined">
+                    <div class="col-5 col-md-3 pt-1 pl-4">
+                        <p class="text-lg d-inline mr-4">Bebes</p>
+                    </div>
+                    <div class="col-3 col-md-1 px-0 pt-2 text-center">
+                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
+                            {{preciosLista[3]}}€
+                        </h5>
+                    </div>
+                    <div class="col-4 col-md-1 px-0 pt-2">
+                        <button type="button" @click="form.baby > 0 ? --form.baby : ''" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-minus"></i></button>
+                        <input type="text" v-model="form.baby" class="border-0 w-10 font-weight-bolder p-0 px-2 text-center" style="background-color:#e6e6e6d4">
+                        <button type="button" @click="++form.baby" class="rounded-circle bg-info text-white d-inline text-xs px-1"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
+        <div class="col-12 text-center px-0 mb-2 py-1" style="background-color:#bedfef;" v-if="this.guardarFecha !== null">
             <button class="btn shadow-city bg-white py-1 px-5 my-2 font-weight-bolder text-center text-base" id="submit" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 Reservar
             </button>
@@ -138,31 +143,34 @@
         },
         data() {
             return {
-                modal: false,
-                status: null,
-                random: 1,
             	form: this.$inertia.form({
                     product_id: this.product.id,
                 	adult: 0,
                 	children: 0,
                     student:0,
+                    baby:0,
                     date:null,
                     priceAdult:0,
                     priceChildren:0,
-                    priceStudent:0
+                    priceStudent:0,
+                    priceBaby:0,
+                    spinner:false
             	}),
                 attributes: [
                     {
                         highlight: true,
                         dates: []
                     }
-                ]
+                ],
+                preciosFecha:{},
+                fechasObjeto:[],
             }
         },
         props: {
             product: Object,
             eventos: Object,
-            precios: Object
+            precios: Object,
+            token: String
         },
         methods: {
             fechas(){
@@ -171,17 +179,16 @@
                     let valor = ""
                     for(let val of newevents){
                         valor = new Date(val)
-                        this.attributes[0].dates.push(valor.getFullYear()+'-'+valor.getMonth()+'-'+valor.getDate())
+                        this.attributes[0].dates.push(valor)
                     }
-                    console.log(this.attributes[0].dates)
                 }
             },
             submit(){
-                var total = parseInt(this.form.adult) + parseInt(this.form.children);
-
-                if (total == 0 || this.guardarFecha == null) {
+                let total = parseInt(this.form.adult) + parseInt(this.form.children) + parseInt(this.form.student) + parseInt(this.form.baby);
+                this.form.date = this.fechaForm;
+                if (total == 0) {
                     let text=""
-                    if(total == 0) text = "Error, Debes agregar al menos una persona"
+                    if(total == 0) text = "Indica cuántas personas acudirán a esta actividad"
                     if(this.guardarFecha == null) text = "No ha seleccionado ninguna fecha"
                  
                     this.$swal({
@@ -194,10 +201,11 @@
                             '<i class="fa fa-thumbs-up"></i> Aceptar!',
                         confirmButtonAriaLabel: 'Aceptar!',
                     })
-                }
-                if(total > 0 && this.guardarFecha !== null){
-                    console.log(this.form)
-                    this.form.date = this.guardarFecha;
+                }else{
+                    this.form.priceAdult = this.preciosLista[0] !== undefined ? this.preciosLista[0] : 0
+                    this.form.priceChildren = this.preciosLista[1] !== undefined ? this.preciosLista[1] : 0
+                    this.form.priceStudent = this.preciosLista[2] !== undefined ? this.preciosLista[2] : 0
+                    this.form.priceBaby = this.preciosLista[3] !== undefined ? this.preciosLista[3] : 0
                     this.form.post(route('cart.activity'),{
                         _token: this.$page.props.csrf_token,
                         errorBag: 'submit',
@@ -223,10 +231,37 @@
                         Inertia.visit(route('checkout.souvenirs'), { method: 'get' }, { preserveScroll: true });
                     }
                 })
-            }
+            },
     	},
         computed: {
             guardarFecha(){
+                if(this.form.date !== null){
+                this.spinner=true;
+                let arr = String(this.form.date).split(new Date().getFullYear())
+                const result = this.fechasObjeto.filter(el => String(el.fecha).includes(arr[0]))
+                const token = this.token;
+                this.preciosFecha = {};
+                axios({
+                url: 'https://apptest.turitop.com/v1/tickets/getprices',
+                method: 'POST',
+                data:{
+                    access_token:token,
+                    data: {
+                        product_short_id: this.product.short_id,
+                        date_event:result[0].codigo,
+                        language_code:"es"
+                    }
+                }
+                })
+                .then((respuesta) => {
+                        this.preciosFecha = respuesta.data.data
+                        this.spinner =false;
+                        console.log(this.preciosFecha)
+                })
+            }
+                return this.form.date;
+            },
+            fechaForm(){
                 return this.form.date;
             },
             dias_disponibles(){
@@ -236,17 +271,36 @@
                 return newevents.map((el) => {
                     valor = new Date(el);
                     return { 
-                        start:valor.getFullYear()+'-'+valor.getMonth()+'-'+valor.getDate(),
-                        end:valor.getFullYear()+'-'+valor.getMonth()+'-'+valor.getDate()
+                        start:valor.getFullYear()+'-'+(valor.getMonth()+1)+'-'+valor.getDate(),
+                        end:valor.getFullYear()+'-'+(valor.getMonth()+1)+'-'+valor.getDate()
                     }
                 })
             },
+            preciosLista(){
+                if(this.preciosFecha !== {}){
+                    let arr =[];
+                    for(let val in this.preciosFecha.prices_per_ticket){
+                        arr.push(this.preciosFecha.prices_per_ticket[val]);
+                    }
+                    console.log(arr)
+                    return arr;
+                }else{
+                    return 0
+                }
+            }
         },
         created(){
             this.fechas()
+            this.fechasObjeto = this.eventos.map((el)=>{ 
+                return { 
+                    codigo : el.time,
+                    fecha  : new Date(el.time*1000)
+                }
+            })
         },
         mounted(){
-            console.log(this.dias_disponibles)
+            console.log(this.eventos)
+            console.log(this.fechasObjeto)
         }
 
     }

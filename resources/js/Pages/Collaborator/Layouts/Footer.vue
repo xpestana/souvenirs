@@ -40,10 +40,10 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li class="pb-2"><a target="_blank" href="/tablero/alojamientos/politicas/privacidad">Políticas de privacidad</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/tablero/alojamientos/politicas/terminosycondiciones">Términos y condiciones</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/tablero/alojamientos/politicas/entregas">Políticas de entrega</a></li>
-                                        <li class="pb-2"><a target="_blank" href="/tablero/alojamientos/politicas/devolucion">Políticas de devolución</a></li>
+                                        <li class="pb-2"><a target="_blank" href="/politicas/privacidad">Políticas de privacidad</a></li>
+                                        <li class="pb-2"><a target="_blank" href="/politicas/terminosycondiciones">Términos y condiciones</a></li>
+                                        <li class="pb-2"><a target="_blank" href="/politicas/entregas">Políticas de entrega</a></li>
+                                        <li class="pb-2"><a target="_blank" href="/politicas/devolucion">Políticas de devolución</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -52,15 +52,13 @@
                     <div class="footer-social">
                         <div class="row justify-content-center pb-3">
                             <div class="col-8 col-md-3 text-center d-inline-flex">
-                                <a href="#" class="">
-                                <!-- <a href="#" class="my-auto mx-3"> -->
-                                    <!-- <i class="fab fa-whatsapp text-white rounded-circle bg-success p-2"></i> -->
+                                <button type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="+34 722 19 39 03">
                                     <img src="/vendor_asset/img/social/wt.png" class="">
-                                </a>
-                                <a href="#" class="">
+                                </button>
+                                <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
                                     <img src="/vendor_asset/img/social/inst.png" class="px-2">
                                 </a>
-                                <a href="#" class="">
+                                <a target="_blank" href="https://twitter.com/hicitty_" class="">
                                     <img src="/vendor_asset/img/social/tw.png" class="px-2">
                                 </a>
                             </div>
@@ -82,10 +80,14 @@
 
 <script>
     import { Link } from '@inertiajs/inertia-vue3'
-
     export default {
         components: {
             Link,
+        },
+        created(){
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
         }
     }
 </script>

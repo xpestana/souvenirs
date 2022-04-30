@@ -13,7 +13,7 @@
         </div>
 
         <div class="container px-4">
-            <div class="row shadow-md activity-card my-3 h-28 md:h-32" v-for="product in data" :key="product.id">
+            <div class="row shadow-md activity-card my-3 h-28 md:h-32" v-for="product in actList" :key="product.id">
                 <div class="col-4 col-md-2 px-0 p-2">
                     <template v-if="product.images.length > 0">
                         <Link :href="route('product.activities.show',{product : product.id})">
@@ -42,14 +42,26 @@
                     <div class="footer-card-act d-flex flex-row justify-between align-items-end">
                         <div class="time">
                             <i class="far fa-hourglass mr-1 text-grayc md:text-base"></i>
-                            <p class="text-grayc d-inline md:text-base" v-if="product.activities">{{ product.activities.duration }}</p>
+                            <p class="text-grayc d-inline md:text-base" v-if="product.duration">{{ product.duration }}</p>
                         </div>
                         <div class="lenguage">
                             <i class="far fa-comment-alt mr-2 text-grayc md:text-base"></i>
                             <p class="text-grayc d-inline md:text-base">Español</p>
                         </div>
                         <div class="price">
-                            <p class="font-weight-bolder text-azulc md:text-2xl pr-md-2">35€</p>
+                            <p class="font-weight-bolder text-azulc md:text-2xl pr-md-2">
+                                <template v-if="product.precios.lenght !== null">
+                                <template v-if="product.precios[2] !== undefined">
+                                    <Decimals :precio="product.precios[2]"/>€
+                                </template>
+                                <template v-else-if="product.precios[1] !== undefined">
+                                    <Decimals :precio="product.precios[1]"/>€
+                                </template>
+                                <template v-else-if="product.precios[0] !== undefined">
+                                    <Decimals :precio="product.precios[0]"/>€
+                                </template>
+                              </template>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -78,7 +90,7 @@
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
     import Moment from 'moment'
     import Slider from '@vueform/slider'
-
+    import Decimals from '@/Layouts/Components/Decimals.vue'
     export default {
         components: {
             Head,
@@ -86,6 +98,7 @@
             Layout,
             Breadcrumb,
             Slider,
+            Decimals
         },
         props: {
             products: Object,
@@ -140,7 +153,29 @@
             truncateTitle(title){
                 title.length > 65 ? title = title.slice(0,65 - Number(title.length))+'...'  : ''
                 return title;
-            }
+            },
+        },
+         computed:{
+          actList(){
+            return this.data.map((el)=>{
+              let precios = JSON.parse(el.activities.priceA);
+              let arr = [];
+              if(precios !== null){
+                  for(let val in precios.prices_per_ticket){
+                      arr.push(precios.prices_per_ticket[val])
+                  }
+              }else{
+                let arr = null;
+              }
+              return {
+                id:el.id,
+                precios:arr,
+                images:el.images,
+                title:el.title,
+                duration:el.activities.duration,
+              }
+            })
+          }
         }
 }
 

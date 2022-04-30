@@ -51,6 +51,15 @@ Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name(
 Route::get('politicas/terminosycondiciones',function(){
     return Inertia::render('Collaborator/Politicas/Terminos'); 
 });
+Route::get('politicas/privacidad',function(){
+    return Inertia::render('Collaborator/Politicas/Privacidad'); 
+});
+Route::get('politicas/devolucion',function(){
+    return Inertia::render('Collaborator/Politicas/Reembolso'); 
+});
+Route::get('politicas/entregas',function(){
+    return Inertia::render('Collaborator/Politicas/Entregas'); 
+});
 /*
     Auth
  */
@@ -284,15 +293,6 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
    });
    Route::get('/politicas/cookies',function(){
        return Inertia::render('Collaborator/Politicas/Cookies'); 
-   });
-   Route::get('/politicas/privacidad',function(){
-       return Inertia::render('Collaborator/Politicas/Privacidad'); 
-   });
-   Route::get('/politicas/devolucion',function(){
-       return Inertia::render('Collaborator/Politicas/Reembolso'); 
-   });
-   Route::get('/politicas/entregas',function(){
-       return Inertia::render('Collaborator/Politicas/Entregas'); 
    });
 });
 /*Ajustes*/

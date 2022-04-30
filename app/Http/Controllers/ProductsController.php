@@ -21,7 +21,7 @@ class ProductsController extends Controller
     public function activities($id)
     {
         $product = Products::with('images', 'activities')->where('id', $id)->first();
-
-        return Inertia::render('Dashboard/Show/Activities', compact('product'));
+        $access_token = connect()['access_token'];
+        return Inertia::render('Dashboard/Show/Activities', compact('product','access_token'));
     }
 }

@@ -330,7 +330,7 @@
                 return this.activitiesList.reduce((acc, el) => ({
                     ...acc,
                     num:++acc.num,
-                    precio:(Number(el.attributes.adult)*el.attributes.priceA + Number(el.attributes.children)*el.attributes.priceN) + acc.precio,
+                    precio:(Number(el.attributes.adult)*Number(el.attributes.priceAdult) + Number(el.attributes.children)*Number(el.attributes.priceChildren) + Number(el.attributes.student)*Number(el.attributes.priceStudent) + Number(el.attributes.baby)*Number(el.attributes.priceBaby)) + acc.precio,
                 }),{num:0,precio:0});
             },
             importeTotal(){

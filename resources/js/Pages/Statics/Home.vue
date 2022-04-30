@@ -285,7 +285,7 @@
             background-size: contain;
         }
         #actividades .tarjeta{
-          height: 13em;
+          height: 11em;
           width: 11em;
         }
         #actividades .tarjeta img{

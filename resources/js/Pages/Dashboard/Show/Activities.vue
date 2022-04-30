@@ -79,23 +79,27 @@
 
                         <div id="precio" class="collapse p-3" aria-labelledby="headingtwo" data-parent="#accordionExample" style="background-color:#e6e6e6d4">
                             <template v-if="this.precios.length == 0">
-                                <div class="text-center">
-                                    No hay precios establecidos para esta actividad
+                                <div class="text-center">   
+                                    Esta actividad no esta disponible
                                 </div>
                             </template>
-                            <template v-else>
+                            <template v-if="this.precios.length > 0">
                                 <div class="text-right">
-                                    <div class="mb-4" v-if="this.precios[0]">
-                                        <p class="text-xl d-inline mr-4">Adulto</p>
-                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">{{this.precios[0]}}€</h5>
+                                    <div class="mb-4" v-if="this.precios[0] !== undefined">
+                                        <p class="text-lg d-inline mr-4">Adultos</p>
+                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[0]}}€</h5>
                                     </div>
-                                    <div class="mb-4" v-if="this.precios[1]">
-                                        <p class="text-xl d-inline mr-4">Niños</p>
-                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">{{this.precios[1]}}€</h5>
+                                    <div class="mb-4" v-if="this.precios[1] !== undefined">
+                                        <p class="text-lg d-inline mr-4">Niños</p>
+                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[1]}}€</h5>
                                     </div>
-                                    <div v-if="this.precios[2]">
-                                        <p class="text-xl d-inline mr-4">Estudiantes</p>
-                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">{{this.precios[2]}}€</h5>
+                                    <div class="mb-4" v-if="this.precios[2] !== undefined">
+                                        <p class="text-lg d-inline mr-4">Estudiantes</p>
+                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
+                                    </div>
+                                    <div v-if="this.precios[2] !== undefined">
+                                        <p class="text-lg d-inline mr-4">Bébes</p>
+                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[3]}}€</h5>
                                     </div>
                                 </div>
                             </template>
@@ -121,7 +125,7 @@
                                 </div>
                             </div>
                             <div class="px-3">
-                                <calendar :product="product" :eventos="eventosAbiertos" :precios="precios" />
+                                <calendar :token="access_token" :product="product" :eventos="eventosAbiertos" :precios="precios" />
                             </div>
                         </div>
                     </div>
@@ -199,21 +203,6 @@
                     </div>  
                 </div>
             </div>
-
-            <div class="col-12 mt-3 py-2" style="background-color:#bedfef;">
-                <h2 class="font-weight-bolder text-left d-inline text-xl" v-if="this.precios[2]">
-                    {{precios[2]}}€
-                </h2>
-                <h2 class="font-weight-bolder text-left d-inline text-xl" v-if="this.precios[2] == undefined && this.precios[1] !== undefined">
-                    {{precios[1]}}€
-                </h2>
-                <h2 class="font-weight-bolder text-left d-inline text-xl" v-if="this.precios[1] == undefined && this.precios[0] !== undefined">
-                        {{precios[0]}}€
-                </h2>
-                <!-- <a @click="cambiarColor('horarios-color')" href="#" class="d-inline float-right" data-toggle="collapse" data-target="#horario" aria-expanded="true" aria-controls="horario">
-                    <p class="font-weight-bolder text-md">Ver disponibilidad</p>
-                </a> -->
-            </div>
         </div>
     </div>
     
@@ -254,6 +243,7 @@
         },
         props: {
             product: Object,
+            access_token: String
         },
         created(){
             this.moment=Moment;
@@ -275,7 +265,7 @@
                 else{
                     
                 }
-            }   
+            } 
         },
         methods:{
             cambiarColor(id){
