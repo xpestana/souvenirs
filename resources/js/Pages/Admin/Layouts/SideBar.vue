@@ -92,7 +92,8 @@ export default {
         urlActividades(){
             let url = this.$page.url;
             let url1 = url.includes('/admin/activities')
-            if(url1){
+            let url2 = url.includes('tablero/actividades/')
+            if(url1 || url2){
                 return true;
             }
             return false;

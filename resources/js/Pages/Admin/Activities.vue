@@ -92,15 +92,74 @@
             </div>
         </div>
     </div>
+
+    <div class="container px-0 px-md-2 px-lg-5">
+        <div class="row my-4 my-md-5 px-md-5">
+            <div class="col-12 text-center">
+                <h1 class="text-azulc text-2xl font-weight-bolder">Actividades registradas</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center justify-content-md-between mt-3 mb-2 mt-md-5 mb-md-4 opciones px-md-5">
+            <div class="col-10 col-md-5 col-lg-4 my-2 my-lg-0  text-center text-md-left">
+                <a href="#" class="btn btn-primary-c py-1 px-3">Agregar Actividad <i class="fas fa-plus pr-1 pr-lg-3"></i></a>
+            </div>
+            <div class="col-10 col-md-5 col-lg-4 pt-md-1 pl-md-5 my-2 my-md-0 text-center text-md-right">
+                <div class="input-search m-0">
+                    <span class="fa fa-search text-muted position-absolute d-none d-lg-block text-md-right ml-md-2 right-0 md:mr-48 md:pt-2.5"></span>
+                    <input type="text" class="rounded-sm border md:pl-8 h-9" placeholder="Search">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container tabla-actividades-registradas px-0 px-md-2 px-lg-5 mb-4">
+        <div class="row mt-2 px-md-5">
+            <div class="col-12">
+                <div class="table-responsive-md bg-white">
+                    <table class="table table-striped table-borderless">
+                        <thead class="table-active text-center">
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Idioma</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"> 
+                            <tr v-for="act in activities.data" :key="act.id">
+                                <td class="text-center truncate">{{ act.title }}</td>
+                                <td class="text-center">{{ detallarPrecios(act.activities.priceA) }}</td>
+                                <td class="text-center">Idioma</td>
+                                <td class="text-center">
+                                    <div class="d-inline-flex">
+                                    <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('activities.edit',{id:act.id})" style="background-color: #2b59a2">Editar</Link>
+                                    <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1">Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 flex justify-center mb-4">
+                <paginator :paginator="activities" />
+            </div>
+        </div>
+    </div>
 </template>
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import { Link } from '@inertiajs/inertia-vue3'
+import Paginator from '@/Components/Paginator.vue'
 export default {
     layout:Layout,
+    components:{
+        Paginator,
+        Link
+    },
     props:{
         products:Object,
-        actList:Object
+        actList:Object,
+        activities:Object
     },
     data(){
         return {
@@ -124,11 +183,33 @@ export default {
     },
     created(){
         // this.moment=Moment;
+        console.log(this.activities)
     },
     updated(){
         this.desabilitar = false
     },
     methods: {
+        detallarPrecios(precios){
+            if(precios !== "null"){
+                let lista = JSON.parse(precios);
+                if(lista.error_code == undefined){
+                    let arr = [];
+                    for(let val in lista.prices_per_ticket){
+                      arr.push(lista.prices_per_ticket[val])
+                    }
+                    let template = ''
+                    if(arr[0]) template += 'Adultos: '+arr[0]
+                    if(arr[1]) template += ' - Niños: '+arr[1]
+                    if(arr[2]) template += ' - Estudiantes: '+arr[2]
+                    if(arr[3]) template += ' - Bebes: '+arr[3]
+                    return template;
+                }
+                return 'sin precios'   
+            }else
+            {
+                return 'sin precios'   
+            }
+        },
         updt(){
             this.$inertia.get(route('update.api'),
                 {

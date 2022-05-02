@@ -44,7 +44,10 @@ class ActivitiesController extends Controller
         $actList = Products::where("short_id","<>","null")
                             ->where("del","0")                        
                             ->get();
-        return Inertia::render('Admin/Activities', compact('products','actList'));
+        
+        $activities = Products::with('activities')->where('type', 'Activities')->paginate(8);
+
+        return Inertia::render('Admin/Activities', compact('products','actList','activities'));
     }
 
     /**
@@ -148,7 +151,7 @@ class ActivitiesController extends Controller
     {
         $product = Products::with('images', 'activities')->where('id', $id)->first();
 
-        return Inertia::render('Dashboard/Edit/Activities', compact('product'));
+        return Inertia::render('Admin/Activities/Edit', compact('product'));
     }
 
     /**
