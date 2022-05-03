@@ -150,6 +150,8 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
      */
     Route::post('/verify/activities', [ActivitiesController::class, 'verify'])->name('verify.activities');
     Route::post('/update/activities/{activities}', [ActivitiesController::class, 'update'])->name('update.activities');
+    Route::post('/updt/activities/{activities}', [ActivitiesController::class, 'updt'])->name('updt.activities');
+    Route::post('/destroy/activities/', [ActivitiesController::class, 'destroy'])->name('destroy.activities');
     Route::post('/activities/image', [ActivitiesController::class, 'image'])->name('activities.image');
     Route::post('/activities/update/image', [ActivitiesController::class, 'updt_image'])->name('activities.update.image');
     Route::resource(

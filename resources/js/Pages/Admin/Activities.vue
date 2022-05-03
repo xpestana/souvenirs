@@ -132,7 +132,7 @@
                                 <td class="text-center">
                                     <div class="d-inline-flex">
                                     <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('activities.edit',{id:act.id})" style="background-color: #2b59a2">Editar</Link>
-                                    <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="update(product.short_id)">Eliminar</button>
+                                    <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="eliminar(act.id)">Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -176,6 +176,7 @@ export default {
                 coordinates: null,	
                 images: null,
                 pricing_notes: null,
+                id: null
             }),
             zebra:false,
             desabilitar:false,
@@ -268,6 +269,30 @@ export default {
             horas == 0 ? horas='' : horas=horas+'h ';
             min == 0 ? min='' : min=min+'min';
             return horas+min
+        },
+        eliminar(id){ 
+            this.$swal({
+                title: '¿Esta seguro de eliminar esta actividad?',
+                icon: 'warning',
+                showCloseButton: false,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar',
+            }).then((res)=>{
+                if(res.isConfirmed)
+                {
+                    
+                    this.$inertia.post(route('destroy.activities'),{
+                        id: id,
+                        _token: this.$page.props.csrf_token,
+                        errorBag: 'submit',
+                        preserveScroll: true,
+                    })
+                }
+            })
         }
     },
     computed:{
@@ -287,7 +312,7 @@ export default {
                     return 0;
                 }
             })
-        },
+        }
     }
 }
 </script>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\Activities;
 use App\Models\Images;
 use Inertia\Inertia;
 use Redirect;
@@ -45,7 +46,7 @@ class ActivitiesController extends Controller
                             ->where("del","0")                        
                             ->get();
         
-        $activities = Products::with('activities')->where('type', 'Activities')->paginate(8);
+        $activities = Products::with('activities')->where('type', 'Activities')->where('del', false)->paginate(8);
 
         return Inertia::render('Admin/Activities', compact('products','actList','activities'));
     }
@@ -281,19 +282,46 @@ class ActivitiesController extends Controller
 
         return back(); 
     }
+    public function updt(Request $request, $activities)
+    {
+
+        $arr = [
+            "prices_per_ticket" => [
+                
+            ]
+        ];
+        $i = 0;
+        foreach ($request->pricesArr as $arrayPrice) {
+            $arr['prices_per_ticket']["111".$i] = $arrayPrice;
+
+            $i++;
+        }
+
+        $product = Products::find($activities);
+        $product->description = $request->description;
+        $product->title = $request->title;
+        $product->save();
+
+        $activities = Activities::find($product->activities->id);
+        $activities->language = $request->language;
+        $activities->priceA = json_encode($arr);
+        $activities->save();
+
+        return back()->with(['id'=>$product->id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);  
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $product = Products::find($id);
+        $product = Products::find($request->id);
         $product->del = true;
         $product->save();
         
-        return Redirect::route('activities.index')->with(['id'=>$id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
+        return Redirect::route('activities.index')->with(['id'=>$product->id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
     }
     /*update API*/
     public function api()
@@ -339,8 +367,6 @@ class ActivitiesController extends Controller
 
                 if($p){
                     $p->type = 'Activities';
-                    $p->title = html_entity_decode($product['name']);
-                    $p->description = ($product['description'] != '') ? html_entity_decode($product['description']): html_entity_decode($product['summary']);
                     $p->category = $product['type']['name'];
                     $p->short_id = $product['short_id'];
                     $p->summary = html_entity_decode($product['summary']);
@@ -353,7 +379,6 @@ class ActivitiesController extends Controller
                             'duration' => $product['duration'],
                             'coordinates' => $product['coordinates'],
                             'price_notes' => $product['pricing_notes'],
-                            'priceA' => json_encode($prices),
                             'events' => json_encode($events),
                         ]);
 

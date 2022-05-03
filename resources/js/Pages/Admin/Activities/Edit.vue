@@ -18,7 +18,7 @@
                 <input type="text" v-model="form.title" class="border rounded w-72 md:w-96" placeholder="Título">
             </div>
             <div class="col-12 col-md-6">
-                <select name="" id="language" class="border rounded w-72 md:w-96 mt-4">
+                <select name="" id="idioma" class="border rounded w-72 md:w-96 mt-4">
                     <option value="">Idioma</option>
                     <option value="Español">Español</option>
                     <option value="Inglés">Inglés</option>
@@ -39,10 +39,6 @@
             </div>
             <div class="col-12 col-md-6">
                 <span class="d-block font-weight-bolder mb-1 mt-2 mt-md-0">Precio base</span>
-                <div class="mt-1 d-flex pr-md-5 mr-md-5">
-                    <label class="pt-2 py-2 px-2 font-weight-bolder">Único</label>
-                    <input type="text" placeholder="Precio" v-model="form.priceUnique" class="border rounded ml-auto mr-2 mr-md-5">
-                </div>
                 <div class="mt-1 d-flex pr-md-5 mr-md-5">
                     <label class="pt-2 py-2 px-2 font-weight-bolder">Adulto</label>
                     <input type="text" placeholder="Precio" v-model="priceAdult" class="border rounded ml-auto mr-2 mr-md-5">
@@ -129,13 +125,14 @@ export default {
             this.form.pricesArr.push(this.priceChildren) 
             this.form.pricesArr.push(this.priceStudent) 
             this.form.pricesArr.push(this.priceBaby) 
-            this.form.lenguage = document.getElementById('idioma').value
-            // this.form.post(route('activities.update',{id: this.product.id}),{
-            //     _token: this.$page.props.csrf_token,
-            //     errorBag: 'submit',
-            //     preserveScroll: true,
-            //     forceFormData: true,
-            // })
+            this.form.language = document.getElementById('idioma').value
+
+             this.form.post(route('updt.activities',{activities: this.product.id}),{
+                 _token: this.$page.props.csrf_token,
+                 errorBag: 'submit',
+                 preserveScroll: true,
+                 forceFormData: true,
+             })
         },
     }
     

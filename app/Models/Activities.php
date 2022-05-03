@@ -26,6 +26,7 @@ class Activities extends Model
         'coordinates',
         'events',
         'price_notes',
+        'language',
     ];
 
     /**
