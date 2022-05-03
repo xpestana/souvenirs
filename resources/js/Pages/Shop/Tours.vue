@@ -42,7 +42,7 @@
                     <div class="footer-card-act d-flex flex-row justify-between align-items-end">
                         <div class="time">
                             <i class="far fa-hourglass mr-1 text-grayc md:text-base"></i>
-                            <p class="text-grayc d-inline md:text-base" v-if="product.duration">{{ product.duration }}</p>
+                            <p class="text-grayc d-inline md:text-base" v-if="product.duration"><ConvertirMinutos :minutos="product.duration" /></p>
                         </div>
                         <div class="lenguage">
                             <i class="far fa-comment-alt mr-2 text-grayc md:text-base"></i>
@@ -50,17 +50,20 @@
                         </div>
                         <div class="price">
                             <p class="font-weight-bolder text-azulc md:text-2xl pr-md-2">
-                                <template v-if="product.precios.lenght !== null">
-                                <template v-if="product.precios[2] !== undefined">
-                                    <Decimals :precio="product.precios[2]"/>€
+                                <template v-if="product.precios.lenght !== 0">
+                                    <template v-if="product.precios[3] !== undefined && product.precios[3] !== null">
+                                        <Decimals :precio="product.precios[3]"/>€
+                                    </template>
+                                    <template v-if="product.precios[2] !== undefined && product.precios[2] !== null && product.precios[3] == undefined">
+                                        <Decimals :precio="product.precios[2]"/>€
+                                    </template>
+                                    <template v-else-if="product.precios[1] !== undefined && product.precios[1] !== null && product.precios[2] == undefined">
+                                        <Decimals :precio="product.precios[1]"/>€
+                                    </template>
+                                    <template v-else-if="product.precios[0] !== undefined && product.precios[0] !== null && product.precios[1] == undefined">
+                                        <Decimals :precio="product.precios[0]"/>€
+                                    </template>
                                 </template>
-                                <template v-else-if="product.precios[1] !== undefined">
-                                    <Decimals :precio="product.precios[1]"/>€
-                                </template>
-                                <template v-else-if="product.precios[0] !== undefined">
-                                    <Decimals :precio="product.precios[0]"/>€
-                                </template>
-                              </template>
                             </p>
                         </div>
                     </div>
@@ -91,6 +94,7 @@
     import Moment from 'moment'
     import Slider from '@vueform/slider'
     import Decimals from '@/Layouts/Components/Decimals.vue'
+    import ConvertirMinutos from '@/Layouts/Components/ConvertirMinutos.vue'
     export default {
         components: {
             Head,
@@ -98,7 +102,8 @@
             Layout,
             Breadcrumb,
             Slider,
-            Decimals
+            Decimals,
+            ConvertirMinutos
         },
         props: {
             products: Object,
@@ -162,7 +167,9 @@
               let arr = [];
               if(precios !== null){
                   for(let val in precios.prices_per_ticket){
-                      arr.push(precios.prices_per_ticket[val])
+                      if(precios.prices_per_ticket[val] !== null){
+                        arr.push(Number(precios.prices_per_ticket[val]))
+                      }
                   }
               }else{
                 let arr = null;

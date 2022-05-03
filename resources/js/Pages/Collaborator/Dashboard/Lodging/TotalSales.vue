@@ -25,32 +25,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>00labc</td>
-                                    <td>00labc</td>
-                                    <td>M 20</td>
-                                    <td>M 20</td>
-                                    <td>hola@email.com</td>
-                                    <td>04/02/2022</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>00labc</td>
-                                    <td>00labc</td>
-                                    <td>M 20</td>
-                                    <td>M 20</td>
-                                    <td>hola@email.com</td>
-                                    <td>04/02/2022</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>00labc</td>
-                                    <td>00labc</td>
-                                    <td>M 20</td>
-                                    <td>M 20</td>
-                                    <td>hola@email.com</td>
-                                    <td>04/02/2022</td>
-                                    <td>10</td>
+                                <tr v-for="venta in ventas" :key="venta.id">
+                                    <td>{{venta.calle}} {{venta.planta}}</td>
+                                    <td>{{venta.address}}</td>
+                                    <td>-</td>
+                                    <td>{{venta.id_t }}}</td>
+                                    <td>{{venta.email}}</td>
+                                    <td>{{moment(venta.date).format("DD/MM/YYYY")}}</td>
+                                    <td>{{venta.total_benefit}}€</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -60,7 +42,12 @@
             <div class="row pie justify-content-end">
                 <div class="col-sm-4 col-md-3 mt-4">
                     <h2 class="text-info"><strong>Total</strong></h2>
-                    <p><b>Tu beneficio es de 13€</b></p>
+                    <p><b>Tu beneficio es de {{total}}€</b></p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-10 col-md-4">
+                    <paginator :paginator="orders" />
                 </div>
             </div>
         </div>
@@ -70,14 +57,48 @@
 import { Inertia } from '@inertiajs/inertia'
 import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 import { Head, Link } from '@inertiajs/inertia-vue3'
+import Paginator from '@/Components/Paginator'
+import Moment from 'moment'
 
 export default {
     layout:TemplateApp,
     props:{
+        orders:Object
     },
     components:{
         Head,
         Link,
+        Paginator
+    },
+    data(){
+        return{
+            total:0
+        }
+    },
+    created(){
+        console.log(this.orders)
+        this.moment=Moment;
+    },
+    computed:{
+        ventas(){
+            const obj = this.orders.data.map((col)=>{
+            this.total += parseInt(col.total);
+            return {
+                id : col.id,
+                calle: col.calle,
+                planta: col.planta,
+                address: col.address,
+                image : col.image,
+                date : col.created_at,
+                type : col.type,
+                id_t: col.transaction_id,
+                email : col.shippings[0].email,
+                total_benefit : parseInt(col.total)/100,
+            }
+            });
+            this.total = this.total/100;
+            return obj;
+        },
     }
 }
 </script>

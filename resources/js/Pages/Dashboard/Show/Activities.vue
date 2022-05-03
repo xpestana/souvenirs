@@ -22,11 +22,11 @@
             <div class="col-12 d-flex flex-row justify-around mt-2 pb-2 border-bottom">
                 <div class="time text-center">
                     <i class="far fa-hourglass mr-1 text-grayc"></i>
-                    <p class="text-grayc">{{ product.activities.duration }}</p>
+                    <p class="text-grayc"> <ConvertirMinutos :minutos="product.activities.duration" /></p>
                 </div>
                 <div class="lenguage text-center">
                     <i class="far fa-comment-alt mr-2 text-grayc"></i>
-                    <p class="text-grayc">Español</p>
+                    <p class="text-grayc">{{ product.activities.language }}</p>
                 </div>
             </div>
             <div class="col-12 mt-2 pb-2 border-bottom">
@@ -85,19 +85,19 @@
                             </template>
                             <template v-if="this.precios.length > 0">
                                 <div class="text-right">
-                                    <div class="mb-4" v-if="this.precios[0] !== undefined">
+                                    <div class="mb-4" v-if="this.precios[0] !== undefined && this.precios[0] !== null">
                                         <p class="text-lg d-inline mr-4">Adultos</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[0]== 0 }">{{this.precios[0]}}€</h5>
                                     </div>
-                                    <div class="mb-4" v-if="this.precios[1] !== undefined">
+                                    <div class="mb-4" v-if="this.precios[1] !== undefined && this.precios[1] !== null">
                                         <p class="text-lg d-inline mr-4">Niños</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[1]== 0 }">{{this.precios[1]}}€</h5>
                                     </div>
-                                    <div class="mb-4" v-if="this.precios[2] !== undefined">
+                                    <div class="mb-4" v-if="this.precios[2] !== undefined && this.precios[2] !== null">
                                         <p class="text-lg d-inline mr-4">Estudiantes</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
                                     </div>
-                                    <div v-if="this.precios[3] !== undefined">
+                                    <div v-if="this.precios[3] !== undefined && this.precios[3] !== null">
                                         <p class="text-lg d-inline mr-4">Bébes</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[3]== 0 }">{{this.precios[3]}}€</h5>
                                     </div>
@@ -212,6 +212,7 @@
     import Layout from '@/Layouts/Layout.vue' 
     import Back from '@/Layouts/Components/Back.vue'
     import Calendar from '@/Layouts/Components/Calendar.vue' 
+    import ConvertirMinutos from '@/Layouts/Components/ConvertirMinutos.vue'
     import Activities from '@/Layouts/Components/Activities.vue' 
     import { Carousel, Navigation, Slide } from 'vue3-carousel'
     import 'vue3-carousel/dist/carousel.css';
@@ -229,6 +230,7 @@
             Slide,
             Navigation,
             Calendar,
+            ConvertirMinutos
         },
         data: () => {
             return {
@@ -260,10 +262,10 @@
             }
             
             if(this.product.activities.events.length >0){
-                this.eventos = JSON.parse(this.product.activities.events)
-                if(this.eventos.status == 'ERROR'){}
+                let lista = JSON.parse(this.product.activities.events)
+                if(lista.status == 'ERROR'){}
                 else{
-                    
+                    this.eventos = JSON.parse(this.product.activities.events);
                 }
             } 
         },

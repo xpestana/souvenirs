@@ -121,10 +121,10 @@ export default {
             }
         },
         submit() {
-            this.form.pricesArr.push(this.priceAdult) 
-            this.form.pricesArr.push(this.priceChildren) 
-            this.form.pricesArr.push(this.priceStudent) 
-            this.form.pricesArr.push(this.priceBaby) 
+            this.form.pricesArr[0] = this.priceAdult
+            this.form.pricesArr[1] = this.priceChildren
+            this.form.pricesArr[2] = this.priceStudent
+            this.form.pricesArr[3] = this.priceBaby
             this.form.language = document.getElementById('idioma').value
 
              this.form.post(route('updt.activities',{activities: this.product.id}),{

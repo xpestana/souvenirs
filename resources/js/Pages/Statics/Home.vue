@@ -61,12 +61,12 @@
                     <div class="tarjeta-cuerpo py-2 px-1 d-flex flex-column">
                         <div class="mb-auto h-6 md:h-16 overflow-hidden">
                           <Link :href="route('product.activities.show',{product : product.id})" >
-                            <p class="font-weight-bolder text-center mb-2 text-wrap px-1">{{ product.title }}</p>
+                            <p class="font-weight-bolder text-center mb-1 text-wrap px-1">{{ product.title }}</p>
                           </Link>
                         </div>
                         <div class="">
-                          <p class="text-left"><i class="far fa-clock"></i> Duración: {{product.duration}} </p>
-                          <h3 class="font-weight-bolder d-block text-left mt-3">
+                          <p class="text-left"><i class="far fa-clock"></i> <ConvertirMinutos :minutos="product.duration" /> </p>
+                          <h3 class="font-weight-bolder d-block text-left mt-2">
                               <template v-if="product.precios.lenght !== null">
                                 <template v-if="product.precios[2]">
                                     Desde: {{product.precios[2]}}€
@@ -126,6 +126,7 @@
     import 'vue3-carousel/dist/carousel.css';
     import Layout from '@/Layouts/Layout.vue'
     import Decimals from '@/Layouts/Components/Decimals.vue'
+    import ConvertirMinutos from '@/Layouts/Components/ConvertirMinutos.vue'
 
     export default{
       layout:Layout,
@@ -136,7 +137,8 @@
             Navigation,
             Header,
             Layout,
-            Decimals
+            Decimals,
+            ConvertirMinutos
         },
         data: () => {
             return {
@@ -299,7 +301,7 @@
     }
     @media (max-width: 374px){
       #actividades .tarjeta{
-          height: 13em;
+          height: 10em;
           width: 8.8em;
         }
     }

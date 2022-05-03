@@ -30,7 +30,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="order in hotel.orders">
+                                <tr v-if="hotel.orders.length == 0">
+                                    <td colspan="5" class="text-center">Propiedad sin ventas relacionadas</td>
+                                </tr>
+                                <tr v-for="order in hotel.orders" :key="order.transaction_id">
                                     <td>{{ order.transaction_id }}</td>
                                     <td></td>
                                     <td>{{ order.shippings[0].email }}</td>
@@ -69,6 +72,7 @@ export default {
       }
     },
     created(){
+        console.log(this.hotel)
         this.moment=Moment;
         var total_benefit = this.total_benefit;
         this.hotel.orders.forEach(function(order) {

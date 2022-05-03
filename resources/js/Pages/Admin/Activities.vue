@@ -229,7 +229,7 @@ export default {
         product(short_id){
             var product = this.products.filter(product => product.short_id == short_id)[0];
             this.form.name = this.codificarTilde(product.name);
-            this.form.duration = this.codificarMinutos(product.duration);
+            this.form.duration = product.duration;
             this.form.description = this.codificarTilde(product.description);
             this.form.flow = product.flow;
             this.form.short_id = product.short_id;
@@ -261,14 +261,6 @@ export default {
             n.indexOf('&uuml;') != -1 ? n = n.replaceAll('&uuml;', 'ü'):''
             n.indexOf('&ntilde;') != -1 ? n = n.replaceAll('&ntilde;', 'ñ'):''
             return n;
-        },
-        codificarMinutos(minutos){
-            minutos= parseInt(minutos);
-            let horas=Math.floor(minutos/60)
-            let min = minutos % 60
-            horas == 0 ? horas='' : horas=horas+'h ';
-            min == 0 ? min='' : min=min+'min';
-            return horas+min
         },
         eliminar(id){ 
             this.$swal({

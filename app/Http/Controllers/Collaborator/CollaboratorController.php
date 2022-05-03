@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Collaborator;
 use App\Http\Controllers\Controller;
 use App\Models\hotel;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -299,8 +300,15 @@ class CollaboratorController extends Controller
     }
 
     public function sales_hab(){
+        $orders = Order::join('hotels', 'hotels.id', '=', 'orders.hotel_id')
+                ->join('hotel_user', 'hotels.id', '=', 'hotel_user.hotel_id')
+                ->select('orders.*', 'hotels.type', 'hotels.address', 'hotels.zone', 'hotels.calle', 'hotels.image', 'hotels.planta')
+                ->where('hotel_user.user_id', auth()->user()->id)
+                ->orderBy('orders.created_at','DESC')
+                ->paginate(10);
+        $orders->load('shippings');
         $hotels = auth()->user()->hotel->load('orders.shippings');       
-        return Inertia::render('Collaborator/Dashboard/Lodging/TotalSales', compact('hotels'));
+        return Inertia::render('Collaborator/Dashboard/Lodging/TotalSales', compact('hotels','orders'));
     }
 
     public function sales_hab_details($id)

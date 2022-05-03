@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submit">
 	<div class="row">
-        <div class="col-12 text-center" v-if="this.precios.length > 0">
+        <div class="col-12 text-center" v-if="this.eventos.length > 0">
                 <DatePicker mode="date" v-model="form.date" 
                 :available-dates="this.dias_disponibles" 
                 :attributes="attributes" />
@@ -18,10 +18,10 @@
             </div> -->
         </div>
         
-        <div class="col-12 my-2 text-center text-danger" v-if="this.eventos == null">
+        <div class="col-12 my-2 text-center text-danger" v-if="this.eventos.length == 0">
             Esta actividad no esta disponible
         </div>
-        <template v-if="this.preciosLista.length == 0 && this.eventos !== undefined">
+        <template v-if="this.preciosLista.length == 0 && this.eventos.length > 0">
             <div class="col-12 my-2 text-center text-azulc">
                 Seleccione una fecha para poder ver los precios!
             </div>
@@ -286,6 +286,7 @@
             }
         },
         created(){
+            console.log(this.eventos)
             this.fechas()
                 if(this.eventos !== undefined){
                 this.fechasObjeto = this.eventos.map((el)=>{ 
