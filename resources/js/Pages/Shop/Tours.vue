@@ -46,7 +46,7 @@
                         </div>
                         <div class="lenguage">
                             <i class="far fa-comment-alt mr-2 text-grayc md:text-base"></i>
-                            <p class="text-grayc d-inline md:text-base">Español</p>
+                            <p class="text-grayc d-inline md:text-base">{{ product.language }}</p>
                         </div>
                         <div class="price">
                             <p class="font-weight-bolder text-azulc md:text-2xl pr-md-2">
@@ -170,6 +170,7 @@
               return {
                 id:el.id,
                 precios:arr,
+                language:el.activities.language,
                 images:el.images,
                 title:el.title,
                 duration:el.activities.duration,

@@ -128,11 +128,11 @@
                             <tr v-for="act in activities.data" :key="act.id">
                                 <td class="text-center truncate">{{ act.title }}</td>
                                 <td class="text-center">{{ detallarPrecios(act.activities.priceA) }}</td>
-                                <td class="text-center">Idioma</td>
+                                <td class="text-center">{{ act.activities.language }}</td>
                                 <td class="text-center">
                                     <div class="d-inline-flex">
                                     <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('activities.edit',{id:act.id})" style="background-color: #2b59a2">Editar</Link>
-                                    <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1">Eliminar</button>
+                                    <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="update(product.short_id)">Eliminar</button>
                                     </div>
                                 </td>
                             </tr>

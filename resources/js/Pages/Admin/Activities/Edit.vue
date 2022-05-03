@@ -18,7 +18,7 @@
                 <input type="text" v-model="form.title" class="border rounded w-72 md:w-96" placeholder="Título">
             </div>
             <div class="col-12 col-md-6">
-                <select name="" id="idioma" class="border rounded w-72 md:w-96 mt-4">
+                <select name="" id="language" class="border rounded w-72 md:w-96 mt-4">
                     <option value="">Idioma</option>
                     <option value="Español">Español</option>
                     <option value="Inglés">Inglés</option>
@@ -91,6 +91,7 @@ export default {
 				title: this.product.title,
                 description: this.product.description,
                 priceUnique:this.product.price,
+                language:this.product.activities.language,
                 pricesArr:[],
 			}),
             priceAdult:null,
