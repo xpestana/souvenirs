@@ -144,7 +144,7 @@ class ActivitiesController extends Controller
                     'access_token'   => connect()['access_token'],
                     'data' => [
                         "product_short_id" => $request->short_id,
-                        "date_event"=> $request->event_time,
+                        "date_event"=> strtotime($request->event_time),
                         'language_code'=> "es"
                     ]
                 ])->collect();
