@@ -135,10 +135,23 @@ class ActivitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $product = Products::with('images', 'activities')->where('id', $id)->first();
-        $access_token = connect()['access_token'];
+
+        if($request->event_time){
+                $prices = Http::post('https://apptest.turitop.com/v1/tickets/getprices', [
+                    'access_token'   => connect()['access_token'],
+                    'data' => [
+                        "product_short_id" => $request->short_id,
+                        "date_event"=> $request->event_time,
+                        'language_code'=> "es"
+                    ]
+                ])->collect();
+                if(isset($prices['data'])){
+                    $prices = $prices['data'];
+                }
+            }
         return Inertia::render('Dashboard/Show/Activities', compact('product', 'access_token'));
     }
 
