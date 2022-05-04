@@ -33,8 +33,8 @@
                 </div>
             </div>
         </template>
-        <template v-if="this.preciosLista.length !== 0 && this.eventos !== null">
-            <div  class="col-12 py-2 mt-1" style="background-color:#e6e6e6d4">
+        
+            <div  class="col-12 py-2 mt-1" style="background-color:#e6e6e6d4" v-if="this.preciosLista.length !== 0 && this.eventos !== null">
                 <div class="row pb-2 justify-content-md-center" v-if="this.preciosLista[0] !== undefined">
                     <div class="col-5 col-md-3 pt-1 pl-4" >
                         <p class="text-lg d-inline mr-4">Adultos</p>
@@ -96,13 +96,14 @@
                     </div>
                 </div>
             </div>
-        </template>
+            <div class="col-12 text-center px-0 mb-2 py-1" style="background-color:#bedfef;" v-if="this.guardarFecha !== null || this.preciosLista[0] !== undefined">
+                <button class="btn shadow-city bg-white py-1 px-5 my-2 font-weight-bolder text-center text-base" id="submit" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Reservar
+                </button>
+            </div>
         
-        <div class="col-12 text-center px-0 mb-2 py-1" style="background-color:#bedfef;" v-if="this.guardarFecha !== null">
-            <button class="btn shadow-city bg-white py-1 px-5 my-2 font-weight-bolder text-center text-base" id="submit" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Reservar
-            </button>
-        </div>
+        
+        
   	</div>
     </form>
 </template>
@@ -138,23 +139,35 @@
                     priceStudent:0,
                     priceBaby:0,
                     codes:0,
-                    spinner:false
+                    fecha:null,
+            	}),
+                spinner:false,
+                formApi: this.$inertia.form({
+                    short_id: 0,
+                    event_time: 0
             	}),
                 attributes: [
                     {
                         highlight: true,
                         dates: []
-                    }
+                    },
+                    {
+                        key: 'today',
+                        highlight: 'red',
+                        dates:'asdasd'
+                    },
                 ],
                 preciosFecha:{},
                 fechasObjeto:[],
+                preciosLista:0,
+                getDate:null
             }
         },
         props: {
             product: Object,
             eventos: Object,
             precios: Object,
-            token: String
+            prices:Object
         },
         methods: {
             fechas(){
@@ -193,6 +206,9 @@
 
                     this.form.codes = this.codeLista[0] !== undefined ? this.codeLista[0] : 0
 
+                    let url = this.$page.url;
+                    this.form.fecha = url.split('event_time=')[1].split('&')[0];
+
                     this.form.post(route('cart.activity'),{
                         _token: this.$page.props.csrf_token,
                         errorBag: 'submit',
@@ -226,24 +242,14 @@
                 this.spinner=true;
                 let arr = String(this.form.date).split(new Date().getFullYear())
                 const result = this.fechasObjeto.filter(el => String(el.fecha).includes(arr[0]))
-                const token = this.token;
+
+                this.formApi.short_id = this.product.short_id;
+                this.formApi.event_time = result[0].codigo;
                 this.preciosFecha = {};
-                axios({
-                url: 'https://apptest.turitop.com/v1/tickets/getprices',
-                method: 'POST',
-                data:{
-                    access_token:token,
-                    data: {
-                        product_short_id: this.product.short_id,
-                        date_event:result[0].codigo,
-                        language_code:"es"
-                    }
-                }
-                })
-                .then((respuesta) => {
-                        this.preciosFecha = respuesta.data.data
-                        this.spinner =false;
-                        console.log(this.preciosFecha)
+                this.$inertia.get(route('product.activities.show',this.product.id),
+                this.formApi,
+                { 
+                    preserveScroll: true 
                 })
             }
                 return this.form.date;
@@ -260,18 +266,6 @@
                     }
                 })
             },
-            preciosLista(){
-                if(this.preciosFecha !== {}){
-                    let arr =[];
-                    for(let val in this.preciosFecha.prices_per_ticket){
-                        arr.push(this.preciosFecha.prices_per_ticket[val]);
-                    }
-                    console.log(arr)
-                    return arr;
-                }else{
-                    return 0
-                }
-            },
             codeLista(){
                 if(this.preciosFecha !== {}){
                     let arr =[];console.log(this.preciosFecha.prices_per_ticket)
@@ -286,7 +280,23 @@
             }
         },
         created(){
-            console.log(this.eventos)
+            let url = this.$page.url;
+            if(url.length > 20){
+                this.getDate = url.split('event_time=')[1].split('&')[0];
+                let date = new Date (this.getDate*1000);
+                this.attributes[1].dates = new Date(date.getFullYear(),date.getMonth(),date.getDate());
+            }else{
+                this.attributes[1].dates = null;
+            }
+            
+
+            if(this.prices.prices_per_ticket !== undefined){
+                this.preciosLista = [];
+                for(let val in this.prices.prices_per_ticket){
+                    this.preciosLista.push(this.prices.prices_per_ticket[val]);
+                }
+            }
+            console.log(this.preciosLista)
             this.fechas()
                 if(this.eventos !== undefined){
                 this.fechasObjeto = this.eventos.map((el)=>{ 

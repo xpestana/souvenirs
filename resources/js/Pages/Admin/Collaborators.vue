@@ -42,7 +42,7 @@
 						<div class="d-md-inline-flex mt-3 pb-2 pb-md-0">
 							<div class="pr-md-4 text-md-center">
 								<p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0€</p>
+								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{calcularBeneficio(clbtr.hotel)}}€</p>
 							</div>
 							<div class="pr-md-4 text-md-center"> 
 								<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
@@ -95,6 +95,7 @@ export default {
                 id : col.id,
                 firstname: col.firstname,
                 email: col.email,
+				hotel: col.hotel,
                 lodgings : col.hotel.length,
                 total_orders : total_orders
             }
@@ -112,6 +113,7 @@ export default {
 			formSearch: this.$inertia.form({
 				search: null,
 			}),
+			total:0
 		}
 	},
 	methods:{
@@ -144,6 +146,30 @@ export default {
 				});
 			},1500);
 		},
+		calcularBeneficio(hoteles){
+			const obj = hoteles.map((col)=>{
+                var total_orders = 0;
+                var total_benefits = 0;
+				let orders = orders + col.orders.length;
+				col.orders.forEach(function(order) {
+                    total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+                });
+                
+
+				return{
+					total_benefits: (total_benefits/100),
+				}
+			})
+			
+			if(obj.length > 0){
+				let beneficio = 0;
+				for(let val in obj){
+					beneficio = beneficio + Number(obj[val].total_benefits);
+				}
+				return beneficio;
+			}
+			return 0;
+		}
 	}
 }
 </script>

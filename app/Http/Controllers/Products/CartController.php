@@ -135,7 +135,7 @@ class CartController extends Controller
             'attributes' => array(
                 'type' => 'activity',
                 'url' => $image,
-                'date' => $request->date,
+                'date' => $request->fecha,
                 'adult' => $request->adult,
                 'children' => $request->children,
                 'student' => $request->student,

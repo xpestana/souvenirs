@@ -34,15 +34,15 @@
 		</section>
 		<section id="info">
 			<div class="row justify-content-lg-between mx-lg-4 mt-md-5 align-items-end">
-				<div class="col-12 col-md-12 col-lg-5 col-xl-6 my-2 my-md-0">
+				<div class="col-12 col-md-12 col-lg-5 my-2 my-md-0">
 					<Link :href="route('admin.lodging.create',collaborator.id)" type="button" class="btn btn-azulc text-white px-2 px-md-4 py-1">Añadir apartamento<i class="fas fa-plus pl-2"></i></Link>
 					<h5 class="text-info mt-1 p-1 font-weight-bolder"><Link href="#">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
 				</div>
-				<div class="col-12 col-md-5 col-lg-4 col-xl-3  my-1 my-md-0">
+				<div class="col-12 col-md-5 col-lg-4   my-1 my-md-0">
 					<h4 class="text-info font-weight-bolder pl-0 pl-xl-4">Total</h4><br>
 					<h4 class="font-weight-bolder pl-0 pl-xl-4">Beneficio {{ total }}€</h4><br>
 				</div>
-				<div class="col-12 col-md-4 col-lg-3 col-xl-3">
+				<div class="col-12 col-md-4 col-lg-3">
 					<h4 class="font-weight-bolder">Pedidos {{ orders }}</h4><br>
 				</div>
 			</div>

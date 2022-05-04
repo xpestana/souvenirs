@@ -125,7 +125,7 @@
                                 </div>
                             </div>
                             <div class="px-3">
-                                <calendar :token="access_token" :product="product" :eventos="eventosAbiertos" :precios="precios" />
+                                <calendar :prices="prices" :token="access_token" :product="product" :eventos="eventosAbiertos" :precios="precios" />
                             </div>
                         </div>
                     </div>
@@ -245,11 +245,12 @@
         },
         props: {
             product: Object,
-            access_token: String
+            access_token: String,
+            prices: Object
         },
         created(){
+            console.log(this.prices)
             this.moment=Moment;
-            console.log(this.product)
             if(this.product.activities.priceA !== "null")
             {
                 let precios = JSON.parse(this.product.activities.priceA)
@@ -268,6 +269,11 @@
                     this.eventos = JSON.parse(this.product.activities.events);
                 }
             } 
+        },
+        mounted(){
+            if(this.prices.prices_per_ticket !== undefined){
+                document.getElementById('horario').classList.add('show');
+            }
         },
         methods:{
             cambiarColor(id){
