@@ -1,9 +1,9 @@
 @extends('Mails.layout')
 
 @section('content')
-  <h1>Compra en {{ $appName }}</h1>
+  <h1>Compra en {{ $appName }} Mensaje Cliente</h1>
 
-  <p>Se ha registrado una compra en la plataforma {{ $appName }}, los productos son:</p>
+  <p>Ud ha registrado una compra en la plataforma {{ $appName }}, los productos son:</p>
 
   <ul>
     @foreach($order->shippings as $product)

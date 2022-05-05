@@ -1,6 +1,8 @@
 <template>
+    
     <Head title="Checkout"/>
     <Layout>
+    
     <!-- Breadcrumb Area Start Here -->
     <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
         <div class="container">
@@ -14,7 +16,7 @@
         </div>
     </div>
     <!-- Breadcrumb Area End Here -->
-
+    <form @submit.prevent="submit">
     <!-- checkout-area start -->
     <div class="checkout-area white-bg pt-60 pb-80">
         <div class="container">
@@ -158,8 +160,9 @@
         </div>
     </div>
     <!-- checkout-area end -->
-
+</form>
     </Layout>
+
 </template>
 
 <script>
@@ -251,7 +254,7 @@
                 paymentProcessing: false
             }
         },
-        async mounted() {
+       /* async mounted() {
 
             this.stripe = await loadStripe('pk_test_51Jz1DqKb9p440caATQOa5mvwIe3UzVaJmzMJfdolAuuJ3RDcPVWNsNYX7W46CRmVdG0N9DUzX1GdenKgKaV3VvOk00vpli1M7n');
 
@@ -263,8 +266,17 @@
             });
 
             this.cardElement.mount('#card-element');
-        },
+        },*/
         methods: {
+            submit() {
+                Inertia.post(route('sale'), this.form);
+             /*this.form.post(,{
+                 _token: this.$page.props.csrf_token,
+                 errorBag: 'submit',
+                 preserveScroll: true,
+                 forceFormData: true,
+             })*/
+        },
             calculate(priceA, priceN, adult, children){
                 if (priceN) {
                     var amount = ((adult * priceA) +  (children * priceN));
@@ -273,7 +285,7 @@
                 }
                 return amount;
             },
-            async processPayment() {
+            /*async processPayment() {
                 this.paymentProcessing = true;
 
                 const {paymentMethod, error} = await this.stripe.createPaymentMethod(
@@ -304,7 +316,7 @@
                                 },
                             })
                 }
-            }
+            }*/
         },
         computed:{
             cartList(){

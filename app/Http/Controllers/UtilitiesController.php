@@ -19,12 +19,16 @@ class UtilitiesController extends Controller
     /*STATICS PAGES*/
     public function handle_auth($id)
     {
-        $user = User::find($id);
-        if ($user) {
-            if ($user->getRoleNames()->first() == "Client") {
-                $auth = Auth::login($user, true);
+        if($id){
+        $users = Hotel::find($id)->user;
+        if (!empty($users)) {
+            foreach ($users as $user) {
+                if ($user->getRoleNames()->first() == "Client") {
+                    $auth = Auth::login($user, true);
+                }
             }
         }
+    }
         return 0;        
     }
     public function home(Request $request)
