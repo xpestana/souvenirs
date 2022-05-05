@@ -98,7 +98,7 @@
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
                                     </div>
                                     <div v-if="this.precios[3] !== undefined && this.precios[3] !== null">
-                                        <p class="text-lg d-inline mr-4">Bébes</p>
+                                        <p class="text-lg d-inline mr-4">Bebés</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[3]== 0 }">{{this.precios[3]}}€</h5>
                                     </div>
                                 </div>
@@ -205,7 +205,13 @@
             </div>
         </div>
     </div>
-    
+
+<Transition>
+    <div v-if="showPopup" class="fixed-bottom" id="popup">
+        <div class="alert alert-primary alert m-0 text-center py-4 text-muted" role="alert" style="background-color:#d8ecf3" v-html="$page.props.flash.mensaje">
+        </div>
+    </div>
+</Transition>
 </template>
 <script>
     import { Link, Head } from '@inertiajs/inertia-vue3'
@@ -241,12 +247,19 @@
                 itemsToShow: 1,
                 snapAlign: 'center',
                 },
+                showPopup:false
             }
         },
         props: {
             product: Object,
             access_token: String,
             prices: Object
+        },
+        updated(){
+            if(this.$page.props.flash.mensaje){
+                this.showPopup=true;
+            }
+            setTimeout(()=>this.showPopup=false, 3000);
         },
         created(){
             console.log(this.prices)

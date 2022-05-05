@@ -1,10 +1,17 @@
 <template>
-    
-    <Head title="Checkout"/>
-    <Layout>
-    
+    <Head title="Checkout"/>  
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 py-1 border-bottom border-dark">
+                <div class="absolute left-3 top-5">
+                    <Link :href="route('cart.index')"><i class="fas fa-times text-lg"></i></Link>
+                </div>
+                <img src="/vendor_asset/img/logo/logo.png" class="mx-auto w-12">
+            </div>
+        </div>
+    </div>
     <!-- Breadcrumb Area Start Here -->
-    <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
+    <!-- <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
         <div class="container">
             <div class="breadcrumb-wrap text-center">
                 <h3>Checkout</h3>
@@ -14,154 +21,122 @@
                 </ol>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Breadcrumb Area End Here -->
     <form @submit.prevent="submit">
     <!-- checkout-area start -->
-    <div class="checkout-area white-bg pt-60 pb-80">
-        <div class="container">
+    <template v-if="showForm">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="checkbox-form mb-sm-40">
-                        <h3>Detalles de Facturación</h3>
-                        <div class="row">
-                            <div class="col-md-12" hidden>
-                                <div class="country-select clearfix mb-30">
-                                    <label>País <span class="required">*</span></label>
-                                    <select id="country" class="wide" v-model="form.country">
-                                        <option  v-for="(country, index) in countries" :value="index">{{ country }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checkout-form-list mb-sm-30">
-                                    <label>Nombre <span class="required">*</span></label>
-                                    <input type="text" placeholder="" v-model="form.firstname"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Apellido <span class="required">*</span></label>
-                                    <input type="text" placeholder="" v-model="form.lastname"/>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list">
-                                    <label>Dirección <span class="required">*</span></label>
-                                    <input type="text" placeholder="Calle" v-model="form.address"/>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list mtb-30">
-                                    <input type="text" placeholder="Apartamento, suite, unidad etc. (opcional)" v-model="form.apart"/>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Poblado / Ciudad <span class="required">*</span></label>
-                                    <input type="text" placeholder="Poblado / Ciudad" v-model="form.city"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Estado / Provincia <span class="required">*</span></label>
-                                    <input type="text" placeholder="Estado / Provincia" v-model="form.state"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Nro de habitación <span class="required">*</span></label>
-                                    <input type="text" placeholder="Nro de habitación" v-model="form.hab"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Código Postal <span class="required">*</span></label>
-                                    <input type="text" placeholder="Código postal" v-model="form.zip_code"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Correo <span class="required">*</span></label>
-                                    <input type="email" placeholder="" v-model="form.email"/>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="checkout-form-list mb-30">
-                                    <label>Teléfono  <span class="required">*</span></label>
-                                    <input type="text" placeholder="Teléfono" v-model="form.phone"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row px-0">
-                        <div class="col-12">
-                            <img src="/vendor_asset/img/logo/logo.png" class="mx-auto w-12">
-                        </div>
-                        <div class="col-12 border-bottom border-dark"></div>
-                        <div class="col-12 d-flex justify-between pt-1 px-1">
-                            <div>
-                                <img src="/vendor_asset/img/icons/visa.png" class="d-inline w-10">
-                                <img src="/vendor_asset/img/icons/mastercard.png" class="d-inline w-10">
-                                <img src="/vendor_asset/img/icons/redsys.png" class="d-inline ml-2 w-14">
-                            </div>
-                            <div>
-                                <img src="/vendor_asset/img/icons/padlock.png" class="d-inline mr-2 w-4">
-                                <p class="d-inline">Pago seguro</p>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-3">
-                            <p class="text-muted">Resumen:</p>
-                            <div class="d-flex justify-between" v-if="totalSouvenirs.num > 0">
-                                <p class="text-muted">
-                                <template v-if="totalSouvenirs.num > 1">
-                                    {{totalSouvenirs.num}} souvenirs
-                                </template>
-                                <template v-if="totalSouvenirs.num == 1">
-                                    {{totalSouvenirs.num}} souvenir
-                                </template>
-                                </p>
-                                <p class="font-weight-bolder text-muted"><Decimals :precio="totalSouvenirs.precio"/>€</p>
-                            </div>
-                            <div class="d-flex justify-between" v-if="totalActivities.num > 0">
-                                <p class="text-muted">
-                                    <template v-if="totalActivities.num > 1">
-                                        {{totalActivities.num}} actividades
-                                    </template>
-                                    <template v-if="totalActivities.num == 1">
-                                        {{totalActivities.num}} actividad
-                                    </template>
-                                </p>
-                                <p class="font-weight-bolder text-muted"><Decimals :precio="totalActivities.precio"/>€</p>
-                            </div>
-                            <div class="d-flex justify-between" v-if="totalSouvenirs.precio > 0">
-                                <p class="text-muted">Envío</p>
-                                <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < this.$page.props.settings.shippings"><Decimals :precio="5"/>€</p>
-                                <p class="font-weight-bolder text-muted" v-else>GRATIS</p>
-                            </div>
-                            <div class="d-flex justify-between mt-2">
-                                <p class="font-weight-bolder">Importe</p>
-                                <p class="font-weight-bolder text-lg"><Decimals :precio="importeTotal"/> Euros</p>
-                            </div>
-                        </div>
-                        <div class="col-12 border-bottom border-dark mt-1 mb-3"></div>
-                        <div class="col-12 mt-2">
-                            <div class="d-block">
-                                <input type="checkbox" class="form-control mr-1">
-                                <a class="text-primary d-inline text-xs" target="_blank" href="/politicas/terminosycondiciones">He leído y acepto los términos y condiciones</a>
-                            </div>
-                            <button class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2">Pagar</button>
-                        </div>
+                <div class="col-12 py-1">
+                    <div class="text-right">
+                        <img src="/vendor_asset/img/icons/padlock.png" class="d-inline mr-2 w-4">
+                        <p class="d-inline">Pago seguro</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="container mt-3 px-3 px-md-5">
+            <div class="row">
+                <div class="col-12 mb-2">
+                    <h3 class="text-lg">Persona de contacto</h3>
+                </div>
+                <div class="col-12 col-md-6">
+                    <input type="text" placeholder="Nombre*" v-model="form.name" class="border rounded py-1 w-100" required/>
+                </div>
+                <div class="col-12 col-md-6 mt-3 mt-md-0">
+                    <input type="text" placeholder="Móvil*" v-model="form.phone" class="border rounded py-1 w-100" required/>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 mb-2">
+                    <h3 class="text-lg">Dirección de envío</h3>
+                    <p class="mt-1 text-center text-grayc leading-4" v-if="hotel !== null">
+                        ¡Su anfitrión ya ha rellenado estos campos <br> para facilitar el envío!
+                    </p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <input type="text" placeholder="Dirección*" v-model="form.address" class="border rounded py-1 w-100" required/>
+                </div>
+                <div class="col-12 col-md-6 mt-3 mt-md-0">
+                    <input type="text" placeholder="Piso, escalera, puerta, etc. (opcional)" v-model="form.hab" class="border rounded py-1 w-100"/>
+                </div>
+                <div class="col-12 col-md-6 mt-3 mt-md-4">
+                    <input type="text" placeholder="Escriba aqui sus observaciones para la agencia" v-model="form.observations" class="border rounded py-1 w-100"/>
+                </div>
+                <div class="col-12 col-md-6 mt-3 mt-md-4">
+                    <input type="text" placeholder="Código postal*" v-model="form.cp" class="border rounded py-1 w-100" required/>
+                </div>
+                <div class="col-12 mt-20">
+                    <button type="button" class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2" @click="validarForm">Continuar</button>
+                </div>
+            </div>
+
+        </div>
+    </template>
+    <template v-if="showCheckout">
+        <div class="checkout-area white-bg">
+            <div class="container">
+                <div class="row px-0 justify-content-md-center md:mt-24">
+                    <div class="col-12 col-md-8 d-flex justify-between pt-1 px-1">
+                        <div>
+                            <img src="/vendor_asset/img/icons/visa.png" class="d-inline w-10">
+                            <img src="/vendor_asset/img/icons/mastercard.png" class="d-inline w-10">
+                            <img src="/vendor_asset/img/icons/redsys.png" class="d-inline ml-2 w-14">
+                        </div>
+                        <div>
+                            <img src="/vendor_asset/img/icons/padlock.png" class="d-inline mr-2 w-4">
+                            <p class="d-inline">Pago seguro</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8 mt-3">
+                        <p class="text-muted">Resumen:</p>
+                        <div class="d-flex justify-between" v-if="totalSouvenirs.num > 0">
+                            <p class="text-muted">
+                            <template v-if="totalSouvenirs.num > 1">
+                                {{totalSouvenirs.num}} souvenirs
+                            </template>
+                            <template v-if="totalSouvenirs.num == 1">
+                                {{totalSouvenirs.num}} souvenir
+                            </template>
+                            </p>
+                            <p class="font-weight-bolder text-muted"><Decimals :precio="totalSouvenirs.precio"/>€</p>
+                        </div>
+                        <div class="d-flex justify-between" v-if="totalActivities.num > 0">
+                            <p class="text-muted">
+                                <template v-if="totalActivities.num > 1">
+                                    {{totalActivities.num}} actividades
+                                </template>
+                                <template v-if="totalActivities.num == 1">
+                                    {{totalActivities.num}} actividad
+                                </template>
+                            </p>
+                            <p class="font-weight-bolder text-muted"><Decimals :precio="totalActivities.precio"/>€</p>
+                        </div>
+                        <div class="d-flex justify-between" v-if="totalSouvenirs.precio > 0">
+                            <p class="text-muted">Envío</p>
+                            <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < this.$page.props.settings.shippings"><Decimals :precio="5"/>€</p>
+                            <p class="font-weight-bolder text-muted" v-else>GRATIS</p>
+                        </div>
+                        <div class="d-flex justify-between mt-2">
+                            <p class="font-weight-bolder">Importe</p>
+                            <p class="font-weight-bolder text-lg"><Decimals :precio="importeTotal"/> Euros</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8 border-bottom border-dark mt-1 mb-3"></div>
+                    <div class="col-12 col-md-8 mt-2">
+                        <div class="d-block">
+                            <input type="checkbox" class="form-control mr-1" v-model="checkTerminos">
+                            <a class="text-primary d-inline text-xs" target="_blank" href="/politicas/terminosycondiciones">He leído y acepto los términos y condiciones</a>
+                        </div>
+                        <button type="submit" class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2">Pagar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
     <!-- checkout-area end -->
 </form>
-    </Layout>
 
 </template>
 
@@ -237,21 +212,18 @@
                 total: null,
                 stripe: {},
                 cardElement: {},
+                paymentProcessing: false,
+                showCheckout:false,
+                showForm:true,
                 form: {
-                    firstname: null,
-                    lastname: null,
-                    email: null,
-                    address: (this.hotel) ? this.hotel.address : null,
-                    apart: null,
-                    city: null,
-                    state: (this.hotel) ? this.hotel.zone : null,
-                    zip_code: null,
-                    phone: null,
-                    country: null,
-                    amount: null,
-                    hab: null
+                    name: '',
+                    phone: '',
+                    address: (this.hotel) ? this.hotel.address : '',
+                    hab: (this.hotel) ? this.hotel.planta : '',
+                    observations: '',
+                    cp: (this.hotel) ? this.hotel.cp : '',
                 },
-                paymentProcessing: false
+                checkTerminos:false
             }
         },
        /* async mounted() {
@@ -268,8 +240,39 @@
             this.cardElement.mount('#card-element');
         },*/
         methods: {
+            validarForm(){
+                if(this.form.name == '' || this.form.phone == '' || this.form.address == '' || this.form.cp == ''){
+                    this.$swal({
+                        title: 'Nombre, móvil, dirección y código postal son campos obligatorios!',
+                        icon: 'info',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonText:
+                            '<i class="fa fa-thumbs-up"></i> Aceptar!',
+                        confirmButtonAriaLabel: 'Aceptar!',
+                    })
+                }else{
+                    this.showForm = false;
+                    this.showCheckout = true;
+                }
+            },
             submit() {
-                Inertia.post(route('sale'), this.form);
+                if(this.checkTerminos){
+                    Inertia.post(route('sale'), this.form);
+                }
+                else{
+                    this.$swal({
+                        title: '¡Debe aceptar los términos y condiciones del servicio de pago!',
+                        icon: 'info',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonText:
+                            '<i class="fa fa-thumbs-up"></i> Aceptar!',
+                        confirmButtonAriaLabel: 'Aceptar!',
+                    })
+                }
              /*this.form.post(,{
                  _token: this.$page.props.csrf_token,
                  errorBag: 'submit',
@@ -347,7 +350,6 @@
             },
             importeTotal(){
                 let envio;
-                console.log(this.totalSouvenirs.precio)
                 this.totalSouvenirs.precio > this.$page.props.settings.shippings ? envio=0 : envio=5;
                 this.totalSouvenirs.precio == 0 ? envio=0 : '';
                 return this.totalActivities.precio+this.totalSouvenirs.precio+envio;

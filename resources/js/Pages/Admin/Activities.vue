@@ -13,7 +13,10 @@
             </div>
             <div class="col-12 d-none d-md-block cabecera-escritorio">
                 <div class="row px-0 alto-mobile py-3 thead d-none d-md-flex">
-                    <div class="col-6 px-0 text-center">
+                    <div class="col-2 px-0 text-center">
+                        <p class="font-weight-bolder">Proveedor</p>
+                    </div>
+                    <div class="col-4 px-0 text-center">
                         <p class="font-weight-bolder">Nombre de la actividad</p>
                     </div>
                     <div class="col-1 px-0 text-center">
@@ -32,7 +35,10 @@
             </div>
             <div class="col-12 alto pr-0 overflw  d-none d-md-block tabla-escritorio">
                 <div class="row px-0 py-2 tabla" :class="{'td' : transmutar()}" v-for="product in activitiesListAsc" :key="product.id">
-                    <div class="col-6 px-0 text-center">
+                    <div class="col-2 px-0 text-center">
+                        <p>Naturanda</p>
+                    </div>
+                    <div class="col-4 px-0 text-center">
                         <p>{{  codificarTilde(product.name) }}</p>
                     </div>
                     <div class="col-1 px-0 text-center">
@@ -60,6 +66,7 @@
                     <table class="table table-striped table-borderless" >
                         <thead class="table-active text-center">
                             <tr>
+                                <th scope="col">Proveedor</th>
                                 <th scope="col">Título</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Stock</th>
@@ -69,6 +76,7 @@
                         </thead>
                         <tbody id="tbody"> 
                             <tr v-for="product in activitiesListAsc" :key="product.id">
+                                <td class="text-center">Naturanda</td>
                                 <td class="text-center">{{ product.name }}</td>
                                 <td class="text-center">{{ product.flow }}</td>
                                 <td class="text-center">{{ product.location_name }}</td>
@@ -93,7 +101,7 @@
         </div>
     </div>
 
-    <div class="container px-0 px-md-2 px-lg-5">
+    <div class="container px-0 px-md-2 px-lg-5" hidden>
         <div class="row my-4 my-md-5 px-md-5">
             <div class="col-12 text-center">
                 <h1 class="text-azulc text-2xl font-weight-bolder">Actividades registradas</h1>
@@ -111,7 +119,7 @@
             </div>
         </div>
     </div>
-    <div class="container tabla-actividades-registradas px-0 px-md-2 px-lg-5 mb-4">
+    <div class="container tabla-actividades-registradas px-0 px-md-2 px-lg-5 mb-4" hidden>
         <div class="row mt-2 px-md-5">
             <div class="col-12">
                 <div class="table-responsive-md bg-white">

@@ -82,7 +82,7 @@
                 </div>
                 <div class="row pb-2 justify-content-md-center" v-if="this.preciosLista[3] !== undefined">
                     <div class="col-5 col-md-3 pt-1 pl-4">
-                        <p class="text-lg d-inline mr-4">Bebes</p>
+                        <p class="text-lg d-inline mr-4">Bebés</p>
                     </div>
                     <div class="col-3 col-md-1 px-0 pt-2 text-center">
                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline">
@@ -183,10 +183,12 @@
             submit(){
                 let total = parseInt(this.form.adult) + parseInt(this.form.children) + parseInt(this.form.student) + parseInt(this.form.baby);
                 this.form.date = this.guardarFecha;
+                let url = this.$page.url;
+                this.form.fecha = url.split('event_time=')[1].split('&')[0];
                 if (total == 0) {
                     let text=""
                     if(total == 0) text = "Indica cuántas personas acudirán a esta actividad"
-                    if(this.guardarFecha == null) text = "No ha seleccionado ninguna fecha"
+                    if(this.form.fecha == null) text = "No ha seleccionado ninguna fecha"
                  
                     this.$swal({
                         title: text,
@@ -206,8 +208,6 @@
 
                     this.form.codes = this.codeLista[0] !== undefined ? this.codeLista[0] : 0
 
-                    let url = this.$page.url;
-                    this.form.fecha = url.split('event_time=')[1].split('&')[0];
 
                     this.form.post(route('cart.activity'),{
                         _token: this.$page.props.csrf_token,

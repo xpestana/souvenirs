@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="row pie">
-                <div class="col-md-5 offset-7 col-md-3 offset-md-9">
+                <div class="col-5 offset-7 col-md-3 offset-md-9">
                     <h2 class="text-info">Total</h2>
                     <p><b>Tu beneficio es de {{ total_benefit.toFixed(2) }}€</b></p>
                 </div>

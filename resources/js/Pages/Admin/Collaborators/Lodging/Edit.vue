@@ -157,7 +157,6 @@ export default {
                 total_benefits: (total_benefits/100)
             }
         });
-        console.log(obj)
         if(obj.length > 0){
             for(let val in obj){
                 this.total = this.total + Number(obj[val].total_benefits);

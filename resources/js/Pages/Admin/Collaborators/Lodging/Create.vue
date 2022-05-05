@@ -15,11 +15,11 @@
 					<div class="d-md-inline-flex mt-1">
                         <div class="pr-md-4 text-md-center">
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0€</p>
+                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total }}€</p>
                         </div>
 						<div class="pr-md-4 text-md-center"> 
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
-                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0</p>
+                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ pedidos }}</p>
                         </div>
                         <div class="pr-md-4 text-md-center"> 
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
@@ -136,6 +136,25 @@ export default {
     },
     created(){
 		console.log(this.collaborator);
+
+        const obj = this.collaborator.hotel.map((col)=>{
+            var total_orders = 0;
+            var total_benefits = 0;
+            total_orders = total_orders + col.orders.length;
+            col.orders.forEach(function(order) {
+                total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+            });
+            return {
+                total_orders,
+                total_benefits: (total_benefits/100)
+            }
+        });
+        if(obj.length > 0){
+            for(let val in obj){
+                this.total = this.total + Number(obj[val].total_benefits);
+                this.pedidos = this.pedidos + Number(obj[val].total_orders);
+            }
+        }
     },
     data(){
         return{
@@ -153,6 +172,8 @@ export default {
                 image: null,
 				collaborator: this.collaborator.id,
             }),
+            pedidos:0,
+            total:0
         }
     },
     methods: {

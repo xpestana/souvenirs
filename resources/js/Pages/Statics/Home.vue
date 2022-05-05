@@ -47,7 +47,7 @@
             <div class="col-12 px-md-5">
               <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="5000">
                 <Slide v-for=" product in actList" :key="product.id">
-                  <div class="tarjeta bg-light">
+                  <div class="tarjeta bg-light h-36 w-40 md:h-60 md:w-60 mr-2.5">
                     <div class="tarjeta-img d-block">
                       <Link :href="route('product.activities.show',{product : product.id})">
                           <template v-if="product.images.length !== 0">
@@ -234,8 +234,6 @@
       cursor:pointer;
     }
     #actividades .tarjeta{
-      height: 19em;
-      width: 19em;
       box-shadow: 0px 0px 4px 1px rgba(0 0 0 / 20%);
     }
     #actividades .tarjeta img{
@@ -257,10 +255,6 @@
         }
         #carrosel .welcome{
             min-width: 100%!important;
-        }
-        #actividades .tarjeta{
-          height: 17em;
-          width: 14em;
         }
         #hicitty {
           background-size: contain;
@@ -286,10 +280,6 @@
         #carrosel .welcome{
             background-size: contain;
         }
-        #actividades .tarjeta{
-          height: 11em;
-          width: 11em;
-        }
         #actividades .tarjeta img{
           height: 5em;
         }
@@ -299,10 +289,5 @@
         }
         
     }
-    @media (max-width: 374px){
-      #actividades .tarjeta{
-          height: 10em;
-          width: 8.8em;
-        }
-    }
+    
 </style>

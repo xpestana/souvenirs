@@ -148,6 +148,6 @@ class CartController extends Controller
             'associatedModel' => $product
         ));
         $pin = mt_Rand(1000000, 9999999);
-        return back()->with(['id'=>$pin, 'message' => 'Producto agregado al carrito', 'code' => 200, 'status' => 'success']);  
+        return back()->with(['mensaje' => '<i class="fas fa-check mr-1"></i> Artículo añadido a tu cesta']);  
     }
 }
