@@ -117,7 +117,7 @@
 					</div>
 				</div>
 				<div class="col-12 col-md-2 p-0 mt-auto px-auto text-center">
-					<Link href="#" class="btn btn-sm btn-info w-75 my-1 py-0 text-white">Ver más</Link>
+					<Link :href="route('collaborator.sales.details',{hab:hotel.id})" class="btn btn-sm btn-info w-75 my-1 py-0 text-white">Ver más</Link>
 					<Link  :href="route('admin.lodging.edit',[hotel.id,collaborator.id])" class="btn btn-sm btn-secondary w-75 py-0">Editar</Link>
 				</div>
 			</div>

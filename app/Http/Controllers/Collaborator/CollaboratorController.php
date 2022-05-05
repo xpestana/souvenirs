@@ -311,9 +311,9 @@ class CollaboratorController extends Controller
         return Inertia::render('Collaborator/Dashboard/Lodging/TotalSales', compact('hotels','orders'));
     }
 
-    public function sales_hab_details($id)
+    public function sales_hab_details($hab)
     {   
-        $hotel = hotel::find($id)->load('orders.shippings');
+        $hotel = hotel::find($hab)->load('orders.shippings');
         return Inertia::render('Collaborator/Dashboard/Lodging/Details', compact('hotel'));
     }
 }

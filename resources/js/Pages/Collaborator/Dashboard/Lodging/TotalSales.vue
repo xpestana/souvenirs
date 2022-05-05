@@ -32,7 +32,10 @@
                                     <td>{{venta.id_t }}}</td>
                                     <td>{{venta.email}}</td>
                                     <td>{{moment(venta.date).format("DD/MM/YYYY")}}</td>
-                                    <td>{{venta.total_benefit}}€</td>
+                                    <td>{{venta.total_benefit.toFixed(2)}}€</td>
+                                </tr>
+                                <tr v-if="ventas.length == 0">
+                                    <td colspan="7" class="text-center">Sin alojamientos</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -285,8 +285,8 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::post('/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');
     Route::get('/edit/{hab}',[CollaboratorController::class, 'edit_hab'])->name('collaborator.edit.hab');
     Route::post('/update/{id}',[CollaboratorController::class, 'update_hab'])->name('collaborator.update.hab');    
-    Route::get('/ventas/{id}', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
-    Route::get('/ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
+    Route::get('/hab-ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
+    Route::get('/ventas/totales/{id}', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
 
     
     /* Politicas */
