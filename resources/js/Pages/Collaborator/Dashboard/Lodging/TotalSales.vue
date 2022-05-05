@@ -3,7 +3,7 @@
         <div class="container mt-5">
             <div class="row titulo">
                 <div class="col-1 text-white">
-                    <Link :href="route('collaborator.index')"><i class="fas fa-angle-left bg-info px-2 py-1"></i></Link>	
+                    <a href="javascript:void(0);" @click="back"><i class="fas fa-angle-left bg-info px-2 py-1"></i></a>		
                 </div>
                 <div class="col-11">
                     <h1 class="text-center mb-4 titulo text-info display-4"><strong>Ventas totales</strong></h1>
@@ -79,6 +79,11 @@ export default {
         console.log(this.orders)
         this.moment=Moment;
     },
+    methods:{
+        back() {
+            window.history.back();
+        },
+    },
     computed:{
         ventas(){
             const obj = this.orders.data.map((col)=>{
@@ -92,7 +97,7 @@ export default {
                 date : col.created_at,
                 type : col.type,
                 id_t: col.transaction_id,
-                email : col.shippings[0].email,
+                // email : col.shippings[0].email,
                 total_benefit : parseInt(col.total)/100,
             }
             });

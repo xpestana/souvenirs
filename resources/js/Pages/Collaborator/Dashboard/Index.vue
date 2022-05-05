@@ -19,7 +19,7 @@
                             <div class="row caja-info">
                                 <div class="col-12 col-md-9 info-boton">
                                     <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
-                                    <h5 class="text-info p-3"><Link :href="route('collaborator.sales.hab')">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
+                                    <h5 v-if="this.user_id > 0" class="text-info p-3"><Link :href="route('collaborator.sales.hab',{id: user_id})">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
                                 </div>
                                 <div class="col-12 col-md-3 info-total text-right">
                                     <h3 class="text-info"><strong>Total</strong></h3><br>
@@ -130,6 +130,12 @@
         hotels: Object,
         url:String
         },
+        created(){
+            console.log()
+            if(this.hotels.length > 0){
+                this.user_id = this.hotels[0].pivot.user_id
+            }
+        },
         computed:{
             hoteles(){
             const obj = this.hotels.map((col)=>{
@@ -157,7 +163,8 @@
             return{
                 showModal:false,
                 total: 0,
-                orders: 0
+                orders: 0,
+                user_id:0
             }
         },
         methods: {

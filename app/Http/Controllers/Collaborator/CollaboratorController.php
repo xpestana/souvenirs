@@ -299,11 +299,11 @@ class CollaboratorController extends Controller
          }
     }
 
-    public function sales_hab(){
+    public function sales_hab($id){
         $orders = Order::join('hotels', 'hotels.id', '=', 'orders.hotel_id')
                 ->join('hotel_user', 'hotels.id', '=', 'hotel_user.hotel_id')
                 ->select('orders.*', 'hotels.type', 'hotels.address', 'hotels.zone', 'hotels.calle', 'hotels.image', 'hotels.planta')
-                ->where('hotel_user.user_id', auth()->user()->id)
+                ->where('hotel_user.user_id', $id)
                 ->orderBy('orders.created_at','DESC')
                 ->paginate(10);
         $orders->load('shippings');
