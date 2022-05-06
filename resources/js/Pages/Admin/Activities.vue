@@ -11,7 +11,7 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <div class="col-12 d-none d-md-block cabecera-escritorio" hidden>
+            <div class="col-12 d-none cabecera-escritorio" hidden>
                 <div class="row px-0 alto-mobile py-3 thead d-none d-md-flex">
                     <div class="col-2 px-0 text-center">
                         <p class="font-weight-bolder">Proveedor</p>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 alto pr-0 overflw  d-none d-md-block tabla-escritorio" hidden>
+            <div class="col-12 alto pr-0 overflw  d-none tabla-escritorio" hidden>
                 <div class="row px-0 py-2 tabla" :class="{'td' : transmutar()}" v-for="product in activitiesListAsc" :key="product.id">
                     <div class="col-2 px-0 text-center">
                         <p>Naturanda</p>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 d-md-none tabla-movil" hidden>
+            <div class="col-12 d-none tabla-movil" hidden>
                 <div class="table-responsive-md bg-white alto">
                     <table class="table table-striped table-borderless" >
                         <thead class="table-active text-center">
