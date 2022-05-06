@@ -379,7 +379,6 @@ class ActivitiesController extends Controller
                             'coordinates' => $product['coordinates'],
                             'price_notes' => $product['pricing_notes'],
                             'events' => json_encode($events),
-                            'language' => "Español",
                         ]);
 
                 if (!empty($product['images'])) {
