@@ -231,6 +231,7 @@ class ActivitiesController extends Controller
                             'priceA' => json_encode($prices),
                             'events' => json_encode($events),
                             'price_notes' => $request->pricing_notes,
+                            'language' => "Español",
                         ]);
 
                 if (!empty($request->images)) {
@@ -378,6 +379,7 @@ class ActivitiesController extends Controller
                             'coordinates' => $product['coordinates'],
                             'price_notes' => $product['pricing_notes'],
                             'events' => json_encode($events),
+                            'language' => "Español",
                         ]);
 
                 if (!empty($product['images'])) {
@@ -409,6 +411,7 @@ class ActivitiesController extends Controller
                             'priceA' => json_encode($prices),
                             'events' => json_encode($events),
                             'price_notes' => $product['pricing_notes'],
+                            'language' => "Español",
                         ]);
 
                 if (!empty($product['images'])) {
