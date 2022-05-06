@@ -40,14 +40,12 @@ class SalesController extends Controller
     {
         $request->validate([
             'email' => 'required|string|email|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'name' => 'required',
             'address' => 'required',
-            'city' => 'required',
             'phone' => 'required',
             'hab' => 'required',
         ]);
-       
+
         if (auth()->user()) {
             $user = auth()->user();
             $hotel_id = (!auth()->user()->hotel->isEmpty()) ? auth()->user()->hotel->first()->id : null;
@@ -67,16 +65,12 @@ class SalesController extends Controller
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'quantity' => $product->quantity,
-                    'firstname' => $request->firstname,
-                    'lastname' => $request->lastname,
-                    'email' => $request->email,
+                    'firstname' => $request->name,
                     'address' => $request->address,
-                    'apart' => $request->apart,
-                    'city' => $request->city,
-                    'state' => $request->state,
                     'zip_code' => $request->zip_code,
                     'phone' => $request->phone,
                     'hab' => $request->hab,
+                    'observations' => $request->observations,
                     'amount' => $product->price,
                     ]);
                 

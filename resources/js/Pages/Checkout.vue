@@ -47,6 +47,9 @@
                 <div class="col-12 col-md-6 mt-3 mt-md-0">
                     <input type="text" placeholder="Móvil*" v-model="form.phone" class="border rounded py-1 w-100" required/>
                 </div>
+                <div class="col-12 col-md-6 mt-3">
+                    <input type="email" placeholder="Email*" v-model="form.email" class="border rounded py-1 w-100" required/>
+                </div>
             </div>
             <div class="row mt-4">
                 <div class="col-12 mb-2">
@@ -218,6 +221,7 @@
                 form: {
                     name: '',
                     phone: '',
+                    email: '',
                     address: (this.hotel) ? this.hotel.address : '',
                     hab: (this.hotel) ? this.hotel.planta : '',
                     observations: '',

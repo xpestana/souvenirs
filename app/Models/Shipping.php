@@ -29,6 +29,7 @@ class Shipping extends Model
         'date_init',
         'date_end',
         'hab',
+        'observations',
     ];
 
     public function order()
