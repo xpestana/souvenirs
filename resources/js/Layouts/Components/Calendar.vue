@@ -5,19 +5,20 @@
                 <DatePicker mode="date" v-model="form.date" 
                 :available-dates="this.dias_disponibles" 
                 :attributes="attributes" />
-            <!-- <div class="border mt-2 section-horarios d-inline-flex p-1 mb-1 w-3/4 md:w-1/4">
+        </div>
+        <div class="col-12 py-0 my-0 text-center" v-if="this.preciosLista.length > 0">
+            <div class="border mt-2 section-horarios d-inline-flex p-1 mb-1 w-3/4 md:w-1/4">
                 <div class="icon text-center">
                     <i class="far fa-clock text-xl text-grayc pl-1 pr-2"></i>
                 </div>
                 <div class="lista-horarios">
                     <div class="d-inline mr-2">
                         <input type="radio" name="hora" class="mb-2">
-                        <p class="hora d-inline pl-1 pt-1 text-base">11:00</p>
+                        <p class="hora d-inline pl-1 pt-1 text-base">{{ hora }}</p>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
-        
         <div class="col-12 my-2 text-center text-danger" v-if="this.eventos.length == 0">
             Esta actividad no esta disponible
         </div>
@@ -160,7 +161,8 @@
                 preciosFecha:{},
                 fechasObjeto:[],
                 preciosLista:0,
-                getDate:null
+                getDate:null,
+                hora:0,
             }
         },
         props: {
@@ -284,6 +286,7 @@
             if(url.length > 20){
                 this.getDate = url.split('event_time=')[1].split('&')[0];
                 let date = new Date (this.getDate*1000);
+                this.hora = String(date).split(String(date.getFullYear()))[1].split('GMT')[0];
                 this.attributes[1].dates = new Date(date.getFullYear(),date.getMonth(),date.getDate());
             }else{
                 this.attributes[1].dates = null;

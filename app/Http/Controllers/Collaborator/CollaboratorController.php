@@ -242,8 +242,9 @@ class CollaboratorController extends Controller
 
     public function edit_hab($id){
 
-        $hotel = hotel::find($id);
-        return Inertia::render('Collaborator/Dashboard/Lodging/Edit',compact('hotel'));
+        $hotel = hotel::find($id)->load('orders.shippings');
+        $url = config('app.url');
+        return Inertia::render('Collaborator/Dashboard/Lodging/Edit',compact('hotel','url'));
     }
 
     public function update_hab($id,Request $request){

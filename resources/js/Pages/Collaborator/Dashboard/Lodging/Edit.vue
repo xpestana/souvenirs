@@ -14,9 +14,62 @@
                             <p class="text-left text-muted">{{hotel.type.toUpperCase()}}</p>
                             <h1 class="pt-1 pb-2">{{hotel.calle}} {{hotel.planta}}</h1>
                             <div class="estadistica d-md-inline-flex">
-                                <p class="px-2 text-muted">Benefecio total 334€</p>
-                                <p class="px-2 text-muted">Pedidos totales: 8</p>
-                                <p class="text-primary px-2">Obtener QR</p>
+                                <p class="px-2 text-muted">Benefecio total {{ totalBeneficio }}€</p>
+                                <p class="px-2 text-muted">Pedidos totales: {{hotel.orders.length}}</p>
+                                <button class="btn btn-link px-2 py-0" data-toggle="modal" :data-target="'#centralModal'+hotel.id">Obtener QR</button>
+                                <!-- Central Modal Small -->
+                                <div class="modal fade" :id="'centralModal'+hotel.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                aria-hidden="true">
+                                <!-- Change class .modal-sm to change the size of the modal -->
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content mx-auto">
+                                            <div class="modal-body p-0">
+                                                <div class="row mt-5 mb-2">
+                                                    <div class="col-12 my-4 d-flex justify-content-center">
+                                                        <QRCodeVue3
+                                                            :width="1080"
+                                                            :height="1080"
+                                                            :imgclass="'souvenirs_img'+hotel.id"
+                                                            style="max-width: 50%;"
+                                                            :value="url+'?h='+hotel.id"
+                                                            :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
+                                                            :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
+                                                            :dotsOptions="{
+                                                                type: 'square',
+                                                                color: '#31516B',
+                                                                gradient: {
+                                                                type: 'linear',
+                                                                rotation: 0,
+                                                                colorStops: [
+                                                                    { offset: 0, color: '#31516B' },
+                                                                    { offset: 1, color: '#31516B' },
+                                                                ],
+                                                            },
+                                                            }"
+                                                            fileExt="png"
+                                                            :backgroundOptions="{ color: '#ffffff' }"
+                                                            :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
+                                                            :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
+                                                            :download="false"
+                                                            downloadButton="view-cart bg-info mt-3 souvenirs_btn"
+                                                            :downloadOptions="{ name: 'souvenirs', extension: 'png' }"
+                                                            crossOrigin="anonymous"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="row px-3 pt-4 pb-5">
+                                                    <div class="col-6 text-left">
+                                                        <button class="bnt btn-primary-c text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Volver</button>
+                                                    </div>
+                                                    <div class="col-6 text-right">
+                                                        <button class="bnt btn-primary-c text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(hotel.id,hotel.calle+' '+hotel.planta)">Descargar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Central Modal Small -->
                             </div>
                         </div>
                     </div>
@@ -115,15 +168,17 @@
 	import { Head, Link } from '@inertiajs/inertia-vue3'
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 	import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
-
+    import QRCodeVue3 from "qrcode-vue3"
 	export default {
         layout:TemplateApp,
         components:{
             Link,
-            ValidationErrors
+            ValidationErrors,
+            QRCodeVue3
         },
         props:{
             hotel:Object,
+            url:String,
         },
         data(){
             return{
@@ -169,6 +224,30 @@
                 this.form.reset('image');
                 $('#fileFeatured').html('');
                 this.showF=0;
+            },
+            souvenirs_btn(id,lodging){
+            var urlItem = $('.souvenirs_img'+id).attr('src');
+            axios({
+                    url: urlItem,
+                    method: 'GET',
+                    responseType: 'blob'
+                })
+                .then((response) => {
+                        const url = window.URL
+                            .createObjectURL(new Blob([response.data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', `lodging-${lodging}.png`);
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                })                
+            }
+        },
+        computed:{
+            totalBeneficio(){
+                const total = this.hotel.orders.reduce((acc,col)=> acc + parseInt(col.total),0);
+                return (total/100)
             },
         }
 	}
