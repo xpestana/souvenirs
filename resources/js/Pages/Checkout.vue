@@ -48,7 +48,7 @@
                     <input type="text" placeholder="Móvil*" v-model="form.phone" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3">
-                    <input type="email" placeholder="Email*" v-model="form.email" class="border rounded py-1 w-100" required/>
+                    <input type="email" placeholder="Correo electrónico*" v-model="form.email" class="border rounded py-1 w-100" required/>
                 </div>
             </div>
             <div class="row mt-4">
@@ -163,16 +163,10 @@
             hotel: Object,
         },
         created(){
-            console.log(this.totalActivities)
-            console.log(this.cartList)
-            var text = 'No hay dirección!!!';
-            var address = 'No entro por medio de un codigo QR, asegurese que la dirección de envío que coloque, sea la correcta';
-
             if (this.hotel) {
-                address = this.hotel.address + " Zona: " + this.hotel.zone;
-                text = '<strong>Por favor asegúrese que la <u>dirección de envio</u> sea la correcta:</strong>';
-            }
-            this.$swal({
+                let address = this.hotel.address + " Zona: " + this.hotel.zone;
+                let text = '<strong>Por favor asegúrese que la <u>dirección de envio</u> sea la correcta:</strong>';
+                this.$swal({
                     title: text,
                     icon: 'info',
                     html: address,
@@ -183,6 +177,7 @@
                         '<i class="fa fa-thumbs-up"></i> Aceptar!',
                     confirmButtonAriaLabel: 'Aceptar!',
                 })
+            }
             var cart = this.$page.props.cart;
             var total = 0;
             var total_souvenirs = 0;
@@ -222,7 +217,7 @@
                     name: '',
                     phone: '',
                     email: '',
-                    address: (this.hotel) ? this.hotel.address : '',
+                    address: (this.hotel) ? this.hotel.calle : '',
                     hab: (this.hotel) ? this.hotel.planta : '',
                     observations: '',
                     cp: (this.hotel) ? this.hotel.cp : '',

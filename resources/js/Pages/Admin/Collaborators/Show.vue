@@ -36,7 +36,7 @@
 			<div class="row justify-content-lg-between mx-lg-4 mt-md-5 align-items-end">
 				<div class="col-12 col-md-12 col-lg-5 my-2 my-md-0">
 					<Link :href="route('admin.lodging.create',collaborator.id)" type="button" class="btn btn-azulc text-white px-2 px-md-4 py-1">Añadir apartamento<i class="fas fa-plus pl-2"></i></Link>
-					<h5 v-if="collaborator.hotel.length > 0" class="text-info mt-1 p-1 font-weight-bolder"><Link :href="route('collaborator.sales.hab',{id: collaborator.id})">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
+					<h5 v-if="collaborator.hotel.length > 0" class="text-info mt-1 p-1 font-weight-bolder"><Link :href="route('admin.sales.hab',{id: collaborator.id})">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
 				</div>
 				<div class="col-12 col-md-5 col-lg-4   my-1 my-md-0">
 					<h4 class="text-info font-weight-bolder pl-0 pl-xl-4">Total</h4><br>
@@ -117,7 +117,7 @@
 					</div>
 				</div>
 				<div class="col-12 col-md-2 p-0 mt-auto px-auto text-center">
-					<Link :href="route('collaborator.sales.details',{hab:hotel.id})" class="btn btn-sm btn-info w-75 my-1 py-0 text-white">Ver más</Link>
+					<Link :href="route('admin.hotel.details',[hotel.id,collaborator.id])" class="btn btn-sm btn-info w-75 my-1 py-0 text-white">Ver más</Link>
 					<Link  :href="route('admin.lodging.edit',[hotel.id,collaborator.id])" class="btn btn-sm btn-secondary w-75 py-0">Editar</Link>
 				</div>
 			</div>

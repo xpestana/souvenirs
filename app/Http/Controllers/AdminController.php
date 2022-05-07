@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\profile;
 use App\Models\Settings;
 use App\Models\Products;
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -539,5 +540,24 @@ class AdminController extends Controller
         $settings->save();
 
         return back()->with(['id'=>$settings->id, 'message' => "Actualizado exitosamente", 'code' => 200, 'status' => 'success']);
+    }
+
+    public function sales_hab_details($hab,$id)
+    {   
+        $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
+        $hotel = hotel::find($hab)->load('orders.shippings');
+        return Inertia::render('Admin/Collaborators/Lodging/Details', compact('hotel','collaborator'));
+    }
+
+    public function sales_hab($id){
+        $orders = Order::join('hotels', 'hotels.id', '=', 'orders.hotel_id')
+                ->join('hotel_user', 'hotels.id', '=', 'hotel_user.hotel_id')
+                ->select('orders.*', 'hotels.type', 'hotels.address', 'hotels.zone', 'hotels.calle', 'hotels.image', 'hotels.planta')
+                ->where('hotel_user.user_id', $id)
+                ->orderBy('orders.created_at','DESC')
+                ->paginate(10);
+        $orders->load('shippings');
+        $collaborator = User::find($id)->load('profile','hotel.orders.shippings');       
+        return Inertia::render('Admin/Collaborators/Lodging/TotalSales', compact('collaborator','orders'));
     }
 }

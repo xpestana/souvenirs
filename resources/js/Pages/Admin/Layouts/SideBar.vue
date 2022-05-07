@@ -74,8 +74,8 @@ export default {
             let url2 = url.includes('/admin/colaborador/')
             let url3 = url.includes('/admin/crear/colaborador')
             let url4 = url.includes('/admin/editar/colaborador/')
-            let url5 = url.includes('/admin/editar/alojamiento/')
-            let url6 = url.includes('/admin/crear/alojamiento/')
+            let url5 = url.includes('/alojamiento')
+            let url6 = url.includes('/admin/ventas/totales')
             if(url1 || url2 || url3 || url4 || url5 || url6){
                 return true;
             }

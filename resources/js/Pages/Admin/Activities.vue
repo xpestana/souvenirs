@@ -102,7 +102,7 @@
     </div>
 
     <div class="container px-0 px-md-2 px-lg-5">
-        <div class="row my-4 my-md-5 px-md-5">
+        <div class="row my-4 my-md-5 px-md-5" hidden>
             <div class="col-12 text-center">
                 <h1 class="text-azulc text-2xl font-weight-bolder">Actividades registradas</h1>
             </div>

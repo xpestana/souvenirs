@@ -325,6 +325,8 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/editar/alojamiento/{id}/colaborador/{idcol}', [AdminController::class, 'collaborator_lodging_edit'])->name('admin.lodging.edit');
     Route::post('/update/alojamiento/{id}', [AdminController::class, 'collaborator_lodging_update'])->name('admin.lodging.update');
     Route::delete('/eliminar/alojamiento/{hotel}/{collaborator}', [AdminController::class, 'lodging_delete'])->name('admin.lodging.delete');
+    Route::get('/alojamiento/{hab}/{id}', [AdminController::class, 'sales_hab_details'])->name('admin.hotel.details');
+    Route::get('/alojamientos/ventas/{id}', [AdminController::class, 'sales_hab'])->name('admin.sales.hab');  
 
     /*ADMINISTRADORES*/
     
@@ -366,4 +368,8 @@ Route::resource(
 
 Route::get('/update/api', [ActivitiesController::class, 'api'])->name('update.api');
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
+Route::get('test',function(){
+    return view('Mails/souvenirs'); 
+});
+
 require __DIR__.'/auth.php';
