@@ -164,12 +164,6 @@ class AdminController extends Controller
 
     /*Admin nuevo*/
 
-
-    public function home()
-    {
-        return Inertia::render('Admin/index');
-    }
-
     public function colaboradores(Request $request)
     {
         $collaborators = User::join('profiles', 'profiles.user_id', '=', 'users.id')
@@ -559,5 +553,17 @@ class AdminController extends Controller
         $orders->load('shippings');
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');       
         return Inertia::render('Admin/Collaborators/Lodging/TotalSales', compact('collaborator','orders'));
+    }
+
+    public function transaction($id)
+    {   
+        $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
+        return Inertia::render('Admin/Collaborators/Lodging/Transaction', compact('collaborator'));
+    }
+
+    
+    public function sales()
+    {
+        return Inertia::render('Admin/Sales');
     }
 }

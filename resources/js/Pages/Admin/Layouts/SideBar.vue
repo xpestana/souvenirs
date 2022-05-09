@@ -30,10 +30,10 @@
                 </Link>
             </li>
             <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.home')"  class="link">
+                <Link :href="route('admin.sales')"  class="link" :class="{ 'active': urlVentas}">
                     <div class="d-inline-flex">
                         <i class="fas fa-shopping-cart my-auto pr-1"></i>
-                        <p class="p-2">Mis ventas</p>
+                        <p class="p-2" :class="{ 'active': urlVentas}">Mis ventas</p>
                     </div>
                 </Link>
             </li>
@@ -94,6 +94,14 @@ export default {
             let url1 = url.includes('/admin/activities')
             let url2 = url.includes('tablero/actividades/')
             if(url1 || url2){
+                return true;
+            }
+            return false;
+        },
+        urlVentas(){
+            let url = this.$page.url;
+            let url1 = url.includes('/admin/ventas')
+            if(url1){
                 return true;
             }
             return false;

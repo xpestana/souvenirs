@@ -62,7 +62,13 @@
                                     <td class="text-center">-</td>
                                     <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
                                     <td class="text-center">{{ parseInt(order.total)/100 }} €</td>
-                                    <td class="text-center px-0"><Link class="btn btn-sm text-white d-inline p-0.5 mx-0" as="button" href="#" style="background-color: #2b59a2">Más detalles</Link></td>
+                                    <td class="text-center px-0">
+                                        <Link :href="route('admin.hab.transaction',collaborator.id)" 
+                                            class="btn btn-sm text-white d-inline p-0.5 mx-0" as="button" 
+                                            style="background-color: #2b59a2">
+                                            Más detalles
+                                        </Link>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

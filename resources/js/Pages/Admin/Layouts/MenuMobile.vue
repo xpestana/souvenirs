@@ -31,7 +31,7 @@
               </Link>
               </li>
               <li class="nav-item">    
-              <Link :href="route('admin.home')"  class="nav-link py-0">
+              <Link :href="route('admin.activities')"  class="nav-link py-0">
                   <div class="d-inline-flex">
                       <i class="fas fa-biking my-auto pr-1"></i>
                       <p class="p-2 font-weight-bolder">Gestión de actividades</p>
@@ -39,7 +39,7 @@
               </Link>
               </li>
               <li class="nav-item">
-              <Link :href="route('admin.home')"  class="nav-link py-0">
+              <Link :href="route('admin.souvenirs')"  class="nav-link py-0">
                   <div class="d-inline-flex">
                       <i class="fas fa-gift my-auto pr-1"></i>
                       <p class="p-2 font-weight-bolder">Gestión de souvenirs</p>
@@ -47,7 +47,7 @@
               </Link>
               </li>
               <li class="nav-item">
-              <Link :href="route('admin.home')"  class="nav-link py-0">
+              <Link :href="route('admin.sales')"  class="nav-link py-0">
                   <div class="d-inline-flex">
                       <i class="fas fa-shopping-cart my-auto pr-1"></i>
                       <p class="p-2 font-weight-bolder">Mis ventas</p>

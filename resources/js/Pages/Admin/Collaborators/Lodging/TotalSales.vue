@@ -62,7 +62,7 @@
                                     <td class="text-center">{{venta.email}}</td>
                                     <td class="text-center">{{moment(venta.date).format("DD/MM/YYYY")}}</td>
                                     <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
-                                    <td class="text-center w-28"><Link class="btn btn-sm text-white d-inline p-0.5" as="button" href="#" style="background-color: #2b59a2">Más detalles</Link></td>
+                                    <td class="text-center w-28"><Link :href="route('admin.hab.transaction',collaborator.id)" class="btn btn-sm text-white d-inline p-0.5" as="button" style="background-color: #2b59a2">Más detalles</Link></td>
                                 </tr>
                                 <tr v-if="ventas.length == 0">
                                     <td colspan="8" class="text-center">Sin pedidos</td>

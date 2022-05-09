@@ -309,7 +309,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
 
 Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(function () {
 
-    Route::get('/inicio', [AdminController::class, 'home'])->name('admin.home');
+    Route::get('/ventas', [AdminController::class, 'sales'])->name('admin.sales');
 
     Route::get('/colaboradores', [AdminController::class, 'colaboradores'])->name('admin.colaboradores');
     Route::get('/crear/colaborador', [AdminController::class, 'collaborator_create'])->name('admin.collaborator.create');
@@ -327,6 +327,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::delete('/eliminar/alojamiento/{hotel}/{collaborator}', [AdminController::class, 'lodging_delete'])->name('admin.lodging.delete');
     Route::get('/alojamiento/{hab}/{id}', [AdminController::class, 'sales_hab_details'])->name('admin.hotel.details');
     Route::get('/alojamientos/ventas/{id}', [AdminController::class, 'sales_hab'])->name('admin.sales.hab');  
+    Route::get('/alojamientos/transaccion/{id}', [AdminController::class, 'transaction'])->name('admin.hab.transaction');  
 
     /*ADMINISTRADORES*/
     
