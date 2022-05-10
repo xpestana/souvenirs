@@ -24,36 +24,57 @@
                             </thead>
                             <tbody>
                                 <tr v-for="order in orders.data" :key="order.id">
-                                    <td class="text-center">-</td>
+                                    <td class="text-center">
+                                         <template v-if="order.hotel.user[0]">
+                                                {{ order.hotel.user[0].email }}
+                                        </template>
+                                        <template v-else>
+                                            -
+                                        </template>
+                                    </td>
                                     <td class="text-center">{{ order.hotel.calle }} {{ order.hotel.panta }}</td>
                                     <td class="text-center">
                                         <template v-if="order.returned == 1">
-                                            <select name="returned" id="returned" @change="returned(order.id)">
+                                            <select class="rounded py-1" name="returned" id="returned" @change="returned(order.id)">
                                                 <option value="1" selected>Si</option>
                                                 <option value="0">No</option>
                                             </select>
                                         </template>
                                         <template v-else>
-                                            <select name="returned" id="returned" @change="returned(order.id)">
+                                            <select class="rounded py-1" name="returned" id="returned" @change="returned(order.id)">
                                                 <option value="1">Si</option>
                                                 <option value="0" selected>No</option>
                                             </select>
                                         </template>
                                     </td>
-                                    <td class="text-center">{{ order.transaction_id }}</td>
-                                    <td class="text-center">{{ order.shippings[0].email / order.shippings[0].phone }}</td>
+                                    <td class="text-center">
+                                        <Link :href="route('admin.sales.transaction',order.id)">{{ order.transaction_id }}</Link>
+                                    </td>
+                                    <td class="text-center">
+                                        <template v-if="order.shippings[0]">
+                                                {{ order.shippings[0].email }}
+                                        </template>
+                                        <template v-else>
+                                            -
+                                        </template>
+                                    </td>
                                     <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
-									<td class="text-center">{{ parseInt(order.total) / 100 }} €</td>
+									<td class="text-center px-0">{{ parseInt(order.total) / 100 }}€</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="row mx-lg-4 pie justify-content-end my-4">
+            <div class="row mx-lg-4 pie justify-content-end my-3">
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
-                    <p><b>Tu beneficio es de 333€</b></p>
+                    <p><b>Tu beneficio es de {{ beneficioTotal }}€</b></p>
+                </div>
+            </div>
+            <div class="row justify-content-center paginador">
+                <div class="col-10 col-md-5">
+                    <paginator :paginator="orders" />
                 </div>
             </div>
         </div>
@@ -61,12 +82,16 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/inertia-vue3';
 import Layout from '@/Pages/Admin/Layouts/Layout'
+import Paginator from '@/Components/Paginator'
 import Moment from 'moment'
 
 export default {
     layout:Layout,
     components:{
+        Paginator,
+        Link
     },
     created(){
         console.log(this.orders);
@@ -80,16 +105,25 @@ export default {
             window.history.back();
         },
         returned(id){
-                Inertia.post(route('admin.shipping.returned'), {
+                this.$inertia.post(route('admin.order.returned'), {
                 id: id,
                 })
             },
     },
+    computed:{
+        beneficioTotal(){
+            let noDevueltos = this.orders.data.filter(el => el.returned == 0)
+            console.log(noDevueltos)
+            return (noDevueltos.reduce((acc,el) => Number(el.total) + acc,0))/100
+        }
+    }
     
     
 }
 </script>
 
 <style>
-
+.paginador nav{
+    margin-top: 0 !important;
+}
 </style>

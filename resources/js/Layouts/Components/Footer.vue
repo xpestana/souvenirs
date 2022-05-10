@@ -1,82 +1,76 @@
 <template>
-    <div class="bg-footer col-12 p-20 my-10"></div>
         <!-- Footer Area Start Here -->
-        <footer class="footer-area bg-img">
-            <div class="footer-top bg-img pt-82 pb-50">
+        <footer class="mt-5 pt-3 bg-light">
+            <div class="footer-body">
                 <div class="container">
-                    <div class="row">
-                        
-			            <div class="col-lg-3 col-sm-3 col-md-3">
-                            <div class="footer-widget">
-                                <div class="footer-logo mb-43">
-                                    <Link :href="route('home')">
-                                        <img id="logo-footer" alt="brand-image" src="/vendor_asset/img/logo/logo.png">
-                                    </Link>
-                                </div>
-                                <div class="footer-addres">
-                                    <p>Dirección</p>
-                                    <div class="footer-phn-email">
-                                        <a href="#">+34 555 5555 55</a>
-                                        <a href="#">+34 555 5555 55</a>
+                    <div class="row justify-content-around">
+                        <div class="col-12 col-md-2">
+                            <img class="mx-auto w-28 md:w-56" src="/vendor_asset/img/logo/logo.png" alt="logo">
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="footer-widget mb-40">
+                                <div class="footer-content pt-2 text-center">
+                                    <div class="">
+                                    <Link :href="route('about.us')" class="text-lg">¿Quiénes somos?</Link>
                                     </div>
-                                    <div class="footer-phn-email">
-                                        <a href="#">correo1@mail.com</a>
-                                        <a href="#">correo2@support.info</a>
+                                    <div class="">
+                                        <Link :href="route('contact')" class="text-lg">Contáctanos</Link>
+                                    </div>
+                                    <div class="">
+                                        <a href="#" class="text-lg">Blog</a>
+                                    </div>
+                                    <div class="">
+                                        <a href="#" class="text-lg">Trabaja con nosotros</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="col-lg-3 col-sm-3 col-md-3">
+                        <div class="col-12 col-md-3">
                             <div class="footer-widget mb-40">
-                                <div class="footer-title mb-55">
-                                    <h4>¿Ya nos sigues?</h4>
-                                </div>
-                                <div class="footer-content">
-                                    <ul>
-                                        <li><a href="#">Instagram</a></li>
-                                        <li><a href="#">Twitter</a></li>
-                                    </ul>
+                                <div class="footer-content text-center pt-2">
+                                    <div><Link href="#" class="text-lg text-azulc font-weight-bolder">Servicios</Link></div>
+                                    <div><Link class="text-lg" :href="route('activities')">Actividades</Link></div>
+                                    <div><Link class="text-lg" :href="route('souvenirs')">Souvenirs</Link></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3">
+                        <div class="col-12 col-md-3">
                             <div class="footer-widget mb-40">
-                                <div class="footer-title mb-55">
-                                    <h4>Servicios</h4>
-                                </div>
-                                <div class="footer-content">
-                                    <ul>
-                                        <li><Link :href="route('about.us')">¿Quiénes somos?</Link></li>
-                                        <li><Link :href="route('contact')">Contáctanos</Link></li>
-                                        <li><a href="#">Blog</a></li>
-                                        <li><a href="#">Soporte</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3">
-                            <div class="footer-widget mb-40">
-                                <div class="footer-title mb-55">
-                                    <h4>Políticas</h4>
-                                </div>
-                                <div class="footer-content">
-                                    <ul>
-                                        <li><a target="_blank" href="/tablero/alojamientos/politicas/privacidad">Políticas de privacidad</a></li>
-                                        <li><a target="_blank" href="politicas/terminosycondiciones">Términos y condiciones</a></li>
-                                        <li><a target="_blank" href="/tablero/alojamientos/politicas/entregas">Políticas de entrega</a></li>
-                                        <li><a target="_blank" href="/tablero/alojamientos/politicas/devolucion">Políticas de devolución</a></li>
-                                    </ul>
+                                <div class="footer-content text-center pt-2">
+                                    <div><Link href="#" class="text-lg text-azulc font-weight-bolder">Políticas</Link></div>
+                                    <div>
+                                        <Link class="text-lg" :href="route('privacidad')">Políticas de privacidad</Link>
+                                    </div>
+                                    <div>
+                                        <Link class="text-lg" :href="route('terminosycondiciones')">Términos y condiciones</Link>
+                                    </div>
+                                    <div>
+                                        <Link class="text-lg" :href="route('entregas')">Políticas de entrega</Link>
+                                    </div>
+                                    <div>
+                                        <Link class="text-lg" :href="route('devolucion')">Políticas de devolución</Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="copyright text-center">
-                        <p>Copyright ©<a href="#">HiCity</a>. Todos los derechos reservados.</p>
+            <div class="footer-copryright">
+                <div class="container-fluid px-0 py-3 position-relative" style="background-color:#ededed">
+                    <p class="text-center text-secondary">Copyright ©<a href="#">HiCitty</a>. Todos los derechos reservados.</p>
+                    <div class="footer-social md:absolute right-0 top-1 text-center ">
+                        <div class="d-inline-flex">
+                            <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
+                                <img src="/vendor_asset/img/social/wt.png" class="w-16 h-12">
+                            </a>
+                            <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
+                                <img src="/vendor_asset/img/social/inst.png" class="px-2 w-16 h-12">
+                            </a>
+                            <a target="_blank" href="https://twitter.com/hicitty_" class="">
+                                <img src="/vendor_asset/img/social/tw.png" class="px-2 w-16 h-12">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,16 +80,18 @@
 </template>
 
 <script>
-    import { Link } from '@inertiajs/inertia-vue3';
-
+    import { Link } from '@inertiajs/inertia-vue3'
     export default {
         components: {
             Link,
         },
+        created(){
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+        }
     }
 </script>
 <style type="text/css">
-    .bg-footer{
-        background-color: #31516B;
-    }
+
 </style>

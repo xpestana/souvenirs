@@ -59,13 +59,13 @@
                                     <td class="text-center">{{venta.address}}</td>
                                     <td class="text-center p-0">
                                         <template v-if="venta.returned == 1">
-                                            <select name="returned" id="returned" @change="returned(venta.id)">
+                                            <select class="py-1 rounded mt-3" name="returned" id="returned" @change="returned(venta.id)">
                                                 <option value="1" selected>Si</option>
                                                 <option value="0">No</option>
                                             </select>
                                         </template>
                                         <template v-else>
-                                            <select name="returned" id="returned" @change="returned(venta.id)">
+                                            <select class="py-1 rounded mt-3" name="returned" id="returned" @change="returned(venta.id)">
                                                 <option value="1">Si</option>
                                                 <option value="0" selected>No</option>
                                             </select>
@@ -76,7 +76,14 @@
                                     <td class="text-center">{{venta.email}}</td>
                                     <td class="text-center">{{moment(venta.date).format("DD/MM/YYYY")}}</td>
                                     <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
-                                    <td class="text-center w-28"><Link :href="route('admin.hab.transaction',collaborator.id)" class="btn btn-sm text-white d-inline p-0.5" as="button" style="background-color: #2b59a2">Más detalles</Link></td>
+                                    <td class="text-center w-28 px-1">
+                                        <template v-if="venta.shippings[0] !== undefined">
+                                                <Link :href="route('admin.hab.transaction',[collaborator.id,venta.shippings[0].id])" 
+                                                    class="btn btn-sm text-white d-inline p-0.5" as="button" style="background-color: #2b59a2">
+                                                    Más detalles
+                                                </Link>    
+                                        </template>
+                                    </td>
                                 </tr>
                                 <tr v-if="ventas.length == 0">
                                     <td colspan="8" class="text-center">Sin pedidos</td>
@@ -128,7 +135,6 @@ export default {
     computed:{
         ventas(){
             const obj = this.orders.data.map((col)=>{
-                console.log(col.returned);
             return {
                 id : col.id,
                 calle: col.calle,
@@ -137,6 +143,7 @@ export default {
                 image : col.image,
                 date : col.created_at,
                 type : col.type,
+                shippings : col.shippings,
                 id_t: col.transaction_id,
                 email : (col.shippings[0]) ? col.shippings[0].email : "",
                 returned : col.returned,

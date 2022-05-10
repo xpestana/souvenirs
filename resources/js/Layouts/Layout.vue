@@ -15,7 +15,7 @@
 <script>
 
 import Header from '@/Layouts/Components/Header.vue'
-import Footer from '@/Pages/Collaborator/Layouts/Footer.vue'
+import Footer from '@/Layouts/Components/Footer.vue'
 import Notify from '@/Layouts/Components/Toast.vue'
 
 export default {

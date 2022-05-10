@@ -60,9 +60,9 @@
                     <div class="footer-social">
                         <div class="row justify-content-center pb-3">
                             <div class="col-8 col-md-3 text-center d-inline-flex">
-                                <button type="button" data-container="body" data-toggle="popover" data-placement="top" data-content="+34 722 19 39 03">
+                                <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
                                     <img src="/vendor_asset/img/social/wt.png" class="">
-                                </button>
+                                </a>
                                 <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
                                     <img src="/vendor_asset/img/social/inst.png" class="px-2">
                                 </a>

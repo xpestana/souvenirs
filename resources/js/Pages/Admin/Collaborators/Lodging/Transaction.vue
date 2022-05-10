@@ -34,7 +34,7 @@
         <div class="container mt-5 px-0 px-md-4">
             <div class="row cabeza mx-lg-4">
                 <div class="col-12">
-                    <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-3xl"><strong>Venta {{ shipping.order.transaction_id }}</strong></h1>
+                    <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-3xl"><strong>Venta "{{ shipping.order.transaction_id }}"</strong></h1>
                 </div>
             </div>
             <div class="row cuerpo mx-lg-4 mt-md-2">
@@ -72,7 +72,6 @@
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
                     <p><b>Tu beneficio es de {{ total }}€</b></p>
-                    <button class="btn btn-primary-c rounded-pill mt-2 py-1 py-md-0">Guardar cambios</button>
                 </div>
             </div>
         </div>

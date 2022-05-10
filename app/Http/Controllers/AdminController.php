@@ -610,12 +610,12 @@ class AdminController extends Controller
     }
     public function sales()
     {
-        $orders = Order::with('hotel.user', 'shippings')->paginate(20);
+        $orders = Order::with('hotel.user', 'shippings')->orderBy('created_at','DESC')->paginate(10);
         return Inertia::render('Admin/Sales', compact('orders'));
     }
     public function sales_detail($id)
     {
-        $order = Order::find($id)->load('hotel.user', 'shippings');
+        $order = Order::find($id)->load('hotel.user', 'shippings.product');
         return Inertia::render('Admin/Sales_details', compact('order'));
     }
 }

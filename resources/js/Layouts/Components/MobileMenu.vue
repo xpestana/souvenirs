@@ -36,7 +36,7 @@
 				<div class="col-12">
 					<ul class="navbar-nav">
 						<li class="nav-item d-flex justify-between px-3">
-							<h3 class="font-weight-bolder">Menú</h3>
+							<h3 class="font-weight-bolder text-xl" style="font-family:'Futur'">Menú</h3>
 							<button type="button" data-toggle="collapse" data-target="#collapseb"
 								aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation" @click="atenuar">
 								<i class="fas fa-times font-weight-bolder"></i>

@@ -55,9 +55,9 @@
                             <div class="d-block">
                                 <form @submit.prevent="submit">
                                 <div class="quatity-stock-mobile d-inline">
-                                    <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1" @click="form.quantity > 1 ? --form.quantity: ''"><i class="fas fa-minus"></i></button>
-                                    <p class="text-muted d-inline mx-2">Cantidad <input v-model="form.quantity" type="number" min="1"></p>
-                                    <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1" @click="++form.quantity"><i class="fas fa-plus"></i></button>
+                                    <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1.5 py-md-1" @click="form.quantity > 1 ? --form.quantity: ''"><i class="fas fa-minus"></i></button>
+                                    <p class="text-muted mx-2 d-inline"><input v-model="form.quantity" type="number" min="1" class="px-0 pl-1 pl-md-2 w-8 md:w-12"></p>
+                                    <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1.5 py-md-1" @click="++form.quantity"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <div class="d-inline ml-3">
                                     <button href="#" type="submit" class="text-azulc">Añadir al carrito</button>
@@ -214,16 +214,18 @@
 </script>
 <style scope>
     .carousel__prev {
-        left: 2%;
+        left: 5%;
     }
     .carousel__next {
-        right: 2%;
+        right: 5%;
+        color: #fff !important;
     }
     .carousel #img-product {
         height: 30em;
         background-size: contain !important;
         background-repeat: no-repeat !important;
-        min-width: 100% !important;
+        min-width: 60% !important;
+        margin: 0 auto;
     }
     .img-thumb{
         width: 100%;
@@ -240,9 +242,7 @@
         margin-bottom: 0px;
     }
     .thubnail-desc .quatity-stock-mobile input{
-        padding: 0;
         border: none;
-        width: 8px;
         margin: 0 2px;
     }
     

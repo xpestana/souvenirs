@@ -59,13 +59,13 @@
                                     <td class="text-center">{{ order.transaction_id }}</td>
                                     <td class="text-center p-0">
                                         <template v-if="order.returned == 1">
-                                            <select name="returned" id="returned" @change="returned(order.id)">
+                                            <select class="rounded py-1 mt-2" name="returned" id="returned" @change="returned(order.id)">
                                                 <option value="1" selected>Si</option>
                                                 <option value="0">No</option>
                                             </select>
                                         </template>
                                         <template v-else>
-                                            <select name="returned" id="returned" @change="returned(order.id)">
+                                            <select class="rounded py-1 mt-2" name="returned" id="returned" @change="returned(order.id)">
                                                 <option value="1">Si</option>
                                                 <option value="0" selected>No</option>
                                             </select>
@@ -126,9 +126,8 @@ export default {
     },
     created(){
         this.moment=Moment;
-        console.log(this.collaborator)
-        console.log(this.hotel)
         this.datosColaborador()
+        console.log(this.shippings)
     },
     methods:{
         datosColaborador(){
@@ -149,7 +148,8 @@ export default {
     },
     computed:{
         totalBeneficio(){
-            const total = this.shippings.reduce((acc,col)=> acc + parseInt(col.total),0);
+            let noDevueltos = this.shippings.filter(el => el.returned == 0)
+            const total = noDevueltos.reduce((acc,col)=> acc + parseInt(col.total),0);
             return (total/100)
         },
     }

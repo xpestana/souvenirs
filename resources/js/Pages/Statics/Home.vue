@@ -240,7 +240,7 @@
       height: 10em;
     }
     #souvenirs .images .image{
-      height: 8em;
+      height: 6em;
       width: 100%;
       background-position: center center !important;
       background-size: cover !important;
@@ -258,7 +258,7 @@
         }
         #hicitty {
           background-size: contain;
-          padding: 5em 0;
+          padding: 3.5em 0;
           margin-bottom: -3em;
         }
     }
@@ -273,7 +273,7 @@
             max-height: 240px;
         }
         #categorias .categoria-img{
-          height: 9em;
+          height: 7em;
           width: 100%;
           background-size: cover !important;
         }
