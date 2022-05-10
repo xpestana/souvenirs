@@ -23,14 +23,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="order in orders.data" :key="order.id">
                                     <td class="text-center">-</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">-</td>
-									<td class="text-center">-</td>
+                                    <td class="text-center">{{ order.hotel.calle }} {{ order.hotel.panta }}</td>
+                                    <td class="text-center">
+                                        <template v-if="order.returned == 1">
+                                            <select name="returned" id="returned" @change="returned(order.id)">
+                                                <option value="1" selected>Si</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </template>
+                                        <template v-else>
+                                            <select name="returned" id="returned" @change="returned(order.id)">
+                                                <option value="1">Si</option>
+                                                <option value="0" selected>No</option>
+                                            </select>
+                                        </template>
+                                    </td>
+                                    <td class="text-center">{{ order.transaction_id }}</td>
+                                    <td class="text-center">{{ order.shippings[0].email / order.shippings[0].phone }}</td>
+                                    <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
+									<td class="text-center">{{ parseInt(order.total) / 100 }} €</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -49,14 +62,28 @@
 
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
+import Moment from 'moment'
+
 export default {
     layout:Layout,
     components:{
+    },
+    created(){
+        console.log(this.orders);
+        this.moment=Moment;
+    },
+    props:{
+        orders:Object,
     },
     methods:{
         back() {
             window.history.back();
         },
+        returned(id){
+                Inertia.post(route('admin.shipping.returned'), {
+                id: id,
+                })
+            },
     },
     
     

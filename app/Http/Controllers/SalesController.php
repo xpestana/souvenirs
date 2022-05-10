@@ -66,6 +66,7 @@ class SalesController extends Controller
                     'product_id' => $product->id,
                     'quantity' => $product->quantity,
                     'firstname' => $request->name,
+                    'email' => $request->email,
                     'address' => $request->address,
                     'zip_code' => $request->zip_code,
                     'phone' => $request->phone,

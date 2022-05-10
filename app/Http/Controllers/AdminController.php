@@ -6,6 +6,7 @@ use App\Models\hotel;
 use App\Models\User;
 use App\Models\profile;
 use App\Models\Settings;
+use App\Models\Shipping;
 use App\Models\Products;
 use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
@@ -540,7 +541,13 @@ class AdminController extends Controller
     {   
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
         $hotel = hotel::find($hab)->load('orders.shippings');
-        return Inertia::render('Admin/Collaborators/Lodging/Details', compact('hotel','collaborator'));
+
+        $shippings = Shipping::join('orders', 'orders.id', '=', 'shippings.order_id')
+                ->select('shippings.*', 'orders.transaction_id', 'orders.total')
+                ->where('orders.hotel_id', $hab)
+                ->orderBy('orders.created_at','DESC')->get();
+
+        return Inertia::render('Admin/Collaborators/Lodging/Details', compact('shippings','collaborator', 'hotel'));
     }
 
     public function sales_hab($id){
@@ -554,16 +561,61 @@ class AdminController extends Controller
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');       
         return Inertia::render('Admin/Collaborators/Lodging/TotalSales', compact('collaborator','orders'));
     }
+    public function returned_order(Request $request){
 
-    public function transaction($id)
+        $order = Order::find($request->id);
+
+        if ($order->returned == 0) {
+            $order->returned = 1;
+            $order->save();
+            foreach($order->shippings as $shipping){
+                $ship = Shipping::find($shipping->id);
+                $ship->returned = 1;
+                $ship->save();
+            }
+        }else{
+            $order->returned = 0;
+            $order->save();
+            foreach($order->shippings as $shipping){
+                $ship = Shipping::find($shipping->id);
+                $ship->returned = 0;
+                $ship->save();
+            }
+        }
+        
+        $id = mt_Rand(1000000, 9999999);
+        return back()->with(['id'=>$id, 'message' => "Actualizado exitosamente", 'code' => 200, 'status' => 'success']);
+    }
+    public function returned_shipping(Request $request){
+
+        $ship = Shipping::find($request->id);
+        
+        if ($ship->returned == 0) {
+            $ship->returned = 1;
+            $ship->save();
+        }else{
+            $ship->returned = 0;
+            $ship->save();
+        }
+        
+        $id = mt_Rand(1000000, 9999999);
+        return back()->with(['id'=>$id, 'message' => "Actualizado exitosamente", 'code' => 200, 'status' => 'success']);
+    }
+    public function transaction($id, $shipping)
     {   
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
-        return Inertia::render('Admin/Collaborators/Lodging/Transaction', compact('collaborator'));
-    }
+        $shipping = Shipping::find($shipping)->load('order.hotel', 'product');
 
-    
+        return Inertia::render('Admin/Collaborators/Lodging/Transaction', compact('collaborator', 'shipping'));
+    }
     public function sales()
     {
-        return Inertia::render('Admin/Sales');
+        $orders = Order::with('hotel.user', 'shippings')->paginate(20);
+        return Inertia::render('Admin/Sales', compact('orders'));
+    }
+    public function sales_detail($id)
+    {
+        $order = Order::find($id)->load('hotel.user', 'shippings');
+        return Inertia::render('Admin/Sales_details', compact('order'));
     }
 }

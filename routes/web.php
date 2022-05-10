@@ -327,7 +327,9 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::delete('/eliminar/alojamiento/{hotel}/{collaborator}', [AdminController::class, 'lodging_delete'])->name('admin.lodging.delete');
     Route::get('/alojamiento/{hab}/{id}', [AdminController::class, 'sales_hab_details'])->name('admin.hotel.details');
     Route::get('/alojamientos/ventas/{id}', [AdminController::class, 'sales_hab'])->name('admin.sales.hab');  
-    Route::get('/alojamientos/transaccion/{id}', [AdminController::class, 'transaction'])->name('admin.hab.transaction');  
+    Route::get('/alojamientos/transaccion/{id}/{shipping}', [AdminController::class, 'transaction'])->name('admin.hab.transaction');  
+    Route::post('/alojamientos/transaccion/devolucion', [AdminController::class, 'returned_order'])->name('admin.order.returned');  
+    Route::post('/alojamientos/envios/devolucion', [AdminController::class, 'returned_shipping'])->name('admin.shipping.returned');  
 
     /*ADMINISTRADORES*/
     

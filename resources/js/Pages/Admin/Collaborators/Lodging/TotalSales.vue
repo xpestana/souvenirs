@@ -57,8 +57,22 @@
                                 <tr v-for="venta in ventas" :key="venta.id">
                                     <td class="text-center">{{venta.calle}} {{venta.planta}}</td>
                                     <td class="text-center">{{venta.address}}</td>
-                                    <td class="text-center">-</td>
-                                    <td class="text-center">{{venta.id_t }}}</td>
+                                    <td class="text-center p-0">
+                                        <template v-if="venta.returned == 1">
+                                            <select name="returned" id="returned" @change="returned(venta.id)">
+                                                <option value="1" selected>Si</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </template>
+                                        <template v-else>
+                                            <select name="returned" id="returned" @change="returned(venta.id)">
+                                                <option value="1">Si</option>
+                                                <option value="0" selected>No</option>
+                                            </select>
+                                        </template>
+                                        
+                                    </td>
+                                    <td class="text-center">{{venta.id_t }}</td>
                                     <td class="text-center">{{venta.email}}</td>
                                     <td class="text-center">{{moment(venta.date).format("DD/MM/YYYY")}}</td>
                                     <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
@@ -76,7 +90,7 @@
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
                     <p><b>Tu beneficio es de {{ total.toFixed(2) }}€</b></p>
-                    <button class="btn btn-primary-c rounded-pill mt-2 py-1 py-md-0">Guardar cambios</button>
+                    <button class="btn btn-primary-c rounded-pill mt-2 py-1 py-md-0" hidden>Guardar cambios</button>
                 </div>
             </div>
         </div>
@@ -87,6 +101,8 @@
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import { Link } from '@inertiajs/inertia-vue3'
 import Moment from 'moment'
+import { Inertia } from '@inertiajs/inertia'
+
 export default {
     layout:Layout,
     props:{
@@ -112,6 +128,7 @@ export default {
     computed:{
         ventas(){
             const obj = this.orders.data.map((col)=>{
+                console.log(col.returned);
             return {
                 id : col.id,
                 calle: col.calle,
@@ -121,7 +138,8 @@ export default {
                 date : col.created_at,
                 type : col.type,
                 id_t: col.transaction_id,
-                // email : col.shippings[0].email,
+                email : (col.shippings[0]) ? col.shippings[0].email : "",
+                returned : col.returned,
                 total_benefit : parseInt(col.total)/100,
             }
             });
@@ -129,6 +147,11 @@ export default {
         },
     },
     methods:{
+        returned(id){
+            Inertia.post(route('admin.order.returned'), {
+                id: id,
+            })
+        },
         datosColaborador(){
             const obj = this.collaborator.hotel.map((col)=>{
                 var total_benefits = 0;

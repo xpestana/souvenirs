@@ -34,7 +34,7 @@
         <div class="container mt-5 px-0 px-md-4">
             <div class="row cabeza mx-lg-4">
                 <div class="col-12">
-                    <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-3xl"><strong>Venta "id de transaccion"</strong></h1>
+                    <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-3xl"><strong>Venta {{ shipping.order.transaction_id }}</strong></h1>
                 </div>
             </div>
             <div class="row cuerpo mx-lg-4 mt-md-2">
@@ -52,14 +52,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td class="text-center">{{ shipping.product.title }}</td>
+                                    <td class="text-center">{{ (shipping.returned == 0)? "NO" : "SI" }}</td>
+                                    <td class="text-center">{{ shipping.email }}</td>
+                                    <td class="text-center">{{ moment(shipping.created_at).format("DD/MM/YYYY") }}</td>
+                                    <td class="text-center">{{ parseInt(shipping.amount) }} €</td>
+                                    <td class="text-center">{{ (parseInt(shipping.amount) * 0.2).toFixed(2) }} €</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -82,11 +81,13 @@
 
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
+import Moment from 'moment'
 export default {
     layout:Layout,
     props:{
         hotel:Object,
         collaborator:Object,
+        shipping:Object,
     },
     data(){
         return{
@@ -95,8 +96,9 @@ export default {
         }
     },
     created(){
-        console.log(this.collaborator)
-        this.datosColaborador()
+        console.log(this.shipping)
+        this.datosColaborador();
+        this.moment=Moment;
     },
     components:{
     },
@@ -119,7 +121,3 @@ export default {
     
 }
 </script>
-
-<style>
-
-</style>

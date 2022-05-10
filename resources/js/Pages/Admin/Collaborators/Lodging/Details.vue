@@ -52,18 +52,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-if="hotel.orders.length == 0">
+                                <tr v-if="shippings.length == 0">
                                     <td colspan="6" class="text-center">Propiedad sin ventas relacionadas</td>
                                 </tr>
-                                <tr v-for="order in hotel.orders" :key="order.transaction_id">
+                                <tr v-for="order in shippings" :key="order.id">
                                     <td class="text-center">{{ order.transaction_id }}</td>
-                                    <td class="text-center"></td>
-                                    <!-- <td>{{ order.shippings[0].email }}</td> -->
-                                    <td class="text-center">-</td>
+                                    <td class="text-center p-0">
+                                        <template v-if="order.returned == 1">
+                                            <select name="returned" id="returned" @change="returned(order.id)">
+                                                <option value="1" selected>Si</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </template>
+                                        <template v-else>
+                                            <select name="returned" id="returned" @change="returned(order.id)">
+                                                <option value="1">Si</option>
+                                                <option value="0" selected>No</option>
+                                            </select>
+                                        </template>
+                                    </td>
+                                    <td>{{ order.email }}</td> 
                                     <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
                                     <td class="text-center">{{ parseInt(order.total)/100 }} €</td>
                                     <td class="text-center px-0">
-                                        <Link :href="route('admin.hab.transaction',collaborator.id)" 
+                                        <Link :href="route('admin.hab.transaction',{id:collaborator.id, shipping:order.id})" 
                                             class="btn btn-sm text-white d-inline p-0.5 mx-0" as="button" 
                                             style="background-color: #2b59a2">
                                             Más detalles
@@ -77,12 +89,12 @@
             </div>
             <div class="row mx-lg-4 pie justify-content-between my-4">
                 <div class="col-12 col-md-5">
-                    <h5  class="text-azulc mt-1 p-1 font-weight-bolder"><Link :href="route('admin.sales.hab',{id: collaborator.id})" v-if="hotel.orders.length !== 0">Ventas totales<i class="fas fa-angle-right ml-2 py-1 px-1.5 bg-azulc text-white rounded-circle"></i></Link></h5>
+                    <h5  class="text-azulc mt-1 p-1 font-weight-bolder"><Link :href="route('admin.sales.hab',{id: collaborator.id})" v-if="shippings.length !== 0">Ventas totales<i class="fas fa-angle-right ml-2 py-1 px-1.5 bg-azulc text-white rounded-circle"></i></Link></h5>
                 </div>
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
                     <p><b>Tu beneficio es de {{ totalBeneficio }}€</b></p>
-                    <button class="btn btn-primary-c rounded-pill mt-2 py-1 py-md-0">Guardar cambios</button>
+                    <button class="btn btn-primary-c rounded-pill mt-2 py-1 py-md-0" hidden>Guardar cambios</button>
                 </div>
             </div>
         </div>
@@ -93,11 +105,14 @@
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import { Link } from '@inertiajs/inertia-vue3'
 import Moment from 'moment'
+import { Inertia } from '@inertiajs/inertia'
+
 export default {
     layout:Layout,
     props:{
-        hotel:Object,
+        shippings:Object,
         collaborator:Object,
+        hotel:Object,
     },
     components:{
         Link
@@ -126,10 +141,15 @@ export default {
                 this.total = this.total + (total_benefits/100)
             });
         },
+        returned(id){
+            Inertia.post(route('admin.shipping.returned'), {
+                id: id,
+            })
+        },
     },
     computed:{
         totalBeneficio(){
-            const total = this.hotel.orders.reduce((acc,col)=> acc + parseInt(col.total),0);
+            const total = this.shippings.reduce((acc,col)=> acc + parseInt(col.total),0);
             return (total/100)
         },
     }
