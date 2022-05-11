@@ -73,9 +73,9 @@
     color: white;
     font-weight: 400;
 }
-.bg-img{
+/* .bg-img{
         background-position: 50% 20% !important;
-}
+} */
 .breadcrumb-wrap h3, .breadcrumb-item a{
     color:  #fff !important;
 }
@@ -93,4 +93,179 @@
         padding: 10px;
         font-size: 11px;
     }
+}
+body .modal-backdrop{
+    background-color:#fff !important;
+}
+.modal-backdrop.show {
+    opacity: 0.8 !important;
+}
+
+.modal-content {
+    width: 90% !important;
+    border: none !important;
+    border-radius: 0.2rem !important;
+    box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 32%) !important;
+}
+
+.animated-icon1{
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: 0px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .animated-icon1 span{
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+  }
+  
+  .animated-icon1 span {
+    background: #1a1919;
+  }
+  
+  
+  
+  .animated-icon1 span:nth-child(1) {
+   top: 0px;
+  }
+  
+  .animated-icon1 span:nth-child(2) {
+    top: 10px;
+  }
+  
+  .animated-icon1 span:nth-child(3) {
+    top: 20px;
+  }
+  
+  .animated-icon1.open span:nth-child(1) {
+    top: 11px;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+  }
+  
+  .animated-icon1.open span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+  }
+  
+  .animated-icon1.open span:nth-child(3) {
+    top: 11px;
+    -webkit-transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+  }
+  
+  .btn-azulc{
+    background-color:#0076ff;
+  }
+  .btn-primary-c{
+    background-color:#5a80fb;
+    color:#fff;
+  }
+  .btn-danger-c{
+    background-color:#fa7470;
+    color:#fff;
+  }
+  .btn-danger-c:hover,
+  .btn-primary-c:hover{
+    color: #fff;
+    opacity: 0.8;
+  }
+  .text-azulc{
+    color: #65b4ce !important; 
+  }
+  .text-grayc{
+    color:#a9a9a9;
+  }
+  .btn-outline-azulc {
+    color: #65b4ce;
+    border-color: #65b4ce;
+  }
+  .btn-outline-azulc:hover{
+    color: #ffffff;
+    background-color: #4aa1be;
+  }
+  .bg-azulc{
+    background-color: #65b4ce; 
+  }
+  
+  .opacidad{
+    opacity: 0.2;
+  }
+  
+  .carousel ol .carousel__slide {
+    justify-content: start !important;
+  }
+
+  .shadow-city{
+    box-shadow: 0px 0px 3px 3px rgba(0 0 0 / 20%);
+  }
+
+  #carrosel .carousel__prev{
+    background-color: #ffffff00 !important;
+    color: #ffffff00 !important;
+  }
+  #carrosel .carousel__next{
+    background-color: #ffffff00 !important;
+    color: #ffffff00 !important;
+  }
+  #carrosel .carousel__prev{
+    left:50px;
+  }
+  #carrosel .carousel__next{
+    right:50px !important;
+  }
+  #carrosel .welcome img{
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      min-width: 100%!important;
+      height: 40em;
+  }
+  #carrosel .welcome{
+      min-width: 100%!important;
+  }
+
+  #product-img .carousel__prev {
+    left: 5%;
+  }
+  #product-img .carousel__next {
+      right: 5%;
+      color: #fff !important;
+  }
+  #product-img .carousel #img-product {
+      height: 30em;
+      background-size: contain !important;
+      background-repeat: no-repeat !important;
+      min-width: 60% !important;
+      margin: 0 auto;
+  }
+  #product-img .carousel__prev, .carousel__next{
+      background-color: #31516B !important; 
 }

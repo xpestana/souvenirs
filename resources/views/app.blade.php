@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#aad8eb">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
     <!-- CSRF Token -->
@@ -50,7 +51,6 @@
 
         <!-- Scripts -->
         @routes
-        
     </head>
     <body>
         @inertia
@@ -63,7 +63,7 @@
         <!-- Mobile menu js
         <script src="vendor_asset/js/jquery.meanmenu.min.js" defer></script>-->
         <!-- ScrollUp js -->
-        <script src="{{ asset('vendor_asset/js/jquery.scrollUp.js') }}" defer></script>
+        {{-- <script src="{{ asset('vendor_asset/js/jquery.scrollUp.js') }}" defer></script> --}}
         <!-- Fancybox js -->
         <script src="{{ asset('vendor_asset/js/jquery.fancybox.min.js') }}" defer></script>
         <!-- Jquery nice select js -->

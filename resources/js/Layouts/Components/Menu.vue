@@ -1,86 +1,44 @@
 <template>
-    <!-- Header Menu & Cart Area Start Here -->
-    <div class="col-xl-7 col-lg-6 d-none d-lg-block">
-        <div class="maain-menu-area maain-menu-area-three  position-relative pl-155">
-            <!-- Primary Menu Start -->
-            <div class="primary-menu">
-                <nav>
-                    <ul class="primary-menu-list d-flex">
-                        <li class="active" hidden><Link :href="route('home')">Inicio</Link></li>
-                        <li class="position-static"><Link :href="route('souvenirs')">Souvenirs</Link></li>
-                        <li><Link :href="route('activities')">Actividades</Link></li>
-                        <li hidden><Link :href="route('contact')">Contacto</Link></li>
-                    </ul>
-                </nav>
+<nav class="navbar fixed-top navbar-light bg-light shadow-md">
+  
+    <div class="row justify-content-between w-100">
+        <div class="col-3 col-lg-3 enlaces mt-3">
+            <div class="dropdown">
+            <button class="btn burger pb-0 pt-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <Link class="dropdown-item" :href="route('souvenirs')"><h3 class="font-weight-bolder">Souvenirs</h3></Link>
+                <Link class="dropdown-item" :href="route('activities')"><h3 class="font-weight-bolder">Actividades</h3></Link>
+                <Link class="dropdown-item" :href="route('contact')"><h3 class="font-weight-bolder">Contacto</h3></Link>
+                <Link class="dropdown-item" href="#"><h3 class="font-weight-bolder">Ayuda</h3></Link>
             </div>
-            <!-- Primary Menu End -->
+            </div>
         </div>
-    </div>
-    <!-- Header Menu & Cart Area End Here -->
-
-    <!-- Cart Box Start Here -->
-       <div class="col-xl-3 col-lg-3 col-md-7 col-sm-6 col-7  d-lg-block lg">
-        <!-- Cart & Search Area Start -->
-        <div class="search-cart-area pr-all-50 float-right">
-            <ul class="d-flex">
-                <li  hidden=""><i class="header-menu icon-menu"></i>
-                <!-- Currency & Language Selection Start -->
-                <ul class="ht-dropdown cart-box-width currency-selector" >
-                    <li >
-                        <ul>
-                            <template v-if="this.$page.props.auth.user">
-                                <li v-if="$page.props.auth.role != 'Client'"><Link :href="route('profile.index')">Mi cuenta</Link></li>
-                                <li><Link :href="route('cart.index')">Carrito</Link></li>
-                                <li hidden><Link :href="route('contact')">Contacto</Link></li>
-                                <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
-                            </template>
-                            <template v-else>
-                                <li><Link :href="route('login')">Iniciar Sesión</Link></li>
-                                <li><Link :href="route('cart.index')">Carrito</Link></li>
-                                <li hidden><Link :href="route('contact')">Contacto</Link></li>
-                            </template>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- Currency & Language Selection End -->
-                </li>
-                <li class="search-mrg"  hidden=""><i class="header-search icon-search"></i>
-                    <!-- Search Area Start -->
-                    <ul class="ht-dropdown search-box-view">
-                        <li>
-                            <form action="#" class="position-relative">
-                                <input class="email" placeholder="Search our catalog" name="email" type="text">
-                                <button type="submit" class="submit"><i class="icon-search" aria-hidden="true"></i></button>
-                            </form>
-                        </li>
-                    </ul>
-                    <!-- Search Area End -->
+              <!-- Cart Box Start Here -->
+        <div class="col-lg-3 col-3">
+            <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" width="65" @click="home">
+        </div>
+        <div class="col-lg-3 col-3">
+            <div class="search-cart-area text-right">
+            <ul class="d-inline-flex">
+                <li class="icon-login pt-2 mt-1 pb-0">
+                    <div class="dropdown">
+					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+						<img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="40">
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="30"></a>
+					</div>
+				</div>
                 </li>
                 <Cart :key="$page.props.flash.id"/>
-                <li>
-                    <a href="javascript:void(0)"><i class="fas fa-globe lang"></i></a>
-                </li>
-                <li class="icon-login " v-if="this.$page.props.auth.user && $page.props.auth.role != 'Client'">
-                    <Link :href="route('profile.index')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="far fa-user-circle"></i></Link>
-                    <ul class="ht-dropdown cart-box-width currency-selector" >
-                        <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
-                    </ul>
-                </li>
-                <li class="icon-login " v-if="this.$page.props.auth.user && $page.props.auth.role == 'Client'">
-                    <a href="javascript:void(0)"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="far fa-user-circle"></i></a>
-                    <ul class="ht-dropdown cart-box-width currency-selector" >
-                        <li><a href="javascript:void(0);" @click.prevent="logout">Cerrar sesión</a></li>
-                    </ul>
-                </li>
-                <li class="icon-login" v-if="this.$page.props.auth.user == null">
-                    <Link :href="route('login')"><i style="font-size: 23px; margin-top: 0.1rem !important;" class="fas fa-sign-in-alt mt-1 "></i></Link>
-                </li>
             </ul>
-    </div>
-    <!-- Cart & Search Area End -->
-</div>
+        </div>    
+        </div>
 <!-- Cart Box End Here -->
-    
+    </div>
+</nav>
 </template>
 <script>
     import { Link } from '@inertiajs/inertia-vue3';
@@ -99,71 +57,16 @@
                     _token: this.$page.props.csrf_token,
                 })
             },
+            home(){
+              this.$inertia.get(route('home'),{}, {
+                    preserveScroll: true
+                })
+            },
         }
     }
 </script>
 <style scope>
-    .lang{
-        background-color: #000;
-        color: #fff !important;
-        border-radius: 100%;
-        padding: 5px;
-        font-size: 18px;
-    }
-
-    #cart-area{
-        width: 180px !important;
-        padding: 10px !important;
-    }
-    .search-cart-area > ul > li:first-child{
-        padding: 43px 0 0px 0px;
-    }
-    .search-cart-area > ul > li.search-mrg{
-        padding: 43px 0 0px 20px;
-    }
-    .search-cart-area > ul > li{
-        padding: 43px 0 0px 35px;
-    }
-    .search-cart-area > ul > li ul.currency-selector{
-        width: 180px;
-    }
-    .primary-menu-list > li > a{
-        line-height:  110px;
-    }
-    @media (max-width: 767px){
-        .lg{
-            display: none !important;
-        }
-        .icon-login{
-            display: none !important;
-        }
-        .search-cart-area > ul > li > a > span{
-            font-size: 11px;
-            height: 16px;
-            line-height: 17px;
-            right: -16px;
-            top: 3px;
-            width: 17px;
-        }
-        .search-cart-area > ul > li > i.header-search{
-            font-size: 28px;
-        }
-        .search-cart-area > ul > li > a i.header-cart{
-            font-size: 28px;
-        }
-        .search-cart-area > ul > li{
-            padding: 43px 0 0px 15px;
-        }
-
-    }
-    .pl-155{
-        padding-left: 245px !important;
-    }
-.search-cart-area > ul > li > a > span{
-    top: -2px !important;
-    right: -4px !important;
-}
-[class^="icon-"]:before, [class*=" icon-"]:before{
-    font-size: 120% !important;
+nav .enlaces i{
+    font-size: 1.5em;
 }
 </style>

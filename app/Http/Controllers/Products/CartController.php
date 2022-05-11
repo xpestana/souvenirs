@@ -79,19 +79,26 @@ class CartController extends Controller
         else
             $quantity = 1;
         $product = Products::find($id)->load('images');
-        $addCart = \Cart::add(array(
-            'id' => $product->id,
-            'name'=>$product->title,
-            'price'=> $product->price,
-            'quantity' => $quantity,
-            'attributes' => array(
-                'url' => $product->images[0]->url,
-                'type' => 'souvenir'
-                ),
-            'associatedModel' => $product
-        ));
         $pin = mt_Rand(1000000, 9999999);
-        return back()->with(['id'=>$pin, 'message' => 'Producto agregado al carrito', 'code' => 200, 'status' => 'success']);  
+        $cartQuantity = (Cart::get($product->id)) ? Cart::get($product->id)->quantity : 0;
+        if ($product->stock >= $request->quantity + $cartQuantity) {
+            $addCart = \Cart::add(array(
+                'id' => $product->id,
+                'name'=>$product->title,
+                'price'=> $product->price,
+                'quantity' => $quantity,
+                'attributes' => array(
+                    'url' => $product->images[0]->url,
+                    'type' => 'souvenir'
+                    ),
+                'associatedModel' => $product
+            ));
+        
+            return back()->with(['mensaje' => '<i class="fas fa-check mr-1"></i> Artículo añadido a tu cesta']);  
+        }else{
+            return back()->with(['mensaje' => 'Lo sentimos, no tenemos más stock de este producto']);
+        }
+        
     }
 
     /**
@@ -110,12 +117,16 @@ class CartController extends Controller
             Cart::remove($id);
         }
         $pin = mt_Rand(1000000, 9999999);
-        return back()->with(['id'=>$pin, 'message' => 'Producto eliminado exitosamente', 'code' => 200, 'status' => 'success']);  
+        return back()->with(['id'=>$pin, 'mensaje' => 'Producto eliminado exitosamente']);  
     }
     public function activity(Request $request)
     {
         $datetime = new Carbon($request->date);
         $product = Products::find($request->product_id)->load('images');
+        $image = null;
+        if($product->image){
+            $image = $product->images[0]->url;
+        }
         $addCart = \Cart::add(array(
             'id' => $product->id,
             'name'=>$product->title,
@@ -123,16 +134,20 @@ class CartController extends Controller
             'quantity' => 1,
             'attributes' => array(
                 'type' => 'activity',
-                'url' => $product->images[0]->url,
-                'date' => $datetime->subDay(1),
+                'url' => $image,
+                'date' => $request->fecha,
                 'adult' => $request->adult,
                 'children' => $request->children,
-                'priceA' => $product->activities->priceA,
-                'priceN' => $product->activities->priceN
+                'student' => $request->student,
+                'baby' => $request->baby,
+                'priceAdult' => $request->priceAdult,
+                'priceChildren' => $request->priceChildren,
+                'priceStudent' => $request->priceStudent,
+                'priceBaby' => $request->priceBaby,
                 ),
             'associatedModel' => $product
         ));
         $pin = mt_Rand(1000000, 9999999);
-        return back()->with(['id'=>$pin, 'message' => 'Producto agregado al carrito', 'code' => 200, 'status' => 'success']);  
+        return back()->with(['mensaje' => '<i class="fas fa-check mr-1"></i> Artículo añadido a tu cesta']);  
     }
 }

@@ -5,50 +5,34 @@
    			<div class="col-md-6">
    				<h3>Gestión de Actividades</h3>	
    			</div>
-    		<div align="center" class="col-md-6 mb-3">
-    			<div class="d-single-info text-lg-center">
-                	<Link class="view-cart bg-info" :href="route('activities.create')">Agregar Actividad</Link>
-                </div>
-    		</div> 
     	</div>
     	<div class="table-responsive">
     		<table class="table table-striped table-bordered table-hover">
     			<thead>
             		<tr>
             			<th>Titulo</th>
-            			<th>Precio</th>
-            			<th>Fecha de inicio / final</th>
-            			<th>Destacado</th>
+            			<th>Flow</th>
+            			<th>Localidad</th>
+            			<th>Type</th>
             			<th>Acciones</th>
             		</tr>
             	</thead>
             	<tbody>
-            		<tr v-for="product in products" :key="product.id">
-            			<td>{{ product.title }}</td>
+            		<tr v-for="product in products" :key="product.short_id">
             			<td>
-            				<template v-if="product.activities.priceN">
-            					Adulto: {{ product.activities.priceA }} / Niño: {{ product.activities.priceN }}
-            				</template>
-            				<template v-else>
-            					{{ product.activities.priceA }}
-            				</template>
+            				{{ product.name }}
             			</td>
+						<td>
+							{{ product.flow }}
+						</td>     
+						<td>
+							{{ product.location_name }}
+						</td>    
+						<td>
+							{{ product.type['name'] }}
+						</td>   			
             			<td>
-            				<template v-if="product.activities.end">
-            					De {{ moment(product.activities.init).format('DD/MM/YYYY') }} a {{ moment(product.activities.end).format('DD/MM/YYYY') }}
-            				</template>
-            				<template v-else>
-            					El {{ moment(product.activities.init).format('DD/MM/YYYY')}}
-            				</template>
-            			</td>
-            			<td style="font-size: 13px;">
-                			<template v-if="product.featured==0"><i class="fas fa-times-circle text-danger"></i></template>
-                			<template v-if="product.featured==1"><i class="fas fa-check-square text-success"></i></template>
-                		</td>
-            			<td>
-            				<Link class="view-cart bg-info ml-2" :href="route('activities.show',{actividade: product.id})" title="Ver Actividades"> Ver </Link>
-                        	<Link class="view-cart bg-secundary ml-2" :href="route('activities.edit',{actividade: product.id})" title="Editar Actividades"> Editar </Link>
-                    		<button class="view-cart bg-danger ml-2" title="Eliminar actividad" @click="deleteProduct(product.id)"> Eliminar </button>
+            				<input type="checkbox" :value="product.short_id" @change="update(product.short_id)">
             			</td>
             		</tr>
             	</tbody>
@@ -73,32 +57,49 @@
         },
         data(){
         	return {
-        		moment:null
+        		moment:null,
+        		form: this.$inertia.form({
+                	name: null,
+                	duration: null,
+                	description: null,
+                	flow: null,
+                	short_id: null,	
+                	summary: null,	
+                	type: null,	
+                	location_name: null,
+                	coordinates: null,	
+                	images: null,
+                	pricing_notes: null,
+            	}),
         	}
         },
     	created(){
+    		console.log("todos", this.products);
     		this.moment=Moment;
     	},
     	methods: {
-        	deleteProduct(product){
-        		this.$swal({
-  					title: '¿Estas seguro?',
-  					text: "¡Esta acción no se puede revertir!",
-  					icon: 'warning',
-  					showCancelButton: true,
-  					confirmButtonColor: '#3085d6',
-  					cancelButtonColor: '#d33',
-  					confirmButtonText: 'Si, eliminar!',
-  					cancelButtonText: 'Cancelar',
-				}).then((result) => {
-  						if (result.isConfirmed) {
-  							this.$inertia.delete(route('activities.destroy',{actividade : product}),
-  							{
-								preserveScroll: true,
-  							})
-  						}
-					})
+    		update(product){
+    			this.product(product);
+    			this.form.post(route('update.activities',{activities : product}),
+  					{
+						preserveScroll: true,
+  					})
+    		},
+    		product(short_id){
+            	var product = this.products.filter(product => product.short_id == short_id)[0];
+            	this.form.name = product.name;
+            	this.form.duration = product.duration;
+            	this.form.description = product.description;
+            	this.form.flow = product.flow;
+            	this.form.short_id = product.short_id;
+            	this.form.summary = product.summary;
+            	this.form.coordinates = product.coordinates;
+            	this.form.type = product.type.name;
+            	this.form.location_name = product.location_name;
+            	this.form.images = product.images;
+            	this.form.pricing_notes = product.pricing_notes;
             	
+
         	}
     	}
 	}

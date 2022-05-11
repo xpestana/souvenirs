@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Models\Categories;
 use App\Models\Products;
+use App\Models\Settings;
 use Illuminate\Support\Arr;
 use Cart;
 
@@ -48,21 +49,23 @@ class HandleInertiaRequests extends Middleware
             'auth.profile' => fn() => auth()->user() ? auth()->user()->profile : null,
             'auth.role' => fn() => auth()->user() ? auth()->user()->getRoleNames()->first() : null,
             'cart' => fn() => Cart::getContent(),
+            'settings' => fn() => Settings::where('active',1)->first(),
             'cart.total' => fn() => Cart::getTotal(),
             'cart.count' => fn() => Cart::getTotalQuantity(),
             'souvenirs' => Products::with('images')
                                     ->where('del',false)
                                     ->where('type', 'Souvenirs')
-                                    ->limit(5)->inRandomOrder()->get(),
+                                    ->limit(12)->get(),
             'activities' => Products::with('images', 'activities')
                                     ->where('del',false)
                                     ->where('type', 'Activities')
-                                    ->limit(5)->inRandomOrder()->get(),
+                                    ->limit(12)->get(),
             'flash' => [
                 'id' => fn () => $request->session()->get('id'),
                 'message' => fn () => $request->session()->get('message'),
                 'code' => fn () => $request->session()->get('code'),
                 'status' => fn () => $request->session()->get('status'),
+                'mensaje' => fn () => $request->session()->get('mensaje'),
             ],
     ]);
     }

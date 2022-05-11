@@ -21,6 +21,12 @@ class Activities extends Model
         'end',
         'details',
         'iframe',
+        'duration',
+        'flow',
+        'coordinates',
+        'events',
+        'price_notes',
+        'language',
     ];
 
     /**

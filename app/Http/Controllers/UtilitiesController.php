@@ -19,12 +19,16 @@ class UtilitiesController extends Controller
     /*STATICS PAGES*/
     public function handle_auth($id)
     {
-        $user = User::find($id);
-        if ($user) {
-            if ($user->getRoleNames()->first() == "Client") {
-                $auth = Auth::login($user, true);
+        if($id){
+        $users = Hotel::find($id)->user;
+        if (!empty($users)) {
+            foreach ($users as $user) {
+                if ($user->getRoleNames()->first() == "Client") {
+                    $auth = Auth::login($user, true);
+                }
             }
         }
+    }
         return 0;        
     }
     public function home(Request $request)
@@ -40,21 +44,30 @@ class UtilitiesController extends Controller
         $min_r = (isset($request->price[0])) ? $request->price[0] : 0;
         $max_r = (isset($request->price[1])) ? $request->price[1] : 100;
 
+
 //        dd($max);
         $products = Products::with('images', 'activities')
                             ->where('del',false)
                             ->where('type', 'Activities')
                             ->search(trim($request->search))
-                            ->priceA($min_r,$max_r)
-                            ->paginate(20);
+                            ->priceA($min_r,$max_r);
+        if ($request->show) {
+            $products = $products->get();
+            $showr = 1;
+        }else{
+            $products = $products->paginate(8);
+            $showr = 0;
+        }
 
-        $max = Products::with('images', 'activities')
-                            ->where('del',false)
-                            ->where('type', 'Activities')->get()
-                            ->max('activities.priceA');
+        $products_responsives = Products::with('images', 'activities')
+                                ->where('del',false)
+                                ->where('type', 'Activities')->get();
+
+        $count = $products_responsives->count();
+
+        $max = $products_responsives->max('activities.priceA');
        
-
-        return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'min_r', 'max_r'));
+        return Inertia::render('Shop/Tours', compact('products', 'max', 'search', 'min_r', 'max_r', 'count','showr'));
     }
 
 
@@ -62,25 +75,31 @@ class UtilitiesController extends Controller
     {
         $this->handle_auth($request->h);
         $search =  null;
+        $showr = null;
         if ($request) {
             $search = $request->search;
             $min_r = (isset($request->price[0])) ? $request->price[0] : 0;
             $max_r = (isset($request->price[1])) ? $request->price[1] : 100;
         }
-
+        
         $products = Products::with('images')
-                            ->where('del',false)
                             ->where('type', 'Souvenirs')
-                             ->search(trim($request->search))
-                            ->price($min_r,$max_r)
-                            ->paginate(20);
+                            ->search(trim($request->search))
+                            ->price($min_r,$max_r);
+        if ($request->show) {
+            $products = $products->where('del',false)->get();
+            $showr = $request->show;
+        }else{
+            $products = $products->where('del',false)->paginate(8);
+        }
 
-        $max = Products::with('images', 'activities')
+        $products_responsives = Products::with('images', 'activities')
                             ->where('del',false)
-                            ->where('type', 'Souvenirs')->get()
-                            ->max('price');
+                            ->where('type', 'Souvenirs')->get();
+        $count= $products_responsives->count();
+        $max = $products_responsives->max('price');
 
-        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search', 'min_r', 'max_r'));
+        return Inertia::render('Shop/Souvenirs', compact('products', 'max', 'search', 'min_r', 'max_r', 'count', 'showr'));
     }
     public function about(Request $request)
     {

@@ -46,23 +46,67 @@ class SouvenirsController extends Controller
     {
         $validator = $this->validate($request, [
             'title'         => 'required|string|max:255',
-            'precio'        => 'required',
+            'precio'        => 'required|numeric',
             'description'   => 'required',
             'featured'      => 'required',
+            'stock'      => 'required|numeric',
+            'category'      => 'required',
         ]);
+        if ($request->precio < $request->offer) {
+            return back()->with(['id'=>400, 'message' => 'El precio de oferta debe ser menor que el precio normal', 'code' => 400, 'status' => 'error']);
+        }
         
+       /* $image = $request->image;
+        if ($image) {
+            $msg =$this->valid($image);
+
+            if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
+        }*/
+        
+
+        try {
+            $id = mt_Rand(1000000, 9999999);
+       /*     
+            $user = auth()->user();
+
+            $Path = public_path('storage/souvenirs/');
+            $pathName = '/';
+
+            if (!file_exists($Path)) {
+                mkdir($Path, 777, true);
+            }
+
+            if ($image) {
+                $nameFile =$this->FileName($image); //nombre de archivo original
+                $imgFileOriginal = Image::make($image->getRealPath());
+                $imgFileOriginal->save($Path.$nameFile['fileName']);
+                $name_file = $nameFile['fileName'];
+            }else{
+                $name_file ="default.jpg";
+            }
+*/
         $souvenir = Products::create([
                 'type' => 'Souvenirs',
                 'title' => $request->title,
                 'description' => $request->description,
                 'price' => $request->precio,
-                'stock' => 0,
+                'stock' => $request->stock,
                 'featured' => $request->featured,
+                'offer' => $request->offer,
+                'category' => $request->category,
             ]);
 
+       /* Images::create([
+                'products_id'   => $souvenir->id,
+                'name'          => $name_file,
+                'url'           => $pathName.$name_file,
+            ]);*/
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
-        return back()->with(['id'=>$id, 'message' => 'Agregado con exito, Espere un momento porfavor', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+        return Redirect::route('admin.souvenirs')->with(['id'=>$id, 'message' => 'Agregado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+        } catch (Exception $e) {
+                
+        }
     }
     /**
      * Cambias nombres de los archivos.
@@ -91,6 +135,28 @@ class SouvenirsController extends Controller
         ];
 
         return $response;
+    }
+
+    public function valid($file)
+    {
+        if ($file) {
+            /*** Extraccion de la extension ***/
+            $nameFile = $file->getClientOriginalName();
+            $extension = pathinfo($nameFile, PATHINFO_EXTENSION);
+            $id = mt_Rand(1000000, 9999999);
+
+            $images=array("JPG", "JPEG", "PNG");
+            if (!in_array(strtoupper($extension), $images)) {
+                return ['id' => $id, 'code' => 404, 'msg' => 'Formato de imagen incorrecto', 'status' => 'error'];
+            }
+            
+            $response = [
+                'id' => $id,
+                'code' => 200,
+                'msg' => 'Acepted'
+            ];
+            return $response;
+        }
     }
      /**
      * Store a newly created resource in storage.
@@ -146,7 +212,7 @@ class SouvenirsController extends Controller
     {
         $product = Products::with('images')->where('id', $id)->first();
 
-        return Inertia::render('Dashboard/Edit/Souvenirs', compact('product'));
+        return Inertia::render('Dashboard/Edit/Souvenirs', compact('product','numPage'));
     }
 
     /**
@@ -162,19 +228,30 @@ class SouvenirsController extends Controller
             'title'         => 'required|string|max:255',
             'precio'        => 'required',
             'description'   => 'required',
-            'featured'      => 'required',
+            'stock'      => 'required',
+            'category'      => 'required',
         ]);
-
+        if ($request->precio < $request->offer) {
+            return back()->with(['id'=>400, 'message' => 'El precio de oferta debe ser menor que el precio normal', 'code' => 400, 'status' => 'error']);
+        }
+                      
         $souvenir = Products::find($request->souvenir);
         $souvenir->title = $request->title;
         $souvenir->price = $request->precio;
         $souvenir->description = $request->description;
         $souvenir->featured = $request->featured;
+        $souvenir->stock = $request->stock;
+        $souvenir->offer = $request->offer;
+        $souvenir->category = $request->category;
         $souvenir->save();
+
+        /*if ($request->image) {
+            $this->updt_image($souvenir->id, $request->image);
+        }*/
 
         $id= $souvenir->id;
         $cookie = Cookie::make('product_id', $id, 5);
-        return back()->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+        return Redirect::route('admin.souvenirs',["page=".$request->idPage])->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
     }
     public function updt_image(Request $request)
     {
@@ -217,6 +294,6 @@ class SouvenirsController extends Controller
         $product->del = true;
         $product->save();
         
-        return Redirect::route('souvenirs.index')->with(['id'=>$id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
+        return back()->with(['id'=>$id, 'message' => 'Eliminado exitosamente', 'code' => 200, 'status' => 'success']);    
     }
 }

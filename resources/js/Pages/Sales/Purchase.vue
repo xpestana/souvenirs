@@ -1,8 +1,10 @@
 <template>
     <Head title="Compra"/>
     <Layout>
-    <Breadcrumb title="Compra"/>
-    <div class="skill-area white-bg ptb-80">
+    <div class="d-none d-md-block">
+        <Breadcrumb title="Compra"/>
+    </div>
+    <div class="skill-area white-bg ptb-80 d-none d-md-block">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -55,6 +57,18 @@
             </div>
         </div>
     </div>
+    <div class="mobile-section bg-light p-0 d-md-none">
+        <div class="titulos text-center pt-5">
+            <h1 class="text-muted font-weight-bolder text-3xl">¡Tu pago se ha <br> realizado con éxito!</h1>
+            <h5 class="text-muted text-lg">En unos minutos recibirás tu pedido</h5>
+        </div>
+        <div class="logo">
+            <img class="mx-auto" src="/vendor_asset/img/logo/logopequeño.png" alt="logo">
+        <div class="order-num pb-5">
+        </div>
+            <h3 class="text-muted font-weight-bolder text-xl text-center">Número de pedido:S8GL</h3>
+        </div>
+    </div>
    </Layout> 	 
 </template>
 
@@ -90,5 +104,9 @@
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
+}
+.logo img{
+    height: 15em;
+    min-width: 14em !important;
 }
 </style>

@@ -3,127 +3,83 @@
     <Layout>
     <Breadcrumb title="Actividades"/>
     <!-- Shop Page Start -->
-    <div class="main-shop-page white-bg ptb-80 overflow-hidden">
+    <div class="main-shop-activies py-3">
         <div class="container">
-            <!-- Row End -->
             <div class="row">
-                <!-- Sidebar Shopping Option Start -->
-                <div class="col-lg-3 col-md-4">
-                    <div class="sidebar">
-                        <form @submit.prevent="submit">
-                        <!-- Price Filter Options Start -->
-                        <div class="search-filter mb-30">
-                            <h3 class="sidebar-title">Filtrar por precio</h3>
-                            <div class="product-price mt-1 mb-4">
-                                <h6 class="filter-heading  text-center text-md-left mb-5">Price</h6>
-                                <Slider 
-                                    v-model="form.price"
-                                    :max="max"
-                                />
-                            </div>
-                        </div>
-                        <!-- Price Filter Options End -->
-
-                        <!-- Sidebar Categorie Start -->
-                        <div class="row">
-                            <div align="center" class="col-md-12 mb-3">
-                                <button type="submit" class="view-cart bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Filtrar</button>
-                            </div> 
-                        </div>
-                    </form>
-                    </div>
-                </div>
-                <!-- Sidebar Shopping Option End -->
-                <!-- Product Categorie List Start -->
-                <div class="col-lg-9 col-md-8">
-                    <!-- Grid & List View Start -->
-                    <div class="grid-list-top border-default universal-padding d-lg-flex justify-content-md-center align-items-center mb-30">
-                        <div class="grid-list-view d-flex align-items-center  mb-sm-15">
-                        </div>
-                        <!-- Toolbar Short Area Start -->
-                        <div class="main-toolbar-sorter clearfix">
-                            <form @submit.prevent="submit">
-                            <div class="toolbar-sorter d-md-flex align-items-center">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary" type="submit"><i class="icon-search" aria-hidden="true"></i></button>
-                                    </div>
-                                    <input type="text" class="form-control" aria-label="" aria-describedby="basic-addon1" v-model="form.search">
-                                </div>
-                            </div>
-                            </form>
-                        </div>
-                        <!-- Toolbar Short Area End -->
-                    </div>
-                    <!-- Grid & List View End -->
-                    <div class="shop-area mb-all-40">
-                        <!-- Grid & List Main Area End -->
-                        <div class="tab-content Products-area">
-                            <div id="grid-view" class="tab-pane fade  show active">
-                                <div class="row">
-                                    <div v-for="product in products.data" :key="product.id" class="col-md-6 col-sm-6">
-                                        <!-- Single Product Start -->
-                                        <div class="single-aboss-product mb-3">
-                                            <div class="pro-img">
-                                                <Link :href="route('product.activities.show',{product : product.id})">
-                                                    <div :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'" class="img-prod"></div>
-                                                </Link>
-                                                <div class="pro-actions">
-                                                    <Link class="quick-view" :href="route('product.activities.show',{product : product.id})"><i class="icon-zoom"></i></Link>
-                                                </div>
-                                            </div>
-                                            <div class="pro-content">
-                                                <h4><Link :href="route('product.activities.show',{product : product.id})">{{ product.title }}</Link></h4>
-                                                <div class="col-12 mb-3" hidden>
-                                                        <template v-if="product.activities.end">
-                                                            De {{ moment(product.activities.init).format('DD/MM/YYYY') }} a {{ moment(product.activities.end).format('DD/MM/YYYY') }}
-                                                        </template>
-                                                        <template v-else>
-                                                            El {{ moment(product.activities.init).format('DD/MM/YYYY')}}
-                                                        </template>
-                                                    </div>
-                                                <div class="pro-price-cart">
-                                                    
-                                                    <div class="pro-home-price">
-                                                        <span>
-                                                            <template v-if="product.activities.priceN">
-                                                                Adulto: {{ product.activities.priceA }} € / Niño: {{ product.activities.priceN }} €
-                                                            </template>
-                                                            <template v-else>
-                                                                Precio: {{ product.activities.priceA }} €
-                                                            </template>
-                                                        </span>
-                                                    </div>
-                                                    <div class="pro-cart">
-                                                       <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id)" hidden><i class="icon-cart"></i></a>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Single Product End -->
-                                    </div>
-                                </div>
-                                <!-- Row End -->
-                            </div>
-                        </div>
-                        <!-- Grid & List Main Area End -->
-                    </div>
-                    <!-- Shop Breadcrumb Area Start -->
-                    <div class="shop-breadcrumb-area border-default mt-40">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8 col-md-6 col-sm-12 py-4 paginate_scroll">
-                                <paginator :paginator="products"/>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Shop Breadcrumb Area End -->
-                </div>
-                <!-- product Categorie List End -->
+                <div class="col-12 text-center">
+                    <h5 class="text-muted md:text-lg">{{count}} excursiones y actividades en Sevilla</h5>  
+                </div>  
             </div>
-            <!-- Row End -->
         </div>
-        <!-- Container End -->
+
+        <div class="container px-4">
+            <div class="row shadow-md activity-card my-3 h-28 md:h-32" v-for="product in actList" :key="product.id">
+                <div class="col-4 col-md-2 px-0 p-2">
+                    <template v-if="product.images.length > 0">
+                        <Link :href="route('product.activities.show',{product : product.id})">
+                            <template v-if="product.short_id == null">
+                                <img :src="'/storage/souvenirs/'+product.images[0].name" alt="Actividad" class="h-24 md:h-28 w-100">    
+                            </template>
+                            <template v-else>
+                                <img :src="product.images[0].name" alt="Actividad" class="h-24 md:h-28 w-100">    
+                            </template>
+                            
+                        </Link>
+                    </template>
+                </div>
+                <div class="col-8 col-md-10 d-flex flex-column justify-between px-0 py-1 pr-1">
+                    <div class="header-card-act">
+                        <div class="title">
+                            <Link :href="route('product.activities.show',{product : product.id})">
+                                <p class="font-weight-bolder text-azulc md:text-2xl fuente">{{ truncateTitle(product.title) }}</p>
+                            </Link>
+                        </div>
+                    </div>
+                    <!-- <div class="views">
+                        <p class="text-azulc d-inline text-base md:text-xl">9,1/10</p>
+                        <p class="ml-2 text-grayc d-inline md:text-base">120 opiniones</p>
+                    </div> -->
+                    <div class="footer-card-act d-flex flex-row justify-between align-items-end">
+                        <div class="time">
+                            <i class="far fa-hourglass mr-1 text-grayc md:text-base"></i>
+                            <p class="text-grayc d-inline md:text-base" v-if="product.duration"><ConvertirMinutos :minutos="product.duration" /></p>
+                        </div>
+                        <div class="lenguage">
+                            <i class="far fa-comment-alt mr-2 text-grayc md:text-base"></i>
+                            <p class="text-grayc d-inline md:text-base">{{ product.language }}</p>
+                        </div>
+                        <div class="price">
+                            <p class="font-weight-bolder text-azulc md:text-2xl pr-md-2">
+                                <template v-if="product.precios.lenght !== 0">
+                                    <template v-if="product.precios[3] !== undefined && product.precios[3] !== null">
+                                        <Decimals :precio="product.precios[3]"/>€
+                                    </template>
+                                    <template v-if="product.precios[2] !== undefined && product.precios[2] !== null && product.precios[3] == undefined">
+                                        <Decimals :precio="product.precios[2]"/>€
+                                    </template>
+                                    <template v-else-if="product.precios[1] !== undefined && product.precios[1] !== null && product.precios[2] == undefined">
+                                        <Decimals :precio="product.precios[1]"/>€
+                                    </template>
+                                    <template v-else-if="product.precios[0] !== undefined && product.precios[0] !== null && product.precios[1] == undefined">
+                                        <Decimals :precio="product.precios[0]"/>€
+                                    </template>
+                                </template>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div v-if="show.show != 1" class="col-12">
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-6 text-center">
+                            <a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill px-4 py-1" @click="load_more()">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- Shop Page End -->
 </Layout>
@@ -135,10 +91,10 @@
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Layout from '@/Layouts/Layout.vue'        
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue'     
-    import Paginator from '@/Components/Paginator.vue'   
     import Moment from 'moment'
     import Slider from '@vueform/slider'
-
+    import Decimals from '@/Layouts/Components/Decimals.vue'
+    import ConvertirMinutos from '@/Layouts/Components/ConvertirMinutos.vue'
     export default {
         components: {
             Head,
@@ -146,7 +102,8 @@
             Layout,
             Breadcrumb,
             Slider,
-            Paginator
+            Decimals,
+            ConvertirMinutos
         },
         props: {
             products: Object,
@@ -154,17 +111,24 @@
             min_r:Number,
             max_r:Number,
             search: String,
+            count: Number,
+            showr: Number,
         },
         created () {
             this.moment=Moment;
+            console.log(this.products)
         },
         data(){
             return {
+                data: (this.products.data) ? this.products.data : this.products,
                 moment:null,
                 max: this.max,
                 form: this.$inertia.form({
                     search: this.search,
                     price: [this.min_r,this.max_r],
+                }),
+                show: this.$inertia.form({
+                    show: this.showr,
                 }),
             }
         },
@@ -181,24 +145,55 @@
                 this.$inertia.post(route('cart.activity',{checkout: id}),{
                     preserveScroll: true
                 })
-            }
+            },
+            load_more(){
+                this.show.show = 1;
+                this.show.get(route('activities'),{
+                    _token: this.$page.props.csrf_token,
+                    errorBag: 'submit',
+                    preserveScroll: true,
+                    
+                })
+            },
+            truncateTitle(title){
+                title.length > 65 ? title = title.slice(0,65 - Number(title.length))+'...'  : ''
+                return title;
+            },
+        },
+         computed:{
+          actList(){
+            return this.data.map((el)=>{
+              let precios = JSON.parse(el.activities.priceA);
+              let arr = [];
+              if(precios !== null){
+                  for(let val in precios.prices_per_ticket){
+                      if(precios.prices_per_ticket[val] !== null){
+                        arr.push(Number(precios.prices_per_ticket[val]))
+                      }
+                  }
+              }else{
+                let arr = null;
+              }
+              return {
+                id:el.id,
+                precios:arr,
+                language:el.activities.language,
+                images:el.images,
+                title:el.title,
+                duration:el.activities.duration,
+              }
+            })
+          }
         }
 }
 
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
 <style scope>
-    .img-prod{
-        width: 100%;
-        height: 250px;
-        background-size: cover !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
+    .activity-card{
+        background-color: #ededed;
     }
-    
-    @media (max-width: 800px){
-        .paginate_scroll{
-            overflow-x: scroll;
-        }
+    .fuente{
+        font-family: Montserrat Bold !important;
     }
 </style>

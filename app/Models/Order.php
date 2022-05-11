@@ -14,6 +14,7 @@ class Order extends Model
         'transaction_id',
         'total',
         'ryder_id',
+        'hotel_id',
     ];
 
     /**
@@ -30,5 +31,9 @@ class Order extends Model
     public function ryder()
     {
         return $this->belongsTo(Ryder::class);
+    }
+    public function hotel()
+    {
+        return $this->belongsTo(hotel::class);
     }
 }

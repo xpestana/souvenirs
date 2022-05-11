@@ -67,4 +67,28 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+    /*
+        Scopes
+     */
+    public function scopeSearch($query, $search) 
+    {
+        if ($search) {
+             $query->whereHas('profile', function($query) use ($search) {
+                $query->where('firstname','like',  ['%'.$search.'%']);
+                $query->orWhere('lastname','like', ['%'.$search.'%']);
+            });
+        }
+    }
+    public function scopeEmail($query, $email, $roll) 
+    {
+        if ($email && $roll =="Hotel") {
+            $query->orWhere("email",'like',  '%'.$email.'%');
+            $query->role('Hotel');
+        }
+        if ($email && $roll =="Admin") {
+            $query->orWhere("email",'like',  '%'.$email.'%');
+            $query->role('Admin');
+        }
+    }
 }

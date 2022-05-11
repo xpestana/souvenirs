@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SaleSouvenirReceived;
+use App\Mail\AdminReceived;
 use App\Mail\SaleActivityReceived;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -39,83 +40,49 @@ class SalesController extends Controller
     {
         $request->validate([
             'email' => 'required|string|email|max:255',
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'name' => 'required',
             'address' => 'required',
-            'city' => 'required',
             'phone' => 'required',
             'hab' => 'required',
         ]);
 
         if (auth()->user()) {
             $user = auth()->user();
+            $hotel_id = (!auth()->user()->hotel->isEmpty()) ? auth()->user()->hotel->first()->id : null;
         }else{
             $user = User::where('email','clientAdmin@email.com')->first();
+            $hotel_id= null;
         }
-        try {
-            $payment = $user->charge(
-                $request->amount,
-                $request->payment_method_id,
-                ['currency' => 'eur']
-            );
-            
-            $payment = $payment->asStripePaymentIntent();
-
             $order = Order::create([ 
                 'user_id' => $user->id,
-                'transaction_id' => $payment->charges->data[0]->id,
-                'total' => $payment->charges->data[0]->amount
+                'transaction_id' => "XXX---0000",
+                'total' => "20",
+                'hotel_id' => $hotel_id,
             ]);
             $products = Cart::getContent();
             foreach($products as $product){
-                if ($product->attributes->type == 'souvenir') {
-                    $shipping = Shipping::create([ 
+                  $shipping = Shipping::create([ 
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'quantity' => $product->quantity,
-                    'firstname' => $request->firstname,
-                    'lastname' => $request->lastname,
+                    'firstname' => $request->name,
                     'email' => $request->email,
                     'address' => $request->address,
-                    'apart' => $request->apart,
-                    'city' => $request->city,
-                    'state' => $request->state,
                     'zip_code' => $request->zip_code,
                     'phone' => $request->phone,
                     'hab' => $request->hab,
+                    'observations' => $request->observations,
                     'amount' => $product->price,
                     ]);
-                }else{
-                    $shipping = Shipping::create([ 
-                    'order_id' => $order->id,
-                    'product_id' => $product->id,
-                    'firstname' => $request->firstname,
-                    'lastname' => $request->lastname,
-                    'email' => $request->email,
-                    'address' => $request->address,
-                    'apart' => $request->apart,
-                    'city' => $request->city,
-                    'state' => $request->state,
-                    'zip_code' => $request->zip_code,
-                    'phone' => $request->phone,
-                    'hab' => $request->hab,
-                    'date_init' => $product->attributes->date,
-                    'adult' => $product->attributes->adult,
-                    'children' => $product->attributes->children,
-                ]);
-                }
                 
-            }
+                }
             Cart::clear();
 
-            foreach ([$request->email, 'xpestana4@gmail.com'] as $recipient) {
-                Mail::to($recipient)->send(new SaleSouvenirReceived($order));
-            }
-
+                Mail::to($request->email)->send(new SaleSouvenirReceived($order));
+                Mail::to("info@hicitty.es")->send(new AdminReceived($order));
             return Redirect::route('purchase',['oi' => $order->id]);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
-        }
+
+        
     }
      public function sale_activities(Request $request)
     {

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\Activities;
 use App\Models\Images;
 use Inertia\Inertia;
 use Redirect;
@@ -21,9 +24,31 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        $products = Products::where("type", "Activities")->where('del',false)->with('images', 'activities')->get();
-
+        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+                        'access_token'   => connect()['access_token'],
+                        'data' => [
+                                    'language_code: es'
+                                ]
+                    ])->collect()['data']['products'];
+//        dd($products);
         return Inertia::render('Dashboard/Activities', compact('products'));
+    }
+    
+    public function activities()
+    {
+        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+            'access_token'   => connect()['access_token'],
+            'data' => [
+                        'language_code: es'
+                    ]
+        ])->collect()['data']['products'];
+        $actList = Products::where("short_id","<>","null")
+                            ->where("del","0")                        
+                            ->get();
+        
+        $activities = Products::with('activities')->where('type', 'Activities')->where('del', false)->paginate(8);
+
+        return Inertia::render('Admin/Activities', compact('products','actList','activities'));
     }
 
     /**
@@ -44,35 +69,7 @@ class ActivitiesController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $this->validate($request, [
-            'title'         => 'required|string|max:255',
-            'precioA'        => 'required',
-            'description'   => 'required',
-            'fechaI'         => 'required',
-            'iframe'         => 'required',
-            'featured'      => 'required',
-        ]);
-
-        $activities = Products::create([
-                    'type' => 'Activities',
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'featured' => $request->featured,
-                    ]);
-
-
-        $activities->activities()
-                        ->create([
-                            'priceA' => $request->precioA,
-                            'priceN' => $request->precioN,
-                            'init' => $request->fechaI,
-                            'end' => $request->fechaF,
-                            'details' => $request->details,
-                            'iframe' => $request->iframe,
-                        ]);
-        $id= $activities->id;
-        $cookie = Cookie::make('product_id', $id, 5);
-        return back()->with(['id'=>$id, 'message' => 'Agregado con exito, Espere un momento porfavor', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+        //
     }
     /**
      * Cambias nombres de los archivos.
@@ -138,11 +135,9 @@ class ActivitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $product = Products::with('images', 'activities')->where('id', $id)->first();
-
-        return Inertia::render('Dashboard/Show/Activities', compact('product'));
+        //
     }
 
     /**
@@ -155,7 +150,7 @@ class ActivitiesController extends Controller
     {
         $product = Products::with('images', 'activities')->where('id', $id)->first();
 
-        return Inertia::render('Dashboard/Edit/Activities', compact('product'));
+        return Inertia::render('Admin/Activities/Edit', compact('product'));
     }
 
     /**
@@ -165,37 +160,98 @@ class ActivitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $activities)
     {
-        $validator = $this->validate($request, [
-            'title'         => 'required|string|max:255',
-            'precioA'        => 'required',
-            'description'   => 'required',
-            'fechaI'         => 'required',
-            'iframe'         => 'required',
-            'featured'      => 'required',
-        ]);
+            $product = Products::where("short_id", $activities)->first();
+            
+            try {
+                if($product){
 
-        $activities = Products::find($id);
-        $activities->title = $request->title;
-        $activities->description = $request->description;
-        $activities->featured = $request->featured;
-        $activities->save();
+                    if($product->del == 0){
+                        $product->del = 1;
+                        $product->save();
+                    }else{
+                        $product->del = 0;
+                        $product->save();
+                    }
+                
+                }else{
+                    $today = now();
+                    $week = date("d-m-Y",strtotime($today."+ 2 month"));
+                    
 
-        $activities->activities()
-                        ->update([
-                            'priceA' => $request->precioA,
-                            'priceN' => $request->precioN,
-                            'init' => $request->fechaI,
-                            'end' => $request->fechaF,
-                            'details' => $request->details,
-                            'iframe' => $request->iframe,
+                    $events = Http::post('https://apptest.turitop.com/v1/product/tour/getevents', [
+                        'access_token'   => connect()['access_token'],
+                        'data' => [
+                            "product_short_id" => $request->short_id,
+                            "start_date"=> strtotime($today),
+                            "end_date"=> strtotime($week),
+                            'language_code'=> "es"
+                        ]
+                    ])->collect();
+
+                    if(isset($events['data']['events'])){
+                        $events = $events['data']['events'];
+                    }
+            
+                    $prices=null;
+                    if(isset($events[0])){
+                        $prices = Http::post('https://apptest.turitop.com/v1/tickets/getprices', [
+                        'access_token'   => connect()['access_token'],
+                        'data' => [
+                            "product_short_id" => $request->short_id,
+                            "date_event"=> $events[0]['time'],
+                            'language_code'=> "es"
+                        ]
+                        ])->collect();
+
+                        if(isset($prices['data'])){
+                            $prices = $prices['data'];
+                        }
+                    }
+                    
+                    $product = Products::create([
+                        'type' => 'Activities',
+                        'title' => $request->name,
+                        'description' => ($request->description) ? $request->description: $request->summary,
+                        'featured' => false,
+                        'category' => $request->type,
+                        'short_id' => $request->short_id,
+                        'summary' => $request->summary,
+                        
                         ]);
 
-        $id= $activities->id;
-        $cookie = Cookie::make('product_id', $id, 5);
-        return back()->with(['id'=>$id, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success'])->cookie($cookie); 
+                    $product->activities()
+                        ->create([
+                            'details' => ($request->pricing_notes) ? $request->pricing_notes: $request->summary,
+                            'flow' => $request->flow,
+                            'priceA' => $prices,
+                            'duration' => $request->duration,
+                            'coordinates' => $request->coordinates,
+                            'priceA' => json_encode($prices),
+                            'events' => json_encode($events),
+                            'price_notes' => $request->pricing_notes,
+                            'language' => "Español",
+                        ]);
+
+                if (!empty($request->images)) {
+                    foreach($request->images as $image){
+                        Images::create([
+                            'products_id'   => $product->id,
+                            'name'          => $image['url'],
+                            'url'           => $image['url'],
+                        ]);
+                    }
+                }
+                }
+            } catch (Exception $e) {
+                return back()->with(['id'=>400, 'message' => 'Ocurrio un error intente denuevo', 'code' => 400, 'status' => 'error']);     
+            }
+            
+        return back()->with(['id'=>$activities, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success']); 
+        
     }
+    
     public function updt_image(Request $request)
     {
         Images::where('products_id', $request->id)->delete();
@@ -220,8 +276,37 @@ class ActivitiesController extends Controller
                 'name'          => $nameFile['fileName'],
                 'url'           => $pathName.$nameFile['fileName'],
             ]);
+
         }
+
         return back(); 
+    }
+    public function updt(Request $request, $activities)
+    {
+
+        $arr = [
+            "prices_per_ticket" => [
+                
+            ]
+        ];
+        $i = 0;
+        foreach ($request->pricesArr as $arrayPrice) {
+            $arr['prices_per_ticket']["111".$i] = $arrayPrice;
+
+            $i++;
+        }
+
+        $product = Products::find($activities);
+        $product->description = $request->description;
+        $product->title = $request->title;
+        $product->save();
+
+        $activities = Activities::find($product->activities->id);
+        $activities->language = $request->language;
+        $activities->priceA = json_encode($arr);
+        $activities->save();
+
+        return back()->with(['id'=>$product->id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);  
     }
     /**
      * Remove the specified resource from storage.
@@ -229,12 +314,117 @@ class ActivitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($actividade)
+    public function destroy(Request $request)
     {
-        $product = Products::find($actividade);
+        $product = Products::find($request->id);
         $product->del = true;
         $product->save();
         
-        return Redirect::route('activities.index')->with(['id'=>$actividade, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
+        return Redirect::route('activities.index')->with(['id'=>$product->id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);    
+    }
+    /*update API*/
+    public function api()
+    {
+        $today = now();
+        $week = date("d-m-Y",strtotime($today."+ 2 month"));
+        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+            'access_token'   => connect()['access_token'],
+            'data' => [
+                        'language_code: es'
+                    ]
+        ])->collect()['data']['products'];
+        
+        foreach($products as $product){
+            $p = Products::where("short_id", $product['short_id'])->first();
+            
+            $events = Http::post('https://apptest.turitop.com/v1/product/tour/getevents', [
+                        'access_token'   => connect()['access_token'],
+                        'data' => [
+                            "product_short_id" => $product['short_id'],
+                            "start_date"=> strtotime($today),
+                            "end_date"=> strtotime($week),
+                            'language_code'=> "es"
+                        ]
+                    ])->collect();
+            if(isset($events['data']['events'])){
+                $events = $events['data']['events'];
+            }
+            $prices=null;
+            if(isset($events[0])){
+                $prices = Http::post('https://apptest.turitop.com/v1/tickets/getprices', [
+                    'access_token'   => connect()['access_token'],
+                    'data' => [
+                        "product_short_id" => $product['short_id'],
+                        "date_event"=> $events[0]['time'],
+                        'language_code'=> "es"
+                    ]
+                ])->collect();
+                if(isset($prices['data'])){
+                    $prices = $prices['data'];
+                }
+            }
+
+                if($p){
+                    $p->type = 'Activities';
+                    $p->category = $product['type']['name'];
+                    $p->short_id = $product['short_id'];
+                    $p->summary = html_entity_decode($product['summary']);
+                    $p->save();
+
+                    $p->activities()
+                        ->update([
+                            'details' => ($product['pricing_notes'] != '') ? html_entity_decode($product['pricing_notes']): html_entity_decode($product['summary']),
+                            'flow' => $product['flow'],
+                            'duration' => $product['duration'],
+                            'coordinates' => $product['coordinates'],
+                            'price_notes' => $product['pricing_notes'],
+                            'events' => json_encode($events),
+                        ]);
+
+                if (!empty($product['images'])) {
+                    foreach($product['images'] as $image){
+                        $p->images()->update([
+                            'name'          => $image['url'],
+                            'url'           => $image['url'],
+                        ]);
+                    }
+                }
+                }else{
+
+                    $prod = Products::create([
+                        'type' => 'Activities',
+                        'title' => html_entity_decode($product['name']),
+                        'description' => ($product['description'] != '') ? html_entity_decode($product['description']): html_entity_decode($product['summary']),
+                        'featured' => false,
+                        'category' => $product['type']['name'],
+                        'short_id' => $product['short_id'],
+                        'summary' => html_entity_decode($product['summary']),
+                        ]);
+
+                    $prod->activities()
+                        ->create([
+                            'details' => ($product['pricing_notes'] != '') ? html_entity_decode($product['pricing_notes']): html_entity_decode($product['summary']),
+                            'flow' => $product['flow'],
+                            'duration' => $product['duration'],
+                            'coordinates' => $product['coordinates'],
+                            'priceA' => json_encode($prices),
+                            'events' => json_encode($events),
+                            'price_notes' => $product['pricing_notes'],
+                            'language' => "Español",
+                        ]);
+
+                if (!empty($product['images'])) {
+                    foreach($product['images'] as $image){
+                        Images::create([
+                            'products_id'   => $prod->id,
+                            'name'          => $image['url'],
+                            'url'           => $image['url'],
+                        ]);
+                    }
+                }
+                }
+        }
+        
+      return back()->with(['id'=>200, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success']); 
     }
 }

@@ -20,6 +20,13 @@ class hotel extends Model
         'address',
         'zone',
         'image',
+        'calle',
+        'planta',
+        'cp',
+        'code',
+        'url',
+        'area',
+
     ];
 
     /**
@@ -28,5 +35,9 @@ class hotel extends Model
     public function user()
     {
         return $this->belongsToMany(User::class)->withPivot('manager');
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
