@@ -3,6 +3,18 @@
       <div id="carrosel">
         <Carousel :autoplay="6000" :wrap-around="true" :transition="600">
             <Slide :key="0">
+              <div class="bg-image welcome" style="background:url(/vendor_asset/img/home/home1.png)">
+              </div>
+            </Slide>
+            <Slide :key="1">
+              <div class="bg-image welcome" style="background:url(/vendor_asset/img/home/home2.png)">
+              </div>
+            </Slide>
+            <Slide :key="2">
+              <div class="bg-image welcome" style="background:url(/vendor_asset/img/home/home3.png)">
+              </div>
+            </Slide>
+            <!-- <Slide :key="0">
               <div class="bg-image welcome">
                   <img src="/vendor_asset/img/home/home1.png" alt="">
               </div>
@@ -15,7 +27,7 @@
             <Slide :key="2">
               <div class="bg-image welcome">
               <img src="/vendor_asset/img/home/home3.png" alt=""></div>
-            </Slide>
+            </Slide> -->
             <template #addons>
               <Navigation />
             </template>
@@ -47,7 +59,7 @@
             <div class="col-12 px-md-5">
               <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="5000">
                 <Slide v-for=" product in actList" :key="product.id">
-                  <div class="tarjeta bg-light h-36 w-40 md:h-60 md:w-60 mr-2.5">
+                  <div class="tarjeta bg-light h-36 w-40 md:h-60 md:w-60 mr-2 ml-0.5 my-2">
                     <div class="tarjeta-img d-block">
                       <Link :href="route('product.activities.show',{product : product.id})">
                           <template v-if="product.images.length !== 0">
@@ -103,7 +115,7 @@
                   <div class="col-4 col-md-2 mt-3 px-2 px" v-for=" product in $page.props.souvenirs" :key="product.id">
                     <Link :href="route('product.souvenir.show',{product : product.id})">
                     <div class="rounded image text-center position-relative w-100" :style="'background:url(/storage/souvenirs/'+product.images[0].url+')'">
-                      <!-- <p class="bg-light position-absolute fixed-bottom text-right py-2 px-1 font-weight-bolder text-muted" style="opacity:0.6;z-index:37"><Decimals :precio="product.price"/>€</p> -->
+                      <p class="bg-light position-absolute fixed-bottom text-right py-2 px-1 font-weight-bolder text-muted" style="opacity:0.6;z-index:37"><Decimals :precio="product.price"/>€</p>
                     </div>
                     </Link>
                   </div>
@@ -194,7 +206,12 @@
         }
     }
 </script>
-<style scope>
+<style scoped>
+    .bg-image{
+      background-size: cover !important;
+      background-position:center !important;
+      height: 45em;
+    }
     #hicitty {
       background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url('/vendor_asset/img/hicity.png');
       background-position: bottom center;
@@ -205,26 +222,6 @@
     }
     .h2{
       font-size:2em
-    }
-    #carrosel .carousel__prev,.carousel__next{
-      background-color: #ffffff00 !important;
-      color: #ffffff00 !important;
-    }
-    #carrosel .carousel__prev{
-      left:50px;
-    }
-    #carrosel .carousel__next{
-      right:50px !important;
-    }
-    #carrosel .welcome img{
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        min-width: 100%!important;
-        height: 40em;
-    }
-    #carrosel .welcome{
-        min-width: 100%!important;
     }
     #categorias .categoria-img{
       height: 12em;
@@ -247,6 +244,14 @@
       cursor:pointer;
     }
     @media (max-width: 850px){
+      .bg-image{
+        background-size: contain !important;
+        background-position:center !important;
+        background-repeat: no-repeat !important;
+        height: 24em;
+        margin-top:-64px;
+        margin-bottom:-30px;
+      }
         #carrosel .welcome img{
           background-position: center center;
           background-repeat: no-repeat;

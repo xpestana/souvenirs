@@ -227,4 +227,45 @@ body .modal-backdrop{
     box-shadow: 0px 0px 3px 3px rgba(0 0 0 / 20%);
   }
 
-  
+  #carrosel .carousel__prev{
+    background-color: #ffffff00 !important;
+    color: #ffffff00 !important;
+  }
+  #carrosel .carousel__next{
+    background-color: #ffffff00 !important;
+    color: #ffffff00 !important;
+  }
+  #carrosel .carousel__prev{
+    left:50px;
+  }
+  #carrosel .carousel__next{
+    right:50px !important;
+  }
+  #carrosel .welcome img{
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      min-width: 100%!important;
+      height: 40em;
+  }
+  #carrosel .welcome{
+      min-width: 100%!important;
+  }
+
+  #product-img .carousel__prev {
+    left: 5%;
+  }
+  #product-img .carousel__next {
+      right: 5%;
+      color: #fff !important;
+  }
+  #product-img .carousel #img-product {
+      height: 30em;
+      background-size: contain !important;
+      background-repeat: no-repeat !important;
+      min-width: 60% !important;
+      margin: 0 auto;
+  }
+  #product-img .carousel__prev, .carousel__next{
+      background-color: #31516B !important; 
+}

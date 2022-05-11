@@ -8,7 +8,7 @@
                 <!-- Main Thumbnail Image Start -->
                 <div class="col-12 px-0">
                     <!-- Thumbnail Large Image start -->
-                    <div class="product-img">
+                    <div class="product-img" id="product-img">
                         <div id="thumb1" class="tab-pane fade show active">
                             <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
                             <Slide v-for="img in product.images" :key="img.id">
@@ -24,20 +24,6 @@
                     <div class="alert font-weight-bolder text-center py-1" role="alert" style="background:#d8edf3">
                         Envío gratuito en pedidos superiores de <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€
                     </div>
-                    <!-- Thumbnail Large Image End -->
-                    <!-- Thumbnail Image End -->
-                    <!-- <div v-if="product.images.length != 0" class="product-thumbnail d-none d-md-block">
-                         <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
-                            <Slide v-for="image in product.images" :key="image.id">
-                                <a data-fancybox="images" :href="'/storage/souvenirs/'+image.url" class="w-100">
-                                    <div :style="'background:url(/storage/souvenirs/'+image.url+')'" class="img-thumb"></div>
-                                </a>
-                            </Slide>
-                            <template #addons>
-                                <Navigation />
-                            </template>
-                        </Carousel>
-                    </div> -->
                     <!-- Thumbnail image end -->
                 </div>
                 <!-- Main Thumbnail Image End -->
@@ -79,29 +65,6 @@
                         <div class="pro-desc-details mt-4"> 
                             <span v-html="product.description"></span>
                         </div>
-                        <!-- <div class="pro-price mt-30 d-none d-md-block">
-                            <p class="d-flex align-items-center"><span class="prev-price" hidden>16.51</span><span class="price">Precio:  € {{ product.price }}</span><span class="saving-price" hidden>-5%</span></p>
-                        </div> -->
-                        
-                        <!-- <div class="pt-10 quatity-stock d-none d-md-block">
-                           <label>Quantity</label>
-                           <form @submit.prevent="submit">
-                            <ul class="d-flex flex-wrap  align-items-center">
-                                <li class="box-quantity">
-                                    
-                                    <input class="quantity" v-model="form.quantity" type="number" min="1">
-                                    
-                                </li>
-                                <li>
-                                    <button type="submit" class="pro-cart">Añadir Al Carrito</button>
-                                </li>
-                                <li class="pro-ref" hidden>
-                                    <p><span class="in-stock"><i class="ion-checkmark-round"></i>{{ product.stock }} disponibles</span></p>
-                                </li>
-                            </ul>
-                            </form>
-                        </div> -->
-                        
                         <div class="pt-10 quatity-stock" v-if="$page.props.auth.role == 'Admin'">
                             <Link :href="route('souvenirs.edit',{souvenir:product.id})" class="pro-cart">Editar Souvenir</Link>
                         </div>
@@ -212,21 +175,7 @@
         }
     }
 </script>
-<style scope>
-    .carousel__prev {
-        left: 5%;
-    }
-    .carousel__next {
-        right: 5%;
-        color: #fff !important;
-    }
-    .carousel #img-product {
-        height: 30em;
-        background-size: contain !important;
-        background-repeat: no-repeat !important;
-        min-width: 60% !important;
-        margin: 0 auto;
-    }
+<style scoped>
     .img-thumb{
         width: 100%;
         height: 100px;
@@ -235,9 +184,7 @@
         background-position: center !important;
         margin-left: 10px;
     }
-    .carousel__prev, .carousel__next{
-        background-color: #31516B !important; 
-    }
+    
     .pro-price{
         margin-bottom: 0px;
     }

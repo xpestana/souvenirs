@@ -20,7 +20,7 @@
 					</div>
 				</div>
 				<Link :href="route('cart.index')">
-					<img class="d-inline pt-3" src="/vendor_asset/img/carts.png" alt="logo" width="20">
+					<img class="d-inline" src="/vendor_asset/img/icons/carrito.png" alt="logo" width="20" style="padding-top:1.35em">
 				</Link>
           </div>
         </div>

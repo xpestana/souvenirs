@@ -86,7 +86,7 @@
                                         <div class="single-aboss-product mx-2 my-2">
                                             <div class="pro-img">
                                                 <a title="Añadir Al Carrito" href="javascript:void(0)" @click="cart(product.id,product.stock)">
-                                                    <div class="add-cart mt-1 p-1 absolute block right-0">
+                                                    <div class="add-cart mt-1 p-1 absolute block right-0" id="boton-agregar">
                                                         <img src="/vendor_asset/img/icons/plust.png" alt="">
                                                     </div>
                                                 </a>
@@ -252,6 +252,9 @@
 </script>
 <style src="@vueform/slider/themes/default.css"></style>
 <style scope>
+    #boton-agregar:hover{
+        background-color: transparent;
+    }
     .v-enter-active,
     .v-leave-active {
     transition: opacity 0.5s ease;
