@@ -6,7 +6,14 @@
             <div class="primary-menu">
                 <nav>
                     <ul class="primary-menu-list d-flex justify-content-end pr-5">
-                        <li><Link :href="route('collaborator.index')" :class="{ 'border-bottom border-dark': $page.url === '/tablero/alojamientos' }"><i class="fas fa-user iconNav"></i> Mis alojamientos</Link></li>
+                        <li><Link :href="route('collaborator.index')" :class="{ 'border-bottom border-dark': $page.url === '/tablero/alojamientos' }"><i class="fas fa-user iconNav"></i>
+                            <template v-if="gestorDe == 2">
+                                Mis alojamientos
+                            </template>
+                            <template v-if="gestorDe == 1">
+                                Mis hoteles
+                            </template>
+                         </Link></li>
                         <li><Link :href="route('collaborator.ajustes.index')" :class="{ 'border-bottom border-dark': $page.url === '/tablero/ajustes' }"><i class="fas fa-wrench iconNav"></i> Ajustes</Link></li>
                     </ul>
                     
@@ -30,6 +37,14 @@
                     _token: this.$page.props.csrf_token,
                 })
             },
+        },
+        computed:{
+            gestorDe(){
+                if(this.$page.props.auth.user.profile == undefined){
+                    return this.$page.props.auth.profile.gestor
+                }
+                return this.$page.props.auth.user.profile.gestor;
+            }
         }
     }
 </script>

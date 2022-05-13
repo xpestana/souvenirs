@@ -171,16 +171,30 @@ class CollaboratorController extends Controller
     }
     public function store_hab(Request $request)
     {
-        $request->validate([
-            'calle' => 'required|string',
-            'planta' => 'required|string',
-            'address' => 'nullable|string',
-            'city' => 'required|string',
-            'cp' => 'required|string',
-            'code' => 'nullable|string',
-            'url' => 'nullable|url',
-            'area' => 'nullable|string',
-        ]);
+        if($request->tipo == 'hotel'){
+            $request->validate([
+                'nombre_hotel' => 'required|string',
+                'numero_habitaciones' => 'required|numeric',
+                'calle' => 'required|string',
+                'planta' => 'required|string',
+                'city' => 'required|string',
+                'cp' => 'required|string',
+                'code' => 'nullable|string',
+                'url' => 'nullable|url',
+                'area' => 'nullable|string',
+            ]);
+        }else{
+            $request->validate([
+                'calle' => 'required|string',
+                'planta' => 'required|string',
+                'address' => 'nullable|string',
+                'city' => 'required|string',
+                'cp' => 'required|string',
+                'code' => 'nullable|string',
+                'url' => 'nullable|url',
+                'area' => 'nullable|string',
+            ]);
+        }
 
         $image = $request->image;
         if ($image) {
