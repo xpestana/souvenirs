@@ -4,9 +4,16 @@
 		<form @submit.prevent="submit">
 		<div class="row justify-content-center">
 			<div class="col-md-6">
-				<h3 class="h3 text-center text-md-left pb-2">Alojamiento de {{ profile.firstname }}</h3>
+				<h3 class="h3 text-center text-md-left pb-2">
+					<template v-if="profile.gestor == 1">
+						Hoteles de {{ profile.firstname }}
+					</template>
+					<template v-if="profile.gestor == 2">
+						Alojamiento de {{ profile.firstname }}
+					</template>
+				</h3>
 				<div class="d-flex justify-content-center justify-content-md-start">
-					<img class="img-foto rounded-circle" src="/vendor_asset/img/default.png" width="150" height="150">
+					<img class="img-foto rounded-circle w-24" src="/vendor_asset/img/default.png">
 					<div class="d-flex flex-column mt-3 ml-2 text-left">
 						<p class="">{{ profile.firstname }}</p> 
 						<p class="text-info">{{ user.email }}</p>
@@ -16,26 +23,45 @@
 
 				<div class="col-md-12">
 					
-					<h4 class="h4 text-center text-md-left my-3 pt-4">Registra un alojamiento</h4>
+					<h4 class="h4 text-center text-md-left my-3 pt-4">
+						<template v-if="profile.gestor == 1">
+							Registra un hotel
+						</template>
+						<template v-if="profile.gestor == 2">
+							Registra un alojamiento
+						</template>
+					</h4>
 					<div class="row justify-content-between">
-						<div class="col-md-12 mb-3">
-							<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.calle" placeholder="Calle *" required>
+						<template v-if="profile.gestor == 1">
+							<div class="col-12 col-md-6 mb-3">
+                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Nombre del hotel*">
+                    		</div>
+							<div class="col-12 col-md-6 mb-3">
+                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="N° de habitaciones*">
+                    		</div>
+						</template>
+						<div class="col-12 mb-3" :class="{'col-md-6' : profile.gestor == 1}">
+							<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.calle" placeholder="Calle *">
                     	</div>
-                    	<div class="col-md-12 mb-3">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.planta" placeholder="N° - Letra - Planta *" required>
+                    	<div class="col-12 mb-3" :class="{'col-md-6' : profile.gestor == 1}">
+                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.planta" placeholder="N° - Letra - Planta *">
                     	</div>
-                    	<div class="col-md-12 mb-3">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" placeholder="Otras indicaciones sobre la dirección">
-                    	</div>
+						<template v-if="profile.gestor == 2">
+							<div class="col-md-12 mb-3">
+                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" placeholder="Otras indicaciones sobre la dirección">
+                    		</div>
+						</template>
                     	<div class="col-md-6 mb-3">
                     		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" placeholder="Ciudad *" >
                     	</div>
                     	<div class="col-md-6 mb-3">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" placeholder="CP *" required>
+                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" placeholder="CP *">
                     	</div>
+						<template v-if="profile.gestor == 2">
                     	<div class="col-md-6 mb-3">
                     		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.code" placeholder="N° de licencia VFT/SE/12345" >
                     	</div>
+						</template>
                     	<div class="col-md-6 mb-3">
                     		<input type="url" class="form-control w-100 mb-2 py-3" v-model="form.url" placeholder="Link web" >
                     	</div>
@@ -119,6 +145,9 @@
             	user: this.$page.props.auth.user,
             	profile: this.$page.props.auth.profile,
             	form: this.$inertia.form({
+					tipo: this.$page.props.auth.profile.gestor == 1 ? 'hotel' : 'apartamento',
+					nombre_hotel:null,
+					numero_habitaciones:null,
                     calle: null,
                     planta: null,
                     address: null,
