@@ -17,13 +17,14 @@
                 <div class="col-4 col-md-2 px-0 p-2">
                     <template v-if="product.images.length > 0">
                         <Link :href="route('product.activities.show',{product : product.id})">
-                            <template v-if="product.short_id == null">
-                                <img :src="'/storage/souvenirs/'+product.images[0].name" alt="Actividad" class="h-24 md:h-28 w-100">    
+                            <img :src="product.images[0].name" alt="Actividad" class="h-24 md:h-28 w-100">    
+                        </Link>
+                    </template>
+                    <template v-else>
+                        <Link :href="route('product.activities.show',{product : product.id})">
+                            <template v-if="product.short_id !== null">
+                                <img src="/vendor_asset/img/bg-image/act-default.jpg" alt="Actividad" class="h-24 md:h-28 w-100">    
                             </template>
-                            <template v-else>
-                                <img :src="product.images[0].name" alt="Actividad" class="h-24 md:h-28 w-100">    
-                            </template>
-                            
                         </Link>
                     </template>
                 </div>

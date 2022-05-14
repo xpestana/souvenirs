@@ -125,9 +125,16 @@
             <template v-for="act in activitiesList" :key="act.id">
                 <div  class="row p-2 mt-1"  style="background-color:#ededed;" v-if="activitiesList.length > 0">
                     <div class="col-3 col-md-2 px-0" >
-                        <Link :href="route('product.souvenir.show',{product : act.id})">
-                            <img :src="'/storage/souvenirs/'+act.attributes.url" alt="product" class="h-16  w-100 md:h-24">                    
-                        </Link>
+                        <template v-if="act.associatedModel.images.length > 0">
+                            <Link :href="route('product.souvenir.show',{product : act.id})">
+                                <img :src="act.associatedModel.images[0].name" alt="product" class="h-16  w-100 md:h-24">                    
+                            </Link>
+                        </template>
+                        <template v-else>
+                            <Link :href="route('product.souvenir.show',{product : act.id})">
+                                <img src="/vendor_asset/img/bg-image/act-default.jpg" alt="product" class="h-16  w-100 md:h-24">                    
+                            </Link>
+                        </template>
                     </div>
                     <div class="col-8 col-md-9 pl-2 pr-0 d-flex flex-column justify-between" v-if="act.name">
                         <div class="product d-flex justify-between">

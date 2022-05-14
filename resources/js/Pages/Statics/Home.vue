@@ -63,10 +63,10 @@
                     <div class="tarjeta-img d-block">
                       <Link :href="route('product.activities.show',{product : product.id})">
                           <template v-if="product.images.length !== 0">
-                              <img :src="'/storage/souvenirs/'+product.images[0].name" class="w-100">
+                              <img :src="product.images[0].name" class="w-100">
                           </template>
                           <template v-else>
-                              <div class="bg-light h-12 md:h-28"></div>
+                              <img src="/vendor_asset/img/bg-image/act-default.jpg" class="w-100">
                           </template>
                       </Link>
                     </div>
@@ -168,7 +168,7 @@
             
         },
         created(){
-          console.log(this.actList)
+          console.log(this.$page.props.activities)
         },
         methods:{
           souvenirs(){
@@ -234,7 +234,7 @@
       box-shadow: 0px 0px 4px 1px rgba(0 0 0 / 20%);
     }
     #actividades .tarjeta img{
-      height: 10em;
+      height: 8em;
     }
     #souvenirs .images .image{
       height: 6em;
@@ -286,7 +286,7 @@
             background-size: contain;
         }
         #actividades .tarjeta img{
-          height: 5em;
+          height: 4.5em;
         }
         #actividades .tarjeta-cuerpo p {
             font-size: 13px;
