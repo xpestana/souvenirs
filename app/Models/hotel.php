@@ -26,6 +26,7 @@ class hotel extends Model
         'code',
         'url',
         'area',
+        'hab',
 
     ];
 

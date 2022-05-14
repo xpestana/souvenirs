@@ -225,6 +225,8 @@ class CollaboratorController extends Controller
                 $name_file ="default.jpg";
             }
             $hotel = hotel::create([
+                'name'        => ($request->nombre_hotel) ? $request->nombre_hotel : null,
+                'hab'         => ($request->numero_habitaciones) ? $request->numero_habitaciones : null,
                 'calle'       => $request->calle,
                 'type'        => (auth()->user()->profile->gestor == 1) ? "hotel" : "apartamento",
                 'address'     => $request->address,
