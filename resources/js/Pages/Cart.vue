@@ -125,9 +125,9 @@
             <template v-for="act in activitiesList" :key="act.id">
                 <div  class="row p-2 mt-1"  style="background-color:#ededed;" v-if="activitiesList.length > 0">
                     <div class="col-3 col-md-2 px-0" >
-                        <template v-if="act.associatedModel.images.length > 0">
+                        <template v-if="act.img.length > 0">
                             <Link :href="route('product.souvenir.show',{product : act.id})">
-                                <img :src="act.associatedModel.images[0].name" alt="product" class="h-16  w-100 md:h-24">                    
+                                <img :src="act.img[0].name" alt="product" class="h-16  w-100 md:h-24">                    
                             </Link>
                         </template>
                         <template v-else>
@@ -142,41 +142,14 @@
                                 <p class="text-sm md:text-xl truncate pr-3">{{ act.name }}</p>
                             </div>
                             <div class="product-price">
-                                <p class="text-sm md:text-xl font-weight-bolder"><Decimals :precio="(Number(act.attributes.priceAdult)*Number(act.attributes.adult) + Number(act.attributes.priceChildren)*Number(act.attributes.children) + Number(act.attributes.priceStudent)*Number(act.attributes.student) + Number(act.attributes.priceBaby)*Number(act.attributes.baby))"/>€</p>
+                                <p class="text-sm md:text-xl font-weight-bolder"><Decimals :precio="act.precio"/>€</p>
                             </div>
                         </div>
                         <div class="activity-prices pt-1 pr-1 text-center d-flex justify-around">
                             <div class="">
-                                <p class="text-sm md:text-base" v-if="act.attributes.adult > 0">
-                                    <template v-if="act.attributes.adult == 1">
-                                        {{ act.attributes.adult }} Adulto    
-                                    </template>
-                                    <template v-if="act.attributes.adult > 1">
-                                        {{ act.attributes.adult }} Adultos    
-                                    </template>
-                                </p>
-                                <p class="text-sm md:text-base" v-if="act.attributes.children > 0">
-                                    <template v-if="act.attributes.children == 1">
-                                        {{ act.attributes.children }} Niño    
-                                    </template>
-                                    <template v-if="act.attributes.children > 1">
-                                        {{ act.attributes.children }} Niños    
-                                    </template>
-                                </p>
-                                <p class="text-sm md:text-base" v-if="act.attributes.student > 0">
-                                    <template v-if="act.attributes.student == 1">
-                                        {{ act.attributes.student }} Estudiante    
-                                    </template>
-                                    <template v-if="act.attributes.student > 1">
-                                        {{ act.attributes.student }} Estudiantes    
-                                    </template>
-                                </p>
-                                <p class="text-sm md:text-base" v-if="act.attributes.baby > 0">
-                                    <template v-if="act.attributes.baby == 1">
-                                        {{ act.attributes.baby }} Bebe    
-                                    </template>
-                                    <template v-if="act.attributes.baby > 1">
-                                        {{ act.attributes.baby }} Bebes    
+                                <p class="text-sm md:text-base" v-for="concepto in act.personas" :key="concepto">
+                                    <template v-if="Number(concepto.split(':')[0]) > 0">
+                                        <CodificarTilde :string="concepto.split(':')[2]" /> {{concepto.split(':')[0]}} 
                                     </template>
                                 </p>
                             </div>
@@ -193,37 +166,8 @@
             <div class="row justify-content-between" v-if="activitiesList.length > 0">
                 <div class="col-5 text-center mt-3 px-0 pl-1">
                     <p class="text-muted">Resumen del pedido</p>
-                    <p class="text-center text-muted leading-4" v-if="nadult > 0">
-                        <template v-if="nadult > 1">
-                            ({{ nadult }} adultos)
-                        </template>
-                        <template v-else>
-                            ({{ nadult }} adulto)
-                        </template>
-                    </p>
-                    <p class="text-center text-muted leading-4" v-if="nchildren > 0">
-                    <template v-if="nchildren > 1">
-                            ({{ nchildren }} niños)
-                        </template>
-                        <template v-else>
-                            ({{ nchildren }} niño)
-                        </template>    
-                    </p>
-                    <p class="text-center text-muted leading-4" v-if="nstudent > 0">
-                    <template v-if="nstudent > 1">
-                            ({{ nstudent }} estudiantes)
-                        </template>
-                        <template v-else>
-                            ({{ nstudent }} estudiante)
-                        </template>    
-                    </p>
-                    <p class="text-center text-muted leading-4" v-if="nbaby > 0">
-                    <template v-if="nbaby > 1">
-                            ({{ nbaby }} bebes)
-                        </template>
-                        <template v-else>
-                            ({{ nbaby }} bebe)
-                        </template>    
+                    <p class="text-center text-muted leading-4" v-for="val in actPedido" :key="val">
+                            ({{val.cantidad}} <CodificarTilde :string="val.concepto"/><template v-if="val.cantidad > 1">s</template>)
                     </p>
                 </div>
                 <div class="col-6 text-right mt-3 px-0 pr-1">
@@ -271,6 +215,7 @@
     import Layout from '@/Layouts/Layout.vue'        
     import Total from '@/Pages/Total.vue' 
     import Decimals from '@/Layouts/Components/Decimals.vue'
+    import CodificarTilde from '@/Layouts/Components/CodificarTilde.vue'
 
     export default {
         components: {
@@ -278,11 +223,11 @@
             Link,
             Layout,
             Total,
-            Decimals
+            Decimals,
+            CodificarTilde
         },
         created(){
             this.totalesSouvenirs();
-            console.log(this.activitiesList)
         },
         updated(){
             this.totalesSouvenirs();
@@ -334,14 +279,6 @@
                         preserveScroll: true,
                     })
             },
-            calculate(priceA, priceN, adult, children){
-                if (priceN) {
-                    var amount = ((adult * priceA) +  (children * priceN));
-                }else{
-                    var amount = ((adult * priceA) +  (children * priceA));
-                }
-                return amount;
-            },
             totalesSouvenirs(){
                 this.nchildren=0;
                 this.nadult=0;
@@ -350,10 +287,6 @@
                 var total_souvenirs = 0;
                 var total_activities = 0;
                 let numero_souvenirs = 0;
-                let adultn = 0;
-                let childrenn = 0;
-                let student = 0;
-                let baby = 0;
                 Object.keys(cart).forEach(function(key) {
                     if (cart[key].name) {
                         if (cart[key].attributes.type == 'souvenir') {
@@ -363,19 +296,12 @@
                         }
                         
                         if (cart[key].attributes.type == 'activity') {
-                            adultn += Number(cart[key].attributes.adult);
-                            childrenn += Number(cart[key].attributes.children);
-                            student += Number(cart[key].attributes.student);
-                            baby += Number(cart[key].attributes.baby);
-
-                            total_activities += (Number(cart[key].attributes.adult) * Number(cart[key].attributes.priceAdult) + Number(cart[key].attributes.children) * Number(cart[key].attributes.priceChildren) + Number(cart[key].attributes.student) * Number(cart[key].attributes.priceStudent) + Number(cart[key].attributes.baby) * Number(cart[key].attributes.priceBaby));
+                            total_activities+= cart[key].attributes.pedido.reduce((acc,col)=>{
+                                return acc + Number(col.split(':')[0])*Number(col.split(':')[1])
+                            },0)
                         }
                     }
                 });
-                this.nadult += adultn;
-                this.nchildren = childrenn;
-                this.nstudent = student;
-                this.nbaby = baby;
                 this.n_souvenirs = numero_souvenirs == 1 ? numero_souvenirs+' artículo' : numero_souvenirs+' artículos';
                 this.total_souvenirs = total_souvenirs;
                 this.sub_total = total;
@@ -404,8 +330,55 @@
                 let cart = this.$page.props.cart;
                 let largo = Number(Object.values(cart).length) - 2;
                 let array = Object.values(cart).splice(0,largo);
-                return array.filter((product)=> product.attributes.type =="activity")
-            }
+                let activities = array.filter((product)=> product.attributes.type =="activity")
+                return activities.map(el=>{
+                    let precioAct = el.attributes.pedido.reduce((acc,col)=>{
+                        return acc + Number(col.split(':')[0])*Number(col.split(':')[1])
+                    },0)
+                    return{
+                        id:el.id,
+                        name:el.name,
+                        img:el.associatedModel.images,
+                        precio:precioAct,
+                        personas:el.attributes.pedido,
+                    }
+                })
+            },
+            actPedido(){
+                let cart = this.$page.props.cart;
+                let largo = Number(Object.values(cart).length) - 2;
+                let array = Object.values(cart).splice(0,largo);
+                let activities = array.filter((product)=> product.attributes.type =="activity")
+                let arrCon = [];
+                let arrCan = [];
+                for(let el of activities){
+                    let acc = null;
+                    let index = null;
+                    for(let val in el.attributes.pedido){
+                        acc = el.attributes.pedido[val].split(':');
+                        
+                        if(Number(acc[0]) > 0){
+                            acc[2] == 'Adults' || acc[2] == 'Adultos' ? acc[2] = 'Adulto' : ''
+                            acc[2] == 'Children' || acc[2] == 'Ni&ntilde;os' ? acc[2] = 'Ni&ntilde;o' : ''
+                            acc[2] == 'Students' ? acc[2] = 'Estudiante' : ''
+                            acc[2] == 'Babies' || acc[2] == 'Beb&eacute;s' ? acc[2] = 'Bebé' : ''
+                            if(Number(arrCon.indexOf(acc[2])) == -1){
+                                arrCon.push(acc[2])
+                                arrCan.push(Number(acc[0]))
+                            }
+                            else{
+                                index = Number(arrCon.indexOf(acc[2]))
+                                arrCan[index] = Number(arrCan[index]) + Number(acc[0]);
+                            }
+                        }
+                    }  
+                }
+                let result = [];
+                for (let i = 0; i < arrCon.length; i++) {
+                    result.push({concepto:arrCon[i],cantidad:arrCan[i]})
+                }
+                return result;
+            },
         },
         updated(){
             this.totalesSouvenirs()

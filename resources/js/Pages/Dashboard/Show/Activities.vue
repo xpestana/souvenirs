@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="px-3">
-                                <calendar :prices="prices" :token="access_token" :product="product" :eventos="eventosAbiertos" :precios="precios" />
+                                <calendar :ticket="ticket" :prices="prices" :token="access_token" :product="product" :eventos="eventosAbiertos" :precios="precios" />
                             </div>
                         </div>
                     </div>
@@ -261,7 +261,6 @@
             setTimeout(()=>this.showPopup=false, 3000);
         },
         created(){
-            console.log(this.prices)
             this.moment=Moment;
             if(this.product.activities.priceA !== "null")
             {
