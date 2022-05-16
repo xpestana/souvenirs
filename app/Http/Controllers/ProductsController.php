@@ -23,22 +23,34 @@ class ProductsController extends Controller
     {
         $product = Products::with('images', 'activities')->where('id', $id)->first();
         $access_token = connect()['access_token'];
-
+        $ticket = [];
         $prices = [];
         if($request->event_time){
-            $prices = Http::post('https://apptest.turitop.com/v1/tickets/getprices', [
+
+            $ticket = Http::post('https://app.turitop.com/v1/tickets/get', [
                 'access_token'   => connect()['access_token'],
                 'data' => [
                     "product_short_id" => $request->short_id,
                     "date_event"=> $request->event_time,
                     'language_code'=> "es"
                 ]
-            ])->collect();
+            ])->collect();  
+            $ticket = $ticket['data']['tickets'];
+            
+            $prices = Http::post('https://app.turitop.com/v1/tickets/getprices', [
+                'access_token'   => connect()['access_token'],
+                'data' => [
+                    "product_short_id" => $request->short_id,
+                    "date_event"=> $request->event_time,
+                    'language_code'=> "es"
+                ]
+            ])->collect(); 
             if(isset($prices['data'])){
-                $prices = $prices['data'];
+
+                $prices = $prices['data']; 
             }
         }
-
-        return Inertia::render('Dashboard/Show/Activities', compact('product','access_token','prices'));
+        
+        return Inertia::render('Dashboard/Show/Activities', compact('product','access_token','prices', 'ticket'));
     }
 }

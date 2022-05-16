@@ -33,7 +33,7 @@ class ProfileController extends Controller
         }
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
             $hotel = hotel::find(auth()->user()->hotel->first()->id);
-            $url = env('APP_URL');
+            $url = config('app.url');
             $client = $hotel->user()->wherePivot('manager', false)->first();
         }else{
             $hotel = null;

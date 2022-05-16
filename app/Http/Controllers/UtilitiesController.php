@@ -146,7 +146,7 @@ class UtilitiesController extends Controller
     public function qr()
     {
         $hotel = hotel::find(auth()->user()->hotel->first()->id);
-        $url = env('APP_URL');
+        $url = "https://hicitty.com/";
         $client = $hotel->user()->wherePivot('manager', false)->first();
         
         return Inertia::render('Dashboard/Qr', compact('url', 'client'));

@@ -251,7 +251,8 @@
         props: {
             product: Object,
             access_token: String,
-            prices: Object
+            prices: Object,
+            ticket: Object
         },
         updated(){
             if(this.$page.props.flash.mensaje){

@@ -96,21 +96,22 @@
     <!-- Register Page End Here -->
     </Layout>
 </template>
-
 <script>
     import { Link, Head } from '@inertiajs/inertia-vue3'
-    import Layout from '@/Layouts/Layout.vue'
     import Breadcrumb from '@/Layouts/Components/Breadcrumb.vue' 
     import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
     import BreezeButton from '@/Components/Button.vue'
+    import Header from '@/Layouts/Components/Header.vue'
+    import Notify from '@/Layouts/Components/Toast.vue'
 
     export default {
         components: {
             Link,
             Head,
-            Layout,
             Breadcrumb,
             BreezeButton,
+            Header,
+            Notify,
             BreezeValidationErrors
         },
         data() {

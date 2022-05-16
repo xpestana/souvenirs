@@ -16,10 +16,12 @@ class HttpsProtocol
      */
     public function handle(Request $request, Closure $next)
     {
-       /* if (!$request->secure()) {
+        if (env('APP_ENV') == "production") {
+            if (!$request->secure()) {
 
                 return redirect()->secure($request->getRequestUri());
-            }*/
+            }
+        }
         return $next($request); 
     }
 }

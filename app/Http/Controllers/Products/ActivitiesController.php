@@ -24,7 +24,7 @@ class ActivitiesController extends Controller
      */
     public function index()
     {
-        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+        $products = Http::post('https://app.turitop.com/v1/product/getproducts', [
                         'access_token'   => connect()['access_token'],
                         'data' => [
                                     'language_code: es'
@@ -36,7 +36,7 @@ class ActivitiesController extends Controller
     
     public function activities()
     {
-        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+        $products = Http::post('https://app.turitop.com/v1/product/getproducts', [
             'access_token'   => connect()['access_token'],
             'data' => [
                         'language_code: es'
@@ -180,7 +180,7 @@ class ActivitiesController extends Controller
                     $week = date("d-m-Y",strtotime($today."+ 2 month"));
                     
 
-                    $events = Http::post('https://apptest.turitop.com/v1/product/tour/getevents', [
+                    $events = Http::post('https://app.turitop.com/v1/product/tour/getevents', [
                         'access_token'   => connect()['access_token'],
                         'data' => [
                             "product_short_id" => $request->short_id,
@@ -196,7 +196,7 @@ class ActivitiesController extends Controller
             
                     $prices=null;
                     if(isset($events[0])){
-                        $prices = Http::post('https://apptest.turitop.com/v1/tickets/getprices', [
+                        $prices = Http::post('https://app.turitop.com/v1/tickets/getprices', [
                         'access_token'   => connect()['access_token'],
                         'data' => [
                             "product_short_id" => $request->short_id,
@@ -327,7 +327,7 @@ class ActivitiesController extends Controller
     {
         $today = now();
         $week = date("d-m-Y",strtotime($today."+ 2 month"));
-        $products = Http::post('https://apptest.turitop.com/v1/product/getproducts', [
+        $products = Http::post('https://app.turitop.com/v1/product/getproducts', [
             'access_token'   => connect()['access_token'],
             'data' => [
                         'language_code: es'
@@ -337,7 +337,7 @@ class ActivitiesController extends Controller
         foreach($products as $product){
             $p = Products::where("short_id", $product['short_id'])->first();
             
-            $events = Http::post('https://apptest.turitop.com/v1/product/tour/getevents', [
+            $events = Http::post('https://app.turitop.com/v1/product/tour/getevents', [
                         'access_token'   => connect()['access_token'],
                         'data' => [
                             "product_short_id" => $product['short_id'],
@@ -351,7 +351,7 @@ class ActivitiesController extends Controller
             }
             $prices=null;
             if(isset($events[0])){
-                $prices = Http::post('https://apptest.turitop.com/v1/tickets/getprices', [
+                $prices = Http::post('https://app.turitop.com/v1/tickets/getprices', [
                     'access_token'   => connect()['access_token'],
                     'data' => [
                         "product_short_id" => $product['short_id'],
