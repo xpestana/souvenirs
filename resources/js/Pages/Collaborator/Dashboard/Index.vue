@@ -42,12 +42,15 @@
                     <section id="alojamientos">
                         <div class="container">
                             <div v-for="hotel in hoteles" :key="hotel.id" class="row tarjeta my-4 p-3">
-                                <template v-if="hotel.type == 'apartamento'">
                                     <div class="col-12 col-md-2 p-0">
                                         <img class="img-foto w-100" :src="'/storage/hotel'+hotel.image" >
                                     </div>
                                     <div class="col-12 col-md-8 texto">
-                                        <p>{{hotel.type.toUpperCase()}}</p>
+                                        <p>{{hotel.type.toUpperCase()}} 
+                                            <template v-if="hotel.type == 'hotel'">
+                                                Habitaciones Registradas {{ hotel.hab }} {{ hotel.zone }}
+                                            </template>
+                                        </p>
                                         <h1 class="pt-1 pb-2">{{hotel.calle}} {{hotel.planta}}</h1>
                                         <div class="estadistica">
                                             <p class="px-2">Benefecio total {{ hotel.total_benefit }} €</p>
@@ -113,7 +116,6 @@
                                         <Link :href="route('collaborator.sales.details',{hab:hotel.id})" class="btn btn-info w-75 my-1 py-0 text-white">Ver más</Link>
                                         <Link  :href="route('collaborator.edit.hab',{hab:hotel.id})" class="btn btn-secondary w-75  my-1 py-0">Editar</Link>
                                     </div>
-                                </template>
                             </div>
                         </div>  
                     </section>
@@ -146,6 +148,7 @@
             if(this.hotels.length > 0){
                 this.user_id = this.hotels[0].pivot.user_id
             }
+            console.log(this.hoteles);
         },
         computed:{
             hoteles(){
@@ -162,6 +165,8 @@
                 planta: col.planta,
                 image : col.image,
                 type : col.type,
+                hab : col.hab,
+                zone : col.zone,
                 total_benefit : total_benefit/100,
                 total_orders : col.orders.length
             }

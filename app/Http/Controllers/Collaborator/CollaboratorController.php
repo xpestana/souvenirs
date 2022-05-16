@@ -264,15 +264,29 @@ class CollaboratorController extends Controller
     }
 
     public function update_hab($id,Request $request){
-        
-        $request->validate([
+            
+        if($request->type == 'hotel'){
+            $request->validate([
+                'nombre_hotel' => 'required|string',
+                'numero_habitaciones' => 'required|numeric',
+                'calle' => 'required|string',
+                'planta' => 'required|string',
+                'city' => 'required|string',
+                'cp' => 'required|string',
+                'code' => 'nullable|string',
+                'url' => 'nullable|url',
+                'area' => 'nullable|string',
+            ]);
+        }else{
+            $request->validate([
             'calle' => 'required|string',
             'planta' => 'required|string',
             'address' => 'nullable|string',
             'city' => 'required|string',
             'cp' => 'required|string',
             'code' => 'nullable|string'
-        ]);
+            ]);
+        }
 
          try{
             
@@ -295,7 +309,8 @@ class CollaboratorController extends Controller
             }
 
             $hotel = hotel::find($id);
-            
+            $hotel->name = ($request->nombre_hotel) ? $request->nombre_hotel : null;
+            $hotel->hab  = ($request->numero_habitaciones) ? $request->numero_habitaciones : null;
             $hotel->calle = $request->calle;
             $hotel->address = $request->address;
             $hotel->zone = $request->city;

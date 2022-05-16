@@ -78,10 +78,27 @@
                     <form @submit.prevent="submit">
                     <div class="row my-3 justify-content-start">
                         <div class="col-12 col-md-6">
-                            <h1>Modifica tu alojamiento</h1>
+                            <h1>Modifica tu 
+                                <template v-if="hotel.type == 'apartamento'">
+                                    alojamiento
+                                </template>
+                                <template v-else>
+                                    Hotel
+                                </template>
+                            </h1>
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">
+                        <template  v-if="hotel.type == 'hotel'">
+                            <div class="col-12 col-md-6 mb-3">
+                                <input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Nombre del hotel*">
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="N° de habitaciones*">
+                            </div>
+                            <div class="w-100"></div>
+                        </template>
                         <div class="col-12 col-md-3 mb-2 mb-md-0">
                             <input type="text" class="form-control w-100" placeholder="Calle" v-model="form.calle">
                         </div>
@@ -184,6 +201,9 @@
             return{
                 showF: 0,
                 form: this.$inertia.form({
+                    type:this.hotel.type,
+                    nombre_hotel:this.hotel.name,
+                    numero_habitaciones:this.hotel.hab,
                     calle: this.hotel.calle,
                     planta: this.hotel.planta,
                     address: this.hotel.address,
