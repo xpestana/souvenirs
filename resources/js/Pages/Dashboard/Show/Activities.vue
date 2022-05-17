@@ -2,14 +2,12 @@
     
     <div class="img-container">
         <div class="w-100">
-            <template v-if="product.short_id == null">
-                <img :src="'/storage/souvenirs/'+product.images[0].url" class="h-72 w-100">
+            <template v-if="product.images.length > 0">
+                <img :src="product.images[0].name" class="bg-contain mx-auto w-4/6 h-96">    
             </template>
-            <template v-if="product.short_id !== null && product.images.length > 0">
-                <img :src="product.images[0].name" class="h-72 w-100">    
-            </template>
-            <template v-if="product.images.length == 0">
-                    <div class="my-5 py-5 text-center border border-danger mx-2"><h1 class="text-xl">No existe imagen para esta actividad</h1></div>
+            <template v-else>
+                <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-96">    
+                    <!-- <div class="my-5 py-5 text-center border border-danger mx-2"><h1 class="text-xl">No existe imagen para esta actividad</h1></div> -->
             </template>
         </div>
     </div>
@@ -125,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="px-3">
-                                <calendar :prices="prices" :token="access_token" :product="product" :eventos="eventosAbiertos" :precios="precios" />
+                                <calendar :ticket="ticket" :prices="prices" :token="access_token" :product="product" :eventos="eventosAbiertos" :precios="precios" />
                             </div>
                         </div>
                     </div>
@@ -263,7 +261,6 @@
             setTimeout(()=>this.showPopup=false, 3000);
         },
         created(){
-            console.log(this.prices)
             this.moment=Moment;
             if(this.product.activities.priceA !== "null")
             {

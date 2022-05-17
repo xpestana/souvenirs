@@ -187,12 +187,6 @@
                     if (cart[key].attributes.type == 'souvenir') {
                         total += (cart[key].price * cart[key].quantity);
                         total_souvenirs += (cart[key].price * cart[key].quantity);
-                    }else{
-                        if (cart[key].attributes.priceN) {
-                            total += ((cart[key].attributes.adult * cart[key].attributes.priceA) +  (cart[key].attributes.children * cart[key].attributes.priceN));
-                        }else{
-                            total += ((cart[key].attributes.adult * cart[key].attributes.priceA) +  (cart[key].attributes.children * cart[key].attributes.priceA));
-                        }
                     }
                 }
             });
@@ -279,14 +273,6 @@
                  forceFormData: true,
              })*/
         },
-            calculate(priceA, priceN, adult, children){
-                if (priceN) {
-                    var amount = ((adult * priceA) +  (children * priceN));
-                }else{
-                    var amount = ((adult * priceA) +  (children * priceA));
-                }
-                return amount;
-            },
             /*async processPayment() {
                 this.paymentProcessing = true;
 
@@ -344,7 +330,9 @@
                 return this.activitiesList.reduce((acc, el) => ({
                     ...acc,
                     num:++acc.num,
-                    precio:(Number(el.attributes.adult)*Number(el.attributes.priceAdult) + Number(el.attributes.children)*Number(el.attributes.priceChildren) + Number(el.attributes.student)*Number(el.attributes.priceStudent) + Number(el.attributes.baby)*Number(el.attributes.priceBaby)) + acc.precio,
+                    precio:acc.precio + el.attributes.pedido.reduce((acc,col)=>{
+                        return acc + Number(col.split(':')[0])*Number(col.split(':')[1])
+                    },0),
                 }),{num:0,precio:0});
             },
             importeTotal(){

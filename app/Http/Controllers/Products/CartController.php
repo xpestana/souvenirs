@@ -136,14 +136,7 @@ class CartController extends Controller
                 'type' => 'activity',
                 'url' => $image,
                 'date' => $request->fecha,
-                'adult' => $request->adult,
-                'children' => $request->children,
-                'student' => $request->student,
-                'baby' => $request->baby,
-                'priceAdult' => $request->priceAdult,
-                'priceChildren' => $request->priceChildren,
-                'priceStudent' => $request->priceStudent,
-                'priceBaby' => $request->priceBaby,
+                'pedido' => $request->pedido,
                 ),
             'associatedModel' => $product
         ));
