@@ -7,7 +7,7 @@
             <div class="col-12 text-center">
                 <h1>¿Necesitas ayuda?</h1>
                 <p>Atención especializada</p>
-                <p>(+34) 777 777 777</p>
+                <p>(+34) 722 193 903</p>
             </div>
             <div class="col-12 text-center px-0 px-lg-4">
                 <template v-if="hotels.length == 0">
@@ -43,14 +43,16 @@
                         <div class="container">
                             <div v-for="hotel in hoteles" :key="hotel.id" class="row tarjeta my-4 p-3">
                                     <div class="col-12 col-md-2 p-0">
-                                        <img class="img-foto w-100" :src="'/storage/hotel'+hotel.image" >
+                                        <img class="img-foto w-100 h-36 md:h-28" :src="'/storage/hotel'+hotel.image" >
                                     </div>
                                     <div class="col-12 col-md-8 texto">
-                                        <p>{{hotel.type.toUpperCase()}} 
+                                        <div class="text-md-left">
+                                            <p class="d-md-inline mr-md-3 text-center">{{hotel.type.toUpperCase()}}</p>
                                             <template v-if="hotel.type == 'hotel'">
-                                                Habitaciones Registradas {{ hotel.hab }} {{ hotel.zone }}
+                                                <p class="d-md-inline mr-md-2 text-center">Habitaciones Registradas {{ hotel.hab }} </p>
+                                                <p class="d-md-inline text-center">{{ hotel.zone }}</p>
                                             </template>
-                                        </p>
+                                        </div>
                                         <h1 class="pt-1 pb-2">{{hotel.calle}} {{hotel.planta}}</h1>
                                         <div class="estadistica">
                                             <p class="px-2">Benefecio total {{ hotel.total_benefit }} €</p>
@@ -285,9 +287,6 @@ body{
     font-weight: bold;
     text-align: left;
 }
-#alojamientos .tarjeta .img-foto{
-    max-height: 100px;
-}
 #alojamientos .tarjeta .estadistica{
     display: inline-flex;
     float:left;
@@ -312,9 +311,6 @@ body{
 @media (max-width:767px){
     #alojamientos .tarjeta .estadistica{
         display: block;
-    }
-    #alojamientos .tarjeta img{
-        max-height: 225px;
     }
     #alojamientos .tarjeta .estadistica p{
         padding-top:0;

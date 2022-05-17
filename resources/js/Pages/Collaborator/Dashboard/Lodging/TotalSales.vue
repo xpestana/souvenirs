@@ -15,24 +15,36 @@
                         <table class="table table-striped">
                             <thead class="thead-light" >
                                 <tr>
-                                    <th scope="col">Alojamiento</th>
-                                    <th scope="col">Dirección</th>
-                                    <th scope="col">Devuelto</th>
-                                    <th scope="col">ID de transacción</th>
-                                    <th scope="col">Correo</th>
-                                    <th scope="col">Fecha</th>
-                                    <th scope="col">Beneficio</th>
+                                    <th scope="col" class="text-center">Alojamiento</th>
+                                    <template v-if="this.$page.props.auth.profile.gestor==1">
+                                        <th scope="col" class="text-center">N° pedidos</th>
+                                        <th scope="col" class="text-center">Total</th>
+                                    </template>
+                                    <template v-else>
+                                        <th scope="col" class="text-center">Dirección</th>
+                                        <th scope="col" class="text-center">Devuelto</th>
+                                        <th scope="col" class="text-center">ID de transacción</th>
+                                        <th scope="col" class="text-center">Correo</th>
+                                        <th scope="col" class="text-center">Fecha</th>
+                                    </template>
+                                    <th scope="col" class="text-center">Beneficio</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="venta in ventas" :key="venta.id">
-                                    <td>{{venta.calle}} {{venta.planta}}</td>
-                                    <td>{{venta.address}}</td>
-                                    <td>-</td>
-                                    <td>{{venta.id_t }}}</td>
-                                    <td>{{venta.email}}</td>
-                                    <td>{{moment(venta.date).format("DD/MM/YYYY")}}</td>
-                                    <td>{{venta.total_benefit.toFixed(2)}}€</td>
+                                    <td class="text-center">{{venta.calle}} {{venta.planta}}</td>
+                                    <template v-if="this.$page.props.auth.profile.gestor==1">
+                                        <td class="text-center">{{venta.shippings.length}}</td>
+                                        <td class="text-center">{{ parseInt(venta.total_benefit*0.20).toFixed(2) }}</td>
+                                    </template>
+                                    <template v-else>
+                                        <td class="text-center">{{venta.address}}</td>
+                                        <td class="text-center">-</td>
+                                        <td class="text-center">{{venta.id_t }}</td>
+                                        <td class="text-center">{{venta.email}}</td>
+                                        <td class="text-center">{{moment(venta.date).format("DD/MM/YYYY")}}</td>
+                                    </template>
+                                    <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
                                 </tr>
                                 <tr v-if="ventas.length == 0">
                                     <td colspan="7" class="text-center">Sin alojamientos</td>
@@ -99,6 +111,7 @@ export default {
                 image : col.image,
                 date : col.created_at,
                 type : col.type,
+                shippings : col.shippings,
                 id_t: col.transaction_id,
                 // email : col.shippings[0].email,
                 total_benefit : parseInt(col.total)/100,
