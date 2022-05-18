@@ -93,7 +93,8 @@
                     codes:0,
                     fecha:null,
                     date:null,
-                    pedido:[]
+                    pedido:[],
+                    short_id:this.product.short_id
             	}),
                 spinner:false,
                 formApi: this.$inertia.form({

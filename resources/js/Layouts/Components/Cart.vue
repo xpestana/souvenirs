@@ -34,7 +34,7 @@
                             </h6>
                             <span class="cart-price" v-if="product.attributes.type == 'souvenir'">{{ product.price }} €</span>
                             <template v-if="product.attributes.type == 'activity'">
-                                <span class="cart-price">Precio: {{ Number(product.attributes.adult) * Number(product.attributes.priceAdult) +  Number(product.attributes.children) * Number(product.attributes.priceChildren) +  Number(product.attributes.student) * Number(product.attributes.priceStudent) +  Number(product.attributes.baby) * Number(product.attributes.priceBaby) }} €</span>
+                                <span class="cart-price">Precio: <Decimals :precio="Number(calcPrecioAct(product.attributes.pedido))" /> €</span>
                             </template>
                             <span v-if="product.attributes.type == 'souvenir'">Cantidad: {{ product.quantity }}</span>
                             <span><a href="javascript:void(0)" class="text-danger" @click="deleteCart(product.id)"><i class="ion-close"></i> Eliminar</a></span>
@@ -44,8 +44,8 @@
                     <li class="cart-footer">
                         <ul class="price-content">
                             <li hidden>Sub-total <span>{{ sub_total }} €</span></li>
-                            <li v-if="total_souvenirs<40  && total_souvenirs > 0">Envío <span> 5 €</span></li>
-                            <li>Total <span> {{ total }}€</span></li>
+                            <li v-if="total_souvenirs<Number($page.props.settings.shippings)  && total_souvenirs > 0">Envío <span> 5 €</span></li>
+                            <li>Total <span> <Decimals :precio="Number(total)" /> €</span></li>
                         </ul>
                         <div class="cart-actions text-center">
                             <Link class="cart-checkout" :href="route('checkout.souvenirs')">Pagar Ahora</Link>
@@ -55,11 +55,12 @@
             </li>
 </template>
 <script>
-	 import { Link } from '@inertiajs/inertia-vue3';
-
+    import { Link } from '@inertiajs/inertia-vue3';
+    import Decimals from '@/Layouts/Components/Decimals.vue'
 	export default{
         components: {
-        	Link
+        	Link,
+            Decimals
         },
         data(){
             return {
@@ -70,32 +71,47 @@
             }
         },
         created(){
-            var cart = this.$page.props.cart;
-            var total = 0;
-            var total_souvenirs = 0;
-
-            Object.keys(cart).forEach(function(key) {
-                if (cart[key].name) {
-                    if (cart[key].attributes.type == 'souvenir') {
-                        total += (cart[key].price * cart[key].quantity);
-                        total_souvenirs += (cart[key].price * cart[key].quantity);
-                    }else{
-                        if (cart[key].attributes !== null) {
-                            total += Number(cart[key].attributes.adult) * Number(cart[key].attributes.priceAdult) +  Number(cart[key].attributes.children) * Number(cart[key].attributes.priceChildren) +  Number(cart[key].attributes.student) * Number(cart[key].attributes.priceStudent) +  Number(cart[key].attributes.baby) * Number(cart[key].attributes.priceBaby);
-                        }else{
-                            total += 0;
-                        }
-                    }
-                }
-            });
-            this.total_souvenirs = total_souvenirs;
-            this.sub_total = total;
-            if (total_souvenirs < 40 && total_souvenirs > 0) {
-                total += 5 ;
-            }
-            this.total = total;
+            this.calcularTotal()
+        },
+        updated(){
+            this.calcularTotal()
         },
         methods: {
+            calcularTotal(){
+                var cart = this.$page.props.cart;
+                var total = 0;
+                var total_souvenirs = 0;
+
+                Object.keys(cart).forEach(function(key) {
+                    if (cart[key].name) {
+                        if (cart[key].attributes.type == 'souvenir') {
+                            total += (cart[key].price * cart[key].quantity);
+                            total_souvenirs += (cart[key].price * cart[key].quantity);
+                        }else{
+                            for(let act of cart[key].attributes.pedido){
+                                if(Number(act.split(':')[0]) > 0){
+                                    total += Number(act.split(':')[0])*Number(act.split(':')[1])
+                                }
+                            }
+                        }
+                    }
+                });
+                this.total_souvenirs = total_souvenirs;
+                this.sub_total = total;
+                if (total_souvenirs < Number(this.$page.props.settings.shippings) && total_souvenirs > 0) {
+                    total += 5 ;
+                }
+                this.total = total;
+            },
+            calcPrecioAct(actividad){
+                let total = 0;
+                for(let act of actividad){
+                    if(Number(act.split(':')[0]) > 0){
+                        total += Number(act.split(':')[0])*Number(act.split(':')[1])
+                    }
+                }
+                return total.toFixed(2);
+            },
             deleteCart(id){
                 this.$inertia.delete(route('cart.destroy',{checkout : id}),
                     {
