@@ -33,6 +33,16 @@ class SalesController extends Controller
                 $hotel = hotel::find(auth()->user()->hotel->first()->id);
             }
         }
+        dd($hotel);
+
+        $forms = Http::post('https://app.turitop.com/v1/product/getclientform', [
+                        'access_token'   => connect()['access_token'],
+                        'data' => [
+                                    "product_short_id": "product_id_here",
+                                    'language_code: es'
+                                ]
+                    ])->collect();
+        dd($forms);
         return Inertia::render('Checkout', compact('hotel'));
     }
     
