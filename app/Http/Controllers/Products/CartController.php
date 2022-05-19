@@ -137,6 +137,7 @@ class CartController extends Controller
                 'url' => $image,
                 'date' => $request->fecha,
                 'pedido' => $request->pedido,
+                'short_id' => $request->short_id,
                 ),
             'associatedModel' => $product
         ));

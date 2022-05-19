@@ -13,6 +13,9 @@
                             <template v-if="gestorDe == 1">
                                 Mis hoteles
                             </template>
+                            <template v-if="gestorDe !== 1 && gestorDe !== 1">
+                                Mis alojamientos
+                            </template>
                          </Link></li>
                         <li><Link :href="route('collaborator.ajustes.index')" :class="{ 'border-bottom border-dark': $page.url === '/tablero/ajustes' }"><i class="fas fa-wrench iconNav"></i> Ajustes</Link></li>
                     </ul>
