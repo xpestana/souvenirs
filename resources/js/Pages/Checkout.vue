@@ -70,7 +70,33 @@
                 <div class="col-12 col-md-6 mt-3 mt-md-4">
                     <input type="text" placeholder="Código postal*" v-model="form.cp" class="border rounded py-1 w-100" required/>
                 </div>
-                <div class="col-12 mt-20">
+            </div>
+            <div class="row mt-4" v-if="forms_extra.length > 0">
+                <div class="col-12 mb-2">
+                    <h3 class="text-lg">Datos extra</h3>
+                </div>
+                <div class="col-12 col-md-6 mt-1" v-for="(input, index) in forms_extra" :key="index">
+                    <template v-if="input.name.split('\n')[0]=='Idioma del tour : '">
+                        <label>Eligir Idioma del tour</label>
+                        <select :id="'input'+index" class="rounded border w-100">
+                            <option value="">Eligir Idioma del tour</option>
+                            <option v-if="input.name.split('\n')[4] !== undefined" :value="input.name.split('\n')[4]">{{input.name.split('\n')[4]}}</option>
+                            <option v-if="input.name.split('\n')[5] !== undefined" :value="input.name.split('\n')[5]">{{input.name.split('\n')[5]}}</option>
+                            <option v-if="input.name.split('\n')[6] !== undefined" :value="input.name.split('\n')[6]">{{input.name.split('\n')[6]}}</option>
+                            <option v-if="input.name.split('\n')[7] !== undefined" :value="input.name.split('\n')[7]">{{input.name.split('\n')[7]}}</option>
+                        </select>
+                    </template>
+                    <template v-else>
+                        <label>{{input.name}}</label>
+                        <textarea :id="'input'+index" class="rounded border w-100" :placeholder="input.name+'*'"></textarea>
+                    </template>
+                </div>
+                <div class="col-12 mt-1" v-if="mensajeInputs !== ''">
+                    <p class="text-center text-danger">{{mensajeInputs}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mt-20 mb-4">
                     <button type="button" class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2" @click="validarForm">Continuar</button>
                 </div>
             </div>
@@ -161,8 +187,10 @@
         },
         props: {
             hotel: Object,
+            forms_extra: Object,
         },
         created(){
+            console.log(this.forms_extra)
             if (this.hotel) {
                 let address = this.hotel.address + " Zona: " + this.hotel.zone;
                 let text = '<strong>Por favor asegúrese que la <u>dirección de envio</u> sea la correcta:</strong>';
@@ -215,8 +243,10 @@
                     hab: (this.hotel) ? this.hotel.planta : '',
                     observations: '',
                     cp: (this.hotel) ? this.hotel.cp : '',
+                    data: [],
                 },
-                checkTerminos:false
+                checkTerminos:false,
+                mensajeInputs:''
             }
         },
        /* async mounted() {
@@ -234,6 +264,15 @@
         },*/
         methods: {
             validarForm(){
+                let full = true;
+                this.form.data = [];
+                for (let i = 0; i < this.forms_extra.length; i++) {
+                    if(document.getElementById('input'+i).value == ''){
+                        full = false;
+                        this.mensajeInputs = 'El campo '+this.forms_extra[i].name.split('\n')[0]+' es obligatorio';
+                    }
+                    this.form.data.push({[this.forms_extra[i].name.split('\n')[0]]: document.getElementById('input'+i).value})
+                }
                 if(this.form.name == '' || this.form.phone == '' || this.form.address == '' || this.form.cp == ''){
                     this.$swal({
                         title: 'Nombre, móvil, dirección y código postal son campos obligatorios!',
@@ -246,11 +285,14 @@
                         confirmButtonAriaLabel: 'Aceptar!',
                     })
                 }else{
-                    this.showForm = false;
-                    this.showCheckout = true;
+                    if(full){
+                        this.showForm = false;
+                        this.showCheckout = true;
+                    }
                 }
             },
             submit() {
+                console.log(this.form)
                 if(this.checkTerminos){
                     Inertia.post(route('sale'), this.form);
                 }

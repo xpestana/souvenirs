@@ -50,25 +50,13 @@ class SalesController extends Controller
                 foreach ($forms as $form) {
                 if ($form['key'] != "name" && $form['key'] != "country" && $form['key'] != "phone") {
                     if ($form['required'] == true) {
-                        foreach ($forms_extra as $extra) {
-                            if (array_search($form['name'], $extra)) {
-                                $act = true;
-                                break; 
-                            }
-                        }
-                        if (!$act) {
-                            array_push($forms_extra,$form);
-                        }
-                        $act = false;
+                        //
+                        array_push($forms_extra,$form);
                     }
                 }
                 }
             }
         }
-        
-            dd($forms_extra);
-        
-        
         return Inertia::render('Checkout', compact('hotel', 'forms_extra'));
     }
     

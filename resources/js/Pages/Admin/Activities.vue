@@ -120,7 +120,7 @@
         </div>
     </div>
     <div class="container tabla-actividades-registradas px-0 px-md-2 px-lg-5 mb-4" >
-        <div class="row mt-2 px-md-5">
+        <div class="row mt-2">
             <div class="col-12">
                 <div class="table-responsive-md bg-white">
                     <table class="table table-striped table-borderless">
@@ -134,7 +134,7 @@
                         </thead>
                         <tbody id="tbody"> 
                             <tr v-for="act in activities.data" :key="act.id">
-                                <td class="text-center truncate">{{ act.title }}</td>
+                                <td class="truncate">{{ act.title }}</td>
                                 <td class="text-center">{{ detallarPrecios(act.activities.priceA) }}</td>
                                 <td class="text-center">{{ act.activities.language }}</td>
                                 <td class="text-center">
