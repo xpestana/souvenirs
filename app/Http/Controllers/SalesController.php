@@ -39,7 +39,7 @@ class SalesController extends Controller
             $forms = Http::post('https://app.turitop.com/v1/product/getclientform', [
                         'access_token'   => connect()['access_token'],
                         'data' => [
-                                    "product_short_id": "product_id_here",
+                                    "product_short_id: product_id_here",
                                     'language_code: es'
                                 ]
                     ])->collect();
