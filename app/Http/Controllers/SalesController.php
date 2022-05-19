@@ -6,6 +6,7 @@ use App\Mail\SaleSouvenirReceived;
 use App\Mail\AdminReceived;
 use App\Mail\SaleActivityReceived;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Products;
 use App\Models\Order;
@@ -34,19 +35,30 @@ class SalesController extends Controller
             }
         }
 
-        $products = Cart::getContent();
+        $products = Cart::getContent(); 
+        $forms_extra = array();
         foreach($products as $product){
-            $forms = Http::post('https://app.turitop.com/v1/product/getclientform', [
+            if ($product->attributes["type"] =="activity") {
+                $forms = Http::post('https://app.turitop.com/v1/product/getclientform', [
                         'access_token'   => connect()['access_token'],
                         'data' => [
-                                    "product_short_id: product_id_here",
+                                    "product_short_id"=>$product->attributes["short_id"],
                                     'language_code: es'
                                 ]
-                    ])->collect();
-            dd($forms);
+                    ])->collect()['data']['client_form'];
+
+                foreach ($forms as $form) {
+                if ($form['key'] != "name" && $form['key'] != "email" && $form['key'] != "phone" && $form['key'] != "country" && $form['key'] != "comments") {
+                    if ($form['required'] == true) {
+                        array_push($forms_extra,$form);
+                    }
+                }
+                
+                }
+            }
         }
         
-        return Inertia::render('Checkout', compact('hotel'));
+        return Inertia::render('Checkout', compact('hotel', 'forms_extra'));
     }
     
     public function sale(Request $request)
@@ -71,6 +83,7 @@ class SalesController extends Controller
                 'transaction_id' => "XXX---0000",
                 'total' => "20",
                 'hotel_id' => $hotel_id,
+                'data' => json_encode($request->data),
             ]);
             $products = Cart::getContent();
             foreach($products as $product){
