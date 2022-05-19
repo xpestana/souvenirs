@@ -34,7 +34,7 @@ class SalesController extends Controller
                 $hotel = hotel::find(auth()->user()->hotel->first()->id);
             }
         }
-
+        $act = false;
         $products = Cart::getContent(); 
         $forms_extra = array();
         foreach($products as $product){
@@ -48,15 +48,26 @@ class SalesController extends Controller
                     ])->collect()['data']['client_form'];
 
                 foreach ($forms as $form) {
-                if ($form['key'] != "name" && $form['key'] != "email" && $form['key'] != "phone" && $form['key'] != "country" && $form['key'] != "comments") {
+                if ($form['key'] != "name" && $form['key'] != "country" && $form['key'] != "phone") {
                     if ($form['required'] == true) {
-                        array_push($forms_extra,$form);
+                        foreach ($forms_extra as $extra) {
+                            if (array_search($form['name'], $extra)) {
+                                $act = true;
+                                break; 
+                            }
+                        }
+                        if (!$act) {
+                            array_push($forms_extra,$form);
+                        }
+                        $act = false;
                     }
                 }
-                
                 }
             }
         }
+        
+            dd($forms_extra);
+        
         
         return Inertia::render('Checkout', compact('hotel', 'forms_extra'));
     }
