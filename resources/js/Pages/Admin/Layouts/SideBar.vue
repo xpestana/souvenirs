@@ -1,7 +1,7 @@
 <template>
 <aside id="sidebar" class="d-none d-md-block px-lg-3">
-    <div class="logo py-4">
-        <img class="m-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" height="130" width="130">
+    <div class="logo pb-4 pt-16 mb-5">
+        <img class="m-auto" src="/vendor_asset/img/logo/hilogo.png" alt="logo">
     </div>
     <div class="items">
         <ul>

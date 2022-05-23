@@ -268,6 +268,9 @@
         }
     }
     @media (max-width: 530px){
+      #carrosel{
+          margin-top: -1em;
+      }
       #carrosel .welcome img{
           height: 25vh;
         }

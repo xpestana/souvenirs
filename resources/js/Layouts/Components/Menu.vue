@@ -17,7 +17,7 @@
         </div>
               <!-- Cart Box Start Here -->
         <div class="col-lg-3 col-3">
-            <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" width="65" @click="home" style="cursor: pointer;">
+            <img class="mx-auto h-16 w-40 pt-2" src="/vendor_asset/img/logo/hilogo.png" alt="logo" @click="home" style="cursor: pointer;">
         </div>
         <div class="col-lg-3 col-3">
             <div class="search-cart-area text-right">

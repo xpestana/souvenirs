@@ -4,7 +4,7 @@
                             <!-- Navbar brand -->
         <div class="row justify-content-between">
           <div class="col-4">
-            <img class="ml-4" src="/vendor_asset/img/logo/logo.png" alt="logo" height="70" width="70">
+            <img class="ml-4 pt-4" src="/vendor_asset/img/logo/hilogo.png" alt="logo">
           </div>
           <div class="col-4 text-right">
             <button class="navbar-toggler first-button m-3 p-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent20"

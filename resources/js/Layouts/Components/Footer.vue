@@ -7,7 +7,7 @@
                         <div class="col-6 pt-2 pt-md-0">
                             <div class="row">
                                 <div class="col-12 col-md-4 px-0">
-                                    <img class="mx-auto w-36 md:w-56" src="/vendor_asset/img/logo/logo.png" alt="logo">
+                                    <img class="mx-auto w-36 md:w-56 md:mt-3" src="/vendor_asset/img/logo/hilogo.png" alt="logo">
                                 </div>
                                 <div class="col-12 col-md-8 px-0">
                                     <div class="footer-widget mb-40">

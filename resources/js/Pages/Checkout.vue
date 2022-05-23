@@ -6,7 +6,7 @@
                 <div class="absolute left-3 top-5">
                     <Link :href="route('cart.index')"><i class="fas fa-times text-lg"></i></Link>
                 </div>
-                <img src="/vendor_asset/img/logo/logo.png" class="mx-auto w-12">
+                <img src="/vendor_asset/img/logo/hilogo.png" class="mx-auto w-32 py-1">
             </div>
         </div>
     </div>

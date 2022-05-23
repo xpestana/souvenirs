@@ -3,12 +3,12 @@
 <div class="section cuerpo">
     <div class="section cabezera"> 
         <div class="container">
-            <div class="row">
+            <div class="row mb-2 mb-md-0">
                 <div class="col-6 logo-caja">
-                    <img src="/vendor_asset/img/logo/logo.png">
+                    <img class="w-28 md:w-44" src="/vendor_asset/img/logo/hilogo.png">
                 </div>
                 <div class="col-6 text-right boton">
-                    <Link :href="route('login')" class="btn btn-primary iniciar">Iniciar sesión<i class="fas fa-user-friends pl-2"></i> </Link>
+                    <Link :href="route('login')" class="btn btn-primary iniciar md:px-4 md:py-2 md:mt-1">Iniciar sesión<i class="fas fa-user-friends fas fa-user-friends pl-0 pl-md-2"></i> </Link>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-left head-registra">
-                <h1 class="titulo">Registra <br>tu <br> alojamiento</h1>
+                <h1 class="titulo text-5xl md:text-6xl">Registra <br>tu <br> alojamiento</h1>
                 <p class="r-1"><small>Darse de alta son sólo unos minutos ¡Empieza hoy mismo!</small></p>
                 <p class="r-2"><small>Crea un cuenta de <b>colaborador</b> para empezar</small></p>
                     
@@ -69,17 +69,10 @@ export default {
 </script>
 
 <style scoped>
-.logo-caja img {
-    width: 28%;
-}
 a.btn.btn-primary.iniciar {
     background-color: #fff;
     color: #3490dc;
-    margin-top: 21px;
     font-weight: 600;
-    font-size: 1.3rem;
-    padding-left: 28px;
-    padding-right: 28px;
 }
 .section.inicio {
     margin-top: 100px;
@@ -93,10 +86,6 @@ p.r-2 {
     font-size: 24px;
     color: #3490dc;
     margin-top: 24px;
-}
-h1.titulo {
-    font-size: 6rem;
-    line-height: 5rem;
 }
 .fs-beneficios{
         font-size: 1.5em;
@@ -122,15 +111,6 @@ h1.titulo {
     padding-bottom: 64px;
 }
 /* responsive */
-    @media (max-width: 576px) { 
-    .logo-caja img {
-    width: 50%;
-}
-.titulo{
-    font-size: 4rem !important;
-    line-height: 4rem !important;
-}
-}
 @media (max-width: 576px) { 
     .beneficios p {
     color: #6c757d !important;
