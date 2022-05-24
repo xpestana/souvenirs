@@ -14,7 +14,7 @@ class AddFieldInUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->json('del')->default(false);
+            $table->boolean('del')->default(false);
         });
     }
 
