@@ -159,7 +159,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::find($id)->delete();
+        $user=User::find($id);
+        $product->del = true;
+        $product->save();
         return back()->with(['id'=>$id, 'message' => 'Eliminado con exito', 'code' => 200, 'status' => 'success']); 
     }
 
@@ -172,6 +174,7 @@ class AdminController extends Controller
                 ->role('Hotel')
                 ->search($request->search)
                 ->email($request->search, 'Hotel')
+                ->where('del',false)
                 ->with('hotel.orders.shippings')
                 ->orderBy('profiles.firstname','ASC')
                 ->paginate(10);
