@@ -4,7 +4,7 @@
         <nav class="navbar navbar-light light-blue lighten-4 pt-1">
 
             <!-- Navbar brand -->
-            <Link :href="route('collaborator.index')"><img id="logo-menu" src="/vendor_asset/img/logo/logo.png" alt="logo"></Link>
+            <Link :href="route('collaborator.index')"><img class="w-32 pt-2.5" src="/vendor_asset/img/logo/hilogo.png" alt="logo"></Link>
             <!-- Collapse button -->
             <button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
                 aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">

@@ -5,8 +5,8 @@
                 <div class="main-header">
                     <div class="row">
                         <div class="col-lg-3 d-none d-lg-block">
-                            <div class="logo">
-                                <Link :href="route('collaborator.index')"><img id="logo-menu" src="/vendor_asset/img/logo/logo.png" alt="logo"></Link>
+                            <div class="logo-container">
+                                <Link :href="route('collaborator.index')"><img class="w-40 pt-9" src="/vendor_asset/img/logo/hilogo.png" alt="logo"></Link>
                             </div>
                         </div>
                         <!-- Logo End Here -->
@@ -50,9 +50,7 @@
         top: 0;
         z-index: 100;
     }
-    .logo {
-        padding: 10px 0 !important;
-    }   
+    
     .sm{
         display: none !important;
     }

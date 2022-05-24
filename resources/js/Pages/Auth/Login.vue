@@ -3,9 +3,9 @@
     <div class="row w-100 p-0 m-0">
         <div class="col-md-7 up py-4">
             <div class="col-md-12 text-center">
-                <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/logopequeño.png">
+                <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/hilogo.png">
 
-                <h1 class="title">Lo hacemos por ti</h1>
+                <h1 class="title text-xl md:text-3xl font-weight-bolder mt-2">Lo hacemos por ti</h1>
                 <div class="caja-info mt-4">
                     <p>
                         Horario disponible: <br>
@@ -198,10 +198,6 @@ export default {
         color:#70b3c6;
         line-height: 1.5;
         font-size: 16px;
-    }
-    .title{
-        font-size: 33px;
-        font-weight: 600;
     }
     .degrad{
         background-image: linear-gradient(175deg, #cff3fb 0, #b7e3ee 25%, #9dd2e1 50%, #82c1d4 75%, #69b2c9 100%);

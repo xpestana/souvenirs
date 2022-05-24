@@ -5,7 +5,7 @@
         <div class="row w-100 p-0 m-0">
             <div class="col-md-7 up py-4">
                 <div class="col-md-12 text-center">
-                    <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/logopequeño.png">
+                    <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/hilogo.png">
 
                     <h1 class="title">Lo hacemos por ti</h1>
                     <div class="caja-info mt-4">

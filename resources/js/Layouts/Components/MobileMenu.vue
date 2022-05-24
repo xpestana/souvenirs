@@ -8,7 +8,7 @@
 				</button>
           </div>
 		  <div class="col-4">
-			  <img class="mx-auto" src="/vendor_asset/img/logo/logo.png" alt="logo" width="55" @click="home">
+			  <img class="mx-auto mt-3.5" src="/vendor_asset/img/logo/hilogo.png" alt="logo" @click="home">
 		  </div>
 		  <div class="col-4 d-flex justify-end pr-4">
 				<div class="dropdown mt-2">

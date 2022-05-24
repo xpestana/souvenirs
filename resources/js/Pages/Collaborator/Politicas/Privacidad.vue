@@ -3,10 +3,10 @@
         <div class="cuerpo">
             <div class="titulo">
                 <div class="row">
-                    <div class="col-5 col-md-2 px-0">
-                        <img src="/vendor_asset/img/logo/logopequeño.png">
+                    <div class="col-12 col-md-2 px-0">
+                        <img class="w-40 mt-md-5 mx-auto" src="/vendor_asset/img/logo/hilogo.png">
                     </div>
-                    <div class="col-7 col-md-10 pt-5">
+                    <div class="col-12 col-md-10 pt-0 pt-md-3">
                         <h1 class="pt-5 pb-2"><strong>POLÍTICA DE PRIVACIDAD</strong></h1>
                         <hr>
                     </div>
@@ -108,10 +108,6 @@
 <style scoped>
 .cuerpo .titulo h1{
     font-size: 1.5em;
-}
-.cuerpo .titulo img{
-    height: 10em;
-    width: 10em;
 }
 .cuerpo {
     background-color: #f3f3f3;

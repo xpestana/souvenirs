@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>HiCitty</title>
-    <link rel="icon" type="image/x-icon" href="{{asset('storage/img/favicon.ico')}}"/>
+    <link rel="icon" type="image/x-icon" href="{{asset('vendor_asset/img/logo/hifavicon.png')}}"/>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,7 +22,6 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ mix('css/all.css') }}">
 
-        <link rel="shortcut icon" href="/vendor_asset/img/logo/logo.png">
         <!-- Fontawesome css -->
         <link rel="stylesheet" href="{{ asset('vendor_asset/css/font-awesome.min.css') }}">
         <!-- fontello css -->
