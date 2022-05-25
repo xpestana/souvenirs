@@ -13,16 +13,16 @@
                                     <div class="footer-widget mb-40">
                                         <div class="footer-content pt-2 text-center">
                                             <div class="">
-                                            <Link :href="route('about.us')" class="text-base md:text-lg">¿Quiénes somos?</Link>
+                                            <Link :href="route('about.us')" class="text-base md:text-lg">About us</Link>
                                             </div>
                                             <div class="">
-                                                <Link :href="route('contact')" class="text-base md:text-lg">Contáctanos</Link>
+                                                <Link :href="route('contact')" class="text-base md:text-lg">Contact Us</Link>
                                             </div>
                                             <div class="">
                                                 <a href="#" class="text-base md:text-lg">Blog</a>
                                             </div>
                                             <div class="">
-                                                <a href="#" class="text-base md:text-lg">Trabaja con nosotros</a>
+                                                <a href="#" class="text-base md:text-lg">Work with us</a>
                                             </div>
                                         </div>
                                     </div>
@@ -34,8 +34,8 @@
                                 <div class="col-12 col-md-6 px-0">
                                     <div class="footer-widget mb-40">
                                         <div class="footer-content text-center pt-2">
-                                            <div><Link href="#" class="text-lg text-md-info font-weight-bolder border-b-4 md:border-b-0 border-info pb-0.5  title-footer">Servicios</Link></div>
-                                            <div class="mt-1"><Link class="text-base md:text-lg" :href="route('activities')">Actividades</Link></div>
+                                            <div><Link href="#" class="text-lg text-md-info font-weight-bolder border-b-4 md:border-b-0 border-info pb-0.5  title-footer">Services</Link></div>
+                                            <div class="mt-1"><Link class="text-base md:text-lg" :href="route('activities')">Activities</Link></div>
                                             <div><Link class="text-base md:text-lg" :href="route('souvenirs')">Souvenirs</Link></div>
                                         </div>
                                     </div>
@@ -43,18 +43,18 @@
                                 <div class="col-12 col-md-6 px-0">
                                     <div class="footer-widget mb-40">
                                         <div class="footer-content text-center pt-2">
-                                            <div><Link href="#" class="text-lg font-weight-bolder border-b-4 md:border-b-0 border-info pb-0.5 title-footer">Políticas</Link></div>
+                                            <div><Link href="#" class="text-lg font-weight-bolder border-b-4 md:border-b-0 border-info pb-0.5 title-footer">Policies</Link></div>
                                             <div class="mt-1">
-                                                <Link class="text-base md:text-lg" :href="route('privacidad')">Políticas de privacidad</Link>
+                                                <Link class="text-base md:text-lg" :href="route('privacidad')">Privacy policies</Link>
                                             </div>
                                             <div>
-                                                <Link class="text-base md:text-lg" :href="route('terminosycondiciones')">Términos y condiciones</Link>
+                                                <Link class="text-base md:text-lg" :href="route('terminosycondiciones')">Terms and Conditions</Link>
                                             </div>
                                             <div>
-                                                <Link class="text-base md:text-lg" :href="route('entregas')">Políticas de entrega</Link>
+                                                <Link class="text-base md:text-lg" :href="route('entregas')">Delivery policies</Link>
                                             </div>
                                             <div>
-                                                <Link class="text-base md:text-lg" :href="route('devolucion')">Políticas de devolución</Link>
+                                                <Link class="text-base md:text-lg" :href="route('devolucion')">Return Policy</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                             </a>
                         </div>
                     </div>
-                    <p class="text-center text-secondary">Copyright ©<a href="#">HiCitty</a>. Todos los derechos reservados.</p>
+                    <p class="text-center text-secondary">Copyright ©<a href="#">HiCitty</a>. All rights reserved.</p>
                 </div>
             </div>
         </footer>

@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row mb-2">
                 <div class="col-12 text-center">
-                    <h5 class="text-muted md:text-lg">{{ count }} Souvenirs disponibles</h5>
+                    <h5 class="text-muted md:text-lg">{{ count }} Souvenirs available</h5>
                 </div>
             </div>
             <!-- Row End -->
@@ -133,7 +133,7 @@
                             <div v-if="show.show != 1" class="col-12">
                                 <div class="row justify-content-center mb-5">
                                     <div class="col-6 text-center">
-                                        <a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill px-4 py-1" @click="load_more()">Ver más</a>
+                                        <a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill px-4 py-1" @click="load_more()">See more</a>
                                     </div>
                                 </div>
                             </div>

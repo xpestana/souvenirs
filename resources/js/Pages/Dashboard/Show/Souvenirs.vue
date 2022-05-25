@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="alert font-weight-bolder text-center py-1" role="alert" style="background:#d8edf3">
-                        Envío gratuito en pedidos superiores de <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€
+                        Free shipping on orders over <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€
                     </div>
                     <!-- Thumbnail image end -->
                 </div>
@@ -46,7 +46,7 @@
                                     <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1.5 py-md-1" @click="++form.quantity"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <div class="d-inline ml-3">
-                                    <button href="#" type="submit" class="text-azulc">Añadir al carrito</button>
+                                    <button href="#" type="submit" class="text-azulc">Add to cart</button>
                                 </div>
                                 </form>
                             </div>

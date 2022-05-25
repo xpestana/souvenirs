@@ -4,15 +4,15 @@
     <div class="cart-head">
         <div class="w-100 text-right pr-2 pr-md-4" style="background-color:#aad8eb;">
             <img src="/vendor_asset/img/icons/padlock.png" width="20" class="d-inline mb-1">
-            <p class="ml-2 d-inline">Pago seguro</p>
+            <p class="ml-2 d-inline">Secure payment</p>
         </div>
 
         <div class="text-center mt-3 mt-md-4" v-if="souvenirsList.length < 1 && activitiesList.length < 1">
-            <p class="md:text-lg leading-4" style="color:#a3a3a3">Aun no ha sido añadida ninguna <br> actividad o souvenir</p>
+            <p class="md:text-lg leading-4" style="color:#a3a3a3">None have been added yet <br> activity or souvenir</p>
         </div>
         <div class="text-center mt-3 mt-md-4">
-            <h3 class="font-weight-bolder md:text-lg">Envío gratis</h3>
-            <p class="md:text-base">En compras superiores a <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€</p>
+            <h3 class="font-weight-bolder md:text-lg">Free shipping</h3>
+            <p class="md:text-base">On purchases over <Decimals :precio="Number(this.$page.props.settings.shippings)"/>€</p>
         </div>
         <div class="container mt-2 mb-2 px-md-5">
             <div class="row justify-content-between">
@@ -20,8 +20,8 @@
                     <h3 class="text-lg md:text-xl" v-if="souvenirsList.length > 1 || activitiesList.length > 0">Souvenirs</h3>
                 </div>  
                 <div class="col-12 text-center" v-if="souvenirsList.length == 0 && activitiesList.length > 0">
-                    <p class="text-grayc my-2">¡Llevate un recuerdo de Sevilla!</p>
-                    <Link :href="route('souvenirs')" class="text-primary text-base mb-2">Añade un Souvenir</Link>
+                    <p class="text-grayc my-2">¡Take a souvenir of Seville!</p>
+                    <Link :href="route('souvenirs')" class="text-primary text-base mb-2">Add a Souvenir</Link>
                 </div>  
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <div class="col-4 text-center">
                     <Link :href="route('activities')">
                         <i class="fas fa-biking text-azulc text-3xl"></i>
-                        <p class="font-weight-bolder">Actividades</p>
+                        <p class="font-weight-bolder">Activities</p>
                     </Link>
                 </div>
                 <div class="col-4 text-center">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="quantity-product d-inline-flex mb-md-1">
-                            <p class="text-xs md:text-lg pr-2" mt-1>Cantidad</p>
+                            <p class="text-xs md:text-lg pr-2" mt-1>Quantity</p>
                             <input type="text" class="cantidad" :value="product.quantity">
                             <div class="ml-1 ml-md-2 pt-md-1 quantity-buttons">
                                 <a href="javascript:void(0)"><i class="fas fa-angle-up d-block" @click="upCart(product.id,product.quantity)"></i></a>
@@ -88,20 +88,20 @@
         <div class="container px-4 px-md-5">
             <div class="row justify-content-between">
                 <div class="col-5 text-center mt-3 px-0 pl-1">
-                    <p class="text-muted">Resumen del pedido</p>
+                    <p class="text-muted">Order summary</p>
                     <p class="text-center text-muted">({{n_souvenirs}})</p>
                 </div>
                 <div class="col-6 text-right mt-3 px-0 pr-1">
                     <p class="text-muted leading-4">Sub total: <Decimals :precio="sub_total"/>€</p>
-                    <p class="text-muted leading-4">Costes del envío:  <Decimals :precio="costo_envio"/>€</p>
-                    <p class="text-muted leading-4" v-if="costo_gratuito > 0">Envío gratuito: -<Decimals :precio="costo_gratuito"/>€</p>
+                    <p class="text-muted leading-4">Shipping costs:  <Decimals :precio="costo_envio"/>€</p>
+                    <p class="text-muted leading-4" v-if="costo_gratuito > 0">Free shipping: -<Decimals :precio="costo_gratuito"/>€</p>
                     <p class="leading-4 font-weight-bolder text-muted">Total Souvenirs <Decimals :precio="total_souvenirs"/>€</p>
                 </div>
             </div>
             <div class="row mt-3" v-if="sub_total < n_gratuito">
                 <div class="col-12 px-0 text-center">
-                    <h4 class="text-sm text-muted">¡Te faltan <Decimals :precio="diferencia"/>€ para conseguir envío gratuito!</h4>
-                    <Link :href="route('souvenirs')"><h3 class="text-base text-primary">Añade otro souvenir</h3></Link>
+                    <h4 class="text-sm text-muted">¡You need <Decimals :precio="diferencia"/>€ to get free shipping!</h4>
+                    <Link :href="route('souvenirs')"><h3 class="text-base text-primary">Add another souvenir</h3></Link>
                 </div>
             </div>
         </div>
@@ -115,11 +115,11 @@
         <div class="container mt-1 mb-2 px-4 px-md-5">
             <div class="row justify-content-between">
                 <div class="col-12 text-left mb-1">
-                    <h3 class="text-lg md:text-xl">Actividades</h3>
+                    <h3 class="text-lg md:text-xl">Activities</h3>
                 </div>
                 <div class="col-12 text-center" v-if="activitiesList.length < 1">
-                    <h4 class="text-sm md:text-lg text-muted">¿Vas a perderte nuestras actividades?</h4>
-                    <Link :href="route('activities')"><h4 class="text-base md:text-xl text-primary">¡Echales un ojo!</h4></Link>
+                    <h4 class="text-sm md:text-lg text-muted">Are you going to miss our activities?</h4>
+                    <Link :href="route('activities')"><h4 class="text-base md:text-xl text-primary">Take a look at them!</h4></Link>
                 </div>         
             </div>
             <template v-for="act in activitiesList" :key="act.id">
@@ -154,7 +154,7 @@
                                 </p>
                             </div>
                             <div class="pt-3">
-                                <Link :href="route('product.activities.show',{product : act.id})" class="btn btn-sm btn-azulc px-2 py-0 text-white rounded-pill">Modificar reserva</Link>
+                                <Link :href="route('product.activities.show',{product : act.id})" class="btn btn-sm btn-azulc px-2 py-0 text-white rounded-pill">Modify reservation</Link>
                             </div>
                         </div>
                     </div>
@@ -165,13 +165,13 @@
             </template>
             <div class="row justify-content-between" v-if="activitiesList.length > 0">
                 <div class="col-5 text-center mt-3 px-0 pl-1">
-                    <p class="text-muted">Resumen del pedido</p>
+                    <p class="text-muted">Order summary</p>
                     <p class="text-center text-muted leading-4" v-for="val in actPedido" :key="val">
-                            ({{val.cantidad}} <CodificarTilde :string="val.concepto"/><template v-if="val.cantidad > 1">s</template>)
+                            (<CodificarTilde :string="val.concepto"/> {{val.cantidad}})
                     </p>
                 </div>
                 <div class="col-6 text-right mt-3 px-0 pr-1">
-                    <p class="leading-4 pt-3 font-weight-bolder text-muted">Total actividades <Decimals :precio="total_activities"/>€</p>
+                    <p class="leading-4 pt-3 font-weight-bolder text-muted">Total activities <Decimals :precio="total_activities"/>€</p>
                 </div>
             </div>
         </div>
@@ -184,10 +184,10 @@
         <div class="container mt-3 px-md-5">
             <div class="row justify-content-between">
             <div class="col-6 text-left pr-0">
-                <p class="d-inline text-base">Importe total: <b><Decimals :precio="total"/>€</b> </p>
+                <p class="d-inline text-base">Total import: <b><Decimals :precio="total"/>€</b> </p>
             </div>
             <div class="col-5 text-right">
-                <Link class="btn btn-info rounded-xl px-3 py-1 text-white opacity-60" :href="route('checkout.souvenirs')">Pagar</Link>
+                <Link class="btn btn-info rounded-xl px-3 py-1 text-white opacity-60" :href="route('checkout.souvenirs')">To pay</Link>
             </div>
         </div>
         </div>
@@ -302,7 +302,7 @@
                         }
                     }
                 });
-                this.n_souvenirs = numero_souvenirs == 1 ? numero_souvenirs+' artículo' : numero_souvenirs+' artículos';
+                this.n_souvenirs = numero_souvenirs == 1 ? numero_souvenirs+' article' : numero_souvenirs+' articles';
                 this.total_souvenirs = total_souvenirs;
                 this.sub_total = total;
                 this.diferencia = this.n_gratuito -this.sub_total;
@@ -358,10 +358,10 @@
                         acc = el.attributes.pedido[val].split(':');
                         
                         if(Number(acc[0]) > 0){
-                            acc[2] == 'Adults' || acc[2] == 'Adultos' ? acc[2] = 'Adulto' : ''
-                            acc[2] == 'Children' || acc[2] == 'Ni&ntilde;os' ? acc[2] = 'Ni&ntilde;o' : ''
-                            acc[2] == 'Students' ? acc[2] = 'Estudiante' : ''
-                            acc[2] == 'Babies' || acc[2] == 'Beb&eacute;s' ? acc[2] = 'Bebé' : ''
+                            acc[2] == 'Adultos' || acc[2] == 'Adulto' ? acc[2] = 'Adult' : ''
+                            acc[2] == 'Ni&ntilde;os' || acc[2] == 'Ni&ntilde;o' ? acc[2] = 'Child' : ''
+                            acc[2] == 'Estudiante' ? acc[2] = 'Student' : ''
+                            acc[2] == 'Beb&eacute;s' || acc[2] == 'Beb&eacute;' ? acc[2] = 'Babe' : ''
                             if(Number(arrCon.indexOf(acc[2])) == -1){
                                 arrCon.push(acc[2])
                                 arrCan.push(Number(acc[0]))

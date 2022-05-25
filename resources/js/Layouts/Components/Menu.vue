@@ -9,9 +9,9 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <Link class="dropdown-item" :href="route('souvenirs')"><h3 class="font-weight-bolder">Souvenirs</h3></Link>
-                <Link class="dropdown-item" :href="route('activities')"><h3 class="font-weight-bolder">Actividades</h3></Link>
-                <Link class="dropdown-item" :href="route('contact')"><h3 class="font-weight-bolder">Contacto</h3></Link>
-                <Link class="dropdown-item" href="#"><h3 class="font-weight-bolder">Ayuda</h3></Link>
+                <Link class="dropdown-item" :href="route('activities')"><h3 class="font-weight-bolder">Activities</h3></Link>
+                <Link class="dropdown-item" :href="route('contact')"><h3 class="font-weight-bolder">Contact</h3></Link>
+                <Link class="dropdown-item" href="#"><h3 class="font-weight-bolder">Help</h3></Link>
             </div>
             </div>
         </div>

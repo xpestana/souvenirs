@@ -38,13 +38,13 @@
           <div class="row my-2 my-md-5 px-md-5">
             <div class="col-12 d-inline-flex justify-center px-1 px-md-5">
               <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home1.png);" @click="actividades">
-                <p class="bg-light px-1 mx-1 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Actividades</p>
+                <p class="bg-light px-1 mx-1 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Activities</p>
               </div>
               <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home2.png);" @click="souvenirs">
                 <p class="bg-light px-1 mx-1 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Souvenirs</p>
               </div>
               <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home3.png);">
-                <p class="bg-light px-1 mx-1 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Gastronomia</p>
+                <p class="bg-light px-1 mx-1 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Gastronomy</p>
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@
         <div class="container">
           <div class="row mt-3 mb-2 my-md-5 px-md-5">
             <div class="col-12 text-left px-md-5">
-              <h2 class="h2 font-weight-bolder"> Conoce Sevilla con HiCitty</h2>
+              <h2 class="h2 font-weight-bolder"> Get to know Seville with HiCitty</h2>
             </div>
             <div class="col-12 px-md-5">
               <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true" :autoplay="5000">
@@ -98,7 +98,7 @@
               </Carousel>
             </div>
             <div class="col-12 px-md-5 mt-2">
-              <Link :href="route('activities')" class="text-azulc">Ver todas las actividades</Link>
+              <Link :href="route('activities')" class="text-azulc">See all activities</Link>
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@
         <div class="container mb-5">
           <div class="row my-md-5 px-md-5">
             <div class="col-12 text-left px-md-5">
-              <h2 class="h2 font-weight-bolder"> ¡Llevate el mejor recuerdo de Sevilla!</h2>
+              <h2 class="h2 font-weight-bolder"> ¡Take the best memory of Seville!</h2>
               <hr>
             </div>
             <div class="col-12 images">
@@ -122,7 +122,7 @@
               </div>
             </div>
             <div class="col-12 px-md-5 mt-2">
-              <Link :href="route('souvenirs')" class="text-azulc">Ver todos los souvenirs</Link>
+              <Link :href="route('souvenirs')" class="text-azulc">See all souvenirs</Link>
             </div>
           </div>
         </div>

@@ -20,11 +20,11 @@
             </div>
         </div>
         <div class="col-12 my-2 text-center text-danger" v-if="this.eventos.length == 0">
-            Esta actividad no esta disponible
+            This activity is not available
         </div>
         <template v-if="this.preciosLista.length == 0 && this.eventos.length > 0">
             <div class="col-12 my-2 text-center text-azulc">
-                Seleccione una fecha para poder ver los precios!
+                Select a date to see the prices!
             </div>
         </template>
         <template v-if="this.spinner">
@@ -60,7 +60,7 @@
             </div>
             <div class="col-12 text-center px-0 mb-2 py-1" style="background-color:#bedfef;" v-if="this.guardarFecha !== null || this.preciosLista[0] !== undefined">
                 <button class="btn shadow-city bg-white py-1 px-5 my-2 font-weight-bolder text-center text-base" id="submit" type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Reservar
+                    Reserve
                 </button>
             </div>
   	</div>

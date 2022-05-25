@@ -1,13 +1,13 @@
 <template>
-    <Head title="Actividades"/>
+    <Head title="Activities"/>
     <Layout>
-    <Breadcrumb title="Actividades"/>
+    <Breadcrumb title="Activities"/>
     <!-- Shop Page Start -->
     <div class="main-shop-activies py-3">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h5 class="text-muted md:text-lg">{{count}} excursiones y actividades en Sevilla</h5>  
+                    <h5 class="text-muted md:text-lg">{{count}} excursions and activities in Seville</h5>  
                 </div>  
             </div>
         </div>
@@ -75,7 +75,7 @@
                 <div v-if="show.show != 1" class="col-12">
                     <div class="row justify-content-center mb-5">
                         <div class="col-6 text-center">
-                            <a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill px-4 py-1" @click="load_more()">Ver más</a>
+                            <a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill px-4 py-1" @click="load_more()">See more</a>
                         </div>
                     </div>
                 </div>

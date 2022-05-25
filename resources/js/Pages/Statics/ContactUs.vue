@@ -1,12 +1,12 @@
 <template>
-    <Head title="Contáctanos"/>
+    <Head title="Contact us"/>
     <Layout>
     
-    <Breadcrumb title="Contáctanos"/>
+    <Breadcrumb title="Contact us"/>
     <!-- Regester Page Start Here -->
     <div class="register-area white-bg ptb-80">
         <div class="container">
-        <h3 class="login-header text-info">Contáctanos</h3>
+        <h3 class="login-header text-info">Contact us</h3>
             <div class="row">
                 <div class="col-xl-12">
                     <div class="register-contact  clearfix">
@@ -14,47 +14,47 @@
                             <div class="address-wrapper row">
                                 <div class="col-md-6">
                                     <div class="address-fname">
-                                        <input class="form-control" type="text" v-model="form.firstname" placeholder="Nombre">
+                                        <input class="form-control" type="text" v-model="form.firstname" placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="address-fname">
-                                        <input class="form-control" type="text" v-model="form.lastname" placeholder="Apellido">
+                                        <input class="form-control" type="text" v-model="form.lastname" placeholder="Surname">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="address-email">
-                                        <input class="form-control" type="email" v-model="form.email" placeholder="Correo">
+                                        <input class="form-control" type="email" v-model="form.email" placeholder="Email">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="address-web">
-                                        <input class="form-control" type="number" v-model="form.phone" placeholder="Teléfono">
+                                        <input class="form-control" type="number" v-model="form.phone" placeholder="Telephone">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="address-subject">
-                                        <input class="form-control" type="text" v-model="form.subject" placeholder="Asunto">
+                                        <input class="form-control" type="text" v-model="form.subject" placeholder="Issue">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="type">Nos contacta por:</label>
-                                    <select id="type" class="form-control mt-1 block w-100" v-model="form.contact">
-                                        <option value="Venta">Venta</option>
-                                        <option value="Información">Información</option>
-                                        <option value="Devolución">Devolución</option>
+                                    <label for="type">Contact us by:</label>
+                                    <select id="type" class="form-control block w-100" v-model="form.contact">
+                                        <option value="Venta">Sale</option>
+                                        <option value="Información">Information</option>
+                                        <option value="Devolución">Return</option>
                                     </select>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12 mt-2">
                                     <div class="address-textarea">
-                                        <textarea name="message" class="form-control" v-model="form.message" placeholder="Escríbenos..."></textarea>
+                                        <textarea name="message" class="form-control" v-model="form.message" placeholder="Write us..."></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="footer-content mail-content clearfix">
                                 <div class="send-email float-md-right">
                                     <BreezeButton class="return-customer-btn bg-info" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                        Enviar
+                                        Send
                                     </BreezeButton>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
             </div>
             <div class="row datos mt-5">
                 <div class="col-12 text-center">
-                    <h1>Si prefieres llama al <br>+34722193903  o <br>envíanos un correo a <br>info@hicitty.es</h1>
+                    <h1>If you prefer, call <br>+34722193903  o <br>send us an email to <br>info@hicitty.es</h1>
                 </div>
             </div>
             <div class="row mt-3 datos justify-content-center">

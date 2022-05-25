@@ -36,19 +36,19 @@
                             <template v-if="product.attributes.type == 'activity'">
                                 <span class="cart-price">Precio: <Decimals :precio="Number(calcPrecioAct(product.attributes.pedido))" /> €</span>
                             </template>
-                            <span v-if="product.attributes.type == 'souvenir'">Cantidad: {{ product.quantity }}</span>
-                            <span><a href="javascript:void(0)" class="text-danger" @click="deleteCart(product.id)"><i class="ion-close"></i> Eliminar</a></span>
+                            <span v-if="product.attributes.type == 'souvenir'">Quantity: {{ product.quantity }}</span>
+                            <span><a href="javascript:void(0)" class="text-danger" @click="deleteCart(product.id)"><i class="ion-close"></i> Remove</a></span>
                         </div>
                     </li>
                     </template>
                     <li class="cart-footer">
                         <ul class="price-content">
                             <li hidden>Sub-total <span>{{ sub_total }} €</span></li>
-                            <li v-if="total_souvenirs<Number($page.props.settings.shippings)  && total_souvenirs > 0">Envío <span> 5 €</span></li>
+                            <li v-if="total_souvenirs<Number($page.props.settings.shippings)  && total_souvenirs > 0">Shipping <span> 5 €</span></li>
                             <li>Total <span> <Decimals :precio="Number(total)" /> €</span></li>
                         </ul>
                         <div class="cart-actions text-center">
-                            <Link class="cart-checkout" :href="route('checkout.souvenirs')">Pagar Ahora</Link>
+                            <Link class="cart-checkout" :href="route('checkout.souvenirs')">Pay Now</Link>
                         </div>
                     </li>
                 </ul>

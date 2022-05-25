@@ -36,7 +36,7 @@
 				<div class="col-12">
 					<ul class="navbar-nav">
 						<li class="nav-item d-flex justify-between px-3">
-							<h3 class="font-weight-bolder text-xl" style="font-family:'Futur'">Menú</h3>
+							<h3 class="font-weight-bolder text-xl" style="font-family:'Futur'">Menu</h3>
 							<button type="button" data-toggle="collapse" data-target="#collapseb"
 								aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation" @click="atenuar">
 								<i class="fas fa-times font-weight-bolder"></i>
@@ -53,7 +53,7 @@
 						<Link :href="route('activities')" class="nav-link py-0 text-center">
 							<div class="">
 								<i class="fas fa-biking text-azulc"></i>
-								<p class="font-weight-bolder">Actividades</p>
+								<p class="font-weight-bolder">Activities</p>
 							</div>
 						</Link>
 						</li>
@@ -79,7 +79,7 @@
 						<Link :href="route('contact')" class="nav-link py-0 text-center">
 							<div class="">
 								<i class="fas fa-comment text-azulc"></i>
-								<p class="p-2 font-weight-bolder">Contacto</p>
+								<p class="p-2 font-weight-bolder">Contact</p>
 							</div>
 						</Link>
 						</li>
@@ -91,7 +91,7 @@
 						<Link href="#" class="nav-link py-0 text-center">
 							<div class="">
 								<i class="fas fa-question-circle text-azulc"></i>
-								<p class="p-2 font-weight-bolder">Ayuda</p>
+								<p class="p-2 font-weight-bolder">Help</p>
 							</div>
 						</Link>
 						</li>

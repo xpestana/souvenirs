@@ -44,7 +44,7 @@
                         <button @click="cambiarColor('descripcion-color')" class="w-100" type="button" data-toggle="collapse" data-target="#descripcion" aria-expanded="true" aria-controls="descripcion" >
                             <div class="d-flex" id="headingOne">
                                     <div class="mr-auto">
-                                        <p class="leading-8 text-grayc pl-1" id="descripcion-color">DESCRIPCIÓN</p>
+                                        <p class="leading-8 text-grayc pl-1" id="descripcion-color">DESCRIPTION</p>
                                     </div>
                                     <div>
                                         <i class="fas fa-angle-down text-grayc font-weight-bolder text-3xl pr-2"></i>
@@ -67,7 +67,7 @@
                         <button @click="cambiarColor('precio-color')" class="w-100" type="button" data-toggle="collapse" data-target="#precio" aria-expanded="true" aria-controls="precio">
                             <div class="d-flex" id="headingtwo">
                                     <div class="mr-auto">
-                                        <p class="leading-8 text-grayc pl-1" id="precio-color">PRECIOS</p>
+                                        <p class="leading-8 text-grayc pl-1" id="precio-color">PRICES</p>
                                     </div>
                                     <div>
                                         <i class="fas fa-angle-down text-grayc font-weight-bolder text-3xl pr-2"></i>
@@ -78,25 +78,25 @@
                         <div id="precio" class="collapse p-3" aria-labelledby="headingtwo" data-parent="#accordionExample" style="background-color:#e6e6e6d4">
                             <template v-if="this.precios.length == 0">
                                 <div class="text-center">   
-                                    Esta actividad no esta disponible
+                                    This activity is not available
                                 </div>
                             </template>
                             <template v-if="this.precios.length > 0">
                                 <div class="text-right">
                                     <div class="mb-4" v-if="this.precios[0] !== undefined && this.precios[0] !== null">
-                                        <p class="text-lg d-inline mr-4">Adultos</p>
+                                        <p class="text-lg d-inline mr-4">Adults</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[0]== 0 }">{{this.precios[0]}}€</h5>
                                     </div>
                                     <div class="mb-4" v-if="this.precios[1] !== undefined && this.precios[1] !== null">
-                                        <p class="text-lg d-inline mr-4">Niños</p>
+                                        <p class="text-lg d-inline mr-4">Kids</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[1]== 0 }">{{this.precios[1]}}€</h5>
                                     </div>
                                     <div class="mb-4" v-if="this.precios[2] !== undefined && this.precios[2] !== null">
-                                        <p class="text-lg d-inline mr-4">Estudiantes</p>
+                                        <p class="text-lg d-inline mr-4">Students</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
                                     </div>
                                     <div v-if="this.precios[3] !== undefined && this.precios[3] !== null">
-                                        <p class="text-lg d-inline mr-4">Bebés</p>
+                                        <p class="text-lg d-inline mr-4">Babies</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[3]== 0 }">{{this.precios[3]}}€</h5>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                         <button @click="cambiarColor('horarios-color')" class="w-100" type="button" data-toggle="collapse" data-target="#horario" aria-expanded="true" aria-controls="horario">
                             <div class="d-flex" id="head3">
                                     <div class="mr-auto">
-                                        <p class="leading-8 text-grayc pl-1" id="horarios-color">HORARIOS</p>
+                                        <p class="leading-8 text-grayc pl-1" id="horarios-color">TIMETABLE</p>
                                     </div>
                                     <div>
                                         <i class="fas fa-angle-down text-grayc font-weight-bolder text-3xl pr-2"></i>
@@ -119,7 +119,7 @@
                             <div class="px-0 mb-2 py-1 d-flex"  style="background-color:#bedfef;">
                                 <button @click="cambiarColor('horarios-color')" type="button" data-toggle="collapse" data-target="#horario" aria-expanded="true" aria-controls="horario"><i class="fas fa-angle-left text-muted pl-2 font-weight-bolder text-3xl pr-2 text-left"></i></button>
                                 <div class="text-center flex-grow-1"> 
-                                    <h3 class="text-base font-weight-bolder">Selecciona fecha y hora</h3>
+                                    <h3 class="text-base font-weight-bolder">Select date and time</h3>
                                 </div>
                             </div>
                             <div class="px-3">
@@ -131,7 +131,7 @@
                         <button @click="cambiarColor('detalles-color')" class="w-100" type="button" data-toggle="collapse" data-target="#detalles" aria-expanded="true" aria-controls="detalles">
                             <div class="d-flex" id="head4">
                                     <div class="mr-auto">
-                                        <p class="leading-8 text-grayc pl-1" id="detalles-color">DETALLES</p>
+                                        <p class="leading-8 text-grayc pl-1" id="detalles-color">DETAILS</p>
                                     </div>
                                     <div>
                                         <i class="fas fa-angle-down text-grayc font-weight-bolder text-3xl pr-2"></i>
@@ -145,7 +145,7 @@
                                 </div>    
                             </template>
                             <template v-else>
-                                    No hay información para esta sección
+                                    There is no information for this section
                             </template>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                         <button @click="cambiarColor('cancelaciones-color')" class="w-100" type="button" data-toggle="collapse" data-target="#cancelaciones" aria-expanded="true" aria-controls="cancelaciones">
                             <div class="d-flex" id="head5">
                                     <div class="mr-auto">
-                                        <p class="leading-8 text-grayc pl-1" id="cancelaciones-color">CANCELACIONES</p>
+                                        <p class="leading-8 text-grayc pl-1" id="cancelaciones-color">CANCELLATIONS</p>
                                     </div>
                                     <div>
                                         <i class="fas fa-angle-down text-grayc font-weight-bolder text-3xl pr-2"></i>
@@ -167,7 +167,7 @@
                                 </div>    
                             </template>
                             <template v-else>
-                                    No hay información para esta sección
+                                    There is no information for this section
                             </template>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                         <button @click="cambiarColor('punto-color')" class="w-100" type="button" data-toggle="collapse" data-target="#punto" aria-expanded="true" aria-controls="punto">
                             <div class="d-flex" id="head6">
                                     <div class="mr-auto">
-                                        <p class="leading-8 text-grayc pl-1" id="punto-color">PUNTO DE ENCUENTRO</p>
+                                        <p class="leading-8 text-grayc pl-1" id="punto-color">MEETING POINT</p>
                                     </div>
                                     <div>
                                         <i class="fas fa-angle-down text-grayc font-weight-bolder text-3xl pr-2"></i>
@@ -194,7 +194,7 @@
                             </template>
                             <template v-if="product.activities && product.activities.coordinates == ''">
                                 <div class="text-center">
-                                    No hay punto de encuentro registrado para esta actividad. 
+                                    There is no registered meeting point for this activity.
                                 </div>
                             </template>
                         </div>
