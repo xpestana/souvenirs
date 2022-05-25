@@ -74,10 +74,11 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->quantity)
+        if($request->quantity){
             $quantity = $request->quantity;
-        else
+        }else{
             $quantity = 1;
+        }
         $product = Products::find($id)->load('images');
         $pin = mt_Rand(1000000, 9999999);
         $cartQuantity = (Cart::get($product->id)) ? Cart::get($product->id)->quantity : 0;
@@ -93,10 +94,9 @@ class CartController extends Controller
                     ),
                 'associatedModel' => $product
             ));
-        
-            return back()->with(['mensaje' => '<i class="fas fa-check mr-1"></i> Artículo añadido a tu cesta']);  
+            return back()->with(['id'=>$id, 'mensaje' => '<i class="fas fa-check mr-1"></i> Item added to your cart']);  
         }else{
-            return back()->with(['mensaje' => 'Lo sentimos, no tenemos más stock de este producto']);
+            return back()->with(['id'=>$id, 'mensaje' => 'Sorry, we have no more stock of this product']);
         }
         
     }
@@ -117,7 +117,7 @@ class CartController extends Controller
             Cart::remove($id);
         }
         $pin = mt_Rand(1000000, 9999999);
-        return back()->with(['id'=>$pin, 'mensaje' => 'Producto eliminado exitosamente']);  
+        return back()->with(['id'=>$pin, 'mensaje' => 'Product removed successfully']);  
     }
     public function activity(Request $request)
     {
@@ -142,6 +142,6 @@ class CartController extends Controller
             'associatedModel' => $product
         ));
         $pin = mt_Rand(1000000, 9999999);
-        return back()->with(['mensaje' => '<i class="fas fa-check mr-1"></i> Artículo añadido a tu cesta']);  
+        return back()->with(['mensaje' => '<i class="fas fa-check mr-1"></i> Item added to your cart']);  
     }
 }

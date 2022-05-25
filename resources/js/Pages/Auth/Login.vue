@@ -5,10 +5,10 @@
             <div class="col-md-12 text-center">
                 <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/hilogo.png">
 
-                <h1 class="title text-xl md:text-3xl font-weight-bolder mt-2">Lo hacemos por ti</h1>
+                <h1 class="title text-xl md:text-3xl font-weight-bolder mt-2">We do it for you</h1>
                 <div class="caja-info mt-4">
                     <p>
-                        Horario disponible: <br>
+                        Available hours: <br>
                         8:30-14:30 h. <br>
                         (+34) 722 193 903
                     </p>
@@ -17,24 +17,24 @@
         </div>
         <div class="col-md-5 up degrad py-4">
             <div class="col-md-12 text-center">
-                <h1 class="text-white mb-4 title_white">¡Bienvenido a HiCitty!</h1>
+                <h1 class="text-white mb-4 title_white">Welcome to HiCitty!</h1>
                 <div class="col-md-10 mx-auto">
                     <form @submit.prevent="submit" class=" mt-10">
                         <div>
                             <BreezeInput type="email" class="form-control my-3 py-4" id="email" name="email" autocomplete="on" placeholder="E-mail" v-model="form.email" required/>
                         </div>
                         <div class="relative">
-                            <BreezeInput type="password" class="form-control my-3 py-4" name="password" id="password" autocomplete="off" placeholder="Contraseña" v-model="form.password" required/>
+                            <BreezeInput type="password" class="form-control my-3 py-4" name="password" id="password" autocomplete="off" placeholder="Password" v-model="form.password" required/>
                             <button class="btn absolute top-1 right-5 rounded-circle px-auto" type="button" v-on:click="showPass('password')"><i class="far fa-eye"></i></button>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Iniciar sesión</button>
+                            <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Log in</button>
                         </div>
                     </form>
                 </div>
                 <div class="col-12 text-center mt-2">
                     <button type="button" class="btn btn-link text-white text-lg" data-toggle="modal" data-target="#forgot-password">
-                        ¿Has olvidado tu contraseña?
+                        ¿Have you forgotten your password?
                     </button>
                     <template v-if="showValidation">
                         <BreezeValidationErrors class="my-3" />
@@ -54,15 +54,15 @@
                                         <form @submit.prevent="forgotPass">
                                         <div class="row mb-2 justify-content-center">
                                             <div class="col-12">
-                                                <h1 class="text-lg font-weight-bolder">Reestablece tu contraseña</h1>
+                                                <h1 class="text-lg font-weight-bolder">Reset your password</h1>
                                             </div>
                                             <div class="col-8 px-0 py-3 text-left">
                                                 <p class="text-justify">
-                                                    ¿Olvidaste tu contraseña? No hay problema. Simplemente háganos saber su dirección de correo electrónico
-                                                        y le enviaremos un enlace para restablecer la contraseña que le permitirá elegir una nueva.
+                                                    Did you forget your password? No problem. Just let us know your email address
+                                                        and we will send you a password reset link that will allow you to choose a new one.
                                                 </p>
-                                                <label for="correo" class="mt-3">Correo electrónico<span class="text-danger">*</span></label>
-                                                <input type="text" class="rounded border w-100 py-2" v-model="forgot.email" placeholder="Correo Electrónico"  required autofocus autocomplete="username">                
+                                                <label for="correo" class="mt-3">Email<span class="text-danger">*</span></label>
+                                                <input type="text" class="rounded border w-100 py-2" v-model="forgot.email" placeholder="E-mail"  required autofocus autocomplete="username">                
                                             </div>
                                         </div>
                                         <div class="row px-3 pt-2 pb-5 justify-content-center">
@@ -70,7 +70,7 @@
                                                 <template v-if="!showValidation">
                                                     <BreezeValidationErrors class="mb-3" />
                                                 </template>
-                                                <button class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Enviar</button>
+                                                <button class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Send</button>
                                             </div>
                                         </div>
                                         </form>

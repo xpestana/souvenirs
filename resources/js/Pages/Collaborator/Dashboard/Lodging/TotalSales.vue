@@ -6,7 +6,7 @@
                     <a href="javascript:void(0);" @click="back"><i class="fas fa-angle-left bg-info px-2 py-1"></i></a>		
                 </div>
                 <div class="col-11">
-                    <h1 class="text-center mb-4 titulo text-info display-4"><strong>Ventas totales</strong></h1>
+                    <h1 class="text-center mb-4 titulo text-info display-4"><strong>Total Sales</strong></h1>
                 </div>
             </div>
             <div class="row tabla">
@@ -15,19 +15,19 @@
                         <table class="table table-striped">
                             <thead class="thead-light" >
                                 <tr>
-                                    <th scope="col" class="text-center">Alojamiento</th>
+                                    <th scope="col" class="text-center">Lodging</th>
                                     <template v-if="this.$page.props.auth.profile.gestor==1">
-                                        <th scope="col" class="text-center">N° pedidos</th>
+                                        <th scope="col" class="text-center">N° orders</th>
                                         <th scope="col" class="text-center">Total</th>
                                     </template>
                                     <template v-else>
-                                        <th scope="col" class="text-center">Dirección</th>
-                                        <th scope="col" class="text-center">Devuelto</th>
-                                        <th scope="col" class="text-center">ID de transacción</th>
-                                        <th scope="col" class="text-center">Correo</th>
-                                        <th scope="col" class="text-center">Fecha</th>
+                                        <th scope="col" class="text-center">Address</th>
+                                        <th scope="col" class="text-center">Returned</th>
+                                        <th scope="col" class="text-center">ID transaction</th>
+                                        <th scope="col" class="text-center">Email</th>
+                                        <th scope="col" class="text-center">Date</th>
                                     </template>
-                                    <th scope="col" class="text-center">Beneficio</th>
+                                    <th scope="col" class="text-center">Benefit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,7 +47,7 @@
                                     <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
                                 </tr>
                                 <tr v-if="ventas.length == 0">
-                                    <td colspan="7" class="text-center">Sin alojamientos</td>
+                                    <td colspan="7" class="text-center">No lodgings</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -57,7 +57,7 @@
             <div class="row pie justify-content-end">
                 <div class="col-sm-4 col-md-3 mt-4">
                     <h2 class="text-info"><strong>Total</strong></h2>
-                    <p><b>Tu beneficio es de {{total}}€</b></p>
+                    <p><b>Your benefit is {{total}}€</b></p>
                 </div>
             </div>
             <div class="row justify-content-center">

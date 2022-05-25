@@ -81,13 +81,13 @@
                           <h3 class="font-weight-bolder d-block text-left mt-2">
                               <template v-if="product.precios.lenght !== null">
                                 <template v-if="product.precios[2]">
-                                    Desde: {{product.precios[2]}}€
+                                    From: {{product.precios[2]}}€
                                 </template>
                                 <template v-else-if="product.precios[1]">
-                                    Desde: {{product.precios[1]}}€
+                                    From: {{product.precios[1]}}€
                                 </template>
                                 <template v-else-if="product.precios[0]">
-                                    Desde {{product.precios[0]}}€
+                                    From {{product.precios[0]}}€
                                 </template>
                               </template>
                           </h3>

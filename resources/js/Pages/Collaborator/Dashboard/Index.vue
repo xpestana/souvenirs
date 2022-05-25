@@ -5,17 +5,17 @@
     <div class="main">
         <div class="row mt-4">
             <div class="col-12 text-center">
-                <h1>¿Necesitas ayuda?</h1>
-                <p>Atención especializada</p>
+                <h1>¿Need help?</h1>
+                <p>Specialized care</p>
                 <p>(+34) 722 193 903</p>
             </div>
             <div class="col-12 text-center px-0 px-lg-4">
                 <template v-if="hotels.length == 0">
                     <template v-if="$page.props.auth.user.profile.gestor == 1">
-                        <a href="javascript:void(0)" class="btn btn-outline-info boton-inicio" @click.prevent="lodging"> <i class="fas fa-plus"></i>Añadir Hotel</a>
+                        <a href="javascript:void(0)" class="btn btn-outline-info boton-inicio" @click.prevent="lodging"> <i class="fas fa-plus"></i>Add Hotel</a>
                     </template>
                     <template v-else>
-                        <a href="javascript:void(0)" class="btn btn-outline-info boton-inicio" @click.prevent="lodging"> <i class="fas fa-plus"></i>Añadir alojamiento</a>
+                        <a href="javascript:void(0)" class="btn btn-outline-info boton-inicio" @click.prevent="lodging"> <i class="fas fa-plus"></i>Add Lodging</a>
                     </template>
                 </template>
                 <template v-else>
@@ -24,17 +24,17 @@
                             <div class="row caja-info">
                                 <div class="col-12 col-md-9 info-boton">
                                     <template v-if="$page.props.auth.user.profile.gestor == 1">
-                                        <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir hotel</a>
+                                        <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Add Hotel</a>
                                     </template>
                                     <template v-else>
-                                        <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
+                                        <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Add Lodging</a>
                                     </template>
-                                    <h5 v-if="this.user_id > 0" class="text-info p-3"><Link :href="route('collaborator.sales.hab',{id: user_id})">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
+                                    <h5 v-if="this.user_id > 0" class="text-info p-3"><Link :href="route('collaborator.sales.hab',{id: user_id})">Total sales<i class="fas fa-angle-right p-1"></i></Link></h5>
                                 </div>
                                 <div class="col-12 col-md-3 info-total text-right" v-if="$page.props.auth.user.profile.gestor == 2">
                                     <h3 class="text-info"><strong>Total</strong></h3><br>
-                                    <h4><strong>Beneficio {{ total }} €</strong></h4><br>
-                                    <h4><strong>Pedidos {{ orders }}</strong></h4><br>
+                                    <h4><strong>Benefit {{ total }} €</strong></h4><br>
+                                    <h4><strong>Orders {{ orders }}</strong></h4><br>
                                 </div>
                             </div>
                         </div>
@@ -49,15 +49,15 @@
                                         <div class="text-md-left">
                                             <p class="d-md-inline mr-md-3 text-center">{{hotel.type.toUpperCase()}}</p>
                                             <template v-if="hotel.type == 'hotel'">
-                                                <p class="d-md-inline mr-md-2 text-center">Habitaciones Registradas {{ hotel.hab }} </p>
+                                                <p class="d-md-inline mr-md-2 text-center">Registered Rooms {{ hotel.hab }} </p>
                                                 <p class="d-md-inline text-center">{{ hotel.zone }}</p>
                                             </template>
                                         </div>
                                         <h1 class="pt-1 pb-2">{{hotel.calle}} {{hotel.planta}}</h1>
                                         <div class="estadistica">
-                                            <p class="px-2">Benefecio total {{ hotel.total_benefit }} €</p>
-                                            <p class="px-2">Pedidos totales: {{ hotel.total_orders }}</p>
-                                            <button class="btn btn-link px-2" data-toggle="modal" :data-target="'#centralModal'+hotel.id">Obtener QR</button>
+                                            <p class="px-2">Total benefit {{ hotel.total_benefit }} €</p>
+                                            <p class="px-2">Total orders: {{ hotel.total_orders }}</p>
+                                            <button class="btn btn-link px-2" data-toggle="modal" :data-target="'#centralModal'+hotel.id">Get QR</button>
                                                 <!-- Central Modal Small -->
                                                 <div class="modal fade" :id="'centralModal'+hotel.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                                 aria-hidden="true">
@@ -100,10 +100,10 @@
                                                                 </div>
                                                                 <div class="row px-3 pt-4 pb-5">
                                                                     <div class="col-6 text-left">
-                                                                        <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Volver</a>
+                                                                        <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Return</a>
                                                                     </div>
                                                                     <div class="col-6 text-right">
-                                                                        <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(hotel.id,hotel.calle+' '+hotel.planta)">Descargar</a>
+                                                                        <a class="bnt btn-modal text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(hotel.id,hotel.calle+' '+hotel.planta)">Download</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -115,8 +115,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-2 p-0 my-auto botones">
-                                        <Link :href="route('collaborator.sales.details',{hab:hotel.id})" class="btn btn-info w-75 my-1 py-0 text-white">Ver más</Link>
-                                        <Link  :href="route('collaborator.edit.hab',{hab:hotel.id})" class="btn btn-secondary w-75  my-1 py-0">Editar</Link>
+                                        <Link :href="route('collaborator.sales.details',{hab:hotel.id})" class="btn btn-info w-75 my-1 py-0 text-white">See more</Link>
+                                        <Link  :href="route('collaborator.edit.hab',{hab:hotel.id})" class="btn btn-secondary w-75  my-1 py-0">Edit</Link>
                                     </div>
                             </div>
                         </div>  

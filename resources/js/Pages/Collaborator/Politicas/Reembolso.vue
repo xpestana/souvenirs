@@ -7,7 +7,7 @@
                         <img class="w-40 mt-md-5 mx-auto" src="/vendor_asset/img/logo/hilogo.png">
                     </div>
                     <div class="col-12 col-md-10 pt-0 pt-md-3">
-                        <h1 class="pt-md-5 pb-2"><strong>POLÍTICAS DE DEVOLUCIÓN Y CANCELACIÓN DEL SERVICIO</strong></h1>
+                        <h1 class="pt-md-5 pb-2"><strong>RETURN POLICIES AND SERVICE CANCELLATION</strong></h1>
                         <hr>
                     </div>
                 </div>
@@ -15,53 +15,53 @@
             <div class="parrafo">
                 <div class="row">
                     <div class="col-12 text-justify mt-3">
-                        <p><b>Devoluciones por desistimiento de compra</b></p><br>
+                        <p><b>Returns for withdrawal of purchase</b></p><br>
 
-                        <p>Todos los productos adquiridos en esta plataforma podrán ser devueltos y reembolsados, siempre que nos indique la intención de devolver el/los productos dentro de un plazo de 14 días naturales tras su recepción y que cumplan con el resto de condiciones que a continuación establecemos:</p><br>
+                        <p>All products purchased on this platform may be returned and refunded, provided that you indicate your intention to return the product(s) within a period of 14 calendar days after receipt and that they comply with the rest of the conditions that we establish below:</p><br>
                         
-                        <p>Requisitos para devoluciones por desistimiento</p><br>
+                        <p>Requirements for returns due to withdrawal</p><br>
 
-                        <p>-Para el envío de vuelta podría intentar utilizar el mismo embalaje con el que se ha recibido el producto, para asegurarnos de que dicho producto va bien protegido. En el caso de no contar con este embalaje, deberá usted devolverlo de forma que el producto llegue en buenas condiciones a nuestros almacenes.</p><br>
-                        <p>–Se devolverán las cantidades pagadas por el/los artículos/os, así como el coste de envío inicial, si lo hubiese. El coste de devolución correrá a cuenta del cliente. No aceptaremos devoluciones enviadas a portes debidos, No obstante, en caso de que el consumidor y usuario haya seleccionado expresamente una modalidad de entrega diferente a la modalidad menos costosa de entrega ordinaria, la empresa no estará obligado a reembolsar los costes adicionales que de ello se deriven.</p><br>
+                        <p>-For the return shipment, you could try to use the same packaging with which the product was received, to ensure that the product is well protected. If you do not have this packaging, you must return it so that the product arrives in good condition at our warehouses.</p><br>
+                        <p>–The amounts paid for the item(s) will be refunded, as well as the initial shipping cost, if any. The return cost will be borne by the customer. We will not accept returns sent postage due, however, in the event that the consumer and user have expressly selected a delivery method other than the least expensive method of ordinary delivery, the company will not be obliged to reimburse the additional costs that may arise from it. derive.</p><br>
                         
-                        <p>Excepciones al derecho de desistimiento. No se aceptan devoluciones o cancelaciones cuando:</p><br>
+                        <p>Exceptions to the right of withdrawal. Refunds or cancellations are not accepted when:</p><br>
 
-                        <p>•	El servicio haya sido completamente ejecutado, cuando la ejecución haya comenzado con previo consentimiento expreso del consumidor y usuario.</p><br>
+                        <p>•The service has been fully executed, when the execution has begun with the prior express consent of the consumer and user.</p><br>
 
-                        <p>•	El suministro de bienes confeccionados conforme a las especificaciones del consumidor y usuario o claramente personalizados.</p><br>
-                        <p>•	El suministro de bienes que puedan deteriorarse o caducar con rapidez.</p><br>
-                        <p>•	El suministro de bienes precintados que no sean aptos para ser devueltos por razones de protección de la salud o de higiene y que hayan sido desprecintados tras la entrega.</p><br>
-                        <p>•	 El suministro de bienes que después de su entrega y teniendo en cuenta su naturaleza se hayan mezclado de forma indisociable con otros bienes.</p><br>
+                        <p>•	The supply of goods made according to the specifications of the consumer and user or clearly personalized.</p><br>
+                        <p>•	The supply of goods that can deteriorate or expire quickly.</p><br>
+                        <p>•	The supply of sealed goods that are not suitable to be returned for reasons of health protection or hygiene and that have been unsealed after delivery.</p><br>
+                        <p>•	 The supply of goods that after delivery and taking into account their nature have been mixed inseparably with other goods.</p><br>
 
-                        <p>El plazo de desistimiento concluirá a los 14 días naturales contados a partir de:</p><br>
+                        <p>The withdrawal period will end after 14 calendar days from:</p><br>
 
-                        <p>•	 En el caso de contratación de servicios, el día de la celebración del mismo.</p><br>
-                        <p>•	En el caso de los productos de venta, el día que el consumidor y usuario o un tercero por él indicado, adquiera la posesión material de los bienes solicitados, o bien:</p><br>
-                        <p>o	1.º En caso de entrega de múltiples bienes encargados por el consumidor y usuario en el mismo pedido y entregados por separado, el día que éste o un tercero por él indicado, distinto del transportista, adquiera la posesión material del último de los bienes.</p><br>
-                        <p>o	2.º En caso de entrega de un bien compuesto por múltiples componentes o piezas, el día que el consumidor y usuario o un tercero por él indicado, distinto del transportista, adquiera la posesión material del último componente o pieza.</p><br>
-                        <p>o	3.º En caso de contratos para la entrega periódica de bienes durante un plazo determinado, el día que el consumidor y usuario o un tercero por él indicado, distinto del transportista, adquiera la posesión material del primero de esos bienes.</p><br>
+                        <p>•	 In the case of contracting services, the day of the celebration of the same.</p><br>
+                        <p>•	In the case of sale products, the day that the consumer and user or a third party indicated by him, acquires material possession of the requested goods, or:</p><br>
+                        <p>o	1.º In the event of delivery of multiple goods ordered by the consumer and user in the same order and delivered separately, on the day that the latter or a third party indicated by him, other than the carrier, acquires material possession of the last of the goods.</p><br>
+                        <p>o	2.º In case of delivery of a good made up of multiple components or pieces, the day that the consumer and user or a third party indicated by him, other than the carrier, acquires material possession of the last component or piece.</p><br>
+                        <p>o	3.º In the case of contracts for the periodic delivery of goods during a given period, the day that the consumer and user or a third party indicated by him, other than the carrier, acquires material possession of the first of those goods.</p><br>
 
-                        <p>Tras examinar el artículo le informaremos si tiene derecho al reembolso de las cantidades abonadas. HiCitty reembolsará todo pago recibido al consumidor y usuario, incluidos en su caso los costes de entrega si los hubiera, sin demoras indebidas y, en cualquier caso, antes de que hayan transcurrido 14 días naturales desde la fecha en la que haya sido informado de la decisión de desistimiento del contrato del consumidor y usuario.</p><br>
+                        <p>After examining the article we will inform you if you are entitled to a refund of the amounts paid. HiCitty will reimburse all payments received from the consumer and user, including delivery costs if any, without undue delay and, in any case, before 14 calendar days have elapsed from the date on which it was informed of the decision to withdraw from the consumer and user contract.</p><br>
 
-                        <p>El consumidor y usuario sólo soportará el coste directo de devolución de los bienes, tal y como permite el artículo 108 .1 del texto refundido de la ley general para la defensa de los consumidores y usuarios y otras leyes complementarias.</p><br>
+                        <p>The consumer and user will only bear the direct cost of returning the goods, as allowed by article 108.1 of the consolidated text of the general law for the defense of consumers and users and other complementary laws.</p><br>
 
-                        <p>No obstante, podremos retener el reembolso hasta haber recibido los bienes, o hasta que usted haya presentado una prueba de la devolución de los bienes, según qué condición se cumpla primero. El reembolso se efectuará siempre en el mismo medio de pago que usted utilizó para pagar la compra a no ser que el consumidor disponga lo contrario. </p><br>
-                        <p>En el caso de que se declarara estado de alarma o posibles prórrogas, se interrumpirían los plazos para la devolución de los productos comprados por cualquier modalidad. </p><br>
-                        <p>Pasos a seguir:Deberá ponerse en contacto con nosotros de forma inmediata por medio de nuestro formulario de devolución facilitando los datos del producto, o bien llamando al +34722193903 y/o correo electrónico: info@hicitty.es.</p><br>
+                        <p>However, we may withhold reimbursement until we have received the goods, or until you have provided proof of return of the goods, depending on which condition is met first. The refund will always be made in the same means of payment that you used to pay for the purchase, unless the consumer decides otherwise.</p><br>
+                        <p>In the event that a state of alarm or possible extensions is declared, the deadlines for the return of the products purchased by any modality will be interrupted.</p><br>
+                        <p>Steps to follow: You must contact us immediately through our return form, providing the product data, or by calling +34722193903 and/or email: info@hicitty.es.</p><br>
 
-                        <p>Al recibir los productos procederemos a examinarlos y es cuando le comunicaremos si tiene derecho o no al reintegro de las cantidades abonadas, por el/los productos comprado/s incluidos los gastos de entrega. El proceso de devolución se llevará a cabo lo antes posible y, en cualquier caso, dentro del plazo de 14 días desde la fecha en la que se nos notificó la intención de desistir.</p><br>
-                        <p>Para el proceso de devolución puede usted enviarlo por su cuenta, por correos o con la empresa de trasportes que usted decida seleccionar, para cualquier duda sobre la devolución del producto puede ponerse en contacto a través de nuestro número de atención al cliente +34722193903 y/o correo electrónico: info@hicitty.es.</p><br>
-                        <p>La dirección para la devolución es Avenida de la Buhaira 17, Portal 2, 2ºA. C.P. 41018 Municipio: Sevilla, Sevilla. España. </p><br>
+                        <p>Upon receipt of the products, we will proceed to examine them and that is when we will inform you whether or not you are entitled to a refund of the amounts paid, for the purchased product(s), including delivery costs. The return process will be carried out as soon as possible and, in any case, within a period of 14 days from the date on which we were notified of the intention to withdraw.</p><br>
+                        <p>For the return process you can send it on your own, by mail or with the transport company that you decide to select, for any questions about the return of the product you can contact us through our customer service number +34722193903 and/or or email: info@hicitty.es.</p><br>
+                        <p>The return address is Avenida de la Buhaira 17, Portal 2, 2ºA. C.P. 41018 Municipality: Seville, Seville. Spain.</p><br>
 
-                        <p><b>Devoluciones por producto defectuoso o error en producto</b></p><br>
-                        <p>En los casos en que usted considere que en el momento de la entrega el producto, no se ajusta a lo estipulado en el pedido, deberá ponerse en contacto con nosotros de forma inmediata por medio de nuestro formulario de devolución facilitando los datos del producto, así como del daño que sufre, o bien llamando al +34722193903  y/o correo electrónicoinfo@hicitty.es donde le indicaremos la forma de proceder.</p><br>
+                        <p><b>Returns for defective product or product error</b></p><br>
+                        <p>In the cases in which you consider that at the time of delivery the product does not conform to what is stipulated in the order, you must contact us immediately through our return form, providing the product data, as well as as well as the damage suffered, or by calling +34722193903 and/or email info@hicitty.es where we will indicate how to proceed.</p><br>
 
-                        <p>Al recibir los productos procederemos a examinarlos y es cuando le comunicaremos si tiene derecho o no al reintegro de las cantidades abonadas, por el/los productos comprado/s incluidos los gastos de entrega, si los hubiera. El proceso de devolución se llevará a cabo lo antes posible y, en cualquier caso, dentro del plazo de 14 días desde la fecha en la que se nos notificó la intención de desistir.</p><br>
+                        <p>Upon receipt of the products, we will proceed to examine them and that is when we will inform you whether or not you are entitled to a refund of the amounts paid, for the purchased product(s), including delivery costs, if any. The return process will be carried out as soon as possible and, in any case, within a period of 14 days from the date on which we were notified of the intention to withdraw.</p><br>
 
-                        <p>Para el proceso de devolución puede usted enviarlo por su cuenta, por correos o con la empresa de trasportes que usted decida seleccionar, para cualquier duda sobre la devolución del producto puede ponerse en contacto a través de nuestro número de atención al cliente +34722193903 y/o correo electrónico: info@hicitty.es. La dirección para la devolución es Avenida de la Buhaira 17, Portal 2, 2ºA. C.P. 41018 Municipio: Sevilla, Sevilla. España. </p><br>
+                        <p>For the return process you can send it on your own, by mail or with the transport company that you decide to select, for any questions about the return of the product you can contact us through our customer service number +34722193903 and/or or email: info@hicitty.es. The return address is Avenida de la Buhaira 17, Portal 2, 2ºA. C.P. 41018 Municipality: Seville, Seville. Spain.</p><br>
                         
-                        <p>Procederemos a examinar el producto devuelto y le comunicaremos dentro de un plazo razonable si procede la devolución o sustitución del mismo (en su caso). La devolución o sustitución del artículo se efectuará lo antes posible y, en cualquier caso, dentro de los 14 días naturales siguientes a la fecha en la que le enviemos un correo electrónico confirmando que procede la devolución o sustitución del artículo no conforme. Las cantidades pagadas por aquellos productos que sean devueltos a causa de alguna tara o defecto, cuando realmente exista, le serán reembolsadas íntegramente, incluidos los gastos de envío incurridos para entregarle el artículo. La devolución se efectuará en el mismo medio de pago que se utilizó para pagar la compra o en aquel que el consumidor nos indique en su solicitud.</p><br>
-                        <p>Aquellas devoluciones que se deriven de un error en el servicio. En tal caso nos comprometemos a cambiar el producto por otro igual siempre que haya disponibilidad del mismo. En el supuesto de que no se pudiera hacer el cambio se reintegrará el importe.</p><br>
+                        <p>We will proceed to examine the returned product and we will notify you within a reasonable period of time if the return or replacement of the product is appropriate (if applicable). The return or replacement of the item will be made as soon as possible and, in any case, within 14 calendar days following the date on which we send you an email confirming that the return or replacement of the non-compliant item is appropriate. The amounts paid for those products that are returned due to some defect or defect, when it actually exists, will be fully reimbursed, including the shipping costs incurred to deliver the item. The refund will be made in the same means of payment that was used to pay for the purchase or in the one that the consumer indicates in his request.</p><br>
+                        <p>Those returns that derive from an error in the service. In such a case, we promise to change the product for another one as long as it is available. In the event that the change cannot be made, the amount will be refunded.</p><br>
                     </div>
                 </div>
             </div>

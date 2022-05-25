@@ -14,9 +14,9 @@
                             <p class="text-left text-muted">{{hotel.type.toUpperCase()}}</p>
                             <h1 class="pt-1 pb-2">{{hotel.calle}} {{hotel.planta}}</h1>
                             <div class="estadistica d-md-inline-flex">
-                                <p class="px-2 text-muted">Benefecio total {{ totalBeneficio }}€</p>
-                                <p class="px-2 text-muted">Pedidos totales: {{hotel.orders.length}}</p>
-                                <button class="btn btn-link px-2 py-0" data-toggle="modal" :data-target="'#centralModal'+hotel.id">Obtener QR</button>
+                                <p class="px-2 text-muted">Total benefit {{ totalBeneficio }}€</p>
+                                <p class="px-2 text-muted">Total orders: {{hotel.orders.length}}</p>
+                                <button class="btn btn-link px-2 py-0" data-toggle="modal" :data-target="'#centralModal'+hotel.id">Get QR</button>
                                 <!-- Central Modal Small -->
                                 <div class="modal fade" :id="'centralModal'+hotel.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                 aria-hidden="true">
@@ -59,10 +59,10 @@
                                                 </div>
                                                 <div class="row px-3 pt-4 pb-5">
                                                     <div class="col-6 text-left">
-                                                        <button class="bnt btn-primary-c text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Volver</button>
+                                                        <button class="bnt btn-primary-c text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Return</button>
                                                     </div>
                                                     <div class="col-6 text-right">
-                                                        <button class="bnt btn-primary-c text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(hotel.id,hotel.calle+' '+hotel.planta)">Descargar</button>
+                                                        <button class="bnt btn-primary-c text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(hotel.id,hotel.calle+' '+hotel.planta)">Download</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -78,9 +78,9 @@
                     <form @submit.prevent="submit">
                     <div class="row my-3 justify-content-start">
                         <div class="col-12 col-md-6">
-                            <h1>Modifica tu 
+                            <h1>Modify your 
                                 <template v-if="hotel.type == 'apartamento'">
-                                    alojamiento
+                                    Lodging
                                 </template>
                                 <template v-else>
                                     Hotel
@@ -91,29 +91,29 @@
                     <div class="row my-3 justify-content-start">
                         <template  v-if="hotel.type == 'hotel'">
                             <div class="col-12 col-md-6 mb-3">
-                                <input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Nombre del hotel*">
+                                <input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Name of the hotel*">
                             </div>
                             <div class="w-100"></div>
                             <div class="col-12 col-md-6 mb-3">
-                                <input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="N° de habitaciones*">
+                                <input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="Number of rooms*">
                             </div>
                             <div class="w-100"></div>
                         </template>
                         <div class="col-12 col-md-3 mb-2 mb-md-0">
-                            <input type="text" class="form-control w-100" placeholder="Calle" v-model="form.calle">
+                            <input type="text" class="form-control w-100" placeholder="Street" v-model="form.calle">
                         </div>
                         <div class="col-12 col-md-3">
-                            <input type="text" class="form-control w-100" placeholder="N°-Letra-Planta" v-model="form.planta">
+                            <input type="text" class="form-control w-100" placeholder="N°-Letter-Floor" v-model="form.planta">
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">
                         <div class="col-12 col-md-6">
-                            <input type="text" class="form-control w-100" placeholder="Otras indicaciones"  v-model="form.address">
+                            <input type="text" class="form-control w-100" placeholder="Other indications"  v-model="form.address">
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">
                         <div class="col-12 col-md-3  mb-2 mb-md-0">
-                            <input type="text" class="form-control w-100" placeholder="Ciudad"  v-model="form.city">
+                            <input type="text" class="form-control w-100" placeholder="Town"  v-model="form.city">
                         </div>
                         <div class="col-12 col-md-3">
                             <input type="text" class="form-control w-100" placeholder="CP"  v-model="form.cp">
@@ -121,15 +121,15 @@
                     </div>
                     <div class="row my-3 justify-content-start">
                         <div class="col-12 col-md-3">
-                            <input type="text" class="form-control w-100" v-model="form.code" placeholder="N° de licencia VFT/SE/12345">
+                            <input type="text" class="form-control w-100" v-model="form.code" placeholder="License number VFT/SE/12345">
                         </div>
                         <div class="col-12 col-md-3">
-                            <input type="text" class="form-control w-100" placeholder="Link-web"  v-model="form.url">
+                            <input type="text" class="form-control w-100" placeholder="Website link"  v-model="form.url">
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">
                         <div class="col-md-6">
-                            Actualizar imagen <button 
+                            Update image <button 
                                 type="button"
                                 style="border-radius: 20px"
                                 size="sm"
@@ -137,7 +137,7 @@
                                 variant="info" 
                                 @click="selectFeatured()"
                             >
-                                Examinar
+                                Examine
                             </button>
                             <i v-if="showF==1"
                                 id="eraseFile" 
@@ -161,7 +161,7 @@
                     </div>
                     <div class="my-3 justify-content-start">
                         <div class="col-12 col-md-6 pl-0">
-                            <textarea class="form-control w-100" placeholder="Otros datos de interés" v-model="form.area"></textarea>
+                            <textarea class="form-control w-100" placeholder="Other data of interest" v-model="form.area"></textarea>
                         </div>
                     </div>
                     <div class="my-3 justify-content-start">
@@ -171,7 +171,7 @@
                     </div>
                     <div class="row my-5">
                         <div class="col-12 text-right">
-                            <button class="btn btn-primary rounded-pill" type="submit">Guardar cambios</button>
+                            <button class="btn btn-primary rounded-pill" type="submit">Save Changes</button>
                         </div>
                     </div>
                     </form>

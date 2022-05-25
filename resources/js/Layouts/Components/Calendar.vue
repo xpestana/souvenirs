@@ -2,7 +2,7 @@
     <form @submit.prevent="submit">
 	<div class="row">
         <div class="col-12 text-center" v-if="this.eventos.length > 0">
-                <DatePicker mode="date" v-model="form.date" 
+                <DatePicker locale="en" mode="date" v-model="form.date" 
                 :available-dates="this.dias_disponibles" 
                 :attributes="attributes" />
         </div>

@@ -6,25 +6,25 @@
                 <div class="modal-body p-4">
                     <div class="row">
                         <div class="col-12 text-center mb-4">
-                            <h1><strong>Valoramos tu privacidad</strong></h1>
+                            <h1><strong>We value your privacy</strong></h1>
                         </div>
                         <div class="col-12 text-center">
                             <p class="text-justify  mb-4">
-                                Utilizamos cookies para mejorar la experiencia de navegación en nuestro sitio,
-                                le informamos la normativa vigente en materia de protección de datos de carácter personal,
-                                por lo tanto para continuar navegando en el sitio debe aceptar el uso de Cookies y nuestra política
-                                de privacidad.
+                                We use cookies to improve the browsing experience on our site,
+                                We inform you of the current regulations regarding the protection of personal data,
+                                therefore to continue browsing the site you must accept the use of Cookies and our policy
+                                Of privacy.
                             </p>
                             <div class="text-left">
-                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/avisolegal">Aviso legal</a><br>
-                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/privacidad">Política de privacidad</a><br>
-                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/cookies">Política de Cookies</a>
+                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/avisolegal">Legal warning</a><br>
+                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/privacidad">Privacy Policy</a><br>
+                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/cookies">Cookies policy</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" @click="saveCookie">Acepto</button>
+                    <button type="button" class="btn btn-primary" @click="saveCookie">I agree</button>
                 </div>
             </div>
         </div>

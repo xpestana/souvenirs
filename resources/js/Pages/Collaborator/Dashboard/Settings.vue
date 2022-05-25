@@ -3,41 +3,41 @@
         <ModalCookies/>
         <div class="row mt-3">
             <div class="col-12 text-center">
-                <h1 class="display-4 text-info">Información personal</h1>
+                <h1 class="display-4 text-info">Personal information</h1>
             </div>
         </div>
             <!--Formulario INFORMACION PERSONAL -->
             <form @submit.prevent="submitProfile">
             <div class="row mt-5 justify-content-center justify-content-md-start">
                 <div class="col-12 col-md-5">
-                    <label class="py-2">Persona de contacto</label>
-                    <input type="text" class="input-datos" placeholder="Persona de contacto" v-model="formP.name">
+                    <label class="py-2">Contact person</label>
+                    <input type="text" class="input-datos" placeholder="Contact person" v-model="formP.name">
                 </div>
                 <div class="col-12 col-md-5">
-                    <label class="py-2">Correo electrónico</label>
-                    <input type="text" class="input-datos" placeholder="Correo electrónico"  v-model="formP.email">
+                    <label class="py-2">Email</label>
+                    <input type="text" class="input-datos" placeholder="Email"  v-model="formP.email">
                 </div>
             </div>
             <div class="row mt-2 py-2 justify-content-center justify-content-md-start">
                 <div class="col-12 col-md-5">
-                    <label class="py-2">Número de teléfono</label>
-                    <input type="text" class="input-datos" placeholder="Número de teléfono"  v-model="formP.phone">
+                    <label class="py-2">Phone number</label>
+                    <input type="text" class="input-datos" placeholder="Phone number"  v-model="formP.phone">
                 </div>
                 <div class="col-12 col-md-5">
-                    <label class="py-2">Contraseña</label>
-                    <input type="password" class="input-datos" placeholder="Contraseña"  v-model="formP.password">
+                    <label class="py-2">Password</label>
+                    <input type="password" class="input-datos" placeholder="Password"  v-model="formP.password">
                 </div>
             </div>
             <div class="row  mt-2 py-2 justify-content-center justify-content-md-start">
                 <div class="col-12 col-md-5">
-                        <label class="py-2">Datos fiscales</label>
+                        <label class="py-2">Tax data</label>
                         <div class="d-md-inline-flex">
-                            <input type="text" class="input-datos" placeholder="Datos fiscales" :value="formF.address+','+formF.city">
-                            <button type="button" class="btn btn-primary ml-4" data-toggle="modal" data-target="#datosModal">Editar</button>
+                            <input type="text" class="input-datos" placeholder="Tax data" :value="formF.address+','+formF.city">
+                            <button type="button" class="btn btn-primary ml-4" data-toggle="modal" data-target="#datosModal">Edit</button>
                         </div>
                 </div>
                 <div class="col-12 mt-3 text-left" v-if="errors.submitProfile">
-                    <div class="font-medium text-danger">Whoops! Algo salió mal.</div>
+                    <div class="font-medium text-danger">Whoops! Something went wrong.</div>
                     <ul class="mt-3 list-disc list-inside text-sm text-danger">
                         <li v-for="(error, key) in errors.submitProfile" :key="key">{{ error }}</li>
                     </ul>
@@ -48,7 +48,7 @@
                     <a href="javascript:void(0);" @click.prevent="logout" class="btn btn-lg text-white btn-cerrar">Cerrar sesión<i class="fas fa-key pl-1 pr-2"></i></a>
                 </div>
                 <div class="col-12 col-md-5 text-right btn-guardar">
-                    <button class="btn btn-primary px-3 py-1 rounded-pill">Guardar cambios</button>
+                    <button class="btn btn-primary px-3 py-1 rounded-pill">Save Changes</button>
                 </div>
             </div>
             </form>
@@ -59,49 +59,49 @@
                         <div class="modal-content p-4">
                             <div class="modal-body p-0">
                                 <div class="row">
-                                    <label class="pl-3 mb-2">Datos fiscales</label>
+                                    <label class="pl-3 mb-2">Tax data</label>
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-12 col-md-6">
-                                        <input type="text" class="form-control" placeholder="Razón social" v-model="formF.razon">
+                                        <input type="text" class="form-control" placeholder="Business name" v-model="formF.razon">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <select class="w-100" v-model="formF.nif" id="nif">
-                                            <option value="NIF Español">NIF Español</option>
-                                            <option value="Número VAT intracomunitario">Número VAT intracomunitario</option>
-                                            <option value="Pasaporte">Pasaporte</option>
-                                            <option value="Documento oficial país de residencia">Documento oficial país de residencia</option>
-                                            <option value="Certificado de residencia">Certificado de residencia</option>
-                                            <option value="Otro documento probatorio">Otro documento probatorio</option>
-                                            <option value="No censado">No censado</option>
+                                            <option value="NIF Español">NIF Spanish</option>
+                                            <option value="Número VAT intracomunitario">Intracommunity VAT number</option>
+                                            <option value="Pasaporte">Passport</option>
+                                            <option value="Documento oficial país de residencia">Official document country of residence</option>
+                                            <option value="Certificado de residencia">Residence certificate</option>
+                                            <option value="Otro documento probatorio">Other supporting document</option>
+                                            <option value="No censado">Not registered</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-12 col-md-6">
-                                        <input type="text" class="form-control" placeholder="N° Identificador Fiscal*" v-model="formF.identifier">
+                                        <input type="text" class="form-control" placeholder="Fiscal Identifier No.*" v-model="formF.identifier">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="text" class="form-control" placeholder="España" value="España">
+                                        <input type="text" class="form-control" placeholder="Spain" value="Spain">
                                     </div>
                                 </div>                
                                 <div class="row my-3">
                                     <div class="col-12 col-md-6">
-                                        <input type="text" class="form-control" placeholder="Ciudad*" v-model="formF.city">
+                                        <input type="text" class="form-control" placeholder="Town*" v-model="formF.city">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="text" class="form-control" placeholder="Codigo Postal*" v-model="formF.cp">
+                                        <input type="text" class="form-control" placeholder="Postal Code*" v-model="formF.cp">
                                     </div>
                                 </div>
                                 <div class="row my-3">
                                     <div class="col-12">
-                                        <input type="text" class="form-control" placeholder="Dirección fiscal*" v-model="formF.address" >
+                                        <input type="text" class="form-control" placeholder="Fiscal address*" v-model="formF.address" >
                                     </div>
                                 </div>    
                                 <div class="row justify-content-between align-items-end mt-4">
                                     <div class="col-12 my-2">
                                         <div v-if="errors.submitFiscal">
-                                            <div class="font-medium text-danger">Whoops! Algo salió mal.</div>
+                                            <div class="font-medium text-danger">Whoops! Something went wrong.</div>
 
                                             <ul class="mt-3 list-disc list-inside text-sm text-danger">
                                                 <li v-for="(error, key) in errors.submitFiscal" :key="key">{{ error }}</li>
@@ -109,10 +109,10 @@
                                         </div>
                                     </div>
                                     <div class="col-6 text-left">
-                                        <button class="btn rounded-pill py-0 px-5 boton-modal text-white" data-dismiss="modal" >Volver</button>
+                                        <button class="btn rounded-pill py-0 px-5 boton-modal text-white" data-dismiss="modal" >Return</button>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <button type="submit" class="btn rounded-pill py-0 boton-modal  text-white" :class="{ 'opacity-25': formF.processing }" :disabled="formF.processing">Guardar cambios</button>
+                                        <button type="submit" class="btn rounded-pill py-0 boton-modal  text-white" :class="{ 'opacity-25': formF.processing }" :disabled="formF.processing">Save Changes</button>
                                     </div>
                                 </div>            
                             </div>

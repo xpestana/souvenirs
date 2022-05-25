@@ -7,41 +7,41 @@
                     <a href="javascript:void(0);" @click="back"><i class="fas fa-angle-left bg-info"></i></a>	
                 </div>
                 <div class="col-12 col-md-9">
-                    <h1 class="text-center mb-4 titulo text-info text-4xl"><strong>Ventas de {{hotel.calle}} {{hotel.planta}}</strong></h1>
+                    <h1 class="text-center mb-4 titulo text-info text-4xl"><strong>Sales of {{hotel.calle}} {{hotel.planta}}</strong></h1>
                 </div>
             </div>
             <div class="row cuerpo">
                 <div class="col-12 col-md-3 text-center">
-                    <Link v-if="hotel.orders.length > 0" :href="route('collaborator.sales.hab',hotel.orders[0].user_id)"><p class="text-info mb-4"><strong class="pr-2">Ventas totales</strong><i class="fas fa-angle-right rounded-circle bg-info text-white px-2 py-1"></i></p></Link>
+                    <Link v-if="hotel.orders.length > 0" :href="route('collaborator.sales.hab',hotel.orders[0].user_id)"><p class="text-info mb-4"><strong class="pr-2">Total sales</strong><i class="fas fa-angle-right rounded-circle bg-info text-white px-2 py-1"></i></p></Link>
                     <div>
                         <img class="m-auto h-32 w-40 rounded-circle" :src="'/storage/hotel'+hotel.image" alt="">
                     </div>
-                    <h6 class="mt-3"><strong>Piso {{hotel.planta}}</strong></h6>
-                    <p class="ventas">VENTAS</p>
+                    <h6 class="mt-3"><strong>Floor {{hotel.planta}}</strong></h6>
+                    <p class="ventas">SALES</p>
                 </div>
                 <div class="col-12 col-md-9">
                     <div class="table-responsive-sm">
                         <table class="table table-striped table-active">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID transacción</th>
+                                    <th scope="col">ID transaction</th>
                                     <template v-if="this.$page.props.auth.profile.gestor==1">
-                                        <th scope="col">Habitación</th>
+                                        <th scope="col">Room</th>
                                     </template>
-                                    <th scope="col">Devuelto</th>
-                                    <th scope="col">Correo</th>
-                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Returned</th>
+                                    <th scope="col">EMail</th>
+                                    <th scope="col">Date</th>
                                     <th scope="col">Total</th>
-                                    <th scope="col">Beneficio</th>
+                                    <th scope="col">Benefit</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-if="hotel.orders.length == 0">
                                     <template v-if="this.$page.props.auth.profile.gestor==1">
-                                        <td colspan="7" class="text-center">Propiedad sin ventas relacionadas</td>
+                                        <td colspan="7" class="text-center">Property with no related sales</td>
                                     </template>
                                     <template v-else>
-                                        <td colspan="6" class="text-center">Propiedad sin ventas relacionadas</td>
+                                        <td colspan="6" class="text-center">Property with no related sales</td>
                                     </template>
                                 </tr>
                                 <tr v-for="order in hotel.orders" :key="order.transaction_id">
@@ -55,10 +55,10 @@
                                     </template>
                                     <td>
                                         <p v-if="order.returned == 0">
-                                            NO
+                                           NOT
                                         </p>
                                         <p v-else>
-                                            SI
+                                            YES
                                         </p>
                                     </td>
                                     <!-- <td>{{ order.shippings[0].email }}</td> -->
@@ -75,7 +75,7 @@
             <div class="row pie">
                 <div class="col-5 offset-7 col-md-3 offset-md-9">
                     <h2 class="text-info">Total</h2>
-                    <p><b>Tu beneficio es de {{ total_benefit.toFixed(2) }}€</b></p>
+                    <p><b>Your benefit is {{ total_benefit.toFixed(2) }}€</b></p>
                 </div>
             </div>
         </div>

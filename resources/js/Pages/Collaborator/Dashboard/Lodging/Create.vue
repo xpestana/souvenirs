@@ -6,10 +6,10 @@
 			<div class="col-md-6">
 				<h3 class="h3 text-center text-md-left pb-2">
 					<template v-if="profile.gestor == 1">
-						Hoteles de {{ profile.firstname }}
+						Hotels of {{ profile.firstname }}
 					</template>
 					<template v-if="profile.gestor == 2">
-						Alojamiento de {{ profile.firstname }}
+						Lodging of {{ profile.firstname }}
 					</template>
 				</h3>
 				<div class="d-flex justify-content-center justify-content-md-start">
@@ -25,48 +25,48 @@
 					
 					<h4 class="h4 text-center text-md-left my-3 pt-4">
 						<template v-if="profile.gestor == 1">
-							Registra un hotel
+							Register a hotel
 						</template>
 						<template v-if="profile.gestor == 2">
-							Registra un alojamiento
+							Register a lodging
 						</template>
 					</h4>
 					<div class="row justify-content-between">
 						<template v-if="profile.gestor == 1">
 							<div class="col-12 col-md-6 mb-3">
-                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Nombre del hotel*">
+                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Name of the hotel*">
                     		</div>
 							<div class="col-12 col-md-6 mb-3">
-                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="N° de habitaciones*">
+                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="Number of rooms*">
                     		</div>
 						</template>
 						<div class="col-12 mb-3" :class="{'col-md-6' : profile.gestor == 1}">
-							<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.calle" placeholder="Calle *">
+							<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.calle" placeholder="Street *">
                     	</div>
                     	<div class="col-12 mb-3" :class="{'col-md-6' : profile.gestor == 1}">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.planta" placeholder="N° - Letra - Planta *">
+                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.planta" placeholder="N° - Letter - Floor *">
                     	</div>
 						<template v-if="profile.gestor == 2">
 							<div class="col-md-12 mb-3">
-                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" placeholder="Otras indicaciones sobre la dirección">
+                    			<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" placeholder="Other indications about the address">
                     		</div>
 						</template>
                     	<div class="col-md-6 mb-3">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" placeholder="Ciudad *" >
+                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" placeholder="Town *" >
                     	</div>
                     	<div class="col-md-6 mb-3">
                     		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" placeholder="CP *">
                     	</div>
 						<template v-if="profile.gestor == 2">
                     	<div class="col-md-6 mb-3">
-                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.code" placeholder="N° de licencia VFT/SE/12345" >
+                    		<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.code" placeholder="License number VFT/SE/12345" >
                     	</div>
 						</template>
                     	<div class="col-md-6 mb-3">
-                    		<input type="url" class="form-control w-100 mb-2 py-3" v-model="form.url" placeholder="Link web" >
+                    		<input type="url" class="form-control w-100 mb-2 py-3" v-model="form.url" placeholder="Website link" >
                     	</div>
                     	<div class="col-md-12 mb-3">
-                    		Añadir imagen <button 
+                    		Add image <button 
                                     type="button"
                                     style="border-radius: 20px"
                                     size="sm"
@@ -74,7 +74,7 @@
                                     variant="info" 
                                     @click="selectFeatured()"
                                 >
-                                    Examinar
+                                    Examine
                                 </button>
                                 <i v-if="showF==1"
                                     id="eraseFile" 
@@ -96,7 +96,7 @@
                                 </progress>
                     	</div>
                     	<div class="col-md-12 mb-3">
-                    		<textarea id="area" cols="10" rows="3" class="form-control w-100 mb-2 py-3" v-model="form.area" placeholder="Otros datos de interés"></textarea>
+                    		<textarea id="area" cols="10" rows="3" class="form-control w-100 mb-2 py-3" v-model="form.area" placeholder="Other data of interest"></textarea>
                     	</div>
                     	<div class="w-100">
 							<ValidationErrors class="my-3" />
@@ -114,10 +114,10 @@
 		<div class="row">
 			<div class="col-12 d-inline-flex justify-content-between">
 				<Link :href="route('collaborator.index')" class="btn btn-primary rounded-pill px-3 mt-3">
-					Volver
+					Return
 				</Link>	
 				<button type="submit" class="btn btn-primary rounded-pill px-3 mt-3 text-white" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-					Siguiente
+					Following
 				</button>
 			</div>
 		</div>

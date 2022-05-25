@@ -8,7 +8,7 @@
                     <img class="w-28 md:w-44" src="/vendor_asset/img/logo/hilogo.png">
                 </div>
                 <div class="col-6 text-right boton">
-                    <Link :href="route('login')" class="btn btn-primary iniciar md:px-4 md:py-2 md:mt-1">Iniciar sesión<i class="fas fa-user-friends fas fa-user-friends pl-0 pl-md-2"></i> </Link>
+                    <Link :href="route('login')" class="btn btn-primary iniciar md:px-4 md:py-2 md:mt-1">Log in<i class="fas fa-user-friends fas fa-user-friends pl-0 pl-md-2"></i> </Link>
                 </div>
             </div>
         </div>
@@ -18,11 +18,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-left head-registra">
-                <h1 class="titulo text-5xl md:text-6xl">Registra <br>tu <br> alojamiento</h1>
-                <p class="r-1"><small>Darse de alta son sólo unos minutos ¡Empieza hoy mismo!</small></p>
-                <p class="r-2"><small>Crea un cuenta de <b>colaborador</b> para empezar</small></p>
+                <h1 class="titulo text-5xl md:text-6xl">Register   <br>your <br> lodging</h1>
+                <p class="r-1"><small>Signing up is just a few minutes. Get started today!</small></p>
+                <p class="r-2"><small>Create an account <b>collaborator</b> to get started</small></p>
                     
-                <Link :href="route('collaborator.register')" type="button" class="btn btn-primary empezar">Empezar</Link>
+                <Link :href="route('collaborator.register')" type="button" class="btn btn-primary empezar">Begin</Link>
                     
             </div>
                             
@@ -30,19 +30,19 @@
                 
                 <div class="d-flex fs-beneficios my-2">
                     <i class="far fa-check-circle pt-2 pe-3"></i>
-                    <p class="fw-bold beneficios-text m-2">Darse de alta es gratis</p>
+                    <p class="fw-bold beneficios-text m-2">Signing up is free</p>
                 </div>
                 <div class="d-flex fs-beneficios my-2">
                     <i class="far fa-check-circle pt-2 pe-3"></i>
-                    <p class="fw-bold beneficios-text m-2">Nueva línea de ingresos sin trabajo adicional</p>
+                    <p class="fw-bold beneficios-text m-2">New line of income without additional work</p>
                 </div>
                 <div class="d-flex fs-beneficios my-2">
                     <i class="far fa-check-circle pt-2 pe-3"></i>
-                    <p class="fw-bold beneficios-text m-2">Aumentamos tus valoraciones</p>
+                    <p class="fw-bold beneficios-text m-2">We increase your ratings</p>
                 </div>
                 <div class="d-flex fs-beneficios my-2">
                     <i class="far fa-check-circle pt-2 pe-3"></i>
-                    <p class="fw-bold beneficios-text m-2">Mejoramos la experiencia de tus inquilinos</p>
+                    <p class="fw-bold beneficios-text m-2">We improve the experience of your tenants</p>
                 </div>
                 
             </div>

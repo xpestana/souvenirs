@@ -7,7 +7,7 @@
                         <img class="w-40 mt-5" src="/vendor_asset/img/logo/hilogo.png">
                     </div>
                     <div class="col-12 col-md-10 pt-0 pt-md-3">
-                        <h1 class="pt-5 pb-2"><strong>AVISO LEGAL</strong></h1>
+                        <h1 class="pt-5 pb-2"><strong>LEGAL WARNING</strong></h1>
                         <hr>
                     </div>
                 </div>
@@ -15,35 +15,35 @@
             <div class="parrafo">
                 <div class="row">
                     <div class="col-12 text-justify">
-                        <p>HiCitty, provisto con NIF/CIF B16895708, dirección Av. De la Buhaira, 17, no puede asumir 
-                        ninguna responsabilidad derivada del uso incorrecto, inapropiado o ilícito de la información
-                        aparecida en la página de Internet de www.hicitty.com </p><br>
+                        <p>HiCitty, provided with NIF/CIF B16895708, address Av. De la Buhaira, 17, cannot assume
+                        no responsibility derived from the incorrect, inappropriate or illegal use of the information
+                        appeared on the website of www.hicitty.com </p><br>
 
-                        <p>Con los límites establecidos en la ley, HiCitty no asume ninguna responsabilidad derivada de
-                        la falta de veracidad, integridad, actualización y precisión de los datos o informaciones 
-                        que se contienen en sus páginas de Internet. </p><br>
+                        <p>Within the limits established by law, HiCitty assumes no liability arising from
+                        the lack of veracity, integrity, updating and precision of the data or information
+                        that are contained in its Internet pages. </p><br>
 
-                        <p>Los contenidos e información no vinculan a HiCitty ni constituyen opiniones, consejos o 
-                        asesoramiento legal de ningún tipo pues se trata meramente de un servicio ofrecido con carácter 
-                        informativo y divulgativo.</p><br>
+                        <p>The contents and information do not bind HiCitty and do not constitute opinions, advice or
+                        legal advice of any kind as it is merely a service offered on a
+                        informative and informative.</p><br>
                         
-                        <p>La página de Internet de www.hicitty.com puede contener enlaces (links) a otras páginas de 
-                        terceras partes que HiCitty no puede controlar. Por lo tanto, HiCitty no puede asumir responsabilidades 
-                        por el contenido que pueda aparecer en páginas de terceros. </p><br>
+                        <p>The website of www.hicitty.com may contain links (links) to other pages of
+                        third parties that HiCitty cannot control. Therefore, HiCitty cannot assume responsibility
+                        for the content that may appear on third-party pages.</p><br>
                         
-                        <p>Los textos, imágenes, sonidos, animaciones, software y el resto de contenidos incluidos en este website
-                        son propiedad exclusiva de HiCitty o sus licenciantes. Cualquier acto de transmisión, distribución, cesión, 
-                        reproducción, almacenamiento o comunicación pública total o parcial, debe contar con el consentimiento expreso 
-                        de la empresa. </p><br>
+                        <p>The texts, images, sounds, animations, software and other content included in this website
+                        are the exclusive property of HiCitty or its licensors. Any act of transmission, distribution, assignment,
+                        reproduction, storage or public communication in whole or in part, must have the express consent
+                        of the company. </p><br>
                         
-                        <p>Asimismo, para acceder a algunos de los servicios que HiCitty ofrece a través del website deberá proporcionar 
-                        algunos datos de carácter personal. En cumplimiento de lo establecido en el Reglamento (UE) 2016/679 del Parlamento 
-                        Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al 
-                        tratamiento de datos personales y a la libre circulación de estos datos le informamos que, mediante la cumplimentación de 
-                        los presentes formularios, sus datos personales quedarán incorporados y serán tratados en los ficheros de HiCitty con el 
-                        fin de poderle prestar y ofrecer nuestros servicios así como para informarle de las mejoras del sitio Web. Asimismo, le 
-                        informamos de la posibilidad de que ejerza los derechos de acceso, rectificación, cancelación y oposición de sus datos de 
-                        carácter personal, manera gratuita mediante email a info@hicitty.</p><br>
+                        <p>Likewise, to access some of the services that HiCitty offers through the website, you must provide
+                        some personal data. In compliance with the provisions of Regulation (EU) 2016/679 of the Parliament
+                        European and Council, of April 27, 2016, on the protection of natural persons with regard to
+                        treatment of personal data and the free circulation of these data we inform you that, by completing the
+                        these forms, your personal data will be incorporated and will be treated in the HiCitty files with the
+                        in order to be able to provide and offer our services as well as to inform you of improvements to the website. Likewise, he
+                        We inform you of the possibility of exercising your rights of access, rectification, cancellation and opposition of your personal data.
+                        personal character, free of charge by email to info@hicitty.</p><br>
                     </div>
                 </div>
             </div>

@@ -10,18 +10,6 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Area Start Here -->
-    <!-- <div class="breadcrumb-area pt-65 pb-70 bg-img" style="background-image:url(/vendor_asset/img/bg-image/hop-brech-bg.jpg);">
-        <div class="container">
-            <div class="breadcrumb-wrap text-center">
-                <h3>Checkout</h3>
-                <ol class="breadcrumb breadcrumb-list" hidden>
-                    <li class="breadcrumb-item"><Link :href="route('home')">Inicio</Link></li>
-                    <li class="breadcrumb-item active">Checkout</li>
-                </ol>
-            </div>
-        </div>
-    </div> -->
     <!-- Breadcrumb Area End Here -->
     <form @submit.prevent="submit">
     <!-- checkout-area start -->
@@ -31,7 +19,7 @@
                 <div class="col-12 py-1">
                     <div class="text-right">
                         <img src="/vendor_asset/img/icons/padlock.png" class="d-inline mr-2 w-4">
-                        <p class="d-inline">Pago seguro</p>
+                        <p class="d-inline">Secure payment</p>
                     </div>
                 </div>
             </div>
@@ -39,47 +27,47 @@
         <div class="container mt-3 px-3 px-md-5">
             <div class="row">
                 <div class="col-12 mb-2">
-                    <h3 class="text-lg">Persona de contacto</h3>
+                    <h3 class="text-lg">Contact person</h3>
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="text" placeholder="Nombre*" v-model="form.name" class="border rounded py-1 w-100" required/>
+                    <input type="text" placeholder="Name*" v-model="form.name" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-0">
-                    <input type="text" placeholder="Móvil*" v-model="form.phone" class="border rounded py-1 w-100" required/>
+                    <input type="text" placeholder="Mobile*" v-model="form.phone" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3">
-                    <input type="email" placeholder="Correo electrónico*" v-model="form.email" class="border rounded py-1 w-100" required/>
+                    <input type="email" placeholder="E-mail*" v-model="form.email" class="border rounded py-1 w-100" required/>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-12 mb-2">
-                    <h3 class="text-lg">Dirección de envío</h3>
+                    <h3 class="text-lg">Shipping Address</h3>
                     <p class="mt-1 text-center text-grayc leading-4" v-if="hotel !== null">
-                        ¡Su anfitrión ya ha rellenado estos campos <br> para facilitar el envío!
+                        ¡Your host has already filled in these fields <br> to facilitate sending!
                     </p>
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="text" placeholder="Dirección*" v-model="form.address" class="border rounded py-1 w-100" required/>
+                    <input type="text" placeholder="Address*" v-model="form.address" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-0">
-                    <input type="text" placeholder="Piso, escalera, puerta, etc. (opcional)" v-model="form.hab" class="border rounded py-1 w-100"/>
+                    <input type="text" placeholder="Floor, stair, door, etc. (optional)" v-model="form.hab" class="border rounded py-1 w-100"/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-4">
-                    <input type="text" placeholder="Escriba aqui sus observaciones para la agencia" v-model="form.observations" class="border rounded py-1 w-100"/>
+                    <input type="text" placeholder="Write here your observations for the agency" v-model="form.observations" class="border rounded py-1 w-100"/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-4">
-                    <input type="text" placeholder="Código postal*" v-model="form.cp" class="border rounded py-1 w-100" required/>
+                    <input type="text" placeholder="Postal Code*" v-model="form.cp" class="border rounded py-1 w-100" required/>
                 </div>
             </div>
             <div class="row mt-4" v-if="forms_extra.length > 0">
                 <div class="col-12 mb-2">
-                    <h3 class="text-lg">Datos extra</h3>
+                    <h3 class="text-lg">Extra data</h3>
                 </div>
                 <div class="col-12 col-md-6 mt-1" v-for="(input, index) in forms_extra" :key="index">
                     <template v-if="input.name.split('\n')[0]=='Idioma del tour : '">
-                        <label>Eligir Idioma del tour</label>
+                        <label>Choose tour language</label>
                         <select :id="'input'+index" class="rounded border w-100">
-                            <option value="">Eligir Idioma del tour</option>
+                            <option value="">Choose tour language</option>
                             <option v-if="input.name.split('\n')[4] !== undefined" :value="input.name.split('\n')[4]">{{input.name.split('\n')[4]}}</option>
                             <option v-if="input.name.split('\n')[5] !== undefined" :value="input.name.split('\n')[5]">{{input.name.split('\n')[5]}}</option>
                             <option v-if="input.name.split('\n')[6] !== undefined" :value="input.name.split('\n')[6]">{{input.name.split('\n')[6]}}</option>
@@ -97,7 +85,7 @@
             </div>
             <div class="row">
                 <div class="col-12 mt-20 mb-4">
-                    <button type="button" class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2" @click="validarForm">Continuar</button>
+                    <button type="button" class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2" @click="validarForm">Continue</button>
                 </div>
             </div>
 
@@ -115,11 +103,11 @@
                         </div>
                         <div>
                             <img src="/vendor_asset/img/icons/padlock.png" class="d-inline mr-2 w-4">
-                            <p class="d-inline">Pago seguro</p>
+                            <p class="d-inline">Secure payment</p>
                         </div>
                     </div>
                     <div class="col-12 col-md-8 mt-3">
-                        <p class="text-muted">Resumen:</p>
+                        <p class="text-muted">Sumnary:</p>
                         <div class="d-flex justify-between" v-if="totalSouvenirs.num > 0">
                             <p class="text-muted">
                             <template v-if="totalSouvenirs.num > 1">
@@ -134,21 +122,21 @@
                         <div class="d-flex justify-between" v-if="totalActivities.num > 0">
                             <p class="text-muted">
                                 <template v-if="totalActivities.num > 1">
-                                    {{totalActivities.num}} actividades
+                                    {{totalActivities.num}} activities
                                 </template>
                                 <template v-if="totalActivities.num == 1">
-                                    {{totalActivities.num}} actividad
+                                    {{totalActivities.num}} activity
                                 </template>
                             </p>
                             <p class="font-weight-bolder text-muted"><Decimals :precio="totalActivities.precio"/>€</p>
                         </div>
                         <div class="d-flex justify-between" v-if="totalSouvenirs.precio > 0">
-                            <p class="text-muted">Envío</p>
+                            <p class="text-muted">Shipping</p>
                             <p class="font-weight-bolder text-muted" v-if="totalSouvenirs.precio < this.$page.props.settings.shippings"><Decimals :precio="5"/>€</p>
-                            <p class="font-weight-bolder text-muted" v-else>GRATIS</p>
+                            <p class="font-weight-bolder text-muted" v-else>FREE</p>
                         </div>
                         <div class="d-flex justify-between mt-2">
-                            <p class="font-weight-bolder">Importe</p>
+                            <p class="font-weight-bolder">Amount</p>
                             <p class="font-weight-bolder text-lg"><Decimals :precio="importeTotal"/> Euros</p>
                         </div>
                     </div>
@@ -156,9 +144,9 @@
                     <div class="col-12 col-md-8 mt-2">
                         <div class="d-block">
                             <input type="checkbox" class="form-control mr-1" v-model="checkTerminos">
-                            <a class="text-primary d-inline text-xs" target="_blank" href="/politicas/terminosycondiciones">He leído y acepto los términos y condiciones</a>
+                            <a class="text-primary d-inline text-xs" target="_blank" href="/politicas/terminosycondiciones">I have read and accept the terms and conditions</a>
                         </div>
-                        <button type="submit" class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2">Pagar</button>
+                        <button type="submit" class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2">To pay</button>
                     </div>
                 </div>
             </div>
@@ -269,13 +257,13 @@
                 for (let i = 0; i < this.forms_extra.length; i++) {
                     if(document.getElementById('input'+i).value == ''){
                         full = false;
-                        this.mensajeInputs = 'El campo '+this.forms_extra[i].name.split('\n')[0]+' es obligatorio';
+                        this.mensajeInputs = 'The field '+this.forms_extra[i].name.split('\n')[0]+' is mandatory';
                     }
                     this.form.data.push({[this.forms_extra[i].name.split('\n')[0]]: document.getElementById('input'+i).value})
                 }
                 if(this.form.name == '' || this.form.phone == '' || this.form.address == '' || this.form.cp == ''){
                     this.$swal({
-                        title: 'Nombre, móvil, dirección y código postal son campos obligatorios!',
+                        title: 'Name, mobile, address and zip code are required fields!',
                         icon: 'info',
                         showCloseButton: false,
                         showCancelButton: false,
@@ -298,7 +286,7 @@
                 }
                 else{
                     this.$swal({
-                        title: '¡Debe aceptar los términos y condiciones del servicio de pago!',
+                        title: '¡You must accept the terms and conditions of the payment service!!',
                         icon: 'info',
                         showCloseButton: false,
                         showCancelButton: false,

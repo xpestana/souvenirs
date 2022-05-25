@@ -232,6 +232,7 @@
         updated(){
             this.totalesSouvenirs();
             if(this.$page.props.flash.mensaje){
+                console.log(this.$page.props.flash.mensaje)
                 this.showPopup=true;
             }
             setTimeout(()=>this.showPopup=false, 3000);
@@ -358,10 +359,10 @@
                         acc = el.attributes.pedido[val].split(':');
                         
                         if(Number(acc[0]) > 0){
-                            acc[2] == 'Adultos' || acc[2] == 'Adulto' ? acc[2] = 'Adult' : ''
-                            acc[2] == 'Ni&ntilde;os' || acc[2] == 'Ni&ntilde;o' ? acc[2] = 'Child' : ''
-                            acc[2] == 'Estudiante' ? acc[2] = 'Student' : ''
-                            acc[2] == 'Beb&eacute;s' || acc[2] == 'Beb&eacute;' ? acc[2] = 'Babe' : ''
+                            acc[2] == 'Adultos' || acc[2] == 'Adulto' || acc[2] == 'Adults' ? acc[2] = 'Adult' : ''
+                            acc[2] == 'Ni&ntilde;os' || acc[2] == 'Ni&ntilde;o' || acc[2] == 'Children' ? acc[2] = 'Child' : ''
+                            acc[2] == 'Estudiante' || acc[2] == 'Studends' ? acc[2] = 'Student' : ''
+                            acc[2] == 'Beb&eacute;s' || acc[2] == 'Beb&eacute;' || acc[2] == 'Babies' ? acc[2] = 'Babe' : ''
                             if(Number(arrCon.indexOf(acc[2])) == -1){
                                 arrCon.push(acc[2])
                                 arrCan.push(Number(acc[0]))

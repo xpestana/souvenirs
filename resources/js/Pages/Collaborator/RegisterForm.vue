@@ -5,11 +5,11 @@
                 <div class="col-md-12 text-center">
                     <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/hilogo.png">
 
-                    <h1 class="title">Lo hacemos por ti</h1>
+                    <h1 class="title">We do it for you</h1>
                     <div class="caja-info mt-4">
                         <p>
-                            Lo hacemos por ti <br>
-                            Horario disponible: <br>
+                            We do it for you <br>
+                            Available hours: <br>
                             8:30-14:30 h. <br>
                             (+34) 777 777 777
                         </p>
@@ -18,13 +18,13 @@
             </div>
             <div class="col-md-5 up degrad py-4">
                 <div class="col-md-12 text-center">
-                    <h1 class="text-white mb-4 title_white">Crea una cuenta para<br>registrar tu alojamiento<br>y gestionarlo</h1>
+                    <h1 class="text-white mb-4 title_white">Create an account for<br>register your accommodation<br>and manage it</h1>
                     <div class="col-md-10 mx-auto">
                         <form @submit.prevent="submit" class=" mt-10">
                             <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="E-mail*" v-model="form.email" required/>
                             <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="Confirmar E-mail" v-model="form.email_confirmation" required/>
-                            <BreezeInput type="password" class="form-control my-2 py-4" autocomplete="off" placeholder="Contraseña" v-model="form.password" required/>
-                            <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Regístrate ahora</button>
+                            <BreezeInput type="password" class="form-control my-2 py-4" autocomplete="off" placeholder="Password" v-model="form.password" required/>
+                            <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Register now</button>
                             <ValidationErrors class="my-3" />
                         </form>
                     </div>

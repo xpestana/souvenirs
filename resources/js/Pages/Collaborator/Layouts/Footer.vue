@@ -12,10 +12,10 @@
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li class="pb-2"><Link :href="route('about.us')">¿Quiénes somos?</Link></li>
-                                        <li class="pb-2"><Link :href="route('contact')">Contáctanos</Link></li>
+                                        <li class="pb-2"><Link :href="route('about.us')">¿About us?</Link></li>
+                                        <li class="pb-2"><Link :href="route('contact')">Contact us</Link></li>
                                         <li class="pb-2"><a href="#">Blog</a></li>
-                                        <li class="pb-2"><a href="#">Trabaja con nosotros</a></li>
+                                        <li class="pb-2"><a href="#">Work with us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -23,11 +23,11 @@
                         <div class="col-12 col-md-3">
                             <div class="footer-widget mb-40">
                                 <div class="footer-title mb-55">
-                                    <h4>Servicios</h4>
+                                    <h4>Services</h4>
                                 </div>
                                 <div class="footer-content">
                                     <ul>
-                                        <li class="pb-2"><Link :href="route('activities')">Actividades</Link></li>
+                                        <li class="pb-2"><Link :href="route('activities')">Activities</Link></li>
                                         <li class="pb-2"><Link :href="route('souvenirs')">Souvenirs</Link></li>
                                     </ul>
                                 </div>
@@ -36,21 +36,21 @@
                         <div class="col-12 col-md-3">
                             <div class="footer-widget mb-40">
                                 <div class="footer-title mb-55">
-                                    <h4>Políticas</h4>
+                                    <h4>Policies</h4>
                                 </div>
                                 <div class="footer-content">
                                     <ul>
                                         <li class="pb-2">
-                                            <Link :href="route('privacidad')">Políticas de privacidad</Link>
+                                            <Link :href="route('privacidad')">Privacy policies</Link>
                                         </li>
                                         <li class="pb-2">
-                                            <Link :href="route('terminosycondiciones')">Términos y condiciones</Link>
+                                            <Link :href="route('terminosycondiciones')">Terms and Conditions</Link>
                                         </li>
                                         <li class="pb-2">
-                                            <Link :href="route('entregas')">Políticas de entrega</Link>
+                                            <Link :href="route('entregas')">Delivery policies</Link>
                                         </li>
                                         <li class="pb-2">
-                                            <Link :href="route('devolucion')">Políticas de devolución</Link>
+                                            <Link :href="route('devolucion')">Return Policy</Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -77,7 +77,7 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="copyright text-center">
-                        <p>Copyright ©<a href="#">HiCity</a>. Todos los derechos reservados.</p>
+                        <p>Copyright ©<a href="#">HiCitty</a>. All rights reserved.</p>
                     </div>
                 </div>
             </div>

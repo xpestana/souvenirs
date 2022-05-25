@@ -17,10 +17,19 @@
                 <!-- Links -->
                 <div class="col-7 offset-5 col-md-5 col-offset-7 offset-5 shadow-md p-3">
                     <ul class="navbar-nav">
-                        <li class="py-1"><Link :href="route('collaborator.index')"><i class="fas fa-user iconNav"></i> Mis alojamientos</Link></li>
-                        <li class="py-1"><Link :href="route('collaborator.ajustes.index')" ><i class="fas fa-wrench iconNav"></i>Ajustes</Link></li>
+                        <li class="py-1">
+                            <Link :href="route('collaborator.index')"><i class="fas fa-user iconNav"></i> 
+                            <template v-if="gestorDe == 1">
+                                My hotels
+                            </template>
+                            <template v-else>
+                                My lodgings
+                            </template>
+                            </Link>
+                        </li>
+                        <li class="py-1"><Link :href="route('collaborator.ajustes.index')" ><i class="fas fa-wrench iconNav"></i>Settings</Link></li>
                         <template v-if="!this.$page.props.auth.user">
-                            <li class="py-1"><Link :href="route('login')">Iniciar Sesión</Link></li>
+                            <li class="py-1"><Link :href="route('login')">Log in</Link></li>
                         </template>
                     </ul>
                 </div>
@@ -47,6 +56,14 @@
                     _token: this.$page.props.csrf_token,
                 })
             },
+        },
+        computed:{
+            gestorDe(){
+                if(this.$page.props.auth.user.profile == undefined){
+                    return this.$page.props.auth.profile.gestor
+                }
+                return this.$page.props.auth.user.profile.gestor;
+            }
         }
 	}
 </script>
