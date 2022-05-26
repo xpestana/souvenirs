@@ -45,7 +45,7 @@
             </div>
             <div class="row justify-content-between my-2 align-items-center">
                 <div class="col-12 col-md-5">
-                    <a href="javascript:void(0);" @click.prevent="logout" class="btn btn-lg text-white btn-cerrar">Cerrar sesión<i class="fas fa-key pl-1 pr-2"></i></a>
+                    <a href="javascript:void(0);" @click.prevent="logout" class="btn btn-lg text-white btn-cerrar">Sign off<i class="fas fa-key pl-1 pr-2"></i></a>
                 </div>
                 <div class="col-12 col-md-5 text-right btn-guardar">
                     <button class="btn btn-primary px-3 py-1 rounded-pill">Save Changes</button>

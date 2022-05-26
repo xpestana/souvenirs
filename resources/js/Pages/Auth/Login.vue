@@ -70,7 +70,7 @@
                                                 <template v-if="!showValidation">
                                                     <BreezeValidationErrors class="mb-3" />
                                                 </template>
-                                                <button class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Send</button>
+                                                <button class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100" :class="{ 'opacity-25': forgot.processing }" :disabled="forgot.processing">Send</button>
                                             </div>
                                         </div>
                                         </form>
@@ -98,12 +98,11 @@
                     </div>
                     <div class="row mb-2 justify-content-center">
                         <div class="col-12 text-center">
-                            <h1 class="text-lg font-weight-bolder">Muchas gracias</h1>
+                            <h1 class="text-lg font-weight-bolder">Thank you very much</h1>
                         </div>
                         <div class="col-8 px-0 py-3 text-left">
                             <p class="text-justify" v-if="$page.props.flash.status">
-                                Hemos enviado un correo a {{$page.props.flash.status.email}} con un enlace
-                                donde podras reestrablecer tu contraseña.
+                                We have sent an email to {{$page.props.flash.status.email}} with a link where you can reset your password.
                             </p>
                         </div>
                     </div>
