@@ -30,7 +30,7 @@
                                                 </div>
                                             </div>
                                             <div class="pro-content">
-                                                <h4><Link :href="route('product.souvenir.show',{product : product.product.id})">{{ product.product.title }}</Link></h4>
+                                                <h4><Link :href="route('product.souvenir.show',{product : product.product.id})">{{ product.product.title_en }}</Link></h4>
                                             </div>
                                         </div>
                                         <!-- Single Product End -->

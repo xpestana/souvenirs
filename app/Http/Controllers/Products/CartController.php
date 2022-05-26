@@ -85,7 +85,7 @@ class CartController extends Controller
         if ($product->stock >= $request->quantity + $cartQuantity) {
             $addCart = \Cart::add(array(
                 'id' => $product->id,
-                'name'=>$product->title,
+                'name'=>$product->title_en,
                 'price'=> $product->price,
                 'quantity' => $quantity,
                 'attributes' => array(
