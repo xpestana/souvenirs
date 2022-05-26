@@ -84,7 +84,6 @@ class CollaboratorController extends Controller
         $request->validate([
             'name' => 'required|string',
             'phone' => 'required|string',
-            'gestor' => ['required','string', Rule::in([1, 2])],
             'razon' => 'required|string',
             'nif' => 'required|string',
             'id' => 'required|string',
@@ -107,7 +106,7 @@ class CollaboratorController extends Controller
         ]);
         auth()->user()->assignRole('Hotel');
 
-        return Redirect::route('collaborator.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
+        return Redirect::route('collaborator.index')->with(['id'=>auth()->user()->id, 'message' => 'Successful registration', 'code' => 200, 'status' => 'success']);
     }
     public function create_hab()
     {
@@ -130,7 +129,7 @@ class CollaboratorController extends Controller
 
             $images=array("JPG", "JPEG", "PNG");
             if (!in_array(strtoupper($extension), $images)) {
-                return ['id' => $id, 'code' => 404, 'msg' => 'Formato de imagen incorrecto', 'status' => 'error'];
+                return ['id' => $id, 'code' => 404, 'msg' => 'Incorrect image format', 'status' => 'error'];
             }
             
             $response = [
@@ -228,7 +227,7 @@ class CollaboratorController extends Controller
                 'name'        => ($request->nombre_hotel) ? $request->nombre_hotel : null,
                 'hab'         => ($request->numero_habitaciones) ? $request->numero_habitaciones : null,
                 'calle'       => $request->calle,
-                'type'        => (auth()->user()->profile->gestor == 1) ? "hotel" : "apartamento",
+                'type'        => $request->tipo,
                 'address'     => $request->address,
                 'zone'        => $request->city,
                 'planta'      => $request->planta,
@@ -250,7 +249,7 @@ class CollaboratorController extends Controller
             $clientUser->assignRole('Client');
             $clientUser->hotel()->attach($hotel->id, ['manager' => false]);
 
-        return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
+        return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Saved successfully', 'code' => 200, 'status' => 'success']);  
         } catch (Exception $e) {
             
         }
@@ -324,7 +323,7 @@ class CollaboratorController extends Controller
             }
             $hotel->save();
 
-            return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
+            return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Accommodation upgraded successfully!', 'code' => 200, 'status' => 'success']);  
          }catch (Exception $e) 
          {
         

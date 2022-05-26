@@ -7,10 +7,10 @@
                 <div class="col-md-12 text-center">
                     <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/hilogo.png">
 
-                    <h1 class="title">Lo hacemos por ti</h1>
+                    <h1 class="title">We do it for you</h1>
                     <div class="caja-info mt-4">
                         <p>
-                            Horario disponible: <br>
+                           Available hours: <br>
                             8:30-14:30 h. <br>
                             (+34) 722 193 903
                         </p>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-5 up degrad py-4">
                 <div class="col-md-12 text-center">
-                    <h1 class="text-white mb-4 title_white">¡Restaurar contraseña!</h1>
+                    <h1 class="text-white mb-4 title_white">¡Reset password!</h1>
                     <div class="col-md-10 mx-auto">
                         <form @submit.prevent="submit">
                             <div class="text-left">
@@ -29,18 +29,18 @@
 
                             <div class="mt-4 text-left relative">
                                 <!-- <label for="" class="text-white">Password</label> -->
-                                <BreezeInput id="password" type="password" class="mt-1 block w-full py-3.5" v-model="form.password" required autocomplete="new-password" placeholder="Nueva contraseña"/>
+                                <BreezeInput id="password" type="password" class="mt-1 block w-full py-3.5" v-model="form.password" required autocomplete="new-password" placeholder="New password"/>
                                 <button class="btn absolute top-1 right-5 rounded-circle px-auto" type="button" v-on:click="showPass('password')"><i class="far fa-eye"></i></button>
                             </div>
 
                             <div class="mt-4 text-left relative">
                                 <!-- <label for="" class="text-white">Confirm Password</label> -->
-                                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full py-3.5" v-model="form.password_confirmation" required autocomplete="new-password" placeholder="Confirma tu contraseña"/>
+                                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full py-3.5" v-model="form.password_confirmation" required autocomplete="new-password" placeholder="Confirm password"/>
                                 <button class="btn absolute top-1 right-5 rounded-circle px-auto" type="button" v-on:click="showPass('password_confirmation')"><i class="far fa-eye"></i></button>
                             </div>
 
                             <div class="flex items-center justify-center mt-4">
-                                <button type="submit" class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100 text-base" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Restaurar contraseña</button>
+                                <button type="submit" class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100 text-base" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Reset password</button>
                             </div>
                         </form> 
                     </div>

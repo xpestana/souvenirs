@@ -8,57 +8,51 @@
 							<notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
 							<div class="row">
 								<div class="col-md-7">
-									<h3>Datos personales</h3>
-									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.name" autocomplete="name" placeholder="Persona en contacto *" required/>
-									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.phone" autocomplete="phone" placeholder="Número de teléfono *" required/>
-
-									<select name="gestor" id="gestor" class="form-control w-100 select" required v-model="form.gestor">
-										<option value="0">Eres gestor de *: </option>
-										<option value="1">Hotel</option>
-										<option value="2">Apartamento</option>
-									</select>
+									<h3>Personal information</h3>
+									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.name" autocomplete="name" placeholder="Contact person *" required/>
+									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.phone" autocomplete="phone" placeholder="Phone number *" required/>
 								</div>
 								<div class="col-md-5">
-									<img src="/vendor_asset/img/logo/logo.png" class="my-4 mx-auto">
+									<img src="/vendor_asset/img/logo/logo.png" class="my-1 mx-auto">
 								</div>
-								<div class="col-md-12 mt-4">
-									<h3>Datos fiscales</h3>
+								<div class="col-md-12">
+									<h3>Tax data</h3>
 									<div class="row justify-content-between">
 										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.razon" autocomplete="razon" placeholder="Razón social *" required/>
+											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.razon" autocomplete="razon" placeholder="Business name *" required/>
 										</div>
 										<div class="col-md-6">
 											<select name="nif" id="nif" v-model="form.nif" class="form-control w-100 select" required>
-												<option value="NIF Español">NIF Español</option>
-												<option value="Número VAT intracomunitario">Número VAT intracomunitario</option>
-												<option value="Pasaporte">Pasaporte</option>
-												<option value="Documento oficial país de residencia">Documento oficial país de residencia</option>
-												<option value="Certificado de residencia">Certificado de residencia</option>
-												<option value="Otro documento probatorio">Otro documento probatorio</option>
-												<option value="No censado">No censado</option>
+												<option value="NIF Español">NIF Spanish</option>
+												<option value="Intracommunity VAT number">Intracommunity VAT number</option>
+												<option value="Passport">Passport</option>
+												<option value="Official document country of residence">Official document country of residence</option>
+												<option value="Residence certificate">Residence certificate</option>
+												<option value="Other supporting document">Other supporting document</option>
+												<option value="Not registered">Not registered</option>
 											</select>
 										</div>
 										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.id" autocomplete="id" placeholder="N° de Identificador Fiscal *" required/>
+											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.id" autocomplete="id" placeholder="Fiscal Identifier Number *" required/>
 										</div>
 										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.country" autocomplete="country" placeholder="País *" value="España" readonly="" required/>
+											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.country" autocomplete="country" placeholder="Country *" value="Spain" readonly="" required/>
 										</div>
 										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" autocomplete="city" placeholder="Ciudad *" required/>
+											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" autocomplete="city" placeholder="Town *" required/>
 										</div>
 										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" autocomplete="cp" placeholder="Codigo Postal *" required/>
+											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" autocomplete="cp" placeholder="Postal Code *" required/>
 										</div>
 										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" autocomplete="address" placeholder="Dirección fiscal *" required/>
+											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" autocomplete="address" placeholder="Fiscal address *" required/>
 										</div>
 										<div class="w-100">
 											<ValidationErrors class="my-3" />
 										</div>
 										<div align="center" class="col-12 mt-3 text-center">
 											<button type="submit" class="btn btn-primary  rounded-pill  w-50 py-1 mt-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-												Crear cuenta
+												Create Account
 											</button>
 											<div v-if="status" class="mb-4 font-medium text-sm text-danger mt-4">
 												{{ status }}
@@ -104,8 +98,6 @@
 		},
 		methods: {
 			submit() {
-				var gestor = document.getElementById('gestor').value;
-				this.form.gestor = gestor;
 				this.form.post(route('collaborator.register.data'),{
 					_token: this.$page.props.csrf_token,
 					errorBag: 'submit',

@@ -19,12 +19,7 @@
                     <ul class="navbar-nav">
                         <li class="py-1">
                             <Link :href="route('collaborator.index')"><i class="fas fa-user iconNav"></i> 
-                            <template v-if="gestorDe == 1">
-                                My hotels
-                            </template>
-                            <template v-else>
                                 My lodgings
-                            </template>
                             </Link>
                         </li>
                         <li class="py-1"><Link :href="route('collaborator.ajustes.index')" ><i class="fas fa-wrench iconNav"></i>Settings</Link></li>

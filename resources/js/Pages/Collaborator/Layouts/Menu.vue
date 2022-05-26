@@ -7,12 +7,7 @@
                 <nav>
                     <ul class="primary-menu-list d-flex justify-content-end pr-5">
                         <li><Link :href="route('collaborator.index')" :class="{ 'border-bottom border-dark': $page.url === '/tablero/alojamientos' }"><i class="fas fa-user iconNav"></i>
-                            <template v-if="gestorDe == 1">
-                                My hotels
-                            </template>
-                            <template v-else>
                                 My lodgings
-                            </template>
                          </Link></li>
                         <li><Link :href="route('collaborator.ajustes.index')" :class="{ 'border-bottom border-dark': $page.url === '/tablero/ajustes' }"><i class="fas fa-wrench iconNav"></i> Settings</Link></li>
                     </ul>
