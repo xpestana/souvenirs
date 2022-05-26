@@ -84,7 +84,6 @@ class CollaboratorController extends Controller
         $request->validate([
             'name' => 'required|string',
             'phone' => 'required|string',
-            'gestor' => ['required','string', Rule::in([1, 2])],
             'razon' => 'required|string',
             'nif' => 'required|string',
             'id' => 'required|string',
@@ -228,7 +227,7 @@ class CollaboratorController extends Controller
                 'name'        => ($request->nombre_hotel) ? $request->nombre_hotel : null,
                 'hab'         => ($request->numero_habitaciones) ? $request->numero_habitaciones : null,
                 'calle'       => $request->calle,
-                'type'        => (auth()->user()->profile->gestor == 1) ? "hotel" : "apartamento",
+                'type'        => $request->tipo,
                 'address'     => $request->address,
                 'zone'        => $request->city,
                 'planta'      => $request->planta,

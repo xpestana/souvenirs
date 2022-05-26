@@ -70,7 +70,7 @@
                                                 <template v-if="!showValidation">
                                                     <BreezeValidationErrors class="mb-3" />
                                                 </template>
-                                                <button class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Enviar</button>
+                                                <button class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100" :class="{ 'opacity-25': forgot.processing }" :disabled="forgot.processing">Enviar</button>
                                             </div>
                                         </div>
                                         </form>

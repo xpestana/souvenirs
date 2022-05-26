@@ -11,27 +11,17 @@
             </div>
             <div class="col-12 text-center px-0 px-lg-4">
                 <template v-if="hotels.length == 0">
-                    <template v-if="$page.props.auth.user.profile.gestor == 1">
-                        <a href="javascript:void(0)" class="btn btn-outline-info boton-inicio" @click.prevent="lodging"> <i class="fas fa-plus"></i>Añadir Hotel</a>
-                    </template>
-                    <template v-else>
-                        <a href="javascript:void(0)" class="btn btn-outline-info boton-inicio" @click.prevent="lodging"> <i class="fas fa-plus"></i>Añadir alojamiento</a>
-                    </template>
+                    <a href="javascript:void(0)" class="btn btn-outline-info boton-inicio" @click.prevent="lodging"> <i class="fas fa-plus"></i>Añadir alojamiento</a>
                 </template>
                 <template v-else>
                     <section id="cabecera">
                         <div class="container">
                             <div class="row caja-info">
                                 <div class="col-12 col-md-9 info-boton">
-                                    <template v-if="$page.props.auth.user.profile.gestor == 1">
-                                        <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir hotel</a>
-                                    </template>
-                                    <template v-else>
-                                        <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
-                                    </template>
+                                    <a type="button" class="btn btn-outline-info boton rounded-pill px-4"  @click.prevent="lodging"><i class="fas fa-plus"></i>Añadir alojamiento</a>
                                     <h5 v-if="this.user_id > 0" class="text-info p-3"><Link :href="route('collaborator.sales.hab',{id: user_id})">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
                                 </div>
-                                <div class="col-12 col-md-3 info-total text-right" v-if="$page.props.auth.user.profile.gestor == 2">
+                                <div class="col-12 col-md-3 info-total text-right">
                                     <h3 class="text-info"><strong>Total</strong></h3><br>
                                     <h4><strong>Beneficio {{ total }} €</strong></h4><br>
                                     <h4><strong>Pedidos {{ orders }}</strong></h4><br>

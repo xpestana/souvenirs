@@ -11,17 +11,11 @@
 									<h3>Datos personales</h3>
 									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.name" autocomplete="name" placeholder="Persona en contacto *" required/>
 									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.phone" autocomplete="phone" placeholder="Número de teléfono *" required/>
-
-									<select name="gestor" id="gestor" class="form-control w-100 select" required v-model="form.gestor">
-										<option value="0">Eres gestor de *: </option>
-										<option value="1">Hotel</option>
-										<option value="2">Apartamento</option>
-									</select>
 								</div>
 								<div class="col-md-5">
-									<img src="/vendor_asset/img/logo/logo.png" class="my-4 mx-auto">
+									<img src="/vendor_asset/img/logo/logo.png" class="my-1 mx-auto">
 								</div>
-								<div class="col-md-12 mt-4">
+								<div class="col-md-12">
 									<h3>Datos fiscales</h3>
 									<div class="row justify-content-between">
 										<div class="col-md-6">
@@ -104,8 +98,6 @@
 		},
 		methods: {
 			submit() {
-				var gestor = document.getElementById('gestor').value;
-				this.form.gestor = gestor;
 				this.form.post(route('collaborator.register.data'),{
 					_token: this.$page.props.csrf_token,
 					errorBag: 'submit',
