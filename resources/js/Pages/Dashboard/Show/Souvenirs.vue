@@ -32,7 +32,7 @@
                     <back/>
                     <div class="thubnail-desc fix mt-1 mt-md-4">
                         <div class="product-header-mobile">
-                            <h3 class="text-azulc font-weight-bolder text-lg d-inline">{{ product.title }}</h3>
+                            <h3 class="text-azulc font-weight-bolder text-lg d-inline">{{ product.title_en }}</h3>
                             <div class="d-inline">
                                 <img v-if="this.product.offer > 0" class="raya-img d-inline" src="/vendor_asset/img/slash.png" style="opacity:0.6">
                                 <h3 class="font-weight-bolder text-2xl d-inline ml-3" :class="{'opacidad':this.product.offer > 0}"><Decimals :precio="product.price"/>€</h3>
@@ -63,10 +63,10 @@
                             <li class="write-review"><a href="#">Escribe un review</a></li>
                         </ul>
                         <div class="pro-desc-details mt-4"> 
-                            <span v-html="product.description"></span>
+                            <span v-html="product.description_en"></span>
                         </div>
                         <div class="pt-10 quatity-stock" v-if="$page.props.auth.role == 'Admin'">
-                            <Link :href="route('souvenirs.edit',{souvenir:product.id})" class="pro-cart">Editar Souvenir</Link>
+                            <Link :href="route('admin.souvenirs.edit',{id:product.id,numPage:1})" class="pro-cart">Edit Souvenir</Link>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                         <!-- Product Thumbnail Tab Content Start -->
                         <div class="tab-content thumb-content">
                             <div id="dtail" class="tab-pane fade show active">
-                                <span v-html="product.description"></span>
+                                <span v-html="product.description_en"></span>
                             </div>
                         </div>
                         <!-- Product Thumbnail Tab Content End -->

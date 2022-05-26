@@ -47,6 +47,22 @@
                                 Actualizar imagenes
                         </button>
                   </div>
+
+                  <div class="col-12 text-center text-md-left my-2 mt-4">
+                      <p class="text-xl">Traduccion en Inglés</p>
+                  </div>
+                  <div class="col-12 my-2">
+                      <input type="text" class="border rounded w-100" placeholder="Título*" v-model="form.titleEn">
+                  </div>
+
+                  <div class="col-12">
+                      <label class="text-base">Descripción del producto</label>
+                      <ckeditor 
+                        :editor="editor" 
+                        :config="editorConfig"
+                        v-model="form.descriptionEn"
+                    ></ckeditor>
+                  </div>
               </div>
           </div>
           <div class="offset-md-4"></div>
@@ -129,6 +145,8 @@ export default {
                 featured:0,
                 stock: this.product.stock,
                 category: this.product.category,
+                titleEn: this.product.title_en,
+                descriptionEn: this.product.description_en,
                 image: null,
                 idPage:this.numPage
             }),

@@ -24,7 +24,9 @@ class Products extends Model
         'category',
         'offer',
         'short_id',
-        'summary'
+        'summary',
+        'title_en',
+        'description_en'
     ];
 
     /**

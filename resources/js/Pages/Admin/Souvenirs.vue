@@ -81,7 +81,7 @@
                         <tbody id="tbody"> 
                             <template v-if="data.length > 0">
                                 <tr v-for="product in data" :key="product.id">
-                                    <td class="text-center">{{ product.title }}</td>
+                                    <td class="text-center">{{ product.title_en }}</td>
                                     <td class="text-center">{{ product.price }}</td>
                                     <td class="text-center">{{ product.stock }}</td>
                                     <td class="text-center">{{ product.category }}</td>
