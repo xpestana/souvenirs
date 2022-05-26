@@ -112,7 +112,7 @@
                                             </div>
                                             <div class="pro-mobile p-2 bg-white">
                                                 <div class="pro-mobile-title text-left">
-                                                    <h4 class="md:text-base text-muted whitespace-nowrap truncate ..."><Link :href="route('product.souvenir.show',{product : product.id})" v-html="product.title"></Link></h4>
+                                                    <h4 class="md:text-base text-muted whitespace-nowrap truncate ..."><Link :href="route('product.souvenir.show',{product : product.id})" v-html="product.title_en"></Link></h4>
                                                 </div>
                                                 <div class="pro-mobile-price text-xl font-bold text-right">
                                                     <span class="d-inline"><Decimals :precio="product.price" /></span><span class="d-inline">€</span>
