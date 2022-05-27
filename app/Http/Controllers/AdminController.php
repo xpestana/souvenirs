@@ -621,4 +621,23 @@ class AdminController extends Controller
         $order = Order::find($id)->load('hotel.user', 'shippings.product');
         return Inertia::render('Admin/Sales_details', compact('order'));
     }
+
+     public function associates(Request $request)
+    {
+        $collaborators = User::join('profiles', 'profiles.user_id', '=', 'users.id')
+                ->select('users.*', 'profiles.firstname','profiles.lastname','profiles.city')
+                ->role('Hotel')
+                ->search($request->search)
+                ->email($request->search, 'Hotel')
+                ->where('del',false)
+                ->with('hotel.orders.shippings')
+                ->orderBy('profiles.firstname','ASC')
+                ->paginate(10);
+        return Inertia::render('Admin/Associates/Index',compact('collaborators') );
+    }
+
+    public function associates_create(Request $request)
+    {
+        return Inertia::render('Admin/Associates/Create');   
+    }
 }
