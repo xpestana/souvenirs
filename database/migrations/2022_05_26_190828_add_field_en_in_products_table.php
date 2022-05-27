@@ -14,9 +14,9 @@ class AddFieldEnInProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('title_en')->nullable();
-            $table->string('description_en')->nullable();
-            $table->string('summary_en')->nullable();
+            $table->string('title_en',2000)->nullable();
+            $table->string('description_en',2000)->nullable();
+            $table->string('summary_en',2000)->nullable();
         });
     }
 

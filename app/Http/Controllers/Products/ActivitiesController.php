@@ -299,6 +299,8 @@ class ActivitiesController extends Controller
         $product = Products::find($activities);
         $product->description = $request->description;
         $product->title = $request->title;
+        $product->description_en = $request->descriptionEn;
+        $product->title_en = $request->titleEn;
         $product->save();
 
         $activities = Activities::find($product->activities->id);
@@ -327,14 +329,18 @@ class ActivitiesController extends Controller
     {
         $today = now();
         $week = date("d-m-Y",strtotime($today."+ 2 month"));
+
+        /*Español*/
+
         $products = Http::post('https://app.turitop.com/v1/product/getproducts', [
             'access_token'   => connect()['access_token'],
             'data' => [
-                        'language_code: es'
+                        'language_code'=> "es"
                     ]
         ])->collect()['data']['products'];
         
         foreach($products as $product){
+            
             $p = Products::where("short_id", $product['short_id'])->first();
             
             $events = Http::post('https://app.turitop.com/v1/product/tour/getevents', [
@@ -425,6 +431,113 @@ class ActivitiesController extends Controller
                 }
         }
         
+         /*Ingles*/
+        
+        $products = Http::post('https://app.turitop.com/v1/product/getproducts', [
+            'access_token'   => connect()['access_token'],
+            'data' => [
+                        'language_code'=> "en"
+                    ]
+        ])->collect()['data']['products'];
+        
+        foreach($products as $product){
+            
+            $p = Products::where("short_id", $product['short_id'])->first();
+            
+            $events = Http::post('https://app.turitop.com/v1/product/tour/getevents', [
+                        'access_token'   => connect()['access_token'],
+                        'data' => [
+                            "product_short_id" => $product['short_id'],
+                            "start_date"=> strtotime($today),
+                            "end_date"=> strtotime($week),
+                            'language_code'=> "en"
+                        ]
+                    ])->collect();
+            if(isset($events['data']['events'])){
+                $events = $events['data']['events'];
+            }
+            $prices=null;
+            if(isset($events[0])){
+                $prices = Http::post('https://app.turitop.com/v1/tickets/getprices', [
+                    'access_token'   => connect()['access_token'],
+                    'data' => [
+                        "product_short_id" => $product['short_id'],
+                        "date_event"=> $events[0]['time'],
+                        'language_code'=> "en"
+                    ]
+                ])->collect();
+                if(isset($prices['data'])){
+                    $prices = $prices['data'];
+                }
+            }
+
+                if($p){
+                    $p->type = 'Activities';
+                    if(is_null($p->title_en)){
+                        $p->title_en = html_entity_decode($product['name']);    
+                    }
+                    if(is_null($p->description_en)){
+                        $p->description_en = ($product['description'] != '') ? html_entity_decode($product['description']): html_entity_decode($product['summary']);
+                    }
+                    $p->category = $product['type']['name'];
+                    $p->short_id = $product['short_id'];
+                    $p->summary_en = html_entity_decode($product['summary']);
+                    $p->save();
+
+                    $p->activities()
+                        ->update([
+                            'details_en' => ($product['pricing_notes'] != '') ? html_entity_decode($product['pricing_notes']): html_entity_decode($product['summary']),
+                            'flow' => $product['flow'],
+                            'price_en' => json_encode($prices),
+                            'duration' => $product['duration'],
+                            'coordinates' => $product['coordinates'],
+                            'price_notes_en' => $product['pricing_notes'],
+                            'events_en' => json_encode($events),
+                        ]);
+
+                if (!empty($product['images'])) {
+                    foreach($product['images'] as $image){
+                        $p->images()->update([
+                            'name'          => $image['url'],
+                            'url'           => $image['url'],
+                        ]);
+                    }
+                }
+                }else{
+
+                    $prod = Products::create([
+                        'type' => 'Activities',
+                        'title_en' => html_entity_decode($product['name']),
+                        'description_en' => ($product['description'] != '') ? html_entity_decode($product['description']): html_entity_decode($product['summary']),
+                        'featured' => false,
+                        'category' => $product['type']['name'],
+                        'short_id' => $product['short_id'],
+                        'summary_en' => html_entity_decode($product['summary']),
+                        ]);
+
+                    $prod->activities()
+                        ->create([
+                            'details_en' => ($product['pricing_notes'] != '') ? html_entity_decode($product['pricing_notes']): html_entity_decode($product['summary']),
+                            'flow' => $product['flow'],
+                            'duration' => $product['duration'],
+                            'coordinates' => $product['coordinates'],
+                            'price_en' => json_encode($prices),
+                            'events_en' => json_encode($events),
+                            'price_notes_en' => $product['pricing_notes'],
+                            'language' => "Español",
+                        ]);
+
+                if (!empty($product['images'])) {
+                    foreach($product['images'] as $image){
+                        Images::create([
+                            'products_id'   => $prod->id,
+                            'name'          => $image['url'],
+                            'url'           => $image['url'],
+                        ]);
+                    }
+                }
+                }
+        }
       return back()->with(['id'=>200, 'message' => 'Actualizado con exito', 'code' => 200, 'status' => 'success']); 
     }
 }

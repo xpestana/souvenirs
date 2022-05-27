@@ -27,6 +27,10 @@ class Activities extends Model
         'events',
         'price_notes',
         'language',
+        'details_en',
+        'price_en',
+        'price_notes_en',
+        'events_en',
     ];
 
     /**

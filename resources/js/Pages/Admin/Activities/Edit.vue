@@ -17,6 +17,10 @@
                 <span class="d-block font-weight-bolder mb-2">Título de la actividad</span>
                 <input type="text" v-model="form.title" class="border rounded w-72 md:w-96" placeholder="Título">
             </div>
+            <div class="col-12 col-md-6 px-md-0">
+                <span class="d-block font-weight-bolder mb-2">Título de la actividad en ingles</span>
+                <input type="text" v-model="form.titleEn" class="border rounded w-72 md:w-96" placeholder="Título">
+            </div>
             <div class="col-12 col-md-6">
                 <select name="" id="idioma" class="border rounded w-72 md:w-96 mt-4">
                     <option value="">Idioma</option>
@@ -36,6 +40,14 @@
                     :config="editorConfig"
                     v-model="form.description"
                 ></ckeditor>
+                <div class="col-12 mt-4 p-0">
+                    <span class="d-block font-weight-bolder mb-1">Descripción en ingles</span>
+                <ckeditor 
+                    :editor="editor" 
+                    :config="editorConfig"
+                    v-model="form.descriptionEn"
+                ></ckeditor>
+                </div>
             </div>
             <div class="col-12 col-md-6">
                 <span class="d-block font-weight-bolder mb-1 mt-2 mt-md-0">Precio base</span>
@@ -85,7 +97,9 @@ export default {
         return {
             form: this.$inertia.form({
 				title: this.product.title,
+                titleEn: this.product.title_en,
                 description: this.product.description,
+                descriptionEn: this.product.description_en,
                 priceUnique:this.product.price,
                 language:this.product.activities.language,
                 pricesArr:[],
