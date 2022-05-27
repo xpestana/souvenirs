@@ -164,7 +164,7 @@
          computed:{
           actList(){
             return this.data.map((el)=>{
-              let precios = JSON.parse(el.activities.priceA);
+              let precios = JSON.parse(el.activities.price_en);
               let arr = [];
               if(precios !== null){
                   for(let val in precios.prices_per_ticket){
@@ -180,7 +180,7 @@
                 precios:arr,
                 language:el.activities.language,
                 images:el.images,
-                title:el.title,
+                title:el.title_en,
                 duration:el.activities.duration,
               }
             })

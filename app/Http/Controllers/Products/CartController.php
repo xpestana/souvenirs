@@ -129,7 +129,7 @@ class CartController extends Controller
         }
         $addCart = \Cart::add(array(
             'id' => $product->id,
-            'name'=>$product->title,
+            'name'=>$product->title_en,
             'price'=> 20,
             'quantity' => 1,
             'attributes' => array(

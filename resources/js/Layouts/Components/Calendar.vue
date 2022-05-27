@@ -166,6 +166,7 @@
                         confirmButtonAriaLabel: 'Aceptar!',
                     })
                 }else{
+                    console.log(this.form)
                     this.form.post(route('cart.activity'),{
                         _token: this.$page.props.csrf_token,
                         errorBag: 'submit',
@@ -194,6 +195,7 @@
             },
             recorrerPrecios(){
                 let arr = []
+                
                 for(let key in this.prices.prices_per_ticket)
                 {
                     arr.push(this.ticket[key])

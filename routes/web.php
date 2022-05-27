@@ -317,6 +317,10 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::post('/colaborador/store', [AdminController::class, 'collaborator_store'])->name('admin.collaborator.store');
     Route::get('/colaborador/{id}', [AdminController::class, 'collaborator_details'])->name('admin.collaborator.show');
 
+    /*Asociados*/
+    Route::get('/asociados', [AdminController::class, 'associates'])->name('admin.associates');
+    Route::get('/asociados/crear-asociado', [AdminController::class, 'associates_create'])->name('admin.associates.create');
+
     /*Alojamientos*/
     Route::get('/crear/alojamiento/{collaborator}', [AdminController::class, 'lodging_create'])->name('admin.lodging.create');
     Route::post('/store/alojamiento', [AdminController::class, 'lodging_store'])->name('admin.lodging.store');

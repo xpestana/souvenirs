@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row section-description">
             <div class="col-12 px-3 mt-1">
-                <h1 class="font-weight-bolder text-xl">{{ product.title }}</h1>
+                <h1 class="font-weight-bolder text-xl">{{ product.title_en }}</h1>
             </div>
             <div class="col-12 d-flex flex-row justify-around mt-2 pb-2 border-bottom">
                 <div class="time text-center">
@@ -28,11 +28,11 @@
                 </div>
             </div>
             <div class="col-12 mt-2 pb-2 border-bottom">
-                <template v-if="product.summary !== null">
-                    <div class="break-words">{{product.summary}}</div>
+                <template v-if="product.summary_en !== null">
+                    <div class="break-words">{{product.summary_en}}</div>
                 </template>
                 <template v-else>
-                    <div class="break-words" v-html="product.description">
+                    <div class="break-words" v-html="product.description_en">
                     </div>
                 </template>
             </div>
@@ -53,12 +53,12 @@
                         </button>
 
                         <div id="descripcion" class="collapse py-3 px-3" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <template v-if="product.description !== null">
-                                <div class="" v-html="product.description">
+                            <template v-if="product.description_en !== null">
+                                <div class="" v-html="product.description_en">
                                 </div>
                             </template>
                             <template v-else>
-                                <div>{{product.summary}}</div>
+                                <div>{{product.summary_en}}</div>
                             </template>
                             
                         </div>
@@ -140,8 +140,8 @@
                         </button>
 
                         <div id="detalles" class="collapse py-3 px-3" aria-labelledby="head4" data-parent="#accordionExample">
-                            <template v-if="product.activities.details !== null">
-                                <div v-html="filtroDetalles(product.activities.details)">
+                            <template v-if="product.activities.details_en !== null">
+                                <div v-html="filtroDetalles(product.activities.details_en)">
                                 </div>    
                             </template>
                             <template v-else>
@@ -162,8 +162,8 @@
                         </button>
 
                         <div id="cancelaciones" class="collapse py-2 px-3" aria-labelledby="head5" data-parent="#accordionExample">
-                            <template v-if="product.activities.price_notes !== null">
-                                <div v-html="filtroDetalles(product.activities.price_notes)">
+                            <template v-if="product.activities.price_notes_en !== null">
+                                <div v-html="filtroDetalles(product.activities.price_notes_en)">
                                 </div>    
                             </template>
                             <template v-else>
@@ -261,6 +261,7 @@
             setTimeout(()=>this.showPopup=false, 3000);
         },
         created(){
+            console.log(this.product)
             this.moment=Moment;
             if(this.product.activities.priceA !== "null")
             {
@@ -273,11 +274,11 @@
                 }
             }
             
-            if(this.product.activities.events.length >0){
-                let lista = JSON.parse(this.product.activities.events)
+            if(this.product.activities.events_en.length >0){
+                let lista = JSON.parse(this.product.activities.events_en)
                 if(lista.status == 'ERROR'){}
                 else{
-                    this.eventos = JSON.parse(this.product.activities.events);
+                    this.eventos = JSON.parse(this.product.activities.events_en);
                 }
             } 
         },
