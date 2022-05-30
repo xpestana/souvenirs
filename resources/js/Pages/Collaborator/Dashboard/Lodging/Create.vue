@@ -28,7 +28,7 @@
 							<select name="" id="registerA" class="rounded border w-100 py-1" @change="showForm">
 								<option value="-">Select</option>
 								<option value="hotel">Hotel</option>
-								<option value="lodging">Lodging</option>
+								<option value="lodging">Apartamento</option>
 							</select>
 						</div>
 					</div>
@@ -36,39 +36,39 @@
 						<div class="row justify-content-between">
 							<template v-if="registerHotel">
 								<div class="col-12 col-md-6 mb-3">
-									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Name of the hotel*">
+									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Nombre del hotel*">
 								</div>
 								<div class="col-12 col-md-6 mb-3">
-									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="Number of rooms*">
+									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="Numero de habitaciones*">
 								</div>
 							</template>
 							<div class="col-12 mb-3" :class="{'col-md-6' : registerHotel}">
-								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.calle" placeholder="Street *">
+								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.calle" placeholder="Calle *">
 							</div>
 							<div class="col-12 mb-3" :class="{'col-md-6' : registerHotel}">
-								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.planta" placeholder="N° - Letter - Floor *">
+								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.planta" placeholder="N° - Letra - Piso *">
 							</div>
 							<template v-if="registerLodging">
 								<div class="col-md-12 mb-3">
-									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" placeholder="Other indications about the address">
+									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" placeholder="Otras indicaciones sobre la dirección">
 								</div>
 							</template>
 							<div class="col-md-6 mb-3">
-								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" placeholder="Town *" >
+								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" placeholder="Ciudad *" >
 							</div>
 							<div class="col-md-6 mb-3">
 								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" placeholder="CP *">
 							</div>
 							<template v-if="registerLodging">
 							<div class="col-md-6 mb-3">
-								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.code" placeholder="License number VFT/SE/12345" >
+								<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.code" placeholder="N° de licencia VFT/SE/12345" >
 							</div>
 							</template>
 							<div class="col-md-6 mb-3">
-								<input type="url" class="form-control w-100 mb-2 py-3" v-model="form.url" placeholder="Website link" >
+								<input type="url" class="form-control w-100 mb-2 py-3" v-model="form.url" placeholder="link web" >
 							</div>
 							<div class="col-md-12 mb-3">
-								Add image <button 
+								Añadir imagen <button 
 										type="button"
 										style="border-radius: 20px"
 										size="sm"
@@ -111,7 +111,7 @@
 			<div class="col-md-6 d-flex">
 				<template v-if="registerLodging || registerHotel">
 					<div class="container-logo my-auto">
-						<img src="/vendor_asset/img/logo/logosintexto.png" class="w-100">
+						<img src="/vendor_asset/img/logo/hilogo.png" class="w-100">
 					</div>
 				</template>
 			</div>
