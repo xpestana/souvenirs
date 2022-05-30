@@ -688,4 +688,47 @@ class AdminController extends Controller
 
          return  Redirect::route('admin.associates')->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
     }
+    public function associates_updt(Request $request, $id){
+        $request->validate([
+            'email' => ['nullable', 'email', 'confirmed', 'max:255', Rule::unique('users')->ignore($id)],
+            'password' => 
+            ['nullable', 
+                Rules\Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->uncompromised()
+            ],
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'gestor' => ['required','string', Rule::in([1, 2])],
+            'razon' => 'required|string',
+            'nif' => 'required|string',
+            'id' => 'required|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'address' => 'required|string',
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->email;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        
+        $profile = profile::find($user->profile->id);
+        $profile->firstname = $request->name;
+        $profile->phone = $request->phone;
+        $profile->gestor = $request->gestor;
+        $profile->razon = $request->razon;
+        $profile->nif = $request->nif;
+        $profile->identify = $request->id;
+        $profile->city = $request->city;
+        $profile->cp = $request->cp;
+        $profile->address = $request->address;
+        $profile->save();
+
+        return back()->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
+    }
 }
