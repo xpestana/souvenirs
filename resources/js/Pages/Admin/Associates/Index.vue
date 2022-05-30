@@ -30,83 +30,85 @@
 			</div>
 			</div>
 		<div class="container px-0 cuerpo">
-				<div v-for="clbtr in colaboradores" :key="clbtr.id">
-                    <div class="row colaborador my-4 p-2 w-75 mx-auto bg-light justify-content-center justify-content-md-between" >
-                        <div class="col-10 col-md-6">
-                            <h1 class="font-weight-bolder text-center text-md-left">{{clbtr.firstname}} </h1>
-                        </div>
-                        <div class="col-10 col-md-6">
-                            <p class="font-weight-bolder text-muted mt-3 text-center text-md-left">{{clbtr.email}}</p>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-md-inline-flex mt-3 pb-2 pb-md-0">
-                                <div class="pr-md-4 text-md-center">
-                                    <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                                    <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{calcularBeneficio(clbtr.hotel)}}€</p>
-                                </div>
-                                <div class="pr-md-4 text-md-center"> 
-                                    <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
-                                    <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.total_orders }}</p>
-                                </div>
-                                <div class="pr-md-4 text-md-center"> 
-                                    <p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
-                                    <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.lodgings}}</p>
-                                </div>
-                                <div class="pr-md-4 text-md-center pt-1"> 
-                                    <a href="#" class="text-primary px-md-2" data-toggle="modal" :data-target="'#colaborador'+clbtr.id">Obtener QR</a>
-                                    <!-- Central Modal Small -->
-                                    <div class="modal fade" :id="'colaborador'+clbtr.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                    aria-hidden="true">
-                                    <!-- Change class .modal-sm to change the size of the modal -->
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content mx-auto">
-                                                <div class="modal-body p-0">
-                                                    <div class="row mt-5 mb-2">
-                                                        <div class="col-12 my-4 d-flex justify-content-center">
-                                                            <QRCodeVue3
-                                                                :width="1080"
-                                                                :height="1080"
-                                                                :imgclass="'souvenirs_img'+clbtr.id"
-                                                                style="max-width: 50%;"
-                                                                :value="url+'?c='+clbtr.id"
-                                                                :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
-                                                                :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
-                                                                :dotsOptions="{
-                                                                    type: 'square',
-                                                                    color: '#31516B',
-                                                                    gradient: {
-                                                                    type: 'linear',
-                                                                    rotation: 0,
-                                                                    colorStops: [
-                                                                        { offset: 0, color: '#31516B' },
-                                                                        { offset: 1, color: '#31516B' },
-                                                                    ],
-                                                                },
-                                                                }"
-                                                                fileExt="png"
-                                                                :backgroundOptions="{ color: '#ffffff' }"
-                                                                :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
-                                                                :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
-                                                                :download="false"
-                                                                downloadButton="view-cart bg-info mt-3 souvenirs_btn"
-                                                                :downloadOptions="{ name: 'souvenirs', extension: 'png' }"
-                                                                crossOrigin="anonymous"
-                                                            />
-                                                        </div>
+           <div v-for="clbtr in colaboradores" :key="clbtr.id">
+                <div class="row colaborador my-4 p-2 w-75 mx-auto bg-light justify-content-center justify-content-md-between" >
+                    <div class="col-10 col-md-6">
+                        <Link :href="route('admin.associates.show',clbtr.id)">
+                        <h1 class="font-weight-bolder text-center text-md-left">{{clbtr.firstname}} </h1>
+                        </Link>
+                    </div>
+                    <div class="col-10 col-md-6">
+                        <p class="font-weight-bolder text-muted mt-3 text-center text-md-left">{{clbtr.email}}</p>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-md-inline-flex mt-3 pb-2 pb-md-0">
+                            <div class="pr-md-4 text-md-center">
+                                <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
+                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{calcularBeneficio(clbtr.hotel)}}€</p>
+                            </div>
+                            <div class="pr-md-4 text-md-center"> 
+                                <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
+                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.total_orders }}</p>
+                            </div>
+                            <div class="pr-md-4 text-md-center"> 
+                                <p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
+                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.lodgings}}</p>
+                            </div>
+                            <div class="pr-md-4 text-md-center pt-1"> 
+                                <a href="#" class="text-primary px-md-2" data-toggle="modal" :data-target="'#colaborador'+clbtr.id">Obtener QR</a>
+                                <!-- Central Modal Small -->
+                                <div class="modal fade" :id="'colaborador'+clbtr.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                aria-hidden="true">
+                                <!-- Change class .modal-sm to change the size of the modal -->
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content mx-auto">
+                                            <div class="modal-body p-0">
+                                                <div class="row mt-5 mb-2">
+                                                    <div class="col-12 my-4 d-flex justify-content-center">
+                                                        <QRCodeVue3
+                                                            :width="1080"
+                                                            :height="1080"
+                                                            :imgclass="'souvenirs_img'+clbtr.id"
+                                                            style="max-width: 50%;"
+                                                            :value="url+'?c='+clbtr.id"
+                                                            :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
+                                                            :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
+                                                            :dotsOptions="{
+                                                                type: 'square',
+                                                                color: '#31516B',
+                                                                gradient: {
+                                                                type: 'linear',
+                                                                rotation: 0,
+                                                                colorStops: [
+                                                                    { offset: 0, color: '#31516B' },
+                                                                    { offset: 1, color: '#31516B' },
+                                                                ],
+                                                            },
+                                                            }"
+                                                            fileExt="png"
+                                                            :backgroundOptions="{ color: '#ffffff' }"
+                                                            :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
+                                                            :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
+                                                            :download="false"
+                                                            downloadButton="view-cart bg-info mt-3 souvenirs_btn"
+                                                            :downloadOptions="{ name: 'souvenirs', extension: 'png' }"
+                                                            crossOrigin="anonymous"
+                                                        />
                                                     </div>
-                                                    <div class="row px-3 pt-4 pb-5">
-                                                        <div class="col-6 text-left">
-                                                            <a class="bnt btn-azulc text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Volver</a>
+                                                </div>
+                                                <div class="row px-3 pt-4 pb-5">
+                                                    <div class="col-6 text-left">
+                                                        <a class="bnt btn-azulc text-white rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Volver</a>
                                                         </div>
                                                         <div class="col-6 text-right">
-                                                            <a  class="bnt btn-azulc text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(clbtr.id,clbtr.firstname)">Descargar</a>
+                                                        <a  class="bnt btn-azulc text-white rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(clbtr.id,clbtr.firstname)">Descargar</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Central Modal Small -->
+                                         <!-- Central Modal Small -->
                                 </div>
                                 <div class="pr-md-4 text-md-center"> 
                                     <p class="text-muted d-inline d-md-block pl-md-2 pl-md-0">{{clbtr.city}}</p>
@@ -277,6 +279,9 @@ export default {
 }
 .cuerpo .colaborador h1{
     font-size: 30px;
+}
+.cuerpo .colaborador h1:hover{
+    color:#65b4ce;
 }
 .cabeza .agregar{
 	font-size: 17px;

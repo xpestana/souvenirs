@@ -17,7 +17,6 @@
                         <img class="m-auto h-32 w-40 rounded-circle" :src="'/storage/hotel'+hotel.image" alt="">
                     </div>
                     <h6 class="mt-3"><strong>Floor {{hotel.planta}}</strong></h6>
-                    <p class="ventas">SALES</p>
                 </div>
                 <div class="col-12 col-md-9">
                     <div class="table-responsive-sm">
@@ -30,7 +29,7 @@
                                     </template>
                                     <th scope="col">Returned</th>
                                     <th scope="col">EMail</th>
-                                    <th scope="col">Date</th>
+                                    
                                     <th scope="col">Total</th>
                                     <th scope="col">Benefit</th>
                                 </tr>
@@ -61,8 +60,7 @@
                                             YES
                                         </p>
                                     </td>
-                                    <!-- <td>{{ order.shippings[0].email }}</td> -->
-                                    <td>-</td>
+
                                     <td>{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
                                     <td>{{ ((parseInt(order.total)/100)*0.20).toFixed(2) }} €</td>
                                     <td>{{ parseInt(order.total)/100 }} €</td>
@@ -70,14 +68,15 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-5 offset-7 col-md-3 offset-md-9">
+                            <h2 class="text-info text-2xl font-weight-bolder">Total</h2>
+                            <p><b>Tu beneficio es de {{ total_benefit.toFixed(2) }}€</b></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row pie">
-                <div class="col-5 offset-7 col-md-3 offset-md-9">
-                    <h2 class="text-info">Total</h2>
-                    <p><b>Your benefit is {{ total_benefit.toFixed(2) }}€</b></p>
-                </div>
-            </div>
+            
         </div>
     </div>
 </template>
@@ -119,7 +118,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .cabeza .titulo{
     padding: 0 110px;
 }

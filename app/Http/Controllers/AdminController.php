@@ -731,4 +731,11 @@ class AdminController extends Controller
 
         return back()->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
     }
+
+    public function associate_details($id)
+    {
+        $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
+        $url = config('app.url');
+        return Inertia::render('Admin/Associates/Details',compact('collaborator','url'));
+    }
 }

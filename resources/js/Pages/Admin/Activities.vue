@@ -126,6 +126,7 @@
                     <table class="table table-striped table-borderless">
                         <thead class="table-active text-center">
                             <tr>
+                                <th scope="col">Proveedor</th>
                                 <th scope="col">Título</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Idioma</th>
@@ -134,6 +135,7 @@
                         </thead>
                         <tbody id="tbody"> 
                             <tr v-for="act in activities.data" :key="act.id">
+                                <td class="text-center">Naturanda</td>
                                 <td class="truncate">{{ act.title }}</td>
                                 <td class="text-center">{{ detallarPrecios(act.activities.priceA) }}</td>
                                 <td class="text-center">{{ act.activities.language }}</td>

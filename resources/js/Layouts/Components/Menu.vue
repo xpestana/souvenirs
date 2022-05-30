@@ -28,7 +28,8 @@
 						<img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="40">
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="30"></a>
+						<a class="dropdown-item" href="#"><img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="30"> Spanish</a>
+                        <a class="dropdown-item" href="#"><img class="d-inline" src="/vendor_asset/img/english.png" alt="logo" width="30"> English</a>
 					</div>
 				</div>
                 </li>

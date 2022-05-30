@@ -27,7 +27,7 @@
 							<select name="" id="registerA" class="rounded border w-100 py-1" @change="showForm">
 								<option value="-">Select</option>
 								<option value="hotel">Hotel</option>
-								<option value="lodging">Lodging</option>
+								<option value="lodging">Apartment</option>
 							</select>
 						</div>
 					</div>
@@ -111,7 +111,7 @@
 			<div class="col-md-6 d-flex">
 				<template v-if="registerLodging || registerHotel">
 				<div class="container-logo my-auto">
-					<img src="/vendor_asset/img/logo/logosintexto.png" class="w-100">
+					<img src="/vendor_asset/img/logo/hilogo.png" class="w-100">
 				</div>
 				</template>
 			</div>
