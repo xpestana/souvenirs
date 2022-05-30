@@ -93,7 +93,7 @@ export default {
         submit() {
             var gestor = document.getElementById('gestor').value;
         this.form.gestor = gestor;
-            this.form.post(route('admin.collaborator.store'),{
+            this.form.post(route('admin.associates.store'),{
                 _token: this.$page.props.csrf_token,
                 errorBag: 'submit',
                 preserveScroll: true,

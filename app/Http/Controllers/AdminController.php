@@ -626,9 +626,9 @@ class AdminController extends Controller
     {
         $collaborators = User::join('profiles', 'profiles.user_id', '=', 'users.id')
                 ->select('users.*', 'profiles.firstname','profiles.lastname','profiles.city')
-                ->role('Hotel')
+                ->role('Associate')
                 ->search($request->search)
-                ->email($request->search, 'Hotel')
+                ->email($request->search, 'Associate')
                 ->where('del',false)
                 ->with('hotel.orders.shippings')
                 ->orderBy('profiles.firstname','ASC')
@@ -639,5 +639,97 @@ class AdminController extends Controller
     public function associates_create(Request $request)
     {
         return Inertia::render('Admin/Associates/Create');   
+    }
+
+        public function associates_store(Request $request){
+        
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:users|confirmed',
+            'password' => 
+            ['required', 
+                Rules\Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->uncompromised()
+            ],
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'gestor' => ['required','string', Rule::in([1, 2])],
+            'razon' => 'required|string',
+            'nif' => 'required|string',
+            'id' => 'required|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'address' => 'required|string',
+        ]);
+
+        $user = User::create([
+            'name' => $request->email,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $userProfile = profile::create([
+            'user_id' => $user->id,
+            'firstname' => $request->name,
+            'phone' => $request->phone,
+            'gestor' => $request->gestor,
+            'razon' => $request->razon,
+            'nif' => $request->nif,
+            'identify' => $request->id,
+            'city' => $request->city,
+            'cp' => $request->cp,
+            'address' => $request->address,
+        ]);
+
+        $user->assignRole('Associate');
+
+        Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
+
+         return  Redirect::route('admin.associates')->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
+    }
+
+    public function associates_updt(Request $request, $id){
+        $request->validate([
+            'email' => ['nullable', 'email', 'confirmed', 'max:255', Rule::unique('users')->ignore($id)],
+            'password' => 
+            ['nullable', 
+                Rules\Password::min(8)
+                ->mixedCase()
+                ->numbers()
+                ->uncompromised()
+            ],
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'gestor' => ['required','string', Rule::in([1, 2])],
+            'razon' => 'required|string',
+            'nif' => 'required|string',
+            'id' => 'required|string',
+            'city' => 'required|string',
+            'cp' => 'required|string',
+            'address' => 'required|string',
+        ]);
+
+        $user = User::find($id);
+        $user->name = $request->email;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        
+        $profile = profile::find($user->profile->id);
+        $profile->firstname = $request->name;
+        $profile->phone = $request->phone;
+        $profile->gestor = $request->gestor;
+        $profile->razon = $request->razon;
+        $profile->nif = $request->nif;
+        $profile->identify = $request->id;
+        $profile->city = $request->city;
+        $profile->cp = $request->cp;
+        $profile->address = $request->address;
+        $profile->save();
+
+        return back()->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
     }
 }
