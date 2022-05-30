@@ -320,6 +320,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     /*Asociados*/
     Route::get('/asociados', [AdminController::class, 'associates'])->name('admin.associates');
     Route::get('/asociados/crear-asociado', [AdminController::class, 'associates_create'])->name('admin.associates.create');
+    Route::post('/asociados/store', [AdminController::class, 'associates_store'])->name('admin.associates.store');
 
     /*Alojamientos*/
     Route::get('/crear/alojamiento/{collaborator}', [AdminController::class, 'lodging_create'])->name('admin.lodging.create');
