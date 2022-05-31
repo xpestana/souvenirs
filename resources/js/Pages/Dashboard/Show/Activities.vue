@@ -92,11 +92,11 @@
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[1]== 0 }">{{this.precios[1]}}€</h5>
                                     </div>
                                     <div class="mb-4" v-if="this.precios[2] !== undefined && this.precios[2] !== null">
-                                        <p class="text-lg d-inline mr-4">Estudiantes</p>
+                                        <p class="text-lg d-inline mr-4">Bebés</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
                                     </div>
                                     <div v-if="this.precios[3] !== undefined && this.precios[3] !== null">
-                                        <p class="text-lg d-inline mr-4">Bebés</p>
+                                        <p class="text-lg d-inline mr-4">Estudiantes</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[3]== 0 }">{{this.precios[3]}}€</h5>
                                     </div>
                                 </div>

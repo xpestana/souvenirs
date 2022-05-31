@@ -103,7 +103,7 @@
                         <div class="col-8 px-0 py-3 text-left">
                             <p class="text-justify" v-if="$page.props.flash.status">
                                 Hemos enviado un correo a {{$page.props.flash.status.email}} con un enlace
-                                donde podras reestrablecer tu contraseña.
+                                donde podrás reestrablecer tu contraseña.
                             </p>
                         </div>
                     </div>

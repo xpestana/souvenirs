@@ -11,7 +11,7 @@
                             Lo hacemos por ti <br>
                             Horario disponible: <br>
                             8:30-14:30 h. <br>
-                            (+34) 777 777 777
+                            (+34) 722 193 903
                         </p>
                     </div>
                 </div>

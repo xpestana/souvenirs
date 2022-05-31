@@ -69,8 +69,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-5 offset-7 col-md-3 offset-md-9">
-                            <h2 class="text-info text-2xl font-weight-bolder">Total</h2>
-                            <p><b>Tu beneficio es de {{ total_benefit.toFixed(2) }}€</b></p>
+                            <h2 class="text-info text-2xl font-weight-bolder">Total {{ total_benefit.toFixed(2) }}€</h2>
                         </div>
                     </div>
                 </div>
