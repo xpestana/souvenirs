@@ -279,7 +279,6 @@ class ActivitiesController extends Controller
 
         }
 
-        return back(); 
     }
     public function updt(Request $request, $activities)
     {
