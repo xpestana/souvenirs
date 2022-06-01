@@ -3,11 +3,11 @@
     <div class="img-container">
         <div class="w-100">
             <template v-if="product.images.length > 0">
-                <img :src="product.images[0].name" class="bg-contain mx-auto w-4/6 h-96">    
+                <img :src="'/storage/souvenirs/'+product.images[0].name" :onerror="product.images[0].name" class="bg-contain mx-auto w-4/6 h-96">    
             </template>
             <template v-else>
                 <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-96">    
-                    <!-- <div class="my-5 py-5 text-center border border-danger mx-2"><h1 class="text-xl">No existe imagen para esta actividad</h1></div> -->
+            <!-- <div class="my-5 py-5 text-center border border-danger mx-2"><h1 class="text-xl">No existe imagen para esta actividad</h1></div> -->
             </template>
         </div>
     </div>
@@ -262,13 +262,16 @@
         },
         created(){
             this.moment=Moment;
+            console.log(this.product)
             if(this.product.activities.priceA !== "null")
             {
                 let precios = JSON.parse(this.product.activities.priceA)
                 if(precios.status == 'ERROR'){}
                 else{
                     for(let val in precios.prices_per_ticket){
-                        this.precios.push(precios.prices_per_ticket[val])
+                        if(precios.prices_per_ticket[val] !== null){
+                            this.precios.push(precios.prices_per_ticket[val])
+                        }
                     }
                 }
             }

@@ -283,13 +283,13 @@ class ActivitiesController extends Controller
     }
     public function updt(Request $request, $activities)
     {
-
         $arr = [
             "prices_per_ticket" => [
                 
             ]
         ];
         $i = 0;
+        
         foreach ($request->pricesArr as $arrayPrice) {
             $arr['prices_per_ticket']["111".$i] = $arrayPrice;
 
@@ -306,9 +306,9 @@ class ActivitiesController extends Controller
         $activities = Activities::find($product->activities->id);
         $activities->language = $request->language;
         $activities->coordinates = $request->coordinates;
-        $activities->coordinates_en = $request->coordinates_en;
+        $activities->coordinates_en = $request->coordinatesEn;
         $activities->price_notes = $request->price_notes;
-        $activities->price_notes_en = $request->price_notes_en;
+        $activities->price_notes_en = $request->prices_notesEn;
         $activities->priceA = json_encode($arr);
         $activities->save();
 
