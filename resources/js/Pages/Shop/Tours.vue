@@ -17,7 +17,7 @@
                 <div class="col-4 col-md-2 px-0 p-2">
                     <template v-if="product.images.length > 0">
                         <Link :href="route('product.activities.show',{product : product.id})">
-                            <img :src="product.images[0].name" alt="Actividad" class="h-24 md:h-28 w-100">    
+                            <img :src="'/storage/souvenirs/'+product.images[0].name" :onerror="product.images[0].name" alt="Actividad" class="h-24 md:h-28 w-100">    
                         </Link>
                     </template>
                     <template v-else>
