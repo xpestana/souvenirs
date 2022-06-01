@@ -25,7 +25,10 @@
                 </div>
                 <div class="col-12 col-md-5">
                     <label class="py-2">Password</label>
-                    <input type="password" class="input-datos" placeholder="Password"  v-model="formP.password">
+                    <div class="relative">
+                        <input type="password" class="input-password" placeholder="Contraseña"  v-model="formP.password" id="contrasena">
+                        <button class="btn absolute top-1 left-0 rounded-circle pt-0" type="button" v-on:click="showPass('contrasena')"><i class="far fa-eye"></i></button>
+                    </div>
                 </div>
             </div>
             <div class="row  mt-2 py-2 justify-content-center justify-content-md-start">
@@ -154,7 +157,14 @@
             }),
         }
     	},
+        created(){
+            console.log(this.$page.props.auth.user)
+        },
     	methods:{
+             showPass: function (id){
+                let x = document.getElementById(id);
+                x.type = x.type == 'password' ? 'text' : 'password';            
+            },
     		submitProfile() {
             this.formP.put(route('collaborator.profile.update'), {
                 preserveScroll: true,
@@ -189,6 +199,12 @@
     border: 0;
     background-color: #efefef;
     padding: 5px 60px 5px 10px;
+    outline: none;
+}
+.input-password{
+    border: 0;
+    background-color: #efefef;
+    padding: 7px 60px 5px 45px;
     outline: none;
 }
 form label{

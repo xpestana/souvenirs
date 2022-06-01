@@ -13,7 +13,7 @@
 					</div>
                     <div class="mt-md-3 d-flex flex-column flex-md-row justify-content-center justify-content-md-between">
                         <p class="font-weight-bolder text-muted mt-md-3 d-md-inline mx-auto mx-md-4">{{collaborator.email}}</p>
-                        <Link href="#" class="btn btn-sm btn-secondary py-0 px-4 mt-2 mt-md-3 mx-auto">Editar</Link>
+                        <Link :href="route('admin.associates.edit',collaborator.id)" class="btn btn-sm btn-secondary py-0 px-4 mt-2 mt-md-3 mx-auto">Editar</Link>
                     </div>
 				</div>
 				<div class="col-12 d-md-inline-flex mt-1">

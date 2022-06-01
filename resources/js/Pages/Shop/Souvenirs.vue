@@ -266,7 +266,7 @@
     }
     .img-prod{
         width: 100%;
-        height: 13em !important;
+        height: 10em !important;
         background-size: cover !important;
         background-repeat: no-repeat !important;
         background-position: center !important;

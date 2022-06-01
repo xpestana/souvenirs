@@ -688,6 +688,13 @@ class AdminController extends Controller
 
          return  Redirect::route('admin.associates')->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
     }
+
+    public function associates_edit(User $user)
+    {
+        $user->load('profile');
+        return Inertia::render('Admin/Associates/Edit', compact('user'));
+    }
+    
     public function associates_updt(Request $request, $id){
         $request->validate([
             'email' => ['nullable', 'email', 'confirmed', 'max:255', Rule::unique('users')->ignore($id)],

@@ -1,6 +1,6 @@
 <template>
         <!-- Footer Area Start Here -->
-        <footer class="mt-5 pt-3 bg-light position-relative">
+        <footer class="mt-5 pt-4 bg-light position-relative">
             <div class="footer-body">
                 <div class="container">
                     <div class="row pt-3 pt-md-0">
@@ -69,13 +69,13 @@
                     <div class="footer-social absolute right-0 md:bottom-0">
                         <div class="d-inline-flex">
                             <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
-                                <img src="/vendor_asset/img/social/wt.png" class="w-12 h-8 md:w-16 md:h-12">
+                                <img src="/vendor_asset/img/icons/wsicon.png" class="mx-1 mx-md-2 w-10 h-10 md:w-10 md:h-10">
                             </a>
                             <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
-                                <img src="/vendor_asset/img/social/inst.png" class="px-md-2 w-10 h-8 md:w-16 md:h-12">
+                                <img src="/vendor_asset/img/icons/igicon.png" class="px-1 px-md-2 w-12 h-10 md:w-14 md:h-10">
                             </a>
                             <a target="_blank" href="https://twitter.com/hicitty_" class="">
-                                <img src="/vendor_asset/img/social/tw.png" class="px-md-2 w-10 h-8 md:w-16 md:h-12">
+                                <img src="/vendor_asset/img/icons/twicon.png" class="px-1 px-md-2 w-12 h-10 md:w-14 md:h-10">
                             </a>
                         </div>
                     </div>
