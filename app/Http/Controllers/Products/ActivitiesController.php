@@ -305,6 +305,8 @@ class ActivitiesController extends Controller
 
         $activities = Activities::find($product->activities->id);
         $activities->language = $request->language;
+        $activities->coordinates = $request->coordinates;
+        $activities->price_notes_en = $request->price_notes_en;
         $activities->priceA = json_encode($arr);
         $activities->save();
 
