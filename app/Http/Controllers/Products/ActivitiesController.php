@@ -386,8 +386,6 @@ class ActivitiesController extends Controller
                             'details' => ($product['pricing_notes'] != '') ? html_entity_decode($product['pricing_notes']): html_entity_decode($product['summary']),
                             'flow' => $product['flow'],
                             'duration' => $product['duration'],
-                            'coordinates' => $product['coordinates'],
-                            'price_notes' => $product['pricing_notes'],
                             'events' => json_encode($events),
                         ]);
 
@@ -416,10 +414,8 @@ class ActivitiesController extends Controller
                             'details' => ($product['pricing_notes'] != '') ? html_entity_decode($product['pricing_notes']): html_entity_decode($product['summary']),
                             'flow' => $product['flow'],
                             'duration' => $product['duration'],
-                            'coordinates' => $product['coordinates'],
                             'priceA' => json_encode($prices),
                             'events' => json_encode($events),
-                            'price_notes' => $product['pricing_notes'],
                             'language' => "Español",
                         ]);
 
@@ -494,8 +490,6 @@ class ActivitiesController extends Controller
                             'flow' => $product['flow'],
                             'price_en' => json_encode($prices),
                             'duration' => $product['duration'],
-                            'coordinates' => $product['coordinates'],
-                            'price_notes_en' => $product['pricing_notes'],
                             'events_en' => json_encode($events),
                         ]);
 
