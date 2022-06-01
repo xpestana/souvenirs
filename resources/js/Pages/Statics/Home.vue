@@ -63,7 +63,7 @@
                     <div class="tarjeta-img d-block">
                       <Link :href="route('product.activities.show',{product : product.id})">
                           <template v-if="product.images.length !== 0">
-                              <img :src="product.images[0].name" class="w-100">
+                              <img :src="'/storage/souvenirs/'+product.images[0].name" :onerror="product.images[0].name" class="w-100">
                           </template>
                           <template v-else>
                               <img src="/vendor_asset/img/bg-image/act-default.jpg" class="w-100">

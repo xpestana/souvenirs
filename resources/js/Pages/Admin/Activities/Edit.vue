@@ -145,9 +145,6 @@ export default {
     components:{
         Link
     },
-    props:{
-        product:Object
-    },
     data(){
         return {
             form: this.$inertia.form({
@@ -176,42 +173,45 @@ export default {
             dropzone:null
         }
     },
+        props:{
+        product:Object
+    },
+         mounted() {
+            const product_id = this.product.id;
+            const toast = this.$toast;
+            const dropzone = new Dropzone("div#dropRef", { 
+                url: route('activities.update.image'),
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 20,
+                acceptedFiles: 'image/*',
+                maxFilesize:10,
+                init: function() {
+                   const myDropzone = this;
+                   // First change the button to actually tell Dropzone to process the queue.
+                        document.getElementById("submit_image").addEventListener("click", function(e) {
+                        // Make sure that the form isn't actually being sent.
+                        e.preventDefault();
+                        e.stopPropagation();
+                        myDropzone.processQueue();
+                    });
+                      myDropzone.on("sending", function(file, xhr, formData) {
+                        formData.append("id", product_id);
+                    });
+                    myDropzone.on("complete", function(file) {
+                       toast.show("Actualizado exitosamente", {
+                            type: "success",
+                            position : "top-right",
+                            pauseOnHover: "true",
+                        });
+                    });
+                }
+            });
+            this.dropzone = dropzone;
+        },
     created(){
         this.precios()
         console.log(this.product)
-    },
-    mounted(){
-        const product_id = this.product.id;
-        const toast = this.$toast;
-        const dropzone = new Dropzone("div#dropRef", { 
-            url: route('activities.update.image'),
-            autoProcessQueue: false,
-            uploadMultiple: true,
-            parallelUploads: 5,
-            acceptedFiles: 'image/*',
-            maxFilesize:3,
-            init: function() {
-                const myDropzone = this;
-                // First change the button to actually tell Dropzone to process the queue.
-                    document.getElementById("submit_image").addEventListener("click", function(e) {
-                    // Make sure that the form isn't actually being sent.
-                    e.preventDefault();
-                    e.stopPropagation();
-                    myDropzone.processQueue();
-                });
-                    myDropzone.on("sending", function(file, xhr, formData) {
-                    formData.append("id", product_id);
-                });
-                myDropzone.on("complete", function(file) {
-                    toast.show("Actualizado exitosamente", {
-                        type: "success",
-                        position : "top-right",
-                        pauseOnHover: "true",
-                    });
-                });
-            }
-        });
-        this.dropzone = dropzone;
     },
     methods:{
         precios(){

@@ -1,17 +1,38 @@
 <template>
-    
-    <div class="img-container">
-        <div class="w-100">
-            <template v-if="product.images.length > 0">
-                <img :src="'/storage/souvenirs/'+product.images[0].name" :onerror="product.images[0].name" class="bg-contain mx-auto w-4/6 h-96">
-            </template>
-            <template v-else>
-                <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-96">    
-                    <!-- <div class="my-5 py-5 text-center border border-danger mx-2"><h1 class="text-xl">No existe imagen para esta actividad</h1></div> -->
-            </template>
+        <!-- Product Thumbnail Start -->
+    <div class="main-product-thumbnail white-bg pb-8">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Main Thumbnail Image Start -->
+                <div class="col-12 px-0">
+                    <!-- Thumbnail Large Image start -->
+                    <div class="product-img" id="product-img">
+                        <div id="thumb1" class="tab-pane fade show active">
+                            <template v-if="product.images.length > 0">
+                                <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+                                <Slide v-for="img in product.images" :key="img.id">
+                                    <img :src="'/storage/souvenirs/'+img.name" :onerror="img.name"  id="img-product">
+                                </Slide>
+                                <template #addons>
+                                    <Navigation />
+                                </template>
+                                </Carousel>
+                            </template>
+                            <template v-else>
+
+                                <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-96">    
+
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main Thumbnail Image End -->
+            </div>
+            <!-- Row End -->
         </div>
+        <!-- Container End -->
     </div>
-    
+        <!-- Product Thumbnail End -->
     <div class="container">
         <div class="row section-description">
             <div class="col-12 px-3 mt-1">
@@ -185,14 +206,14 @@
 
                         <div id="punto" class="collapse py-2 px-3" aria-labelledby="head6" data-parent="#accordionExample">
                             <template v-if="product.activities">
-                                <div class="d-flex justify-center" v-if="product.activities.coordinates_en !== ''">
+                                <div class="d-flex justify-center" v-if="product.activities.coordinates_en">
                                     <iframe class="h-64 w-96" id="gmap_canvas" 
                                      :src="'https://maps.google.com/maps?q='+product.activities.coordinates_en+'&t=&z=13&ie=UTF8&iwloc=&output=embed'"
                                       frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
                                     </iframe>
                                 </div>
                             </template>
-                            <template v-if="product.activities && product.activities.coordinates_en == ''">
+                            <template v-else>
                                 <div class="text-center">
                                     There is no registered meeting point for this activity.
                                 </div>
@@ -315,11 +336,20 @@
         }
     }
 </script>
-<style scope>
+<style scoped>
 .text-grayc{
     color:#a9a9a9;
 }
 .btn{
     border-radius:0;
+}
+#product-img .carousel #img-product {
+    height: 27em !important;
+}
+@media(max-width:767px){
+    #product-img .carousel #img-product {
+        height: 16em !important;
+        min-width: 100% !important;
+    }
 }
 </style>
