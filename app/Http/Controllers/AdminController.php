@@ -686,7 +686,7 @@ class AdminController extends Controller
 
         Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
 
-         return  Redirect::route('admin.associates')->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
+    return  back()->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
     }
 
     public function associates_edit(User $user)
