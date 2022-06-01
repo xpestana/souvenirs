@@ -3,7 +3,7 @@
     <div class="img-container">
         <div class="w-100">
             <template v-if="product.images.length > 0">
-                <img :src="product.images[0].name" class="bg-contain mx-auto w-4/6 h-96">    
+                <img :src="'/storage/souvenirs/'+product.images[0].name" :onerror="product.images[0].name" class="bg-contain mx-auto w-4/6 h-96">
             </template>
             <template v-else>
                 <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-96">    
@@ -185,14 +185,14 @@
 
                         <div id="punto" class="collapse py-2 px-3" aria-labelledby="head6" data-parent="#accordionExample">
                             <template v-if="product.activities">
-                                <div class="d-flex justify-center" v-if="product.activities.coordinates !== ''">
+                                <div class="d-flex justify-center" v-if="product.activities.coordinates_en !== ''">
                                     <iframe class="h-64 w-96" id="gmap_canvas" 
-                                     :src="'https://maps.google.com/maps?q='+product.activities.coordinates+'&t=&z=13&ie=UTF8&iwloc=&output=embed'"
+                                     :src="'https://maps.google.com/maps?q='+product.activities.coordinates_en+'&t=&z=13&ie=UTF8&iwloc=&output=embed'"
                                       frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
                                     </iframe>
                                 </div>
                             </template>
-                            <template v-if="product.activities && product.activities.coordinates == ''">
+                            <template v-if="product.activities && product.activities.coordinates_en == ''">
                                 <div class="text-center">
                                     There is no registered meeting point for this activity.
                                 </div>
@@ -269,12 +269,14 @@
                 if(precios.status == 'ERROR'){}
                 else{
                     for(let val in precios.prices_per_ticket){
-                        this.precios.push(precios.prices_per_ticket[val])
+                        if(precios.prices_per_ticket[val] !== null){
+                            this.precios.push(precios.prices_per_ticket[val])
+                        }
                     }
                 }
             }
             
-            if(this.product.activities.events_en.length >0){
+            if(this.product.activities.events_en !== null){
                 let lista = JSON.parse(this.product.activities.events_en)
                 if(lista.status == 'ERROR'){}
                 else{
