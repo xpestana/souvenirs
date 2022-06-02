@@ -46,9 +46,7 @@
                                     <th class="text-center" scope="col">Alojamiento</th>
                                     <th class="text-center" scope="col">Dirección</th>
                                     <th class="text-center" scope="col">Devuelto</th>
-                                    <th class="text-center" scope="col">ID de transacción</th>
-                                    <th class="text-center" scope="col">Correo</th>
-                                    <th class="text-center" scope="col">Fecha</th>
+                                    <th class="text-center" scope="col">Total</th>
                                     <th class="text-center" scope="col">Beneficio</th>
                                     <th class="text-center w-28" scope="col">Detalles</th>
                                 </tr>
@@ -70,12 +68,9 @@
                                                 <option value="0" selected>No</option>
                                             </select>
                                         </template>
-                                        
                                     </td>
-                                    <td class="text-center">{{venta.id_t }}</td>
-                                    <td class="text-center">{{venta.email}}</td>
-                                    <td class="text-center">{{moment(venta.date).format("DD/MM/YYYY")}}</td>
-                                    <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
+                                    <td class="text-center">{{ venta.total_benefit.toFixed(2) }}</td>
+                                    <td class="text-center">{{ (venta.total_benefit*0.20).toFixed(2)}}€</td>
                                     <td class="text-center w-28 px-1">
                                         <template v-if="venta.shippings[0] !== undefined">
                                                 <Link :href="route('admin.hab.transaction',[collaborator.id,venta.shippings[0].id])" 

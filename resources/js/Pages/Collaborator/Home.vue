@@ -75,7 +75,7 @@ a.btn.btn-primary.iniciar {
     font-weight: 600;
 }
 .section.inicio {
-    margin-top: 100px;
+    margin-top: 4em;
 }
 p.r-1 {
     font-size: 24px;
@@ -108,7 +108,7 @@ p.r-2 {
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 25px;
-    padding-bottom: 200px;
+    height: 100vh;
 }
 /* responsive */
 @media (max-width: 576px) { 
@@ -128,6 +128,9 @@ i.far.fa-check-circle.pt-2.pe-3 {
 }
 .section.inicio {
     margin-top: 0px;
+}
+.section.cuerpo {
+    height: auto;
 }
 }
 </style>

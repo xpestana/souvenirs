@@ -37,15 +37,18 @@
                     <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-3xl"><strong>Ventas de {{hotel.calle}} {{hotel.planta}}</strong></h1>
                 </div>
             </div>
-            <div class="row cuerpo mx-lg-4 mt-md-2">
-                <div class="col-12 px-md-0">
+            <div class="row cuerpo mx-lg-3 mt-md-2">
+                <div class="col-md-3 d-none d-md-flex flex-column">
+                    <img :src="'/storage/hotel/'+hotel.image" class="rounded-circle m-auto w-40 h-36" alt="hotel-img">
+                    <h5 class="text-azulc mt-2 p-1 font-weight-bolder text-center"><Link :href="route('admin.sales.hab',{id: collaborator.id})" v-if="shippings.length !== 0">Ventas totales<i class="fas fa-angle-right ml-2 py-1 px-1.5 bg-azulc text-white rounded-circle"></i></Link></h5>
+                </div>
+                <div class="col-12 col-md-9 px-md-0">
                     <div class="table-responsive-sm">
                         <table class="table table-striped">
                             <thead class="table-active">
                                 <tr>
                                     <th class="text-center" scope="col">ID transacción</th>
                                     <th class="text-center" scope="col">Devuelto</th>
-                                    <th class="text-center" scope="col">Correo</th>
                                     <th class="text-center" scope="col">Fecha</th>
                                     <th class="text-center" scope="col">Beneficio</th>
                                     <th class="text-center" scope="col">Detalles</th>
@@ -71,7 +74,6 @@
                                             </select>
                                         </template>
                                     </td>
-                                    <td>{{ order.email }}</td> 
                                     <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
                                     <td class="text-center">{{ parseInt(order.total)/100 }} €</td>
                                     <td class="text-center px-0">
@@ -87,13 +89,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row mx-lg-4 pie justify-content-between my-4">
-                <div class="col-12 col-md-5">
-                    <h5  class="text-azulc mt-1 p-1 font-weight-bolder"><Link :href="route('admin.sales.hab',{id: collaborator.id})" v-if="shippings.length !== 0">Ventas totales<i class="fas fa-angle-right ml-2 py-1 px-1.5 bg-azulc text-white rounded-circle"></i></Link></h5>
-                </div>
+            <div class="row mx-lg-4 pie justify-content-end my-4">
                 <div class="col-12 col-md-4">
-                    <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
-                    <p><b>Tu beneficio es de {{ totalBeneficio }}€</b></p>
+                    <h2 class="text-azulc text-2xl font-weight-bolder">Total {{ totalBeneficio }}€</h2>
                     <button class="btn btn-primary-c rounded-pill mt-2 py-1 py-md-0" hidden>Guardar cambios</button>
                 </div>
             </div>
@@ -127,10 +125,14 @@ export default {
     created(){
         this.moment=Moment;
         this.datosColaborador()
-        console.log(this.shippings)
+    },
+    updated(){
+        this.datosColaborador()
     },
     methods:{
         datosColaborador(){
+            this.total=0;
+            this.orders=0;
             const obj = this.collaborator.hotel.map((col)=>{
                 var total_benefits = 0;
                 this.orders = this.orders + col.orders.length;
@@ -139,6 +141,14 @@ export default {
                 });
                 this.total = this.total + (total_benefits/100)
             });
+            let shippingsReturned=0;
+            this.shippings.forEach(order=>{
+                if(order.returned){
+                    shippingsReturned = parseInt(shippingsReturned)  + parseInt(order.total)/100;
+                }
+            });
+            this.total = this.total - shippingsReturned
+            
         },
         returned(id){
             Inertia.post(route('admin.shipping.returned'), {
