@@ -8,15 +8,11 @@
         </div>
         <div class="col-12 py-0 my-0 text-center" v-if="this.preciosLista.length > 0">
             <div class="border mt-2 section-horarios d-inline-flex p-1 mb-1 w-3/4 md:w-1/4">
-                <div class="icon text-center">
-                    <i class="far fa-clock text-xl text-grayc pl-1 pr-2"></i>
-                </div>
-                <div class="lista-horarios">
-                    <div class="d-inline mr-2">
-                        <input type="radio" name="hora" class="mb-2">
-                        <p class="hora d-inline pl-1 pt-1 text-base">{{ hora }}</p>
-                    </div>
-                </div>
+                
+                    <i class="far fa-clock text-xl text-grayc pl-1 pr-2 pt-1.5"></i>
+                    <input type="radio" name="hora" class="mb-2 mt-2">
+                    <p class="hora  pl-1 text-base pt-1">{{ hora }}</p>
+                
             </div>
         </div>
         <div class="col-12 my-2 text-center text-danger" v-if="this.eventos.length == 0">
@@ -36,12 +32,12 @@
         </template>
         
             <div  class="col-12 py-2 mt-1 precios" style="background-color:#e6e6e6d4" v-if="recorrerPrecios().length > 0">
-                <div class="row pb-2 pt-1 justify-content-md-center" v-for="(precio, index) in recorrerPrecios()" :key="precio.name">
+                <div class="row pb-3 pt-1 justify-content-md-center" v-for="(precio, index) in recorrerPrecios()" :key="precio.name">
                     <div class="col-5 col-md-3 pt-1 pl-4" >
-                        <p class="text-lg d-inline mr-4"><CodificarTilde :string="precio.name"/></p>
+                        <h5 class="text-lg d-inline mr-4 font-weight-bolder"><CodificarTilde :string="precio.name"/></h5>
                     </div>
                     <div class="col-3 col-md-1 px-0 pt-2 text-center">
-                        <h5 class="rounded-circle bg-white px-1 py-3.5 font-weight-bolder text-sm d-inline">
+                        <h5 class="rounded-circle bg-white px-1 py-3.5 font-weight-bolder text-base d-inline">
                             {{ precio.price }}€
                         </h5>
                     </div>

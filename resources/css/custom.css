@@ -246,7 +246,7 @@ body .modal-backdrop{
       background-repeat: no-repeat;
       background-size: cover;
       min-width: 100%!important;
-      height: 40em;
+      height: 35em;
   }
   #carrosel .welcome{
       min-width: 100%!important;
@@ -260,7 +260,7 @@ body .modal-backdrop{
       color: #fff !important;
   }
   #product-img .carousel #img-product {
-      height: 30em;
+      height: 25em;
       background-size: contain !important;
       background-repeat: no-repeat !important;
       min-width: 60% !important;
@@ -268,4 +268,4 @@ body .modal-backdrop{
   }
   #product-img .carousel__prev, .carousel__next{
       background-color: #31516B !important; 
-}
+  }

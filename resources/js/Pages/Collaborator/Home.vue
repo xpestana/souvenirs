@@ -108,7 +108,7 @@ p.r-2 {
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 25px;
-    padding-bottom: 64px;
+    padding-bottom: 200px;
 }
 /* responsive */
 @media (max-width: 576px) { 

@@ -54,7 +54,20 @@
                             <tbody>
                                 <tr>
                                     <td class="text-center">{{ shipping.product.title }}</td>
-                                    <td class="text-center">{{ (shipping.returned == 0)? "NO" : "SI" }}</td>
+                                    <td class="text-center">
+                                        <template v-if="shipping.returned == 1">
+                                            <select class="py-1 rounded" name="returned" id="returned" @change="returned(shipping.id)">
+                                                <option value="1" selected>Si</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </template>
+                                        <template v-else>
+                                            <select class="py-1 rounded" name="returned" id="returned" @change="returned(shipping.id)">
+                                                <option value="1">Si</option>
+                                                <option value="0" selected>No</option>
+                                            </select>
+                                        </template>
+                                    </td>
                                     <td class="text-center">{{ shipping.email }}</td>
                                     <td class="text-center">{{ moment(shipping.created_at).format("DD/MM/YYYY") }}</td>
                                     <td class="text-center">{{ parseInt(shipping.amount) }} €</td>
@@ -71,7 +84,7 @@
                 </div>
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
-                    <p><b>Tu beneficio es de {{ total }}€</b></p>
+                    <p><b>Tu beneficio es de {{ (parseInt(shipping.amount) * 0.2).toFixed(2) }}€</b></p>
                 </div>
             </div>
         </div>
@@ -81,6 +94,7 @@
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import Moment from 'moment'
+import { Inertia } from '@inertiajs/inertia'
 export default {
     layout:Layout,
     props:{
@@ -102,6 +116,11 @@ export default {
     components:{
     },
     methods:{
+        returned(id){
+            Inertia.post(route('admin.shipping.returned'), {
+                id: id,
+            })
+        },
         back() {
             window.history.back();
         },

@@ -2,7 +2,7 @@
     <div id="main-inicio">
       <div id="carrosel">
         <Carousel :autoplay="6000" :wrap-around="true" :transition="600">
-            <Slide :key="0">
+            <!-- <Slide :key="0">
               <div class="bg-image welcome" style="background:url(/vendor_asset/img/home/home1.png)">
               </div>
             </Slide>
@@ -13,21 +13,21 @@
             <Slide :key="2">
               <div class="bg-image welcome" style="background:url(/vendor_asset/img/home/home3.png)">
               </div>
-            </Slide>
-            <!-- <Slide :key="0">
-              <div class="bg-image welcome">
+            </Slide> -->
+            <Slide :key="0">
+              <div class="slider">
                   <img src="/vendor_asset/img/home/home1.png" alt="">
               </div>
             </Slide>
             <Slide :key="1">
-              <div class="bg-image welcome">
+              <div class="bg-image slider">
                 <img src="/vendor_asset/img/home/home2.png" alt="">
               </div>
             </Slide>
             <Slide :key="2">
-              <div class="bg-image welcome">
+              <div class="bg-image slider">
               <img src="/vendor_asset/img/home/home3.png" alt=""></div>
-            </Slide> -->
+            </Slide>
             <template #addons>
               <Navigation />
             </template>
@@ -63,7 +63,7 @@
                     <div class="tarjeta-img d-block">
                       <Link :href="route('product.activities.show',{product : product.id})">
                           <template v-if="product.images.length !== 0">
-                              <img :src="product.images[0].name" class="w-100">
+                              <img :src="'/storage/souvenirs/'+product.images[0].name" :onerror="product.images[0].name" class="w-100">
                           </template>
                           <template v-else>
                               <img src="/vendor_asset/img/bg-image/act-default.jpg" class="w-100">
@@ -207,11 +207,11 @@
     }
 </script>
 <style scoped>
-    .bg-image{
+    /* .bg-image{
       background-size: cover !important;
       background-position:center !important;
       height: 45em;
-    }
+    } */
     #hicitty {
       background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)),url('/vendor_asset/img/hicity.png');
       background-position: bottom center;
@@ -243,22 +243,32 @@
       background-size: cover !important;
       cursor:pointer;
     }
+    #carrosel .slider img{
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 86vh;
+      width: 100%;
+    }
+    #carrosel .slider{
+      width: 100%;
+    }
     @media (max-width: 850px){
-      .bg-image{
+      /* .bg-image{
         background-size: contain !important;
         background-position:center !important;
         background-repeat: no-repeat !important;
         height: 24em;
         margin-top:-64px;
         margin-bottom:-30px;
-      }
-        #carrosel .welcome img{
+      } */
+        #carrosel .slider img{
           background-position: center center;
           background-repeat: no-repeat;
           background-size: cover;
           height: 38vh;
         }
-        #carrosel .welcome{
+        #carrosel .slider{
             min-width: 100%!important;
         }
         #hicitty {
@@ -269,33 +279,38 @@
     }
     @media (max-width: 530px){
       #carrosel{
-          margin-top: -1em;
+          margin-top: 0em;
       }
-      #carrosel .welcome img{
-          height: 25vh;
-        }
-        .h2{
-          font-size:1.1em
-        }
-        .carrosel{
-            max-height: 240px;
-        }
-        #categorias .categoria-img{
-          height: 7em;
-          width: 100%;
-          background-size: cover !important;
-        }
-        #carrosel .welcome{
-            background-size: contain;
-        }
-        #actividades .tarjeta img{
-          height: 4.5em;
-        }
-        #actividades .tarjeta-cuerpo p {
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        
+      #carrosel .slider img{
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 30vh;
+      }
+      .h2{
+        font-size:1.1em
+      }
+      .carrosel{
+          max-height: 240px;
+      }
+      #categorias .categoria-img{
+        height: 7em;
+        width: 100%;
+        background-size: cover !important;
+      }
+      #carrosel .slider img{
+          background-position: center center;
+          background-repeat: no-repeat;
+          height: 26vh;
+          background-size: contain;
+      }
+      #actividades .tarjeta img{
+        height: 4.5em;
+      }
+      #actividades .tarjeta-cuerpo p {
+          font-size: 13px;
+          line-height: 1.5;
+      }
     }
     
 </style>

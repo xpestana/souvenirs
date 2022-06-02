@@ -12,8 +12,8 @@
 									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.name" autocomplete="name" placeholder="Persona en contacto *" required/>
 									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.phone" autocomplete="phone" placeholder="Número de teléfono *" required/>
 								</div>
-								<div class="col-md-5">
-									<img src="/vendor_asset/img/logo/logo.png" class="my-1 mx-auto">
+								<div class="col-md-5 d-flex">
+									<img src="/vendor_asset/img/logo/hilogo.png" class="my-2 my-md-auto mx-auto w-40 md:w-56">
 								</div>
 								<div class="col-md-12">
 									<h3>Datos fiscales</h3>

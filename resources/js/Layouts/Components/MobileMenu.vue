@@ -16,7 +16,8 @@
 						<img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="20">
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Spanish <img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="20"></a>
+						<a class="dropdown-item" href="#"><img class="d-inline" src="/vendor_asset/img/espana.png" alt="logo" width="20"> Spanish</a>
+						<a class="dropdown-item" href="#"><img class="d-inline" src="/vendor_asset/img/english.png" alt="logo" width="20"> English</a>
 					</div>
 				</div>
 				<Link :href="route('cart.index')">

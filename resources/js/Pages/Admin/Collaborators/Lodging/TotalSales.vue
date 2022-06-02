@@ -59,13 +59,13 @@
                                     <td class="text-center">{{venta.address}}</td>
                                     <td class="text-center p-0">
                                         <template v-if="venta.returned == 1">
-                                            <select class="py-1 rounded mt-3" name="returned" id="returned" @change="returned(venta.id)">
+                                            <select class="py-1 rounded mt-2" name="returned" id="returned" @change="returned(venta.id)">
                                                 <option value="1" selected>Si</option>
                                                 <option value="0">No</option>
                                             </select>
                                         </template>
                                         <template v-else>
-                                            <select class="py-1 rounded mt-3" name="returned" id="returned" @change="returned(venta.id)">
+                                            <select class="py-1 rounded mt-2" name="returned" id="returned" @change="returned(venta.id)">
                                                 <option value="1">Si</option>
                                                 <option value="0" selected>No</option>
                                             </select>
@@ -153,6 +153,9 @@ export default {
             return obj;
         },
     },
+    updated(){
+        this.datosColaborador()
+    },
     methods:{
         returned(id){
             Inertia.post(route('admin.order.returned'), {
@@ -160,11 +163,15 @@ export default {
             })
         },
         datosColaborador(){
+            this.total = 0;
             const obj = this.collaborator.hotel.map((col)=>{
                 var total_benefits = 0;
                 this.totalOrders = this.totalOrders + col.orders.length;
+                
                 col.orders.forEach(function(order) {
-                    total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+                    if(order.returned == 0){
+                        total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+                    }
                 });
                 this.total = this.total + (total_benefits/100)
             });

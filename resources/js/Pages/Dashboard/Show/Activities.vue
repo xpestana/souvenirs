@@ -1,17 +1,38 @@
 <template>
-    
-    <div class="img-container">
-        <div class="w-100">
-            <template v-if="product.images.length > 0">
-                <img :src="product.images[0].name" class="bg-contain mx-auto w-4/6 h-96">    
-            </template>
-            <template v-else>
-                <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-96">    
-                    <!-- <div class="my-5 py-5 text-center border border-danger mx-2"><h1 class="text-xl">No existe imagen para esta actividad</h1></div> -->
-            </template>
+    <!-- Product Thumbnail Start -->
+    <div class="main-product-thumbnail white-bg pb-8">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Main Thumbnail Image Start -->
+                <div class="col-12 px-0">
+                    <!-- Thumbnail Large Image start -->
+                    <div class="product-img" id="product-img">
+                        <div id="thumb1" class="tab-pane fade show active">
+                            <template v-if="product.images.length > 0">
+                                <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+                                <Slide v-for="img in product.images" :key="img.id">
+                                    <img :src="'/storage/souvenirs/'+img.name" :onerror="img.name"  id="img-product">
+                                </Slide>
+                                <template #addons>
+                                    <Navigation />
+                                </template>
+                                </Carousel>
+                            </template>
+                            <template v-else>
+                                    
+                                <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-96">    
+                            
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main Thumbnail Image End -->
+            </div>
+            <!-- Row End -->
         </div>
+        <!-- Container End -->
     </div>
-    
+        <!-- Product Thumbnail End -->
     <div class="container">
         <div class="row section-description">
             <div class="col-12 px-3 mt-1">
@@ -92,11 +113,11 @@
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[1]== 0 }">{{this.precios[1]}}€</h5>
                                     </div>
                                     <div class="mb-4" v-if="this.precios[2] !== undefined && this.precios[2] !== null">
-                                        <p class="text-lg d-inline mr-4">Estudiantes</p>
+                                        <p class="text-lg d-inline mr-4">Bebés</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
                                     </div>
                                     <div v-if="this.precios[3] !== undefined && this.precios[3] !== null">
-                                        <p class="text-lg d-inline mr-4">Bebés</p>
+                                        <p class="text-lg d-inline mr-4">Estudiantes</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[3]== 0 }">{{this.precios[3]}}€</h5>
                                     </div>
                                 </div>
@@ -262,13 +283,16 @@
         },
         created(){
             this.moment=Moment;
+            console.log(this.product)
             if(this.product.activities.priceA !== "null")
             {
                 let precios = JSON.parse(this.product.activities.priceA)
                 if(precios.status == 'ERROR'){}
                 else{
                     for(let val in precios.prices_per_ticket){
-                        this.precios.push(precios.prices_per_ticket[val])
+                        if(precios.prices_per_ticket[val] !== null){
+                            this.precios.push(precios.prices_per_ticket[val])
+                        }
                     }
                 }
             }
@@ -312,11 +336,20 @@
         }
     }
 </script>
-<style scope>
+<style scoped>
 .text-grayc{
     color:#a9a9a9;
 }
 .btn{
     border-radius:0;
+}
+#product-img .carousel #img-product {
+    height: 27em !important;
+}
+@media(max-width:767px){
+    #product-img .carousel #img-product {
+        height: 16em !important;
+        min-width: 100% !important;
+    }
 }
 </style>

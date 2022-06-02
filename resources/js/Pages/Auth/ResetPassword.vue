@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-5 up degrad py-4">
                 <div class="col-md-12 text-center">
-                    <h1 class="text-white mb-4 title_white">¡Restaurar contraseña!</h1>
+                    <h1 class="text-white mb-4 title_white">Restaurar contraseña</h1>
                     <div class="col-md-10 mx-auto">
                         <form @submit.prevent="submit">
                             <div class="text-left">
