@@ -12,7 +12,7 @@
                         <p class="p-2" :class="{ 'active': urlColaboradores}">Gestor de <br> alojamientos</p>
                     </div>
                 </Link>
-            </li>
+            </li> 
             <li class="mb-3 item pl-2 pb-2" hidden>
                 <Link :href="route('admin.associates')" class="link" :class="{ 'active': this.$page.url.includes('/admin/asociados')}">
                     <div class="d-inline-flex">
