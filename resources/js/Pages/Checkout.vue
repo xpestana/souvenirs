@@ -190,7 +190,6 @@
             forms_extra: Object,
         },
         created(){
-            console.log(this.forms_extra)
             if (this.hotel) {
                 let address = this.hotel.address + " Zona: " + this.hotel.zone;
                 let text = '<strong>Por favor asegúrese que la <u>dirección de envio</u> sea la correcta:</strong>';

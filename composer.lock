@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69d6c3357beddf2cc8e6b0d1cdd78c81",
+    "content-hash": "f074b584b4e50b0b49f2b8e38c9554c4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3964,6 +3964,59 @@
             "time": "2021-12-11T13:40:54+00:00"
         },
         {
+            "name": "sermepa/sermepa",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ssheduardo/sermepa.git",
+                "reference": "7585d58b113cefd99aa0392f9cb2c850961c5c8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ssheduardo/sermepa/zipball/7585d58b113cefd99aa0392f9cb2c850961c5c8f",
+                "reference": "7585d58b113cefd99aa0392f9cb2c850961c5c8f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3|^7.2.5|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0|^8.5.8|^9.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sermepa\\Tpv\\": "src/Sermepa/Tpv/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eduardo D",
+                    "email": "ssh.eduardo@gmail.com",
+                    "homepage": "http://ubublog.com/"
+                }
+            ],
+            "description": "Pasarela de pago Redsys, Sermepa",
+            "homepage": "https://github.com/ssheduardo/sermepa",
+            "keywords": [
+                "lacaixa",
+                "pasarela",
+                "payment",
+                "redsys",
+                "sabadell",
+                "sermepa"
+            ],
+            "support": {
+                "issues": "https://github.com/ssheduardo/sermepa/issues",
+                "source": "https://github.com/ssheduardo/sermepa/tree/1.4.1"
+            },
+            "time": "2022-03-07T10:53:06+00:00"
+        },
+        {
             "name": "spatie/laravel-permission",
             "version": "5.5.2",
             "source": {
@@ -4044,6 +4097,69 @@
                 }
             ],
             "time": "2022-03-09T10:21:20+00:00"
+        },
+        {
+            "name": "ssheduardo/redsys-laravel",
+            "version": "1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ssheduardo/redsys-laravel.git",
+                "reference": "c6e8eb6dd2d1099409ac10084a2477f166172076"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ssheduardo/redsys-laravel/zipball/c6e8eb6dd2d1099409ac10084a2477f166172076",
+                "reference": "c6e8eb6dd2d1099409ac10084a2477f166172076",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.2|^8.0",
+                "sermepa/sermepa": "^1.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ssheduardo\\Redsys\\RedsysServiceProvider"
+                    ],
+                    "aliases": {
+                        "Redsys": "Ssheduardo\\Redsys\\Facades\\Redsys"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ssheduardo\\Redsys\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": ":Eduardo D",
+                    "email": "ssh.eduardo@gmail.com",
+                    "homepage": "http://ubublog.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package redsys for laravel 8",
+            "homepage": "https://github.com/ssheduardo/redsys-laravel",
+            "keywords": [
+                "lacaixa",
+                "pasarela",
+                "payment",
+                "redsys",
+                "sabadell",
+                "tpv"
+            ],
+            "support": {
+                "issues": "https://github.com/ssheduardo/redsys-laravel/issues",
+                "source": "https://github.com/ssheduardo/redsys-laravel/tree/1.4.3"
+            },
+            "time": "2022-02-12T11:48:53+00:00"
         },
         {
             "name": "stripe/stripe-php",
