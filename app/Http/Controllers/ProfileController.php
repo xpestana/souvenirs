@@ -28,6 +28,9 @@ class ProfileController extends Controller
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
             return Redirect::route('collaborator.index');
         }
+        if (auth()->user()->getRoleNames()->first() == 'Associate') {
+            return "en profile controller coloco la ruta para los asociados";
+        }
         if (auth()->user()->getRoleNames()->first() == 'Admin') {
             return Redirect::route('admin.colaboradores');
         }
