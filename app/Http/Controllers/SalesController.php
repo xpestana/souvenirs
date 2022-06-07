@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\hotel;
 use Stripe\Stripe;
 use Inertia\Inertia;
+use App\Models\RedsysAPI;
 use Redirect;
 use Cart;
 
@@ -29,6 +30,8 @@ class SalesController extends Controller
     {
         $hotel = null;
 
+
+        /****************************/
         if (auth()->user()) {
             if (!auth()->user()->hotel->isEmpty()) {
                 $hotel = hotel::find(auth()->user()->hotel->first()->id);
@@ -59,10 +62,54 @@ class SalesController extends Controller
         }
         return Inertia::render('Checkout', compact('hotel', 'forms_extra'));
     }
-    
     public function sale(Request $request)
     {
-        $request->validate([
+        return Redirect::route('redsys',$request->all());
+    }
+    public function sale_redsys(Request $request)
+    {
+        // Se incluye la librería
+        // Se crea Objeto
+        $miObj = new RedsysAPI();
+
+        // Valores de entrada que no hemos cmbiado para ningun ejemplo
+        $fuc="097282966";
+        $terminal="001";
+        $moneda="978";
+        $trans="0";
+        $url="";
+        $urlOK=route('home');
+        $urlKO=route('home');
+        $id=time();
+        $amount=$request->total;  
+
+        // Se Rellenan los campos
+        $miObj->setParameter("DS_MERCHANT_AMOUNT",$amount);
+        $miObj->setParameter("DS_MERCHANT_CURRENCY",$moneda);
+        $miObj->setParameter("DS_MERCHANT_ORDER",$id);
+        $miObj->setParameter("DS_MERCHANT_MERCHANTCODE",$fuc);  
+        $miObj->setParameter("DS_MERCHANT_TRANSACTIONTYPE",$trans);
+        $miObj->setParameter("DS_MERCHANT_TERMINAL",$terminal);
+        $miObj->setParameter("DS_MERCHANT_MERCHANTURL",$url);
+        $miObj->setParameter("DS_MERCHANT_URLOK",$urlOK);
+        $miObj->setParameter("DS_MERCHANT_URLKO",$urlKO);
+        //Datos de configuración
+        $version="HMAC_SHA256_V1";
+        $kc = 'sq7HjrUOBfKmC576ILgskD5srU870gJ7';//Clave recuperada de CANALES
+        // Se generan los parámetros de la petición
+        $request = "";
+        $params = $miObj->createMerchantParameters();
+        $signature = $miObj->createMerchantSignature($kc);
+
+        $forms = Http::post('https://sis-t.redsys.es:25443/sis/realizarPago', [
+                        'Ds_SignatureVersion'   => $version,
+                        'Ds_MerchantParameters'   => $params,
+                        'Ds_Signature'   => $signature,
+                    ]);
+        //dd($request->all());
+
+        return view('Purchase', compact('version', 'params', 'signature'));
+       /* $request->validate([
             'email' => 'required|string|email|max:255',
             'name' => 'required',
             'address' => 'required',
@@ -106,7 +153,7 @@ class SalesController extends Controller
                 Mail::to($request->email)->send(new SaleSouvenirReceived($order));
                 Mail::to("info@hicitty.es")->send(new AdminReceived($order));
             return Redirect::route('purchase',['oi' => $order->id]);
-
+*/
         
     }
      public function sale_activities(Request $request)

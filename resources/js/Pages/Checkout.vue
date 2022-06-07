@@ -153,6 +153,7 @@
         </div>
     </template>
     <!-- checkout-area end -->
+    <input type="hidden" v-model="form.total">
 </form>
 
 </template>
@@ -232,6 +233,7 @@
                     observations: '',
                     cp: (this.hotel) ? this.hotel.cp : '',
                     data: [],
+                    total: null,
                 },
                 checkTerminos:false,
                 mensajeInputs:''
@@ -369,6 +371,7 @@
                 let envio;
                 this.totalSouvenirs.precio > this.$page.props.settings.shippings ? envio=0 : envio=5;
                 this.totalSouvenirs.precio == 0 ? envio=0 : '';
+                this.form.total = this.totalActivities.precio+this.totalSouvenirs.precio+envio;
                 return this.totalActivities.precio+this.totalSouvenirs.precio+envio;
             }
         }
