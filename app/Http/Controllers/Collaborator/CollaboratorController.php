@@ -104,7 +104,13 @@ class CollaboratorController extends Controller
             'cp' => $request->cp,
             'address' => $request->address,
         ]);
-        auth()->user()->assignRole('Hotel');
+        
+        if ($request->gestor == 1) {
+            auth()->user()->assignRole('Hotel');
+        }
+        if ($request->gestor == 2) {
+            auth()->user()->assignRole('Associate');
+        }
 
         return Redirect::route('collaborator.index')->with(['id'=>auth()->user()->id, 'message' => 'Successful registration', 'code' => 200, 'status' => 'success']);
     }
