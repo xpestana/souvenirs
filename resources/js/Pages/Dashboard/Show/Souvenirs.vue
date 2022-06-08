@@ -214,6 +214,11 @@
     .thubnail-desc .product-header-mobile .opacidad{
         opacity: 0.8;
     }
+    @media(min-width:1300px){
+        #product-img .carousel #img-product {
+            height: 38em;
+        }
+    }
     @media(max-width:767px){
         #product-img .carousel #img-product {
             height: 20em;

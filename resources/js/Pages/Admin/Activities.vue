@@ -194,19 +194,23 @@ export default {
     },
     created(){
         // this.moment=Moment;
-        console.log(this.activities)
     },
     updated(){
         this.desabilitar = false
     },
     methods: {
         detallarPrecios(precios){
+            console.log(precios)
             if(precios !== "null"){
                 let lista = JSON.parse(precios);
                 if(lista.error_code == undefined){
                     let arr = [];
                     for(let val in lista.prices_per_ticket){
-                      arr.push(lista.prices_per_ticket[val])
+                        if(lista.prices_per_ticket[val] !== null){
+                            arr.push(lista.prices_per_ticket[val])
+                        }else{
+                            return 'sin precios'   
+                        }
                     }
                     let template = ''
                     if(arr[0]) template += 'Adultos: '+arr[0]

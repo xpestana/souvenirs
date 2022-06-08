@@ -16,9 +16,9 @@
                                 de privacidad.
                             </p>
                             <div class="text-left">
-                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/avisolegal">Aviso legal</a><br>
-                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/privacidad">Política de privacidad</a><br>
-                                <a class="text-info" target="_blank" href="/tablero/alojamientos/politicas/cookies">Política de Cookies</a>
+                                <a class="text-info" target="_blank" :href="route('avisolegal')">Aviso legal</a><br>
+                                <a class="text-info" target="_blank" :href="route('privacidad')">Política de privacidad</a><br>
+                                <a class="text-info" target="_blank"  :href="route('cookies')">Política de Cookies</a>
                             </div>
                         </div>
                     </div>

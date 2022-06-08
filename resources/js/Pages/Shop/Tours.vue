@@ -2,6 +2,7 @@
     <Head title="Actividades"/>
     <Layout>
     <Breadcrumb title="Actividades"/>
+    <ModalCookies/>
     <!-- Shop Page Start -->
     <div class="main-shop-activies py-3">
         <div class="container">
@@ -52,17 +53,17 @@
                         <div class="price">
                             <p class="font-weight-bolder text-azulc md:text-2xl pr-md-2">
                                 <template v-if="product.precios.lenght !== 0">
-                                    <template v-if="product.precios[3] !== undefined && product.precios[3] !== null">
-                                        <Decimals :precio="product.precios[3]"/>€
+                                    <template v-if="product.precios[0] !== undefined && product.precios[0] !== null">
+                                        <Decimals :precio="product.precios[0]"/>€
                                     </template>
-                                    <template v-if="product.precios[2] !== undefined && product.precios[2] !== null && product.precios[3] == undefined">
-                                        <Decimals :precio="product.precios[2]"/>€
-                                    </template>
-                                    <template v-else-if="product.precios[1] !== undefined && product.precios[1] !== null && product.precios[2] == undefined">
+                                    <template v-if="product.precios[1] !== undefined && product.precios[1] !== null && product.precios[0] == undefined">
                                         <Decimals :precio="product.precios[1]"/>€
                                     </template>
-                                    <template v-else-if="product.precios[0] !== undefined && product.precios[0] !== null && product.precios[1] == undefined">
-                                        <Decimals :precio="product.precios[0]"/>€
+                                    <template v-else-if="product.precios[2] !== undefined && product.precios[2] !== null && product.precios[1] == undefined">
+                                        <Decimals :precio="product.precios[2]"/>€
+                                    </template>
+                                    <template v-else-if="product.precios[3] !== undefined && product.precios[3] !== null && product.precios[2] == undefined">
+                                        <Decimals :precio="product.precios[3]"/>€
                                     </template>
                                 </template>
                             </p>
@@ -96,6 +97,7 @@
     import Slider from '@vueform/slider'
     import Decimals from '@/Layouts/Components/Decimals.vue'
     import ConvertirMinutos from '@/Layouts/Components/ConvertirMinutos.vue'
+    import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
     export default {
         components: {
             Head,
@@ -104,7 +106,8 @@
             Breadcrumb,
             Slider,
             Decimals,
-            ConvertirMinutos
+            ConvertirMinutos,
+            ModalCookies
         },
         props: {
             products: Object,

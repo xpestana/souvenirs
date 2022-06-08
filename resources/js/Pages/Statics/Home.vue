@@ -1,20 +1,21 @@
 <template>
     <div id="main-inicio">
+      <ModalCookies/>
       <div id="carrosel">
         <Carousel :autoplay="6000" :wrap-around="true" :transition="600">
-            <!-- <Slide :key="0">
-              <div class="bg-image welcome" style="background:url(/vendor_asset/img/home/home1.png)">
+            <Slide :key="0">
+              <div class="img-item" style="background-image:url(/vendor_asset/img/home/home1.png)">
               </div>
             </Slide>
             <Slide :key="1">
-              <div class="bg-image welcome" style="background:url(/vendor_asset/img/home/home2.png)">
+              <div class="img-item" style="background-image:url(/vendor_asset/img/home/home2.png)">
               </div>
             </Slide>
             <Slide :key="2">
-              <div class="bg-image welcome" style="background:url(/vendor_asset/img/home/home3.png)">
+              <div class="img-item" style="background-image:url(/vendor_asset/img/home/home3.png)">
               </div>
-            </Slide> -->
-            <Slide :key="0">
+            </Slide>
+            <!-- <Slide :key="0">
               <div class="slider">
                   <img src="/vendor_asset/img/home/home1.png" alt="">
               </div>
@@ -27,7 +28,7 @@
             <Slide :key="2">
               <div class="bg-image slider">
               <img src="/vendor_asset/img/home/home3.png" alt=""></div>
-            </Slide>
+            </Slide> -->
             <template #addons>
               <Navigation />
             </template>
@@ -37,13 +38,16 @@
         <div class="container">
           <div class="row my-2 my-md-5 px-md-5">
             <div class="col-12 d-inline-flex justify-center px-1 px-md-5">
-              <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home1.png);" @click="actividades">
+              <div class="mx-2 categoria-img text-center position-relative md:w-2/6" @click="actividades">
+                <img src="/vendor_asset/img/home/s2home1.png" alt="">
                 <p class="bg-light px-1 mx-1 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Actividades</p>
               </div>
-              <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home2.png);" @click="souvenirs">
+              <div class="mx-2 categoria-img text-center position-relative md:w-2/6" @click="souvenirs">
+                <img src="/vendor_asset/img/home/s2home2.png" alt="">
                 <p class="bg-light px-1 mx-1 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Souvenirs</p>
               </div>
-              <div class="mx-2 categoria-img text-center position-relative" style="background:url(/vendor_asset/img/home/s2home3.png);">
+              <div class="mx-2 categoria-img text-center position-relative md:w-2/6">
+                <img src="/vendor_asset/img/home/s2home3.png" alt="">
                 <p class="bg-light px-1 mx-1 mx-md-5 position-absolute mb-0 fixed-bottom mb-2" style="z-index:60">Gastronomia</p>
               </div>
             </div>
@@ -139,6 +143,7 @@
     import Layout from '@/Layouts/Layout.vue'
     import Decimals from '@/Layouts/Components/Decimals.vue'
     import ConvertirMinutos from '@/Layouts/Components/ConvertirMinutos.vue'
+    import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
 
     export default{
       layout:Layout,
@@ -150,7 +155,8 @@
             Header,
             Layout,
             Decimals,
-            ConvertirMinutos
+            ConvertirMinutos,
+            ModalCookies
         },
         data: () => {
             return {
@@ -177,9 +183,7 @@
                 })
             },
             actividades(){
-              this.$inertia.get(route('activities'),{}, {
-                    preserveScroll: true
-                })
+              this.$inertia.get(route('activities'));
             },
         },
         computed:{
@@ -223,12 +227,12 @@
     .h2{
       font-size:2em
     }
-    #categorias .categoria-img{
-      height: 12em;
-      width: 100%;
-      background-size: cover !important;
-      background-position: center center;
-      cursor:pointer;
+    #categorias .categoria-img img{
+        height: 12em;
+        width: 100%;
+        background-size: contain !important;
+        cursor: pointer;
+        background-repeat: no-repeat !important;
     }
     #actividades .tarjeta{
       box-shadow: 0px 0px 4px 1px rgba(0 0 0 / 20%);
@@ -243,7 +247,7 @@
       background-size: cover !important;
       cursor:pointer;
     }
-    #carrosel .slider img{
+    /* #carrosel .slider img{
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -252,6 +256,13 @@
     }
     #carrosel .slider{
       width: 100%;
+    } */
+    #carrosel .img-item {
+        height: 103vh;
+        min-width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 10% 69%;
     }
     @media (max-width: 850px){
       /* .bg-image{
@@ -262,6 +273,9 @@
         margin-top:-64px;
         margin-bottom:-30px;
       } */
+        #carrosel .img-item {
+            height: 38vh;
+        }
         #carrosel .slider img{
           background-position: center center;
           background-repeat: no-repeat;
@@ -281,6 +295,9 @@
       #carrosel{
           margin-top: 0em;
       }
+      #carrosel .img-item {
+          height: 33vh;
+      }
       #carrosel .slider img{
         background-position: center center;
         background-repeat: no-repeat;
@@ -293,7 +310,7 @@
       .carrosel{
           max-height: 240px;
       }
-      #categorias .categoria-img{
+      #categorias .categoria-img img{
         height: 7em;
         width: 100%;
         background-size: cover !important;

@@ -20,7 +20,7 @@
                             </template>
                             <template v-else>
                                     
-                                <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-96">    
+                                <img src="/vendor_asset/img/bg-image/act-default.jpg" class="bg-contain mx-auto w-4/6 h-56 md:h-96">    
                             
                             </template>
                         </div>
@@ -345,6 +345,11 @@
 }
 #product-img .carousel #img-product {
     height: 27em !important;
+}
+@media(min-width:1300px){
+    #product-img .carousel #img-product {
+        height: 38em !important;
+    }
 }
 @media(max-width:767px){
     #product-img .carousel #img-product {

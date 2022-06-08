@@ -29,7 +29,7 @@ class ProfileController extends Controller
             return Redirect::route('collaborator.index');
         }
         if (auth()->user()->getRoleNames()->first() == 'Associate') {
-            return "en profile controller coloco la ruta para los asociados";
+            return Redirect::route('associates.index');
         }
         if (auth()->user()->getRoleNames()->first() == 'Admin') {
             return Redirect::route('admin.colaboradores');
