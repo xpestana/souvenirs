@@ -31,8 +31,8 @@ class ProfileController extends Controller
         if (auth()->user()->getRoleNames()->first() == 'Admin') {
             return Redirect::route('admin.colaboradores');
         }
-        if (auth()->user()->getRoleNames()->first() == 'Admin') {
-            return "en profile controller se coloca la direccion de la ruta para asociados";
+        if (auth()->user()->getRoleNames()->first() == 'Associate') {
+            return Redirect::route('associates.index');
         }
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
             $hotel = hotel::find(auth()->user()->hotel->first()->id);

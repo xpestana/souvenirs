@@ -7,10 +7,14 @@
 						<form @submit.prevent="submit" class="mt -4">
 							<notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
 							<div class="row">
-								<div class="col-md-7">
+								<div class="col-md-7 mb-2">
 									<h3>Personal information</h3>
 									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.name" autocomplete="name" placeholder="Contact person *" required/>
 									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.phone" autocomplete="phone" placeholder="Phone number *" required/>
+									<select name="nif" id="gestor" v-model="form.gestor" class="form-control w-100 select mb-2 pb-0" required>
+										<option value="1">Gestor de alojamientos turísticos</option>
+										<option value="2">Proveedor de actividades</option>
+									</select>
 								</div>
 								<div class="col-md-5 d-flex">
 									<img src="/vendor_asset/img/logo/hilogo.png" class="my-2 my-md-auto mx-auto w-40 md:w-56">
@@ -50,15 +54,24 @@
 										<div class="w-100">
 											<ValidationErrors class="my-3" />
 										</div>
-										<div align="center" class="col-12 mt-3 text-center">
-											<button type="submit" class="btn btn-primary  rounded-pill  w-50 py-1 mt-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-												Create Account
-											</button>
+										<div class="col-12 mt-3 ">
 											<div v-if="status" class="mb-4 font-medium text-sm text-danger mt-4">
 												{{ status }}
 											</div>	
 										</div>
 									</div>
+								</div>
+							</div>
+							<div class="row justify-content-between">
+								<div class="col-12 col-md-5">
+									<button type="button" @click="deleteUser()" class="btn btn-primary  rounded-pill w-100 md:w-3/4 py-0 mt-3">
+										Volver
+									</button>
+								</div>
+								<div class="col-12 col-md-5">
+									<button type="submit" class="btn btn-primary  rounded-pill w-100 md:w-3/4 py-0 mt-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+										Crear cuenta
+									</button>
 								</div>
 							</div>
 						</form>
@@ -73,6 +86,7 @@
 	import BreezeButton from '@/Components/Button.vue'
 	import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
 	import Notify from '@/Layouts/Components/Toast.vue'
+	import { Inertia } from '@inertiajs/inertia'
 
 	export default {
 		components:{
@@ -86,7 +100,7 @@
 				form: this.$inertia.form({
 					name: null,
 					phone: null,
-					gestor: "0",
+					gestor: "1",
 					razon: null,
 					nif: 'NIF Español',
 					id: null,
@@ -109,6 +123,25 @@
                     _token: this.$page.props.csrf_token,
                 })
             },
+			deleteUser(){
+				this.$swal({
+					text: "¿Esta seguro de eliminar esta cuenta permanentemente?",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					cancelButtonText: 'Cancelar',
+					confirmButtonText: 'Elimnarla y salir!'
+				}).then((result) => {
+					if(result.isConfirmed){
+						Inertia.visit(route('collaborator.delete',this.$page.props.auth.user.id), {
+							method: 'post',
+							preserveScroll: true,
+                			preserveState: true,
+						})	
+					}
+				})
+			}
 		}
 	}
 </script>

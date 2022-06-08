@@ -2,8 +2,9 @@
  <section>
     <div class="row w-100 p-0 m-0">
         <div class="col-md-7 up py-4">
+            <notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
             <div class="col-md-12 text-center">
-                <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/hilogo.png">
+                <img style="width: 50%" class="m-auto cursor-pointer" src="/vendor_asset/img/logo/hilogo.png" @click="redirect()">
 
                 <h1 class="title text-xl md:text-3xl font-weight-bolder mt-2">We do it for you</h1>
                 <div class="caja-info mt-4">
@@ -124,6 +125,8 @@ import BreezeInput from '@/Components/Input.vue'
 import BreezeCheckbox from '@/Components/Checkbox.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 import { Link } from '@inertiajs/inertia-vue3';
+import Notify from '@/Layouts/Components/Toast.vue'
+import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
 
 export default {
     components: {
@@ -132,6 +135,8 @@ export default {
         BreezeCheckbox,
         BreezeValidationErrors,
         Link,
+        Notify,
+        ModalCookies
     },
 
     props: {
@@ -179,6 +184,9 @@ export default {
                     this.forgot.reset();
                 },
             })
+        },
+        redirect(){
+            this.$inertia.get(route('collaborator.home'))
         }
     }
 }
@@ -188,6 +196,7 @@ export default {
         display: flex;
         align-items: center;
         height: 100vh;
+        background-color: white !important;
     }
     .caja-info p {
         border-radius: 30px;

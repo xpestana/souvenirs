@@ -206,7 +206,11 @@ export default {
                 if(lista.error_code == undefined){
                     let arr = [];
                     for(let val in lista.prices_per_ticket){
-                      arr.push(lista.prices_per_ticket[val])
+                        if(lista.prices_per_ticket[val] !== null){
+                            arr.push(lista.prices_per_ticket[val])
+                        }else{
+                            return 'sin precios'   
+                        }
                     }
                     let template = ''
                     if(arr[0]) template += 'Adultos: '+arr[0]

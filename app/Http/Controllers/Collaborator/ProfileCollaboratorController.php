@@ -69,4 +69,20 @@ class ProfileCollaboratorController extends Controller
 
         return back()->with(['id'=>$id, 'message' => 'Updated successfully', 'code' => 200, 'status' => 'success']);
     }
+
+    public function associate_profile(Request $request)
+    {
+        return Inertia::render('Associates/Dashboard/Index');
+    }
+
+    public function associate_settings()
+    {
+        return Inertia::render('Associates/Dashboard/Settings');
+    }
+
+    public function destroy($id)
+    {
+        $user=User::find($id)->delete();
+        return redirect()->route('login')->with(['id'=>$id, 'message' => 'Cuenta eliminada', 'code' => 200, 'status' => 'success']); 
+    }
 }

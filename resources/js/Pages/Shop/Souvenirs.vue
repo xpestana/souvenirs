@@ -2,6 +2,7 @@
     <Head title="Souvenirs"/>
 	<Layout>
     <Breadcrumb title="Souvenirs"/>
+    <ModalCookies/>
     <!-- Shop Page Start -->
     <div class="main-shop-page white-bg pt-10 md:ptb-80 bg-light">
         <div class="container">
@@ -174,7 +175,7 @@
     import '/vendor_asset/js/jquery-ui.min.js';
     import Paginator from '@/Components/Paginator.vue'
     import Slider from '@vueform/slider' 
-
+    import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
     export default {
         components: {
             Head,
@@ -184,7 +185,8 @@
             Breadcrumb,
             Slider,
             Paginator,
-            Decimals
+            Decimals,
+            ModalCookies
         },
         props: {
             products: Object,
