@@ -197,17 +197,17 @@ Version: 1.0;
     /*----------------------------
         ScrollUp Activation
     -----------------------------*/
-    $.scrollUp({
-        scrollName: 'scrollUp', // Element ID
-        topDistance: '550', // Distance from top before showing element (px)
-        topSpeed: 1000, // Speed back to top (ms)
-        animation: 'fade', // Fade, slide, none
-        scrollSpeed: 900,
-        animationInSpeed: 1000, // Animation in speed (ms)
-        animationOutSpeed: 1000, // Animation out speed (ms)
-        scrollText: '<i class="fa fa-angle-double-up" aria-hidden="true"></i>', // Text for element
-        activeOverlay: false // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-    });
+    // $.scrollUp({
+    //     scrollName: 'scrollUp', // Element ID
+    //     topDistance: '550', // Distance from top before showing element (px)
+    //     topSpeed: 1000, // Speed back to top (ms)
+    //     animation: 'fade', // Fade, slide, none
+    //     scrollSpeed: 900,
+    //     animationInSpeed: 1000, // Animation in speed (ms)
+    //     animationOutSpeed: 1000, // Animation out speed (ms)
+    //     scrollText: '<i class="fa fa-angle-double-up" aria-hidden="true"></i>', // Text for element
+    //     activeOverlay: false // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+    // });
 
     /*----------------------------
         Sticky-Menu Activation
@@ -275,5 +275,16 @@ Version: 1.0;
             }
         }
     })*/
-    
+    /*----------------------------------------------------
+        hide mobile menu when clicking the body
+    -----------------------------------------------------*/
+    if(window.screen.width < "768"){
+        $('body').on('click', function () {
+            let btn = document.getElementById('btnMobileMenu')
+            let attr = btn.getAttribute('aria-expanded');
+            if(attr === 'true'){
+                btn.click();
+            }
+        });
+    }
 })(jQuery);

@@ -14,10 +14,10 @@
                 </Link>
             </li>
             <li class="mb-3 item pb-2">
-                <Link href="#"  class="link">
+                <Link :href="route('associates.index')" class="link" :class="{'active':this.$page.url.includes('/servicios')}">
                     <div class="d-inline-flex">
                         <i class="fas fa-biking my-auto pr-1 text-lg"></i>
-                        <p class="p-2">Services provided</p>
+                        <p class="p-2" :class="{'active':this.$page.url.includes('/servicios')}">Servicios prestados</p>
                     </div>
                 </Link>
             </li>

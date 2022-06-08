@@ -57,3 +57,9 @@
     margin: 10px 0;
 }
 </style>
+<script>
+import Layout from '@/Layouts/Layout.vue'
+export default{
+    layout:Layout,
+}
+</script>
