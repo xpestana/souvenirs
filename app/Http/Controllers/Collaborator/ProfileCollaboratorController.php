@@ -73,7 +73,7 @@ class ProfileCollaboratorController extends Controller
 
     public function associate_profile(Request $request)
     {
-        return Inertia::render('Associates/Dashboard/Index');
+        return Inertia::render('Associates/Dashboard/ServicesProvided');
     }
     
     public function associate_settings()

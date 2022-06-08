@@ -301,7 +301,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
 /*Dashboard asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(function () {
     
-    Route::get('/alojamientos', [ProfileCollaboratorController::class, 'associate_profile'])->name('associates.index');  
+    Route::get('/servicios', [ProfileCollaboratorController::class, 'associate_profile'])->name('associates.index');  
     Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
 });
 /*Ajustes*/

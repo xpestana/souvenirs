@@ -7,7 +7,7 @@
                         <div class="col-6 pt-2 pt-md-0">
                             <div class="row">
                                 <div class="col-12 col-md-4 px-0">
-                                    <img class="mx-auto w-36 md:w-56 md:mt-3" src="/vendor_asset/img/logo/hilogo.png" alt="logo">
+                                    <img class="mx-auto w-36 md:w-56 md:mt-3 cursor-pointer" src="/vendor_asset/img/logo/hilogo.png" alt="logo" @click="redirect()">
                                 </div>
                                 <div class="col-12 col-md-8 px-0">
                                     <div class="footer-widget mb-40">
@@ -19,10 +19,7 @@
                                                 <Link :href="route('contact')" class="text-base md:text-lg">Contáctanos</Link>
                                             </div>
                                             <div class="">
-                                                <a href="#" class="text-base md:text-lg">Blog</a>
-                                            </div>
-                                            <div class="">
-                                                <a href="#" class="text-base md:text-lg">Trabaja con nosotros</a>
+                                                <a :href="route('collaborator.home')" class="text-base md:text-lg">Trabaja con nosotros</a>
                                             </div>
                                         </div>
                                     </div>
@@ -66,16 +63,16 @@
             </div>
             <div class="footer-copryright">
                 <div class="container-fluid px-0 py-3" style="background-color:#ededed">
-                    <div class="footer-social absolute right-0 md:bottom-0">
-                        <div class="d-inline-flex">
+                    <div class="footer-social absolute right-0 md:bottom-0 d-md-none">
+                        <div class="d-inline-flex mt-1">
                             <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
                                 <img src="/vendor_asset/img/icons/wsicon.png" class="mx-1 mx-md-2 w-10 h-10 md:w-10 md:h-10">
                             </a>
                             <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
                                 <img src="/vendor_asset/img/icons/igicon.png" class="px-1 px-md-2 w-12 h-10 md:w-14 md:h-10">
                             </a>
-                            <a target="_blank" href="https://twitter.com/hicitty_" class="">
-                                <img src="/vendor_asset/img/icons/twicon.png" class="px-1 px-md-2 w-12 h-10 md:w-14 md:h-10">
+                            <a target="_blank" href="https://www.linkedin.com/company/kognos-vb/" class="">
+                                <img src="/vendor_asset/img/icons/inicon.png" class="px-1 px-md-2 w-12 h-10 md:w-14 md:h-10">
                             </a>
                         </div>
                     </div>
@@ -97,6 +94,11 @@
             $(function () {
                 $('[data-toggle="popover"]').popover()
             })
+        },
+        methods:{
+            redirect(){
+                this.$inertia.get(route('home'))
+            }
         }
     }
 </script>
