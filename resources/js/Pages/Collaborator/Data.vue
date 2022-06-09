@@ -11,7 +11,8 @@
 									<h3>Personal information</h3>
 									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.name" autocomplete="name" placeholder="Contact person *" required/>
 									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.phone" autocomplete="phone" placeholder="Phone number *" required/>
-									<select name="nif" id="gestor" v-model="form.gestor" class="form-control w-100 select mb-2 pb-0" required>
+									<select id="gestor" v-model="form.gestor" class="form-control w-100 select mb-2 pb-0" required>
+										<option value="3">Eres gestor de:</option>
 										<option value="1">Gestor de alojamientos turísticos</option>
 										<option value="2">Proveedor de actividades</option>
 									</select>
@@ -100,7 +101,7 @@
 				form: this.$inertia.form({
 					name: null,
 					phone: null,
-					gestor: "1",
+					gestor: "3",
 					razon: null,
 					nif: 'NIF Español',
 					id: null,
@@ -112,11 +113,22 @@
 		},
 		methods: {
 			submit() {
-				this.form.post(route('collaborator.register.data'),{
-					_token: this.$page.props.csrf_token,
-					errorBag: 'submit',
-					preserveScroll: true,
-				})
+				let gestor = document.getElementById('gestor').value
+				if(gestor !== "3"){
+					this.form.gestor = gestor;
+					this.form.post(route('collaborator.register.data'),{
+						_token: this.$page.props.csrf_token,
+						errorBag: 'submit',
+						preserveScroll: true,
+					})
+				}else{
+					this.$swal({
+					text: "¿Debe seleccionar un tipo de gestor?",
+					icon: 'info',
+					confirmButtonColor: '#3085d6',
+					confirmButtonText: 'Aceptar'
+					})
+				}
 			},
 			logout(){
                 this.$inertia.post(route('logout'), {

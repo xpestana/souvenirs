@@ -104,22 +104,56 @@
                             </template>
                             <template v-if="this.precios.length > 0">
                                 <div class="text-right">
-                                    <div class="mb-4" v-if="this.precios[0] !== undefined && this.precios[0] !== null">
+                                    <template v-if="editados">
+                                        <div class="mb-4" v-if="this.precios[0] !== undefined && this.precios[0] !== null">
                                         <p class="text-lg d-inline mr-4">Adults</p>
                                         <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[0]== 0 }">{{this.precios[0]}}€</h5>
-                                    </div>
-                                    <div class="mb-4" v-if="this.precios[1] !== undefined && this.precios[1] !== null">
-                                        <p class="text-lg d-inline mr-4">Kids</p>
-                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[1]== 0 }">{{this.precios[1]}}€</h5>
-                                    </div>
-                                    <div class="mb-4" v-if="this.precios[2] !== undefined && this.precios[2] !== null">
-                                        <p class="text-lg d-inline mr-4">Babies</p>
-                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
-                                    </div>
-                                    <div v-if="this.precios[3] !== undefined && this.precios[3] !== null">
-                                        <p class="text-lg d-inline mr-4">Students</p>
-                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[3]== 0 }">{{this.precios[3]}}€</h5>
-                                    </div>
+                                        </div>
+                                        <div class="mb-4" v-if="this.precios[1] !== undefined && this.precios[1] !== null">
+                                            <p class="text-lg d-inline mr-4">Children</p>
+                                            <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[1]== 0 }">{{this.precios[1]}}€</h5>
+                                        </div>
+                                        <div class="mb-4" v-if="this.precios[2] !== undefined && this.precios[2] !== null">
+                                            <p class="text-lg d-inline mr-4">Students</p>
+                                            <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
+                                        </div>
+                                        <div v-if="this.precios[3] !== undefined && this.precios[3] !== null">
+                                            <p class="text-lg d-inline mr-4">Babies</p>
+                                            <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[3]== 0 }">{{this.precios[3]}}€</h5>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <div class="mb-4" v-if="this.precios[0] !== undefined && this.precios[0] !== null">
+                                        <p class="text-lg d-inline mr-4">Adults</p>
+                                        <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[0]== 0 }">{{this.precios[0]}}€</h5>
+                                        </div>
+                                        <div class="mb-4" v-if="this.precios[1] !== undefined && this.precios[1] !== null">
+                                            <p class="text-lg d-inline mr-4">Children</p>
+                                            <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[1]== 0 }">{{this.precios[1]}}€</h5>
+                                        </div>
+                                        <div class="mb-4" v-if="this.precios[2] !== undefined && this.precios[2] !== null">
+                                            <p class="text-lg d-inline mr-4">
+                                                <template v-if="this.precios.length == 3 && this.precios[2]==0 || this.precios.length > 3 && this.precios[3] > this.precios[2]">
+                                                    Babies
+                                                </template>
+                                                <template v-else>
+                                                    Students
+                                                </template>
+                                            </p>
+                                            <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[2]== 0 }">{{this.precios[2]}}€</h5>
+                                        </div>
+                                        <div v-if="this.precios[3] !== undefined && this.precios[3] !== null">
+                                            <p class="text-lg d-inline mr-4">
+                                                <template v-if="this.precios[3] < this.precios[2]">
+                                                    Babies
+                                                </template>
+                                                <template v-else>
+                                                    Students
+                                                </template>
+                                            </p>
+                                            <h5 class="rounded-circle bg-white p-2 font-weight-bolder text-base d-inline" :class="{'p-0 py-2 px-2.5':this.precios[3]== 0 }">{{this.precios[3]}}€</h5>
+                                        </div>
+                                    </template>
                                 </div>
                             </template>
                         </div>
@@ -266,7 +300,8 @@
                 itemsToShow: 1,
                 snapAlign: 'center',
                 },
-                showPopup:false
+                showPopup:false,
+                editados:false
             }
         },
         props: {
@@ -289,11 +324,22 @@
                 let precios = JSON.parse(this.product.activities.priceA)
                 if(precios.status == 'ERROR'){}
                 else{
+                    let acc=0;
                     for(let val in precios.prices_per_ticket){
-                        if(precios.prices_per_ticket[val] !== null){
-                            this.precios.push(precios.prices_per_ticket[val])
+                        if(val.slice(0,3) == '111'){
+                            this.editados = true;    
                         }
+                        if(precios.prices_per_ticket[val] == null){
+                            ++acc;
+                        }
+                        this.precios.push(precios.prices_per_ticket[val]) 
+                        
                     }
+                    if(acc == 4){
+                        this.precios = [];
+                    }
+                    console.log(this.precios)
+                    
                 }
             }
             
