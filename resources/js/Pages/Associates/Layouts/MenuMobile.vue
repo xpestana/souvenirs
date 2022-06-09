@@ -23,7 +23,7 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <Link href="#" class="nav-link py-0">
+                    <Link :href="route('associates.collaborations')" class="nav-link py-0">
                         <div class="d-inline-flex">
                             <i class="fas fa-mobile-alt my-auto pr-1"></i>
                             <p class="p-2 font-weight-bolder">Colaboración</p>
@@ -31,7 +31,7 @@
                     </Link>
                 </li>
                 <li class="nav-item">
-                    <Link href="#" class="nav-link py-0">
+                    <Link :href="route('associates.index')" class="nav-link py-0">
                         <div class="d-inline-flex">
                             <i class="fas fa-biking my-auto pr-1"></i>
                             <p class="p-2 font-weight-bolder">Servicios prestados</p>
