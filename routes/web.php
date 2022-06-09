@@ -60,6 +60,12 @@ Route::get('politicas/devolucion',function(){
 Route::get('politicas/entregas',function(){
     return Inertia::render('Collaborator/Politicas/Entregas'); 
 })->name('entregas');
+Route::get('/politicas/avisolegal',function(){
+    return Inertia::render('Collaborator/Politicas/AvisoLegal'); 
+})->name('avisolegal');
+Route::get('/politicas/cookies',function(){
+   return Inertia::render('Collaborator/Politicas/Cookies'); 
+})->name('cookies');
 /*
     Auth
  */
@@ -276,9 +282,10 @@ Route::post('/register/collaborator', [CollaboratorController::class, 'store'])-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('registro/datos', [CollaboratorController::class, 'data'])->name('collaborator.data');  
     Route::post('register/data', [CollaboratorController::class, 'register_data'])->name('collaborator.register.data');
+    Route::post('/borrar-cuenta/{id}', [ProfileCollaboratorController::class, 'destroy'])->name('collaborator.delete');  
 });
 
-/*Dashboard*/
+/*Dashboard Colaborador*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(function () {
     
     Route::get('/', [CollaboratorController::class, 'index'])->name('collaborator.index');  
@@ -290,13 +297,12 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::get('/ventas/totales/{id}', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
 
     
-    /* Politicas */
-    Route::get('/politicas/avisolegal',function(){
-        return Inertia::render('Collaborator/Politicas/AvisoLegal'); 
-   });
-   Route::get('/politicas/cookies',function(){
-       return Inertia::render('Collaborator/Politicas/Cookies'); 
-   });
+});
+/*Dashboard asociados*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(function () {
+    
+    Route::get('/servicios', [ProfileCollaboratorController::class, 'associate_profile'])->name('associates.index');  
+    Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
 });
 /*Ajustes*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {

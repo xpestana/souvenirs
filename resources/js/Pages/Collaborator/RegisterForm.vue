@@ -3,7 +3,7 @@
         <div class="row w-100 p-0 m-0">
             <div class="col-md-7 up py-4">
                 <div class="col-md-12 text-center">
-                    <img style="width: 50%" class="m-auto" src="/vendor_asset/img/logo/hilogo.png">
+                    <img style="width: 50%" class="m-auto cursor-pointer" src="/vendor_asset/img/logo/hilogo.png" @click="redirect()">
 
                     <h1 class="title">Lo hacemos por ti</h1>
                     <div class="caja-info mt-4">
@@ -38,12 +38,14 @@
     import BreezeInput from '@/Components/Input.vue'
     import BreezeButton from '@/Components/Button.vue'
     import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors'
+    import { Link } from '@inertiajs/inertia-vue3';
 
     export default {
         components:{
             BreezeInput,
             BreezeButton,
-            ValidationErrors
+            ValidationErrors,
+            Link
         },
         data(){
             return {
@@ -62,6 +64,9 @@
                     preserveScroll: true,
                 })
             },
+            redirect(){
+                this.$inertia.get(route('collaborator.home'))
+            }
         }
     }
 </script>

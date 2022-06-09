@@ -27,20 +27,20 @@
                 <span class="d-block font-weight-bolder mb-2  text-muted">Coordenadas para punto de encuentro</span>
                 <input type="text" v-model="form.coordinates" class="border rounded w-72 md:w-96" placeholder="Formato ej: 37.3890942,-5.992468">
             </div>
+            <div class="col-12 mb-2">
+                <span class="d-block font-weight-bolder mb-1  text-muted">Descripción</span>
+                <ckeditor 
+                    :editor="editor" 
+                    :config="editorConfig"
+                    v-model="form.description"
+                ></ckeditor>
+            </div>
             <div class="col-12  my-md-2">
                 <span class="d-block font-weight-bolder mb-2  text-muted">Cancelaciones</span>
                 <ckeditor 
                     :editor="editor" 
                     :config="editorConfig"
                     v-model="form.price_notes"
-                ></ckeditor>
-            </div>
-            <div class="col-12 mb-4">
-                <span class="d-block font-weight-bolder mb-1  text-muted">Descripción</span>
-                <ckeditor 
-                    :editor="editor" 
-                    :config="editorConfig"
-                    v-model="form.description"
                 ></ckeditor>
             </div>
         </div>
@@ -59,20 +59,20 @@
                 <span class="d-block font-weight-bolder mb-2  text-muted">Coordenadas para punto de encuentro en ingles</span>
                 <input type="text" v-model="form.coordinatesEn" class="border rounded w-72 md:w-96" placeholder="Formato ej: 37.3890942,-5.992468">
             </div>
-            <div class="col-12  my-md-2">
-                <span class="d-block font-weight-bolder mb-2  text-muted">Cancelaciones en ingles</span>
-                <ckeditor 
-                    :editor="editor" 
-                    :config="editorConfig"
-                    v-model="form.prices_notesEn"
-                ></ckeditor>
-            </div>
             <div class="col-12 mb-2">
                 <span class="d-block font-weight-bolder mb-1  text-muted">Descripción en ingles</span>
                 <ckeditor 
                     :editor="editor" 
                     :config="editorConfig"
                     v-model="form.descriptionEn"
+                ></ckeditor>
+            </div>
+            <div class="col-12  my-md-2">
+                <span class="d-block font-weight-bolder mb-2  text-muted">Cancelaciones en ingles</span>
+                <ckeditor 
+                    :editor="editor" 
+                    :config="editorConfig"
+                    v-model="form.prices_notesEn"
                 ></ckeditor>
             </div>
         </div>

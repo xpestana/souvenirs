@@ -11,6 +11,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\profile;
+use Illuminate\Support\Facades\Redirect as FacadesRedirect;
 use Inertia\Inertia;
 use Redirect;
 
@@ -68,5 +69,21 @@ class ProfileCollaboratorController extends Controller
         $profile->save();
 
         return back()->with(['id'=>$id, 'message' => 'Actualizado correctamente', 'code' => 200, 'status' => 'success']);
+    }
+
+    public function associate_profile(Request $request)
+    {
+        return Inertia::render('Associates/Dashboard/ServicesProvided');
+    }
+    
+    public function associate_settings()
+    {
+        return Inertia::render('Associates/Dashboard/Settings');
+    }
+
+    public function destroy($id)
+    {
+        $user=User::find($id)->delete();
+        return redirect()->route('login')->with(['id'=>$id, 'message' => 'Cuenta eliminada', 'code' => 200, 'status' => 'success']); 
     }
 }

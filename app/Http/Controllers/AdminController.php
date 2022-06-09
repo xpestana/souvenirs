@@ -18,9 +18,9 @@ use Exception;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeReceived;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-use Redirect;
 use Image;
 
 
@@ -744,6 +744,6 @@ class AdminController extends Controller
         $profile->address = $request->address;
         $profile->save();
 
-        return back()->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
+        return Redirect::route('admin.associates.show',$id)->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
     }
 }

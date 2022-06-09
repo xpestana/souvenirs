@@ -42,7 +42,7 @@
                                 <form @submit.prevent="submit">
                                 <div class="quatity-stock-mobile d-inline">
                                     <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1.5 py-md-1" @click="form.quantity > 1 ? --form.quantity: ''"><i class="fas fa-minus"></i></button>
-                                    <p class="text-muted mx-2 d-inline"><input v-model="form.quantity" type="number" min="1" class="px-0 pl-1 pl-md-2 w-8 md:w-12"></p>
+                                    <p class="text-muted pl-1 d-inline"><input v-model="form.quantity" type="number" min="1" class="px-2 px-md-3 w-8 md:w-12"></p>
                                     <button type="button" class="rounded-circle bg-azulc text-white d-inline text-xs px-1.5 py-md-1" @click="++form.quantity"><i class="fas fa-plus"></i></button>
                                 </div>
                                 <div class="d-inline ml-3">
@@ -176,6 +176,18 @@
     }
 </script>
 <style scoped>
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+    }
+
+    input[type=number] {
+        -moz-appearance:textfield; 
+    }
+    #product-img .carousel #img-product {
+        height: 30em;
+    }
     .img-thumb{
         width: 100%;
         height: 100px;
@@ -202,11 +214,18 @@
     .thubnail-desc .product-header-mobile .opacidad{
         opacity: 0.8;
     }
+    @media(min-width:1300px){
+        #product-img .carousel #img-product {
+            height: 38em;
+        }
+    }
     @media(max-width:767px){
-        .carousel #img-product {
+        #product-img .carousel #img-product {
             height: 20em;
+        }
+        .carousel #img-product {
             background-size: cover !important;
-            background-repeat: no-repeat !important;
+            background-repeat: no-repeat !important;   
         }
         .main-product-thumbnail .tab-content {
             margin-bottom: 0px;

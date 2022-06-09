@@ -50,13 +50,14 @@ class SalesController extends Controller
                 foreach ($forms as $form) {
                 if ($form['key'] != "name" && $form['key'] != "country" && $form['key'] != "phone") {
                     if ($form['required'] == true) {
-                        //
                         array_push($forms_extra,$form);
                     }
                 }
                 }
             }
         }
+
+
         return Inertia::render('Checkout', compact('hotel', 'forms_extra'));
     }
     
@@ -67,10 +68,11 @@ class SalesController extends Controller
             'name' => 'required',
             'address' => 'required',
             'phone' => 'required',
-            'hab' => 'required',
         ]);
 
-        if (auth()->user()) {
+        
+
+      /*  if (auth()->user()) {
             $user = auth()->user();
             $hotel_id = (!auth()->user()->hotel->isEmpty()) ? auth()->user()->hotel->first()->id : null;
         }else{
@@ -106,7 +108,7 @@ class SalesController extends Controller
                 Mail::to($request->email)->send(new SaleSouvenirReceived($order));
                 Mail::to("info@hicitty.es")->send(new AdminReceived($order));
             return Redirect::route('purchase',['oi' => $order->id]);
-
+*/
         
     }
      public function sale_activities(Request $request)

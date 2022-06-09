@@ -104,9 +104,15 @@ class CollaboratorController extends Controller
             'cp' => $request->cp,
             'address' => $request->address,
         ]);
-        auth()->user()->assignRole('Hotel');
-
-        return Redirect::route('collaborator.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
+        $user = User::find(auth()->user()->id);
+        if ($request->gestor == 1) {
+            $user->assignRole('Hotel');
+            return Redirect::route('collaborator.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
+        }
+        if ($request->gestor == 2) {
+            $user->assignRole('Associate');
+            return Redirect::route('associates.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
+        }
     }
     public function create_hab()
     {

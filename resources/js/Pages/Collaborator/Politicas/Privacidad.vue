@@ -105,6 +105,12 @@
         </div>
     </div>
 </template>
+<script>
+import Layout from '@/Layouts/Layout.vue'
+export default{
+    layout:Layout,
+}
+</script>
 <style scoped>
 .cuerpo .titulo h1{
     font-size: 1.5em;

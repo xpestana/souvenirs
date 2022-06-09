@@ -1,6 +1,7 @@
 <template>
   
 <div class="section cuerpo">
+    <ModalCookies/>
     <div class="section cabezera"> 
         <div class="container">
             <div class="row mb-2 mb-md-0">
@@ -16,33 +17,32 @@
 
     <div class="section inicio"> 
     <div class="container">
-        <div class="row">
+        <div class="row align-content-center fila-container">
             <div class="col-md-6 text-left head-registra">
-                <h1 class="titulo text-5xl md:text-6xl">Registra <br>tu <br> alojamiento</h1>
+                <h1 class="titulo text-5xl md:text-6xl 2xl:text-7xl">Registra <br>tu <br> alojamiento</h1>
                 <p class="r-1"><small>Darse de alta son sólo unos minutos ¡Empieza hoy mismo!</small></p>
                 <p class="r-2"><small>Crea un cuenta de <b>colaborador</b> para empezar</small></p>
                     
                 <Link :href="route('collaborator.register')" type="button" class="btn btn-primary empezar">Empezar</Link>
                     
-            </div>
-                            
-            <div class="col-md-6 beneficios">     
+            </div>    
+            <div class="col-md-6 beneficios md:flex flex-column justify-content-center md:pb-24">     
                 
                 <div class="d-flex fs-beneficios my-2">
-                    <i class="far fa-check-circle pt-2 pe-3"></i>
-                    <p class="fw-bold beneficios-text m-2">Darse de alta es gratis</p>
+                    <i class="far fa-check-circle pt-3.5 2xl:pt-2.5 pe-3 text-white text-lg 2xl:text-3xl"></i>
+                    <p class="fw-bold beneficios-text m-2 text-white text-lg md:text-xl 2xl:text-3xl">Darse de alta es gratis</p>
                 </div>
                 <div class="d-flex fs-beneficios my-2">
-                    <i class="far fa-check-circle pt-2 pe-3"></i>
-                    <p class="fw-bold beneficios-text m-2">Nueva línea de ingresos sin trabajo adicional</p>
+                    <i class="far fa-check-circle pt-3.5 2xl:pt-2.5 pe-3 text-white text-lg 2xl:text-3xl"></i>
+                    <p class="fw-bold beneficios-text m-2 text-white text-lg md:text-xl 2xl:text-3xl">Nueva línea de ingresos sin trabajo adicional</p>
                 </div>
                 <div class="d-flex fs-beneficios my-2">
-                    <i class="far fa-check-circle pt-2 pe-3"></i>
-                    <p class="fw-bold beneficios-text m-2">Aumentamos tus valoraciones</p>
+                    <i class="far fa-check-circle pt-3.5 2xl:pt-2.5 pe-3 text-white text-lg 2xl:text-3xl"></i>
+                    <p class="fw-bold beneficios-text m-2 text-white text-lg md:text-xl 2xl:text-3xl">Aumentamos tus valoraciones</p>
                 </div>
                 <div class="d-flex fs-beneficios my-2">
-                    <i class="far fa-check-circle pt-2 pe-3"></i>
-                    <p class="fw-bold beneficios-text m-2">Mejoramos la experiencia de tus inquilinos</p>
+                    <i class="far fa-check-circle pt-3.5 2xl:pt-2.5 pe-3 text-white text-lg 2xl:text-3xl"></i>
+                    <p class="fw-bold beneficios-text m-2 text-white text-lg md:text-xl 2xl:text-3xl">Mejoramos la experiencia de tus inquilinos</p>
                 </div>
                 
             </div>
@@ -60,10 +60,12 @@
 <script>
 import BreezeButton from '@/Components/Button.vue';
 import { Link } from '@inertiajs/inertia-vue3';
+import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
 export default {
     components: {
         BreezeButton,
-        Link
+        Link,
+        ModalCookies
     }
 }
 </script>
@@ -73,9 +75,6 @@ a.btn.btn-primary.iniciar {
     background-color: #fff;
     color: #3490dc;
     font-weight: 600;
-}
-.section.inicio {
-    margin-top: 100px;
 }
 p.r-1 {
     font-size: 24px;
@@ -87,14 +86,6 @@ p.r-2 {
     color: #3490dc;
     margin-top: 24px;
 }
-.fs-beneficios{
-        font-size: 1.5em;
-        color: #fff;
-    }
-.beneficios-text{
-        font-size: 1.2em;
-        color:#fff;
-    }
     a.btn.btn-primary.empezar {
     background: #5d7ffb;
     font-size: 25px;
@@ -108,7 +99,10 @@ p.r-2 {
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 25px;
-    padding-bottom: 200px;
+    height: 100vh;
+}
+.section.cuerpo .fila-container{
+    height:83vh;
 }
 /* responsive */
 @media (max-width: 576px) { 
@@ -128,6 +122,12 @@ i.far.fa-check-circle.pt-2.pe-3 {
 }
 .section.inicio {
     margin-top: 0px;
+}
+.section.cuerpo {
+    height: auto;
+}
+.section.cuerpo .fila-container{
+    height:auto;
 }
 }
 </style>

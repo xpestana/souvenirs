@@ -3,7 +3,7 @@
                             <!-- Navbar brand -->
         <div class="row justify-content-between">
           <div class="col-4">
-			  <button class="burger p-3" type="button" data-toggle="collapse" data-target="#collapseb" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" @click="atenuar">
+			  <button class="burger p-3" id="btnMobileMenu" type="button" data-toggle="collapse" data-target="#collapseb" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" @click="atenuar">
 				<i class="fas fa-bars"></i>
 				</button>
           </div>
