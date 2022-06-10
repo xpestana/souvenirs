@@ -329,7 +329,7 @@ class AdminController extends Controller
             }
             $hotel = hotel::create([
                 'calle'       => $request->calle,
-                'type'        => ($user->profile->gestor == 1) ? "hotel" : "apartamento",
+                'type'        => $request->type,
                 'address'     => $request->address,
                 'zone'        => $request->city,
                 'planta'      => $request->planta,
@@ -682,8 +682,14 @@ class AdminController extends Controller
         'address' => $request->address,
     ]);
 
-    $user->assignRole('Associate');
+    $userClient = User::create([
+        'name' => $request->email,
+        'email' => $request->email.$user->id,
+        'password' => Hash::make($request->password),
+    ]);
 
+    $user->assignRole('Associate');
+    $userClient->assignRole('Client');
     Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
 
     return  back()->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);

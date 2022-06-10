@@ -70,7 +70,7 @@
             </div>
             <div class="row mx-lg-4 my-3 justify-content-start">
                 <div class="col-12 col-md-6">
-                    <input type="text" class="form-input w-100" v-model="form.code" placeholder="N° de licencia VFT/SE/12345" disabled>
+                    <input type="text" class="form-input w-100" v-model="form.code" placeholder="N° de licencia VFT/SE/12345" >
                 </div>
             </div>
             <div class="row mx-lg-4 my-3 justify-content-start">

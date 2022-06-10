@@ -26,12 +26,7 @@ use Image;
 class AssociateController extends Controller
 {
     public function collaborations(){
-        $orders = Order::join('hotels', 'hotels.id', '=', 'orders.hotel_id')
-                ->join('hotel_user', 'hotels.id', '=', 'hotel_user.hotel_id')
-                ->select('orders.*', 'hotels.type', 'hotels.address', 'hotels.zone', 'hotels.calle', 'hotels.image', 'hotels.planta')
-                ->where('hotel_user.user_id', auth()->user()->id)
-                ->orderBy('orders.created_at','DESC')
-                ->paginate(10);
+        $orders = Order::where("user_id", auth()->user()->id)->orderBy('created_at','DESC')->paginate(10);
         $orders->load('shippings');
         $url = config('app.url');
         $hotels = auth()->user()->hotel->load('orders.shippings');       

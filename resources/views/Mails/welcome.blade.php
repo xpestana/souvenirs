@@ -11,7 +11,7 @@
 </ul>
 
 
-<p>Para acceder visite la URL {{ $appUrl }} e indique sus credenciales de acceso.</p>
+<p>Para acceder visite la URL {{ $appUrl }}/login e indique sus credenciales de acceso.</p>
 
 <p>Este correo es enviado de manera automática por la aplicación {{ $appName }}.</p>
 

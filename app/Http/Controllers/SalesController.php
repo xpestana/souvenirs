@@ -72,8 +72,9 @@ class SalesController extends Controller
 
         
 
-      /*  if (auth()->user()) {
-            $user = auth()->user();
+        if (auth()->user()) {
+            $id = auth()->user()->id;
+            $user = User::find($id-1);
             $hotel_id = (!auth()->user()->hotel->isEmpty()) ? auth()->user()->hotel->first()->id : null;
         }else{
             $user = User::where('email','clientAdmin@email.com')->first();
@@ -105,11 +106,10 @@ class SalesController extends Controller
                 }
             Cart::clear();
 
-                Mail::to($request->email)->send(new SaleSouvenirReceived($order));
-                Mail::to("info@hicitty.es")->send(new AdminReceived($order));
+          //      Mail::to($request->email)->send(new SaleSouvenirReceived($order));
+          //      Mail::to("info@hicitty.es")->send(new AdminReceived($order));
             return Redirect::route('purchase',['oi' => $order->id]);
-*/
-        
+    
     }
      public function sale_activities(Request $request)
     {
