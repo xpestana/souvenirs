@@ -174,6 +174,9 @@ export default {
 }
 </script>
 <style scoped>
+#section{
+	background-color: #fff;
+}
 .opciones .input-search span{
     z-index: 2;
     width: 2.375rem;

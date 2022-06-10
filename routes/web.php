@@ -24,6 +24,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 /*Controladores COLLABORATORS*/
 use App\Http\Controllers\Collaborator\CollaboratorController;
 use App\Http\Controllers\Collaborator\ProfileCollaboratorController;
+use App\Http\Controllers\Collaborator\AssociateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -303,6 +304,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(func
     
     Route::get('/servicios', [ProfileCollaboratorController::class, 'associate_profile'])->name('associates.index');  
     Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
+    Route::get('/colaboraciones', [AssociateController::class, 'collaborations'])->name('associates.collaborations');  
 });
 /*Ajustes*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {

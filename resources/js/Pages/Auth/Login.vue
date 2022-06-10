@@ -145,8 +145,8 @@ export default {
         canResetPassword: Boolean,
     },
     updated(){
-        console.log(this.$page.props.flash.status)
-        if(this.$page.props.flash.status){
+        console.log(this.$page.props.flash.response)
+        if(this.$page.props.flash.response){
             $('#notify').modal('show')
         }
     },

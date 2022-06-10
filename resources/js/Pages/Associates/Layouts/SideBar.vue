@@ -6,10 +6,10 @@
     <div class="items">
         <ul>
             <li class="mb-3 item pl-1 pb-2">
-                <Link href="#"  class="link">
+                <Link :href="route('associates.collaborations')" class="link" :class="{'active':this.$page.url.includes('/colaboraciones')}">
                     <div class="d-inline-flex">
                         <i class="fas fa-mobile-alt my-auto pr-2 text-lg"></i>
-                        <p class="p-2">Colaboración</p>
+                        <p class="p-2" :class="{'active':this.$page.url.includes('/colaboraciones')}">Colaboración</p>
                     </div>
                 </Link>
             </li>

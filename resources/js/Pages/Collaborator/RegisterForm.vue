@@ -76,6 +76,7 @@
         display: flex;
         align-items: center;
         height: 100vh;
+        background-color: #fff !important;
     }
     .caja-info p {
         border-radius: 30px;
