@@ -329,7 +329,7 @@ class AdminController extends Controller
             }
             $hotel = hotel::create([
                 'calle'       => $request->calle,
-                'type'        => ($user->profile->gestor == 1) ? "hotel" : "apartamento",
+                'type'        => $request->type,
                 'address'     => $request->address,
                 'zone'        => $request->city,
                 'planta'      => $request->planta,
