@@ -29,6 +29,7 @@
 								<option value="-">Select</option>
 								<option value="hotel">Hotel</option>
 								<option value="lodging">Apartamento</option>
+								<option value="housing">Complejo turístico</option>
 							</select>
 						</div>
 					</div>
@@ -150,6 +151,7 @@
         	return {
 				registerLodging:null,
 				registerHotel:null,
+				registerHousing:null,
         		showF: 0,
             	user: this.$page.props.auth.user,
             	profile: this.$page.props.auth.profile,
@@ -173,15 +175,19 @@
 			showForm(){
 				if(document.getElementById('registerA').value == 'hotel'){
 					this.registerLodging = false;
+					this.registerHousing = false;
 					this.registerHotel = true;
 					this.form.tipo = 'hotel';
 				}else if(document.getElementById('registerA').value == 'lodging'){
 					this.registerHotel = false;
+					this.registerHousing = false;
 					this.registerLodging = true;
 					this.form.tipo = 'apartamento';
-				}else{
-					this.registerLodging = false;
+				}else if(document.getElementById('registerA').value == 'housing'){
 					this.registerHotel = false;
+					this.registerHousing = true;
+					this.registerLodging = false;
+					this.form.tipo = 'complejo';
 				}
 			},
     		submit() {
