@@ -1,6 +1,6 @@
 <template>
     <nav v-if="paginator!==undefined"
-         class="flex items-center justify-between mt-5 overflow-auto"
+         class="flex items-center justify-between mt-5 overflow-auto w-96"
          role="navigation">
         <div class="flex justify-between flex-1 hidden">
             <span v-if="onFirstPage"

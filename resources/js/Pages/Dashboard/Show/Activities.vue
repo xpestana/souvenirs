@@ -240,9 +240,9 @@
 
                         <div id="punto" class="collapse py-2 px-3" aria-labelledby="head6" data-parent="#accordionExample">
                             <template v-if="product.activities">
-                                <div class="d-flex justify-center" v-if="product.activities.coordinates_en">
+                                <div class="d-flex justify-center" v-if="product.activities.coordinates">
                                     <iframe class="h-64 w-96" id="gmap_canvas" 
-                                     :src="'https://maps.google.com/maps?q='+product.activities.coordinates_en+'&t=&z=13&ie=UTF8&iwloc=&output=embed'"
+                                     :src="'https://maps.google.com/maps?q='+product.activities.coordinates+'&t=&z=13&ie=UTF8&iwloc=&output=embed'"
                                       frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
                                     </iframe>
                                 </div>

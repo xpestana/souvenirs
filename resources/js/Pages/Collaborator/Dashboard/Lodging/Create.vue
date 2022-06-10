@@ -28,6 +28,7 @@
 								<option value="-">Select</option>
 								<option value="hotel">Hotel</option>
 								<option value="lodging">Apartment</option>
+								<option value="complejo">Complejo turístico</option>
 							</select>
 						</div>
 					</div>
@@ -38,7 +39,7 @@
 									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Name of the hotel*">
 								</div>
 								<div class="col-12 col-md-6 mb-3">
-									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="Number of rooms*">
+									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" :placeholder="placeholderHab">
 								</div>
 							</template>
 							<div class="col-12 mb-3" :class="{'col-md-6' : registerHotel}">
@@ -151,6 +152,8 @@
         	return {
 				registerLodging:false,
 				registerHotel:false,
+				registerHousing:false,
+				placeholderHab:null,
         		showF: 0,
             	user: this.$page.props.auth.user,
             	profile: this.$page.props.auth.profile,
@@ -176,12 +179,20 @@
 					this.registerLodging = false;
 					this.registerHotel = true;
 					this.form.tipo = 'hotel';
+					this.placeholderHab = 'Number of rooms*';
 				}else if(document.getElementById('registerA').value == 'lodging'){
 					this.registerHotel = false;
 					this.registerLodging = true;
 					this.form.tipo = 'apartamento';
+				}else if(document.getElementById('registerA').value == 'complejo'){
+					this.registerHotel = true;
+					this.registerHousing = true;
+					this.registerLodging = false;
+					this.form.tipo = 'complejo';
+					this.placeholderHab = 'Number of apartments*';
 				}else{
 					this.registerLodging = false;
+					this.registerHousing = false;
 					this.registerHotel = false;
 				}
 			},

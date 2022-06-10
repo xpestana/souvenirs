@@ -33,7 +33,9 @@
                         <div class="container">
                             <div v-for="hotel in hoteles" :key="hotel.id" class="row tarjeta my-4 p-3">
                                     <div class="col-12 col-md-2 p-0">
+                                        <Link :href="route('collaborator.sales.details',{hab:hotel.id})">
                                         <img class="img-foto w-100 h-36 md:h-28" :src="'/storage/hotel'+hotel.image" >
+                                        </Link>
                                     </div>
                                     <div class="col-12 col-md-8 texto">
                                         <div class="text-md-left">
@@ -43,7 +45,9 @@
                                                 <p class="d-md-inline text-center">{{ hotel.zone }}</p>
                                             </template>
                                         </div>
-                                        <h1 class="pt-1 pb-2">{{hotel.calle}} {{hotel.planta}}</h1>
+                                         <Link :href="route('collaborator.sales.details',{hab:hotel.id})">
+                                            <h1 class="pt-1 pb-2 title">{{hotel.calle}} {{hotel.planta}}</h1>
+                                        </Link>
                                         <div class="estadistica">
                                             <p class="px-2">Total benefit {{ hotel.total_benefit }} €</p>
                                             <p class="px-2">Total orders: {{ hotel.total_orders }}</p>
@@ -258,11 +262,6 @@ body{
     font-size: 21px;
 }
 #alojamientos .tarjeta{
-    box-shadow: 0px -1px 10px 4px rgba(0,0,0,0.47);
-    -webkit-box-shadow: 0px -1px 10px 4px rgba(0,0,0,0.47);
-    -moz-box-shadow: 0px -1px 10px 4px rgba(0,0,0,0.47);
-}
-#alojamientos .tarjeta{
     box-shadow: 1px 1px 3px 3px rgba(0 0 0 / 20%);
 }
 #alojamientos .tarjeta .texto p{
@@ -276,6 +275,9 @@ body{
     font-size: 30px;
     font-weight: bold;
     text-align: left;
+}
+#alojamientos .tarjeta h1:hover{
+    color: #3f9ae5;
 }
 #alojamientos .tarjeta .estadistica{
     display: inline-flex;

@@ -91,7 +91,7 @@
             <div class="row mx-2 pie justify-content-md-end my-4">
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
-                    <p><b>Tu beneficio es de {{ total.toFixed(2) }}€</b></p>
+                    <p><b>Tu beneficio es de {{ (total_benefit*0.20).toFixed(2) }}€</b></p>
                     <button class="btn btn-primary-c rounded-pill mt-2 py-1 py-md-0" hidden>Guardar cambios</button>
                 </div>
             </div>
@@ -118,7 +118,8 @@ export default {
         return{
             totalOrders:0,
             total:0,
-            moment:null
+            moment:null,
+            total_benefit:0
         }
     },
     created(){
@@ -130,6 +131,11 @@ export default {
     computed:{
         ventas(){
             const obj = this.orders.data.map((col)=>{
+            var total_benefits = 0
+            if(col.returned == 0){
+                total_benefits = parseInt(total_benefits)  + parseInt(col.total);
+            }
+            this.total_benefit = this.total_benefit + (total_benefits/100)
             return {
                 id : col.id,
                 calle: col.calle,
@@ -159,16 +165,17 @@ export default {
         },
         datosColaborador(){
             this.total = 0;
+            this.total_benefit = 0;
             const obj = this.collaborator.hotel.map((col)=>{
-                var total_benefits = 0;
+                var total = 0;
                 this.totalOrders = this.totalOrders + col.orders.length;
                 
                 col.orders.forEach(function(order) {
                     if(order.returned == 0){
-                        total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+                        total = parseInt(total) + parseInt(order.total);
                     }
                 });
-                this.total = this.total + (total_benefits/100)
+                this.total = this.total + (total/100)
             });
         },
     },

@@ -19,13 +19,9 @@
         <hr>
         <form @submit.prevent="submit">
         <div class="row mt-2">
-            <div class="col-12 col-md-6 mb-2">
+            <div class="col-12 mb-2">
                 <span class="d-block font-weight-bolder mb-2 text-muted">Título de la actividad</span>
-                <input type="text" v-model="form.title" class="border rounded w-72 md:w-96" placeholder="Título">
-            </div>
-            <div class="col-12 col-md-6">
-                <span class="d-block font-weight-bolder mb-2  text-muted">Coordenadas para punto de encuentro</span>
-                <input type="text" v-model="form.coordinates" class="border rounded w-72 md:w-96" placeholder="Formato ej: 37.3890942,-5.992468">
+                <input type="text" v-model="form.title" class="border rounded w-100" placeholder="Título">
             </div>
             <div class="col-12 mb-2">
                 <span class="d-block font-weight-bolder mb-1  text-muted">Descripción</span>
@@ -51,13 +47,9 @@
         </div>
         <hr>
         <div class="row mt-1">
-            <div class="col-12 col-md-6 mb-2 mt-2">
+            <div class="col-12 mb-2 mt-2">
                 <span class="d-block font-weight-bolder mb-2  text-muted">Titulo de la actividad en ingles</span>
-                <input type="text" v-model="form.titleEn" class="border rounded w-72 md:w-96" placeholder="Título">
-            </div>
-            <div class="col-12 col-md-6 mb-2 mt-2">
-                <span class="d-block font-weight-bolder mb-2  text-muted">Coordenadas para punto de encuentro en ingles</span>
-                <input type="text" v-model="form.coordinatesEn" class="border rounded w-72 md:w-96" placeholder="Formato ej: 37.3890942,-5.992468">
+                <input type="text" v-model="form.titleEn" class="border rounded w-100" placeholder="Título">
             </div>
             <div class="col-12 mb-2">
                 <span class="d-block font-weight-bolder mb-1  text-muted">Descripción en ingles</span>
@@ -84,14 +76,22 @@
         <hr>
         <div class="row mt-3">
             <div class="col-12 col-md-6">
-                <select name="" id="idioma" class="border rounded w-72 md:w-96 mt-4">
-                    <option value="">Idioma</option>
-                    <option value="Español">Español</option>
-                    <option value="Inglés">Inglés</option>
-                    <option value="Italiano">Italiano</option>
-                    <option value="Francés">Francés</option>
-                    <option value="Alemán">Alemán</option>
-                </select>
+                <div class="row">
+                    <div class="col-12 my-1">
+                        <select name="" id="idioma" class="border rounded w-100 mt-4">
+                            <option value="">Idioma</option>
+                            <option value="Español">Español</option>
+                            <option value="Inglés">Inglés</option>
+                            <option value="Italiano">Italiano</option>
+                            <option value="Francés">Francés</option>
+                            <option value="Alemán">Alemán</option>
+                        </select>
+                    </div>
+                    <div class="col-12 mt-3 mb-1">
+                        <span class="d-block font-weight-bolder mb-2  text-muted">Coordenadas para punto de encuentro</span>
+                        <input type="text" v-model="form.coordinates" class="border rounded w-100" placeholder="Formato ej: 37.3890942,-5.992468">
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-md-6">
                 <span class="d-block font-weight-bolder mb-1 mt-2 mt-md-0 text-muted">Precio base</span>
