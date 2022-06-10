@@ -10,7 +10,7 @@
 <script>
 	import Header from '@/Pages/Collaborator/Layouts/Header.vue'
 	import Notify from '@/Layouts/Components/Toast.vue'
-	import Footer from '@/Pages/Collaborator/Layouts/Footer.vue'
+	import Footer from '@/Layouts/Components/Footer.vue'
 
 export default {
     components: {

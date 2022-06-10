@@ -29,7 +29,7 @@
 								<option value="-">Select</option>
 								<option value="hotel">Hotel</option>
 								<option value="lodging">Apartamento</option>
-								<option value="housing">Complejo turístico</option>
+								<option value="complejo">Complejo turístico</option>
 							</select>
 						</div>
 					</div>
@@ -40,7 +40,7 @@
 									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Nombre del hotel*">
 								</div>
 								<div class="col-12 col-md-6 mb-3">
-									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" placeholder="Numero de habitaciones*">
+									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" :placeholder="placeholderHab">
 								</div>
 							</template>
 							<div class="col-12 mb-3" :class="{'col-md-6' : registerHotel}">
@@ -149,9 +149,10 @@
 		},
 		data() {
         	return {
-				registerLodging:null,
-				registerHotel:null,
-				registerHousing:null,
+				registerLodging:false,
+				registerHotel:false,
+				registerHousing:false,
+				placeholderHab:null,
         		showF: 0,
             	user: this.$page.props.auth.user,
             	profile: this.$page.props.auth.profile,
@@ -178,16 +179,22 @@
 					this.registerHousing = false;
 					this.registerHotel = true;
 					this.form.tipo = 'hotel';
+					this.placeholderHab = 'Numero de habitaciones*';
 				}else if(document.getElementById('registerA').value == 'lodging'){
 					this.registerHotel = false;
 					this.registerHousing = false;
 					this.registerLodging = true;
 					this.form.tipo = 'apartamento';
-				}else if(document.getElementById('registerA').value == 'housing'){
-					this.registerHotel = false;
+				}else if(document.getElementById('registerA').value == 'complejo'){
+					this.registerHotel = true;
 					this.registerHousing = true;
 					this.registerLodging = false;
 					this.form.tipo = 'complejo';
+					this.placeholderHab = 'Numero de apartamentos*';
+				}else{
+					this.registerLodging = false;
+					this.registerHousing = false;
+					this.registerHotel = false;
 				}
 			},
     		submit() {

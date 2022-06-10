@@ -124,6 +124,7 @@ export default {
     },
     created(){
         this.moment=Moment;
+        console.log(this.shippings)
         this.datosColaborador()
     },
     updated(){

@@ -108,7 +108,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-12 flex justify-center mb-4" v-if="showPagination">
+            <div class="col-12 flex justify-center my-4" v-if="showPagination">
                 <paginator :paginator="products" />
             </div>
         </div>

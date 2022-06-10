@@ -150,7 +150,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-12 flex justify-center mb-4">
+            <div class="col-12 flex justify-center my-4">
                 <paginator :paginator="activities" />
             </div>
         </div>
