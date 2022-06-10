@@ -106,7 +106,7 @@ class HotelController extends Controller
             'gender'            => 'required|string', 'in:H,M',
             'name'              => 'required|string',
             'email'             => 'required|string|email|max:255|unique:users',
-            'type'              => 'required|string', 'in:apartament,hotel',
+            'type'              => 'required|string', 'in:apartament,hotel,complejo',
             'address'           => 'required|string',
             'zone'              => 'required|string',
         ]);
