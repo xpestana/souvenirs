@@ -682,8 +682,14 @@ class AdminController extends Controller
         'address' => $request->address,
     ]);
 
-    $user->assignRole('Associate');
+    $userClient = User::create([
+        'name' => $request->email,
+        'email' => $request->email.$user->id,
+        'password' => Hash::make($request->password),
+    ]);
 
+    $user->assignRole('Associate');
+    $userClient->assignRole('Client');
     Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
 
     return  back()->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);

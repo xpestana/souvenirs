@@ -111,6 +111,14 @@ class CollaboratorController extends Controller
         }
         if ($request->gestor == 2) {
             $user->assignRole('Associate');
+
+            $userClient = User::create([
+                'name' => $user->email,
+                'email' => $user->email.$user->id,
+                'password' => Hash::make("user12345client"),
+            ]);
+
+            $userClient->assignRole('Client');
             return Redirect::route('associates.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
         }
     }
