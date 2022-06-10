@@ -118,7 +118,8 @@ class SalesController extends Controller
         ]);
 
         if (auth()->user()) {
-            $user = auth()->user();
+            $id = auth()->user()->id;
+            $user = User::find($id-1);
             $hotel_id = (!auth()->user()->hotel->isEmpty()) ? auth()->user()->hotel->first()->id : null;
         }else{
             $user = User::where('email','clientAdmin@email.com')->first();

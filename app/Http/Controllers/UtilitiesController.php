@@ -31,14 +31,25 @@ class UtilitiesController extends Controller
     }
         return 0;        
     }
+    public function handle_auth_c($id)
+    {
+        if($id){
+            $user = User::find($id+1);
+            if (!empty($user)) {
+                $auth = Auth::login($user, true);
+            }
+        }
+    }
     public function home(Request $request)
     {   
         $this->handle_auth($request->h);
+        $this->handle_auth_c($request->c);
         return Inertia::render('Statics/Home');
     }
     public function activities(Request $request)
     {
         $this->handle_auth($request->h);
+        $this->handle_auth_c($request->c);
         $search = null;
         $search = $request->search;
         $min_r = (isset($request->price[0])) ? $request->price[0] : 0;
@@ -74,6 +85,7 @@ class UtilitiesController extends Controller
     public function souvenirs(Request $request)
     {
         $this->handle_auth($request->h);
+        $this->handle_auth_c($request->c);
         $search =  null;
         $showr = null;
         if ($request) {
@@ -104,11 +116,13 @@ class UtilitiesController extends Controller
     public function about(Request $request)
     {
         $this->handle_auth($request->h);
+        $this->handle_auth_c($request->c);
         return Inertia::render('Statics/AboutUs');
     }
     public function contact(Request $request)
     {
         $this->handle_auth($request->h);
+        $this->handle_auth_c($request->c);
         return Inertia::render('Statics/ContactUs');
     }
     public function contact_mail(Request $request)
