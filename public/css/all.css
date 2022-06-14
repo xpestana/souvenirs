@@ -270,6 +270,17 @@ body .modal-backdrop{
       background-color: #31516B !important; 
   }
 
+  .text-collaborator{
+    color:#FF9C06;
+  }
+  .btn-collaborator{
+    background-color:#FF9C06;
+    color:white;
+  }
+  .btn-outline-collaborator{
+    border:2px solid #FF9C06;
+    color:#FF9C06;
+  }
 /*--------------------------------------------------
 Template Name: Hopsop;
 Description:   Travel Accessories eCommerce Template;
