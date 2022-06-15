@@ -85,15 +85,15 @@
 														type: 'linear',
 														rotation: 0,
 														colorStops: [
-															{ offset: 0, color: '#31516B' },
-															{ offset: 1, color: '#31516B' },
+															{ offset: 0, color: '#B4CEE2' },
+															{ offset: 1, color: '#B4CEE2' },
 														],
 													},
 													}"
 													fileExt="png"
 													:backgroundOptions="{ color: '#ffffff' }"
-													:cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
-													:cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
+													:cornersSquareOptions="{ type: 'dot', color: '#B4CEE2' }"
+													:cornersDotOptions="{ type: undefined, color: '#B4CEE2' }"
 													:download="false"
 													downloadButton="bg-info mt-3 souvenirs_btn"
 													:downloadOptions="{ name: 'souvenirs', extension: 'png' }"

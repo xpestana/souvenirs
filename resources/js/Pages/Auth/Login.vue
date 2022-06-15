@@ -81,6 +81,12 @@
                         </div>
                     <!-- Central Modal Small -->
                 </div>
+                <div class="col-12 text-center mt-2">
+                    <p class="text-white">
+                        Don't have an account yet? 
+                        <Link :href="route('collaborator.register')"> <b>Sign up here</b></Link>
+                    </p>
+                </div>     
             </div>
         </div>
     </div>
