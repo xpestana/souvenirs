@@ -42,13 +42,13 @@
                     <h3 class="text-lg">Persona de contacto</h3>
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="text" placeholder="Nombre*" v-model="form.name" class="border rounded py-1 w-100" required/>
+                    <input type="text" placeholder="Nombre*"  id="name" name="name" :value="form.name" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-0">
-                    <input type="text" placeholder="Móvil*" v-model="form.phone" class="border rounded py-1 w-100" required/>
+                    <input type="text" placeholder="Móvil*" name="phone" :value="form.phone" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3">
-                    <input type="email" placeholder="Correo electrónico*" v-model="form.email" class="border rounded py-1 w-100" required/>
+                    <input type="email" placeholder="Correo electrónico*" id="email" name="email" :value="form.email" class="border rounded py-1 w-100" required/>
                 </div>
             </div>
             <div class="row mt-4">
@@ -59,16 +59,16 @@
                     </p>
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="text" placeholder="Dirección*" v-model="form.address" class="border rounded py-1 w-100" required/>
+                    <input type="text" placeholder="Dirección*" id="address" name="address" :value="form.address" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-0">
-                    <input type="text" placeholder="Piso, escalera, puerta, etc. (opcional)" v-model="form.hab" class="border rounded py-1 w-100"/>
+                    <input type="text" placeholder="Piso, escalera, puerta, etc. (opcional)" id="hab" name="hab"  :value="form.hab" class="border rounded py-1 w-100"/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-4">
-                    <input type="text" placeholder="Escriba aqui sus observaciones para la agencia" v-model="form.observations" class="border rounded py-1 w-100"/>
+                    <input type="text" placeholder="Escriba aqui sus observaciones para la agencia" id="observations" name="observations" :value="form.observations" class="border rounded py-1 w-100"/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-4">
-                    <input type="text" placeholder="Código postal*" v-model="form.cp" class="border rounded py-1 w-100" required/>
+                    <input type="text" placeholder="Código postal*" id="cp" name="cp" :value="form.cp" class="border rounded py-1 w-100" required/>
                 </div>
             </div>
             <div class="row mt-4" v-if="forms_extra.length > 0">
@@ -243,6 +243,7 @@
                     observations: '',
                     cp: (this.hotel) ? this.hotel.cp : '',
                     data: [],
+                    total: null,
                 },
                 checkTerminos:false,
                 mensajeInputs:''
@@ -272,9 +273,17 @@
                     }
                     this.form.data.push({[this.forms_extra[i].name.split('\n')[0]]: document.getElementById('input'+i).value})
                 }
-                if(this.form.name == '' || this.form.phone == '' || this.form.address == '' || this.form.cp == ''){
+                var name = $('#name').val();
+                var phone = $('#phone').val();
+                var email = $('#email').val();
+                var hab = $('#hab').val();
+                var observations = $('#observations').val();
+                var address = $('#address').val();
+                var cp = $('#cp').val();
+
+                if(name == '' || phone == '' || email == '' || address == '' || cp == ''){
                     this.$swal({
-                        title: 'Nombre, móvil, dirección y código postal son campos obligatorios!',
+                        title: 'Name, mobile, email, address and zip code are required fields!',
                         icon: 'info',
                         showCloseButton: false,
                         showCancelButton: false,
@@ -287,6 +296,13 @@
                     if(full){
                         this.showForm = false;
                         this.showCheckout = true;
+                        this.form.name = name;
+                        this.form.phone = phone;
+                        this.form.email = email;
+                        this.form.hab = hab;
+                        this.form.observations = observations;
+                        this.form.address = address;
+                        this.form.cp = cp;
                     }
                 }
             },
@@ -380,6 +396,7 @@
                 let envio;
                 this.totalSouvenirs.precio > this.$page.props.settings.shippings ? envio=0 : envio=5;
                 this.totalSouvenirs.precio == 0 ? envio=0 : '';
+                this.form.total = this.totalActivities.precio+this.totalSouvenirs.precio+envio;
                 return this.totalActivities.precio+this.totalSouvenirs.precio+envio;
             }
         }
