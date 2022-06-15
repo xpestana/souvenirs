@@ -165,6 +165,14 @@
         </div>
     </template>
     <!-- checkout-area end -->
+    <input type="hidden" id="total" name="total" :value="form.total">
+    <input type="hidden" id="name_env" name="name_env" :value="form.name">
+    <input type="hidden" id="phone_env" name="phone_env" :value="form.phone">
+    <input type="hidden" id="email_env" name="email_env" :value="form.email">
+    <input type="hidden" id="address_env" name="address_env" :value="form.address">
+    <input type="hidden" id="hab_env" name="hab_env" :value="form.hab">
+    <input type="hidden" id="observations_env" name="observations_env" :value="form.observations">
+    <input type="hidden" id="cp_env" name="cp_env" :value="form.cp">
 </form>
 
 </template>
