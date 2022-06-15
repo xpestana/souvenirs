@@ -141,7 +141,7 @@
                                 <td class="text-center">{{ act.activities.language }}</td>
                                 <td class="text-center">
                                     <div class="d-inline-flex">
-                                    <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('activities.edit',{id:act.id})" style="background-color: #2b59a2">Editar</Link>
+                                    <Link class="btn btn-sm py-0 px-1 py-md-1 px-md-1 text-white d-inline mx-1" :href="route('activities.edit',{id:act.id,page:page})" style="background-color: #2b59a2">Editar</Link>
                                     <button class="btn btn-sm btn-danger py-0 px-1 py-md-1 px-md-1 d-inline mx-1" @click="eliminar(act.id)">Eliminar</button>
                                     </div>
                                 </td>
@@ -186,21 +186,22 @@ export default {
                 coordinates: null,	
                 images: null,
                 pricing_notes: null,
-                id: null
+                id: null,
             }),
             zebra:false,
             desabilitar:false,
+            page:this.$page.url.split('?page=')[1] == undefined ? 1 : this.$page.url.split('?page=')[1]
         }
     },
     created(){
         // this.moment=Moment;
+        console.log(this.$page.url.split('?page=')[1])
     },
     updated(){
         this.desabilitar = false
     },
     methods: {
         detallarPrecios(precios){
-            console.log(precios)
             if(precios !== "null"){
                 let lista = JSON.parse(precios);
                 if(lista.error_code == undefined){

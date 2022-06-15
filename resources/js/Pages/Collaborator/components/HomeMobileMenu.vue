@@ -1,6 +1,6 @@
 <template>
 
-    <nav class="navbar fixed-top navbar-light bg-white d-block d-md-none" id="menu-mobile">
+    <nav class="navbar fixed-top navbar-light bg-white d-block d-md-none py-0" id="menu-mobile">
                             <!-- Navbar brand -->
         <div class="row">
             <div class="col-3">
@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="col-9">
-                <img class="w-44 ml-12 mt-3" src="/vendor_asset/img/logo/hilogo.png" alt="logo">
+                <img class="w-36 ml-6 mt-3" src="/vendor_asset/img/logo/hilogo.png" alt="logo">
             </div>
         </div>
 

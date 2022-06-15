@@ -275,9 +275,65 @@ body .modal-backdrop{
   }
   .btn-collaborator{
     background-color:#FF9C06;
-    color:white;
   }
+  .btn-collaborator p{
+    color:#fff !important;
+  }
+  .btn-collaborator:hover{
+    background-color:#ffffff;
+    border: 2px solid transparent; 
+    border-image: linear-gradient(to bottom, #ff9c06 0%, #86bcd9 100%) 1;
+  }
+  .btn-collaborator:hover p{
+    background-color: #f3ec78;
+    background-image: linear-gradient(180deg, #ff9c06, #86bcd9);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+  
   .btn-outline-collaborator{
     border:2px solid #FF9C06;
     color:#FF9C06;
   }
+
+  .btn-outline-collaborator:hover{
+    background: linear-gradient(180deg, #ff9c06, #86bcd9);
+    color:#fff;
+    border: none;
+  }
+
+.carousel__pagination-button {
+  background-color: #cfcfcf !important;
+  border-radius: 20px  !important;
+  padding: 6px  !important;
+}
+.carousel__pagination-button--active{
+    background-color: #86bbdc  !important;
+}
+#slide .carousel__prev{
+  left:50px;
+  background-color: #86bbdc !important;
+}
+#slide .carousel__next{
+  right:50px !important;
+  background-color: #86bbdc !important;
+}
+@media (min-width:767px){
+  #slide .carousel__next:hover{
+    background-color: #FF9C06 !important;
+  }
+  #slide .carousel__prev:hover{
+    background-color: #FF9C06 !important;
+  }
+}
+@media (max-width:767px){
+  #slide .carousel__prev{
+    left:20px;
+  }
+  #slide .carousel__next{
+    right:20px !important;
+  }
+}

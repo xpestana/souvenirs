@@ -78,8 +78,8 @@
             <div class="col-12 col-md-6">
                 <div class="row">
                     <div class="col-12 my-1">
-                        <select name="" id="idioma" class="border rounded w-100 mt-4">
-                            <option value="">Idioma</option>
+                        <select name="" id="idioma" v-model="form.language" class="border rounded w-100 mt-4">
+                            <option value="null">Idioma</option>
                             <option value="Español">Español</option>
                             <option value="Inglés">Inglés</option>
                             <option value="Italiano">Italiano</option>
@@ -114,6 +114,15 @@
             </div>
         </div>
         <div class="row mt-2">
+            <div class="col-12">
+                <label class="text-base">Imagenes subidas previamente</label>
+            </div>
+            <div class="col-12 my-1 py-2 border rounded">
+                <div v-for="img in product.images" :key="img.id" class="w-16 md:w-40 h-12 md:h-24 d-inline-block mx-1.5 md:mx-3 my-2 overflow-hidden">
+                    <img :src="'/storage/souvenirs'+img.url" class="d-inline rounded bg-cover">
+                </div>
+                <div class="text-center p-2" v-if="product.images.length == 0"><p class="text-danger">No se han subido imagenes aún</p></div>
+            </div>
             <div class="col-12 my-4">
                 <label class="text-base">Imagenes de la actividad</label>
                 <p class="text-danger">Las imagenes introducidas aqui sustituiran las ya existentes</p>
@@ -160,6 +169,7 @@ export default {
                 language:this.product.activities.language,
                 pricesArr:[],
                 featured:0,
+                page:this.page
             }),
             priceAdult:null,
             priceChildren:null,
@@ -174,7 +184,8 @@ export default {
         }
     },
     props:{
-        product:Object
+        product:Object,
+        page:Number
     },
          mounted() {
             const product_id = this.product.id;

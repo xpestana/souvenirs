@@ -1,8 +1,6 @@
 <template>
-<div>
-<ModalCookies/>
-</div>                    
-<section id="collaborator" class="container-fluid">
+
+    <ModalCookies/>
     <div class="d-none d-md-block">
         <HomeMenu/>
     </div>
@@ -10,10 +8,10 @@
         <MenuMobile/>
     </div>
     
-    <section id="banner">
+    <section id="banner" class="container-fluid">
         <div class="row pb-14 md:pb-0">
             <div class="d-md-none banner-overlay"></div>
-            <div class="col-12 col-md-6 pt-44 pl-12">
+            <div class="col-12 col-md-6 pt-44 pl-8">
                 <div class="title">
                     <h1 class="text-5xl md:text-7xl font-weight-bolder">
                         Mejora la <span class="text-collaborator">experiencia</span> de los huéspedes
@@ -26,7 +24,9 @@
                     </p>
                 </div>
                 <div class="pt-8 d-flex flex-column flex-md-row">
-                    <Link :href="route('collaborator.register')"  class="btn btn-collaborator w-48 text-xl mr-4 mx-auto my-2">Regístrate</Link>
+                    <Link :href="route('collaborator.register')" class="btn btn-collaborator w-48 text-xl mr-4 mx-auto my-2">
+                        <p class="text-xl font-weight-bolder">Regístrate</p>
+                    </Link>
                     <Link :href="route('login')" class="btn btn-outline-collaborator w-48 text-xl mx-auto my-2">Iniciar Sesión</Link>
                 </div>
             </div>
@@ -36,14 +36,20 @@
                     <img src="/vendor_asset/img/collaborator/banner2.png"  class="absolute top-16 right-8" width="200">
                     <img src="/vendor_asset/img/collaborator/bannercenter.png" width="450" class="mx-auto">
                     <img src="/vendor_asset/img/collaborator/banner3.png"  class="absolute left-6 bottom-6" width="160">
+                    <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
+                    <div class="banner-wticon absolute right-8 bottom-16 rounded-md d-flex p-2">
+                        <img src="/vendor_asset/img/collaborator/wticon.svg" class="px-1">
+                        <p class="text-white ml-2 leading-4 whitespace-nowrap">¡Contacta con <br>nosotros!</p>
+                    </div>
+                    </a>
                 </div>
             </div>
     </div>
     </section>
-    <section id="direction">
-        <div class="row mt-28 justify-content-center">
-            <div class="col-12 col-md-9 px-12 md:px-0">
-                <h1 class="text-center text-3xl md:text-5xl">¿A quién está dirigido?</h1>
+    <section id="direction" class="container-fluid">
+        <div class="row mt-14 md:mt-28 justify-content-center">
+            <div class="col-12 col-md-9 px-8 md:px-0">
+                <h1 class="text-center text-4xl md:text-5xl">¿A quién está dirigido?</h1>
                 <p class="text-center text-xl md:text-3xl mt-6 md:mt-14">
                     Desde <b>Hicitty</b> ayudamos a que los huéspedes de los hoteles
                     y apartamentos tengan la mejor y más plena de las experiencias
@@ -54,19 +60,19 @@
                 </p>
             </div>
         </div>
-        <div class="row my-16  justify-content-center justify-content-md-around md:px-40">
-            <button class="btn btn-collaborator direction-btn text-2xl col-7 col-md-3 my-4 md:my-0">Apartamentos <br> turísticos</button>
-            <button class="btn btn-collaborator direction-btn text-2xl  col-7 col-md-3 py-4 md:py-8 my-4 md:my-0">Hoteles</button>
-            <button class="btn btn-collaborator direction-btn text-2xl  col-7 col-md-3  my-4 md:my-0">Negocios <br> turísticos</button>
+        <div class="row my-2 md:my-16  justify-content-center justify-content-md-around md:px-40">
+            <div class="direction-btn text-2xl col-7 col-md-3 my-4 md:my-0 text-center text-white py-2 rounded">Apartamentos <br> turísticos</div>
+            <div class="direction-btn text-2xl  col-7 col-md-3 py-4 md:py-8 my-4 md:my-0 text-center text-white rounded">Hoteles</div>
+            <div class="direction-btn text-2xl  col-7 col-md-3  my-4 md:my-0 text-center text-white py-2 rounded">Negocios <br> turísticos</div>
         </div>
     </section>
-    <section id="offer">
+    <section id="offer" class="container-fluid">
         <div class="row my-16  justify-content-around px-2 md:px-32 pt-28">
             <div class="col-12">
                 <h1 class="text-center text-4xl md:text-5xl text-white md:pl-24 mb-8 md:mb-0">¿Qué ofrecemos?</h1>
             </div>
             <div class="col-md-4">
-                <img class="h-64 mx-auto" src="/vendor_asset/img/collaborator/section1.png" alt="">
+                <img class="h-64 md:h-96 mx-auto" src="/vendor_asset/img/collaborator/section1.png" alt="">
             </div>
             <div class="col-md-8">
                 <div class="row">
@@ -77,9 +83,9 @@
                             ciudad que van a visitar.
                         </p>
                     </div>
-                    <div class="col-12 col-md-6 offer-item">
+                    <div class="col-12 col-md-6 offer-item mt-3 md:mt-0">
                         <div class="offer-title">
-                            <img src="/vendor_asset/img/collaborator/kayak.svg" class="d-inline w-8">
+                            <img src="/vendor_asset/img/collaborator/kayakn.svg" class="d-inline w-8">
                             <p class="d-inline text-xl font-weight-bolder text-white pl-2.5">Experiencias</p>
                         </div>
                         <div class="offer-title">
@@ -89,9 +95,9 @@
                             </p>
                         </div>
                     </div>    
-                    <div class="col-12 col-md-6 offer-item">
+                    <div class="col-12 col-md-6 offer-item mt-3 md:mt-0">
                         <div class="offer-title">
-                            <img src="/vendor_asset/img/collaborator/regalo.svg" class="d-inline w-8">
+                            <img src="/vendor_asset/img/collaborator/regalon.svg" class="d-inline w-6">
                             <p class="d-inline text-xl font-weight-bolder text-white pl-2.5">Souvenirs</p>
                         </div>
                         <div class="offer-title">
@@ -103,7 +109,7 @@
                     </div>
                     <div class="col-12 col-md-6 offer-item mt-3">
                         <div class="offer-title">
-                            <img src="/vendor_asset/img/collaborator/informacion.svg" class="d-inline w-8">
+                            <img src="/vendor_asset/img/collaborator/informacionn.svg" class="d-inline w-6">
                             <p class="d-inline text-xl font-weight-bolder text-white pl-2.5">Información turística</p>
                         </div>
                         <div class="offer-title">
@@ -114,9 +120,9 @@
                             </p>
                         </div>
                     </div>  
-                    <div class="col-12 col-md-6 offer-item  mt-3">
+                    <div class="col-12 col-md-6 offer-item mt-3">
                         <div class="offer-title">
-                            <img src="/vendor_asset/img/collaborator/viajeros.svg" class="d-inline w-8">
+                            <img src="/vendor_asset/img/collaborator/hicittylogopequeñon.svg" class="d-inline w-6">
                             <p class="d-inline text-xl font-weight-bolder text-white pl-2.5">Y mucho más</p>
                         </div>
                         <div class="offer-title">
@@ -130,34 +136,98 @@
             </div>
         </div>
     </section>
-    <section id="slide">
+    <section id="slide" class="container-fluid">
         <div class="row md:my-10">
             <div class="col-12">
-                <h1 class="text-center text-3xl md:text-5xl md:pl-24 mb-8 md:mb-0">¿Cómo lo hacemos?</h1>
-            </div>
-            <div class="col-12 col-md-6 pl-4 md:pl-28 md:mt-4">
-                <h2 class="text-2xl font-weight-bolder">
-                    1. <span class="text-collaborator">Registro</span> en la plataforma<br>
-                    y <span class="text-collaborator">alta</span> de los inmuebles
-                </h2>
-                <p class="text-base md:text-xl mt-4 md:leading-8">
-                    Regístrate en menos de 1 minuto y da de alta tus inmuebles para que podamos enviar
-                    los elementos de impacto personalizados.
-                </p>
-            </div>
-            <div class="col-12 col-md-6">
-                <img src="/vendor_asset/img/collaborator/slide1.png" alt="img" class="w-3/4 mx-auto">
+                <h1 class="text-4xl md:text-5xl md:pl-24 mb-6 md:mb-0">¿Cómo lo hacemos?</h1>
             </div>
         </div>
+        <Carousel :settings="settings" :breakpoints="breakpoints" :wrap-around="true">
+            <Slide :key="0">
+                <div class="row">
+                    <div class="col-12 col-md-6 pl-4 md:pl-28 text-left">
+                        <h2 class="text-2xl md:text-3xl font-weight-bolder md:pl-24 mb-8 md:mb-0">
+                            1. <span class="text-collaborator">Registro</span> en la plataforma
+                            y <span class="text-collaborator">alta</span> de los inmuebles
+                        </h2>
+                        <p class="text-base md:text-2xl mt-4 md:leading-8 md:pl-24">
+                            Regístrate en menos de 1 minuto y da de alta tus inmuebles para que podamos enviar
+                            los elementos de impacto personalizados.
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 px-8 md:px-2">
+                        <img src="/vendor_asset/img/collaborator/slide1.png" alt="img" class="w-86 md:w-3/4 mx-auto">
+                    </div>
+                </div>
+            </Slide>
+            <Slide :key="1">
+                <div class="row">
+                    <div class="col-12 col-md-6 pl-4 md:pl-28 text-left">
+                        <h2 class="text-2xl md:text-3xl font-weight-bolder md:pl-24">
+                            2. <span class="text-collaborator">Entrega</span> Y
+                            <span class="text-collaborator">colocación</span> del elemento de impacto
+                            en el inmueble.
+                        </h2>
+                        <p class="text-base md:text-2xl md:leading-8 md:pl-24">
+                            Generamos tus QR y te lo enviamos. Luego coloca el elemento de impacto
+                            en un lugar que esté a la vista de forma sencilla y rápida y que sea fácil
+                            de escanear para el huésped.
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 px-8 md:px-2">
+                        <img src="/vendor_asset/img/collaborator/slide2.png" alt="img" class="w-28 md:w-56 mx-auto">
+                    </div>
+                </div>
+            </Slide>
+            <Slide :key="2">
+                <div class="row">
+                    <div class="col-12 col-md-6 pl-4 md:pl-28 text-left">
+                        <h2 class="text-2xl md:text-3xl font-weight-bolder md:pl-24">
+                            3. <span class="text-collaborator">Incentivación</span> al cliente
+                            para dejar un valoración
+                        </h2>
+                        <p class="text-base md:text-2xl my-4 md:leading-8 md:pl-24">
+                            Una vez acabe el hospedaje, incentivaremos al cliente a dejar una
+                            buena valoración al inmueble en el que se alojó.
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 px-8 md:px-2">
+                        <img src="/vendor_asset/img/collaborator/slide3.png" alt="img" class="w-86 md:  w-3/4 mx-auto">
+                    </div>
+                </div>
+            </Slide>
+            <Slide :key="3">
+                <div class="row">
+                    <div class="col-12 col-md-6 pl-4 md:pl-28 text-left">
+                        <h2 class="text-2xl md:text-3xl font-weight-bolder md:pl-24">
+                            4. <span class="text-collaborator">Control</span> de beneficios de los
+                            inmuebles
+                        </h2>
+                        <p class="text-base md:text-2xl mt-2 md:leading-8 md:pl-24">
+                            Desde la plataforma que ofrecemos a los colaboradores de HiCitty, podrán
+                            controlar en todo momento los inmuebles dados de alta y los beneficios 
+                            obtenidos de cada uno de ellos.
+                        </p>
+                    </div>
+                    <div class="col-12 col-md-6 px-8 md:px-2">
+                        <img src="/vendor_asset/img/collaborator/slide4.png" alt="img" class="w-56 md:w-72 mx-auto">
+                    </div>
+                </div>
+            </Slide>
+            <template #addons>
+                <Navigation />
+                <Pagination />
+            </template>
+        </Carousel>
     </section>
-    <section id="result">
+    <section id="result" class="container-fluid">
         <div class="row my-16  justify-content-around md:px-32 pt-16 md:pt-44">
             <div class="col-12">
-                <h1 class="text-center text-5xl text-white mb-16">¿Cuál es el resultado?</h1>
+                <h1 class="text-center text-4xl md:text-5xl text-white mb-12 md:mb-16">¿Cuál es el resultado?</h1>
             </div>
-            <div class="col-9 col-md-3 my-2 md:my-0 rounded-lg bg-light p-3 result-card shadow-lg">
+            <div class="col-9 col-md-3 my-2 md:my-0 rounded-lg bg-white p-3 result-card shadow-lg">
                 <div class="card-icon">
-                    <img src="/vendor_asset/img/collaborator/viajeros.svg" alt="img-card" class="w-24 mx-auto">
+                    <img src="/vendor_asset/img/collaborator/inquilinosn.svg" alt="img-card" class="w-24 h-24 mx-auto">
                 </div>
                 <div class="card-title">
                     <h3 class="text-lg text-center font-weight-bolder">
@@ -171,9 +241,9 @@
                     </p>
                 </div>
             </div>
-            <div class="col-9 col-md-3 my-2 md:my-0 rounded-lg bg-light p-3 result-card shadow-lg">
+            <div class="col-9 col-md-3 my-2 md:my-0 rounded-lg bg-white p-3 result-card shadow-lg">
                 <div class="card-icon">
-                    <img src="/vendor_asset/img/collaborator/valoracion.svg" alt="img-card" class="w-24 mx-auto">
+                    <img src="/vendor_asset/img/collaborator/valoracionn.svg" alt="img-card" class="h-24 w-24 mx-auto">
                 </div>
                 <div class="card-title">
                     <h3 class="text-lg text-center font-weight-bolder">
@@ -187,9 +257,9 @@
                     </p>
                 </div>
             </div>
-            <div class="col-9 col-md-3 my-2 md:my-0 rounded-lg bg-light p-3 result-card shadow-lg">
+            <div class="col-9 col-md-3 my-2 md:my-0 rounded-lg bg-white p-3 result-card shadow-lg">
                 <div class="card-icon">
-                    <img src="/vendor_asset/img/collaborator/dinerobolsa.svg" alt="img-card" class="w-24 mx-auto">
+                    <img src="/vendor_asset/img/collaborator/dineron.svg" alt="img-card" class="h-24 w-24 mx-auto">
                 </div>
                 <div class="card-title">
                     <h3 class="text-lg text-center font-weight-bolder">
@@ -209,7 +279,7 @@
             </div>
         </div>
     </section>
-    <section id="win">
+    <section id="win" class="container-fluid">
         <div class="row my-16">
             <div class="col-12 md:px-48">
                 <h1 class="text-center text-3xl md:text-6xl font-weight-bolder">
@@ -234,14 +304,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 my-14 text-center ">
-                <Link :href="route('collaborator.register')" class="btn btn-collaborator text-xl w-72">¡Quiero registrarme!</Link>
+            <div class="col-12 mt-14 text-center ">
+                <Link :href="route('collaborator.register')" class="btn btn-win text-xl w-72">¡Quiero registrarme!</Link>
             </div>
         </div>
     </section>
-    <section id="footer">
+    <section id="footer" class="container-fluid">
         <div class="row relative">
-            <div class="px-48 hicitty h-32 md:h-96 w-100">
+            <div class="md:px-48 hicitty h-32 md:h-96 w-100">
                 <img class="absolute left-0" src="/vendor_asset/img/collaborator/footerhiccity.svg" alt="">
             </div>
             <div class="col-12 foot" style="background-color:#000">
@@ -264,13 +334,13 @@
                         <div class="mt-4">
                             <p class="text-white">Contacto</p>
                             <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
-                            <img class="d-inline mr-3" src="/vendor_asset/img/collaborator/itgicon.svg" alt="">
+                            <img class="d-inline mr-3 icon" src="/vendor_asset/img/collaborator/itgicon.svg" alt="">
                             </a>
                             <a target="_blank" href="https://www.linkedin.com/company/kognos-vb/" class="">
-                            <img class="d-inline mx-3 h-8" src="/vendor_asset/img/collaborator/linkedin.svg" alt="">
+                            <img class="d-inline mx-3 h-8 icon" src="/vendor_asset/img/collaborator/linkedin.svg" alt="">
                             </a>
                             <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
-                            <img class="d-inline mx-3 h-8" src="/vendor_asset/img/collaborator/wticon.svg" alt="">
+                            <img class="d-inline mx-3 h-8 icon" src="/vendor_asset/img/collaborator/wticon.svg" alt="">
                             </a>
                         </div>
                     </div>
@@ -278,16 +348,14 @@
             </div>
         </div>
     </section>
-</section>
-            
-
-
-
 </template>
 
 <script>
 import BreezeButton from '@/Components/Button.vue';
 import { Link } from '@inertiajs/inertia-vue3';
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import Header from '@/Layouts/Components/Header';
 import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
 import HomeMenu from '@/Pages/Collaborator/components/HomeMenu.vue'  
 import MenuMobile from '@/Pages/Collaborator/components/HomeMobileMenu.vue'  
@@ -297,7 +365,22 @@ export default {
         Link,
         ModalCookies,
         HomeMenu,
-        MenuMobile
+        MenuMobile,
+        Carousel,
+        Slide,
+        Navigation,
+        Pagination,
+        Header
+    },
+    data: () => {
+        return {
+        settings: {
+            itemsToShow: 1,
+            snapAlign: 'center',
+            },
+            showPopup:false,
+            editados:false
+        }
     },
 
 }
@@ -305,13 +388,31 @@ export default {
 </script>
 
 <style scoped>
+.carousel__next{
+    color: #FF9C06 !important;
+}
+.carousel__prev{
+    color: #FF9C06 !important;
+}
+
 .bg-trans{
     background-color:transparent !important;
 }
 #banner .title h1{
     letter-spacing: 5px;
 }
+#banner .banner-wticon{
+    width: 8%;
+    overflow: hidden;
+    background-color: #808080;
+    transition: background-color 1s,width 1s,;
+} 
+#banner .banner-wticon:hover{
+    background-color: #FF9C06;
+    width: 30%;
+} 
 #direction .direction-btn{
+    background-color: #FF9C06;
     box-shadow: 5px 5px 5px 0px rgba(255,156,6,0.63);
 }
 #offer{
@@ -323,7 +424,7 @@ export default {
 #offer,
 #result{
     background-size: cover;
-    height: 64em;
+    height: 60em;
     background-repeat: no-repeat;
 }
 #footer .hicitty{
@@ -331,6 +432,18 @@ export default {
     background-size: cover;
     background-position: 10% -26%;
     background-repeat: no-repeat;
+}
+#footer .icon:hover{
+    filter: invert(53%) sepia(76%) saturate(625%) hue-rotate(354deg) brightness(107%) contrast(104%);
+}
+#win  .btn-win{
+    background-color: #FF9C06;
+    color:#fff;
+}
+#win  .btn-win:hover{
+    background-color: #fff;
+    color: #FF9C06;
+    border:2px solid #FF9C06;
 }
 @media (max-width:767px) {
     .btn-outline-collaborator{
@@ -359,7 +472,7 @@ export default {
         background-position: 29% 0%;
     }
     #result{
-        height: 95em;
+        height: 89em;
         background-position: 68% 35%;
         background-size: auto;
     }

@@ -146,11 +146,11 @@ class ActivitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,$page)
     {
         $product = Products::with('images', 'activities')->where('id', $id)->first();
 
-        return Inertia::render('Admin/Activities/Edit', compact('product'));
+        return Inertia::render('Admin/Activities/Edit', compact('product','page'));
     }
 
     /**
@@ -311,7 +311,7 @@ class ActivitiesController extends Controller
         $activities->priceA = json_encode($arr);
         $activities->save();
 
-        return back()->with(['id'=>$product->id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);  
+        return redirect()->route('admin.activities',['page'=> $request->page])->with(['id'=>$product->id, 'message' => 'Success', 'code' => 200, 'status' => 'success']);  
     }
     /**
      * Remove the specified resource from storage.

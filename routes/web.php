@@ -162,12 +162,12 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
     Route::post('/destroy/activities/', [ActivitiesController::class, 'destroy'])->name('destroy.activities');
     Route::post('/activities/image', [ActivitiesController::class, 'image'])->name('activities.image');
     Route::post('/activities/update/image', [ActivitiesController::class, 'updt_image'])->name('activities.update.image');
+    Route::get('/activities/{id}/{page}', [ActivitiesController::class, 'edit'])->name('activities.edit');
     Route::resource(
         '/actividades',
         ActivitiesController::class, [
             'names' => [
                 'index'     => 'activities.index',
-                'edit'      => 'activities.edit',
                 'create'    => 'activities.create',
                 'show'      => 'activities.show',
                 'store'     => 'activities.store',
@@ -175,7 +175,7 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('tablero')->group(
                 'destroy'   => 'activities.destroy',
             ],
         ],
-    );
+    )->except(['edit']);
 
     /*
         Categorias

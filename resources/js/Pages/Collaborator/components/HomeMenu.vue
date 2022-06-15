@@ -20,7 +20,9 @@
                 <img class="mx-auto w-96 pt-3.5" src="/vendor_asset/img/logo/hilogo.png" alt="logo" id="logo">
             </div>
             <div class="col-md-6 text-right pt-3.5">
-                <Link :href="route('collaborator.register')" class="btn btn-collaborator w-48 text-xl mr-4">Regístrate</Link>
+                <Link :href="route('collaborator.register')" class="btn btn-collaborator w-48 text-xl mr-4">
+                <p class="text-xl font-weight-bolder">Regístrate</p>
+                </Link>
                 <Link :href="route('login')" class="btn btn-outline-collaborator w-48 text-xl">Iniciar Sesión</Link>
             </div>
         </div>
