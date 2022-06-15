@@ -99,9 +99,10 @@ export default {
         },
         urlActividades(){
             let url = this.$page.url;
-            let url1 = url.includes('/admin/activities')
+            let url1 = url.includes('/admin/activities/')
             let url2 = url.includes('tablero/actividades/')
-            if(url1 || url2){
+            let url3 = url.includes('tablero/activities/')
+            if(url1 || url2 || url3){
                 return true;
             }
             return false;

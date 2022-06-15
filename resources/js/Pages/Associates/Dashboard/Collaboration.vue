@@ -42,8 +42,8 @@
                                                 }"
                                                 fileExt="png"
                                                 :backgroundOptions="{ color: '#ffffff' }"
-                                                :cornersSquareOptions="{ type: 'dot', color: '#6cb2eb' }"
-                                                :cornersDotOptions="{ type: undefined, color: '#6cb2eb' }"
+                                                :cornersSquareOptions="{ type: 'dot', color: '#B4CEE2' }"
+                                                :cornersDotOptions="{ type: undefined, color: '#B4CEE2' }"
                                                 :download="false"
                                                 downloadButton="view-cart bg-info mt-3 souvenirs_btn"
                                                 :downloadOptions="{ name: 'souvenirs', extension: 'png' }"
@@ -81,6 +81,12 @@
                             <tbody>
                                 <tr v-for="venta in ventas" :key="venta.id">
                                     <td class="text-center">{{venta.id_t }}</td>
+                                    <td class="text-center">
+                                        <select class="rounded border">
+                                            <option value="1">Si</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </td>
                                     <td class="text-center">{{moment(venta.date).format("DD/MM/YYYY")}}</td>
                                     <td class="text-center">{{ parseInt(venta.total_benefit*0.20).toFixed(2) }}</td>
                                     <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
