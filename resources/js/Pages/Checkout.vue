@@ -23,7 +23,7 @@
         </div>
     </div> -->
     <!-- Breadcrumb Area End Here -->
-    <form @submit.prevent="submit">
+    <form id="formPay" :action="route('redsys')" method="POST" name="formPay">
     <!-- checkout-area start -->
     <template v-if="showForm">
         <div class="container-fluid">

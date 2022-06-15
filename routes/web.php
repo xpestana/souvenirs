@@ -98,6 +98,7 @@ Route::get('/login', function () {
 
     Route::get('/store/form-checkout', [SalesController::class, 'form_checkout'])->name('form.checkout.souvenirs');
     Route::get('/store/checkout', [SalesController::class, 'checkout'])->name('checkout.souvenirs');
+    Route::post('/purchase/redsys', [SalesController::class, 'sale_redsys'])->name('redsys');
     Route::post('/purchase/sale', [SalesController::class, 'sale'])->name('sale');
     Route::post('/sale/activities', [SalesController::class, 'sale_activities'])->name('sale.activities');
     Route::get('/purchase', [SalesController::class, 'purchase'])->name('purchase');
