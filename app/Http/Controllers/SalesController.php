@@ -94,7 +94,7 @@ class SalesController extends Controller
         $trans="0";
         $url="";
         $urlOK=route('purchase',["oi" => $order_id]);
-        $urlKO=route('purchase',["oi" => $order_id]);
+        $urlKO=route('purchase',["oi" => $order_id, "deny"=> 1]);
         $id=time();
         $amount=$request->total*100;  
         $name = $request->name_env;
@@ -153,7 +153,7 @@ class SalesController extends Controller
                     ]);
                 
                 }
-        //Cart::clear();
+        //
         return view('Purchase', compact('version', 'params', 'signature'));
        /* 
             Mail::to($request->email)->send(new SaleSouvenirReceived($order));
@@ -226,11 +226,24 @@ class SalesController extends Controller
     public function purchase(Request $request)
     {
         $order = Order::where("transaction_id", $request->oi)->first()->load('shippings.product.images');
-        $order->status = "complete";
+        $deny = ($request->deny) ? $request->deny : null; 
+        $order->status = ($request->deny) ? "cancelled" : "complete";
         $order->save();
         
         $id = mt_Rand(1000000, 9999999);
-        return Inertia::render('Sales/Purchase', compact('order'))->with(['id'=>$id, 'message' => 'Registro de pago exitoso', 'code' => 200, 'status' => 'success']);
+        
+        $message = "Registro de pago exitoso";
+        $code = 200;
+        $status = "success";
+
+        if ($request->deny) {
+            $message = "Registro de pago cancelado";
+            $code = 400;
+            $status = "error";
+        }else{
+            Cart::clear();
+        }
+        return Inertia::render('Sales/Purchase', compact('order'))->with(['id'=>$id, 'message' => $message, 'code' => $code, 'status' => $status]);
     }
     public function sale_admin()
     {

@@ -59,14 +59,21 @@
     </div>
     <div class="mobile-section bg-light p-0 d-md-none">
         <div class="titulos text-center pt-5">
-            <h1 class="text-muted font-weight-bolder text-3xl">¡Tu pago se ha <br> realizado con éxito!</h1>
+            <template v-if="order.status == 'complete'">
+                <h1 class="text-muted font-weight-bolder text-3xl">¡Tu pago se ha <br> realizado con éxito!</h1>
             <h5 class="text-muted text-lg">En unos minutos recibirás tu pedido</h5>
+            </template>
+            <template v-else>
+                <h1 class="text-muted font-weight-bolder text-3xl">¡Tu pago se ha <br> cancelado!</h1>
+                <h5 class="text-muted text-lg">Intentelo más tarde</h5>
+            </template>
+            
         </div>
         <div class="logo">
             <img class="mx-auto" src="/vendor_asset/img/logo/logopequeño.png" alt="logo">
         <div class="order-num pb-5">
         </div>
-            <h3 class="text-muted font-weight-bolder text-xl text-center">Número de pedido:S8GL</h3>
+            <h3 class="text-muted font-weight-bolder text-xl text-center">Número de pedido: {{ order.transaction_id }}</h3>
         </div>
     </div>
    </Layout> 	 
