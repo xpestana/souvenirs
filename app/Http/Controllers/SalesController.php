@@ -153,7 +153,7 @@ class SalesController extends Controller
                     ]);
                 
                 }
-        //Cart::clear();
+        
         return view('Purchase', compact('version', 'params', 'signature'));
        /* 
             Mail::to($request->email)->send(new SaleSouvenirReceived($order));
@@ -240,7 +240,10 @@ class SalesController extends Controller
             $message = "Registro de pago cancelado";
             $code = 400;
             $status = "error";
+        }else{
+            Cart::clear();
         }
+        
         return Inertia::render('Sales/Purchase', compact('order'))->with(['id'=>$id, 'message' => $message, 'code' => $code, 'status' => $status]);
     }
     public function sale_admin()

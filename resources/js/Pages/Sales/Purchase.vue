@@ -60,7 +60,7 @@
     </div>
     <div class="mobile-section bg-light p-0 d-md-none">
         <div class="titulos text-center pt-5">
-            <template v-if="order.status == 'completed'">
+            <template v-if="order.status == 'complete'">
                 <h1 class="text-muted font-weight-bolder text-3xl">Your payment has been <br> made successfully!</h1>
                 <h5 class="text-muted text-lg">In a few minutes you will receive your order</h5>
             </template>
