@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         '/tablero/souvenirs/image/',
         '/tablero/souvenirs/update/image',
         '/tablero/activities/image',
-        '/tablero/activities/update/image'
+        '/tablero/activities/update/image',
+        '/purchase/redsys'
     ];
 }

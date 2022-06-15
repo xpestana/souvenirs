@@ -11,7 +11,7 @@
         </div>
     </div>
     <!-- Breadcrumb Area End Here -->
-    <form @submit.prevent="submit">
+    <form id="formPay" :action="route('redsys')" method="POST" name="formPay">
     <!-- checkout-area start -->
     <template v-if="showForm">
         <div class="container-fluid">
@@ -30,13 +30,13 @@
                     <h3 class="text-lg">Contact person</h3>
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="text" placeholder="Name*" v-model="form.name" class="border rounded py-1 w-100" required/>
+                    <input type="text" id="name" name="name" :value="form.name" placeholder="Name*" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-0">
-                    <input type="text" placeholder="Mobile*" v-model="form.phone" class="border rounded py-1 w-100" required/>
+                    <input type="text" id="phone" name="phone" :value="form.phone" placeholder="Mobile*" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3">
-                    <input type="email" placeholder="E-mail*" v-model="form.email" class="border rounded py-1 w-100" required/>
+                    <input type="email" id="email" name="email" :value="form.email" placeholder="E-mail*" class="border rounded py-1 w-100" required/>
                 </div>
             </div>
             <div class="row mt-4">
@@ -47,16 +47,16 @@
                     </p>
                 </div>
                 <div class="col-12 col-md-6">
-                    <input type="text" placeholder="Address*" v-model="form.address" class="border rounded py-1 w-100" required/>
+                    <input type="text" id="address" name="address" :value="form.address" placeholder="Address*" class="border rounded py-1 w-100" required/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-0">
-                    <input type="text" placeholder="Floor, stair, door, etc. (optional)" v-model="form.hab" class="border rounded py-1 w-100"/>
+                    <input type="text" placeholder="Floor, stair, door, etc. (optional)" id="hab" name="hab"  :value="form.hab" class="border rounded py-1 w-100"/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-4">
-                    <input type="text" placeholder="Write here your observations for the agency" v-model="form.observations" class="border rounded py-1 w-100"/>
+                    <input type="text" id="observations" name="observations" :value="form.observations" placeholder="Write here your observations for the agency" class="border rounded py-1 w-100"/>
                 </div>
                 <div class="col-12 col-md-6 mt-3 mt-md-4">
-                    <input type="text" placeholder="Postal Code*" v-model="form.cp" class="border rounded py-1 w-100" required/>
+                    <input type="text" id="cp" name="cp" :value="form.cp" placeholder="Postal Code*" class="border rounded py-1 w-100" required/>
                 </div>
             </div>
             <div class="row mt-4" v-if="forms_extra.length > 0">
@@ -153,7 +153,15 @@
         </div>
     </template>
     <!-- checkout-area end -->
-    <input type="hidden" v-model="form.total">
+
+    <input type="hidden" id="total" name="total" :value="form.total">
+    <input type="hidden" id="name_env" name="name_env" :value="form.name">
+    <input type="hidden" id="phone_env" name="phone_env" :value="form.phone">
+    <input type="hidden" id="email_env" name="email_env" :value="form.email">
+    <input type="hidden" id="address_env" name="address_env" :value="form.address">
+    <input type="hidden" id="hab_env" name="hab_env" :value="form.hab">
+    <input type="hidden" id="observations_env" name="observations_env" :value="form.observations">
+    <input type="hidden" id="cp_env" name="cp_env" :value="form.cp">
 </form>
 
 </template>
@@ -263,9 +271,17 @@
                     }
                     this.form.data.push({[this.forms_extra[i].name.split('\n')[0]]: document.getElementById('input'+i).value})
                 }
-                if(this.form.name == '' || this.form.phone == '' || this.form.address == '' || this.form.cp == ''){
+                var name = $('#name').val();
+                var phone = $('#phone').val();
+                var email = $('#email').val();
+                var hab = $('#hab').val();
+                var observations = $('#observations').val();
+                var address = $('#address').val();
+                var cp = $('#cp').val();
+
+                if(name == '' || phone == '' || email == '' || address == '' || cp == ''){
                     this.$swal({
-                        title: 'Name, mobile, address and zip code are required fields!',
+                        title: 'Name, mobile, email, address and zip code are required fields!',
                         icon: 'info',
                         showCloseButton: false,
                         showCancelButton: false,
@@ -278,6 +294,13 @@
                     if(full){
                         this.showForm = false;
                         this.showCheckout = true;
+                        this.form.name = name;
+                        this.form.phone = phone;
+                        this.form.email = email;
+                        this.form.hab = hab;
+                        this.form.observations = observations;
+                        this.form.address = address;
+                        this.form.cp = cp;
                     }
                 }
             },

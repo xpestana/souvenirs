@@ -53,7 +53,6 @@ class SalesController extends Controller
                 foreach ($forms as $form) {
                 if ($form['key'] != "name" && $form['key'] != "country" && $form['key'] != "phone") {
                     if ($form['required'] == true) {
-                        //
                         array_push($forms_extra,$form);
                     }
                 }
@@ -64,12 +63,28 @@ class SalesController extends Controller
     }
     public function sale(Request $request)
     {
-        return Redirect::route('redsys',$request->all());
+        
+               return redirect()->route('redsys',$request->all());
     }
     public function sale_redsys(Request $request)
     {
-        // Se incluye la librería
-        // Se crea Objeto
+       if (auth()->user()) {
+            $id = auth()->user()->id;
+            $user = User::find($id-1);
+            $hotel_id = (!auth()->user()->hotel->isEmpty()) ? auth()->user()->hotel->first()->id : null;
+        }else{
+            $user = User::where('email','clientAdmin@email.com')->first();
+            $hotel_id= null;
+        }
+
+        $order = 1;
+
+        while (!is_null($order)) {
+            $order_id = orderId();
+            $order = Order::where("transaction_id", )->first();
+
+        }
+        
         $miObj = new RedsysAPI();
 
         // Valores de entrada que no hemos cmbiado para ningun ejemplo
@@ -78,10 +93,17 @@ class SalesController extends Controller
         $moneda="978";
         $trans="0";
         $url="";
-        $urlOK=route('home');
-        $urlKO=route('home');
+        $urlOK=route('purchase',["oi" => $order_id]);
+        $urlKO=route('purchase',["oi" => $order_id]);
         $id=time();
-        $amount=$request->total;  
+        $amount=$request->total*100;  
+        $name = $request->name_env;
+        $email = $request->email_env;
+        $address = $request->address_env;
+        $cp = $request->cp_env;
+        $phone = $request->phone_env;
+        $hab = $request->hab_env;
+        $observations = $request->observations_env;
 
         // Se Rellenan los campos
         $miObj->setParameter("DS_MERCHANT_AMOUNT",$amount);
@@ -101,60 +123,43 @@ class SalesController extends Controller
         $params = $miObj->createMerchantParameters();
         $signature = $miObj->createMerchantSignature($kc);
 
-        $forms = Http::post('https://sis-t.redsys.es:25443/sis/realizarPago', [
-                        'Ds_SignatureVersion'   => $version,
-                        'Ds_MerchantParameters'   => $params,
-                        'Ds_Signature'   => $signature,
-                    ]);
-        //dd($request->all());
+       /*Creando Orden de compra*/
 
-        return view('Purchase', compact('version', 'params', 'signature'));
-       /* $request->validate([
-            'email' => 'required|string|email|max:255',
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'hab' => 'required',
-        ]);
-
-        if (auth()->user()) {
-            $id = auth()->user()->id;
-            $user = User::find($id-1);
-            $hotel_id = (!auth()->user()->hotel->isEmpty()) ? auth()->user()->hotel->first()->id : null;
-        }else{
-            $user = User::where('email','clientAdmin@email.com')->first();
-            $hotel_id= null;
-        }
-            $order = Order::create([ 
+       $order = Order::create([ 
                 'user_id' => $user->id,
-                'transaction_id' => "XXX---0000",
-                'total' => "20",
+                'transaction_id' => $order_id,
+                'total' => $amount/100,
                 'hotel_id' => $hotel_id,
-                'data' => json_encode($request->data),
+                'Ds_SignatureVersion' => $version,
+                'Ds_MerchantParameters' => $params,
+                'Ds_Signature' => $signature,
+                'status' => "pending",
             ]);
-            $products = Cart::getContent();
+
+       $products = Cart::getContent();
             foreach($products as $product){
                   $shipping = Shipping::create([ 
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'quantity' => $product->quantity,
-                    'firstname' => $request->name,
-                    'email' => $request->email,
-                    'address' => $request->address,
-                    'zip_code' => $request->zip_code,
-                    'phone' => $request->phone,
-                    'hab' => $request->hab,
-                    'observations' => $request->observations,
+                    'firstname' => $name,
+                    'email' => $email,
+                    'address' => $address,
+                    'zip_code' => $cp,
+                    'phone' => $phone,
+                    'hab' => $hab,
+                    'observations' => $observations,
                     'amount' => $product->price,
                     ]);
                 
                 }
-            Cart::clear();
-
-                Mail::to($request->email)->send(new SaleSouvenirReceived($order));
-                Mail::to("info@hicitty.es")->send(new AdminReceived($order));
-            return Redirect::route('purchase',['oi' => $order->id]);
-*/
+        //Cart::clear();
+        return view('Purchase', compact('version', 'params', 'signature'));
+       /* 
+            Mail::to($request->email)->send(new SaleSouvenirReceived($order));
+            Mail::to("info@hicitty.es")->send(new AdminReceived($order));
+        return Redirect::route('purchase',['oi' => $order->id]);
+        */
         
     }
      public function sale_activities(Request $request)
@@ -220,7 +225,10 @@ class SalesController extends Controller
     }
     public function purchase(Request $request)
     {
-        $order = Order::find($request->oi)->load('shippings.product.images');
+        $order = Order::where("transaction_id", $request->oi)->first()->load('shippings.product.images');
+        $order->status = "complete";
+        $order->save();
+        
         $id = mt_Rand(1000000, 9999999);
         return Inertia::render('Sales/Purchase', compact('order'))->with(['id'=>$id, 'message' => 'Registro de pago exitoso', 'code' => 200, 'status' => 'success']);
     }

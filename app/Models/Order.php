@@ -15,6 +15,10 @@ class Order extends Model
         'total',
         'ryder_id',
         'hotel_id',
+        'Ds_SignatureVersion',
+        'Ds_MerchantParameters',
+        'Ds_Signature',
+        'status'
     ];
 
     /**
