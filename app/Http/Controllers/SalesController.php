@@ -46,7 +46,7 @@ class SalesController extends Controller
                         'access_token'   => connect()['access_token'],
                         'data' => [
                                     "product_short_id"=>$product->attributes["short_id"],
-                                    'language_code: es'
+                                    'language_code'=>"en"
                                 ]
                     ])->collect()['data']['client_form'];
 
@@ -94,7 +94,7 @@ class SalesController extends Controller
         $trans="0";
         $url="";
         $urlOK=route('purchase',["oi" => $order_id]);
-        $urlKO=route('purchase',["oi" => $order_id]);
+        $urlKO=route('purchase',["oi" => $order_id, "deny"=> 1]);
         $id=time();
         $amount=$request->total*100;  
         $name = $request->name_env;
@@ -226,11 +226,22 @@ class SalesController extends Controller
     public function purchase(Request $request)
     {
         $order = Order::where("transaction_id", $request->oi)->first()->load('shippings.product.images');
-        $order->status = "complete";
+        $deny = ($request->deny) ? $request->deny : null; 
+        $order->status = ($request->deny) ? "cancelled" : "complete";
         $order->save();
-        
+            
         $id = mt_Rand(1000000, 9999999);
-        return Inertia::render('Sales/Purchase', compact('order'))->with(['id'=>$id, 'message' => 'Registro de pago exitoso', 'code' => 200, 'status' => 'success']);
+
+        $message = "Registro de pago exitoso";
+        $code = 200;
+        $status = "success";
+
+        if ($request->deny) {
+            $message = "Registro de pago cancelado";
+            $code = 400;
+            $status = "error";
+        }
+        return Inertia::render('Sales/Purchase', compact('order'))->with(['id'=>$id, 'message' => $message, 'code' => $code, 'status' => $status]);
     }
     public function sale_admin()
     {

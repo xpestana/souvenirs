@@ -11,7 +11,8 @@
                     <div class="about-content mb-all-40">
                        <!-- Section Title Start -->
                         <div class="section-title section-heading">
-                            <h2 class="text-info">Gracias por su compra</h2>
+
+                            <h2 class="text-info">Thanks for your purchase</h2>
                         </div>
                         <div class="shop-area mb-all-40">
                         <!-- Grid & List Main Area End -->
@@ -45,10 +46,10 @@
                 </div>
                 <div class="col-lg-4">
                     <div  align="center" class="section-title section-heading">
-                            <h2 class="text-info">Comunicate con el vendedor</h2>
+                            <h2 class="text-info">Contact the seller</h2>
                         </div>
                     <ul>
-                        <li class="mb-4"><a style="color: #31516B" href="https://api.whatsapp.com/send?phone=5804149774393&text=hola,%20acabo%20de%20comprar%20en%20HiCitty"> <i style="font-size: 25px; font-weight: 700;" class="fab fa-whatsapp"></i> Envíanos un Whatsapp</a></li>
+                        <li class="mb-4"><a style="color: #31516B" href="https://api.whatsapp.com/send?phone=5804149774393&text=hola,%20acabo%20de%20comprar%20en%20HiCitty"> <i style="font-size: 25px; font-weight: 700;" class="fab fa-whatsapp"></i> Send us a Whatsapp</a></li>
                         <li class="mb-4" hidden><a style="color: #31516B" href="javascript:void(0)" target="_blank"> <i style="font-size: 25px; font-weight: 700;" class="fab fa-telegram"></i> Envíanos un Telegram</a></li>
                         <li class="mb-4"><Link style="color: #31516B" :href="route('contact')"> <i style="font-size: 25px; font-weight: 700;" class="fas fa-at"></i> Envíanos un Correo Electrónico</Link></li>
                     </ul>
@@ -59,14 +60,20 @@
     </div>
     <div class="mobile-section bg-light p-0 d-md-none">
         <div class="titulos text-center pt-5">
-            <h1 class="text-muted font-weight-bolder text-3xl">¡Tu pago se ha <br> realizado con éxito!</h1>
-            <h5 class="text-muted text-lg">En unos minutos recibirás tu pedido</h5>
+            <template v-if="order.status == 'completed'">
+                <h1 class="text-muted font-weight-bolder text-3xl">Your payment has been <br> made successfully!</h1>
+                <h5 class="text-muted text-lg">In a few minutes you will receive your order</h5>
+            </template>
+            <template v-else>
+                <h1 class="text-muted font-weight-bolder text-3xl">Your payment has been <br> cancelled!</h1>
+                <h5 class="text-muted text-lg">Try again later</h5>
+            </template>
         </div>
         <div class="logo">
             <img class="mx-auto" src="/vendor_asset/img/logo/logopequeño.png" alt="logo">
         <div class="order-num pb-5">
         </div>
-            <h3 class="text-muted font-weight-bolder text-xl text-center">Número de pedido:S8GL</h3>
+            <h3 class="text-muted font-weight-bolder text-xl text-center">Order number: {{ order.transaction_id }}</h3>
         </div>
     </div>
    </Layout> 	 
