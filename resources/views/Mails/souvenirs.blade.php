@@ -9,7 +9,7 @@
     <div class="main" style="padding: 0 2em;">
         <section id="cabecera">
             <div class="container-logo" style="display: flex;flex-direction: column;">
-            <img src="{{asset('/vendor_asset/img/logo/logo.png')}}" alt="logo" style="margin: 1em auto;max-width: 7em;">
+                <img src="{{asset('/vendor_asset/img/logo/hilogo.png')}}" alt="logo" style="margin: 1em auto;max-width: 12em;">
             </div>
 
             <div class="titulo" style="display: flex;flex-direction: column;">

@@ -78,14 +78,7 @@
                     <form @submit.prevent="submit">
                     <div class="row my-3 justify-content-start">
                         <div class="col-12 col-md-6">
-                            <h1>Modify your 
-                                <template v-if="hotel.type == 'apartamento'">
-                                    Lodging
-                                </template>
-                                <template v-else>
-                                    Hotel
-                                </template>
-                            </h1>
+                            <h1>Modify your {{hotel.type}}</h1>  
                         </div>
                     </div>
                     <div class="row my-3 justify-content-start">

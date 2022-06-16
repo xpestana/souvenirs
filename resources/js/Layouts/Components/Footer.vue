@@ -63,11 +63,11 @@
             </div>
             <div class="footer-copryright">
                 <div class="container-fluid px-0 py-3" style="background-color:#ededed">
-                    <div class="footer-social absolute right-0 md:bottom-0 d-md-none">
+                    <div class="footer-social absolute right-0 md:bottom-0">
                         <div class="d-inline-flex mt-1">
-                            <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
+                            <!-- <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
                                 <img src="/vendor_asset/img/icons/wsicon.png" class="mx-1 mx-md-2 w-10 h-10 md:w-10 md:h-10">
-                            </a>
+                            </a> -->
                             <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
                                 <img src="/vendor_asset/img/icons/igicon.png" class="px-1 px-md-2 w-12 h-10 md:w-14 md:h-10">
                             </a>

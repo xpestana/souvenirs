@@ -6,7 +6,7 @@
                 para habilitar estas funcionalidades
             </h1>
             <p>Atención especializada</p>
-            <p>(+34) 777 777 777</p>
+            <p>(+34) 722 193 903</p>
         </section>
         <section id="tabla" hidden>
         <div class="container-fluid px-0 px-md-5">

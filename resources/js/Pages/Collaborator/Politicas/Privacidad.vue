@@ -52,9 +52,9 @@
                         <p><b>Recipients: </b></p><br>
                         <p>The data will not be communicated to any third party outside HiCitty, except legal obligation. </p><br>
                         <p>As treatment managers, we have contracted the following service providers, having committed to compliance with the regulatory provisions applicable to data protection, at the time of contracting:</p><br>
-                        <p>(IN CHARGE)______________________________________________________, residing in ___________________________________________, NIF/CIF nº ________________________, provides services of _______________________________________. </p><br>
+                        <p>(IN CHARGE)_____________________, residing in_________________, NIF/CIF nº ________________________, provides services of ________________. </p><br>
                         <p>You can consult the privacy policy and other legal aspects of the company at the following link: ____________________ </p><br>
-                        <p>(IN CHARGE) ____________________________________________, con domicilio en ____________________________________________, NIF/CIF nº _________________________, provides services of.</p><br>
+                        <p>(IN CHARGE) _____________________, con domicilio en ___________________, NIF/CIF nº ________________, provides services of.</p><br>
                         <p>You can consult the privacy policy and other legal aspects of the company at the following link: ___________________ </p><br>
 
                         <p><b>Data collected by users of the services </b></p><br>
