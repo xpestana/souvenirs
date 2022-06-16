@@ -47,42 +47,42 @@
                         <label class="col-lg-3 col-md-4 col-form-label">Género</label>
                         <div class="col-lg-6 col-md-8">
                             <span class="custom-radio">
-                                <input name="gender" v-model="form.gender" value="M" type="radio"> H
+                                <input name="gender"  value="M" type="radio"> H
                             </span> 
                             <span class="custom-radio pl-1">
-                                <input name="gender" v-model="form.gender" value="F" type="radio"> M
+                                <input name="gender"  value="F" type="radio"> M
                             </span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="f-name" class="col-lg-3 col-md-4 col-form-label">Nombre</label>
                         <div class="col-lg-6 col-md-8">
-                            <input type="text" id="firstname" class="form-control" v-model="form.firstname">
+                            <input type="text" id="firstname" class="form-control" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="l-name" class="col-lg-3 col-md-4 col-form-label">Apellido</label>
                         <div class="col-lg-6 col-md-8">
-                            <input type="text" id="lastname" class="form-control" v-model="form.lastname">
+                            <input type="text" id="lastname" class="form-control" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email" class="col-lg-3 col-md-4 col-form-label">Correo Electrónico</label>
                         <div class="col-lg-6 col-md-8">
-                            <input type="text" class="form-control" id="email" v-model="form.email">
+                            <input type="text" class="form-control" id="email" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="newpassword" class="col-lg-3 col-md-4 col-form-label">Nueva Contraseña</label>
                         <div class="col-lg-6 col-md-8">
-                            <input type="password" class="form-control" id="newpassword" v-model="form.password">
+                            <input type="password" class="form-control" id="newpassword" >
                             <button class="btn show-btn" type="button" v-on:click="showPass('newpassword')"><i class="far fa-eye"></i></button>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="c-password" class="col-lg-3 col-md-4 col-form-label">Confirmar Contraseña</label>
                         <div class="col-lg-6 col-md-8">
-                            <input type="password" class="form-control" id="c-password" v-model="form.password_confirmation">
+                            <input type="password" class="form-control" id="c-password" >
                             <button class="btn show-btn" type="button" v-on:click="showPass('c-password')"><i class="far fa-eye"></i></button>
                         </div>
                     </div>
@@ -136,14 +136,6 @@ export default {
     data() {
         return {
             options: '',
-            form: this.$inertia.form({
-                firstname: this.$page.props.auth.profile.firstname,
-                lastname: this.$page.props.auth.profile.lastname,
-                gender: this.$page.props.auth.profile.gender,
-                email: this.$page.props.auth.user.email,
-                password: '',
-                password_confirmation: '',
-            })
         }
     },
     methods: {

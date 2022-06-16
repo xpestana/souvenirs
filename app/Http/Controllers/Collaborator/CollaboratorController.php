@@ -345,14 +345,8 @@ class CollaboratorController extends Controller
     }
 
     public function sales_hab($id){
-        $orders = Order::join('hotels', 'hotels.id', '=', 'orders.hotel_id')
-                ->join('hotel_user', 'hotels.id', '=', 'hotel_user.hotel_id')
-                ->select('orders.*', 'hotels.type', 'hotels.address', 'hotels.zone', 'hotels.calle', 'hotels.image', 'hotels.planta')
-                ->where('hotel_user.user_id', $id)
-                ->orderBy('orders.created_at','DESC')
-                ->paginate(10);
-        $orders->load('shippings');
-        $hotels = auth()->user()->hotel->load('orders.shippings');       
+        $hotels = auth()->user()->hotel->load('orders.shippings');    
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->with('hotel', 'shippings')->paginate(15);   
         return Inertia::render('Collaborator/Dashboard/Lodging/TotalSales', compact('hotels','orders'));
     }
 

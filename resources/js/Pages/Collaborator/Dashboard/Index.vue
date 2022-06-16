@@ -153,7 +153,7 @@
                 col.orders.forEach(function(order) {
                     total_benefit = parseInt(total_benefit)  + parseInt(order.total);
                 });
-                this.total = this.total + (total_benefit/100)
+                this.total = this.total + (total_benefit)
                 this.orders = this.orders + (col.orders.length)
             return {
                 id : col.id,
@@ -163,7 +163,7 @@
                 type : col.type,
                 hab : col.hab,
                 zone : col.zone,
-                total_benefit : total_benefit/100,
+                total_benefit : (total_benefit*0.20).toFixed(2),
                 total_orders : col.orders.length
             }
             });
