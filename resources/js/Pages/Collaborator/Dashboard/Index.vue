@@ -44,6 +44,10 @@
                                                 <p class="d-md-inline mr-md-2 text-center">Habitaciones Registradas {{ hotel.hab }} </p>
                                                 <p class="d-md-inline text-center">{{ hotel.zone }}</p>
                                             </template>
+                                            <template v-if="hotel.type == 'complejo'">
+                                                <p class="d-md-inline mr-md-2 text-center">Numero de apartamentos {{ hotel.hab }} </p>
+                                                <p class="d-md-inline text-center">{{ hotel.zone }}</p>
+                                            </template>
                                         </div>
                                         <Link :href="route('collaborator.sales.details',{hab:hotel.id})">
                                         <h1 class="pt-1 pb-2 title">{{hotel.calle}} {{hotel.planta}}</h1>

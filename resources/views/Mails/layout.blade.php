@@ -144,8 +144,12 @@
       <table class="outer frame" align="center" cellpadding="0" cellspacing="0" border="0" width="670" style="border: 0px; border-left: 1px solid #cccccc; border-right: 1px solid #cccccc; background-color: #ffffff;position: relative; background-color: #ebf2f6;">
        <tbody>
         <tr>
-         <td> <a href="https://twitter.com/?uid=598503&amp;iid=am-193306946213455611515622097&amp;nid=27+21" style="border: none; color: #0084b4; text-decoration: none;"><span class="media_logo_div"></span></a>
-          <table cellpadding="0" cellspacing="0" border="0" width="670" class="header frame" style="background-color: #f2f2f2; table-layout: fixed;">
+         <td> 
+          <div style="display: flex">
+            <img src="{{asset('/vendor_asset/img/logo/hilogo.png')}}" style="max-width: 200px;margin:auto;" alt="{{config('app.name')}}">
+          </div>
+          <a href="https://twitter.com/?uid=598503&amp;iid=am-193306946213455611515622097&amp;nid=27+21" style="border: none; color: #0084b4; text-decoration: none;"><span class="media_logo_div"></span></a>
+          {{-- <table cellpadding="0" cellspacing="0" border="0" width="670" class="header frame" style="background-color: #f2f2f2; table-layout: fixed;">
            <tbody>
               <tr>
                 <td class="header_padding" width="80">&nbsp;</td>
@@ -154,9 +158,7 @@
                     <tbody>
                       <tr>
                         <td class="main_name" style="font-size: 14px; font-weight: bold; color: #000000;">
-                          <!-- MASTERHEAD -->
-                          <img src="{{asset('/vendor_asset/img/logo/logo.png')}}" style="max-width: 200px" alt="logo">
-                          <!-- /MASTERHEAD -->
+                          
                         </td>
                       </tr>
                     </tbody>
@@ -165,7 +167,8 @@
                 <td width="70" height="77" class="header_padding"> &nbsp; </td>
               </tr>
             </tbody>
-          </table> </td>
+          </table>  --}}
+        </td>
          <td rowspan="3"></td>
         </tr>
         <tr>
@@ -219,11 +222,11 @@
             <tr>
              <td class="col cut" style="width: 85px;"></td>
              <td class="footer_body media_footer" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 17px; color: #777; text-shadow: 0 1px 0 #ffffff;">
-              <div>
-                <!-- FOOTER TEXT -->
-                © {{ date('Y') }} HiCitty. @lang('All rights reserved.')<br/>
-                <img src="{{asset('/vendor_asset/img/logo/logo.png')}}" alt="{{config('app.name')}}">
-                <!-- /FOOTER TEXT -->
+              <div style="text-align: center">
+                <p>© {{ date('Y') }} HiCitty. @lang('All rights reserved.')</p>
+              </div>
+              <div style="display: flex">
+                <img src="{{asset('/vendor_asset/img/logo/hilogo.png')}}" style="max-width: 200px;margin:auto;" alt="{{config('app.name')}}">
               </div>
             </td>
              <td class="col cut" style="width: 85px;"></td>

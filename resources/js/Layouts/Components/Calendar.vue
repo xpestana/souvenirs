@@ -90,7 +90,7 @@
                     fecha:null,
                     date:null,
                     pedido:[],
-                    short_id:this.product.short_id
+                    short_id:this.product.short_id,
             	}),
                 spinner:false,
                 formApi: this.$inertia.form({
@@ -162,6 +162,7 @@
                         confirmButtonAriaLabel: 'Aceptar!',
                     })
                 }else{
+                    console.log(this.form)
                     this.form.post(route('cart.activity'),{
                         _token: this.$page.props.csrf_token,
                         errorBag: 'submit',
@@ -178,6 +179,7 @@
                 return;
                 }
                 this.form.date = this.guardarFecha;
+                
                 this.form.post(route('cart.activity'),{
                     _token: this.$page.props.csrf_token,
                     errorBag: 'submit',

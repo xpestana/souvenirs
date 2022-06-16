@@ -37,7 +37,7 @@
 						<div class="row justify-content-between">
 							<template v-if="registerHotel">
 								<div class="col-12 col-md-6 mb-3">
-									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" placeholder="Nombre del hotel*">
+									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.nombre_hotel" :placeholder="placeholderNombre">
 								</div>
 								<div class="col-12 col-md-6 mb-3">
 									<input type="text" class="form-control w-100 mb-2 py-3" v-model="form.numero_habitaciones" :placeholder="placeholderHab">
@@ -153,6 +153,7 @@
 				registerHotel:false,
 				registerHousing:false,
 				placeholderHab:null,
+				placeholderNombre:null,
         		showF: 0,
             	user: this.$page.props.auth.user,
             	profile: this.$page.props.auth.profile,
@@ -180,6 +181,7 @@
 					this.registerHotel = true;
 					this.form.tipo = 'hotel';
 					this.placeholderHab = 'Numero de habitaciones*';
+					this.placeholderNombre = 'Nombre del hotel*';
 				}else if(document.getElementById('registerA').value == 'lodging'){
 					this.registerHotel = false;
 					this.registerHousing = false;
@@ -189,8 +191,9 @@
 					this.registerHotel = true;
 					this.registerHousing = true;
 					this.registerLodging = false;
-					this.form.tipo = 'complejo';
+					this.form.tipo = 'complejo turístico';
 					this.placeholderHab = 'Numero de apartamentos*';
+					this.placeholderNombre = 'Nombre del complejo turístico*';
 				}else{
 					this.registerLodging = false;
 					this.registerHousing = false;

@@ -93,7 +93,7 @@
     </div>
 </section>  
 <!-- Central Modal notify -->
-    <div class="modal fade" id="notify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="notify" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <!-- Change class .modal-sm to change the size of the modal -->
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -101,7 +101,7 @@
                 <div class="modal-body p-0">
                     <div class="row">
                         <div class="col-12 p-3 text-right">
-                            <a class="p-3" href="#" data-dismiss="modal" ><i class="fas fa-times text-muted"></i></a>
+                            <!-- <a class="p-3" href="#" data-dismiss="modal" ><i class="fas fa-times text-muted"></i></a> -->
                         </div>
                     </div>
                     <div class="row mb-2 justify-content-center">
@@ -109,15 +109,15 @@
                             <h1 class="text-lg font-weight-bolder">Muchas gracias</h1>
                         </div>
                         <div class="col-8 px-0 py-3 text-left">
-                            <p class="text-justify" v-if="$page.props.flash.status">
-                                Hemos enviado un correo a {{$page.props.flash.status.email}} con un enlace
+                            <p class="text-justify" v-if="$page.props.flash.mensaje">
+                                Hemos enviado un correo a {{$page.props.flash.mensaje.email}} con un enlace
                                 donde podrás reestrablecer tu contraseña.
                             </p>
                         </div>
                     </div>
                     <div class="row px-3 pt-2 pb-5 justify-content-center">
                         <div class="col-8">
-                            <button data-dismiss="modal" type="button" class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100" >Ok</button>
+                            <button  type="button" class="bnt btn-primary-c text-white rounded-pill px-4 py-3 w-100" @click="reload()">Ok</button>
                         </div>
                     </div>
                 </div>
@@ -148,11 +148,13 @@ export default {
     },
 
     props: {
-        canResetPassword: Boolean,
+        status: Boolean,
+    },
+    created(){
+        console.log(this.$page.props.flash)
     },
     updated(){
-        console.log(this.$page.props.flash.response)
-        if(this.$page.props.flash.response){
+        if(this.$page.props.flash.mensaje){
             $('#notify').modal('show')
         }
     },
@@ -171,6 +173,9 @@ export default {
     },
 
     methods: {
+        reload(){
+            window.location.reload();
+        },
         submit() {
             this.showValidation = true;
             this.form.post(this.route('login'), {

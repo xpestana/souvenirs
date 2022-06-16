@@ -227,6 +227,7 @@
             CodificarTilde
         },
         created(){
+            console.log(this.$page.props.cart)
             this.totalesSouvenirs();
         },
         updated(){
