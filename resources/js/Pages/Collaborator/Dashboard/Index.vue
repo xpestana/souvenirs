@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="col-12 col-md-3 info-total text-right" v-if="$page.props.auth.user.profile.gestor == 2">
                                     <h3 class="text-info"><strong>Total</strong></h3><br>
-                                    <h4><strong>Benefit {{ total }} €</strong></h4><br>
+                                    <h4><strong>Benefit {{ total.toFixed(2) }} €</strong></h4><br>
                                     <h4><strong>Orders {{ orders }}</strong></h4><br>
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                 col.orders.forEach(function(order) {
                     total_benefit = parseInt(total_benefit)  + parseInt(order.total);
                 });
-                this.total = this.total + (total_benefit)
+                this.total = this.total + (total_benefit *0.20)
                 this.orders = this.orders + (col.orders.length)
             return {
                 id : col.id,

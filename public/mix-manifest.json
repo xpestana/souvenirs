@@ -67,5 +67,7 @@
     "/vendor_asset/js/main.js": "/vendor_asset/js/main.js",
     "/vendor_asset/js/owl.carousel.min.js": "/vendor_asset/js/owl.carousel.min.js",
     "/vendor_asset/js/plugins.js": "/vendor_asset/js/plugins.js",
-    "/css/all.css": "/css/all.css"
+    "/css/all.css": "/css/all.css",
+    "/vendor_asset/img/contact.png": "/vendor_asset/img/contact.png",
+    "/vendor_asset/img/english.png": "/vendor_asset/img/english.png"
 }
