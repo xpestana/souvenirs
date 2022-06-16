@@ -40,6 +40,8 @@
 
                         <p>Los campos de dichos registros son de cumplimentación obligatoria, siendo imposible realizar las finalidades expresadas si no se aportan esos datos. </p><br>
 
+                        
+
                         <p class="text-center"><b>¿Por cuánto tiempo se conservan los datos personales recabados?</b></p><br>
                         <p>Los datos personales proporcionados se conservarán mientras se mantenga la relación comercial o no solicites su supresión y durante el plazo por el cuál pudieran derivarse responsabilidades legales por los servicios prestados.</p><br>
                         <p><b>Legitimación: </b></p><br>
@@ -50,13 +52,17 @@
                         <p>En caso de que no nos facilites tus datos o lo hagas de forma errónea o incompleta, no podremos atender tu solicitud, resultando del todo imposible proporcionarte la información solicitada o llevar a cabo la contratación de los servicios. </p><br>
                         
                         <p><b>Destinatarios: </b></p><br>
+                        
                         <p>Los datos no se comunicarán a ningún tercero ajeno a HiCitty, salvo obligación legal. </p><br>
                         <p>Como encargados de tratamiento, tenemos contratados a los siguientes proveedores de servicios, habiéndose comprometido al cumplimiento de las disposiciones normativas, de aplicación en materia de protección de datos, en el momento de su contratación: </p><br>
-                        <p>(ENCARGADO)______________________________________________________, con domicilio en ___________________________________________, NIF/CIF nº ________________________, presta servicios de _______________________________________. </p><br>
-                        <p>Puede consultar la política de privacidad y demás aspectos legales de la compañía en el siguiente enlace: ____________________ </p><br>
-                        <p>(ENCARGADO) ____________________________________________, con domicilio en ____________________________________________, NIF/CIF nº _________________________, presta servicios de.</p><br>
+                        
+                        <!--asdasdasd-->
+                        <p>(ENCARGADO)________________, con domicilio en ________________, NIF/CIF nº ____________, presta servicios de __________. </p><br>
+                        <p>Puede consultar la política de privacidad y demás aspectos legales de la compañía en el siguiente enlace: ___________ </p><br>
+                        <p>(ENCARGADO) _________________________, con domicilio en _______________________, NIF/CIF nº _________________, presta servicios de.</p><br>
                         <p>Puede consultar la política de privacidad y demás aspectos legales de la compañía en el siguiente enlace: ___________________ </p><br>
 
+                        <!-- asdasd-->
                         <p><b>Datos recopilados por usuarios de los servicios </b></p><br>
                         <p>En los casos en que el usuario incluya ficheros con datos de carácter personal en los servidores de alojamiento compartido, HiCitty no se hace responsable del incumplimiento por parte del usuario del RGPD.</p><br>
                             
@@ -98,6 +104,9 @@
                         <p>En aplicación de la LSSI. HiCitty no enviará comunicaciones publicitarias o promocionales por correo electrónico u otro medio de comunicación electrónica equivalente que previamente no hubieran sido solicitadas o expresamente autorizadas por los destinatarios de las mismas.</p><br>
                         <p>En el caso de usuarios con los que exista una relación contractual previa, HiCitty sí está autorizado al envío de comunicaciones comerciales referentes a productos o servicios de HiCitty que sean similares a los que inicialmente fueron objeto de contratación con el cliente. </p><br>
                         <p>En todo caso, el usuario, tras acreditar su identidad, podrá solicitar que no se le haga llegar más información comercial a través de los canales de Atención al Cliente.</p><br>
+                        
+
+                        
                         
                     </div>
                 </div>

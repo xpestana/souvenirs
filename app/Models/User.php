@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Cashier\Billable;
-
+use App\Notifications\ResetPassword;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -90,5 +90,10 @@ class User extends Authenticatable
             $query->orWhere("email",'like',  '%'.$email.'%');
             $query->role('Admin');
         }
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

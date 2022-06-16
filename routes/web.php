@@ -386,5 +386,8 @@ Route::resource(
 
 Route::get('/update/api', [ActivitiesController::class, 'api'])->name('update.api');
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
+Route::get('/test',function(){
+    return view('mails.souvenirs');
+});
 
 require __DIR__.'/auth.php';

@@ -40,6 +40,7 @@ class SalesController extends Controller
         $act = false;
         $products = Cart::getContent(); 
         $forms_extra = array();
+        $names = [];
         foreach($products as $product){
             if ($product->attributes["type"] =="activity") {
                 $forms = Http::post('https://app.turitop.com/v1/product/getclientform', [
@@ -52,14 +53,15 @@ class SalesController extends Controller
 
                 foreach ($forms as $form) {
                 if ($form['key'] != "name" && $form['key'] != "country" && $form['key'] != "phone") {
-                    if ($form['required'] == true) {
+                    if ($form['required'] == true && $form['name'] !== '' && !in_array($form['name'],$names)) {
+                        array_push($names,$form['name']);
                         array_push($forms_extra,$form);
                     }
                 }
                 }
             }
         }
-        return Inertia::render('Checkout', compact('hotel', 'forms_extra'));
+        return Inertia::render('Checkout', compact('hotel', 'forms_extra','names'));
     }
     public function sale(Request $request)
     {

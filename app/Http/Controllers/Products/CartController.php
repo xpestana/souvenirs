@@ -127,7 +127,7 @@ class CartController extends Controller
         if($product->image){
             $image = $product->images[0]->url;
         }
-        $addCart = \Cart::add(array(
+        $addCart = Cart::add(array(
             'id' => $product->id,
             'name'=>$product->title,
             'price'=> 20,
