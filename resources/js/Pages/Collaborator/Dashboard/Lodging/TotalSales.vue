@@ -57,7 +57,7 @@
             <div class="row pie justify-content-end">
                 <div class="col-sm-4 col-md-3 mt-4">
                     <h2 class="text-info"><strong>Total</strong></h2>
-                    <p><b>Your benefit is {{total}}€</b></p>
+                    <p><b>Your benefit is {{total.toFixed(2)}}€</b></p>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -102,22 +102,23 @@ export default {
     computed:{
         ventas(){
             const obj = this.orders.data.map((col)=>{
-            this.total += parseInt(col.total);
+                var total_benefit = 0;
+                total_benefit = parseInt(total_benefit)  + parseInt(col.total);
+                this.total += parseInt(col.total) *0.2;
             return {
-                id : col.id,
-                calle: col.calle,
-                planta: col.planta,
-                address: col.address,
-                image : col.image,
-                date : col.created_at,
-                type : col.type,
+                id : col.hotel.id,
+                calle: col.hotel.calle,
+                planta: col.hotel.planta,
+                address: col.hotel.address,
+                image : col.hotel.image,
+                date : col.hotel.created_at,
+                type : col.hotel.type,
                 shippings : col.shippings,
                 id_t: col.transaction_id,
-                // email : col.shippings[0].email,
-                total_benefit : parseInt(col.total)/100,
+                total_benefit : (total_benefit*0.20),
             }
             });
-            this.total = this.total/100;
+            this.total = this.total;
             return obj;
         },
     }

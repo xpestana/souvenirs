@@ -21,7 +21,7 @@ class ProfileController extends Controller
     public function index()
     {
         /*Redirección si no tiene perfil*/
-        if (auth()->user()->profile == null) {
+        if (auth()->user()->profile == null && auth()->user()->getRoleNames()->first() != 'Client') {
             return Redirect::route('collaborator.data');
         }
         /*******************************/

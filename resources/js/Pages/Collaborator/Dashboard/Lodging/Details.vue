@@ -28,8 +28,8 @@
                                         <th scope="col">Room</th>
                                     </template>
                                     <th scope="col">Returned</th>
-                                    <th scope="col">EMail</th>
-                                    
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Email</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Benefit</th>
                                 </tr>
@@ -62,8 +62,9 @@
                                     </td>
 
                                     <td>{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
-                                    <td>{{ ((parseInt(order.total)/100)*0.20).toFixed(2) }} €</td>
-                                    <td>{{ parseInt(order.total)/100 }} €</td>
+                                    <td>{{ order.shippings[0].email }}</td>
+                                    <td>{{ parseInt(order.total) }} €</td>
+                                    <td>{{ ((parseInt(order.total))*0.20).toFixed(2) }} €</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -101,7 +102,7 @@ export default {
         this.moment=Moment;
         var total_benefit = this.total_benefit;
         this.hotel.orders.forEach(function(order) {
-            total_benefit = total_benefit  + (parseInt(order.total))/100;
+            total_benefit = total_benefit  + (parseInt(order.total)*0.20);
         });
         this.total_benefit = total_benefit;
     },

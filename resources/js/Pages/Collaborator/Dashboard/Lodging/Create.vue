@@ -28,7 +28,7 @@
 								<option value="-">Select</option>
 								<option value="hotel">Hotel</option>
 								<option value="lodging">Apartment</option>
-								<option value="complejo">Complejo turístico</option>
+								<option value="complejo">Holiday resort</option>
 							</select>
 						</div>
 					</div>
