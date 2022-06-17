@@ -1,6 +1,6 @@
 <template>
 
-    <nav class="navbar fixed-top navbar-light bg-white d-block d-md-none py-0" id="menu-mobile">
+    <nav class="navbar fixed-top navbar-light bg-white py-0" id="menu-mobile">
                             <!-- Navbar brand -->
         <div class="row">
             <div class="col-3">
@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="col-9">
-                <img class="w-36 ml-6 mt-3" src="/vendor_asset/img/logo/hilogo.png" alt="logo">
+                <img class="w-36 ml-6 mt-3" src="/vendor_asset/img/logo/hilogo.png" alt="logo" @click="redirect()">
             </div>
         </div>
 
@@ -61,10 +61,25 @@ export default {
     methods:{
         navIcon(){
             $('.animated-icon1').toggleClass('open');
+        },
+        redirect(){
+            this.$inertia.get(route('home'))
         }
     }
 }
 </script>
 
 <style scoped>
+.animated-icon1 {
+    width: 20px;
+}
+.animated-icon1 span:nth-child(2) {
+    top: 8px;
+}
+.animated-icon1 span:nth-child(3) {
+    top: 16px;
+}
+.animated-icon1.open span:nth-child(3) {
+    top: 12px !important;
+}
 </style>
