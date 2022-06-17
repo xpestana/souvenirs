@@ -548,19 +548,17 @@ class AdminController extends Controller
         $shippings = Shipping::join('orders', 'orders.id', '=', 'shippings.order_id')
                 ->select('shippings.*', 'orders.transaction_id', 'orders.total')
                 ->where('orders.hotel_id', $hab)
+                ->where('orders.status', "complete")
                 ->orderBy('orders.created_at','DESC')->get();
 
         return Inertia::render('Admin/Collaborators/Lodging/Details', compact('shippings','collaborator', 'hotel'));
     }
 
     public function sales_hab($id){
-        $orders = Order::join('hotels', 'hotels.id', '=', 'orders.hotel_id')
-                ->join('hotel_user', 'hotels.id', '=', 'hotel_user.hotel_id')
-                ->select('orders.*', 'hotels.type', 'hotels.address', 'hotels.zone', 'hotels.calle', 'hotels.image', 'hotels.planta')
-                ->where('hotel_user.user_id', $id)
-                ->orderBy('orders.created_at','DESC')
-                ->paginate(10);
-        $orders->load('shippings');
+
+        $hotels = User::find($id)->hotel->pluck('id');
+        $orders = Order::whereIn('hotel_id',$hotels)->where("status", "complete")->with('hotel', 'shippings')->paginate(15);  
+        
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');       
         return Inertia::render('Admin/Collaborators/Lodging/TotalSales', compact('collaborator','orders'));
     }
@@ -607,8 +605,10 @@ class AdminController extends Controller
     public function transaction($id, $shipping)
     {   
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
-        $shipping = Shipping::find($shipping)->load('order.hotel', 'product');
-
+        $shipping = Shipping::where("id", $shipping)->status()->first();
+        if ($shipping) {
+            $shipping->load('order.hotel', 'product');
+        }
         return Inertia::render('Admin/Collaborators/Lodging/Transaction', compact('collaborator', 'shipping'));
     }
     public function sales()

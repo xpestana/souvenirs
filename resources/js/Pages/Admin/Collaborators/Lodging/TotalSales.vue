@@ -15,7 +15,7 @@
                     <div class="d-md-inline-flex mt-1">
                         <div class="pr-md-4 text-md-center">
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total }}€</p>
+                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.toFixed(2) }}€</p>
                         </div>
                         <div class="pr-md-4 text-md-center"> 
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
@@ -131,26 +131,25 @@ export default {
     },
     computed:{
         ventas(){
-            console.log(this.orders.data)
             const obj = this.orders.data.map((col)=>{
                 var total_benefits = 0
                 if(col.returned == 0){
                     total_benefits = parseInt(total_benefits)  + parseInt(col.total);
                 }
-                this.total_benefit = this.total_benefit + (total_benefits/100)
+                this.total_benefit = this.total_benefit + (total_benefits)
             return {
-                id : col.id,
-                calle: col.calle,
-                planta: col.planta,
-                address: col.address,
-                image : col.image,
-                date : col.created_at,
-                type : col.type,
+                id : col.hotel.id,
+                calle: col.hotel.calle,
+                planta: col.hotel.planta,
+                address: col.hotel.address,
+                image : col.hotel.image,
+                date : col.hotel.created_at,
+                type : col.hotel.type,
                 shippings : col.shippings,
                 id_t: col.transaction_id,
                 email : (col.shippings[0]) ? col.shippings[0].email : "",
                 returned : col.returned,
-                total_benefit : parseInt(col.total)/100,
+                total_benefit : parseInt(col.total),
             }
             });
             return obj;
@@ -177,7 +176,7 @@ export default {
                         total = parseInt(total)  + parseInt(order.total);
                     }
                 });
-                this.total = this.total + (total/100)
+                this.total = this.total + (total*0.20);
             });
         },
     },

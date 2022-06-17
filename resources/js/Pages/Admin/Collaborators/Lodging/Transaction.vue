@@ -15,7 +15,7 @@
                     <div class="d-md-inline-flex mt-1">
                         <div class="pr-md-4 text-md-center">
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.tofixed(2) }}€</p>
+                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.toFixed(2) }}€</p>
                         </div>
                         <div class="pr-md-4 text-md-center"> 
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
