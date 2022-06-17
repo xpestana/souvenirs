@@ -630,7 +630,7 @@ class AdminController extends Controller
                 ->search($request->search)
                 ->email($request->search, 'Associate')
                 ->where('del',false)
-                ->with('hotel.orders.shippings')
+                ->with('orders.shippings')
                 ->orderBy('profiles.firstname','ASC')
                 ->paginate(10);
         return Inertia::render('Admin/Associates/Index',compact('collaborators') );
