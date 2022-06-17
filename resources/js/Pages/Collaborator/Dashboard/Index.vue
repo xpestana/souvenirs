@@ -44,7 +44,7 @@
                                                 <p class="d-md-inline mr-md-2 text-center">Habitaciones Registradas {{ hotel.hab }} </p>
                                                 <p class="d-md-inline text-center">{{ hotel.zone }}</p>
                                             </template>
-                                            <template v-if="hotel.type == 'complejo'">
+                                            <template v-if="hotel.type == 'complejo turístico'">
                                                 <p class="d-md-inline mr-md-2 text-center">Numero de apartamentos {{ hotel.hab }} </p>
                                                 <p class="d-md-inline text-center">{{ hotel.zone }}</p>
                                             </template>

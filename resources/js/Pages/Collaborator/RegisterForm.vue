@@ -1,38 +1,49 @@
 <template>
-    <section>
-        <div class="row w-100 p-0 m-0">
-            <div class="col-md-7 up py-4">
-                <div class="col-md-12 text-center">
-                    <img style="width: 50%" class="m-auto cursor-pointer" src="/vendor_asset/img/logo/hilogo.png" @click="redirect()">
-
-                    <h1 class="title">Lo hacemos por ti</h1>
-                    <div class="caja-info mt-4">
-                        <p>
-                            Lo hacemos por ti <br>
-                            Horario disponible: <br>
-                            8:30-14:30 h. <br>
-                            (+34) 722 193 903
+<!-- <form @submit.prevent="submit" class=" mt-10">
+    <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="E-mail*" v-model="form.email" required/>
+    <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="Confirmar E-mail" v-model="form.email_confirmation" required/>
+    <BreezeInput type="password" class="form-control my-2 py-4" autocomplete="off" placeholder="Contraseña" v-model="form.password" required/>
+    <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Regístrate ahora</button>
+    <ValidationErrors class="my-3" />
+</form>     -->
+    <section id="collaborator-register">
+         <div class="container-fluid flex min-h-screen bg-collaborator">
+            <div class="row m-auto justify-content-center">
+                <div class="register-hicitty col-12 col-md-6">
+                    <div class="hicitty-logo">
+                        <img class="w-72 mx-auto" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="" @click="redirect()">
+                    </div>
+                    <h1 class="text-white font-weight-bolder text-2xl text-center">Solo ganamos si tú ganas</h1>
+                    <div class="hicitty-social my-8 flex justify-center">
+                        <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
+                        <img class="d-inline mr-3 icon" src="/vendor_asset/img/collaborator/itgicon.svg" alt="">
+                        </a>
+                        <a target="_blank" href="https://www.linkedin.com/company/kognos-vb/" class="">
+                        <img class="d-inline mx-3 h-8 icon" src="/vendor_asset/img/collaborator/linkedin.svg" alt="">
+                        </a>
+                        <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
+                        <img class="d-inline mx-3 h-8 icon" src="/vendor_asset/img/collaborator/wticon.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="hicitty-info shadow-lg rounded-2xl text-center p-2 rounded-xl bg-white">
+                        <h1 class="text-2xl font-weight-bolder text-azulc">?</h1>
+                        <p class="text-azulc text-base">¿Necesitas ayuda?</p>
+                        <p class="text-azulc text-sm">
+                            Encontraras atención especializada<br>
+                            llamando al siguiente teléfono:
                         </p>
+                        <p class="text-azulc text-base"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
+                    </div>
+                </div>
+                <div class="register-form col-12 col-md-6 bg-white">
+                    <div class="form-card bg-white p-8 rounded-xl">
+                        <h1 class="text-3xl my-2">Regístrate y empieza a ganar</h1>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 up degrad py-4">
-                <div class="col-md-12 text-center">
-                    <h1 class="text-white mb-4 title_white">Crea una cuenta para<br>registrar tu alojamiento<br>y gestionarlo</h1>
-                    <div class="col-md-10 mx-auto">
-                        <form @submit.prevent="submit" class=" mt-10">
-                            <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="E-mail*" v-model="form.email" required/>
-                            <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="Confirmar E-mail" v-model="form.email_confirmation" required/>
-                            <BreezeInput type="password" class="form-control my-2 py-4" autocomplete="off" placeholder="Contraseña" v-model="form.password" required/>
-                            <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Regístrate ahora</button>
-                            <ValidationErrors class="my-3" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>    
-</template>
+        </div>   
+    </section>
+</template> 
 
 <script>
     import BreezeInput from '@/Components/Input.vue'
@@ -72,6 +83,9 @@
 </script>
 
 <style scoped>
+    .bg-collaborator{
+        background-color:#a0cae1;
+    }
     .up{
         display: flex;
         align-items: center;
