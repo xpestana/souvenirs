@@ -44,15 +44,15 @@
                         <div class="d-md-inline-flex mt-3 pb-2 pb-md-0">
                             <div class="pr-md-4 text-md-center">
                                 <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{calcularBeneficio(clbtr.hotel)}}€</p>
+                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{calcularBeneficio(clbtr.orders)}}€</p>
                             </div>
                             <div class="pr-md-4 text-md-center"> 
                                 <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
-                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.total_orders }}</p>
+                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.orders.length }}</p>
                             </div>
                             <div class="pr-md-4 text-md-center"> 
-                                <p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
-                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.lodgings}}</p>
+                                <p class="font-weight-bolder text-muted d-inline d-md-block">Actividades registradas:</p>
+                                <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0</p>
                             </div>
                             <div class="pr-md-4 text-md-center pt-1"> 
                                 <a href="#" class="text-primary px-md-2" data-toggle="modal" :data-target="'#colaborador'+clbtr.id">Obtener QR</a>
@@ -144,33 +144,29 @@ export default {
         QRCodeVue3
 	},
 	props: {
-	collaborators: Object
+	collaborators: Object,
+    url:String
+	},
+    created(){
+		this.busqueda()
+		console.log(this.collaborators)
 	},
 	computed:{
             colaboradores(){
             const obj = this.collaborators.data.map((col)=>{
                 var total_orders = 0;
-                col.hotel.forEach(function(hotel) {
-                    total_orders = total_orders + hotel.orders.length;
-                });
                 
             return {
                 id : col.id,
                 firstname: col.firstname,
                 email: col.email,
-				hotel: col.hotel,
+				orders: col.orders,
                 city: col.city,
-                lodgings : col.hotel.length,
-                total_orders : total_orders
             }
             });
             return obj;
         },
         },
-	mounted(){
-		this.busqueda()
-		console.log(this.collaborators)
-	},
 	data(){
 		return{
 			formSearch: this.$inertia.form({
@@ -227,28 +223,26 @@ export default {
 				});
 			},1500);
 		},
-		calcularBeneficio(hoteles){
-			const obj = hoteles.map((col)=>{
-                var total_orders = 0;
-                var total_benefits = 0;
-				let orders = orders + col.orders.length;
-				col.orders.forEach(function(order) {
+		calcularBeneficio(orders){
+            var total_benefits = 0;
+            if(orders.length > 0){
+                orders.forEach(function(order) {
                     total_benefits = parseInt(total_benefits)  + parseInt(order.total);
                 });
                 
-				return{
-					total_benefits: (total_benefits/100),
-				}
-			})
+                return (total_benefits*0.20).toFixed(2);
+            }
+            return 0;
+				
 			
-			if(obj.length > 0){
-				let beneficio = 0;
-				for(let val in obj){
-					beneficio = beneficio + Number(obj[val].total_benefits);
-				}
-				return beneficio;
-			}
-			return 0;
+			// if(obj.length > 0){
+			// 	let beneficio = 0;
+			// 	for(let val in obj){
+			// 		beneficio = beneficio + Number(obj[val].total_benefits);
+			// 	}
+			// 	return beneficio;
+			// }
+			// return 0;
 		}
 	}
 }

@@ -393,6 +393,9 @@ export default {
 </script>
 
 <style scoped>
+body{
+    background-color: #fff;
+}
 *> :not(i){
     font-family:Montserrat;
 }
