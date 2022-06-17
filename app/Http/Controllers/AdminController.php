@@ -21,7 +21,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-
 use Image;
 
 
@@ -549,19 +548,17 @@ class AdminController extends Controller
         $shippings = Shipping::join('orders', 'orders.id', '=', 'shippings.order_id')
                 ->select('shippings.*', 'orders.transaction_id', 'orders.total')
                 ->where('orders.hotel_id', $hab)
+                ->where('orders.status', "complete")
                 ->orderBy('orders.created_at','DESC')->get();
 
         return Inertia::render('Admin/Collaborators/Lodging/Details', compact('shippings','collaborator', 'hotel'));
     }
 
     public function sales_hab($id){
-        $orders = Order::join('hotels', 'hotels.id', '=', 'orders.hotel_id')
-                ->join('hotel_user', 'hotels.id', '=', 'hotel_user.hotel_id')
-                ->select('orders.*', 'hotels.type', 'hotels.address', 'hotels.zone', 'hotels.calle', 'hotels.image', 'hotels.planta')
-                ->where('hotel_user.user_id', $id)
-                ->orderBy('orders.created_at','DESC')
-                ->paginate(10);
-        $orders->load('shippings');
+
+        $hotels = User::find($id)->hotel->pluck('id');
+        $orders = Order::whereIn('hotel_id',$hotels)->where("status", "complete")->with('hotel', 'shippings')->paginate(15);  
+        
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');       
         return Inertia::render('Admin/Collaborators/Lodging/TotalSales', compact('collaborator','orders'));
     }
@@ -608,8 +605,10 @@ class AdminController extends Controller
     public function transaction($id, $shipping)
     {   
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
-        $shipping = Shipping::find($shipping)->load('order.hotel', 'product');
-
+        $shipping = Shipping::where("id", $shipping)->status()->first();
+        if ($shipping) {
+            $shipping->load('order.hotel', 'product');
+        }
         return Inertia::render('Admin/Collaborators/Lodging/Transaction', compact('collaborator', 'shipping'));
     }
     public function sales()
@@ -623,7 +622,7 @@ class AdminController extends Controller
         return Inertia::render('Admin/Sales_details', compact('order'));
     }
 
-    public function associates(Request $request)
+     public function associates(Request $request)
     {
         $collaborators = User::join('profiles', 'profiles.user_id', '=', 'users.id')
                 ->select('users.*', 'profiles.firstname','profiles.lastname','profiles.city')
@@ -643,47 +642,47 @@ class AdminController extends Controller
     }
 
     public function associates_store(Request $request){
-        
-        $request->validate([
-            'email' => 'required|string|email|max:255|unique:users|confirmed',
-            'password' => 
-            ['required', 
-                Rules\Password::min(8)
-                ->mixedCase()
-                ->numbers()
-                ->uncompromised()
-            ],
-            'name' => 'required|string',
-            'phone' => 'required|string',
-            'gestor' => ['required','string', Rule::in([1, 2])],
-            'razon' => 'required|string',
-            'nif' => 'required|string',
-            'id' => 'required|string',
-            'city' => 'required|string',
-            'cp' => 'required|string',
-            'address' => 'required|string',
-        ]);
+    
+    $request->validate([
+        'email' => 'required|string|email|max:255|unique:users|confirmed',
+        'password' => 
+        ['required', 
+            Rules\Password::min(8)
+            ->mixedCase()
+            ->numbers()
+            ->uncompromised()
+        ],
+        'name' => 'required|string',
+        'phone' => 'required|string',
+        'gestor' => ['required','string', Rule::in([1, 2])],
+        'razon' => 'required|string',
+        'nif' => 'required|string',
+        'id' => 'required|string',
+        'city' => 'required|string',
+        'cp' => 'required|string',
+        'address' => 'required|string',
+    ]);
 
-        $user = User::create([
-            'name' => $request->email,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    $user = User::create([
+        'name' => $request->email,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
 
-        $userProfile = profile::create([
-            'user_id' => $user->id,
-            'firstname' => $request->name,
-            'phone' => $request->phone,
-            'gestor' => $request->gestor,
-            'razon' => $request->razon,
-            'nif' => $request->nif,
-            'identify' => $request->id,
-            'city' => $request->city,
-            'cp' => $request->cp,
-            'address' => $request->address,
-        ]);
+    $userProfile = profile::create([
+        'user_id' => $user->id,
+        'firstname' => $request->name,
+        'phone' => $request->phone,
+        'gestor' => $request->gestor,
+        'razon' => $request->razon,
+        'nif' => $request->nif,
+        'identify' => $request->id,
+        'city' => $request->city,
+        'cp' => $request->cp,
+        'address' => $request->address,
+    ]);
 
-        $userClient = User::create([
+    $userClient = User::create([
         'name' => $request->email,
         'email' => $request->email.$user->id,
         'password' => Hash::make($request->password),
@@ -691,10 +690,16 @@ class AdminController extends Controller
 
     $user->assignRole('Associate');
     $userClient->assignRole('Client');
-
-        Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
+    Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
 
     return  back()->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
+    }
+
+    public function associate_details($id)
+    {
+        $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
+        $url = config('app.url');
+        return Inertia::render('Admin/Associates/Details',compact('collaborator','url'));
     }
 
     public function associates_edit(User $user)
@@ -703,6 +708,7 @@ class AdminController extends Controller
         return Inertia::render('Admin/Associates/Edit', compact('user'));
     }
     
+
     public function associates_updt(Request $request, $id){
         $request->validate([
             'email' => ['nullable', 'email', 'confirmed', 'max:255', Rule::unique('users')->ignore($id)],
@@ -745,12 +751,5 @@ class AdminController extends Controller
         $profile->save();
 
         return Redirect::route('admin.associates.show',$id)->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
-    }
-
-    public function associate_details($id)
-    {
-        $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
-        $url = config('app.url');
-        return Inertia::render('Admin/Associates/Details',compact('collaborator','url'));
     }
 }

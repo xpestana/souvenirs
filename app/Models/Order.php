@@ -18,7 +18,9 @@ class Order extends Model
         'Ds_SignatureVersion',
         'Ds_MerchantParameters',
         'Ds_Signature',
-        'status'
+        'status',
+        'total_s',
+        'shipping'
     ];
 
     /**

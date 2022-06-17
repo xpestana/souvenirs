@@ -157,7 +157,7 @@ export default {
                 
 
 				return{
-					total_benefits: (total_benefits/100),
+					total_benefits: (total_benefits*0.20).toFixed(2),
 				}
 			})
 			

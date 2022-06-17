@@ -104,7 +104,7 @@ export default {
             const obj = this.orders.data.map((col)=>{
                 var total_benefit = 0;
                 total_benefit = parseInt(total_benefit)  + parseInt(col.total);
-                this.total += parseInt(col.total) *0.2;
+                this.total += parseInt(col.total) *0.20;
             return {
                 id : col.hotel.id,
                 calle: col.hotel.calle,

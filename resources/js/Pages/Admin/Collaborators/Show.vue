@@ -15,7 +15,7 @@
 					<div class="d-md-inline-flex mt-1">
 						<div class="pr-md-4 text-md-center">
 							<p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total }}€</p>
+							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.toFixed(2) }}€</p>
 						</div>
 						<div class="pr-md-4 text-md-center"> 
 							<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="col-12 col-md-5 col-lg-4   my-1 my-md-0">
 					<h4 class="text-info font-weight-bolder pl-0 pl-xl-4">Total</h4><br>
-					<h4 class="font-weight-bolder pl-0 pl-xl-4">Beneficio {{ total }}€</h4><br>
+					<h4 class="font-weight-bolder pl-0 pl-xl-4">Beneficio {{ total.toFixed(2) }}€</h4><br>
 				</div>
 				<div class="col-12 col-md-4 col-lg-3">
 					<h4 class="font-weight-bolder">Pedidos {{ orders }}</h4><br>
@@ -157,7 +157,7 @@ export default {
 				col.orders.forEach(function(order) {
                     total_benefits = parseInt(total_benefits)  + parseInt(order.total);
                 });
-                this.total = this.total + (total_benefits/100)
+                this.total = this.total + (total_benefits)
             return {
                 id : col.id,
                 calle: col.calle,
@@ -165,7 +165,7 @@ export default {
                 image : col.image,
                 type : col.type,
                 total_orders : col.orders.length,
-                total_benefits: total_benefits/100
+                total_benefits: total_benefits.toFixed(2)
             }
             });
             return obj;

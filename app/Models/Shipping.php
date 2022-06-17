@@ -40,4 +40,15 @@ class Shipping extends Model
     {
         return $this->belongsTo(Products::class);
     }
+
+    /*
+    *Scopes
+     */
+    
+    public function scopeStatus($query) 
+    {
+         $query->whereHas('order', function($query) {
+            $query->where('status', "complete");
+        });
+    }
 }
