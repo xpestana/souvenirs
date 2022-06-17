@@ -13,7 +13,8 @@
                                     <div class="footer-widget mb-40">
                                         <div class="footer-content pt-2 text-center">
                                             <div class="">
-                                            <Link :href="route('about.us')" class="text-base md:text-lg">¿Quiénes somos?</Link>
+                                            <!-- <Link :href="route('about.us')" class="text-base md:text-lg">¿Quiénes somos?</Link> -->
+                                            <Link :href="route('collaborator.home')" class="text-base md:text-lg">¿Quiénes somos?</Link>
                                             </div>
                                             <div class="">
                                                 <Link :href="route('contact')" class="text-base md:text-lg">Contáctanos</Link>

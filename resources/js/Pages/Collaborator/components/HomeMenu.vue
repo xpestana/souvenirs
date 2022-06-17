@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar fixed-top navbar-light bg-white bg-trans py-0" id="navbar">
+    <nav class="navbar fixed-top navbar-light bg-white bg-trans py-0  xl:px-16 2xl:px-28" id="navbar">
     
         <div class="row justify-content-between w-100">
             <div class="col-6 d-md-none">
@@ -17,7 +17,7 @@
             </div>
                 
             <div class="col-6">
-                <img class="mx-auto w-96 pt-3.5" src="/vendor_asset/img/logo/hilogo.png" alt="logo" id="logo">
+                <img class="mx-auto w-96 pt-3.5 cursor-pointer" src="/vendor_asset/img/logo/hilogo.png" alt="logo" id="logo" @click="redirect()">
             </div>
             <div class="col-md-6 text-right pt-3.5">
                 <Link :href="route('collaborator.register')" class="btn btn-collaborator w-48 text-xl mr-4">
@@ -55,7 +55,9 @@ export default {
                 document.getElementById('navbar').classList.add('bg-trans');
                 document.getElementById('navbar').classList.remove('shadow-md');
             }
-            console.log();
+        },
+        redirect(){
+            this.$inertia.get(route('home'))
         }
     }
 }
