@@ -15,7 +15,7 @@
                     <div class="d-md-inline-flex mt-1">
                         <div class="pr-md-4 text-md-center">
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total }}€</p>
+                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.tofixed(2) }}€</p>
                         </div>
                         <div class="pr-md-4 text-md-center"> 
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
@@ -71,7 +71,7 @@
                                     <td class="text-center">{{ shipping.email }}</td>
                                     <td class="text-center">{{ moment(shipping.created_at).format("DD/MM/YYYY") }}</td>
                                     <td class="text-center">{{ parseInt(shipping.amount) }} €</td>
-                                    <td class="text-center">{{ (parseInt(shipping.amount) * 0.2).toFixed(2) }} €</td>
+                                    <td class="text-center">{{ (parseInt(shipping.amount) * 0.20).toFixed(2) }} €</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -131,7 +131,7 @@ export default {
                 col.orders.forEach(function(order) {
                     total_benefits = parseInt(total_benefits)  + parseInt(order.total);
                 });
-                this.total = this.total + (total_benefits/100)
+                this.total = this.total + (total_benefits*0.20)
             });
         },
     },

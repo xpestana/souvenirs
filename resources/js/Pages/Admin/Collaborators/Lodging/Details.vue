@@ -15,7 +15,7 @@
                     <div class="d-md-inline-flex mt-1">
                         <div class="pr-md-4 text-md-center">
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total }}€</p>
+                            <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.toFixed(2) }}€</p>
                         </div>
                         <div class="pr-md-4 text-md-center"> 
                             <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
@@ -75,7 +75,7 @@
                                         </template>
                                     </td>
                                     <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
-                                    <td class="text-center">{{ parseInt(order.total)/100 }} €</td>
+                                    <td class="text-center">{{ (parseInt(order.total)*0.20).toFixed(2) }} €</td>
                                     <td class="text-center px-0">
                                         <Link :href="route('admin.hab.transaction',{id:collaborator.id, shipping:order.id})" 
                                             class="btn btn-sm text-white d-inline p-0.5 mx-0" as="button" 
@@ -91,7 +91,7 @@
             </div>
             <div class="row mx-lg-4 pie justify-content-end my-4">
                 <div class="col-12 col-md-4">
-                    <h2 class="text-azulc text-2xl font-weight-bolder">Total {{ totalBeneficio }}€</h2>
+                    <h2 class="text-azulc text-2xl font-weight-bolder">Total {{ totalBeneficio.toFixed(2) }}€</h2>
                     <button class="btn btn-primary-c rounded-pill mt-2 py-1 py-md-0" hidden>Guardar cambios</button>
                 </div>
             </div>
@@ -140,12 +140,12 @@ export default {
                 col.orders.forEach(function(order) {
                     total_benefits = parseInt(total_benefits)  + parseInt(order.total);
                 });
-                this.total = this.total + (total_benefits/100)
+                this.total = this.total + (total_benefits*0.20)
             });
             let shippingsReturned=0;
             this.shippings.forEach(order=>{
                 if(order.returned){
-                    shippingsReturned = parseInt(shippingsReturned)  + parseInt(order.total)/100;
+                    shippingsReturned = parseInt(shippingsReturned)  + parseInt(order.total*0.20);
                 }
             });
             this.total = this.total - shippingsReturned
@@ -161,7 +161,7 @@ export default {
         totalBeneficio(){
             let noDevueltos = this.shippings.filter(el => el.returned == 0)
             const total = noDevueltos.reduce((acc,col)=> acc + parseInt(col.total),0);
-            return (total/100)
+            return (total*0.20)
         },
     }
 }

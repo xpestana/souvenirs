@@ -165,7 +165,9 @@
         </div>
     </template>
     <!-- checkout-area end -->
+    <input type="hidden" id="total_s" name="total_s" :value="form.total_s">
     <input type="hidden" id="total" name="total" :value="form.total">
+    <input type="hidden" id="shipping" name="shipping" :value="form.shipping">
     <input type="hidden" id="name_env" name="name_env" :value="form.name">
     <input type="hidden" id="phone_env" name="phone_env" :value="form.phone">
     <input type="hidden" id="email_env" name="email_env" :value="form.email">
@@ -253,6 +255,8 @@
                     cp: (this.hotel) ? this.hotel.cp : '',
                     data: [],
                     total: null,
+                    total_s: null,
+                    shipping: null,
                 },
                 checkTerminos:false,
                 mensajeInputs:''
@@ -405,7 +409,9 @@
                 let envio;
                 this.totalSouvenirs.precio > this.$page.props.settings.shippings ? envio=0 : envio=5;
                 this.totalSouvenirs.precio == 0 ? envio=0 : '';
-                this.form.total = this.totalActivities.precio+this.totalSouvenirs.precio+envio;
+                this.form.total = this.totalActivities.precio+this.totalSouvenirs.precio;
+                this.form.shipping = envio;
+                this.form.total_s = this.totalActivities.precio+this.totalSouvenirs.precio+envio;
                 return this.totalActivities.precio+this.totalSouvenirs.precio+envio;
             }
         }

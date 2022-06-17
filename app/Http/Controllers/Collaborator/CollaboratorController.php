@@ -346,7 +346,7 @@ class CollaboratorController extends Controller
 
     public function sales_hab($id){
         $hotels = auth()->user()->hotel->load('orders.shippings');    
-        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->with('hotel', 'shippings')->paginate(15);   
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status", "complete")->with('hotel', 'shippings')->paginate(15);   
         return Inertia::render('Collaborator/Dashboard/Lodging/TotalSales', compact('hotels','orders'));
     }
 

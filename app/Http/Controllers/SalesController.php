@@ -106,7 +106,9 @@ class SalesController extends Controller
         $phone = $request->phone_env;
         $hab = $request->hab_env;
         $observations = $request->observations_env;
-
+        $total_s = $request->total_s;
+        $shipping = $request->shipping;
+        
         // Se Rellenan los campos
         $miObj->setParameter("DS_MERCHANT_AMOUNT",$amount);
         $miObj->setParameter("DS_MERCHANT_CURRENCY",$moneda);
@@ -136,6 +138,8 @@ class SalesController extends Controller
                 'Ds_MerchantParameters' => $params,
                 'Ds_Signature' => $signature,
                 'status' => "pending",
+                'total_s' => $total_s,
+                'shipping' => $shipping,
             ]);
 
        $products = Cart::getContent();

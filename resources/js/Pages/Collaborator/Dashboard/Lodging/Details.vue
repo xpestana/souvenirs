@@ -43,7 +43,8 @@
                                         <td colspan="6" class="text-center">Propiedad sin ventas relacionadas</td>
                                     </template>
                                 </tr>
-                                <tr v-for="order in hotel.orders" :key="order.transaction_id">
+                                <template v-for="order in hotel.orders" :key="order.transaction_id">
+                                    <tr v-if="order.status == 'complete'">
                                     <td>{{ order.transaction_id }}</td>
                                     <template v-if="this.$page.props.auth.profile.gestor==1">
                                         <td>
@@ -66,6 +67,7 @@
                                     <td>{{ parseInt(order.total) }} €</td>
                                     <td>{{ ((parseInt(order.total))*0.20).toFixed(2) }} €</td>
                                 </tr>
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -101,7 +103,9 @@ export default {
         this.moment=Moment;
         var total_benefit = this.total_benefit;
         this.hotel.orders.forEach(function(order) {
-            total_benefit = total_benefit  + (parseInt(order.total)*0.20);
+            if (order.status == "complete") {
+                total_benefit = total_benefit  + (parseInt(order.total)*0.20);
+            }
         });
         this.total_benefit = total_benefit;
     },

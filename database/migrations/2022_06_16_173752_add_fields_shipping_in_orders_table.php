@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldRedsysInOrdersTable extends Migration
+class AddFieldsShippingInOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,8 @@ class AddFieldRedsysInOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('Ds_SignatureVersion',2000)->nullable();
-            $table->string('Ds_MerchantParameters',2000)->nullable();
-            $table->string('Ds_Signature',2000)->nullable();
-            $table->string('status')->nullable();
+            $table->decimal('total_s', 20, 2)->default(0);
+            $table->decimal('shipping', 20, 2)->default(0);
         });
     }
 
@@ -29,10 +27,8 @@ class AddFieldRedsysInOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('Ds_SignatureVersion');
-            $table->dropColumn('Ds_MerchantParameters');
-            $table->dropColumn('Ds_Signature');
-            $table->dropColumn('status');
+            $table->dropColumn('total_s');
+            $table->dropColumn('shipping');
         });
     }
 }

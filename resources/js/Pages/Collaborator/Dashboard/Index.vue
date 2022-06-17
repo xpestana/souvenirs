@@ -154,11 +154,16 @@
             hoteles(){
             const obj = this.hotels.map((col)=>{
                 var total_benefit = 0;
+                var i = 0;
                 col.orders.forEach(function(order) {
-                    total_benefit = parseInt(total_benefit)  + parseInt(order.total);
+                    if(order.status == "complete"){
+                        total_benefit = parseInt(total_benefit)  + parseInt(order.total);
+                        i++;
+                    }
+                    
                 });
                 this.total = this.total + (total_benefit *0.20)
-                this.orders = this.orders + (col.orders.length)
+                this.orders = this.orders + i
             return {
                 id : col.id,
                 calle: col.calle,
@@ -168,7 +173,7 @@
                 hab : col.hab,
                 zone : col.zone,
                 total_benefit : (total_benefit*0.20).toFixed(2),
-                total_orders : col.orders.length
+                total_orders : i
             }
             });
             return obj;
