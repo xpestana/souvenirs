@@ -631,10 +631,11 @@ class AdminController extends Controller
                 ->search($request->search)
                 ->email($request->search, 'Associate')
                 ->where('del',false)
-                ->with('hotel.orders.shippings')
+                ->with('orders.shippings')
                 ->orderBy('profiles.firstname','ASC')
                 ->paginate(10);
-        return Inertia::render('Admin/Associates/Index',compact('collaborators') );
+        $url = config('app.url');
+        return Inertia::render('Admin/Associates/Index',compact('collaborators','url') );
     }
 
     public function associates_create(Request $request)
@@ -694,7 +695,7 @@ class AdminController extends Controller
 
         Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
 
-    return  back()->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
+        return redirect()->route('admin.associates')->with(['id'=>$user->id, 'message' => "Successful registration", 'code' => 200, 'status' => 'success']);
     }
 
     public function associates_edit(User $user)
