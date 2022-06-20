@@ -19,15 +19,15 @@
 				<div class="col-12 d-md-inline-flex mt-1">
                     <div class="pr-md-4 text-md-center">
                         <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                        <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total }}€</p>
+                        <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.toFixed(2) }}€</p>
                     </div>
                     <div class="pr-md-4 text-md-center"> 
                         <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
                         <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ orders }}</p>
                     </div>
                     <div class="pr-md-4 text-md-center"> 
-                        <p class="font-weight-bolder text-muted d-inline d-md-block">Actividades registrados:</p>
-                        <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{collaborator.hotel.length}}</p>
+                        <p class="font-weight-bolder text-muted d-inline d-md-block">Actividades registradas:</p>
+                        <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0</p>
                     </div>
                     <div class="pr-md-4 text-md-center pt-1"> 
                             <a href="#" class="text-primary px-md-2" data-toggle="modal" :data-target="'#colaborador'+collaborator.id">Obtener QR</a>
@@ -124,28 +124,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr v-if="shippings.length == 0">
-                                    <td colspan="6" class="text-center">Propiedad sin ventas relacionadas</td>
-                                </tr> -->
-                                <tr>
-                                    <td class="text-center">transaction_id</td>
+                                <template v-if="collaborator.orders == 0">
+                                     <tr>
+                                        <td colspan="6" class="text-center">Sin ventas relacionadas</td>
+                                    </tr>     
+                                </template>
+                                <template v-else>
+                                    <tr v-for="order in partner" :key="order.id">
+                                    <td class="text-center">{{ order.transaction_id }}</td>
                                     <td class="text-center p-0">
-                                        <!-- <template v-if="order.returned == 1"> -->
+                                         <template v-if="order.returned == 1"> -->
                                             <select class="rounded py-1 mt-2" name="returned" id="returned">
                                                 <option value="1" selected>Si</option>
                                                 <option value="0">No</option>
                                             </select>
-                                        <!-- </template>
+                                         </template>
                                         <template v-else>
                                             <select class="rounded py-1 mt-2" name="returned" id="returned" @change="returned(order.id)">
                                                 <option value="1">Si</option>
                                                 <option value="0" selected>No</option>
                                             </select>
-                                        </template> -->
+                                        </template>
                                     </td>
-                                    <td class="text-center">email</td> 
-                                    <td class="text-center">Fecha</td>
-                                    <td class="text-center">100€</td>
+                                    <td class="text-center">{{ order.email }}</td> 
+                                    <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
+                                    <td class="text-center">{{ (parseInt(order.total)*0.20).toFixed(2) }} €</td>
                                     <td class="text-center px-0">
                                         <Link href="#" 
                                             class="btn btn-sm text-white d-inline p-0.5 mx-0" as="button" 
@@ -154,6 +157,7 @@
                                         </Link>
                                     </td>
                                 </tr>
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -162,7 +166,7 @@
             <div class="row mx-lg-4 pie justify-content-end my-4">
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
-                    <p><b>Tu beneficio es de 100€</b></p>
+                    <p><b>Tu beneficio es de {{ total.toFixed(2) }}€</b></p>
                 </div>
             </div>
     </section>
@@ -173,6 +177,8 @@
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import { Link } from '@inertiajs/inertia-vue3'
 import QRCodeVue3 from "qrcode-vue3"
+import Moment from 'moment'
+
 export default {
 	layout:Layout,
 	components:{
@@ -186,27 +192,27 @@ export default {
 	data(){
             return{
                 total: 0,
-                orders: 0
+                orders: 0,
+                moment:null
             }
         },
 	computed:{
-            hoteles(){
-            const obj = this.collaborator.hotel.map((col)=>{
+            partner(){
+            const obj = this.collaborator.orders.map((col)=>{
+                console.log(col);
                 var total_orders = 0;
                 var total_benefits = 0;
-				this.orders = this.orders + col.orders.length;
-				col.orders.forEach(function(order) {
+				this.orders = this.orders + this.collaborator.orders.length;
+				this.collaborator.orders.forEach(function(order) {
                     total_benefits = parseInt(total_benefits)  + parseInt(order.total);
                 });
-                this.total = this.total + (total_benefits/100)
+                this.total = this.total + (total_benefits*0.20)
             return {
                 id : col.id,
-                calle: col.calle,
-                planta: col.planta,
-                image : col.image,
-                type : col.type,
-                total_orders : col.orders.length,
-                total_benefits: total_benefits/100
+                transaction_id : col.transaction_id,
+                email : col.shippings[0].email,
+                created_at : col.created_at,
+                total: col.total
             }
             });
             return obj;
@@ -214,6 +220,7 @@ export default {
 
         },
 	created(){
+        this.moment=Moment;
 		console.log(this.collaborator);
 	},
 	methods:{

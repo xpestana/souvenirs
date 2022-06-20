@@ -698,7 +698,7 @@ class AdminController extends Controller
 
     public function associate_details($id)
     {
-        $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
+        $collaborator = User::find($id)->load('profile','orders.shippings');
         $url = config('app.url');
         return Inertia::render('Admin/Associates/Details',compact('collaborator','url'));
     }
