@@ -1,6 +1,6 @@
 <template>
 <!-- <form @submit.prevent="submit" class=" mt-10">
-    <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="E-mail*" v-model="form.email" required/>
+    <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" v-model="form.email" required/>
     <BreezeInput type="text" class="form-control my-2 py-4" autocomplete="on" placeholder="Confirmar E-mail" v-model="form.email_confirmation" required/>
     <BreezeInput type="password" class="form-control my-2 py-4" autocomplete="off" placeholder="Contraseña" v-model="form.password" required/>
     <button type="submit" class="btn btn-primary mt-4 w-100 rounded-pill py-3 register_btn" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Regístrate ahora</button>
@@ -8,12 +8,87 @@
 </form>     -->
     <section id="collaborator-register">
          <div class="container-fluid flex min-h-screen bg-collaborator">
-            <div class="row m-auto justify-content-center">
-                <div class="register-hicitty col-12 col-md-6">
-                    <div class="hicitty-logo">
-                        <img class="w-72 mx-auto" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="" @click="redirect()">
+            <div class="row m-auto justify-content-around">
+                <div class="register-hicitty col-12 col-lg-5 lg:flex flex-column pt-8 lg:pt-0">
+                    <div class="hicitty-logo mt-auto">
+                        <img class="w-86 mx-auto" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="" @click="redirect()">
                     </div>
-                    <h1 class="text-white font-weight-bolder text-2xl text-center">We only win if you win</h1>
+                    <h1 class="text-white font-weight-bolder text-3xl text-center mb-6 lg:mb-0">We only win if you win</h1>
+                    <div class="hicitty-social hidden lg:block my-8 flex justify-center mx-auto">
+                        <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
+                        <img class="d-inline mr-3 icon" src="/vendor_asset/img/collaborator/itgicon.svg" alt="">
+                        </a>
+                        <a target="_blank" href="https://www.linkedin.com/company/kognos-vb/" class="">
+                        <img class="d-inline mx-3 h-8 icon" src="/vendor_asset/img/collaborator/linkedin.svg" alt="">
+                        </a>
+                        <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
+                        <img class="d-inline mx-3 h-8 icon" src="/vendor_asset/img/collaborator/wticon.svg" alt="">
+                        </a>
+                    </div>
+                    <div class="hicitty-info hidden lg:block shadow-lg rounded-2xl text-center p-2 rounded-xl bg-white mb-auto w-3/4 mx-auto">
+                        <h1 class="text-2xl font-weight-bolder text-azulc">?</h1>
+                        <p class="text-azulc text-base">Need help?</p>
+                        <p class="text-azulc text-sm">
+                            You will find specialized attention<br>
+                            calling the following phone:
+                        </p>
+                        <p class="text-azulc text-base"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
+                    </div>
+                </div>
+                <div class="register-form-collaborator col-12 col-lg-6 bg-white shadow-lg rounded-xl">
+                    <div class="form-card bg-white p-4 lg:p-8 rounded-xl">
+                        <form @submit.prevent="submit" class=" mt-10">
+                            <h1 class="text-3xl lg:text-5xl mb-2 font-weight-bolder">Sign up and start earning</h1>
+                            <div class="my-1">
+                                <label class="font-weight-bolder">Email</label>
+                                <div class="relative w-100 collaborator-box">
+                                    <i class="fas fa-envelope absolute inset-y-1/3 px-2"></i>
+                                    <input type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Email...." autocomplete="on" v-model="form.email" required>
+                                </div>
+                            </div>
+                            <div class="my-1">
+                                <label class="font-weight-bolder">Confirm Email</label>
+                                <div class="relative w-100 collaborator-box">
+                                    <i class="fas fa-envelope absolute inset-y-1/3 px-2"></i>
+                                    <input type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Confirm Email...." v-model="form.email_confirmation" required>
+                                </div>
+                            </div>
+                            <div class="my-1">
+                                <label class="font-weight-bolder">Password</label>
+                                <div class="relative w-100 collaborator-box">
+                                    <i class="fas fa-key absolute inset-y-1/3 px-2"></i>
+                                    <i class="far fa-eye cursor-pointer absolute right-0 inset-y-1/3 px-3" v-on:click="showPass('password')"></i>
+                                    <input type="password" class="collaborator-input bg-light w-100 rounded py-1 pl-8" id="password" placeholder="********" v-model="form.password" required>
+                                </div>
+                            </div>
+                            <div class="my-2">
+                                <input type="checkbox" class="border mr-1 rounded-lg">
+                                <p class="inline text-sm">
+                                    I agree with the
+                                    <a class="d-inline text-xs text-orangec font-weight-bolder" target="_blank" href="/politicas/terminosycondiciones">
+                                    Terms of Service
+                                    </a> and
+                                    <a class="d-inline text-xs text-orangec font-weight-bolder" target="_blank" href="/politicas/terminosycondiciones">
+                                    privacy policies
+                                    </a>
+                                </p>
+                            </div>
+                            <ValidationErrors class="my-3" />
+                            <div class="my-3">
+                                <button type="submit" :href="route('collaborator.register')" class="btn btn-collaborator text-xl w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                    <p class="text-xl mb-0">Check in</p>
+                                </button>
+                            </div>
+                            <div class="my-2 text-center">
+                                <p class="inline-block text-muted form-collaborator-text relative">or if you already have an account</p>
+                            </div>
+                            <div class="my-3">
+                                <Link :href="route('login')" class="btn btn-outline-collaborator text-xl w-100">Log in</Link>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="register-mobile-info lg:hidden my-6">
                     <div class="hicitty-social my-8 flex justify-center">
                         <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
                         <img class="d-inline mr-3 icon" src="/vendor_asset/img/collaborator/itgicon.svg" alt="">
@@ -25,7 +100,7 @@
                         <img class="d-inline mx-3 h-8 icon" src="/vendor_asset/img/collaborator/wticon.svg" alt="">
                         </a>
                     </div>
-                    <div class="hicitty-info shadow-lg rounded-2xl text-center p-2 rounded-xl bg-white">
+                    <div class="hicitty-info shadow-lg rounded-2xl text-center p-2 rounded-xl bg-white mb-auto mx-auto">
                         <h1 class="text-2xl font-weight-bolder text-azulc">?</h1>
                         <p class="text-azulc text-base">Need help?</p>
                         <p class="text-azulc text-sm">
@@ -33,11 +108,6 @@
                             calling the following phone:
                         </p>
                         <p class="text-azulc text-base"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
-                    </div>
-                </div>
-                <div class="register-form col-12 col-md-6 bg-white">
-                    <div class="form-card bg-white p-8 rounded-xl">
-                        <h1 class="text-3xl my-2">Sign up and start earning</h1>
                     </div>
                 </div>
             </div>
@@ -77,50 +147,49 @@
             },
             redirect(){
                 this.$inertia.get(route('collaborator.home'))
-            }
+            },
+            showPass: function (id){
+                let x = document.getElementById(id);
+                x.type = x.type == 'password' ? 'text' : 'password';            
+            },
         }
     }
 </script>
 
 <style scoped>
-    .bg-collaborator{
-        background-color:#a0cae1;
+.register-form-collaborator .form-collaborator-text::after,
+.register-form-collaborator .form-collaborator-text::before{
+    content: '';
+    width: 40%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    background-color: currentColor;
+}
+
+.register-form-collaborator .form-collaborator-text::before{
+    left:-45%;
+}
+.register-form-collaborator .form-collaborator-text::after{
+    right:-45%;
+}
+
+@media (max-width: 767px){
+    .register-form-collaborator .form-collaborator-text::after,
+    .register-form-collaborator .form-collaborator-text::before{
+        content: '';
+        width: 10%;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        background-color: currentColor;
     }
-    .up{
-        display: flex;
-        align-items: center;
-        height: 100vh;
-        background-color: #fff !important;
+
+    .register-form-collaborator .form-collaborator-text::before{
+        left:-5%;
     }
-    .caja-info p {
-        border-radius: 30px;
-        border: 1px solid #70b3c6;
-        display: inline-block;
-        padding: 15px;
-        color:#70b3c6;
-        line-height: 1.5;
-        font-size: 16px;
+    .register-form-collaborator .form-collaborator-text::after{
+        right:-5%;
     }
-    .title{
-        font-size: 33px;
-        font-weight: 600;
-    }
-    .degrad{
-        background-image: linear-gradient(175deg, #cff3fb 0, #b7e3ee 25%, #9dd2e1 50%, #82c1d4 75%, #69b2c9 100%);
-    }
-    .title_white{
-        font-size: 30px;
-        font-weight: 600;
-    }
-    .register_btn{
-        font-size: 20px;
-    }
-    @media (max-width:992px){
-        .up{
-            height: 100%;
-        }
-        .title_white{
-            font-size: 20px;
-        }
-    }
+}
 </style>

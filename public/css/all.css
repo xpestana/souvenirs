@@ -311,6 +311,28 @@ body .modal-backdrop{
   color:#fff;
   border: none;
 }
+.collaborator-box i,
+.collaborator-input::placeholder{
+    color: #bababa;
+}
+.text-orangec{
+    color: #FF9C06;
+}
+.collaborator-input{
+    border: 2px solid #bababa;
+}
+.collaborator-input:focus{
+    border: 2px solid #a0cae1;
+    --tw-ring-shadow: none;
+}
+.collaborator-input:hover{
+    border: 2px solid #a0cae1;
+    outline: none !important;
+    --tw-ring-shadow: none;
+}
+.bg-collaborator{
+    background-color:#a0cae1;
+}
 
 .carousel__pagination-button {
 background-color: #cfcfcf !important;
