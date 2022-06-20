@@ -13,9 +13,10 @@ use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\User;
 use App\Models\hotel;
+use App\Models\RedsysApi;
 use Stripe\Stripe;
 use Inertia\Inertia;
-use App\Models\RedsysAPI;
+
 use Redirect;
 use Cart;
 
@@ -87,7 +88,7 @@ class SalesController extends Controller
 
         }
         
-        $miObj = new RedsysAPI();
+        $miObj = new RedsysApi();
 
         // Valores de entrada que no hemos cmbiado para ningun ejemplo
         $fuc="097282966";
