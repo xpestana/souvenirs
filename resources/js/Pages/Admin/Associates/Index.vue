@@ -137,7 +137,7 @@ import Paginator from '@/Components/Paginator.vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import QRCodeVue3 from "qrcode-vue3"
 export default {
-	layout:Layout,
+	layout:Layout, 
 	components: {
 		Paginator,
 		Link,
