@@ -84,12 +84,7 @@ class CollaboratorController extends Controller
         $request->validate([
             'name' => 'required|string',
             'phone' => 'required|string',
-            'razon' => 'required|string',
-            'nif' => 'required|string',
-            'id' => 'required|string',
-            'city' => 'required|string',
-            'cp' => 'required|string',
-            'address' => 'required|string',
+            'gestor' => 'required|string',
         ]);
 
         $user = profile::create([
