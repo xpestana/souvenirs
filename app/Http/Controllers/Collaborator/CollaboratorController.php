@@ -32,7 +32,7 @@ class CollaboratorController extends Controller
             return Redirect::route('collaborator.data');
         }
         /*******************************/
-        
+        dd(step());
         $hotels = auth()->user()->hotel->load('orders.shippings');
         $url = config('app.url');
         return Inertia::render('Collaborator/Dashboard/Index', compact('hotels','url'));
