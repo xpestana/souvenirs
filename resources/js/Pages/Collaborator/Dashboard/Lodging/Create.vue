@@ -1,5 +1,5 @@
 <template>
-	<div class="container mt-4 p-10 pb-4">
+	<div class="container mt-4 p-6">
 		<ModalCookies/>
 		<form @submit.prevent="submit">
 		<div class="row justify-content-center">
