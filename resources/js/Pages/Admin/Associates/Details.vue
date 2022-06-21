@@ -1,33 +1,33 @@
 <template>
-	<div class="container px-lg-5 mt-4">	
-		<section id="colaborador">
-			<div class="row">
-				<div class="col-3 ">
-					<Link :href="route('admin.associates')"><i class="fas fa-angle-left bg-info text-white px-2 py-1"></i></Link>	
-				</div>
-			</div>
-			<div class="row ficha mx-lg-4 my-4 p-2 bg-light border">
+    <div class="container px-lg-5 mt-4">    
+        <section id="colaborador">
+            <div class="row">
+                <div class="col-3 ">
+                    <Link :href="route('admin.associates')"><i class="fas fa-angle-left bg-info text-white px-2 py-1"></i></Link>   
+                </div>
+            </div>
+            <div class="row ficha mx-lg-4 my-4 p-2 bg-light border">
                 <div class="col-12 d-md-flex justify-content-md-between">
                     <div class="">
-						<h1 class="pt-1 pb-2 font-weight-bolder text-center text-md-left">{{ collaborator.profile.firstname}}</h1>	
-					</div>
+                        <h1 class="pt-1 pb-2 font-weight-bolder text-center text-md-left">{{ collaborator.profile.firstname}}</h1>  
+                    </div>
                     <div class="mt-md-3 d-flex flex-column flex-md-row justify-content-center justify-content-md-between">
                         <p class="font-weight-bolder text-muted mt-md-3 d-md-inline mx-auto mx-md-4">{{collaborator.email}}</p>
                         <Link :href="route('admin.associates.edit',collaborator.id)" class="btn btn-sm btn-secondary py-0 px-4 mt-2 mt-md-3 mx-auto">Editar</Link>
                     </div>
-				</div>
-				<div class="col-12 d-md-inline-flex mt-1">
+                </div>
+                <div class="col-12 d-md-inline-flex mt-1">
                     <div class="pr-md-4 text-md-center">
                         <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-                        <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total }}€</p>
+                        <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.toFixed(2) }}€</p>
                     </div>
                     <div class="pr-md-4 text-md-center"> 
                         <p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
                         <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ orders }}</p>
                     </div>
                     <div class="pr-md-4 text-md-center"> 
-                        <p class="font-weight-bolder text-muted d-inline d-md-block">Actividades registrados:</p>
-                        <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{collaborator.hotel.length}}</p>
+                        <p class="font-weight-bolder text-muted d-inline d-md-block">Actividades registradas:</p>
+                        <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">0</p>
                     </div>
                     <div class="pr-md-4 text-md-center pt-1"> 
                             <a href="#" class="text-primary px-md-2" data-toggle="modal" :data-target="'#colaborador'+collaborator.id">Obtener QR</a>
@@ -88,8 +88,8 @@
                     <div class="pr-md-4 text-md-center"> 
                         <p class="text-muted d-inline d-md-block pl-md-2 pl-md-0">{{collaborator.profile.city}}</p>
                     </div>
-				</div>
-			</div>
+                </div>
+            </div>
             <div class="row mt-3">
                 <div class="col-12 text-center">
                     <button class="btn btn-lg btn-outline-azulc d-md-inline px-5 py-1">
@@ -100,10 +100,10 @@
                     </button>
                 </div>
             </div>
-		</section>
-	</div>
-	<div class="container mt-5 px-0 px-md-4">
-		<section id="tabla">
+        </section>
+    </div>
+    <div class="container mt-5 px-0 px-md-4">
+        <section id="tabla">
         <div class="row cabeza mx-lg-4">
                 <div class="col-12">
                     <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-3xl"><strong>Ventas de colaboración</strong></h1>
@@ -124,28 +124,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr v-if="shippings.length == 0">
-                                    <td colspan="6" class="text-center">Propiedad sin ventas relacionadas</td>
-                                </tr> -->
-                                <tr>
-                                    <td class="text-center">transaction_id</td>
+                                <template v-if="collaborator.orders == 0">
+                                     <tr>
+                                        <td colspan="6" class="text-center">Sin ventas relacionadas</td>
+                                    </tr>     
+                                </template>
+                                <template v-else>
+                                    <tr v-for="order in partner" :key="order.id">
+                                    <td class="text-center">{{ order.transaction_id }}</td>
                                     <td class="text-center p-0">
-                                        <!-- <template v-if="order.returned == 1"> -->
+                                         <template v-if="order.returned == 1"> -->
                                             <select class="rounded py-1 mt-2" name="returned" id="returned">
                                                 <option value="1" selected>Si</option>
                                                 <option value="0">No</option>
                                             </select>
-                                        <!-- </template>
+                                         </template>
                                         <template v-else>
                                             <select class="rounded py-1 mt-2" name="returned" id="returned" @change="returned(order.id)">
                                                 <option value="1">Si</option>
                                                 <option value="0" selected>No</option>
                                             </select>
-                                        </template> -->
+                                        </template>
                                     </td>
-                                    <td class="text-center">email</td> 
-                                    <td class="text-center">Fecha</td>
-                                    <td class="text-center">100€</td>
+                                    <td class="text-center">{{ order.email }}</td> 
+                                    <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
+                                    <td class="text-center">{{ (parseInt(order.total)*0.20).toFixed(2) }} €</td>
                                     <td class="text-center px-0">
                                         <Link href="#" 
                                             class="btn btn-sm text-white d-inline p-0.5 mx-0" as="button" 
@@ -154,6 +157,7 @@
                                         </Link>
                                     </td>
                                 </tr>
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -162,80 +166,84 @@
             <div class="row mx-lg-4 pie justify-content-end my-4">
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
-                    <p><b>Tu beneficio es de 100€</b></p>
+                    <p><b>Tu beneficio es de {{ total.toFixed(2) }}€</b></p>
                 </div>
             </div>
     </section>
-	</div>  
-
+    </div>  
+    
 </template>
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import { Link } from '@inertiajs/inertia-vue3'
 import QRCodeVue3 from "qrcode-vue3"
+import Moment from 'moment'
+
 export default {
-	layout:Layout,
-	components:{
-		Link,
-		QRCodeVue3
-	},
-	props: {
-		collaborator: Object,
-		url:String
-	},
-	data(){
+    layout:Layout,
+    components:{
+        Link,
+        QRCodeVue3
+    },
+    props: {
+        collaborator: Object,
+        url:String
+    },
+    data(){
             return{
                 total: 0,
-                orders: 0
+                orders: 0,
+                moment:null
             }
         },
-	computed:{
-            hoteles(){
-            const obj = this.collaborator.hotel.map((col)=>{
+    computed:{
+            partner(){
+            const obj = this.collaborator.orders.map((col)=>{
+                console.log(col);
                 var total_orders = 0;
                 var total_benefits = 0;
-				this.orders = this.orders + col.orders.length;
-				col.orders.forEach(function(order) {
+                this.orders = this.orders + this.collaborator.orders.length;
+                this.collaborator.orders.forEach(function(order) {
                     total_benefits = parseInt(total_benefits)  + parseInt(order.total);
                 });
-                this.total = this.total + (total_benefits/100)
+                this.total = this.total + (total_benefits*0.20)
             return {
                 id : col.id,
-                calle: col.calle,
-                planta: col.planta,
-                image : col.image,
-                type : col.type,
-                total_orders : col.orders.length,
-                total_benefits: total_benefits/100
+                transaction_id : col.transaction_id,
+                email : col.shippings[0].email,
+                created_at : col.created_at,
+                total: col.total
             }
             });
             return obj;
         },
+
         },
-	created(){
-		console.log(this.collaborator);
-	},
-	methods:{
-		souvenirs_btn(id,name){
-		var urlItem = $('.souvenirs_img'+id).attr('src');
-		axios({
-				url: urlItem,
-				method: 'GET',
-				responseType: 'blob'
-			})
-			.then((response) => {
-					const url = window.URL
-						.createObjectURL(new Blob([response.data]));
-					console.log(url);
-					const link = document.createElement('a');
-					link.href = url;
-					link.setAttribute('download',`${name}.png`);
-					document.body.appendChild(link);
-					link.click();
-					document.body.removeChild(link);
-			})                
-		}
-	}
+    created(){
+        this.moment=Moment;
+        console.log(this.collaborator);
+    },
+    methods:{
+        souvenirs_btn(id,name){
+        var urlItem = $('.souvenirs_img'+id).attr('src');
+        axios({
+                url: urlItem,
+                method: 'GET',
+                responseType: 'blob'
+            })
+            .then((response) => {
+                    const url = window.URL
+                        .createObjectURL(new Blob([response.data]));
+                    console.log(url);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download',`${name}.png`);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+            })                
+        }
+    }
 }
 </script>
 <style scoped>
@@ -243,10 +251,10 @@ export default {
     width: 100% !important;
 }
 #colaborador .ficha h1{
-	font-size: 30px;
+    font-size: 30px;
 }
 #colaborador .ficha{
-	border: 1px solid #d5d5d5;
+    border: 1px solid #d5d5d5;
 }
 #info h4{
     line-height: 0.5;
@@ -259,12 +267,12 @@ export default {
     max-height: 100px;
 }
 #alojamientos .tarjeta h1{
-	font-size: 20px;
+    font-size: 20px;
 }
 @media (max-width:767px)
 {
-	#alojamientos .tarjeta img{
-		min-height: 210px;
-	}
+    #alojamientos .tarjeta img{
+        min-height: 210px;
+    }
 }
 </style>
