@@ -226,7 +226,7 @@ Version: 1.0;
     /*----------------------------
         Nice Select Activation
     ------------------------------ */
-    $('select').niceSelect();
+    // $('select').niceSelect();
     
     /*----------------------------
         Price Slider Activation
@@ -287,4 +287,13 @@ Version: 1.0;
             }
         });
     }
+    /*----------------------------------------------------
+        hide collapse sidebar collaborators
+    -----------------------------------------------------*/
+    $(document).ready(function () {
+        $('.sidebarCollapse').on('click', function () {
+            $('#collaborator-sidebar').toggleClass('active');
+            $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
+        });
+    });
 })(jQuery);

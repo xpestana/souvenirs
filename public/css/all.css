@@ -334,6 +334,22 @@ body .modal-backdrop{
     background-color:#a0cae1;
 }
 
+#collaborator-data select{
+  color: #bababa;
+  font-weight: 500;
+}
+.collaborator-select{
+    border: 2px solid #bababa;
+}
+.collaborator-select:focus{
+    border: 2px solid #a0cae1;
+    --tw-ring-shadow: none;
+}
+.collaborator-select:hover{
+    border: 2px solid #a0cae1;
+    outline: none !important;
+    --tw-ring-shadow: none;
+}
 .carousel__pagination-button {
 background-color: #cfcfcf !important;
 border-radius: 20px  !important;
@@ -371,6 +387,50 @@ background-color: #86bbdc !important;
 #slide .carousel__prev{
     margin-top:95px;
 }
+}
+
+#collaborator-sidebar {
+  transition: all 0.3s;
+}
+#collaborator-sidebar ul li a {
+  display: block;
+}
+#collaborator-sidebar ul li a:hover,
+#collaborator-sidebar ul li a:hover > i{ 
+  color: #000 !important;
+}
+a[data-toggle="collapse"] {
+  position: relative;
+}
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+
+
+@media (max-width: 1024px) {
+#content {
+  width:100%;
+}
+  #collaborator-sidebar {
+      left: -500px !important;
+  }
+  #collaborator-sidebar.active {
+      left: 0 !important;
+  }
+}
+
+.collaborator-dashboard-overlay {
+  height: 100%;
+  position: fixed;
+  top:0;
+  width: 100%;
+  background-color: #0000008a;
+  z-index: 2;
 }
 /*--------------------------------------------------
 Template Name: Hopsop;

@@ -1,98 +1,63 @@
 <template>
-	<section class="bg-register" style="background-image: url('/vendor_asset/img/skyline.png');">
-		<div class="degradado">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-6 card  tab-content dashboard-content shadow-lg my-5">
-						<form @submit.prevent="submit" class="mt -4">
-							<notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
-							<div class="row">
-								<div class="col-md-7 mb-2">
-									<h3>Personal information</h3>
-									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.name" autocomplete="name" placeholder="Contact person *" required/>
-									<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.phone" autocomplete="phone" placeholder="Phone number *" required/>
-									<select id="gestor" v-model="form.gestor" class="form-control w-100 select mb-2 pb-0" required>
-										<option value="3">Eres gestor de:</option>
-										<option value="1">Gestor de alojamientos turísticos</option>
-										<option value="2">Proveedor de actividades</option>
-									</select>
-								</div>
-								<div class="col-md-5 d-flex">
-									<img src="/vendor_asset/img/logo/hilogo.png" class="my-2 my-md-auto mx-auto w-40 md:w-56">
-								</div>
-								<div class="col-md-12">
-									<h3>Tax data</h3>
-									<div class="row justify-content-between">
-										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.razon" autocomplete="razon" placeholder="Business name *" required/>
-										</div>
-										<div class="col-md-6">
-											<select name="nif" id="nif" v-model="form.nif" class="form-control w-100 select" required>
-												<option value="NIF Español">NIF Spanish</option>
-												<option value="Intracommunity VAT number">Intracommunity VAT number</option>
-												<option value="Passport">Passport</option>
-												<option value="Official document country of residence">Official document country of residence</option>
-												<option value="Residence certificate">Residence certificate</option>
-												<option value="Other supporting document">Other supporting document</option>
-												<option value="Not registered">Not registered</option>
-											</select>
-										</div>
-										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.id" autocomplete="id" placeholder="Fiscal Identifier Number *" required/>
-										</div>
-										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.country" autocomplete="country" placeholder="Country *" value="Spain" readonly="" required/>
-										</div>
-										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.city" autocomplete="city" placeholder="Town *" required/>
-										</div>
-										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.cp" autocomplete="cp" placeholder="Postal Code *" required/>
-										</div>
-										<div class="col-md-6">
-											<BreezeInput  type="text" class="form-control w-100 mb-2 py-3" v-model="form.address" autocomplete="address" placeholder="Fiscal address *" required/>
-										</div>
-										<div class="w-100">
-											<ValidationErrors class="my-3" />
-										</div>
-										<div class="col-12 mt-3 ">
-											<div v-if="status" class="mb-4 font-medium text-sm text-danger mt-4">
-												{{ status }}
-											</div>	
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row justify-content-between">
-								<div class="col-12 col-md-5">
-									<button type="button" @click="deleteUser()" class="btn btn-primary  rounded-pill w-100 md:w-3/4 py-0 mt-3">
-										Volver
-									</button>
-								</div>
-								<div class="col-12 col-md-5">
-									<button type="submit" class="btn btn-primary  rounded-pill w-100 md:w-3/4 py-0 mt-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-										Crear cuenta
-									</button>
-								</div>
-							</div>
-						</form>
-					</div>
+<notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
+	<section id="collaborator-data">
+         <div class="container-fluid flex flex-column justify-center content-center min-h-screen bg-collaborator py-8 lg:py-4">
+			<div class="row  justify-content-center mx-auto mt-auto lg:w-2/5">
+				<div class="data-logo col-12 flex flex-column">
+					<img class="w-48 md:w-36 mx-auto" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="" @click="redirect()">
+				</div>
+				<div class="data-presentation col-12 text-center px-0">
+					<h1 class="text-3xl md:text-4xl text-white my-2">Thank you for registering with HiCitty</h1>
+					<p class="mb-4 lg:mb-0 mt-4 text-sm md:text-base text-white">
+						We need the following information to set up your profile so you can start earning with us.
+					</p>
 				</div>
 			</div>
-		</div>
-	</section>
+            <div class="row justify-content-center mx-auto mb-auto lg:w-1/3 mb-8 lg:mb-0">
+                <div class="data-form-collaborator col-12 bg-white shadow-lg rounded-xl">
+                    <div class="form-card bg-white p-2 md:p-4 lg:p-8 rounded-xl">
+                        <form @submit.prevent="submit" class=" mt-10">
+                            <div class="my-2">
+                                <label class="font-weight-bolder">Name</label>
+                                <div class="relative w-100 collaborator-box">
+                                    <i class="fas fa-user absolute inset-y-1/3 px-2"></i>
+                                    <input type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Name...." autocomplete="on" v-model="form.name" required>
+                                </div>
+                            </div>
+                            <div class="my-2">
+                                <label class="font-weight-bolder">Contact number</label>
+                                <div class="relative w-100 collaborator-box">
+									<i class="fas fa-phone-alt absolute inset-y-1/3 px-2"></i>
+                                    <input type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Telephone...." v-model="form.phone" required>
+                                </div>
+                            </div>
+                            <div class="my-2">
+                                <label class="font-weight-bolder">Type of collaborator</label>
+								<select id="gestor" v-model="form.gestor" class="collaborator-select bg-light w-100 rounded py-1" required>
+									<option value="">Type of collaborator...</option>
+									<option value="1">Tourist accommodation manager</option>
+									<option value="2">Activity provider</option>
+								</select>
+                            </div>
+                            <ValidationErrors class="my-3" />
+                            <div class="my-4">
+                                <button type="submit" :href="route('collaborator.register')" class="btn btn-collaborator text-xl w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                    <p class="text-xl mb-0">To accept</p>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </section>		
 </template>
 <script>
-	import BreezeInput from '@/Components/Input.vue'
-	import BreezeButton from '@/Components/Button.vue'
 	import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
 	import Notify from '@/Layouts/Components/Toast.vue'
-	import { Inertia } from '@inertiajs/inertia'
-
+	import { Inertia } from '@inertiajs/inertia'  
 	export default {
 		components:{
-			BreezeInput,
-			BreezeButton,
 			ValidationErrors,
 			Notify,
 		},
@@ -101,7 +66,7 @@
 				form: this.$inertia.form({
 					name: null,
 					phone: null,
-					gestor: "3",
+					gestor: "",
 					razon: null,
 					nif: 'NIF Español',
 					id: null,
@@ -157,24 +122,6 @@
 		}
 	}
 </script>
-<style scope>
-	.degradado {
-		background: linear-gradient(180deg, rgb(255 255 255 / 88%) 0%, rgb(0 212 255 / 0%) 30%);
-		display:flex;
-	}
-	form .select{
-		font-size: 1.1em;
-		color: #6c757d;
-		padding-top: 0px;
-		padding-left: 10px;
-	}
-	body{
-		background-color: #6fb2c6;
-	}
-	.bg-register{
-		width: 100%;
-		background-position: bottom left;
-		background-size: contain;
-		background-repeat: no-repeat;
-	}
+<style scoped>
+
 </style>

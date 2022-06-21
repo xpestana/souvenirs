@@ -82,4 +82,8 @@ export default {
 .animated-icon1.open span:nth-child(3) {
     top: 12px !important;
 }
+.navbar-light .navbar-toggler {
+    color: rgba(0, 0, 0, 0.5);
+    border-color:#ff000000; 
+}
 </style>
