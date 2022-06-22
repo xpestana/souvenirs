@@ -298,8 +298,16 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::get('/hab-ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
     Route::get('/ventas/totales/{id}', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
 
-    
+
+
 });
+
+/*Shipping*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/envio')->group(function () {
+    Route::get('/', [CollaboratorController::class, 'create_shipping'])->name('collaborator.shipping.index');
+    Route::post('/store', [CollaboratorController::class, 'store_shipping'])->name('collaborator.shipping.store');
+});
+
 /*Dashboard asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(function () {
     
@@ -307,6 +315,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(func
     Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
     Route::get('/colaboraciones', [AssociateController::class, 'collaborations'])->name('associates.collaborations');  
 });
+
 /*Ajustes*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
     Route::get('/ajustes/', [ProfileCollaboratorController::class, 'index'])->name('collaborator.ajustes.index');  

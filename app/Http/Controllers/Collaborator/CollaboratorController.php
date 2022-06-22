@@ -7,6 +7,7 @@ use App\Models\hotel;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\profile;
+use App\Models\CollaboratorShipping;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Providers\RouteServiceProvider;
@@ -349,5 +350,65 @@ class CollaboratorController extends Controller
     {   
         $hotel = hotel::find($hab)->load('orders.shippings');
         return Inertia::render('Collaborator/Dashboard/Lodging/Details', compact('hotel'));
+    }
+
+    // Shopping
+
+    public function create_shipping () {
+        $collaboratorShippings = auth()->user()->collaboratorShippings;
+        if ($collaboratorShippings->count() > 0) {
+            $collaboratorShipping = $collaboratorShippings[0];
+        } else {
+            $collaboratorShipping = [
+                'document' => '',
+                'businessName' => '',
+                'contactPerson' => '',
+                'phone' => '',
+                'email' => '',
+                'deliveryAddress' => '',
+                'province' => '',
+                'city' => '',
+            ];
+        }
+        return Inertia::render('Collaborator/Dashboard/Shipping', compact('collaboratorShipping'));
+    }
+
+    public function store_shipping(Request $request){
+        $request->validate([
+            'document' => 'required|string',
+            'businessName' => 'required|string',
+            'contactPerson' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|string',
+            'deliveryAddress' => 'required|string',
+            'province' => 'required|string',
+            'city' => 'required|string',
+        ]);
+        $collaboratorShipping = CollaboratorShipping::where('user_id', auth()->user()->id)->first();
+        if ($collaboratorShipping) {
+            $collaboratorShipping->document = $request->document;
+            $collaboratorShipping->businessName = $request->businessName;
+            $collaboratorShipping->contactPerson = $request->contactPerson;
+            $collaboratorShipping->phone = $request->phone;
+            $collaboratorShipping->email = $request->email;
+            $collaboratorShipping->deliveryAddress = $request->deliveryAddress;
+            $collaboratorShipping->province = $request->province;
+            $collaboratorShipping->city = $request->city;
+            $collaboratorShipping->save();
+        } else {
+            $collaboratorShipping = CollaboratorShipping::create([
+                'user_id' => auth()->user()->id,
+                'document' => $request->email,
+                'businessName' => $request->businessName,
+                'contactPerson' => $request->businessName,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'deliveryAddress' => $request->deliveryAddress,
+                'province' => $request->province,
+                'city' => $request->city,
+            ]);
+        }
+        $id = mt_Rand(1000000, 9999999);
+        return Redirect::route('collaborator.shipping.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
     }
 }
