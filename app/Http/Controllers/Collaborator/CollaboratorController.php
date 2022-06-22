@@ -381,6 +381,7 @@ class CollaboratorController extends Controller
             'phone' => 'required|string',
             'email' => 'required|string',
             'deliveryAddress' => 'required|string',
+            'postalCode' => 'required|string',
             'province' => 'required|string',
             'city' => 'required|string',
         ]);
@@ -394,6 +395,7 @@ class CollaboratorController extends Controller
             $collaboratorShipping->deliveryAddress = $request->deliveryAddress;
             $collaboratorShipping->province = $request->province;
             $collaboratorShipping->city = $request->city;
+            $collaboratorShipping->postalCode = $request->postalCode;
             $collaboratorShipping->save();
         } else {
             $collaboratorShipping = CollaboratorShipping::create([
@@ -405,6 +407,7 @@ class CollaboratorController extends Controller
                 'email' => $request->email,
                 'deliveryAddress' => $request->deliveryAddress,
                 'province' => $request->province,
+                'postalCode' => $request->postalCode,
                 'city' => $request->city,
             ]);
         }

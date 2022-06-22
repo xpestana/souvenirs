@@ -6,57 +6,107 @@
             </div>
         </div>
         <!--Formulario INFORMACION PERSONAL -->
+        {{ errorsKey }}
         <form @submit.prevent="submit()">
-            <div class="row px-2 mt-5 justify-content-center justify-content-md-start">
+            <div class="row mt-5 justify-content-center justify-content-md-start">
                 <div class="col-11 col-md-5">
                     <label class="py-2">Documento de identificación <span class="required-input">*</span></label>
                     <input
                         v-model="formCollaboratorShipping.document"
                         type="text"
                         class="input-datos form-control-file" placeholder="NIF..."
+                        :class="{'error-input': errorsKey.includes('document')}"
                     >
                 </div>
             </div>
             <div class="row mt-4 justify-content-center justify-content-md-start">
                 <div class="col-11 col-md-5">
                         <label class="py-2">Razón social <span class="required-input">*</span></label>
-                        <input v-model="formCollaboratorShipping.businessName" type="text" class="input-datos form-control-file" placeholder="Razón social...">
+                        <input
+                            v-model="formCollaboratorShipping.businessName"
+                            type="text"
+                            class="input-datos form-control-file"
+                            placeholder="Razón social..."
+                            :class="{'error-input': errorsKey.includes('businessName')}"
+                        >
                 </div>
                 <div class="col-11 mt-4 mt-md-0 col-md-5">
                         <label class="py-2">Persona de contacto <span class="required-input">*</span></label>
-                        <input v-model="formCollaboratorShipping.contactPerson" type="text" class="input-datos form-control-file" placeholder="N id Fiscal...">
+                        <input
+                            v-model="formCollaboratorShipping.contactPerson"
+                            type="text"
+                            class="input-datos form-control-file"
+                            placeholder="N id Fiscal..."
+                            :class="{'error-input': errorsKey.includes('contactPerson')}"
+                        >
                 </div>
             </div>
             <div class="row  mt-4 justify-content-center justify-content-md-start">
                 <div class="col-11 col-md-5">
                         <label class="py-2">Telefono <span class="required-input">*</span></label>
-                        <input v-model="formCollaboratorShipping.phone" type="text" class="input-datos form-control-file" placeholder="Telefono...">
+                        <input
+                            v-model="formCollaboratorShipping.phone"
+                            type="text"
+                            class="input-datos form-control-file"
+                            placeholder="Telefono..."
+                            :class="{'error-input': errorsKey.includes('phone')}"
+                        >
                 </div>
                 <div class="col-11 mt-4 mt-md-0 col-md-5">
                         <label class="py-2">Correo electrónico <span class="required-input">*</span></label>
-                        <input v-model="formCollaboratorShipping.email" type="text" class="input-datos form-control-file" placeholder="Correo electrónico...">
+                        <input
+                            v-model="formCollaboratorShipping.email"
+                            type="text"
+                            class="input-datos form-control-file"
+                            placeholder="Correo electrónico..."
+                            :class="{'error-input': errorsKey.includes('email')}"
+                        >
                 </div>
             </div>
             <div class="row  mt-4 justify-content-center justify-content-md-start">
                 <div class="col-11 col-md-5">
                         <label class="py-2">Domicio de entrega <span class="required-input">*</span></label>
-                        <input v-model="formCollaboratorShipping.deliveryAddress" type="text" class="input-datos form-control-file" placeholder="Domicilio de facturarión...">
+                        <input
+                            v-model="formCollaboratorShipping.deliveryAddress"
+                            type="text"
+                            class="input-datos form-control-file"
+                            placeholder="Domicilio de facturarión..."
+                            :class="{'error-input': errorsKey.includes('deliveryAddress')}"
+                        >
                 </div>
             </div>
             <div class="row  mt-4 justify-content-center justify-content-md-start">
                 <div class="col-11 col-md-5">
                         <label class="py-2">Código postal <span class="required-input">*</span></label>
-                        <input v-model="formCollaboratorShipping.postalCode" type="text" class="input-datos form-control-file" placeholder="Código postal...">
+                        <input
+                            v-model="formCollaboratorShipping.postalCode"
+                            type="text"
+                            class="input-datos form-control-file"
+                            placeholder="Código postal..."
+                            :class="{'error-input': errorsKey.includes('postalCode')}"
+                        >
                 </div>
             </div>
             <div class="row mt-4 mb-12 justify-content-center justify-content-md-start">
                 <div class="col-11 col-md-5">
                         <label class="py-2">Provincia <span class="required-input">*</span></label>
-                        <input v-model="formCollaboratorShipping.province" type="text" class="input-datos form-control-file" placeholder="Provincia...">
+                        <input
+                            v-model="formCollaboratorShipping.province"
+                            type="text"
+                            class="input-datos form-control-file"
+                            placeholder="Provincia..."
+                            :class="{'error-input': errorsKey.includes('province')}"
+                        >
                 </div>
                 <div class="col-11 mt-4 mt-md-0 col-md-5">
                         <label class="py-2">Ciudad <span class="required-input">*</span></label>
-                        <input v-model="formCollaboratorShipping.city" type="text" class="input-datos form-control-file" placeholder="Ciudad...">
+                        <input
+                            v-model="formCollaboratorShipping.city"
+                            type="text"
+                            class="input-datos form-control-file"
+                            placeholder="Ciudad..."
+                            :class="{'error-input': errorsKey.includes('city')}"
+                        >
                 </div>
             </div>
             <div class="row justify-content mb-12">
@@ -101,9 +151,14 @@ export default {
         console.log(this.$page.props.collaboratorShipping)
     },
     computed: {
-        errors () {
-            return this.$page.props.errors
-        }
+        errorsKey () {
+            var err = this.$page.props.errors.submitShipping ? Object.keys(this.$page.props.errors.submitShipping) : []
+            return err
+        },
+        errorsValue () {
+            var err = this.$page.props.errors.submitShipping ? Object.values(this.$page.props.errors.submitShipping) : []
+            return err
+        },
     },
     methods: {
         submit () {
@@ -125,9 +180,6 @@ export default {
     .required-input{
         color: #ff9c06;
     }
-    .error-input{
-        border: 2px solid red;
-    }
     h1{
         font-size: 2rem;
         font-weight: bolder;
@@ -147,7 +199,9 @@ export default {
         border: solid 2.5px #bfbfbf;
         border-radius: 5px;
     }
-
+    .error-input{
+        border: solid 2.5px red;
+    }
     .btn-submit{
         font-size: 1.3rem;
         //padding: 11.3px 38.3px;

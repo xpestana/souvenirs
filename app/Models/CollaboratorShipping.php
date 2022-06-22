@@ -17,6 +17,7 @@ class CollaboratorShipping extends Model
         'phone',
         'email',
         'deliveryAddress',
+        'postalCode',
         'province',
         'city',
     ];

@@ -22,6 +22,7 @@ class CreateCollaboratorShippingsTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->text('deliveryAddress');
+            $table->text('postalCode');
             $table->string('province');
             $table->string('city');
             $table->timestamps();
