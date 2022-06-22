@@ -67,13 +67,38 @@
                 Encontraras atención especializada<br>
                 llamando al siguiente teléfono:
             </p>
-            <p class="text-sm text-white"><i class="fas fa-phone-alt mr-1 text-white"></i> (+34) 722 193 903</p>
-            <div class="mt-2 mx-10" style="border:1px solid #fff">
-                <i class="fas fa-comment-dots text-white mr-1"></i>
-                <p class="inline text-white font-bold">¡Danos feedback!</p>
-            </div>
+            <p class="text-sm text-white"><i class="fas fa-phone-alt mr-1 text-white"></i> (+34) 722 193 903</p>    
+            <button class="btn rounded-lg text-white border-solid border border-white mx-auto py-1 mt-2"  data-toggle="modal" data-target="#feedback">
+                <i class="fas fa-comment-dots text-white mr-1"></i>¡Danos feedback!
+            </button>
         </div>
     </nav>
+    <!-- Central Modal Small -->
+    <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <!-- Change class .modal-sm to change the size of the modal -->
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content mx-auto">
+                <div class="modal-body p-0">
+                    <div class="bg-collaborator-orange h-14 pt-3 px-4 rounded-t-xl">
+                        <p class="text-white text-2xl font-bold"><i class="fas fa-comment-dots text-white mr-1"></i>¡Danos feedback!</p>
+                    </div>
+                    <p class="px-4 my-2 text-sm">
+                        ¿Has encontrado un bug? ¿Hay alguna funcioón que echas en falta o necesitas?
+                        ¿Tienes alguna sugerencia? Sea lo que sea lo que tengas que decirnos seguro
+                        que nos ayuda a mejorar tu experiencia, así que no te cortes.
+                    </p>
+                    <div class="mt-1 px-4">
+                        <textarea class="border w-100 rounded h-36" placeholder="Escribe aquí tu feedback..." style="background-color:#daedf8"></textarea>
+                    </div>
+                    <div class="mb-3.5 mt-1 flex">
+                        <button class="btn rounded bg-collaborator-orange text-white ml-auto mr-4 px-4 py-1">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Central Modal Small -->
 </template>
 <script>
 export default {
@@ -81,6 +106,9 @@ export default {
 }
 </script>
 <style scoped>
+.bg-collaborator-orange{
+    background-color: #FF9C06;
+}
 @media (min-width: 1024px){
     .nav-logo i{
         display: none;

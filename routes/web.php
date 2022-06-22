@@ -300,6 +300,12 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
 
     
 });
+/*Dashboard Colaborador*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
+    
+    Route::get('/', [CollaboratorController::class, 'home'])->name('collaborator.dashboard.home');  
+    
+});
 /*Dashboard asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(function () {
     
