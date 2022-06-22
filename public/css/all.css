@@ -94,18 +94,15 @@
       font-size: 11px;
   }
 }
-body .modal-backdrop{
-  background-color:#fff !important;
+/* body .modal-backdrop{
+    background-color:#fff !important;
 }
 .modal-backdrop.show {
-  opacity: 0.8 !important;
-}
+    opacity: 0.8 !important;
+} */
 
 .modal-content {
-  width: 90% !important;
-  border: none !important;
-  border-radius: 0.2rem !important;
-  box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 32%) !important;
+  border-radius: 0.85rem !important;
 }
 
 .animated-icon1{

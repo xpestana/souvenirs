@@ -25,6 +25,10 @@ use Image;
 
 class CollaboratorController extends Controller
 {
+    public function home()
+    {
+        return Inertia::render('Collaborator/Dashboard/Home');
+    }
     public function index()
     {
         /*Redirección si no tiene perfil*/

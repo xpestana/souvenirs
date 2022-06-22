@@ -298,7 +298,14 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::get('/hab-ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
     Route::get('/ventas/totales/{id}', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
 
+
 });
+/*Dashboard Colaborador*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
+
+    Route::get('/', [CollaboratorController::class, 'home'])->name('collaborator.dashboard.home');  
+});
+
 /*Dashboard asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(function () {
 

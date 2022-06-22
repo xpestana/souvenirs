@@ -7,7 +7,12 @@
     <div class="d-xl-none">
         <MenuMobile/>
     </div>
-    
+        <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903" class="d-none d-xl-block">
+            <div class="banner-wticon fixed right-6 bottom-16 rounded-md d-flex p-2 z-50">
+                <img src="/vendor_asset/img/collaborator/wticon.svg" class="px-1">
+                <p class="text-white ml-2.5 xl:ml-3.5 leading-4 whitespace-nowrap">¡Contact <br>us!</p>
+            </div>
+        </a>
         <section id="banner" class="container-fluid xl:px-16 2xl:px-28 lg:h-screen lg:flex relative">
         <div class="d-xl-none banner-overlay"></div>
         <div class="row pb-14 md:pb-0 my-auto">
@@ -36,12 +41,6 @@
                     <img src="/vendor_asset/img/collaborator/banner2.png"  class="absolute top-16 right-8" width="200">
                     <img src="/vendor_asset/img/collaborator/bannercenter.png" width="450" class="mx-auto">
                     <img src="/vendor_asset/img/collaborator/banner3.png"  class="absolute left-4 bottom-4" width="160">
-                    <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
-                    <div class="banner-wticon absolute right-8 bottom-16 rounded-md d-flex p-2">
-                        <img src="/vendor_asset/img/collaborator/wticon.svg" class="px-1">
-                        <p class="text-white ml-2.5 xl:ml-3.5 leading-4 whitespace-nowrap">Contact us!</p>
-                    </div>
-                    </a>
                 </div>
             </div>
         </div>
@@ -413,15 +412,15 @@ body{
 #banner .title h1{
     letter-spacing: 5px;
 }
-#banner .banner-wticon{
-    width: 8%;
+.banner-wticon{
+    width: 4%;
     overflow: hidden;
     background-color: #808080;
     transition: background-color 1s,width 1s,;
 } 
-#banner .banner-wticon:hover{
+.banner-wticon:hover{
     background-color: #FF9C06;
-    width: 30%;
+    width: 14%;
 } 
 #direction .direction-btn{
     background-color: #FF9C06;
@@ -455,6 +454,11 @@ body{
     background-color: #fff;
     color: #FF9C06;
     border:2px solid #FF9C06;
+}
+@media (min-width:1380px) {
+    .banner-wticon{
+        width: 3%;
+    } 
 }
 @media (min-width:1280px) {
     #result{

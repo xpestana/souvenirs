@@ -1,0 +1,187 @@
+<template> 
+<ModalCookies/>
+    <section id="dashboard-home" class="container py-8 ml-2 md:ml-0 md:px-24">
+        <!-- Header section-->
+        <div class="header row justify-content-between shadow p-2 rounded-xl bg-header-collaborator py-3">
+            <div class="col-4 col-md-4 text-left">
+                <h1 class="font-bold text-3xl">Start</h1>
+            </div>
+            <div class="col-8 col-md-4 text-right">
+                <p class="leading-4">
+                    Welcome to HiCitty<br>
+                    <span class="text-orangec">{{$page.props.auth.profile.firstname}}</span>!
+                </p>
+            </div>
+        </div>
+        <!--END Header section-->
+        <!-- Content section-->
+        <div class="home-perfil row mt-3.5 lg:mt-0">
+            <div class="col-12 my-1 px-lg-0">
+                <h2 class="font-bold text-xl">First steps</h2>
+            </div>
+            <div class="col-12 col-lg-6 pl-lg-0 pr-lg-3 lg:h-3/4">
+                <div class="perfil-card w-full h-48 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative" 
+                    id="perfil-lodging" style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome1.jpg');">
+                    <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
+                        <h2 class="font-bold text-xl text-white p-3.5"> Register your first accommodation</h2>
+                        <p class="text-right text-lg text-white  p-3.5">Unrealized</p>
+                    </div>
+                    <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target">
+                        <div class="text-white m-auto">
+                            <button class="btn rounded-lg text-white border-solid border border-white">
+                                <h3 class="mr-1 inline text-white">+</h3> 
+                                add accommodation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 pr-lg-0 pl-lg-3 lg:h-3/4 mt-3.5 lg:mt-0">
+                <div class="perfil-card w-full h-48 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative" 
+                    id="perfil-perfil"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome2.jpg');">
+                    <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
+                        <h2 class="font-bold text-xl text-white p-3.5">Fill in your profile data</h2>
+                        <p class="text-right text-lg text-white  p-3.5">1 of 4</p>
+                    </div>
+                    <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl" id="perfil-perfil-target">
+                        <div class="text-white py-3.5 px-6">
+                            <Link href="#">
+                                <p class="text-white mb-2"><i class="fas fa-id-card text-white mr-2"></i>Profile information</p>
+                            </Link>
+                            <Link href="#">
+                            <p class="text-white hover:font-bold mb-2"><i class="fas fa-file-alt text-white ml-1 mr-2"></i>Tax data</p>
+                            </Link>
+                            <Link href="#">
+                            <p class="text-white hover:font-bold mb-2"><i class="fas fa-credit-card text-white mr-2"></i>Bank information</p>
+                            </Link>
+                            <Link href="#">
+                            <p class="text-white hover:font-bold mb-2"><i class="fas fa-truck text-white mr-1"></i> Shipping information</p>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="home-benefit row">
+            <div class="col-12 mb-3.5 px-lg-0 mt-3.5 lg:mt-0">
+                <h2 class="font-bold text-xl">General information</h2>
+            </div>
+            <div class="col-12 col-lg-4 h-full">
+                <div class="row h-40 lg:h-full">
+                    <div class="col-6 col-lg-12  pl-lg-0 pr-lg-3 benefit-target">
+                        <div class="benefit-card w-full h-full rounded-xl shadow flex flex-column justify-between bg-collaborator-orange">
+                            <h2 class="font-bold text-xl text-white p-2">General information</h2>
+                            <p class="text-right text-lg text-white  p-2">1202.56€</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-12  pl-lg-0 pr-lg-3 mt-lg-auto benefit-target">
+                        <div class="benefit-card w-full h-full rounded-xl shadow flex flex-column justify-between bg-collaborator">
+                            <h2 class="font-bold text-xl text-white p-2">Total orders</h2>
+                            <p class="text-right text-lg text-white  p-2">543</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-8 pr-lg-0 mt-6 lg:mt-0 h-full">
+                <div class="benefit-card-benefit w-full h-full rounded-xl shadow flex flex-column justify-between bg-center bg-cover bg-no-repeat relative p-6" 
+                    id="perfil-perfil"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/chome3.jpg');">
+                    <h2 class="font-bold text-6xl text-orangec">20%</h2>
+                    <p class="text-lg text-white font-bold mb-auto">
+                        commission on the final price
+                        sale of all services
+                        that the customer purchases.
+                    </p>
+                    <button class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
+                        Start selling!
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- END Content section-->
+    </section>
+</template>
+<script>
+import { Inertia } from '@inertiajs/inertia'
+import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
+import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
+import { Head, Link } from '@inertiajs/inertia-vue3'
+import QRCodeVue3 from "qrcode-vue3"
+export default {
+    layout:TemplateApp,
+    components:{
+        Head,
+        Link,
+        QRCodeVue3,
+        ModalCookies
+    },
+    created(){
+        
+    }
+}
+</script>
+<style scoped>
+.bg-header-collaborator{
+    background-color: #f0f0f0;
+}
+.bg-collaborator-orange{
+    background-color: #FF9C06;
+}
+#perfil-perfil #perfil-perfil-target p:hover{
+    font-weight: bolder;
+}
+@media(min-width:1024px){
+    /*TRANSTION ALTA ALOJAMIENTO*/ 
+    #perfil-lodging:hover >
+    #perfil-lodging-target{
+        height: 100%;
+    }
+    #perfil-lodging:hover >
+    #perfil-lodging-target div{
+        display: block;
+    }
+    #perfil-lodging-target{
+        height: 0;
+        transition: all 0.6s;
+    }
+    #perfil-lodging-target div{
+        display:none;
+        transition: all 0.9s;
+    }
+    /*TRANSICION DATOS DE PERFIL*/
+    #perfil-perfil:hover >
+    #perfil-perfil-target{
+        height: 100%;
+    }
+    #perfil-perfil:hover >
+    #perfil-perfil-target div{
+        display: block;
+    }
+    #perfil-perfil-target{
+        height: 0;
+        transition: all 0.6s;
+    }
+    #perfil-perfil-target div{
+        display:none;
+        transition: all 1s;
+    }
+    /** */
+    .benefit-target{
+        height: 46%;
+    }
+    .home-benefit,
+    .home-perfil{
+        height: 35vh;
+    }
+}
+@media(max-width:1023px){
+    #perfil-lodging-target div{
+        display:none;
+    }
+    #perfil-perfil-target div{
+        display:none;
+    }
+    .benefit-target{
+        height: 100%;
+    }
+}
+</style>
