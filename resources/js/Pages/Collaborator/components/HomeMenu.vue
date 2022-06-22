@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-6 text-right pt-3.5">
                 <Link :href="route('collaborator.register')" class="btn btn-collaborator w-48 text-xl mr-4">
-                <p class="text-xl font-weight-bolder">Regístrate</p>
+                <p class="text-xl">Regístrate</p>
                 </Link>
                 <Link :href="route('login')" class="btn btn-outline-collaborator w-48 text-xl">Iniciar Sesión</Link>
             </div>

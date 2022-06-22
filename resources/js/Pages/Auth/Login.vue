@@ -10,7 +10,7 @@
     <ModalCookies/> 
     <notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
     <div class="container-fluid flex min-h-screen bg-collaborator">
-        <div class="row m-auto justify-content-around">
+        <div class="row m-auto justify-content-between">
             <div class="login-hicitty col-12 col-lg-5 lg:flex flex-column pt-8 lg:pt-0">
                 <div class="hicitty-logo mt-auto">
                     <img class="w-86 mx-auto" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="" @click="redirect()">
@@ -29,17 +29,17 @@
                 </div>
                 <div class="hicitty-info hidden lg:block shadow-lg rounded-2xl text-center p-2 rounded-xl bg-white mb-auto w-3/4 mx-auto">
                     <h1 class="text-2xl font-weight-bolder text-azulc">?</h1>
-                    <p class="text-azulc text-base">¿Necesitas ayuda?</p>
+                    <p class="text-azulc text-base font-bold">¿Necesitas ayuda?</p>
                     <p class="text-azulc text-sm">
                         Encontraras atención especializada<br>
                         llamando al siguiente teléfono:
                     </p>
-                    <p class="text-azulc text-base"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
+                    <p class="text-azulc text-base font-bold"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
                 </div>
             </div>
             <div class="login-form-collaborator col-12 col-lg-6 bg-white shadow-lg rounded-xl">
                 <div class="form-card bg-white p-4 lg:p-8 rounded-xl">
-                    <form @submit.prevent="submit" class=" mt-10">
+                    <form @submit.prevent="submit" class="mt-10">
                         <h1 class="text-3xl lg:text-5xl mb-2 font-weight-bolder">¡Bienvenido/a a HiCitty!</h1>
                         <div class="my-1">
                             <label class="font-weight-bolder">Correo electrónico</label>
@@ -82,7 +82,7 @@
                     </form>
                 </div>
             </div>
-            <div class="login-mobile-info lg:hidden my-6">
+            <div class="login-mobile-info lg:hidden my-6 mx-auto">
                 <div class="hicitty-social my-8 flex justify-center">
                     <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
                     <img class="d-inline mr-3 icon" src="/vendor_asset/img/collaborator/itgicon.svg" alt="">
@@ -96,12 +96,12 @@
                 </div>
                 <div class="hicitty-info shadow-lg rounded-2xl text-center p-2 rounded-xl bg-white mb-auto mx-auto">
                     <h1 class="text-2xl font-weight-bolder text-azulc">?</h1>
-                    <p class="text-azulc text-base">¿Necesitas ayuda?</p>
+                    <p class="text-azulc text-base font-bold">¿Necesitas ayuda?</p>
                     <p class="text-azulc text-sm">
                         Encontraras atención especializada<br>
                         llamando al siguiente teléfono:
                     </p>
-                    <p class="text-azulc text-base"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
+                    <p class="text-azulc text-base font-bold"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
                 </div>
             </div>
         </div>
@@ -260,6 +260,9 @@ export default {
 }
 </script>
 <style scoped>
+*> :not(i){
+    font-family:Montserrat;
+}
 .login-form-collaborator .form-collaborator-text::after,
 .login-form-collaborator .form-collaborator-text::before{
     content: '';
