@@ -4,7 +4,7 @@
         <!-- Header section-->
         <div class="header row justify-content-between shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-4 col-md-4 text-left">
-                <h1 class="font-bold text-3xl">Start</h1>
+                <h1 class="font-bold text-3xl text-muted">Start</h1>
             </div>
             <div class="col-8 col-md-4 text-right">
                 <p class="leading-4">
@@ -119,13 +119,8 @@ export default {
     }
 }
 </script>
+
 <style scoped>
-.bg-header-collaborator{
-    background-color: #f0f0f0;
-}
-.bg-collaborator-orange{
-    background-color: #FF9C06;
-}
 #perfil-perfil #perfil-perfil-target p:hover{
     font-weight: bolder;
 }

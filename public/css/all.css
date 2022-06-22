@@ -428,7 +428,23 @@ a[data-toggle="collapse"] {
   width: 100%;
   background-color: #0000008a;
   z-index: 2;
+
 }
+
+.bg-header-collaborator{
+  background-color: #f0f0f0;
+}
+.bg-collaborator-orange{
+  background-color: #FF9C06;
+}
+.col-form-input {
+  border: solid 1.5px #bfbfbf;
+  background-color: #e7f6ff;
+}
+.col-form-inpu::placeholder{
+  color:#bfbfbf;
+}
+
 /*--------------------------------------------------
 Template Name: Hopsop;
 Description:   Travel Accessories eCommerce Template;

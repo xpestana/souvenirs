@@ -8,7 +8,7 @@
 </form>     -->
     <section id="collaborator-register">
          <div class="container-fluid flex min-h-screen bg-collaborator">
-            <div class="row m-auto justify-content-around">
+            <div class="row m-auto justify-content-between">
                 <div class="register-hicitty col-12 col-lg-5 lg:flex flex-column pt-8 lg:pt-0">
                     <div class="hicitty-logo mt-auto">
                         <img class="w-86 mx-auto" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="" @click="redirect()">
@@ -27,18 +27,18 @@
                     </div>
                     <div class="hicitty-info hidden lg:block shadow-lg rounded-2xl text-center p-2 rounded-xl bg-white mb-auto w-3/4 mx-auto">
                         <h1 class="text-2xl font-weight-bolder text-azulc">?</h1>
-                        <p class="text-azulc text-base">Need help?</p>
+                        <p class="text-azulc text-base font-bold">Need help?</p>
                         <p class="text-azulc text-sm">
                             You will find specialized attention<br>
                             calling the following phone:
                         </p>
-                        <p class="text-azulc text-base"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
+                        <p class="text-azulc text-base font-bold"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
                     </div>
                 </div>
                 <div class="register-form-collaborator col-12 col-lg-6 bg-white shadow-lg rounded-xl">
-                    <div class="form-card bg-white p-4 lg:p-8 rounded-xl">
+                    <div class="form-card bg-white p-4 lg:p-6 rounded-xl">
                         <form @submit.prevent="submit" class=" mt-10">
-                            <h1 class="text-3xl lg:text-5xl mb-2 font-weight-bolder">Sign up and start earning</h1>
+                            <h1 class="text-3xl lg:text-5xl mb-2 font-weight-bolder h1-form">Sign up and start earning</h1>
                             <div class="my-1">
                                 <label class="font-weight-bolder">Email</label>
                                 <div class="relative w-100 collaborator-box">
@@ -62,33 +62,33 @@
                                 </div>
                             </div>
                             <div class="my-2">
-                                <input type="checkbox" class="border mr-1 rounded-lg">
+                                <input type="checkbox" class="border mr-1 rounded-lg" v-model="agree">
                                 <p class="inline text-sm">
                                     I agree with the
                                     <a class="d-inline text-xs text-orangec font-weight-bolder" target="_blank" href="/politicas/terminosycondiciones">
                                     Terms of Service
                                     </a> and
-                                    <a class="d-inline text-xs text-orangec font-weight-bolder" target="_blank" href="/politicas/terminosycondiciones">
+                                    <a class="d-inline text-xs text-orangec font-weight-bolder" target="_blank" href="/politicas/privacidad">
                                     privacy policies
                                     </a>
                                 </p>
                             </div>
                             <ValidationErrors class="my-3" />
-                            <div class="my-3">
+                            <div class="my-2">
                                 <button type="submit" :href="route('collaborator.register')" class="btn btn-collaborator text-xl w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                    <p class="text-xl mb-0">Check in</p>
+                                    <p class="text-xl mb-0">Sign in</p>
                                 </button>
                             </div>
                             <div class="my-2 text-center">
                                 <p class="inline-block text-muted form-collaborator-text relative">or if you already have an account</p>
                             </div>
-                            <div class="my-3">
+                            <div class="my-2">
                                 <Link :href="route('login')" class="btn btn-outline-collaborator text-xl w-100">Log in</Link>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="register-mobile-info lg:hidden my-6">
+                <div class="register-mobile-info lg:hidden my-6 mx-auto">
                     <div class="hicitty-social my-8 flex justify-center">
                         <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
                         <img class="d-inline mr-3 icon" src="/vendor_asset/img/collaborator/itgicon.svg" alt="">
@@ -102,12 +102,12 @@
                     </div>
                     <div class="hicitty-info shadow-lg rounded-2xl text-center p-2 rounded-xl bg-white mb-auto mx-auto">
                         <h1 class="text-2xl font-weight-bolder text-azulc">?</h1>
-                        <p class="text-azulc text-base">Need help?</p>
+                        <p class="text-azulc text-base font-bold">Need help?</p>
                         <p class="text-azulc text-sm">
                             You will find specialized attention<br>
                             calling the following phone:
                         </p>
-                        <p class="text-azulc text-base"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
+                        <p class="text-azulc text-base font-bold"><i class="fas fa-phone-alt text-azulc mr-1"></i> (+34) 722 193 903</p>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,6 @@
     import BreezeButton from '@/Components/Button.vue'
     import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors'
     import { Link } from '@inertiajs/inertia-vue3';
-
     export default {
         components:{
             BreezeInput,
@@ -134,16 +133,30 @@
                     email: null,
                     email_confirmation: null,
                     password: '',
-                })
+                }),
+                agree:false
             }
         },
         methods: {
             submit() {
-                this.form.post(route('register.collaborator'),{
-                    _token: this.$page.props.csrf_token,
-                    errorBag: 'submit',
-                    preserveScroll: true,
-                })
+                if(this.agree){
+                    this.form.post(route('register.collaborator'),{
+                        _token: this.$page.props.csrf_token,
+                        errorBag: 'submit',
+                        preserveScroll: true,
+                    })
+                }else{
+                    this.$swal({
+                        title: 'You must accept the terms of service and privacy policies',
+                        icon: 'info',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonText:
+                            '<i class="fa fa-thumbs-up"></i> Ok!',
+                        confirmButtonAriaLabel: 'Ok!',
+                    })
+                }
             },
             redirect(){
                 this.$inertia.get(route('collaborator.home'))
@@ -154,9 +167,13 @@
             },
         }
     }
+
 </script>
 
 <style scoped>
+*> :not(i){
+    font-family:Montserrat;
+}
 .register-form-collaborator .form-collaborator-text::after,
 .register-form-collaborator .form-collaborator-text::before{
     content: '';
@@ -174,7 +191,13 @@
     right:-45%;
 }
 
+.h1-form{
+    letter-spacing:-2.5px;   
+}
 @media (max-width: 767px){
+    .h1-form{
+        letter-spacing:0px;   
+    }
     .register-form-collaborator .form-collaborator-text::after,
     .register-form-collaborator .form-collaborator-text::before{
         content: '';

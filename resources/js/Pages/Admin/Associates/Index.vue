@@ -43,7 +43,7 @@
                     <div class="col-12">
                         <div class="d-md-inline-flex mt-3 pb-2 pb-md-0">
                             <div class="pr-md-4 text-md-center">
-                                <p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
+                                <p class="font-weight-bolder text-muted d-inline d-md-block">Beneficio total</p> 
                                 <p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{calcularBeneficio(clbtr.orders)}}€</p>
                             </div>
                             <div class="pr-md-4 text-md-center"> 
