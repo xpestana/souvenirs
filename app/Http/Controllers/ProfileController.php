@@ -20,13 +20,14 @@ class ProfileController extends Controller
      */
     public function index()
     {
+       //    dd(auth()->user()->getRoleNames()->first());
         /*Redirección si no tiene perfil*/
         if (auth()->user()->profile == null && auth()->user()->getRoleNames()->first() != 'Client') {
             return Redirect::route('collaborator.data');
         }
         /*******************************/
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
-            return Redirect::route('collaborator.index');
+            return Redirect::route('collaborator.dashboard.home');
         }
         if (auth()->user()->getRoleNames()->first() == 'Associate') {
             return Redirect::route('associates.index');
