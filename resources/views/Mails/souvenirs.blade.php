@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="precio" style="margin: 0 2em;">
-                    <h4 style="margin:0;">8€</h4>
+                    <h4 style="margin:0;">{{ $shipping->amount }} €</h4>
                 </div>
                 </div>
             @endforeach
