@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/tablero/perfil';
+    public const HOME = '/tablero/';
 
     /**
      * The controller namespace for the application.
