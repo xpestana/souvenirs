@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper flex" >
-		<notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
+		<Notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
         <!-- Sidebar  -->
         <SideBar/>
         <!-- Page Content  -->

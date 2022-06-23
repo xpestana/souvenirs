@@ -27,7 +27,7 @@ use App\Http\Controllers\Collaborator\ProfileCollaboratorController;
 use App\Http\Controllers\Collaborator\AssociateController;
 
 /*
-|--------------------------------------------------------------------------
+|---------------------------------------------fff-----------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
@@ -298,8 +298,9 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::get('/hab-ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
     Route::get('/ventas/totales/{id}', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
 
-    
 });
+
+
 /*Dashboard Colaborador*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
     
@@ -315,6 +316,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(func
     Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
     Route::get('/colaboraciones', [AssociateController::class, 'collaborations'])->name('associates.collaborations');  
 });
+
 /*Ajustes*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
     Route::get('/ajustes/', [ProfileCollaboratorController::class, 'index'])->name('collaborator.ajustes.index');  
