@@ -25,6 +25,21 @@ use Image;
 
 class CollaboratorController extends Controller
 {
+    public function home()
+    {
+        return Inertia::render('Collaborator/Dashboard/Home');
+    }
+
+    public function profile()
+    {
+        return Inertia::render('Collaborator/Dashboard/Profile/Welcome');
+    }
+
+    public function profile_info()
+    { 
+        return Inertia::render('Collaborator/Dashboard/Profile/Information');
+    }
+    
     public function index()
     {
         /*Redirección si no tiene perfil*/

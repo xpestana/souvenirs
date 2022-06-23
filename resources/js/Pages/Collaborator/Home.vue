@@ -7,8 +7,13 @@
     <div class="d-xl-none">
         <MenuMobile/>
     </div>
-    
-        <section id="banner" class="container-fluid xl:px-16 2xl:px-28 lg:h-screen lg:flex relative">
+        <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903" class="d-none d-xl-block">
+            <div class="banner-wticon fixed right-6 bottom-16 rounded-md d-flex p-2 z-50">
+                <img src="/vendor_asset/img/collaborator/wticon.svg" class="px-1">
+                <p class="text-white ml-2.5 xl:ml-3.5 leading-4 whitespace-nowrap">¡Contacta con <br>nosotros!</p>
+            </div>
+        </a>
+        <section id="banner" class="container-fluid xl:px-16 2xl:px-28 mb-28 lg:flex relative">
         <div class="d-xl-none banner-overlay"></div>
         <div class="row pb-14 md:pb-0 my-auto">
             <div class="col-12 col-xl-6 pt-44 pl-8">
@@ -25,7 +30,7 @@
                 </div>
                 <div class="pt-8 d-flex flex-column flex-md-row">
                     <Link :href="route('collaborator.register')" class="btn btn-collaborator w-48 mx-auto mx-md-0 text-xl my-2">
-                        <p class="text-xl font-weight-bolder">Regístrate</p>
+                        <p class="text-xl">Regístrate</p>
                     </Link>
                     <Link :href="route('login')" class="btn btn-outline-collaborator w-48 text-xl mx-auto ml-md-4 my-2">Iniciar Sesión</Link>
                 </div>
@@ -36,17 +41,11 @@
                     <img src="/vendor_asset/img/collaborator/banner2.png"  class="absolute top-16 right-8" width="200">
                     <img src="/vendor_asset/img/collaborator/bannercenter.png" width="450" class="mx-auto">
                     <img src="/vendor_asset/img/collaborator/banner3.png"  class="absolute left-4 bottom-4" width="160">
-                    <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
-                    <div class="banner-wticon absolute right-8 bottom-16 rounded-md d-flex p-2">
-                        <img src="/vendor_asset/img/collaborator/wticon.svg" class="px-1">
-                        <p class="text-white ml-2.5 xl:ml-3.5 leading-4 whitespace-nowrap">¡Contacta con <br>nosotros!</p>
-                    </div>
-                    </a>
                 </div>
             </div>
         </div>
         </section>
-        <section id="direction" class="container-fluid xl:px-16 2xl:px-28 lg:h-screen lg:flex flex-column my-8 lg:my-0">
+        <section id="direction" class="container-fluid xl:px-16 2xl:px-28 lg:flex flex-column my-8 lg:my-36">
             <div class="row justify-content-center mt-auto">
                 <div class="col-12 col-md-9 px-8 md:px-0">
                     <h1 class="text-center text-4xl md:text-5xl">¿A quién está dirigido?</h1>
@@ -67,7 +66,7 @@
             </div>
         </section>
         <section id="offer" class="container-fluid xl:px-16 2xl:px-28 md:flex">
-            <div class="row my-auto justify-content-around px-2 md:px-32 md:pb-28">
+            <div class="row my-auto justify-content-around px-2 md:px-32 lg:pb-28 pt-24 lg:pt-0">
                 <div class="col-12">
                     <h1 class="text-center text-4xl md:text-5xl text-white md:pl-24 mb-8 md:mb-0">¿Qué ofrecemos?</h1>
                 </div>
@@ -137,7 +136,7 @@
                 </div>
             </div>
         </section>
-        <section id="slide" class="container-fluid xl:px-16 2xl:px-28 lg:h-screen lg:flex flex-column mb-16 md:mb-0">
+        <section id="slide" class="container-fluid xl:px-16 2xl:px-28  lg:flex flex-column mb-16 lg:mb-14 lg:mt-14 ">
             <div class="row mt-auto">
                 <div class="col-12">
                     <h1 class="text-4xl md:text-5xl md:pl-24 mb-6 md:mb-4">¿Cómo lo hacemos?</h1>
@@ -284,7 +283,7 @@
                 </div>
             </div>
         </section>
-        <section id="win" class="container-fluid xl:px-16 2xl:px-28 lg:h-screen lg:flex my-16 xl:my-0">
+        <section id="win" class="container-fluid xl:px-16 2xl:px-28 lg:flex my-16 lg:my-28">
             <div class="row my-auto">
                 <div class="col-12 md:px-48">
                     <h1 class="text-center text-3xl md:text-6xl font-weight-bolder">
@@ -329,14 +328,14 @@
                                 Copyright ©2022 HiCitty. Todos los derechos reservados 
                             </p>
                         </div>
-                        <div class="col-12 col-md-4 px-8 px-md-2 pt-12 md:pl-24 flex flex-column">
-                            <div class="md:ml-auto">
+                        <div class="col-12 col-md-3 col-lg-2 px-8 px-md-2 pt-12 md:pl-24 flex flex-column">
+                            <div class="">
                                 <p class="text-white 2xl:text-xl mb-1">Visita nuestra web</p>
                                 <Link :href="route('home')">
                                 <img class="w-24 2xl:w-36 mr-auto" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="">
                                 </Link>
                             </div>
-                            <div class="md:ml-auto mt-4">
+                            <div class="mt-4">
                                 <p class="text-white mb-1 2xl:text-xl">Contacto</p>
                                 <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
                                 <img class="d-inline mr-2 2xl:mr-2 icon" src="/vendor_asset/img/collaborator/itgicon.svg" alt="">
@@ -413,15 +412,15 @@ body{
 #banner .title h1{
     letter-spacing: 5px;
 }
-#banner .banner-wticon{
-    width: 8%;
+.banner-wticon{
+    width: 4%;
     overflow: hidden;
     background-color: #808080;
     transition: background-color 1s,width 1s,;
 } 
-#banner .banner-wticon:hover{
+.banner-wticon:hover{
     background-color: #FF9C06;
-    width: 30%;
+    width: 14%;
 } 
 #direction .direction-btn{
     background-color: #FF9C06;
@@ -455,6 +454,11 @@ body{
     background-color: #fff;
     color: #FF9C06;
     border:2px solid #FF9C06;
+}
+@media (min-width:1380px) {
+    .banner-wticon{
+        width: 3%;
+    } 
 }
 @media (min-width:1280px) {
     #result{

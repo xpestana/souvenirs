@@ -157,8 +157,9 @@
                         <div class="d-block">
                             <input type="checkbox" class="form-control mr-1" v-model="checkTerminos">
                             <a class="text-primary d-inline text-xs" target="_blank" href="/politicas/terminosycondiciones">He leído y acepto los términos y condiciones</a>
+                            <p class="mt-2 text-danger" v-if="!checkTerminos">Para poder realizar un compra, debe revisar y aceptar los términos y condiciones</p>
                         </div>
-                        <button type="submit" class="btn btn-info opacity-40 d-block text-white float-right py-0 mt-2">Pagar</button>
+                        <button type="submit" :class="{'btn-secondary':!checkTerminos,'btn-info':checkTerminos}" class="btn opacity-40 d-block text-white float-right py-0 mt-2" :disabled="!checkTerminos">Pagar</button>
                     </div>
                 </div>
             </div>

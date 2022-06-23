@@ -300,6 +300,14 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
 
     
 });
+/*Dashboard Colaborador*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
+    
+    Route::get('/', [CollaboratorController::class, 'home'])->name('collaborator.dashboard.home'); 
+    Route::get('/perfil-informacion', [CollaboratorController::class, 'profile_info'])->name('dashboard.profile.info'); 
+    Route::get('/perfil', [CollaboratorController::class, 'profile'])->name('collaborator.dashboard.profile');   
+    
+});
 /*Dashboard asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(function () {
     
