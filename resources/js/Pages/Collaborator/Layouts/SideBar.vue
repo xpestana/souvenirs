@@ -7,19 +7,27 @@
         <ul class="list-unstyled p-4 my-auto">  
             <li class="mb-3.5">
                 <Link :href="route('collaborator.dashboard.home')" class="text-base" :class="{'sidebar-active':this.$page.url=='/tablero'}">
-                    <i class="fas fa-home mr-1 text-white"  :class="{'sidebar-active':this.$page.url=='/tablero'}"></i>
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':this.$page.url=='/tablero'}" 
+                        src="/vendor_asset/img/collaborator/dashboard/icons/inicio.svg"
+                    >
                     Inicio
                 </Link>
             </li>
             <li class="mb-3.5">
                 <a href="#" class="text-base">
-                    <i class="fas fa-building mr-1 text-white"></i>
+                    <img class="inline w-5" style="margin-top:-4px"
+                        src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
+                    >
                     Gestión de alojamientos
                 </a>
             </li>
             <li class="mb-3.5">
                 <a href="#sub-recursos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-base">
-                <i class="fas fa-file text-white mr-2"></i> Recursos</a>
+                <img class="inline w-4" style="margin-top:-4px"
+                    src="/vendor_asset/img/collaborator/dashboard/icons/recurso.svg"
+                >
+                Recursos</a>
                 <ul class="collapse list-unstyled pl-4" id="sub-recursos">
                     <li>
                         <a href="#">Page 1</a>
@@ -31,7 +39,10 @@
             </li>
             <li class="mb-3.5">
                 <a href="#sub-ventas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-base">
-                <i class="fas fa-chart-bar text-white mr-2"></i> Ventas</a>
+                <img class="inline w-5" style="margin-top:-4px"
+                    src="/vendor_asset/img/collaborator/dashboard/icons/ventas.svg"
+                >
+                Ventas</a>
                 <ul class="collapse list-unstyled pl-4" id="sub-ventas">
                     <li>
                         <a href="#">Page 1</a>
@@ -44,37 +55,59 @@
             <li class="mb-3.5">
                 <Link :href="route('collaborator.dashboard.profile')" data-toggle="collapse" 
                     aria-expanded="false" class="dropdown-toggle text-base"  
-                    :class="{'sidebar-active':routesProfile}"
+                    :class="{'side-icon-active':routesProfile}"
                 >
-                    <i class="fas fa-user text-white mr-2" :class="{'sidebar-active':routesProfile}"></i> 
+                <img class="inline w-4" style="margin-top:-4px"
+                        :class="{'sidebar-active':routesProfile}" 
+                        src="/vendor_asset/img/collaborator/dashboard/icons/perfil.svg"
+                    >
+                    
                     Ajustes de perfil
                 </Link>
                 <ul class="collapse list-unstyled pl-8" :class="{'show':routesProfile}" id="sub-perfil">
                     <li>
-                        <a :href="route('dashboard.profile.info')" class="text-sm my-2" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
-                            <i class="fas fa-id-card text-white mr-2" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}"></i>Info. Perfil
-                        </a>        
+                        <Link :href="route('dashboard.profile.info')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
+                            <img class="inline w-4" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/perfil-informacion'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/info.svg"
+                            >
+                            Info. Perfil
+                        </Link>        
                     </li>
                     <li>
-                        <a href="#" class="text-sm my-2">
-                            <i class="fas fa-file-alt text-white ml-1 mr-2"></i>Datos fiscales
-                        </a>
-                    </li>
-                    <li>
-                        <Link :href="route('collaborator.bank.index')" class="text-sm my-2">
-                            <i class="fas fa-credit-card text-white mr-2"></i>Información bancaria
+                        <Link :href="route('collaborator.profile.tax')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-datos-fiscales'}">
+                            <img class="inline w-4" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/perfil-datos-fiscales'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/fiscales.svg"
+                            >
+                            Datos fiscales
                         </Link>
                     </li>
                     <li>
-                        <Link :href="route('collaborator.bank.store')" class="text-sm my-2">
-                            <i class="fas fa-truck text-white mr-0.5"></i> Datos de envío
+                        <Link :href="route('collaborator.bank.index')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/banco'}">
+                            <img class="inline w-4" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/banco'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/bancaria.svg"
+                            >
+                            Información bancaria
+                        </Link>
+                    </li>
+                    <li>
+                        <Link :href="route('collaborator.shipping.index')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/envio'}">
+                            <img class="inline w-4" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/envio'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
+                            >
+                            Datos de envío
                         </Link>
                     </li>
                 </ul>
             </li>
             <li class="mb-3.5">
                 <a :href="route('logout')" class="text-base">
-                    <i class="fas fa-power-off mr-1 text-white"></i>
+                    <img class="inline w-4" style="margin-top:-4px"
+                        src="/vendor_asset/img/collaborator/dashboard/icons/cerrar.svg"
+                    >
                     Cerrar Sesión
                 </a>
             </li>
@@ -130,11 +163,13 @@ export default {
             let url = this.$page.url;
             let route1 = url.includes('tablero/perfil')
             let route2 = url.includes('tablero/perfil-informacion')
+            let route3 = url.includes('tablero/banco')
+            let route4 = url.includes('tablero/envio')
+            let route5 = url.includes('tablero/perfil-datos-fiscales')
             console.log(url)
-            console.log(route1)
-            console.log(route2)
-            if(route1 || route2){
-                return true
+            console.log(route3)
+            if(route1 || route2 || route3 || route4 || route5){
+                return true;
             }
             
         }
@@ -146,6 +181,15 @@ nav::-webkit-scrollbar {display: none;}
 .sidebar-active{
     color:#000 !important;
 }
+.side-icon-active{ 
+  filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
+}
+.icon-active{
+    filter: invert(0%) sepia(0%) saturate(7465%) hue-rotate(248deg) brightness(95%) contrast(109%);
+}
+.icon-img:hover{
+    filter: invert(0%) sepia(0%) saturate(7465%) hue-rotate(248deg) brightness(95%) contrast(109%);
+}
 .bg-collaborator-orange{
     background-color: #FF9C06;
 }
@@ -154,5 +198,4 @@ nav::-webkit-scrollbar {display: none;}
         display: none;
     }
 }
-
 </style>

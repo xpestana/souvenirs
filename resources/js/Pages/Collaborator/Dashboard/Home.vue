@@ -83,17 +83,19 @@
                 </div>
             </div>
             <div class="col-12 col-lg-8 pr-lg-0 mt-6 lg:mt-0 h-full">
-                <div class="benefit-card-benefit w-full h-full rounded-xl shadow flex flex-column justify-between bg-center bg-cover bg-no-repeat relative p-6" 
-                    id="perfil-perfil"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/chome3.jpg');">
-                    <h2 class="font-bold text-6xl text-orangec">20%</h2>
-                    <p class="text-lg text-white font-bold mb-auto">
-                        de comisión sobre el precio final
-                        de venta de todos los servicios
-                        que adquiera el cliente.
-                    </p>
-                    <button class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
-                        ¡Empieza a vender!
-                    </button>
+                <div class="benefit-card-benefit w-full h-56 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative p-6" 
+                    id="perfil-perfil"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg');">
+                    <div class="absolute w-full h-full top-0 left-0 rounded-xl flex flex-column justify-between p-6" style="background-color:#00000069">
+                        <h2 class="font-bold text-6xl text-orangec">20%</h2>
+                        <p class="text-sm lg:text-lg text-white font-bold mb-auto">
+                            de comisión sobre el precio final
+                            de venta de todos los servicios
+                            que adquiera el cliente.
+                        </p>
+                        <button class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
+                            ¡Empieza a vender!
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

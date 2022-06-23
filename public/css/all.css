@@ -393,10 +393,13 @@
 #collaborator-sidebar ul li a {
   display: block;
 }
-#collaborator-sidebar ul li a:hover,
-#collaborator-sidebar ul li a:hover > i{ 
+#collaborator-sidebar ul li a:hover{
   color: #000 !important;
 }
+#collaborator-sidebar ul li .side-link:hover > img{ 
+  filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
+}
+
 a[data-toggle="collapse"] {
   position: relative;
 }
@@ -443,6 +446,9 @@ a[data-toggle="collapse"] {
 }
 .col-form-inpu::placeholder{
   color:#bfbfbf;
+}
+.error-input{
+  border: solid 2.5px red;
 }
 /*--------------------------------------------------
 Template Name: Hopsop;
