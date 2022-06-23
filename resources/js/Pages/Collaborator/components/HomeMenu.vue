@@ -64,5 +64,7 @@ export default {
 </script>
 
 <style>
-
+#header h3,p{
+    font-family:Montserrat;
+}
 </style>

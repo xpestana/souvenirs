@@ -13,7 +13,9 @@
     <link rel="icon" type="image/x-icon" href="{{asset('vendor_asset/img/logo/hifavicon.png')}}"/>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     

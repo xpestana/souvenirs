@@ -70,6 +70,9 @@ export default {
 </script>
 
 <style scoped>
+#header h3,p{
+    font-family:Montserrat;
+}
 .animated-icon1 {
     width: 20px;
 }

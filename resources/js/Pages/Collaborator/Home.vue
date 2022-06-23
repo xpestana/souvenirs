@@ -396,7 +396,7 @@ body{
     background-color: #fff;
 }
 *> :not(i){
-    font-family:Montserrat;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .carousel__next{
