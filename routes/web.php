@@ -301,6 +301,18 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
 });
 
 
+
+/*Shipping*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/envio')->group(function () {
+    Route::get('/', [CollaboratorController::class, 'create_shipping'])->name('collaborator.shipping.index');
+    Route::post('/store', [CollaboratorController::class, 'store_shipping'])->name('collaborator.shipping.store');
+});
+
+/*Bank*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/banco')->group(function () {
+    Route::get('/', [CollaboratorController::class, 'create_bank'])->name('collaborator.bank.index');
+    Route::post('/store', [CollaboratorController::class, 'store_bank'])->name('collaborator.bank.store');
+});
 /*Dashboard Colaborador*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
     

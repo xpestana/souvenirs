@@ -28,8 +28,10 @@ use Image;
 class CollaboratorController extends Controller
 {
     public function home()
-    {
-        return Inertia::render('Collaborator/Dashboard/Home');
+    { 
+        $cont = step();
+        
+        return Inertia::render('Collaborator/Dashboard/Home', compact('cont'));
     }
 
     public function profile()
@@ -52,6 +54,7 @@ class CollaboratorController extends Controller
         
         $hotels = auth()->user()->hotel->load('orders.shippings');
         $url = config('app.url');
+        
         return Inertia::render('Collaborator/Dashboard/Index', compact('hotels','url'));
     }
     public function create()

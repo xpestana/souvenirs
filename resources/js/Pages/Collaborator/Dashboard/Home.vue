@@ -41,7 +41,7 @@
                     id="perfil-perfil"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome2.jpg');">
                     <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
                         <h2 class="font-bold text-xl text-white p-3.5">Rellena los datos de tu perfil</h2>
-                        <p class="text-right text-lg text-white  p-3.5">1 de 4</p>
+                        <p class="text-right text-lg text-white  p-3.5">{{ cont }} de 4</p>
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl" id="perfil-perfil-target">
                         <div class="text-white py-3.5 px-6">
@@ -115,9 +115,9 @@ export default {
         QRCodeVue3,
         ModalCookies
     },
-    created(){
-        
-    }
+    props: {
+        cont: Number
+        },
 }
 </script>
 <style scoped>
