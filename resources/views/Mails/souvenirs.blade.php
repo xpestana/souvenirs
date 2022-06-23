@@ -13,8 +13,10 @@
             </div>
 
             <div class="titulo" style="display: flex;flex-direction: column;">
-            <h2 style="margin: 1em auto 0.5em auto;text-align: center">Compra realizada con exito</h2>
-            <img src="{{asset('/vendor_asset/img/mailclient.png')}}" alt="tituloimagen" style="margin: 0 auto;max-width: 20em;">
+                <h2 style="margin: 1em auto 0.5em auto;text-align: center">Compra realizada con éxito</h2>
+            </div>
+            <div class="titulo" style="display: flex;flex-direction: column;">
+            <img src="{{asset('/vendor_asset/img/mailclient.png')}}" alt="tituloimagen" style="margin: 0 auto;" width="100%">
             </div>
             @php
             $shipping = $order->shippings->first();
@@ -71,7 +73,7 @@
         <section id="pie">
             <div class="hicitty" style="text-align: center;background-color: #ebebeb;padding: 16px 8px; ">
             <h5 style="margin: 0;">HiCitty</h5>
-            <p style="font-size:10px;margin: 0;">Sevila,41001,Sevilla</p>
+            <p style="font-size:10px;margin: 0;">Sevila, 41001, Sevilla</p>
             </div>
         </section>
     </div>
