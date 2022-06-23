@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Collaborator;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SaleSouvenirReceived;
 use App\Models\hotel;
 use App\Models\User;
 use App\Models\Order;
@@ -27,6 +28,23 @@ use Image;
 
 class CollaboratorController extends Controller
 {
+    public function home()
+    { 
+        $cont = step();
+        
+        return Inertia::render('Collaborator/Dashboard/Home', compact('cont'));
+    }
+
+    public function profile()
+    {
+        return Inertia::render('Collaborator/Dashboard/Profile/Welcome');
+    }
+
+    public function profile_info()
+    { 
+        return Inertia::render('Collaborator/Dashboard/Profile/Information');
+    }
+    
     public function index()
     {
         /*Redirección si no tiene perfil*/
@@ -37,6 +55,7 @@ class CollaboratorController extends Controller
         
         $hotels = auth()->user()->hotel->load('orders.shippings');
         $url = config('app.url');
+        
         return Inertia::render('Collaborator/Dashboard/Index', compact('hotels','url'));
     }
     public function create()

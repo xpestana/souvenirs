@@ -49,3 +49,21 @@ if (! function_exists('orderId')) {
         return $first.$second;
     }
 }
+if (! function_exists('step')) {
+    function step()
+    {
+        $cont = 0;
+        $user = auth()->user();
+        $profile = $user->profile;
+
+        if ($profile->firstname != null && $user->email != null && $profile->phone != null) {
+            $cont++;
+        }
+        
+        if ($profile->identify != null && $profile->nif != null && $profile->address != null && $profile->city != null) {
+            $cont++;
+        }
+
+        return $cont;
+    }
+}

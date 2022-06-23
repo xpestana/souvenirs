@@ -298,9 +298,9 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
     Route::get('/hab-ventas/{hab}', [CollaboratorController::class, 'sales_hab_details'])->name('collaborator.sales.details');  
     Route::get('/ventas/totales/{id}', [CollaboratorController::class, 'sales_hab'])->name('collaborator.sales.hab');  
 
-
-
 });
+
+
 
 /*Shipping*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/envio')->group(function () {
@@ -313,7 +313,14 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/banco')->group(function
     Route::get('/', [CollaboratorController::class, 'create_bank'])->name('collaborator.bank.index');
     Route::post('/store', [CollaboratorController::class, 'store_bank'])->name('collaborator.bank.store');
 });
-
+/*Dashboard Colaborador*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
+    
+    Route::get('/', [CollaboratorController::class, 'home'])->name('collaborator.dashboard.home'); 
+    Route::get('/perfil-informacion', [CollaboratorController::class, 'profile_info'])->name('dashboard.profile.info'); 
+    Route::get('/perfil/inicio', [CollaboratorController::class, 'profile'])->name('collaborator.dashboard.profile');   
+    
+});
 /*Dashboard asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(function () {
     

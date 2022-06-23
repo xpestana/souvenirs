@@ -163,8 +163,7 @@ class SalesController extends Controller
         //
         return view('Purchase', compact('version', 'params', 'signature'));
        /* 
-            Mail::to($request->email)->send(new SaleSouvenirReceived($order));
-            Mail::to("info@hicitty.es")->send(new AdminReceived($order));
+            
         return Redirect::route('purchase',['oi' => $order->id]);
         */
         
@@ -249,6 +248,8 @@ class SalesController extends Controller
             $status = "error";
         }else{
             Cart::clear();
+            Mail::to($order->shippings->first()->email)->send(new SaleSouvenirReceived($order));
+            Mail::to("info@hicitty.es")->send(new AdminReceived($order));
         }
         return Inertia::render('Sales/Purchase', compact('order'))->with(['id'=>$id, 'message' => $message, 'code' => $code, 'status' => $status]);
     }

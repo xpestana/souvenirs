@@ -69,8 +69,8 @@
             </template>
             
         </div>
-        <div class="logo">
-            <img class="mx-auto" src="/vendor_asset/img/logo/logopequeño.png" alt="logo">
+        <div class="logo-purchase">
+            <img class="mx-auto w-56 mt-8" src="/vendor_asset/img/logo/logopequeño.png" alt="logo">
         <div class="order-num pb-5">
         </div>
             <h3 class="text-muted font-weight-bolder text-xl text-center">Número de pedido: {{ order.transaction_id }}</h3>
@@ -111,9 +111,5 @@
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
-}
-.logo img{
-    height: 15em;
-    min-width: 14em !important;
 }
 </style>
