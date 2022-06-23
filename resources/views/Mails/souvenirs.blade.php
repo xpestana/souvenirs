@@ -66,13 +66,13 @@
             <button style="padding: 8px 30px;margin: 15px 0;border: none;background-color: #0092ff;color: #fff;border-radius: 5px;font-weight: bolder;">Seguimiento del pedido</button>
             <div class="redes">
             <a target="_blank" href="https://www.instagram.com/hicitty_/" class="">
-                <img src="/vendor_asset/img/icons/igicon.png" class="px-2" style="width: 2.4em;">
+                <img src="{{ asset('/vendor_asset/img/icons/igicon.png') }}" class="px-2" style="width: 2.4em;">
             </a>
             <a target="_blank" href="https://twitter.com/hicitty_" class="" >
-                <img src="/vendor_asset/img/icons/twicon.png" class="px-2" style="width: 2.4em;">
+                <img src="{{ asset('/vendor_asset/img/icons/twicon.png') }}" class="px-2" style="width: 2.4em;">
             </a>
             <a target="_blank" href="https://www.linkedin.com/company/kognos-vb/" class="" >
-                <img src="/vendor_asset/img/icons/inicon.png" class="px-2" style="width: 2.4em;">
+                <img src="{{ asset('/vendor_asset/img/icons/inicon.png') }}" class="px-2" style="width: 2.4em;">
             </a>
             </div>
         </section>
