@@ -455,6 +455,9 @@ body{
     color: #FF9C06;
     border:2px solid #FF9C06;
 }
+@media (min-width:2000px) {
+    
+}
 @media (min-width:1380px) {
     .banner-wticon{
         width: 3%;
