@@ -36,9 +36,9 @@
                     </div>
                 </div>
                 <div class="register-form-collaborator col-12 col-lg-6 bg-white shadow-lg rounded-xl">
-                    <div class="form-card bg-white p-4 lg:p-6 rounded-xl">
+                    <div class="form-card bg-white px-4 py-3.5 lg:p-6 rounded-xl">
                         <form @submit.prevent="submit" class=" mt-10">
-                            <h1 class="text-3xl lg:text-5xl mb-2 font-weight-bolder h1-form">Regístrate y empieza a ganar</h1>
+                            <h1 class="text-3xl lg:text-5xl mb-3.5 font-weight-bolder h1-form">Regístrate y empieza a ganar</h1>
                             <div class="my-1">
                                 <label class="font-weight-bolder">Correo electrónico</label>
                                 <div class="relative w-100 collaborator-box">
@@ -192,7 +192,8 @@
 }
 
 .h1-form{
-    letter-spacing:-2.5px;   
+    letter-spacing:-2.5px;
+    line-height: 0.75em;   
 }
 @media (max-width: 767px){
     .h1-form{

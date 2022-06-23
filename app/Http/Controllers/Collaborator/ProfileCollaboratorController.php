@@ -52,14 +52,23 @@ class ProfileCollaboratorController extends Controller
         $id = mt_Rand(1000000, 9999999);
 
         $request->validate([
-            'razon' => 'required|string',
             'nif' => 'required|string',
+            'razon' => 'required|string',
+            'phone' => 'required|numeric',
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore(auth()->user()->id)],
+            'address' => 'required|string',
             'identifier' => 'required|string',
             'city' => 'required|string',
             'cp' => 'required|string',
-            'address' => 'required|string',
         ]);
+
+        $user = User::find(auth()->user()->id);
+        $user->email = $request->email;
+        $user->save();
+
         $profile = profile::find(auth()->user()->profile->id);
+        $profile->firstname = $request->name;
+        $profile->phone = $request->phone;
         $profile->razon = $request->razon;
         $profile->nif = $request->nif;
         $profile->identify = $request->identifier;

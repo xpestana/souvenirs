@@ -314,11 +314,12 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/banco')->group(function
     Route::post('/store', [CollaboratorController::class, 'store_bank'])->name('collaborator.bank.store');
 });
 /*Dashboard Colaborador*/
-Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     
     Route::get('/', [CollaboratorController::class, 'home'])->name('collaborator.dashboard.home'); 
     Route::get('/perfil-informacion', [CollaboratorController::class, 'profile_info'])->name('dashboard.profile.info'); 
-    Route::get('/perfil/inicio', [CollaboratorController::class, 'profile'])->name('collaborator.dashboard.profile');   
+    Route::get('/perfil-inicio', [CollaboratorController::class, 'profile'])->name('collaborator.dashboard.profile');   
+    Route::get('/perfil-datos-fiscales', [CollaboratorController::class, 'profile_tax'])->name('collaborator.profile.tax');   
     
 });
 /*Dashboard asociados*/

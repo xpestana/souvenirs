@@ -40,15 +40,15 @@
             <div class="login-form-collaborator col-12 col-lg-6 bg-white shadow-lg rounded-xl">
                 <div class="form-card bg-white p-4 lg:p-8 rounded-xl">
                     <form @submit.prevent="submit" class="mt-10">
-                        <h1 class="text-3xl lg:text-5xl mb-2 font-weight-bolder">¡Bienvenido/a a HiCitty!</h1>
-                        <div class="my-1">
+                        <h1 class="text-3xl lg:text-5xl mb-4 font-weight-bolder">¡Bienvenido/a a HiCitty!</h1>
+                        <div class="my-2">
                             <label class="font-weight-bolder">Correo electrónico</label>
                             <div class="relative w-100 collaborator-box">
                                 <i class="fas fa-envelope absolute inset-y-1/3 px-2"></i>
                                 <input type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Email...." autocomplete="on" v-model="form.email" required>
                             </div>
                         </div>
-                        <div class="my-1">
+                        <div class="mt-3.5 mb-2">
                             <label class="font-weight-bolder">Contraseña</label>
                             <div class="relative w-100 collaborator-box">
                                 <i class="fas fa-key absolute inset-y-1/3 px-2"></i>
@@ -56,7 +56,7 @@
                                 <input type="password" class="collaborator-input bg-light w-100 rounded py-1 pl-8" id="password" placeholder="********" v-model="form.password" required>
                             </div>
                         </div>
-                        <div class="row my-2 justify-content-center justify-content-lg-between">
+                        <div class="row mt-2 mb-3.5 justify-content-center justify-content-lg-between">
                             <div class="form-remember col-10 col-lg-4 text-center text-lg-left">
                                 <input type="checkbox" class="border mr-1 rounded-lg">
                                 <p class="inline">Recuérdame</p>
