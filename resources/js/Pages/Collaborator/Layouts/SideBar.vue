@@ -46,10 +46,20 @@
                 <i class="fas fa-user text-white mr-2"></i> Profile settings</a>
                 <ul class="collapse list-unstyled pl-4" id="sub-perfil">
                     <li>
-                        <a href="#">Page 1</a>
+                        <Link
+                           :href="route('collaborator.bank.index')" class="text-base"
+                        >
+                            <i class="fas fa-money-check mr-1 text-white"></i>
+                            Bank information
+                        </Link>
                     </li>
                     <li>
-                        <a href="#">Page 2</a>
+                        <Link
+                          :href="route('collaborator.shipping.index')" class="text-base"
+                        >
+                            <i class="fas fa-truck mr-1 text-white"></i>
+                            Shipping information
+                        </Link>
                     </li>
                 </ul>
             </li>
@@ -76,8 +86,11 @@
     </nav>
 </template>
 <script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
 export default {
-	
+	components:{
+        Link,
+    },
 }
 </script>
 <style scoped>

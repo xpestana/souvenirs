@@ -69,6 +69,16 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function collaboratorShippings()
+    {
+        return $this->hasMany(CollaboratorShipping::class);
+    }
+
+    public function collaboratorBanks()
+    {
+        return $this->hasMany(CollaboratorBank::class);
+    }
+
     /*
         Scopes
      */
