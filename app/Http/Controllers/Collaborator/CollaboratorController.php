@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Collaborator;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SaleSouvenirReceived;
 use App\Models\hotel;
 use App\Models\User;
 use App\Models\Order;

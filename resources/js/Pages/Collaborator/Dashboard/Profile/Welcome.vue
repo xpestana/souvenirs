@@ -50,7 +50,7 @@
                         </p>
                     </div>
                     <div class="col-12 col-lg-2 lg:bg-black flex rounded-r-xl absolute lg:relative z-20 bottom-6 lg:bottom-0">
-                        <button class="btn btn-outline-orange m-auto py-0.5 px-6">Editar</button>
+                        <Link :href="route('collaborator.shipping.index')" class="btn btn-outline-orange m-auto py-0.5 px-6">Editar</Link>
                     </div>
                 </div>
                 <div class="absolute left-0 top-0 rounded-xl lg:hidden w-full h-full z-10" style="background: linear-gradient(179deg, rgba(134,188,217,0) 0%, rgba(1,1,1,1) 100%);"></div>

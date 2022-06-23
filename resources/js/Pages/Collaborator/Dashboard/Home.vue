@@ -45,16 +45,16 @@
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl" id="perfil-perfil-target">
                         <div class="text-white py-3.5 px-6">
-                            <Link href="#">
+                            <Link :href="route('dashboard.profile.info')">
                                 <p class="text-white mb-2"><i class="fas fa-id-card text-white mr-2"></i>Información de perfil</p>
                             </Link>
                             <Link href="#">
                             <p class="text-white hover:font-bold mb-2"><i class="fas fa-file-alt text-white ml-1 mr-2"></i>Datos fiscales</p>
                             </Link>
-                            <Link href="#">
+                            <Link :href="route('collaborator.bank.index')">
                             <p class="text-white hover:font-bold mb-2"><i class="fas fa-credit-card text-white mr-2"></i>Información bancaria</p>
                             </Link>
-                            <Link href="#">
+                            <Link :href="route('collaborator.shipping.index')">
                             <p class="text-white hover:font-bold mb-2"><i class="fas fa-truck text-white mr-1"></i> Datos de envío</p>
                             </Link>
                         </div>
