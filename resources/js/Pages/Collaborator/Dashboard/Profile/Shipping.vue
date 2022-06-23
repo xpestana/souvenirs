@@ -11,7 +11,7 @@
                         >
                             <i class="fas fa-arrow-left"></i>
                         </Link>
-                        <span class="title">Datos de envio</span>
+                        <span class="title">Datos de envío</span>
                     </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
             </div>
             <div class="row  mt-4 justify-content-center justify-content-md-start">
                 <div class="col-11 col-md-5">
-                        <label class="py-2">Domicio de entrega <span class="required-input">*</span></label>
+                        <label class="py-2">Domicilio de entrega <span class="required-input">*</span></label>
                         <input
                             v-model="formCollaboratorShipping.deliveryAddress"
                             type="text"
