@@ -61,14 +61,14 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="text-sm my-2">
+                        <Link :href="route('collaborator.bank.index')" class="text-sm my-2">
                             <i class="fas fa-credit-card text-white mr-2"></i>Información bancaria
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="#" class="text-sm my-2">
+                        <Link :href="route('collaborator.bank.store')" class="text-sm my-2">
                             <i class="fas fa-truck text-white mr-0.5"></i> Datos de envío
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </li>
