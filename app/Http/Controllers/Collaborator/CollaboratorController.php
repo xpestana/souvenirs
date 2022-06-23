@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\profile;
 use App\Models\CollaboratorShipping;
+use App\Models\CollaboratorBank;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Providers\RouteServiceProvider;
@@ -352,7 +353,7 @@ class CollaboratorController extends Controller
         return Inertia::render('Collaborator/Dashboard/Lodging/Details', compact('hotel'));
     }
 
-    // Shopping
+    // Shipping
 
     public function create_shipping () {
         $collaboratorShippings = auth()->user()->collaboratorShippings;
@@ -370,7 +371,7 @@ class CollaboratorController extends Controller
                 'city' => '',
             ];
         }
-        return Inertia::render('Collaborator/Dashboard/Shipping', compact('collaboratorShipping'));
+        return Inertia::render('Collaborator/Dashboard/Profile/Shipping', compact('collaboratorShipping'));
     }
 
     public function store_shipping(Request $request){
@@ -414,4 +415,42 @@ class CollaboratorController extends Controller
         $id = mt_Rand(1000000, 9999999);
         return Redirect::route('collaborator.shipping.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
     }
+
+    //bank
+
+    public function create_bank () {
+        $collaboratorBanks = auth()->user()->collaboratorBanks;
+        if ($collaboratorBanks->count() > 0) {
+            $collaboratorBank = $collaboratorBanks[0];
+        } else {
+            $collaboratorBank = [
+                'holder' => '',
+                'iban' => '',
+            ];
+        }
+        return Inertia::render('Collaborator/Dashboard/Profile/Bank', compact('collaboratorBank'));
+    }
+
+    public function store_bank(Request $request){
+        $request->validate([
+            'holder' => 'required|string',
+            'iban' => 'required|string',
+        ]);
+        $collaboratorBank = CollaboratorBank::where('user_id', auth()->user()->id)->first();
+        if ($collaboratorBank) {
+            $collaboratorBank->holder = $request->holder;
+            $collaboratorBank->iban = $request->iban;
+            $collaboratorBank->save();
+        } else {
+            $collaboratorBank = CollaboratorBank::create([
+                'user_id' => auth()->user()->id,
+                'holder' => $request->holder,
+                'iban' => $request->iban,
+            ]);
+        }
+
+        $id = mt_Rand(1000000, 9999999);
+        return Redirect::route('collaborator.bank.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
+    }
+
 }

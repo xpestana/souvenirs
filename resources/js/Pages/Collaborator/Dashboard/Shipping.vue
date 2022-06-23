@@ -1,13 +1,49 @@
 <template>
-    <div class="container">
+    <div class="container" :class="{'position-relative': windowWidth < 768}">
+        <ModalCookies/>
         <div class="row mt-4 mt-md-6 mb-6 justify-content-center">
-            <div class="col-10 col-md-12 card py-3 px-3 rounded-5">
-                <h1>Datos de envio</h1>
+            <div class="col-10 col-md-12 card py-4 px-4 px-md-5 py-md-5 rounded-5">
+                    <div>
+                        <Link
+                            :href="route('collaborator.home')"
+                            class="text-2xl w-10 mr-3 font-weight-bold mt-3"
+                        >
+                            <i class="fas fa-arrow-left"></i>
+                        </Link>
+                        <span class="title">Datos de envio {{close}}</span>
+                    </div>
             </div>
         </div>
         <!--Formulario INFORMACION PERSONAL -->
-        {{ errorsKey }}
-        <form @submit.prevent="submit()">
+        <form @submit.prevent="submit()" :class="{'position-relative': windowWidth >= 768}">
+            <!--Alert validation -->
+            <div
+                v-if="close"
+                class="validator-alert pt-4 pb-4 px-4 w-210"
+            >
+                <div class="row">
+                    <div class="col-10">
+                        <p class="text-xl orange font-bold">Los siguientes campos son obligatorios</p>                </div>
+                    <div class="col-2">
+                        <button
+                            class="btn text-xl"
+                            type="button"
+                            @click.prevent="closeAlertValidation()"
+                        >
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                 <ul class="mt-4 ml-2 list-disc list-inside text-xl">
+                    <li
+                        v-for="(error, key) in errorsKey"
+                        :key="key"
+                        class="mb-1"
+                    >
+                        {{ error }}
+                    </li>
+                </ul>
+            </div>
             <div class="row mt-5 justify-content-center justify-content-md-start">
                 <div class="col-11 col-md-5">
                     <label class="py-2">Documento de identificación <span class="required-input">*</span></label>
@@ -109,13 +145,16 @@
                         >
                 </div>
             </div>
-            <div class="row justify-content mb-12">
-                <div class="col-11 col-md-5 text-center text-md-left">
-                    <button type="submit" class="btn-submit btn-lg px-3 py-1 rounded-2"><i class="fa fa-save mr-2"></i>Guardar cambios</button>
-                </div>
+            <div class="d-flex justify-content-center justify-content-md-start  mb-12">
+                    <button
+                        type="submit"
+                        class="btn btn-collaborator btn-lg px-4 py-3 rounded-4 text-white d-flex aligin-items-center text-2xl"
+                        :class="{ 'opacity-25': formCollaboratorShipping.processing }" :disabled="formCollaboratorShipping.processing"
+                    >
+                            <i class="fa fa-save mr-2 mt-1"></i><p class="inline-block p-0 m-0 text-2xl">Guardar cambios</p>
+                    </button>
             </div>
         </form>
-        <!--Formulario MODAL DATOS FISCALES -->
     </div>
 </template>
 
@@ -123,7 +162,8 @@
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import { Inertia } from '@inertiajs/inertia'
 import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
-import ModalCookies from '@/Pages/Collaborator/components/ModalCookies' 
+import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
+import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert'
 export default {
     layout:TemplateApp,
     components:{
@@ -133,6 +173,8 @@ export default {
     },
     data() {
         return {
+            close: false,
+            windowWidth: window.innerWidth,
             formCollaboratorShipping: this.$inertia.form({
             	_method: "POST",
                 document: this.$page.props.collaboratorShipping.document,
@@ -155,9 +197,13 @@ export default {
             var err = this.$page.props.errors.submitShipping ? Object.keys(this.$page.props.errors.submitShipping) : []
             return err
         },
-        errorsValue () {
-            var err = this.$page.props.errors.submitShipping ? Object.values(this.$page.props.errors.submitShipping) : []
-            return err
+        hasErrors() {
+            return this.errorsKey.length > 0
+        },
+    },
+    watch: {
+        hasErrors (val) {
+            this.close = val ? true : false
         },
     },
     methods: {
@@ -167,11 +213,29 @@ export default {
                 errorBag: 'submitShipping',
             })
         },
+        closeAlertValidation () {
+            this.close = false
+        },
     },
 }
 </script>
 
 <style lang="scss" scoped>
+
+    .validator-alert{
+        border-radius: 6px;
+        box-shadow: 7px 7px 15px 0 rgba(0, 0, 0, 0.25);
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 999;
+    }
+
+    .orange {
+        color: #ff9c06;
+    }
+
     .card {
         background-color: #f6f6f6;
         border: none;
@@ -180,15 +244,17 @@ export default {
     .required-input{
         color: #ff9c06;
     }
-    h1{
+    .title{
         font-size: 2rem;
         font-weight: bolder;
         color: #545454;
+        diplay: inline-block;
     }
     form label{
         font-weight: bolder;
         font-size: 1.5rem;
         display: block;
+        widows: 10rem;
     }
     .input-datos{
         border: 0;
