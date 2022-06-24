@@ -36,7 +36,7 @@
             @foreach($order->shippings as $product)
                 @if($product->product->type == 'Souvenirs')
                     <div class="tarjeta" style="background-color: #ededed;display: flex; flex-direction: row;padding: 8px; margin-top: 0.7em;">
-                        <img src="{{asset('/vendor_asset/img/recurso_3.png')}}" alt="souvenir" style="width: 7em;height: 5em;">
+                        <img src="{{asset('/storage/souvenirs'.$product->product->images[0]->url)}}" alt="souvenir" style="width: 7em;height: 5em;">
                         <div class="descripcion" style="margin-left: 1em;display: flex; flex-direction: column;">
                             <h4 style="margin:0;">{{ $product->product->title }}</h4>
                             <div class="cantidad" style="margin-top:auto; ">
@@ -53,9 +53,12 @@
             <h3 style="margin: 20px 0 0 0;">Actividades</h3>
             @foreach($order->shippings as $product)
                 @if($product->product->type == 'Activities')
-                
                     <div class="tarjeta" style="background-color: #ededed;display: flex; flex-direction: row;padding: 8px; margin-top: 0.7em;">
-                        <img src="{{asset('/vendor_asset/img/recurso_3.png')}}" alt="souvenir" style="width: 7em;height: 5em;">
+                        @if($product->product->images->count() > 0)
+                            <img src="{{ asset('/storage/souvenirs'.$product->product->images[0]->name)}}"  style="width: 7em;height: 5em;">
+                        @else
+                            <img src="{{ asset('/vendor_asset/img/bg-image/act-default.jpg')}}"  style="width: 7em;height: 5em;">    
+                        @endif
                         <div class="descripcion" style="margin-left: 1em;display: flex; flex-direction: column;">
                             <h4 style="margin:0;">{{ $product->product->title }}</h4>
                         </div>
@@ -86,7 +89,7 @@
                 <img src="{{ asset('/vendor_asset/img/icons/igicon.png') }}" class="px-2" style="width: 2.4em;">
             </a>
             <a  target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903">
-                <img src="/vendor_asset/img/icons/wsicon.png" class="px-2" style="width: 2.4em;">
+                <img src="{{ asset('/vendor_asset/img/icons/wsicon.png') }}" class="px-2" style="width: 2.4em;">
             </a>
             <a target="_blank" href="https://www.linkedin.com/company/kognos-vb/" class="" >
                 <img src="{{ asset('/vendor_asset/img/icons/inicon.png') }}" class="px-2" style="width: 2.4em;">

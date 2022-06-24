@@ -39,7 +39,7 @@
             </div>
             <div class="login-form-collaborator col-12 col-lg-6 bg-white shadow-lg rounded-xl">
                 <div class="form-card bg-white p-4 lg:p-8 rounded-xl">
-                    <form @submit.prevent="submit" class="mt-10">
+                    <form @submit.prevent="submit" class="mt-1.5">
                         <h1 class="text-3xl lg:text-5xl mb-4 font-weight-bolder">¡Bienvenido/a a HiCitty!</h1>
                         <div class="my-2">
                             <label class="font-weight-bolder">Correo electrónico</label>
@@ -48,7 +48,7 @@
                                 <input type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Email...." autocomplete="on" v-model="form.email" required>
                             </div>
                         </div>
-                        <div class="mt-3.5 mb-2">
+                        <div class="mt-2.5 mb-2">
                             <label class="font-weight-bolder">Contraseña</label>
                             <div class="relative w-100 collaborator-box">
                                 <i class="fas fa-key absolute inset-y-1/3 px-2"></i>
