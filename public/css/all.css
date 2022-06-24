@@ -328,7 +328,7 @@
       --tw-ring-shadow: none;
   }
   .bg-collaborator{
-      background-color:#a0cae1;
+      background-color:#86bcd9;
   }
 
   #collaborator-data select{
@@ -411,6 +411,13 @@ a[data-toggle="collapse"] {
   transform: translateY(-50%);
 }
 
+.dropdown-toggle::after {
+  content: "";
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+}
 
 
 @media (max-width: 1024px) {
@@ -441,7 +448,7 @@ a[data-toggle="collapse"] {
   background-color: #FF9C06;
 }
 .col-form-input {
-  border: solid 1.5px #bfbfbf;
+  border: solid 1.8px #bfbfbf;
   background-color: #e7f6ff;
 }
 .col-form-inpu::placeholder{
@@ -449,6 +456,23 @@ a[data-toggle="collapse"] {
 }
 .error-input{
   border: solid 2.5px red;
+}
+.btn-outline-orange{
+  border:2px solid #FF9C06;
+  color:#FF9C06;
+}
+.btn-outline-orange:hover{
+  border:2px solid #fac371;
+  color:#a26b19;
+}
+.gradient-collaborator{
+  background: linear-gradient(100deg, rgba(134,188,217,0) 30%, rgba(1,1,1,1) 90%);
+}
+*> :not(i){
+  font-family: 'Montserrat', sans-serif;
+}
+p,a{
+    font-family: 'Montserrat', sans-serif !important; 
 }
 /*--------------------------------------------------
 Template Name: Hopsop;
@@ -498,7 +522,8 @@ Version: 1.0;
 
 body {
    /* font-family: 'Work Sans', sans-serif;*/
-   font-family: 'Futur';
+   /* font-family: 'Futur'; */
+   font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     color: #333333;
     font-size: 14px;
@@ -3565,7 +3590,8 @@ ul {
 .rating-summary li.read-review:before,
 .rating-summary li.write-review:before {
     content: "\f0e5";
-    font-family: FontAwesome;
+    /* font-family: FontAwesome; */
+    font-family: 'Montserrat', sans-serif;
     font-size: 15px;
     font-weight: 400;
     line-height: 1;
@@ -4472,7 +4498,8 @@ p.checkout-coupon input[type="submit"] {
 }
 .your-order-table table th {
     border-top: medium none;
-    font-family: Montserrat, Arial, Helvetica, sans-serif;
+    /* font-family: Montserrat, Arial, Helvetica, sans-serif; */
+    font-family: 'Montserrat', sans-serif;
     font-weight: normal;
     text-align: center;
     text-transform: uppercase;
@@ -5292,7 +5319,8 @@ Version: 1.0;
 }
 
 h1,h2,h3,h4,h5,h5{
-    font-family: 'Futur';
+    font-family: 'Montserrat', sans-serif;
+    /* font-family: 'Futur'; */
     font-weight: 400;
     color: #333333;
     margin: 0;
@@ -5304,7 +5332,8 @@ p{
     font-weight: 400;
     line-height: 24px;
     margin-bottom: 0;
-    font-family: 'Work Sans', sans-serif;
+    /* font-family: 'Work Sans', sans-serif; */
+    font-family: 'Montserrat', sans-serif;
 }
 a,button,a:before,img,input{
     -webkit-transition: all 0.3 ease 0s;

@@ -30,9 +30,17 @@ class CollaboratorController extends Controller
 {
     public function home()
     { 
+        /*Redirección si no tiene perfil*/
+        if (auth()->user()->profile == null) {
+            return Redirect::route('collaborator.data');
+        }
+        /*******************************/
+        $url = config('app.url');
         $cont = step();
-        
-        return Inertia::render('Collaborator/Dashboard/Home', compact('cont'));
+        $hotels = auth()->user()->hotel->load('orders.shippings');
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status","complete")
+                    ->with('hotel','shippings')->paginate(15);
+        return Inertia::render('Collaborator/Dashboard/Home', compact('cont','hotels','url','orders'));
     }
 
     public function profile()
@@ -44,23 +52,22 @@ class CollaboratorController extends Controller
     { 
         return Inertia::render('Collaborator/Dashboard/Profile/Information');
     }
+
     public function profile_tax()
     { 
         return Inertia::render('Collaborator/Dashboard/Profile/Tax');
     }
-    public function index()
-    {
-        /*Redirección si no tiene perfil*/
-        if (auth()->user()->profile == null) {
-            return Redirect::route('collaborator.data');
-        }
-        /*******************************/
-        
-        $hotels = auth()->user()->hotel->load('orders.shippings');
-        $url = config('app.url');
-        
-        return Inertia::render('Collaborator/Dashboard/Index', compact('hotels','url'));
+
+    public function sales_welcome(){
+        return Inertia::render('Collaborator/Dashboard/Sales/Welcome');
     }
+    public function sales_total(){
+        $hotels = auth()->user()->hotel->load('orders.shippings');
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status","complete")
+                    ->with('hotel','shippings')->paginate(15);
+        return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders'));
+    }
+    
     public function create()
     {
         return Inertia::render('Collaborator/RegisterForm');
@@ -126,7 +133,7 @@ class CollaboratorController extends Controller
         $user = User::find(auth()->user()->id);
         if ($request->gestor == 1) {
             $user->assignRole('Hotel');
-            return Redirect::route('collaborator.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
+            return Redirect::route('collaborator.dashboard.home')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
         }
         if ($request->gestor == 2) {
             $user->assignRole('Associate');

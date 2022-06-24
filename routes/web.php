@@ -321,6 +321,8 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     Route::get('/perfil-informacion', [CollaboratorController::class, 'profile_info'])->name('dashboard.profile.info'); 
     Route::get('/perfil-inicio', [CollaboratorController::class, 'profile'])->name('collaborator.dashboard.profile');   
     Route::get('/perfil-datos-fiscales', [CollaboratorController::class, 'profile_tax'])->name('collaborator.profile.tax');   
+    Route::get('/bienvenido-ventas', [CollaboratorController::class, 'sales_welcome'])->name('collaborator.dashboard.sales');   
+    Route::get('/ventas-totales', [CollaboratorController::class, 'sales_total'])->name('dashboard.sales.total'); 
     
 });
 /*Dashboard asociados*/

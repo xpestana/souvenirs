@@ -197,7 +197,4 @@
     .activity-card{
         background-color: #ededed;
     }
-    .fuente{
-        font-family: Montserrat Bold !important;
-    }
 </style>

@@ -12,7 +12,8 @@ Version: 1.0;
 }
 
 h1,h2,h3,h4,h5,h5{
-    font-family: 'Futur';
+    font-family: 'Montserrat', sans-serif;
+    /* font-family: 'Futur'; */
     font-weight: 400;
     color: #333333;
     margin: 0;
@@ -24,7 +25,8 @@ p{
     font-weight: 400;
     line-height: 24px;
     margin-bottom: 0;
-    font-family: 'Work Sans', sans-serif;
+    /* font-family: 'Work Sans', sans-serif; */
+    font-family: 'Montserrat', sans-serif;
 }
 a,button,a:before,img,input{
     -webkit-transition: all 0.3 ease 0s;

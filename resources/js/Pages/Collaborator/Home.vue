@@ -17,8 +17,8 @@
         <div class="d-xl-none banner-overlay"></div>
         <div class="row pb-14 md:pb-0 my-auto">
             <div class="col-12 col-xl-6 pt-44 pl-8">
-                <div class="title">
-                    <h1 class="text-5xl md:text-7xl font-weight-bolder">
+                <div class="title">    
+                    <h1 class="text-5xl md:text-7xl">
                         Mejora la <span class="text-collaborator">experiencia</span> de los huéspedes
                     </h1>
                 </div>
@@ -65,8 +65,10 @@
                 <div class="direction-btn text-2xl  col-7 col-md-3  my-4 md:my-0 text-center text-white py-2 rounded">Negocios <br> turísticos</div>
             </div>
         </section>
-        <section id="offer" class="container-fluid xl:px-16 2xl:px-28 md:flex">
-            <div class="row my-auto justify-content-around px-2 md:px-32 lg:pb-60 pt-24 lg:pt-60">
+        <!-- <section  class="container-fluid xl:px-16 2xl:px-28 md:flex relative"> -->
+        <section id="oferta" class="relative lg:px-28">
+            <img src="/vendor_asset/img/collaborator/offer.png" class="img-fondo hidden lg:block absolute top-0 left-0 w-full">
+            <div class="row my-auto justify-content-around px-2 md:px-32 pt-28 lg:pb-28">
                 <div class="col-12">
                     <h1 class="text-center text-4xl md:text-5xl text-white md:pl-24 mb-8 md:mb-0">¿Qué ofrecemos?</h1>
                 </div>
@@ -224,8 +226,10 @@
                 </div>
             </div>
         </section>
-        <section id="result" class="container-fluid xl:px-16 2xl:px-28 md:flex">
-            <div class="row my-auto  justify-content-around xl:px-32 pt-16 md:pt-44 md:pb-24">
+        <!-- <section id="result" class="container-fluid xl:px-16 2xl:px-28 md:flex"> -->
+        <section id="resultado" class="relative lg:px-28">
+            <img src="/vendor_asset/img/collaborator/result.png" class="img-fondo hidden lg:block absolute top-0 left-0 w-full">
+            <div class="row my-auto  justify-content-around xl:px-32 pt-16 md:pt-44 md:pb-32">
                 <div class="col-12">
                     <h1 class="text-center text-4xl md:text-5xl text-white mb-12 md:mb-16 lg:pt-14">¿Cuál es el resultado?</h1>
                 </div>
@@ -395,8 +399,9 @@ export default {
 body{
     background-color: #fff;
 }
-*> :not(i){
-    font-family: 'Montserrat', sans-serif;
+#banner .title h1{
+    font-family: 'Montserrat' !important;
+    font-weight: bolder;
 }
 
 .carousel__next{
@@ -426,17 +431,13 @@ body{
     background-color: #FF9C06;
     box-shadow: 5px 5px 5px 0px rgba(255,156,6,0.63);
 }
-#offer{
-    background-image: url('/vendor_asset/img/collaborator/offer.png');
-}
-#result{
-    background-image: url('/vendor_asset/img/collaborator/result.png');
-}
+
+/* 
 #offer,
 #result{
     background-size: cover;
     background-repeat: no-repeat;
-}
+} */
 #footer .hicitty{
     background-image: url('/vendor_asset/img/collaborator/offer.png');
     background-size: cover;
@@ -456,15 +457,28 @@ body{
     color: #FF9C06;
     border:2px solid #FF9C06;
 }
+#resultado .img-fondo{
+    height: 75em;
+}
 @media (min-width:1900px) {
     .banner-wticon{
         width: 2%;
     } 
+    #oferta .img-fondo{
+        height: 56em;
+    }
+    #resultado .img-fondo{
+        height: 65em;
+    }
 }
 @media only screen and (min-width: 1380px) and (max-width: 1900px) {
-.banner-wticon{
+    .banner-wticon{
         width: 3%;
-    } 
+    }
+    #oferta .img-fondo{
+        height: 56em;
+    }
+
 }
 @media (min-width:1280px) {
     #result{
@@ -474,7 +488,7 @@ body{
         height: 65em;
     }*/
 }
-@media (max-width:1200px) {
+@media (max-width:1224px) {
     #banner{
         background-image: url('/vendor_asset/img/collaborator/bannermobile.jpg');
         background-size: cover;
@@ -497,19 +511,21 @@ body{
         position: absolute;
         left:0;
     }
-    #offer{
+    #oferta{
+        background-image: url('/vendor_asset/img/collaborator/offer.png');
         height: 75em;
         background-position: 29% 0%;
     }
-    #result{
-        height: 70em;
+    #resultado{
+        background-image: url('/vendor_asset/img/collaborator/result.png');
+        height: 95em;
         background-position: 68% 35%;
         background-size: auto;
     }
 }
 
 @media (max-width:767px) {
-    #offer{
+    #oferta{
         height: 110em;
         background-position: 29% 0%;
     }

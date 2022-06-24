@@ -33,18 +33,24 @@
 
         <section id="productos" style="background-color: #f1f1f161;padding: 10px 15px;">  
             <h3 style="margin:0;">Souvenirs</h3>
+            @php
+                $articlesTotal = 0;
+            @endphp
             @foreach($order->shippings as $product)
+                @php
+                    $articlesTotal = $articlesTotal + $product->quantity; 
+                @endphp
                 @if($product->product->type == 'Souvenirs')
-                    <div class="tarjeta" style="background-color: #ededed;display: flex; flex-direction: row;padding: 8px; margin-top: 0.7em;">
-                        <img src="{{asset('/storage/souvenirs'.$product->product->images[0]->url)}}" alt="souvenir" style="width: 7em;height: 5em;">
-                        <div class="descripcion" style="margin-left: 1em;display: flex; flex-direction: column;">
+                    <div class="tarjeta" style="background-color: #ededed;display: flex;padding: 8px; margin-top: 0.7em;flex-wrap: wrap">
+                        <img src="{{asset('/storage/souvenirs'.$product->product->images[0]->url)}}" alt="souvenir" style="width: 7em;height: 5em;margin:auto">
+                        <div class="descripcion" style="margin-left: 1em;display: flex; flex-direction: column;flex-grow:1;text-align:center">
                             <h4 style="margin:0;">{{ $product->product->title }}</h4>
                             <div class="cantidad" style="margin-top:auto; ">
                             <p style="display: inline;margin:0 2px;">Cantidad</p>
                             <input type="text" value="{{$product->quantity}}" style="width: 3em;height: 1.5em;border: 1px solid #dbdbdb;border-radius: 5px;outline:none;text-align:center">
                             </div>
                         </div>
-                        <div class="precio" style="margin: 0 2em;">
+                        <div class="precio" style="margin: 0 2em;flex-grow:2;text-align:center">
                             <h4 style="margin:0;">{{ $product->quantity*$product->amount }} €</h4>
                         </div>
                     </div>
@@ -53,25 +59,29 @@
             <h3 style="margin: 20px 0 0 0;">Actividades</h3>
             @foreach($order->shippings as $product)
                 @if($product->product->type == 'Activities')
-                    <div class="tarjeta" style="background-color: #ededed;display: flex; flex-direction: row;padding: 8px; margin-top: 0.7em;">
+                <div class="tarjeta" style="background-color: #ededed;display: flex;padding: 8px; margin-top: 0.7em;flex-wrap: wrap">
                         @if($product->product->images->count() > 0)
-                            <img src="{{ asset('/storage/souvenirs'.$product->product->images[0]->name)}}"  style="width: 7em;height: 5em;">
+                            <img src="{{ asset('/storage/souvenirs'.$product->product->images[0]->name)}}"  style="width: 7em;height: 5em;margin:auto;">
                         @else
-                            <img src="{{ asset('/vendor_asset/img/bg-image/act-default.jpg')}}"  style="width: 7em;height: 5em;">    
+                            <img src="{{ asset('/vendor_asset/img/bg-image/act-default.jpg')}}"  style="width: 7em;height: 5em;margin:auto;">    
                         @endif
-                        <div class="descripcion" style="margin-left: 1em;display: flex; flex-direction: column;">
+                        <div class="descripcion" style="margin-left: 1em;display: flex; flex-direction: column;flex-grow:1;text-align:center">
                             <h4 style="margin:0;">{{ $product->product->title }}</h4>
                         </div>
-                        <div class="precio" style="margin: 0 2em;">
+                        <div class="precio" style="margin: 0 2em;flex-grow:2;text-align:center">
                             <h4 style="margin:0;">{{ $product->amount }} €</h4>
                         </div>
                     </div>
                 @endif
+                
             @endforeach
             <div class="total" style="display: flex;flex-direction: row;color:#9c9c9c;">
                 <div class="resumen" style="margin-top: 1em;text-align: center;">
                 <p style="margin:0;">Resumen del pedido</p>
-                <p style="margin:0;">({{$order->shippings->count()}} {{($order->shippings->count() != 1) ? " artículos" : "articulo" }})</p>
+                
+                <p style="margin:0;">
+                    ({{$articlesTotal}} {{($articlesTotal != 1) ? " artículos" : "articulo" }})
+                </p>
                 </div>
                 <div class="totales" style="text-align: right;margin-top: 1em;margin-left: auto;">
                 <p style="margin:0;">Subtotal: {{ $order->total }}€</p>

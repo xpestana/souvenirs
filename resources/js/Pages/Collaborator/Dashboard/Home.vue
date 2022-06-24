@@ -70,14 +70,16 @@
                 <div class="row h-40 lg:h-full">
                     <div class="col-6 col-lg-12  pl-lg-0 pr-lg-3 benefit-target">
                         <div class="benefit-card w-full h-full rounded-xl shadow flex flex-column justify-between bg-collaborator-orange">
+                            <img src="/vendor_asset/img/collaborator/dashboard/icons/dinero.svg" class="absolute bottom-0 right-0 w-3/4 lg:w-1/2">
                             <h2 class="font-bold text-xl text-white p-2">Beneficios totales</h2>
-                            <p class="text-right text-lg text-white  p-2">1202.56€</p>
+                            <p class="text-right text-lg text-white  p-2">{{(total*0.20).toFixed(2)}}€</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-12  pl-lg-0 pr-lg-3 mt-lg-auto benefit-target">
                         <div class="benefit-card w-full h-full rounded-xl shadow flex flex-column justify-between bg-collaborator">
+                            <img src="/vendor_asset/img/collaborator/dashboard/icons/kayak.svg" class="absolute top-8 lg:top-0  right-0 w-3/4 lg:w-1/2">
                             <h2 class="font-bold text-xl text-white p-2">Pedidos totales</h2>
-                            <p class="text-right text-lg text-white  p-2">543</p>
+                            <p class="text-right text-lg text-white  p-2">{{orders.data.length}}</p>
                         </div>
                     </div>
                 </div>
@@ -118,8 +120,19 @@ export default {
         ModalCookies
     },
     props: {
-        cont: Number
-        },
+    cont: Number,
+    orders:Object
+    },
+    data(){
+        return{
+            total:0
+        }
+    },
+    created(){
+        this.orders.data.forEach(order =>{
+            this.total += Number(order.total);
+        });
+    }
 }
 </script>
 <style scoped>
