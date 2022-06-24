@@ -71,7 +71,7 @@
             <div class="total" style="display: flex;flex-direction: row;color:#9c9c9c;">
                 <div class="resumen" style="margin-top: 1em;text-align: center;">
                 <p style="margin:0;">Resumen del pedido</p>
-                <p style="margin:0;">({{$order->shippings->count()}} {{($order->shippings->count() != 1) ? " artículos" : "articulo" }})</p>
+                <p style="margin:0;">({{$order->shippings->sum("quantity")}} {{($order->shippings->sum("quantity") != 1) ? " artículos" : "articulo" }})</p>
                 </div>
                 <div class="totales" style="text-align: right;margin-top: 1em;margin-left: auto;">
                 <p style="margin:0;">Subtotal: {{ $order->total }}€</p>
