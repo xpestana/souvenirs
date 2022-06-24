@@ -1,137 +1,154 @@
 <template>
-    <div class="container pt-8 pb-8" :class="{'position-relative': windowWidth < 768}">
+    <div  id="dashboard-perfil-shipping" class="container  py-8 ml-2 md:ml-0 md:px-24" :class="{'position-relative': windowWidth < 768}">
         <ModalCookies/>
         <!-- HEADER -->
-        <div class="row justify-content-center">
-            <div class="col-10 col-md-12 shadow rounded-xl bg-header-colaborator py-4">
-                    <div>
-                        <Link
-                            :href="route('collaborator.home')"
-                            class="text-2xl w-10 mr-3 font-weight-bold mt-3"
-                        >
-                            <i class="fas fa-arrow-left"></i>
-                        </Link>
-                        <span class="title">Datos de envío</span>
-                    </div>
+        <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+            <div class="col-12 col-md-8 text-left">
+                <div>
+                    <h1 class="font-bold text-lg md:text-3xl text-muted"><Link
+                        :href="route('collaborator.home')"
+                        class="text-muted mr-2"
+                    >
+                        <i class="fas fa-arrow-left"></i>
+                    </Link>Datos de envío</h1>
+                </div>
             </div>
         </div>
+         <!--END Header-->
         <!--Formulario de envio -->
-        <form @submit.prevent="submit()" :class="{'position-relative': windowWidth >= 768}">
+        <div
+            class="perfil-shipping row mx-1.5 lg:mx-0 mt-8 justify-content-start"
+            :class="{'position-relative': windowWidth >= 768}"
+        >
             <!--Alert validation -->
             <ValidationAlert
-                :errors="errorsKey"
+                :errors="formatErrors"
             />
-            <div class="row mt-5 justify-content-center justify-content-md-start">
-                <div class="col-11 col-md-5">
-                    <label class="py-2">Documento de identificación <span class="required-input">*</span></label>
-                    <input
-                        v-model="formCollaboratorShipping.document"
-                        type="text"
-                        class="input-datos form-control-file" placeholder="NIF..."
-                        :class="{'error-input': errorsKey.includes('document')}"
-                    >
-                </div>
+            <div class="col-12 col-md-12">
+                <form
+                    @submit.prevent="submit()"
+                    :class="{'position-relative': windowWidth >= 768}"
+                    class="row"
+                >
+                     <!--END Alert validation -->
+                    <div class="col-12 col-md-5 my-1.5 px-0">
+                        <label class="font-bold">Documento de identificación <span class="required-input">*</span></label>
+                        <input
+                            v-model="formCollaboratorShipping.document"
+                            type="text"
+                            class="w-100 rounded col-form-input py-1.5" placeholder="NIF..."
+                            :class="{'error-input': errorsKey.includes('document')}"
+                        >
+                    </div>
+                    <div class="col-12 my-1.5 px-0">
+                        <div class="row px-0">
+                            <div class="col-12 col-md-5 pr-md-0">
+                                    <label class="font-bold">Razón social <span class="required-input">*</span></label>
+                                    <input
+                                        v-model="formCollaboratorShipping.businessName"
+                                        type="text"
+                                        class="w-100 rounded col-form-input py-1.5"
+                                        placeholder="Razón social..."
+                                        :class="{'error-input': errorsKey.includes('businessName')}"
+                                    >
+                            </div>
+                            <div class="col-12 mt-2.5 mt-md-0 col-md-5">
+                                    <label class="font-bold">Persona de contacto <span class="required-input">*</span></label>
+                                    <input
+                                        v-model="formCollaboratorShipping.contactPerson"
+                                        type="text"
+                                        class="w-100 rounded col-form-input py-1.5"
+                                        placeholder="N id Fiscal..."
+                                        :class="{'error-input': errorsKey.includes('contactPerson')}"
+                                    >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 my-1.5 px-0">
+                        <div class="row px-0">
+                            <div class="col-12 col-md-5 pr-md-0">
+                                    <label class="font-bold">Telefono <span class="required-input">*</span></label>
+                                    <input
+                                        v-model="formCollaboratorShipping.phone"
+                                        type="text"
+                                        class="w-100 rounded col-form-input py-1.5"
+                                        placeholder="Telefono..."
+                                        :class="{'error-input': errorsKey.includes('phone')}"
+                                    >
+                            </div>
+                            <div class="col-12 mt-2.5 mt-md-0 col-md-5">
+                                    <label class="font-bold">Correo electrónico <span class="required-input">*</span></label>
+                                    <input
+                                        v-model="formCollaboratorShipping.email"
+                                        type="text"
+                                        class="w-100 rounded col-form-input py-1.5"
+                                        placeholder="Correo electrónico..."
+                                        :class="{'error-input': errorsKey.includes('email')}"
+                                    >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-5 my-1.5 px-0">
+                            <label class="font-bold">Domicilio de entrega 
+                            <span class="required-input">*</span>
+                            </label>
+                            <input
+                                v-model="formCollaboratorShipping.deliveryAddress"
+                                type="text"
+                                class="w-100 rounded col-form-input py-1.5"
+                                placeholder="Domicilio de facturarión..."
+                                :class="{'error-input': errorsKey.includes('deliveryAddress')}"
+                            >
+                    </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-12 col-md-5 my-1.5 px-0">
+                            <label class="font-bold">Código postal <span class="required-input">*</span></label>
+                            <input
+                                v-model="formCollaboratorShipping.postalCode"
+                                type="text"
+                                class="w-100 rounded col-form-input py-1.5"
+                                placeholder="Código postal..."
+                                :class="{'error-input': errorsKey.includes('postalCode')}"
+                            >
+                    </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-12 my-1.5 px-0">
+                        <div class="row">
+                            <div class="col-12 col-md-5 pr-md-0">
+                                    <label class="font-bold">Provincia <span class="required-input">*</span></label>
+                                    <input
+                                        v-model="formCollaboratorShipping.province"
+                                        type="text"
+                                        class="w-100 rounded col-form-input py-1.5"
+                                        placeholder="Provincia..."
+                                        :class="{'error-input': errorsKey.includes('province')}"
+                                    >
+                            </div>
+                            <div class="col-12 mt-2.5 mt-md-0 col-md-5">
+                                    <label class="font-bold">Ciudad <span class="required-input">*</span></label>
+                                    <input
+                                        v-model="formCollaboratorShipping.city"
+                                        type="text"
+                                        class="w-100 rounded col-form-input py-1.5"
+                                        placeholder="Ciudad..."
+                                        :class="{'error-input': errorsKey.includes('city')}"
+                                    >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-11 px-0 text-center text-lg-left">
+                             <button
+                             type="submit"
+                             class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+                             :class="{ 'opacity-25': formCollaboratorShipping.processing }"
+                             :disabled="formCollaboratorShipping.processing">
+                                <i class="fas fa-save mr-2 text-white">
+                                </i>Guardar cambios
+                            </button>
+                    </div>
+                </form>
             </div>
-            <div class="row mt-4 justify-content-center justify-content-md-start">
-                <div class="col-11 col-md-5">
-                        <label class="py-2">Razón social <span class="required-input">*</span></label>
-                        <input
-                            v-model="formCollaboratorShipping.businessName"
-                            type="text"
-                            class="input-datos form-control-file"
-                            placeholder="Razón social..."
-                            :class="{'error-input': errorsKey.includes('businessName')}"
-                        >
-                </div>
-                <div class="col-11 mt-4 mt-md-0 col-md-5">
-                        <label class="py-2">Persona de contacto <span class="required-input">*</span></label>
-                        <input
-                            v-model="formCollaboratorShipping.contactPerson"
-                            type="text"
-                            class="input-datos form-control-file"
-                            placeholder="N id Fiscal..."
-                            :class="{'error-input': errorsKey.includes('contactPerson')}"
-                        >
-                </div>
-            </div>
-            <div class="row  mt-4 justify-content-center justify-content-md-start">
-                <div class="col-11 col-md-5">
-                        <label class="py-2">Telefono <span class="required-input">*</span></label>
-                        <input
-                            v-model="formCollaboratorShipping.phone"
-                            type="text"
-                            class="input-datos form-control-file"
-                            placeholder="Telefono..."
-                            :class="{'error-input': errorsKey.includes('phone')}"
-                        >
-                </div>
-                <div class="col-11 mt-4 mt-md-0 col-md-5">
-                        <label class="py-2">Correo electrónico <span class="required-input">*</span></label>
-                        <input
-                            v-model="formCollaboratorShipping.email"
-                            type="text"
-                            class="input-datos form-control-file"
-                            placeholder="Correo electrónico..."
-                            :class="{'error-input': errorsKey.includes('email')}"
-                        >
-                </div>
-            </div>
-            <div class="row  mt-4 justify-content-center justify-content-md-start">
-                <div class="col-11 col-md-5">
-                        <label class="py-2">Domicilio de entrega <span class="required-input">*</span></label>
-                        <input
-                            v-model="formCollaboratorShipping.deliveryAddress"
-                            type="text"
-                            class="input-datos form-control-file"
-                            placeholder="Domicilio de facturarión..."
-                            :class="{'error-input': errorsKey.includes('deliveryAddress')}"
-                        >
-                </div>
-            </div>
-            <div class="row  mt-4 justify-content-center justify-content-md-start">
-                <div class="col-11 col-md-5">
-                        <label class="py-2">Código postal <span class="required-input">*</span></label>
-                        <input
-                            v-model="formCollaboratorShipping.postalCode"
-                            type="text"
-                            class="input-datos form-control-file"
-                            placeholder="Código postal..."
-                            :class="{'error-input': errorsKey.includes('postalCode')}"
-                        >
-                </div>
-            </div>
-            <div class="row mt-4 mb-12 justify-content-center justify-content-md-start">
-                <div class="col-11 col-md-5">
-                        <label class="py-2">Provincia <span class="required-input">*</span></label>
-                        <input
-                            v-model="formCollaboratorShipping.province"
-                            type="text"
-                            class="input-datos form-control-file"
-                            placeholder="Provincia..."
-                            :class="{'error-input': errorsKey.includes('province')}"
-                        >
-                </div>
-                <div class="col-11 mt-4 mt-md-0 col-md-5">
-                        <label class="py-2">Ciudad <span class="required-input">*</span></label>
-                        <input
-                            v-model="formCollaboratorShipping.city"
-                            type="text"
-                            class="input-datos form-control-file"
-                            placeholder="Ciudad..."
-                            :class="{'error-input': errorsKey.includes('city')}"
-                        >
-                </div>
-            </div>
-            <div class="d-flex justify-content-center justify-content-md-start  mb-12">
-                    <button
-                        type="submit"
-                        class="btn btn-collaborator btn-lg px-8 py-3 rounded-4 text-white d-flex aligin-items-center text-2xl"
-                        :class="{ 'opacity-25': formCollaboratorShipping.processing }" :disabled="formCollaboratorShipping.processing"
-                    >
-                            <i class="fa fa-save mr-2 mt-1"></i><p class="inline-block p-0 m-0 text-2xl">Guardar cambios</p>
-                    </button>
-            </div>
-        </form>
+        </div>
     </div>
 </template>
 
@@ -175,6 +192,42 @@ export default {
             var err = this.$page.props.errors.submitShipping ? Object.keys(this.$page.props.errors.submitShipping) : []
             return err
         },
+        formatErrors () {
+            var map = this.errorsKey.map( item => {
+                switch (item) {
+                    case 'document':
+                        return 'Documento de identificación'
+                        break;
+                    case 'businessName':
+                        return 'Razón social'
+                        break;
+                    case 'contactPerson':
+                        return 'Persona de contacto'
+                        break;
+                    case 'phone':
+                        return 'Telefono'
+                        break;
+                    case 'email':
+                        return 'Correo electrónico'
+                        break;
+                    case 'deliveryAddress':
+                        return 'Domicilio de facturación'
+                        break;
+                    case 'postalCode':
+                        return 'Código postal'
+                        break;
+                    case 'province':
+                        return 'Provincia'
+                        break;
+                    case 'city':
+                        return 'Ciudad'
+                        break;
+                    default:
+                    return item
+                }
+            })
+            return map
+        },
     },
     methods: {
         submit () {
@@ -205,12 +258,6 @@ export default {
         font-weight: bolder;
         color: #545454;
         diplay: inline-block;
-    }
-    form label{
-        font-weight: bolder;
-        font-size: 1.5rem;
-        display: block;
-        widows: 10rem;
     }
     .input-datos{
         border: 0;

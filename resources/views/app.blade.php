@@ -15,12 +15,68 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
-    <!-- Styles -->
-    
+    <!-- Style preloader -->
+    <style type="text/css">
+        .preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #a0cae1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .preloader__logo{
+            width: 15%;
+            position: fixed;
+            top: 4rem;
+            margin: auto;
+        }
+        .preloader__loader{
+            position: fixed;
+            text-align: center;
+        }
+        .spinner{
+          width: 118.6px;
+          height: 118.6px;
+          border-radius: 50%;
+          box-shadow: 1px 5px 2px #fff;
+          animation: spinner 2s linear infinite;
+        }
+        @keyframes spinner {
+            0%{
+                transform: rotate(0deg);
+            }
+            50%{
+                transform: rotate(180deg);
+            }
+            100%{
+                transform: rotate(360deg);
+                
+            }
+        }
+
+        .preloader__loader > h1{
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 2rem;
+            font-family: 'Monserrat', sans;
+            text-align: center;
+        }
+        @media (max-width: 767px){
+            .preloader__logo{
+                width: 48%;
+            }
+        }
+    </style>
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ mix('css/all.css') }}">
+        <!--<link rel="stylesheet" href="{{ asset('vendor_asset/css/preloader.css') }}">-->
 
         <!-- Fontawesome css -->
         <link rel="stylesheet" href="{{ asset('vendor_asset/css/font-awesome.min.css') }}">
@@ -52,6 +108,15 @@
         @routes
     </head>
     <body>
+        <!-- Preloader -->
+        <div id="preloaders" class="preloader">
+            <img class="preloader__logo" src="{{ asset('/vendor_asset/img/collaborator/logocompleto.svg') }}" alt="logo">
+            <div class="preloader__loader">
+                <div class="spinner"></div>
+                <h1>Cargando...</h1>
+            </div>
+        </div>
+
         @inertia
         <script src="{{ mix('js/app.js') }}" defer></script>
         
@@ -68,11 +133,22 @@
         <!-- Jquery nice select js -->
         <script src="{{ asset('vendor_asset/js/jquery.nice-select.min.js') }}" defer></script>
         <!-- Jquery ui price slider js 
+
         <script src="vendor_asset/js/jquery-ui.min.js" defer></script>-->
         <!-- Plugin js -->
         <script src="{{ asset('vendor_asset/js/plugins.js') }}" defer></script>
         <!-- Main activaion js -->
         <script src="{{ asset('vendor_asset/js/main.js') }}" defer></script>
+        <!-- CDN jquery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <!-- Js preloader -->
+        <script type="text/javascript">
+            $(window).on('load',function() 
+            {          
+                $("#preloaders").fadeOut(100);
+            });
+        </script>
         
     </body>
 </html>

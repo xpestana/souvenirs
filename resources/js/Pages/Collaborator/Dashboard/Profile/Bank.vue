@@ -1,67 +1,76 @@
 <template>
-    <div class="container pt-8 pb-8" :class="{'position-relative': windowWidth < 768}">
+    <div id="dashboard-perfil-bank" class="container  py-8 ml-2 md:ml-0 md:px-24" :class="{'position-relative': windowWidth < 768}">
         <ModalCookies/>
         <!-- HEADER -->
-        <div class="row justify-content-center">
-            <div class="col-10 col-md-12 shadow rounded-xl bg-header-colaborator py-4">
-                    <div>
-                        <Link
-                            :href="route('collaborator.home')"
-                            class="text-2xl w-10 mr-3 font-weight-bold mt-3"
-                        >
-                            <i class="fas fa-arrow-left"></i>
-                        </Link>
-                        <span class="title">Información bancaria</span>
-                    </div>
+        <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+            <div class="col-12 col-md-8 text-left">
+                <h1 class="font-bold text-lg md:text-3xl text-muted">
+                    <Link
+                        :href="route('collaborator.home')"
+                        class="text-muted mr-2"
+                    >
+                        <i class="fas fa-arrow-left"></i>
+                    </Link>Información bancaria
+                </h1>
             </div>
         </div>
-        <!--Formulario de envio -->
-        <form @submit.prevent="submit()" :class="{'position-relative': windowWidth >= 768}">
+         <!--END Header-->
+        <!--Formulario de banck -->
+        <div
+            class="perfil-shipping row mx-1.5 lg:mx-0 mt-8 justify-content-start"
+            :class="{'position-relative': windowWidth >= 768}"
+        >
             <!--Alert validation -->
             <ValidationAlert
-                :errors="errorsKey"
+                :errors="formatErrors"
             />
-
-            <div class="row mt-5 justify-content-center justify-content-md-start">
-                <div class="col-11 col-md-8">
-                    <label class="py-2">Titular de la cuenta <span class="required-input">*</span></label>
-                    <input
-                        v-model="formCollaboratorBank.holder"
-                        type="text"
-                        class="input-datos form-control-file" placeholder="Titular de la cuenta..."
-                        :class="{'error-input': errorsKey.includes('holder')}"
-                    >
-                </div>
-            </div>
-            <div class="row mt-4 mb-12 justify-content-center justify-content-md-start">
-                <div class="col-11 col-md-8">
-                        <label class="py-2">Número de IBAN <span class="required-input">*</span></label>
+            <div class="col-12 col-md-8">
+                <form
+                    @submit.prevent="submit()"
+                    class="row"
+                >
+                    <!--END Alert validation -->
+                    <div class="col-12 my-1.5 px-0">
+                        <label class="font-bold">Titular de la cuenta <span class="required-input">*</span></label>
                         <input
-                            v-model="formCollaboratorBank.iban"
+                            v-model="formCollaboratorBank.holder"
                             type="text"
-                            class="input-datos form-control-file"
-                            placeholder="Ej: ES121231231234567890"
-                            @keyup="changeValidIban"
-                            @blur="changeValidIban"
-                            :class="{'error-input': errorsKey.includes('iban')}"
+                            class="col-form-input w-100 rounded py-1.5"
+                            placeholder="Titular de la cuenta..."
+                            :class="{'error-input': errorsKey.includes('holder')}"
                         >
-                        <!--<span
-                            class="text-danger mt-3 text-md"
-                        >
-                            El iban no es válido
-                        </span>-->
-                </div>
+                    </div>
+                    <div class="col-12 my-1.5 px-0">
+                            <label class="font-bold">Número de IBAN <span class="required-input">*</span></label>
+                            <input
+                                v-model="formCollaboratorBank.iban"
+                                type="text"
+                                class="col-form-input w-100 rounded py-1.5"
+                                placeholder="Ej: ES121231231234567890"
+                                @keyup="changeValidIban"
+                                @blur="changeValidIban"
+                                :class="{'error-input': errorsKey.includes('iban')}"
+                            >
+                            <div
+                                v-if="!validForm"
+                                class="text-danger mt-2 text-md"
+                            >
+                                El iban no es válido
+                            </div>
+                    </div>
+                    <div class="col-12 mt-11 px-0 text-center text-lg-left">                            
+                        <button
+                             type="submit"
+                             class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+                             :class="{ 'opacity-25': formCollaboratorBank.processing || !validForm }"
+                             :disabled="formCollaboratorBank.processing || !validForm">
+                            <i class="fas fa-save mr-2 text-white">
+                            </i>Guardar cambios
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="d-flex justify-content-center justify-content-md-start  mb-12">
-                    <button
-                        type="submit"
-                        class="btn btn-collaborator btn-lg px-8 py-3 rounded-4 text-white d-flex aligin-items-center text-2xl"
-                        :class="{ 'opacity-25': formCollaboratorBank.processing }" :disabled="formCollaboratorBank.processing"
-                    >
-                            <i class="fa fa-save mr-2 mt-1"></i><p class="inline-block p-0 m-0 text-2xl">Guardar cambios</p>
-                    </button>
-            </div>
-        </form>
+        </div>
     </div>
 </template>
 
@@ -82,7 +91,7 @@ export default {
     data() {
         return {
             windowWidth: window.innerWidth,
-            validForm: false,
+            validForm: true,
             formCollaboratorBank: this.$inertia.form({
             	_method: "POST",
                 holder: this.$page.props.collaboratorBank.holder,
@@ -94,6 +103,21 @@ export default {
         errorsKey () {
             var err = this.$page.props.errors.submitBank ? Object.keys(this.$page.props.errors.submitBank) : []
             return err
+        },
+        formatErrors () {
+            var map = this.errorsKey.map( item => {
+                switch (item) {
+                    case 'holder':
+                        return 'Titulo de la cuenta'
+                        break;
+                    case 'iban':
+                        return 'iban'
+                        break;
+                    default:
+                    return item
+                }
+            })
+            return map
         },
     },
     created(){
@@ -112,7 +136,9 @@ export default {
         changeValidIban (input) {
             var value = input.target.value
             var regexIban = /^ES\d{22}$/
-            this.validForm = regexIban.test(value)
+            var valid = regexIban.test(value)
+            if (valid) { this.validForm = true }
+            else { this.validForm = false }
         },
     },
 }
@@ -130,12 +156,6 @@ export default {
         font-weight: bolder;
         color: #545454;
         diplay: inline-block;
-    }
-    form label{
-        font-weight: bolder;
-        font-size: 1.5rem;
-        display: block;
-        widows: 10rem;
     }
     .input-datos{
         border: 0;

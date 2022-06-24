@@ -5,11 +5,11 @@
     >
         <div class="row">
             <div class="col-10">
-                <p class="text-xl orange font-bold">Los siguientes campos son obligatorios</p>
+                <p class="text-md orange font-bold">Los siguientes campos son obligatorios</p>
             </div>
-            <div class="col-2">
+            <div class="col-2 pt-0">
                 <button
-                    class="btn text-xl"
+                    class="btn text-xl pt-0"
                     type="button"
                     @click.prevent="closeAlertValidation()"
                 >
@@ -17,7 +17,7 @@
                 </button>
             </div>
         </div>
-         <ul class="mt-4 ml-2 list-disc list-inside text-xl">
+         <ul class="mt-1.5 ml-2 list-disc list-inside text-md">
             <li
                 v-for="(error, key) in errors"
                 :key="key"
@@ -65,15 +65,15 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.validator-alert{
         border-radius: 6px;
         box-shadow: 7px 7px 15px 0 rgba(0, 0, 0, 0.25);
         background-color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
         z-index: 999;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
     .orange {
         color: #ff9c06;
