@@ -17,14 +17,12 @@
     $shipping = $order->shippings->first()
   @endphp
   <ul>
-    <li>{{ $shipping->firstname }} {{ $shipping->lastname }}</li>
-    <li>{{ $shipping->email }}</li>
-    <li>{{ $shipping->address  }}</li>
-    <li>{{ $shipping->apart  }}</li>
-    <li>{{ $shipping->city  }}</li>
-    <li>{{ $shipping->state  }}</li>
-    <li>{{ $shipping->zip_code  }}</li>
-    <li>{{ $shipping->phone   }}</li>
+    <li>Nombre: {{ $shipping->firstname }}</li>
+    <li>Corero: {{ $shipping->email }}</li>
+    <li>Dirección: {{ $shipping->address  }}</li>
+    <li>Habitación o apartamento:{{ $shipping->hab  }}</li>
+    <li>Codigo postal: {{ $shipping->zip_code  }}</li>
+    <li>Observaciones: {{ $shipping->observations   }}</li>
   </ul>
   <p>Para acceder visite la URL {{ $appUrl }} Y verifique la compra.</p>
 
