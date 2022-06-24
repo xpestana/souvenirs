@@ -66,7 +66,7 @@
             </div>
         </section>
         <section id="offer" class="container-fluid xl:px-16 2xl:px-28 md:flex">
-            <div class="row my-auto justify-content-around px-2 md:px-32 lg:pb-28 pt-24 lg:pt-0">
+            <div class="row my-auto justify-content-around px-2 md:px-32 lg:pb-60 pt-24 lg:pt-60">
                 <div class="col-12">
                     <h1 class="text-center text-4xl md:text-5xl text-white md:pl-24 mb-8 md:mb-0">¿Qué ofrecemos?</h1>
                 </div>
@@ -136,7 +136,7 @@
                 </div>
             </div>
         </section>
-        <section id="slide" class="container-fluid xl:px-16 2xl:px-28  lg:flex flex-column mb-16 lg:mb-14 lg:mt-14 ">
+        <section id="slide" class="container-fluid xl:px-16 2xl:px-28  lg:flex flex-column mb-16 lg:mb-14 lg:mt-40 ">
             <div class="row mt-auto">
                 <div class="col-12">
                     <h1 class="text-4xl md:text-5xl md:pl-24 mb-6 md:mb-4">¿Cómo lo hacemos?</h1>
@@ -227,7 +227,7 @@
         <section id="result" class="container-fluid xl:px-16 2xl:px-28 md:flex">
             <div class="row my-auto  justify-content-around xl:px-32 pt-16 md:pt-44 md:pb-24">
                 <div class="col-12">
-                    <h1 class="text-center text-4xl md:text-5xl text-white mb-12 md:mb-16">¿Cuál es el resultado?</h1>
+                    <h1 class="text-center text-4xl md:text-5xl text-white mb-12 md:mb-16 lg:pt-14">¿Cuál es el resultado?</h1>
                 </div>
                 <div class="col-9 col-md-3 my-2 md:my-0 rounded-lg bg-white p-3 result-card shadow-lg">
                     <div class="card-icon">
@@ -450,16 +450,19 @@ body{
     background-color: #FF9C06;
     color:#fff;
 }
+
 #win  .btn-win:hover{
     background-color: #fff;
     color: #FF9C06;
     border:2px solid #FF9C06;
 }
-@media (min-width:2000px) {
-    
-}
-@media (min-width:1380px) {
+@media (min-width:1900px) {
     .banner-wticon{
+        width: 2%;
+    } 
+}
+@media only screen and (min-width: 1380px) and (max-width: 1900px) {
+.banner-wticon{
         width: 3%;
     } 
 }
@@ -467,9 +470,9 @@ body{
     #result{
         height: 70em;
     }
-    #offer{
+    /*#offer{
         height: 65em;
-    }
+    }*/
 }
 @media (max-width:1200px) {
     #banner{
