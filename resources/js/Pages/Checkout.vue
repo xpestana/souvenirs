@@ -157,9 +157,9 @@
                         <div class="d-block">
                             <input type="checkbox" class="form-control mr-1" v-model="checkTerminos">
                             <a class="text-primary d-inline text-xs" target="_blank" href="/politicas/terminosycondiciones">He leído y acepto los términos y condiciones</a>
-                            <p class="mt-2 text-danger" v-if="!checkTerminos">Para poder realizar un compra, debe revisar y aceptar los términos y condiciones</p>
+                            <!-- <p class="mt-2 text-danger" v-if="!checkTerminos">Para poder realizar un compra, debe revisar y aceptar los términos y condiciones</p> -->
                         </div>
-                        <button type="submit" :class="{'btn-secondary':!checkTerminos,'btn-info':checkTerminos}" class="btn opacity-40 d-block text-white float-right py-0 mt-2" :disabled="!checkTerminos">Pagar</button>
+                        <button type="button" class="btn opacity-40 btn-info d-block text-white float-right py-0 mt-2" id="pagar" @click="checkRead()">Pagar</button>
                     </div>
                 </div>
             </div>
@@ -277,6 +277,24 @@
             this.cardElement.mount('#card-element');
         },*/
         methods: {
+            checkRead(){
+                if(this.checkTerminos){
+                    let x = document.getElementById('pagar');
+                    console.log(x)
+                    x.setAttribute('type', 'submit');         
+                }else{
+                    this.$swal({
+                        title: 'Debe aceptar los terminos y condiciones para poder hacer la compra',
+                        icon: 'info',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonText:
+                            '<i class="fa fa-thumbs-up"></i> Aceptar!',
+                        confirmButtonAriaLabel: 'Aceptar!',
+                    })
+                }
+            },
             validarForm(){
                 let full = true;
                 this.form.data = [];
@@ -297,7 +315,7 @@
 
                 if(name == '' || phone == '' || email == '' || address == '' || cp == ''){
                     this.$swal({
-                        title: 'Name, mobile, email, address and zip code are required fields!',
+                        title: 'Nombre, teléfono, email, dirección y codigo postal son obligatorios!',
                         icon: 'info',
                         showCloseButton: false,
                         showCancelButton: false,

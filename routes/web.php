@@ -25,6 +25,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Collaborator\CollaboratorController;
 use App\Http\Controllers\Collaborator\ProfileCollaboratorController;
 use App\Http\Controllers\Collaborator\AssociateController;
+use App\Models\Order;
 
 /*
 |---------------------------------------------fff-----------------------------
@@ -409,8 +410,6 @@ Route::resource(
 
 Route::get('/update/api', [ActivitiesController::class, 'api'])->name('update.api');
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
-Route::get('/test',function(){
-    return view('mails.souvenirs');
-});
+
 
 require __DIR__.'/auth.php';
