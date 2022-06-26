@@ -48,7 +48,9 @@
                         <a href="#">Page 1</a>
                     </li>
                     <li>
-                        <a href="#">Page 2</a>
+                        <Link :href="route('collaborator.sales.inmueble')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
+                            Ventas por inmueble
+                        </Link>
                     </li>
                 </ul>
             </li>

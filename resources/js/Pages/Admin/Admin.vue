@@ -208,7 +208,7 @@ export default {
 			let input = this.$page.url.split("?search=","2")[1];
 			if(input !== undefined){
                 let limpio = input.split('%')
-				this.form.search = limpio[0];	
+				this.form.search = limpio[0];
                 this.showPagination=false
 			}
             if(input == ''){

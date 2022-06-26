@@ -32,7 +32,7 @@
             align-items: center;
         }
         .preloader__logo{
-            width: 15%;
+            width: 18%;
             position: fixed;
             top: 4rem;
             margin: auto;
@@ -40,10 +40,14 @@
         .preloader__loader{
             position: fixed;
             text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
         .spinner{
-          width: 118.6px;
-          height: 118.6px;
+          width: 5rem;
+          height: 5rem;
           border-radius: 50%;
           box-shadow: 1px 5px 2px #fff;
           animation: spinner 2s linear infinite;
@@ -61,16 +65,30 @@
             }
         }
 
-        .preloader__loader > h1{
+        .preloader__loader > span{
+            display: block;
+            font-weight: 200;
             font-size: 1.5rem;
             color: #fff;
             margin-top: 2rem;
-            font-family: 'Monserrat', sans;
+            font-family: 'Monserrat', sans-serif;
             text-align: center;
+        }
+        @media (max-width: 1200px){
+            .preloader__logo{
+                width: 31%;
+            }
         }
         @media (max-width: 767px){
             .preloader__logo{
-                width: 48%;
+                width: 60%;
+            }
+            .spinner{
+              width: 5.5rem;
+              height: 5.5rem;
+            }
+            .preloader__loader > span{
+                font-size: 2rem;
             }
         }
     </style>
@@ -115,7 +133,7 @@
             <img class="preloader__logo" src="{{ asset('/vendor_asset/img/collaborator/logocompleto.svg') }}" alt="logo">
             <div class="preloader__loader">
                 <div class="spinner"></div>
-                <h1>Cargando...</h1>
+                <span>Cargando...</span>
             </div>
         </div>
 
@@ -146,7 +164,7 @@
 
         <!-- Js preloader -->
         <script type="text/javascript">
-            $(window).on('load',function() 
+           $(window).on('load',function() 
             {          
                 $("#preloaders").fadeOut(100);
             });

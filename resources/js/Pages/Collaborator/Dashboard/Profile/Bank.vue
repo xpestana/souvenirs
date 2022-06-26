@@ -58,7 +58,7 @@
                                 El iban no es válido
                             </div>
                     </div>
-                    <div class="col-12 mt-11 px-0 text-center text-lg-left">                            
+                    <div class="col-12 mt-11 px-0 text-center text-lg-left">                  
                         <button
                              type="submit"
                              class="btn rounded text-white bg-collaborator-orange py-1 px-6"
