@@ -376,6 +376,8 @@ class CollaboratorController extends Controller
          }
     }
 
+    // Sales
+
     public function sales(){
         $hotels = auth()->user()->hotel->load('orders.shippings');    
         $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status", "complete")->with('hotel', 'shippings')->paginate(15);   
@@ -392,6 +394,19 @@ class CollaboratorController extends Controller
         $hotel = hotel::find($hab)->load('orders.shippings');
         return Inertia::render('Collaborator/Dashboard/Lodging/Details', compact('hotel'));
     }
+
+    public function create_sales_during (Request $request) {
+    	$from = $request->from ? $request->from : null;
+    	$to = $request->to ? $request->to : null;
+    	$hotels = auth()->user()->hotel->load('orders.shippings');    
+        $model = Order::whereIn('hotel_id',$hotels->pluck('id'))->where('type_order', 'qr')->where("status", "complete")->with('hotel', 'shippings');
+        $request->from ? $orders = $model->where('created_at', '>=', $request->from): '';
+        $request->to ?$orders = $model->where('created_at', '<=', $request->to): '';
+        $orders = $model->orderBy('id', 'desc')->paginate(5)->appends(request()->except('page'));
+        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('orders', 'from', 'to'));
+    }
+
+    // end sales
 
     // Shipping
 
@@ -455,6 +470,8 @@ class CollaboratorController extends Controller
         $id = mt_Rand(1000000, 9999999);
         return Redirect::route('collaborator.shipping.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
     }
+
+    // end shipping
 
     //bank
 

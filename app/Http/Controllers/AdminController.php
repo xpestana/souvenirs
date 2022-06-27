@@ -632,7 +632,7 @@ class AdminController extends Controller
                 ->where('del',false)
                 ->with('orders.shippings')
                 ->orderBy('profiles.firstname','ASC')
-                ->paginate(10);
+                ->paginate(1);
         $url = config('app.url');
         return Inertia::render('Admin/Associates/Index',compact('collaborators','url') );
     }
