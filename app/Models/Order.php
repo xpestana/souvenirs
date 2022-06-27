@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use \Carbon\Carbon;
 
 class Order extends Model
 {
@@ -49,7 +50,9 @@ class Order extends Model
     public function scopeDate($query, $desde, $hasta) 
     {
         if ($desde && $hasta) {
-             $query->whereDate('created_at',">=", $desde)
+            $desde = Carbon::parse($desde)->addDay(1);
+            $hasta = Carbon::parse($hasta)->addDay(1);
+            $query->whereDate('created_at',">=", $desde)
                 ->whereDate('created_at',"<=", $hasta);
         }
     }

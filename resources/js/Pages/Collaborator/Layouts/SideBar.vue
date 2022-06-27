@@ -45,15 +45,15 @@
                 Ventas</a>
                 <ul class="collapse list-unstyled pl-4" id="sub-ventas">
                     <li>
-                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link pl-0.5"
-                           :class="{'side-icon-active':this.$page.url=='/tablero/perfil-datos-fiscales'}" 
+                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link pl-0.5"
+                           :class="{'side-icon-active':this.$page.url=='/tablero/ventas-publicidad'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
                             >
                             Ventas por publicidad
                         </Link>
                     </li>
                     <li>
-                        <Link :href="route('collaborator.sales.inmueble')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
+                        <Link :href="route('collaborator.sales.property')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
                             Ventas por inmueble
                         </Link>
                     </li>

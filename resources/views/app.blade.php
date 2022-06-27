@@ -46,8 +46,8 @@
             align-items: center;
         }
         .spinner{
-          width: 5rem;
-          height: 5rem;
+          width: 4.5rem;
+          height: 4.5rem;
           border-radius: 50%;
           box-shadow: 1px 5px 2px #fff;
           animation: spinner 2s linear infinite;
@@ -77,6 +77,10 @@
         @media (max-width: 1200px){
             .preloader__logo{
                 width: 31%;
+            }
+            .spinner{
+              width: 5rem;
+              height: 5rem;
             }
         }
         @media (max-width: 767px){
