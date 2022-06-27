@@ -42,4 +42,15 @@ class Order extends Model
     {
         return $this->belongsTo(hotel::class);
     }
+
+     /*
+        Scopes
+     */
+    public function scopeDate($query, $desde, $hasta) 
+    {
+        if ($desde && $hasta) {
+             $query->whereDate('created_at',">=", $desde)
+                ->whereDate('created_at',"<=", $hasta);
+        }
+    }
 }

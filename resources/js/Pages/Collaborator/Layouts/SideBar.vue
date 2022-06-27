@@ -45,11 +45,25 @@
                 Ventas</a>
                 <ul class="collapse list-unstyled pl-4" id="sub-ventas">
                     <li>
-                        <a href="#">Page 1</a>
+                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link pl-0.5"
+                           :class="{'side-icon-active':this.$page.url=='/tablero/perfil-datos-fiscales'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
+                            >
+                            Ventas por publicidad
+                        </Link>
                     </li>
                     <li>
-                        <Link :href="route('collaborator.sales.inmueble')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
+                        <Link :href="route('collaborator.sales.inmueble')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
                             Ventas por inmueble
+                        </Link>
+                    </li>
+                    <li>
+                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-totales'}">
+                            <img class="inline w-3.5" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-totales'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-totales.svg"
+                            >
+                            Ventas totales
                         </Link>
                     </li>
                 </ul>

@@ -67,8 +67,7 @@ class CollaboratorController extends Controller
         $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
                     ->where("status","complete")
                     ->with('hotel','shippings')
-                    ->whereDate('created_at',">=",$request->desde)
-                    ->whereDate('created_at',"<=",$request->hasta)
+                    ->Date($request->desde, $request->hasta)
                     ->paginate(15);
                     
         return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders'));
@@ -399,10 +398,15 @@ class CollaboratorController extends Controller
     	$from = $request->from ? $request->from : null;
     	$to = $request->to ? $request->to : null;
     	$hotels = auth()->user()->hotel->load('orders.shippings');    
-        $model = Order::whereIn('hotel_id',$hotels->pluck('id'))->where('type_order', 'qr')->where("status", "complete")->with('hotel', 'shippings');
-        $request->from ? $orders = $model->where('created_at', '>=', $request->from): '';
-        $request->to ?$orders = $model->where('created_at', '<=', $request->to): '';
-        $orders = $model->orderBy('id', 'desc')->paginate(5)->appends(request()->except('page'));
+        $model = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                        ->where('type_order', 'qr')
+                        ->where("status", "complete")
+                        ->with('hotel', 'shippings')
+                        ->Date($request->from, $request->to)
+                        ->orderBy('id', 'desc')
+                        ->paginate(5);
+        
+        $orders = $model->appends(request()->except('page'));
         return Inertia::render('Collaborator/Dashboard/Sales/During',compact('orders', 'from', 'to'));
     }
 
