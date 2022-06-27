@@ -70,7 +70,7 @@ class CollaboratorController extends Controller
                     ->whereDate('created_at',">=",$request->desde)
                     ->whereDate('created_at',"<=",$request->hasta)
                     ->paginate(15);
-                    dd($orders);
+                    
         return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders'));
     }
     
