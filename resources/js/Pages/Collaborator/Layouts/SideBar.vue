@@ -66,7 +66,7 @@
                                 :class="{'side-icon-active':this.$page.url=='/tablero/perfil-datos-fiscales'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
                             >
-                            Ventas durante
+                            Ventas por inmuebles
                         </Link>
                     </li>
                     <li>
@@ -75,7 +75,7 @@
                                 :class="{'side-icon-active':this.$page.url=='/tablero/ventas-totales'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-totales.svg"
                             >
-                            Ventas por inmuebles
+                            Ventas totales
                         </Link>
                     </li>
                 </ul>

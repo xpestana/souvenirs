@@ -61,10 +61,16 @@ class CollaboratorController extends Controller
     public function sales_welcome(){
         return Inertia::render('Collaborator/Dashboard/Sales/Welcome');
     }
-    public function sales_total(){
+    public function sales_total(Request $request){
+        
         $hotels = auth()->user()->hotel->load('orders.shippings');
-        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status","complete")
-                    ->with('hotel','shippings')->paginate(15);
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->whereDate('created_at',">=",$request->desde)
+                    ->whereDate('created_at',"<=",$request->hasta)
+                    ->paginate(15);
+                    dd($orders);
         return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders'));
     }
     
@@ -377,7 +383,7 @@ class CollaboratorController extends Controller
 
     public function sales_hab($id){
         $hotels = auth()->user()->hotel->load('orders.shippings');    
-        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status", "complete")->with('hotel', 'shippings')->paginate(15);   
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status", "complete")->with('hotel', 'shippings')->paginate(15); 
         return Inertia::render('Collaborator/Dashboard/Lodging/TotalSales', compact('hotels','orders'));
     }
 
