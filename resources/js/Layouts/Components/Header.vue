@@ -40,9 +40,6 @@
 .ptop-6{
         padding-top: 5.8em !important;
     }
-#header h3,p{
-	font-family:Montserrat Bold;
-}
 #header .burger{
 	color: #cacaca;
 }

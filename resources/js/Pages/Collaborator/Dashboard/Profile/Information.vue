@@ -24,10 +24,17 @@
                         <input type="text"  v-model="form.phone" class="w-100 rounded col-form-input py-1.5" placeholder="Número de telefono...">
                     </div>
                     <div class="col-12 my-1.5 px-0">
-                        <label class="font-bold"><i class="fas fa-key mr-1"></i>Contraseña</label>
+                        <label class="font-bold"><i class="fas fa-key mr-1"></i>Cambiar contraseña</label>
                         <div class="relative w-100">
                             <i class="far fa-eye cursor-pointer absolute left-0 inset-y-1/3 my-auto px-2.5" v-on:click="showPass('password')"></i>
-                            <input type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="password" placeholder="********">
+                            <input v-model="form.password" type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="password" placeholder="********">
+                        </div>
+                    </div>
+                    <div class="col-12 my-1.5 px-0">
+                        <label class="font-bold"><i class="fas fa-key mr-1"></i>Confirmar contraseña</label>
+                        <div class="relative w-100">
+                            <i class="far fa-eye cursor-pointer absolute left-0 inset-y-1/3 my-auto px-2.5" v-on:click="showPass('confirm-password')"></i>
+                            <input v-model="form.confirm_password" type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="confirm-password" placeholder="********">
                         </div>
                     </div>
                     <div class="col-12 mt-11 px-0 text-center text-lg-left">
@@ -56,6 +63,7 @@ export default {
                 email: this.$page.props.auth.user.email,
                 phone: this.$page.props.auth.profile.phone,
                 password: null,
+                confirm_password: null,
             }),
         }
     },

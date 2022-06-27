@@ -22,7 +22,7 @@
             <div class="perfil-card-body my-2.5 lg:my-0 col-12 w-full h-52 lg:h-1/5 rounded-xl shadow relative">
                 <div class="row h-full rounded-xl realtive bg-cover bg-top" id="body-perfil-info">
                     <div class="d-none d-lg-block col-lg-3 lg:h-full rounded-l-xl bg-cover bg-center bg-no-repeat relative" style="background-image: url('/vendor_asset/img/collaborator/dashboard/hp1.jpg');">
-                        <div class="rounded-l-xl gradient absolute left-0 top-0 w-full h-full"></div>
+                        <div class="rounded-l-xl gradient-collaborator absolute left-0 top-0 w-full h-full"></div>
                     </div>
                     <div class="col-12 col-lg-7 lg:h-full lg:bg-black flex flex-column px-6 absolute lg:relative z-20 top-6 lg:top-0">
                         <h2 class="text-2xl text-white mt-auto leading-6">Información del perfil</h2>
@@ -40,7 +40,7 @@
             <div class="perfil-card-body my-2.5 lg:my-0 col-12 w-full h-52 lg:h-1/5 rounded-xl shadow relative">
                 <div class="row h-full rounded-xl bg-cover bg-top" id="body-perfil-envio">
                     <div class="d-none d-lg-block col-lg-3 h-full rounded-l-xl bg-cover bg-center bg-no-repeat relative" style="background-image: url('/vendor_asset/img/collaborator/dashboard/hp2.jpg');">
-                        <div class="rounded-l-xl gradient absolute left-0 top-0 w-full h-full"></div>
+                        <div class="rounded-l-xl gradient-collaborator absolute left-0 top-0 w-full h-full"></div>
                     </div>
                     <div class="col-12 col-lg-7 lg:h-full lg:bg-black flex flex-column px-6 absolute lg:relative z-20 top-6 lg:top-0">
                         <h2 class="text-2xl text-white mt-auto leading-6">Datos de envío</h2>
@@ -58,7 +58,7 @@
             <div class="perfil-card-body my-2.5 lg:my-0 col-12 w-full h-52 lg:h-1/5 rounded-xl shadow relative">
                 <div class="row h-full rounded-xl bg-cover bg-top" id="body-perfil-fiscal">
                     <div class="d-none d-lg-block col-lg-3 lg:h-full rounded-l-xl bg-cover bg-center bg-no-repeat relative" style="background-image: url('/vendor_asset/img/collaborator/dashboard/hp3.jpg');">
-                        <div class="rounded-l-xl gradient absolute left-0 top-0 w-full h-full"></div>
+                        <div class="rounded-l-xl gradient-collaborator absolute left-0 top-0 w-full h-full"></div>
                     </div>
                     <div class="col-12 col-lg-7 lg:h-full lg:bg-black flex flex-column px-6 absolute lg:relative z-20 top-6 lg:top-0">
                         <h2 class="text-2xl text-white mt-auto leading-6">Datos fiscales</h2>
@@ -68,7 +68,7 @@
                         </p>
                     </div>
                     <div class="col-12 col-lg-2 lg:bg-black flex rounded-r-xl absolute lg:relative z-20 bottom-6 lg:bottom-0">
-                        <button class="btn btn-outline-orange m-auto py-0.5 px-6">Editar</button>
+                        <Link :href="route('collaborator.profile.tax')" class="btn btn-outline-orange m-auto py-0.5 px-6">Editar</Link>
                     </div>
                 </div>
                 <div class="absolute left-0 top-0 rounded-xl lg:hidden w-full h-full z-10" style="background: linear-gradient(179deg, rgba(134,188,217,0) 0%, rgba(1,1,1,1) 100%);"></div>
@@ -86,7 +86,7 @@
                         </p>
                     </div>
                     <div class="col-12 col-lg-2 lg:bg-black flex rounded-r-xl absolute lg:relative z-20 bottom-6 lg:bottom-0">
-                        <button class="btn btn-outline-orange m-auto py-0.5 px-6">Editar</button>
+                        <Link :href="route('collaborator.bank.index')" class="btn btn-outline-orange m-auto py-0.5 px-6">Editar</Link>
                     </div>
                 </div>
                 <div class="absolute left-0 top-0 rounded-xl lg:hidden w-full h-full z-10" style="background: linear-gradient(179deg, rgba(134,188,217,0) 0%, rgba(1,1,1,1) 100%);"></div>
@@ -109,17 +109,6 @@ export default {
 }
 </script>
 <style scoped>
-.btn-outline-orange{
-    border:2px solid #FF9C06;
-    color:#FF9C06;
-}
-.btn-outline-orange:hover{
-    border:2px solid #fac371;
-    color:#a26b19;
-}
-.gradient{
-    background: linear-gradient(100deg, rgba(134,188,217,0) 0%, rgba(1,1,1,1) 110%);
-}
 @media(min-width:1024px){
     .perfil-card{
         height:65vh;
