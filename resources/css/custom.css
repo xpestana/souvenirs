@@ -390,8 +390,11 @@
 #collaborator-sidebar {
   transition: all 0.3s;
 }
-#collaborator-sidebar ul li a {
+/* #collaborator-sidebar ul li a {
   display: block;
+} */
+#collaborator-sidebar .list-sidebar li{
+  margin:10px 0;
 }
 #collaborator-sidebar ul li a:hover{
   color: #000 !important;
@@ -473,4 +476,12 @@ a[data-toggle="collapse"] {
 }
 p,a{
     font-family: 'Montserrat', sans-serif !important; 
+}
+.modal-sales{
+  width:55%;
+}
+@media (max-width:767px){
+  .modal-sales{
+    width:85%;
+  }
 }

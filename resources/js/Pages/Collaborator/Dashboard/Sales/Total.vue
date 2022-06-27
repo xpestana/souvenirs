@@ -16,7 +16,7 @@
                         <p class="inline text-white text-base">0€</p>
                     </div>
                     <div class="pt-0.5 col-12 col-lg-6 text-center text-lg-right">
-                        <button class="btn bg-white text-orangec lg:ml-auto py-1 lg:mr-2.5 font-bold">Pedir transferencia</button>
+                        <button class="btn bg-white text-orangec lg:ml-auto py-1 lg:mr-2.5 font-bold" @click="requestTransfer">Pedir transferencia</button>
                     </div>
                 </div>
             </div>
@@ -66,12 +66,107 @@
             </div>
         </div>
         <div class="ver-mas row my-2.5 justify-content-center">
-            <div class="col-11 col-md-8 col-lg-4 col-xl-6 text-center">
+            <div class="col-11 col-md-8 col-lg-4 col-xl-6 text-center overflow-auto">
                 <paginator :paginator="orders"/>
                 <!-- <button class="btn btn-outline-orange font-bold py-1 px-12">Cargar más</button> -->
             </div>
         </div>
         <!-- END Content section-->
+        <!-- Modal Request -->
+        <div class="modal modal-request fade" id="request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-sales mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <div class="flex mt-3.5">
+                            <img src="/vendor_asset/img/collaborator/dashboard/icons/dinero.svg" class="m-auto h-8"
+                            style="filter: invert(53%) sepia(76%) saturate(625%) hue-rotate(354deg) brightness(107%) contrast(104%);"
+                            >
+                        </div>
+                        <h2 class="text-lg text-center font-bold">¿Quieres solicitar el saldo disponible?</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            Envíanos una notificación y nos encargaremos de realizarte la transferencia alrededor
+                            de unos 5 días hábiles.
+                        </p>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" @click="sendNotification">Enviar notificación</button>
+                        </div>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal" aria-label="Close">No enviar todavia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Request  -->
+        <!-- Modal Notification -->
+        <div class="modal modal-notification fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-sales mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <div class="my-2.5 text-center">
+                            <i class="far fa-check-circle text-orangec text-4xl"></i>
+                        </div>
+                        <h2 class="text-lg text-center font-bold">¡Notificación recibida!</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            La transferencia se realizará en 5 días habiles. Para cualquier
+                            consulta ponte en contacto con nosotros.
+                        </p>
+                        <div class="my-3.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  data-dismiss="modal" aria-label="Close">Cerrar mensaje</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Notification  -->
+        <!-- Modal Notice -->
+        <div class="modal modal-notice fade" id="notice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-sales mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <div class="flex mt-3.5">
+                            <img src="/vendor_asset/img/collaborator/dashboard/icons/dinero.svg" class="m-auto h-8"
+                            style="filter: invert(53%) sepia(76%) saturate(625%) hue-rotate(354deg) brightness(107%) contrast(104%);"
+                            >
+                        </div>
+                        <h2 class="text-lg text-center font-bold">Te faltan</h2>
+                        <h3 class="text-lg text-center my-0.5">
+                            <span class="text-4xl text-orangec font-bold">{{remainingDays}}</span> 
+                            <template v-if="Number(this.remainingDays)>1">
+                                días
+                            </template>
+                            <template v-else>
+                                dia
+                            </template>
+                            
+                        </h3>
+                        <h2 class="text-lg text-center font-bold">para poder solicitar una transferencia de saldo</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            Puedes solicitar una transferencia de saldo cada 3 meses.
+                        </p>
+                        <div class="my-3.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  data-dismiss="modal" aria-label="Close">Cerrar mensaje</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Notice  -->
     </section>
 </template>
 <script>
@@ -94,6 +189,9 @@ export default {
             total:0,
             desde:null,
             hasta:null,
+            dateTEST:'2022-01-30 10:57:08',
+            countTest:0,
+            remainingDays:null
         }
     },
     created(){
@@ -146,6 +244,30 @@ export default {
                 }
                 
             }
+        }
+    },
+    methods:{
+        requestTransfer(){
+            let dia = Number(this.moment(this.dateTEST).format("DD"));
+            let mes = Number(this.moment(this.dateTEST).format("MM"));
+            let año = Number(this.moment(this.dateTEST).format("YYYY"));
+            let ago = this.moment().diff(this.moment([año,(mes - 1),(dia)]),'days');
+            this.remainingDays = 90 - ago;
+            if(Number(ago) > 90){
+                $('#request').modal('show')
+            }else{
+                $('#notice').modal('show')
+            }
+        },
+        sendNotification(){
+            let request=$('#request');
+            let noti=$('#notification');
+            this.$inertia.post(route('test'),{
+                onSuccess: (page) => {
+                    request.modal('hide')
+                    noti.modal('show')
+                },
+            })
         }
     }
 }

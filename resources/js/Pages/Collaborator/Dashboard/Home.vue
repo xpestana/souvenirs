@@ -16,15 +16,15 @@
         <!--END Header section-->
         <!-- Content section-->
         <div class="home-perfil row mt-3.5 lg:mt-0">
-            <div class="col-12 my-1 px-lg-0">
-                <h2 class="font-bold text-xl">Primeros pasos</h2>
+            <div class="col-12 mt-2 mb-1 px-lg-0">
+                <h2 class="font-semibold text-3xl">Primeros pasos</h2>
             </div>
             <div class="col-12 col-lg-6 pl-lg-0 pr-lg-3 lg:h-3/4">
                 <div class="perfil-card w-full h-48 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative" 
                     id="perfil-lodging" style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome1.jpg');">
                     <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
-                        <h2 class="font-bold text-xl text-white p-3.5"> Da de alta tu primer alojamiento</h2>
-                        <p class="text-right text-lg text-white  p-3.5">No realizado</p>
+                        <h2 class="font-bold text-2xl text-white p-3.5"> Da de alta tu primer alojamiento</h2>
+                        <p class="text-right text-2xl text-white  p-3.5">No realizado</p>
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target">
                         <div class="text-white m-auto">
@@ -40,15 +40,15 @@
                 <div class="perfil-card w-full h-48 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative" 
                     id="perfil-perfil"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome2.jpg');">
                     <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
-                        <h2 class="font-bold text-xl text-white p-3.5">Rellena los datos de tu perfil</h2>
-                        <p class="text-right text-lg text-white  p-3.5">{{ cont }} de 4</p>
+                        <h2 class="font-bold text-2xl text-white p-3.5">Rellena los datos de tu perfil</h2>
+                        <p class="text-right text-2xl text-white  p-3.5">{{ cont }} de 4</p>
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl" id="perfil-perfil-target">
                         <div class="text-white py-3.5 px-6">
                             <Link :href="route('dashboard.profile.info')">
                                 <p class="text-white mb-2"><i class="fas fa-id-card text-white mr-2"></i>Información de perfil</p>
                             </Link>
-                            <Link href="#">
+                            <Link :href="route('collaborator.profile.tax')">
                             <p class="text-white hover:font-bold mb-2"><i class="fas fa-file-alt text-white ml-1 mr-2"></i>Datos fiscales</p>
                             </Link>
                             <Link :href="route('collaborator.bank.index')">
@@ -64,22 +64,22 @@
         </div>
         <div class="home-benefit row">
             <div class="col-12 mb-3.5 px-lg-0 mt-3.5 lg:mt-0">
-                <h2 class="font-bold text-xl">Información general</h2>
+                <h2 class="font-semibold text-3xl mt-2">Información general</h2>
             </div>
             <div class="col-12 col-lg-4 h-full">
                 <div class="row h-40 lg:h-full">
                     <div class="col-6 col-lg-12  pl-lg-0 pr-lg-3 benefit-target">
                         <div class="benefit-card w-full h-full rounded-xl shadow flex flex-column justify-between bg-collaborator-orange">
                             <img src="/vendor_asset/img/collaborator/dashboard/icons/dinero.svg" class="absolute bottom-0 right-0 w-3/4 lg:w-1/2">
-                            <h2 class="font-bold text-xl text-white p-2">Beneficios totales</h2>
-                            <p class="text-right text-lg text-white  p-2">{{(total*0.20).toFixed(2)}}€</p>
+                            <h2 class="font-bold text-2xl text-white p-2">Beneficios totales</h2>
+                            <p class="text-right text-xl text-white  p-2">{{(total*0.20).toFixed(2)}}€</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-12  pl-lg-0 pr-lg-3 mt-lg-auto benefit-target">
                         <div class="benefit-card w-full h-full rounded-xl shadow flex flex-column justify-between bg-collaborator">
                             <img src="/vendor_asset/img/collaborator/dashboard/icons/kayak.svg" class="absolute top-8 lg:top-0  right-0 w-3/4 lg:w-1/2">
-                            <h2 class="font-bold text-xl text-white p-2">Pedidos totales</h2>
-                            <p class="text-right text-lg text-white  p-2">{{orders.data.length}}</p>
+                            <h2 class="font-bold text-2xl text-white p-2">Pedidos totales</h2>
+                            <p class="text-right text-xl text-white  p-2">{{orders.data.length}}</p>
                         </div>
                     </div>
                 </div>
@@ -88,8 +88,8 @@
                 <div class="benefit-card-benefit w-full h-56 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative p-6" 
                     id="perfil-perfil"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg');">
                     <div class="absolute w-full h-full top-0 left-0 rounded-xl flex flex-column justify-between p-6" style="background-color:#00000069">
-                        <h2 class="font-bold text-6xl text-orangec">20%</h2>
-                        <p class="text-sm lg:text-lg text-white font-bold mb-auto">
+                        <h2 class="font-bold text-7xl text-orangec">20%</h2>
+                        <p class="text-sm lg:text-xl text-white font-bold mb-auto">
                             de comisión sobre el precio final
                             de venta de todos los servicios
                             que adquiera el cliente.

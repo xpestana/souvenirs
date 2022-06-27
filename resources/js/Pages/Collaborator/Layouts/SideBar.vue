@@ -4,7 +4,7 @@
             <i class="fas fa-times sidebarCollapse text-white cursor-pointer h-12 mt-8 w-12 mx-6 text-xl"></i>
             <img class="w-24 md:w-36 mr-auto grow mt-3.5 lg:mx-auto lg:mt-12" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="">
         </div>
-        <ul class="list-unstyled p-4 my-auto">  
+        <ul class="list-unstyled py-4 pl-8 2xl:pl-11 my-auto">  
             <li class="mb-3.5">
                 <Link :href="route('collaborator.dashboard.home')" class="text-base" :class="{'sidebar-active':this.$page.url=='/tablero'}">
                     <img class="inline w-5" style="margin-top:-4px"
@@ -37,24 +37,36 @@
                     </li>
                 </ul>
             </li>
-            <li class="mb-3.5">
-                <a href="#sub-ventas" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-base">
+            <li class="mb-3.5 relative">
+                <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesSales}"  id="downsales" @click="toggleMenuSales('sub-ventas')"></i>
+                <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesSales}" id="upsales" @click="toggleMenuSales('sub-ventas')"></i>
+                <Link :href="route('collaborator.dashboard.sales')" data-toggle="collapse" 
+                    aria-expanded="false" class="dropdown-toggle text-base"  
+                    :class="{'sidebar-active':routesSales}"
+                >
                 <img class="inline w-5" style="margin-top:-4px"
+                    :class="{'side-icon-active':routesSales}" 
                     src="/vendor_asset/img/collaborator/dashboard/icons/ventas.svg"
                 >
-                Ventas</a>
-                <ul class="collapse list-unstyled pl-4" id="sub-ventas">
+                    Ventas
+                </Link>
+                <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesSales}" id="sub-ventas">
                     <li>
-                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link pl-0.5"
-                           :class="{'side-icon-active':this.$page.url=='/tablero/perfil-datos-fiscales'}" 
-                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
+                        <Link href="#" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
+                            <img class="inline w-4" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/perfil-informacion'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-antes.svg"
                             >
                             Ventas por publicidad
-                        </Link>
+                        </Link>        
                     </li>
                     <li>
-                        <Link :href="route('collaborator.sales.inmueble')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
-                            Ventas por inmueble
+                        <Link :href="route('collaborator.sales.inmueble')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
+                            <img class="inline w-4" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-inmueble'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
+                            >
+                            Ventas por inmuebles
                         </Link>
                     </li>
                     <li>
@@ -66,21 +78,29 @@
                             Ventas totales
                         </Link>
                     </li>
+                    <li>
+                        <Link :href="route('dashboard.withdrawals')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/historial-retiros'}">
+                            <i class="fas fa-outdent text-white" :class="{'sidebar-active':this.$page.url=='/tablero/historial-retiros'}"></i>
+                            Historial de retiros
+                        </Link>
+                    </li>
                 </ul>
             </li>
-            <li class="mb-3.5">
+            <li class="mb-3.5 relative">
+                <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesProfile}" id="upprofile" @click="toggleMenuProfile('sub-perfil')"></i>
+                <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesProfile}" id="downprofile" @click="toggleMenuProfile('sub-perfil')"></i>
                 <Link :href="route('collaborator.dashboard.profile')" data-toggle="collapse" 
                     aria-expanded="false" class="dropdown-toggle text-base"  
-                    :class="{'side-icon-active':routesProfile}"
+                    :class="{'sidebar-active':routesProfile}"
                 >
                 <img class="inline w-4" style="margin-top:-4px"
-                        :class="{'sidebar-active':routesProfile}" 
+                        :class="{'side-icon-active':routesProfile}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/perfil.svg"
                     >
                     
                     Ajustes de perfil
                 </Link>
-                <ul class="collapse list-unstyled pl-8" :class="{'show':routesProfile}" id="sub-perfil">
+                <ul class="collapse list-unstyled list-sidebar pl-8" :class="{'show':routesProfile}" id="sub-perfil">
                     <li>
                         <Link :href="route('dashboard.profile.info')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
                             <img class="inline w-4" style="margin-top:-4px"
@@ -120,23 +140,25 @@
                 </ul>
             </li>
             <li class="mb-3.5">
-                <a :href="route('logout')" class="text-base">
+                <Link :href="route('logout')" class="text-base">
                     <img class="inline w-4" style="margin-top:-4px"
                         src="/vendor_asset/img/collaborator/dashboard/icons/cerrar.svg"
                     >
                     Cerrar Sesión
-                </a>
+                </Link>
             </li>
         </ul>
         <div class="nav-info text-center my-auto">
-            <h1 class="text-2xl font-weight-bolder text-white">?</h1>
-            <p class="text-base text-white">¿Necesitas ayuda?</p>
+            <div class="flex">
+                <img class="w-6 m-auto" src="/vendor_asset/img/collaborator/dashboard/icons/question.svg" alt="">
+            </div>
+            <p class="text-base text-white font-semibold">¿Necesitas ayuda?</p>
             <p class="text-sm text-white">
-                Encontraras atención especializada<br>
+                Encontrarás atención especializada<br>
                 llamando al siguiente teléfono:
             </p>
-            <p class="text-sm text-white"><i class="fas fa-phone-alt mr-1 text-white"></i> (+34) 722 193 903</p>    
-            <button class="btn rounded-lg text-white border-solid border border-white mx-auto py-1 my-2"  data-toggle="modal" data-target="#feedback">
+            <p class="text-sm text-white  font-semibold"><i class="fas fa-phone-alt mr-1 text-white"></i> (+34) 722 193 903</p>    
+            <button class="btn rounded-lg text-white border-solid border border-white mx-auto py-1 mt-8 mb-2"  data-toggle="modal" data-target="#feedback">
                 <i class="fas fa-comment-dots text-white mr-1"></i>¡Danos feedback!
             </button>
         </div>
@@ -174,22 +196,57 @@ export default {
     components:{
         Link
     },
-    computed:{
-        routesProfile(){
+    data(){
+        return {
+            routesSales:false,
+            routesProfile:false,
+        }
+    },
+    created(){
+        this.profile()
+        this.sales()
+    },
+    updated(){
+        this.routesSales = false
+        this.routesProfile = false
+        this.profile()
+        this.sales()
+    },
+    methods:{
+        profile(){
             let url = this.$page.url;
             let route1 = url.includes('tablero/perfil')
             let route2 = url.includes('tablero/perfil-informacion')
             let route3 = url.includes('tablero/banco')
             let route4 = url.includes('tablero/envio')
             let route5 = url.includes('tablero/perfil-datos-fiscales')
-            console.log(url)
-            console.log(route3)
             if(route1 || route2 || route3 || route4 || route5){
-                return true;
+                this.routesProfile = true;
             }
-            
+        },
+        sales(){
+            let url = this.$page.url;
+            let route1 = url.includes('tablero/bienvenido-ventas')
+            let route2 = url.includes('/tablero/ventas-totales')
+            let route3 = url.includes('/tablero/ventas-inmueble')
+            let route4 = url.includes('/tablero/historial-retiros')
+            if(route1 || route2 || route3 || route4){
+                this.routesSales = true;
+            }
+        },
+        toggleMenuProfile(id){
+            document.getElementById('downprofile').classList.toggle('d-none')
+            document.getElementById('upprofile').classList.toggle('d-none')
+            let ul = document.getElementById(id);
+            ul.classList.toggle('show');
+        },
+        toggleMenuSales(id){
+            document.getElementById('downsales').classList.toggle('d-none')
+            document.getElementById('upsales').classList.toggle('d-none')
+            let ul = document.getElementById(id);
+            ul.classList.toggle('show');
         }
-    }
+    },
 }
 </script>
 <style scoped>

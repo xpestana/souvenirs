@@ -72,6 +72,9 @@ class CollaboratorController extends Controller
                     
         return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders'));
     }
+    public function withdrawal_history(){
+        return Inertia::render('Collaborator/Dashboard/Sales/Withdrawals');
+    }
     
     public function create()
     {

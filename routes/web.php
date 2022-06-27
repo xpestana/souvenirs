@@ -329,6 +329,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     Route::get('/perfil-datos-fiscales', [CollaboratorController::class, 'profile_tax'])->name('collaborator.profile.tax');   
     Route::get('/bienvenido-ventas', [CollaboratorController::class, 'sales_welcome'])->name('collaborator.dashboard.sales');   
     Route::get('/ventas-totales', [CollaboratorController::class, 'sales_total'])->name('dashboard.sales.total'); 
+    Route::get('/historial-retiros', [CollaboratorController::class, 'withdrawal_history'])->name('dashboard.withdrawals'); 
     
 });
 /*Dashboard asociados*/

@@ -30,9 +30,9 @@
                 </div>
                 <div class="pt-8 d-flex flex-column flex-md-row">
                     <Link :href="route('collaborator.register')" class="btn btn-collaborator w-48 mx-auto mx-md-0 text-xl my-2">
-                        <p class="text-xl">Regístrate</p>
+                        <p class="text-xl font-semibold">Regístrate</p>
                     </Link>
-                    <Link :href="route('login')" class="btn btn-outline-collaborator w-48 text-xl mx-auto ml-md-4 my-2">Iniciar Sesión</Link>
+                    <Link :href="route('login')" class="btn btn-outline-collaborator w-48 text-xl mx-auto ml-md-4 my-2 font-semibold">Iniciar Sesión</Link>
                 </div>
             </div>
             <div class="d-none  d-xl-block col-md-6 pt-16">
@@ -48,29 +48,29 @@
         <section id="direction" class="container-fluid xl:px-16 2xl:px-28 lg:flex flex-column my-8 lg:my-36">
             <div class="row justify-content-center mt-auto">
                 <div class="col-12 col-md-9 px-8 md:px-0">
-                    <h1 class="text-center text-4xl md:text-5xl">¿A quién está dirigido?</h1>
+                    <h1 class="text-center text-4xl md:text-5xl font-semibold">¿A quién está dirigido?</h1>
                     <p class="text-center text-xl md:text-3xl mt-6 md:mt-14">
-                        Desde <b>Hicitty</b> ayudamos a que los huéspedes de los hoteles
+                        Desde <span class="font-semibold">Hicitty</span> ayudamos a que los huéspedes de los hoteles
                         y apartamentos tengan la mejor y más plena de las experiencias
                     </p>
                     <p class="text-center text-base md:text-xl mt-12">
-                        Por lo tanto esto te interesa si <b>gestionas</b> alguno de los
+                        Por lo tanto esto te interesa si <span class="font-semibold">gestionas</span> alguno de los
                         <br>siguientes establecimientos:
                     </p>
                 </div>
             </div>
             <div class="row mb-auto justify-content-center justify-content-md-around lg:px-40">
-                <div class="direction-btn text-2xl col-7 col-md-3 my-4 md:my-0 text-center text-white py-2 rounded">Apartamentos <br> turísticos</div>
-                <div class="direction-btn text-2xl  col-7 col-md-3 py-4 md:py-8 my-4 md:my-0 text-center text-white rounded">Hoteles</div>
-                <div class="direction-btn text-2xl  col-7 col-md-3  my-4 md:my-0 text-center text-white py-2 rounded">Negocios <br> turísticos</div>
+                <div class="direction-btn text-2xl col-7 col-md-3 my-4 md:my-0 text-center text-white py-2 rounded font-semibold">Apartamentos <br> turísticos</div>
+                <div class="direction-btn text-2xl  col-7 col-md-3 py-4 md:py-8 my-4 md:my-0 text-center text-white rounded font-semibold">Hoteles</div>
+                <div class="direction-btn text-2xl  col-7 col-md-3  my-4 md:my-0 text-center text-white py-2 rounded font-semibold">Negocios <br> turísticos</div>
             </div>
         </section>
         <!-- <section  class="container-fluid xl:px-16 2xl:px-28 md:flex relative"> -->
         <section id="oferta" class="relative lg:px-28">
             <img src="/vendor_asset/img/collaborator/offer.png" class="img-fondo hidden lg:block absolute top-0 left-0 w-full">
-            <div class="row my-auto justify-content-around px-2 md:px-32 pt-28 lg:pb-28">
+            <div class="row my-auto justify-content-around px-2 md:px-32 pt-28 lg:pb-28 mx-0">
                 <div class="col-12">
-                    <h1 class="text-center text-4xl md:text-5xl text-white md:pl-24 mb-8 md:mb-0">¿Qué ofrecemos?</h1>
+                    <h1 class="text-center text-4xl md:text-5xl text-white md:pl-24 mb-8 md:mb-0 font-semibold">¿Qué ofrecemos?</h1>
                 </div>
                 <div class="col-md-4">
                     <img class="h-64 md:h-96 mx-auto" src="/vendor_asset/img/collaborator/section1.png" alt="">
@@ -80,57 +80,57 @@
                         <div class="col-12">
                             <p class="text-white text-xl my-4">
                                 Pon al alcance de los huéspedes una gran variedad de <br>
-                                experiencias y servicios que ofrecemos desde <b>Hicitty</b> para la
+                                experiencias y servicios que ofrecemos desde <span class="font-semibold">Hicitty</span> para la
                                 ciudad que van a visitar.
                             </p>
                         </div>
                         <div class="col-12 col-md-6 offer-item mt-3 md:mt-0">
                             <div class="offer-title">
                                 <img src="/vendor_asset/img/collaborator/kayakn.svg" class="d-inline w-8">
-                                <p class="d-inline text-xl font-weight-bolder text-white pl-2.5">Experiencias</p>
+                                <p class="d-inline text-xl font-semibold text-white pl-2.5">Experiencias</p>
                             </div>
                             <div class="offer-title">
                                 <p class="text-base text-white pl-11">
                                     El huésped podra escoger y reservar entre una gran cantidad de actividades  experiencias
-                                    propias de la ciudad en la que se encuentra, como <b>tours guiados, espetáculos locales....</b>
+                                    propias de la ciudad en la que se encuentra, como <span class="font-semibold">tours guiados, espetáculos locales....</span>
                                 </p>
                             </div>
                         </div>    
                         <div class="col-12 col-md-6 offer-item mt-3 md:mt-0">
                             <div class="offer-title">
                                 <img src="/vendor_asset/img/collaborator/regalon.svg" class="d-inline w-6">
-                                <p class="d-inline text-xl font-weight-bolder text-white pl-2.5">Souvenirs</p>
+                                <p class="d-inline text-xl font-semibold text-white pl-2.5">Souvenirs</p>
                             </div>
                             <div class="offer-title">
                                 <p class="text-base text-white pl-11">
-                                    Desde los típicos <b>imanes, postales y démas recuerdos</b> hasta souvenirs gastrinómicos
-                                    como <b>quesos, vinos, productos, típicos de la ciudad....</b>
+                                    Desde los típicos <span class="font-semibold">imanes, postales y démas recuerdos</span> hasta souvenirs gastrinómicos
+                                    como <span clas="font-semibold">quesos, vinos, productos, típicos de la ciudad....</span>
                                 </p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 offer-item mt-3">
                             <div class="offer-title">
                                 <img src="/vendor_asset/img/collaborator/info.svg" class="d-inline w-6">
-                                <p class="d-inline text-xl font-weight-bolder text-white pl-2.5">Información turística</p>
+                                <p class="d-inline text-xl font-semibold text-white pl-2.5">Información turística</p>
                             </div>
                             <div class="offer-title">
                                 <p class="text-base text-white pl-11">
                                     Ofrece toda la información relevante y de interés de la ciudad para que el
                                     huésped no se pierda nada.<br>
-                                    Encontrará <b>guías de qué hacer, que visitar, donde comer, lugares de ocio, rutas....</b>
+                                    Encontrará <span class="font-semibold">guías de qué hacer, que visitar, donde comer, lugares de ocio, rutas....</span>
                                 </p>
                             </div>
                         </div>  
                         <div class="col-12 col-md-6 offer-item mt-3">
                             <div class="offer-title">
                                 <img src="/vendor_asset/img/collaborator/hicittylogopequeñon.svg" class="d-inline w-6">
-                                <p class="d-inline text-xl font-weight-bolder text-white pl-2.5">Y mucho más</p>
+                                <p class="d-inline text-xl font-semibold text-white pl-2.5">Y mucho más</p>
                             </div>
                             <div class="offer-title">
                                 <p class="text-base text-white pl-11">
                                     No todo tiene que ser turismo. Ofrece también una variedad de servicios que
-                                    mejoren la experiencia del huésped como; <b> spa, tranfers, co-working, 
-                                    lavandería....</b>
+                                    mejoren la experiencia del huésped como; <span class="font-semibold"> spa, tranfers, co-working, 
+                                    lavandería....</span>
                                 </p>
                             </div>
                         </div>     
@@ -141,7 +141,7 @@
         <section id="slide" class="container-fluid xl:px-16 2xl:px-28  lg:flex flex-column mb-16 lg:mb-14 lg:mt-40 ">
             <div class="row mt-auto">
                 <div class="col-12">
-                    <h1 class="text-4xl md:text-5xl md:pl-24 mb-6 md:mb-4">¿Cómo lo hacemos?</h1>
+                    <h1 class="text-4xl md:text-5xl md:pl-24 mb-6 md:mb-4 font-semibold">¿Cómo lo hacemos?</h1>
                 </div>
             </div>
             <div class="row mb-auto">
@@ -150,7 +150,7 @@
                         <Slide :key="0">
                             <div class="row">
                                 <div class="col-12 col-md-6 pl-4 md:pl-28 text-left">
-                                    <h2 class="text-2xl md:text-3xl font-weight-bolder md:pl-24 mb-8 md:mb-0">
+                                    <h2 class="text-2xl md:text-3xl font-semibold md:pl-24 mb-8 md:mb-0">
                                         1. <span class="text-collaborator">Registro</span> en la plataforma
                                         y <span class="text-collaborator">alta</span> de los inmuebles
                                     </h2>
@@ -167,7 +167,7 @@
                         <Slide :key="1">
                             <div class="row">
                                 <div class="col-12 col-md-6 pl-4 md:pl-28 text-left">
-                                    <h2 class="text-2xl md:text-3xl font-weight-bolder md:pl-24">
+                                    <h2 class="text-2xl md:text-3xl font-semibold md:pl-24">
                                         2. <span class="text-collaborator">Entrega</span> y
                                         <span class="text-collaborator">colocación</span> del elemento de impacto
                                         en el inmueble.
@@ -186,7 +186,7 @@
                         <Slide :key="2">
                             <div class="row">
                                 <div class="col-12 col-md-6 pl-4 md:pl-28 text-left">
-                                    <h2 class="text-2xl md:text-3xl font-weight-bolder md:pl-24">
+                                    <h2 class="text-2xl md:text-3xl font-semibold md:pl-24">
                                         3. <span class="text-collaborator">Incentivación</span> al cliente
                                         para dejar un valoración
                                     </h2>
@@ -203,7 +203,7 @@
                         <Slide :key="3">
                             <div class="row">
                                 <div class="col-12 col-md-6 pl-4 md:pl-28 text-left">
-                                    <h2 class="text-2xl md:text-3xl font-weight-bolder md:pl-24">
+                                    <h2 class="text-2xl md:text-3xl font-semibold md:pl-24">
                                         4. <span class="text-collaborator">Control</span> de beneficios de los
                                         inmuebles
                                     </h2>
@@ -229,16 +229,16 @@
         <!-- <section id="result" class="container-fluid xl:px-16 2xl:px-28 md:flex"> -->
         <section id="resultado" class="relative lg:px-28">
             <img src="/vendor_asset/img/collaborator/result.png" class="img-fondo hidden lg:block absolute top-0 left-0 w-full">
-            <div class="row my-auto  justify-content-around xl:px-32 pt-16 md:pt-44 md:pb-32">
+            <div class="row my-auto  justify-content-around xl:px-8 pt-16 md:pt-48 md:pb-32 mx-0">
                 <div class="col-12">
-                    <h1 class="text-center text-4xl md:text-5xl text-white mb-12 md:mb-16 lg:pt-14">¿Cuál es el resultado?</h1>
+                    <h1 class="text-center text-4xl md:text-5xl text-white mb-12 md:mb-16 lg:pt-14 font-semibold">¿Cuál es el resultado?</h1>
                 </div>
                 <div class="col-9 col-md-3 my-2 md:my-0 rounded-lg bg-white p-3 result-card shadow-lg">
                     <div class="card-icon">
                         <img src="/vendor_asset/img/collaborator/val.svg" alt="img-card" class="w-24 h-24 mx-auto">
                     </div>
                     <div class="card-title">
-                        <h3 class="text-lg text-center font-weight-bolder">
+                        <h3 class="text-lg text-center font-semibold">
                             Mejorar la experiencia de los inquilinos
                         </h3>
                     </div>
@@ -254,7 +254,7 @@
                         <img src="/vendor_asset/img/collaborator/valoracionn.svg" alt="img-card" class="h-24 w-24 mx-auto">
                     </div>
                     <div class="card-title">
-                        <h3 class="text-lg text-center font-weight-bolder">
+                        <h3 class="text-lg text-center font-semibold">
                             Aumentar las valoraciones
                         </h3>
                     </div>
@@ -270,7 +270,7 @@
                         <img src="/vendor_asset/img/collaborator/dineron.svg" alt="img-card" class="h-24 w-24 mx-auto">
                     </div>
                     <div class="card-title">
-                        <h3 class="text-lg text-center font-weight-bolder">
+                        <h3 class="text-lg text-center font-semibold">
                             Añadir una nueva línea de ingresos
                         </h3>
                     </div>
@@ -283,11 +283,11 @@
                 </div>
                 <div class="col-12">
                     <p class="text-center pt-8 md:pt-16 text-2xl md:text-3xl text-white">Y lo mejor de todo</p>
-                    <h1 class="text-center text-3xl md:text-5xl text-white mt-6 px-8 md:px-0">Sin invertir tiempo ni dinero</h1>
+                    <h1 class="text-center text-3xl md:text-5xl text-white mt-6 px-8 md:px-0 font-semibold">Sin invertir tiempo ni dinero</h1>
                 </div>
             </div>
         </section>
-        <section id="win" class="container-fluid xl:px-16 2xl:px-28 lg:flex my-16 lg:my-28">
+        <section id="win" class="container-fluid xl:px-16 2xl:px-28 lg:flex my-16 lg:my-32">
             <div class="row my-auto">
                 <div class="col-12 md:px-48">
                     <h1 class="text-center text-3xl md:text-6xl font-weight-bolder">
@@ -313,7 +313,7 @@
                     </div>
                 </div>
                 <div class="col-12 mt-14 text-center ">
-                    <Link :href="route('collaborator.register')" class="btn btn-win text-xl w-72">¡Quiero registrarme!</Link>
+                    <Link :href="route('collaborator.register')" class="btn btn-win text-xl w-72 font-semibold">¡Quiero registrarme!</Link>
                 </div>
             </div>
         </section>
@@ -322,10 +322,10 @@
                 <div class="md:px-48 hicitty h-32 md:h-96 w-100">
                     <img class="absolute left-0 right-0 md:top-24 lg:top-0 mx-auto 2xl:w-3/4" src="/vendor_asset/img/collaborator/footerhiccity.svg" alt="">
                 </div>
-                <div class="col-12 foot xl:pt-10 xl:px-16 2xl:px-28" style="background-color:#000">
+                <div class="col-12 foot xl:pt-10 xl:px-4 2xl:px-28" style="background-color:#000">
                     <div class="row justify-content-between pb-8 xl:px-16 2xl:px-28">
-                        <div class="col-12 col-md-4 col-xl-6 px-8">
-                            <h1 class="text-4xl md:text-5xl text-white py-8">
+                        <div class="col-12 col-md-4 col-xl-6">
+                            <h1 class="text-4xl md:text-5xl text-white py-8 font-semibold">
                                 Solo ganamos si tu ganas     
                             </h1>
                             <p class="text-sm text-white">
