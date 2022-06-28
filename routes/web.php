@@ -286,6 +286,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('registro/datos', [CollaboratorController::class, 'data'])->name('collaborator.data');  
     Route::post('register/data', [CollaboratorController::class, 'register_data'])->name('collaborator.register.data');
     Route::post('/borrar-cuenta/{id}', [ProfileCollaboratorController::class, 'destroy'])->name('collaborator.delete');  
+    Route::post('/colaboradores/feedback', [CollaboratorController::class, 'feedback'])->name('collaborator.feedback');
+    Route::post('/colaboradores/notify', [CollaboratorController::class, 'notify'])->name('collaborator.notify');
 });
 
 /*Dashboard Colaborador*/

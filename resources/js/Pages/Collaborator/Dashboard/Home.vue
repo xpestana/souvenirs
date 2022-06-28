@@ -79,7 +79,7 @@
                         <div class="benefit-card w-full h-full rounded-xl shadow flex flex-column justify-between bg-collaborator">
                             <img src="/vendor_asset/img/collaborator/dashboard/icons/kayak.svg" class="absolute top-8 lg:top-0  right-0 w-3/4 lg:w-1/2">
                             <h2 class="font-bold text-2xl text-white p-2">Pedidos totales</h2>
-                            <p class="text-right text-xl text-white  p-2">{{orders.data.length}}</p>
+                            <p class="text-right text-xl text-white  p-2">{{orders.length}}</p>
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@ export default {
         }
     },
     created(){
-        this.orders.data.forEach(order =>{
+        this.orders.forEach(order =>{
             this.total += Number(order.total);
         });
     }

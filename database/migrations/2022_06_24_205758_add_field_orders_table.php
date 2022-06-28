@@ -25,6 +25,6 @@ class AddFieldOrdersTable extends Migration
      */
     public function down()
     {
-        //
+        $table->dropColumn('type_order');
     }
 }

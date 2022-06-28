@@ -61,7 +61,7 @@
                         </Link>        
                     </li>
                     <li>
-                        <Link :href="route('collaborator.sales.inmueble')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
+                        <Link :href="route('collaborator.sales.property')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/ventas-inmueble'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
@@ -169,6 +169,7 @@
     <!-- Change class .modal-sm to change the size of the modal -->
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mx-auto">
+                <form @submit.prevent="sendFeedback">
                 <div class="modal-body p-0">
                     <div class="bg-collaborator-orange h-14 pt-3 px-4 rounded-t-xl">
                         <p class="text-white text-2xl font-bold"><i class="fas fa-comment-dots text-white mr-1"></i>¡Danos feedback!</p>
@@ -179,12 +180,15 @@
                         que nos ayuda a mejorar tu experiencia, así que no te cortes.
                     </p>
                     <div class="mt-1 px-4">
-                        <textarea class="border w-100 rounded h-36 col-form-input" placeholder="Escribe aquí tu feedback..."></textarea>
+                        
+                        <textarea class="border w-100 rounded h-36 col-form-input" v-model="form.description" placeholder="Escribe aquí tu feedback..."></textarea>
+
                     </div>
                     <div class="mb-3.5 mt-1 flex">
                         <button class="btn rounded bg-collaborator-orange text-white ml-auto mr-4 px-4 py-1">Enviar</button>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
@@ -200,6 +204,9 @@ export default {
         return {
             routesSales:false,
             routesProfile:false,
+            form: this.$inertia.form({
+                description: null,
+            }),
         }
     },
     created(){
@@ -245,6 +252,13 @@ export default {
             document.getElementById('upsales').classList.toggle('d-none')
             let ul = document.getElementById(id);
             ul.classList.toggle('show');
+        },
+        sendFeedback(){
+            this.form.post(route('collaborator.feedback'),{
+                    _token: this.$page.props.csrf_token,
+                    errorBag: 'sendFeedback',
+                    preserveScroll: true,
+                })
         }
     },
 }

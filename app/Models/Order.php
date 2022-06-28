@@ -50,8 +50,6 @@ class Order extends Model
     public function scopeDate($query, $desde, $hasta) 
     {
         if ($desde && $hasta) {
-            $desde = Carbon::parse($desde)->addDay(1);
-            $hasta = Carbon::parse($hasta)->addDay(1);
             $query->whereDate('created_at',">=", $desde)
                 ->whereDate('created_at',"<=", $hasta);
         }

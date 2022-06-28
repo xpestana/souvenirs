@@ -13,7 +13,7 @@
                 <div class="row justify-content-center">
                     <div class="pt-2 col-12 col-lg-6 text-center text-lg-left">
                         <h2 class="font-bold inline text-white text-base">Saldo pendiente: </h2><br class="lg:hidden">
-                        <p class="inline text-white text-base">0€</p>
+                        <p class="inline text-white text-base">{{ (withdrawal*0.20).toFixed(2) }} €</p>
                     </div>
                     <div class="pt-0.5 col-12 col-lg-6 text-center text-lg-right">
                         <button class="btn bg-white text-orangec lg:ml-auto py-1 lg:mr-2.5 font-bold" @click="requestTransfer">Pedir transferencia</button>
@@ -182,14 +182,16 @@ export default {
     },
     props:{
         hotels:Object,
-        orders:Object
+        orders:Object,
+        date:String,
     },
     data(){
         return{
             total:0,
+            withdrawal:0,
             desde:null,
             hasta:null,
-            dateTEST:'2022-01-30 10:57:08',
+            dateTEST:this.date,
             countTest:0,
             remainingDays:null
         }
@@ -198,6 +200,10 @@ export default {
         this.moment=Moment;
         this.orders.data.forEach(order =>{
             this.total += Number(order.total);
+            if (order.withdrawal == 0) {
+                this.withdrawal += Number(order.total);    
+            }
+            
         });
     },
     watch:{
@@ -262,7 +268,7 @@ export default {
         sendNotification(){
             let request=$('#request');
             let noti=$('#notification');
-            this.$inertia.post(route('test'),{
+            this.$inertia.post(route('collaborator.notify'),{
                 onSuccess: (page) => {
                     request.modal('hide')
                     noti.modal('show')

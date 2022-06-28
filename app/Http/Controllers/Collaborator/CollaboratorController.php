@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Collaborator;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SaleSouvenirReceived;
+use App\Mail\FeedbackReceived;
 use App\Models\hotel;
 use App\Models\User;
 use App\Models\Order;
@@ -39,10 +40,21 @@ class CollaboratorController extends Controller
         $cont = step();
         $hotels = auth()->user()->hotel->load('orders.shippings');
         $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status","complete")
-                    ->with('hotel','shippings')->paginate(15);
+                    ->with('hotel','shippings')->get();
         return Inertia::render('Collaborator/Dashboard/Home', compact('cont','hotels','url','orders'));
     }
-
+    public function feedback(Request $request)
+    {
+        $request->validate([
+            'description' => 'required|string',
+        ]);
+        $id = mt_Rand(1000000, 9999999);
+        $user = auth()->user();
+        $details = $request->description;
+        Mail::to("info@hicitty.es")->send(new FeedbackReceived($user,$details));
+    
+    return Redirect::route('collaborator.dashboard.home')->with(['id'=>$id, 'message' => 'Enviado con exito', 'code' => 200, 'status' => 'success']);
+    }
     public function profile()
     {
         return Inertia::render('Collaborator/Dashboard/Profile/Welcome');
@@ -58,23 +70,7 @@ class CollaboratorController extends Controller
         return Inertia::render('Collaborator/Dashboard/Profile/Tax');
     }
 
-    public function sales_welcome(){
-        return Inertia::render('Collaborator/Dashboard/Sales/Welcome');
-    }
-    public function sales_total(Request $request){
-        
-        $hotels = auth()->user()->hotel->load('orders.shippings');
-        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
-                    ->where("status","complete")
-                    ->with('hotel','shippings')
-                    ->Date($request->desde, $request->hasta)
-                    ->paginate(15);
-                    
-        return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders'));
-    }
-    public function withdrawal_history(){
-        return Inertia::render('Collaborator/Dashboard/Sales/Withdrawals');
-    }
+   
     
     public function create()
     {
@@ -380,11 +376,9 @@ class CollaboratorController extends Controller
 
     // Sales
 
-    public function sales(){
-        $hotels = auth()->user()->hotel->load('orders.shippings');    
-        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status", "complete")->with('hotel', 'shippings')->paginate(15);   
+    public function sales_welcome(){
+        return Inertia::render('Collaborator/Dashboard/Sales/Welcome');
     }
-
     public function sales_hab($id){
         $hotels = auth()->user()->hotel->load('orders.shippings');    
         $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status", "complete")->with('hotel', 'shippings')->paginate(15); 
@@ -422,6 +416,43 @@ class CollaboratorController extends Controller
                         ->paginate(8);
         $orders = $model->appends(request()->except('page'));
         return Inertia::render('Collaborator/Dashboard/Sales/Publicity',compact('orders'));
+    }
+
+    public function sales_total(Request $request){
+        
+        $hotels = auth()->user()->hotel->load('orders.shippings');
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)->paginate(15);
+        $withdrawal = $orders->where("withdrawal",0);
+
+        $date = null;
+
+        if (!$withdrawal->isEmpty()) {
+            $date = $withdrawal->last()->updated_at; 
+        }
+
+        return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders','date'));
+    }
+    public function notify(Request $request){
+
+        $hotels = auth()->user()->hotel->load('orders.shippings');
+        
+        foreach ($hotels as $hotel) {
+            $orders = Order::where('hotel_id',$hotel->id)->get();
+
+            foreach ($orders as $order) {
+                $updt = Order::find($order->id);
+                $updt->withdrawal = 1;
+                $updt->save();
+            }
+        }
+
+        return back();
+    }
+    public function withdrawal_history(){
+        return Inertia::render('Collaborator/Dashboard/Sales/Withdrawals');
     }
 
     // end sales
