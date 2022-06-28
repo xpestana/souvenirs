@@ -14,7 +14,7 @@ class AddFieldOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('type_order');
+            $table->string('type_order')->default(1);
         });
     }
 
