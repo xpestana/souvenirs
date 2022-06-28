@@ -3,7 +3,7 @@
         <!-- Header section-->
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
-                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="fas fa-arrow-left text-muted mr-2"></i> Historial de retiros</h1>
+                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="fas fa-arrow-left text-muted mr-2"></i> Ventas totales</h1>
             </div>
         </div>
         <!--END Header section-->
@@ -13,7 +13,7 @@
                 <div class="row justify-content-center">
                     <div class="pt-2 col-12 col-lg-6 text-center text-lg-left">
                         <h2 class="font-bold inline text-white text-base">Saldo pendiente: </h2><br class="lg:hidden">
-                        <p class="inline text-white text-base">0€</p>
+                        <p class="inline text-white text-base">{{ (withdrawal*0.20).toFixed(2) }} €</p>
                     </div>
                     <div class="pt-0.5 col-12 col-lg-6 text-center text-lg-right">
                         <button class="btn bg-white text-orangec lg:ml-auto py-1 lg:mr-2.5 font-bold" @click="requestTransfer">Pedir transferencia</button>
@@ -50,12 +50,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-center font-bold">-</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">-</td>
-                                <td class="text-center">-€</td>
+                            <tr v-for="order in orders.data" :key="order.id">
+                                <td class="text-center font-bold">{{order.transaction_id}}</td>
+                                <td class="text-center">{{order.hotel.zone}}</td>
+                                <td class="text-center">{{moment(order.created_at).format("DD/MM/YYYY")}}</td>
+                                <td class="text-center">{{order.total}}</td>
+                                <td class="text-center">{{(order.total*0.20).toFixed(2)}}€</td>
+                            </tr>
+                            <tr v-if="orders.length == 0">
+                                <td colspan="5" class="text-center">Sin alojamientos</td>
                             </tr>
                         </tbody>
                     </table>
@@ -64,7 +67,7 @@
         </div>
         <div class="ver-mas row my-2.5 justify-content-center">
             <div class="col-11 col-md-8 col-lg-4 col-xl-6 text-center overflow-auto">
-                <!-- <paginator :paginator="orders"/> -->
+                <paginator :paginator="orders"/>
                 <!-- <button class="btn btn-outline-orange font-bold py-1 px-12">Cargar más</button> -->
             </div>
         </div>
@@ -179,23 +182,29 @@ export default {
     },
     props:{
         hotels:Object,
-        orders:Object
+        orders:Object,
+        date:String,
     },
     data(){
         return{
             total:0,
+            withdrawal:0,
             desde:null,
             hasta:null,
-            dateTEST:'2022-01-30 10:57:08',
+            dateTEST:this.date,
             countTest:0,
             remainingDays:null
         }
     },
     created(){
         this.moment=Moment;
-        // this.orders.data.forEach(order =>{
-        //     this.total += Number(order.total);
-        // });
+        this.orders.data.forEach(order =>{
+            this.total += Number(order.total);
+            if (order.withdrawal == 0) {
+                this.withdrawal += Number(order.total);    
+            }
+            
+        });
     },
     watch:{
         hasta(newVal,oldVal){
@@ -259,7 +268,7 @@ export default {
         sendNotification(){
             let request=$('#request');
             let noti=$('#notification');
-            this.$inertia.post(route('test'),{
+            this.$inertia.post(route('collaborator.notify'),{
                 onSuccess: (page) => {
                     request.modal('hide')
                     noti.modal('show')

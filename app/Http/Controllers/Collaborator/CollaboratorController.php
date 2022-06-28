@@ -438,9 +438,9 @@ class CollaboratorController extends Controller
     public function notify(Request $request){
 
         $hotels = auth()->user()->hotel->load('orders.shippings');
-        
+
         foreach ($hotels as $hotel) {
-            $orders = Order::where('hotel_id',$hotel->id)->get();
+            $orders = Order::where('hotel_id',$hotel->id)->where("status","complete")->get();
 
             foreach ($orders as $order) {
                 $updt = Order::find($order->id);
@@ -451,8 +451,27 @@ class CollaboratorController extends Controller
 
         return back();
     }
-    public function withdrawal_history(){
-        return Inertia::render('Collaborator/Dashboard/Sales/Withdrawals');
+    public function withdrawal_history(Request $request){
+
+        $hotels = auth()->user()->hotel->load('orders.shippings');
+        $withdrawal = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("withdrawal",0)
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)->paginate(15);
+         
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("withdrawal",1)
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)->paginate(15);
+
+        $date = null;
+
+        if (!$withdrawal->isEmpty()) {
+            $date = $withdrawal->last()->updated_at; 
+        }
+        return Inertia::render('Collaborator/Dashboard/Sales/Withdrawals',compact('hotels','orders','date'));
     }
 
     // end sales
