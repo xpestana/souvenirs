@@ -315,9 +315,14 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/banco')->group(function
     Route::post('/store', [CollaboratorController::class, 'store_bank'])->name('collaborator.bank.store');
 });
 
-/*Sales during*/
+/*Sales propertity*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/ventas-inmueble')->group(function () {
-    Route::get('/', [CollaboratorController::class, 'create_sales_during'])->name('collaborator.sales.inmueble');
+    Route::get('/', [CollaboratorController::class, 'sales_property'])->name('collaborator.sales.property');
+});
+
+/*Sales publicity*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/ventas-publicidad')->group(function () {
+    Route::get('/', [CollaboratorController::class, 'sales_publicity'])->name('collaborator.sales.publicity');
 });
 
 /*Dashboard Colaborador*/

@@ -397,20 +397,31 @@ class CollaboratorController extends Controller
         return Inertia::render('Collaborator/Dashboard/Lodging/Details', compact('hotel'));
     }
 
-    public function create_sales_during (Request $request) {
-    	$from = $request->from ? $request->from : null;
-    	$to = $request->to ? $request->to : null;
-    	$hotels = auth()->user()->hotel->load('orders.shippings');    
+    public function sales_property (Request $request) {
+    	$hotels = auth()->user()->hotel->load('orders.shippings'); 
         $model = Order::whereIn('hotel_id',$hotels->pluck('id'))
-                        ->where('type_order', 'qr')
+                        ->where('type_order', '1')
                         ->where("status", "complete")
                         ->with('hotel', 'shippings')
                         ->Date($request->from, $request->to)
                         ->orderBy('id', 'desc')
-                        ->paginate(5);
+                        ->paginate(8);
         
         $orders = $model->appends(request()->except('page'));
-        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('orders', 'from', 'to'));
+        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('orders'));
+    }
+
+    public function sales_publicity (Request $request) {
+        $hotels = auth()->user()->hotel->load('orders.shippings'); 
+        $model = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                        ->where('type_order', '2')
+                        ->where("status", "complete")
+                        ->with('hotel', 'shippings')
+                        ->Date($request->from, $request->to)
+                        ->orderBy('id', 'desc')
+                        ->paginate(8);
+        $orders = $model->appends(request()->except('page'));
+        return Inertia::render('Collaborator/Dashboard/Sales/Publicity',compact('orders'));
     }
 
     // end sales

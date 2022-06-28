@@ -25,7 +25,7 @@
 				  	placeholder="Select date"
 				  	type="date"
 				  	class="col-form-input w-100 rounded py-1.5"
-				  	@change="fiterDuring()"
+				  	@change="validFilterProperty()"
 				  >
 				</div>
 	    	</div>
@@ -36,50 +36,53 @@
 				  		v-model="form.to"
 				  		placeholder="Select date"
 				  		type="date" class="col-form-input w-100 rounded py-1.5"
-				  		@change="fiterDuring()"
+				  		@change="validFilterProperty()"
 				  	>
 				</div>
 	    	</div>
 	    </div>
 	    <!-- END Filtro por fecha -->
 		<!-- table -->
-        <div class="table-responsive-sm mt-8">
-        	<table class="table table-striped table-responsive">
-			  <thead class="text-white text-sm text-center">
-			    <tr id="tablep">
-			      <th scope="col">ID Transacción</th>
-			  	  <th scope="col">Alojamiento</th>
-			  	  <th scope="col">Tipo Aloj.</th>
-			  	  <th scope="col">Provincia</th>
-			  	  <th scope="col">Ciudad</th>
-			  	  <th scope="col">Fecha</th>
-			  	  <th scope="col">Facturación</th>
-			  	  <th scope="col">Beneficio</th>
-			    </tr>
-			  </thead>
-			  <tbody class="text-xs text-muted" id="tbody">
-			    <tr
- 					v-for="(item, index) in filterOrders"
- 					:key="index"
- 					id="tablep"
-			    >
-			      <td class="text-center font-bold underline">{{ item.transactionId }}</td>
-			      <td class="text-center">{{ item.alojamiento }}</td>
-			      <td class="text-center">{{ item.tipoAloj }}</td>
-			      <td class="text-center">{{ item.province }}</td>
-			      <td class="text-center">{{ item.city }}</td>
-			      <td class="text-center">{{ item.created_at }}</td>
-			      <td class="text-center">{{ item.total }}€</td>
-			      <td class="text-center">{{ item.beneficio }}€</td>
-			    </tr>
-			    <tr v-if="filterOrders.length < 1">
-					<td colspan="8" class="text-center">No hay resultados para la busqueda</td>
-				</tr>
-			  </tbody>
-			</table>
-        </div>
-        <div class="row justify-content-md-center px-0 px-lg-5 py-2">
-        	<div class="col-12 flex justify-center">
+		<div class="mt-8 row">
+			<div class="col-12">
+				<div class="table-responsive-sm">
+		        	<table class="table table-striped">
+					  <thead class="text-white text-sm text-center">
+					    <tr id="tablep">
+					      <th
+					      	v-for="(item, key) in headerTable"
+					    	:key="key"
+					      	scope="col"
+					      >
+					  		{{ item.name }}
+					  	  </th>
+					    </tr>
+					  </thead>
+					  <tbody class="text-xs" id="tbody">
+					    <tr
+		 					v-for="(item, index) in filterOrders"
+		 					:key="index"
+		 					id="tablep"
+					    >
+					      <td class="text-center font-bold underline">{{ item.transactionId }}</td>
+					      <td class="text-center">{{ item.alojamiento }}</td>
+					      <td class="text-center">{{ item.tipoAloj }}</td>
+					      <td class="text-center">{{ item.province }}</td>
+					      <td class="text-center">{{ item.city }}</td>
+					      <td class="text-center">{{ item.created_at }}</td>
+					      <td class="text-center">{{ item.total }}€</td>
+					      <td class="text-center">{{ item.beneficio }}€</td>
+					    </tr>
+					    <tr v-if="filterOrders.length < 1">
+							<td colspan="8" class="text-center">No hay resultados para la busqueda</td>
+						</tr>
+					  </tbody>
+					</table>
+		        </div>
+			</div>
+		</div>
+         <div class="ver-mas row my-2.5 justify-content-center">
+        	<div class="col-11 col-md-8 col-lg-4 col-xl-6 text-center">
      			 <paginator :paginator="orders" />
      		</div> 
         </div>
@@ -90,7 +93,7 @@
 <script>
 	import { Head, Link } from '@inertiajs/inertia-vue3'
 	import { Inertia } from '@inertiajs/inertia'
-	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
+	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
 	import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
 	import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert'
 	import Paginator from '@/Components/Paginator.vue'
@@ -105,8 +108,6 @@
 	    },
 	    props:{
 	        orders: Object,
-	        from: String,
-	        to: String,
 	    },
 	    data () {
 	    	return {
@@ -147,6 +148,7 @@
 	    		return map
 	    	},
 	    },
+
 	    mounted(){
 			this.busqueda()
 		},
@@ -163,7 +165,27 @@
 					this.form.to = limpioTo
 				}
 			},
-	    	fiterDuring() {
+	    	validFilterProperty() {
+	    		if (this.form.to && this.form.from) {
+					if (moment(this.form.to).isAfter(this.form.from)) {
+						this.submitDuring()
+					} else {
+						this.$swal({
+	                        title: 'Intervalo de fechas incorrecto',
+	                        icon: 'info',
+	                        showCloseButton: false,
+	                        showCancelButton: false,
+	                        focusConfirm: false,
+	                        confirmButtonText:
+	                            '<i class="fa fa-thumbs-up"></i> Aceptar!',
+	                        confirmButtonAriaLabel: 'Aceptar!',
+	                    })
+					}
+				} else {
+					this.submitDuring()
+				}
+			},
+			submitDuring () {
 				this.orders.data = [];
 				/*let nodos = document.getElementById('tbody').childNodes.length;
 				if(nodos == 3 || nodos > 4){
@@ -180,13 +202,6 @@
 					});
 				},1500);
 			},
-	    	/*fiterDuring () {
-	    		var form = {
-	    			from: this.filterSaleDuring.from,
-	    			to: this.filterSaleDuring.to,
-	    		}
-	    		Inertia.get(route('collaborator.sales.inmueble', form))
-            },*/
 	    },
 	}
 </script>
@@ -218,11 +233,5 @@
     	display: block;
     	overflow-x: auto;
     	white-space: nowrap;
-    }
-    table::-webkit-scrollbar-thumb{
-    	background-color:orange;
-    }
-    table::-webkit-scrollbar-track{
-    	background-color:orange;
     }
 </style>
