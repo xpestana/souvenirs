@@ -45,8 +45,8 @@
             align-items: center;
         }
         .spinner{
-          width: 4.5rem;
-          height: 4.5rem;
+          width: 4rem;
+          height: 4rem;
           border-radius: 50%;
           box-shadow: 1px 5px 2px #fff;
           animation: spinner 2s linear infinite;
@@ -78,8 +78,8 @@
                 width: 31%;
             }
             .spinner{
-              width: 5rem;
-              height: 5rem;
+              width: 4.5rem;
+              height: 4.5rem;
             }
         }
         @media (max-width: 767px){
@@ -87,8 +87,8 @@
                 width: 60%;
             }
             .spinner{
-              width: 5.5rem;
-              height: 5.5rem;
+              width: 5rem;
+              height: 5rem;
             }
             .preloader__loader > span{
                 font-size: 2rem;
@@ -172,6 +172,5 @@
                 $("#preloaders").fadeOut(100);
             });
         </script>
-        
     </body>
 </html>
