@@ -52,32 +52,21 @@
                 </Link>
                 <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesSales}" id="sub-ventas">
                     <li>
-<<<<<<< HEAD
-                        <Link href="#" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
+                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/perfil-informacion'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-antes.svg"
-=======
-                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link pl-0.5"
-                           :class="{'side-icon-active':this.$page.url=='/tablero/ventas-publicidad'}" 
-                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
->>>>>>> origin/jhon
                             >
                             Ventas por publicidad
                         </Link>        
                     </li>
                     <li>
-<<<<<<< HEAD
                         <Link :href="route('collaborator.sales.inmueble')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/ventas-inmueble'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
                             >
                             Ventas por inmuebles
-=======
-                        <Link :href="route('collaborator.sales.property')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
-                            Ventas por inmueble
->>>>>>> origin/jhon
                         </Link>
                     </li>
                     <li>
