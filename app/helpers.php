@@ -64,6 +64,13 @@ if (! function_exists('step')) {
             $cont++;
         }
 
+        if (!$user->collaboratorShippings->isEmpty()) {
+            $cont++;
+        }
+        
+        if (!$user->collaboratorBanks->isEmpty()) {
+            $cont++;
+        }
         return $cont;
     }
 }
