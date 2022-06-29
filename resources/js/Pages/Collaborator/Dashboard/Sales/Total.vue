@@ -3,7 +3,10 @@
         <!-- Header section-->
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
-                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="fas fa-arrow-left text-muted mr-2"></i> Ventas totales</h1>
+                <h1 class="font-bold text-lg md:text-3xl text-muted">
+                    <i class="fas fa-arrow-left text-muted mr-2 cursor-pointer" @click="back"></i> 
+                    Ventas totales
+                </h1>
             </div>
         </div>
         <!--END Header section-->
@@ -21,7 +24,7 @@
                 </div>
             </div>
             <div class="col-12 col-lg-4 text-center text-lg-left pt-2 pt-lg-0">
-                <p class="pt-0.5"><b>Facturación total: </b>{{total}}€</p>
+                <p class="pt-0.5"><b>Facturación total: </b>{{total.toFixed(2)}}€</p>
                 <p class=""><b>Beneficio total: </b>{{(total*0.20).toFixed(2)}}€</p>
             </div>
         </div>
@@ -33,7 +36,7 @@
             </div>
             <div class="col-md-3 col-12">
                 <label class="font-bold mb-1">Hasta:</label>
-                <input type="date" v-model="hasta" class="w-100 rounded col-form-input py-1.5">
+                <input type="date" v-model="hasta" @change="filter" class="w-100 rounded col-form-input py-1.5">
             </div>
         </div>
         <div class="total-tabla row">
@@ -57,8 +60,8 @@
                                 <td class="text-center">{{order.total}}</td>
                                 <td class="text-center">{{(order.total*0.20).toFixed(2)}}€</td>
                             </tr>
-                            <tr v-if="orders.length == 0">
-                                <td colspan="5" class="text-center">Sin alojamientos</td>
+                            <tr v-if="orders.data.length == 0">
+                                <td colspan="5" class="text-center">No hay resultados para esta busqueda</td>
                             </tr>
                         </tbody>
                     </table>
@@ -93,7 +96,7 @@
                             de unos 5 días hábiles.
                         </p>
                         <div class="my-2.5 text-center">
-                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" @click="sendNotification">Enviar notificación</button>
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" @click="sendNotification">{{textButton}}</button>
                         </div>
                         <div class="my-2.5 text-center">
                             <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal" aria-label="Close">No enviar todavia</button>
@@ -104,14 +107,14 @@
         </div>
         <!-- Modal Request  -->
         <!-- Modal Notification -->
-        <div class="modal modal-notification fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <div class="modal modal-notification fade" id="notification" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel"
         aria-hidden="true">
         <!-- Change class .modal-sm to change the size of the modal -->
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content modal-sales mx-auto px-2">
                     <div class="modal-body p-0 relative">
                         <div>
-                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer" data-dismiss="modal" aria-label="Close"></i>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer" data-dismiss="modal" aria-label="Close"  @click="reload"></i>
                         </div>
                         <div class="my-2.5 text-center">
                             <i class="far fa-check-circle text-orangec text-4xl"></i>
@@ -122,7 +125,7 @@
                             consulta ponte en contacto con nosotros.
                         </p>
                         <div class="my-3.5 text-center">
-                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  data-dismiss="modal" aria-label="Close">Cerrar mensaje</button>
+                            <button @click="reload" class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  data-dismiss="modal" aria-label="Close">Cerrar mensaje</button>
                         </div>
                     </div>
                 </div>
@@ -167,10 +170,21 @@
             </div>
         </div>
         <!-- Modal Notice  -->
+        
+        <ModalSales :id="'negativo'">
+            <h2 class="text-lg text-center font-bold mt-3">¡Atención!</h2>
+            <p class="px-4 my-2 text-xs text-center">
+                Actualmente no tiene un saldo para retirar.
+            </p>
+            <div class="my-3.5 text-center">
+                <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  data-dismiss="modal" aria-label="Close">Cerrar mensaje</button>
+            </div>
+        </ModalSales>
     </section>
 </template>
 <script>
 import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
+import ModalSales from '@/Pages/Collaborator/components/Modal.vue'
 import Paginator from '@/Components/Paginator.vue'
 import { Link } from '@inertiajs/inertia-vue3';
 import Moment from 'moment'
@@ -178,7 +192,8 @@ export default {
     layout:TemplateApp,
     components:{
         Link,
-        Paginator
+        Paginator,
+        ModalSales
     },
     props:{
         hotels:Object,
@@ -193,10 +208,12 @@ export default {
             hasta:null,
             dateTEST:this.date,
             countTest:0,
-            remainingDays:null
+            remainingDays:null,
+            textButton:'Enviar notificación'
         }
     },
     created(){
+        console.log(this.date)
         this.moment=Moment;
         this.orders.data.forEach(order =>{
             this.total += Number(order.total);
@@ -205,75 +222,70 @@ export default {
             }
             
         });
-    },
-    watch:{
-        hasta(newVal,oldVal){
-            if(this.desde !== null){
-                if(this.moment(newVal).isAfter(this.desde)){
-                    this.$inertia.get(route('dashboard.sales.total'), {desde:this.desde,hasta:this.hasta},
-                    { 
-                        preserveScroll: true
-                    })
-                }else{
-                    this.$swal({
-                        title: 'A elegido un intervalo de fechas incorrecto',
-                        icon: 'info',
-                        showCloseButton: false,
-                        showCancelButton: false,
-                        focusConfirm: false,
-                        confirmButtonText:
-                            '<i class="fa fa-thumbs-up"></i> Aceptar!',
-                        confirmButtonAriaLabel: 'Aceptar!',
-                    })
-                }
-                
-            }
-        },
-        desde(newVal,oldVal){
-            if(this.hasta !== null){
-                if(this.moment(this.hasta).isAfter(newVal)){
-                    this.$inertia.get(route('dashboard.sales.total'), {desde:this.desde,hasta:this.hasta},
-                    { 
-                        preserveScroll: true
-                    })
-                }else{
-                    this.$swal({
-                        title: 'A elegido un intervalo de fechas incorrecto',
-                        icon: 'info',
-                        showCloseButton: false,
-                        showCancelButton: false,
-                        focusConfirm: false,
-                        confirmButtonText:
-                            '<i class="fa fa-thumbs-up"></i> Aceptar!',
-                        confirmButtonAriaLabel: 'Aceptar!',
-                    })
-                }
-                
-            }
+        let urlClean = this.$page.url.split('desde=')[1];
+        if(urlClean){
+            this.desde = urlClean.split('&hasta=')[0]
+            this.hasta = urlClean.split('&hasta=')[1]
         }
     },
     methods:{
+        back(){
+            window.history.back();
+        },
         requestTransfer(){
-            let dia = Number(this.moment(this.dateTEST).format("DD"));
-            let mes = Number(this.moment(this.dateTEST).format("MM"));
-            let año = Number(this.moment(this.dateTEST).format("YYYY"));
-            let ago = this.moment().diff(this.moment([año,(mes - 1),(dia)]),'days');
-            this.remainingDays = 90 - ago;
-            if(Number(ago) > 90){
-                $('#request').modal('show')
+            if(this.withdrawal > 0){
+                let dia = Number(this.moment(this.dateTEST).format("DD"));
+                let mes = Number(this.moment(this.dateTEST).format("MM"));
+                let año = Number(this.moment(this.dateTEST).format("YYYY"));
+                let ago = this.moment().diff(this.moment([año,(mes - 1),(dia)]),'days');
+                this.remainingDays = 90 - ago;
+                if(Number(ago) > 90){
+                    $('#request').modal('show')
+                }else{
+                    $('#notice').modal('show')
+                }
             }else{
-                $('#notice').modal('show')
+                $('#negativo').modal('show')
             }
         },
         sendNotification(){
+            this.textButton = 'Enviando...';
             let request=$('#request');
             let noti=$('#notification');
-            this.$inertia.post(route('collaborator.notify'),{
-                onSuccess: (page) => {
-                    request.modal('hide')
-                    noti.modal('show')
-                },
-            })
+            axios({
+				url: route('collaborator.notify'),
+				method: 'POST',
+			})
+			.then((response) => {
+                this.textButton = 'Enviar notificación';
+                request.modal('hide')
+                noti.modal('show')
+			}) 
+        },
+        reload(){
+            window.location.reload()
+        },
+        filter(){
+            if(this.desde !== null){
+                if(this.moment(this.hasta).isAfter(this.desde)){
+                    this.$inertia.get(route('dashboard.sales.total'), {desde:this.desde,hasta:this.hasta},
+                    { 
+                        preserveScroll: true
+                    })
+                }else{
+                    this.$swal({
+                        title: 'A elegido un intervalo de fechas incorrecto',
+                        icon: 'info',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        focusConfirm: false,
+                        confirmButtonText:
+                            '<i class="fa fa-thumbs-up"></i> Aceptar!',
+                        confirmButtonAriaLabel: 'Aceptar!',
+                    })
+                }
+                
+            }
         }
     }
 }

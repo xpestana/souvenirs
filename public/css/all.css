@@ -361,7 +361,7 @@
   background-color: #86bbdc !important;
 }
 #slide .carousel__next{
-  right:50px !important;
+  right:65px !important;
   background-color: #86bbdc !important;
 }
 @media (min-width:767px){
@@ -399,10 +399,15 @@
 #collaborator-sidebar ul li a:hover{
   color: #000 !important;
 }
+#collaborator-sidebar ul li .side-link:hover > i{ 
+  color: #000 !important;
+}
 #collaborator-sidebar ul li .side-link:hover > img{ 
   filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
 }
-
+#collaborator-sidebar ul li .link:hover > img{ 
+  filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
+}
 a[data-toggle="collapse"] {
   position: relative;
 }

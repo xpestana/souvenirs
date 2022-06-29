@@ -426,6 +426,9 @@ Route::resource(
 
 Route::get('/update/api', [ActivitiesController::class, 'api'])->name('update.api');
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
-
+Route::get('test', function(){
+    $order = Order::find(14);
+    return view('Mails/souvenirs',compact('order'));
+});
 
 require __DIR__.'/auth.php';

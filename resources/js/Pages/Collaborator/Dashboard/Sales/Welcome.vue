@@ -29,7 +29,7 @@
                         </p>
                     </div>
                     <div class="col-12 col-lg-2 lg:bg-black flex rounded-r-xl absolute lg:relative z-20 bottom-6 lg:bottom-0">
-                        <button class="btn btn-outline-orange m-auto py-0.5 px-6">Ver</button>
+                        <Link :href="route('collaborator.sales.publicity')" class="btn btn-outline-orange m-auto py-0.5 px-6">Ver</Link>
                     </div>
                 </div>
                 <div class="absolute left-0 top-0 rounded-xl lg:hidden w-full h-full z-10" style="background: linear-gradient(179deg, rgba(134,188,217,0) 0%, rgba(1,1,1,1) 100%);"></div>
@@ -47,7 +47,7 @@
                         </p>
                     </div>
                     <div class="col-12 col-lg-2 lg:bg-black flex rounded-r-xl absolute lg:relative z-20 bottom-6 lg:bottom-0">
-                        <Link :href="route('dashboard.sales.total')" class="btn btn-outline-orange m-auto py-0.5 px-6">Ver</Link>
+                        <Link :href="route('collaborator.sales.property')" class="btn btn-outline-orange m-auto py-0.5 px-6">Ver</Link>
                     </div>
                 </div>
                 <div class="absolute left-0 top-0 rounded-xl lg:hidden w-full h-full z-10" style="background: linear-gradient(179deg, rgba(134,188,217,0) 0%, rgba(1,1,1,1) 100%);"></div>

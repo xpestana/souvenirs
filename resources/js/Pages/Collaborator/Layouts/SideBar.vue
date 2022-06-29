@@ -6,7 +6,7 @@
         </div>
         <ul class="list-unstyled py-4 pl-8 2xl:pl-11 my-auto">  
             <li class="mb-3.5">
-                <Link :href="route('collaborator.dashboard.home')" class="text-base" :class="{'sidebar-active':this.$page.url=='/tablero'}">
+                <Link :href="route('collaborator.dashboard.home')" class="text-base link" :class="{'sidebar-active':this.$page.url=='/tablero'}">
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':this.$page.url=='/tablero'}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/inicio.svg"
@@ -15,7 +15,7 @@
                 </Link>
             </li>
             <li class="mb-3.5">
-                <a href="#" class="text-base">
+                <a href="#" class="text-base link">
                     <img class="inline w-5" style="margin-top:-4px"
                         src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
                     >
@@ -23,7 +23,7 @@
                 </a>
             </li>
             <li class="mb-3.5">
-                <a href="#sub-recursos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-base">
+                <a href="#sub-recursos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-base link">
                 <img class="inline w-4" style="margin-top:-4px"
                     src="/vendor_asset/img/collaborator/dashboard/icons/recurso.svg"
                 >
@@ -41,7 +41,7 @@
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesSales}"  id="downsales" @click="toggleMenuSales('sub-ventas')"></i>
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesSales}" id="upsales" @click="toggleMenuSales('sub-ventas')"></i>
                 <Link :href="route('collaborator.dashboard.sales')" data-toggle="collapse" 
-                    aria-expanded="false" class="dropdown-toggle text-base"  
+                    aria-expanded="false" class="dropdown-toggle text-base link"  
                     :class="{'sidebar-active':routesSales}"
                 >
                 <img class="inline w-5" style="margin-top:-4px"
@@ -52,9 +52,9 @@
                 </Link>
                 <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesSales}" id="sub-ventas">
                     <li>
-                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
+                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-publicidad'}">
                             <img class="inline w-4" style="margin-top:-4px"
-                                :class="{'side-icon-active':this.$page.url=='/tablero/perfil-informacion'}" 
+                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-publicidad'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-antes.svg"
                             >
                             Ventas por publicidad
@@ -70,17 +70,19 @@
                         </Link>
                     </li>
                     <li>
-                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-totales'}">
+                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url.includes('/tablero/ventas-totales')}">
                             <img class="inline w-3.5" style="margin-top:-4px"
-                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-totales'}" 
+                                :class="{
+                                    'side-icon-active':this.$page.url.includes('/tablero/ventas-totales')
+                                    }" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-totales.svg"
                             >
                             Ventas totales
                         </Link>
                     </li>
                     <li>
-                        <Link :href="route('dashboard.withdrawals')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url=='/tablero/historial-retiros'}">
-                            <i class="fas fa-outdent text-white" :class="{'sidebar-active':this.$page.url=='/tablero/historial-retiros'}"></i>
+                        <Link :href="route('dashboard.withdrawals')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url.includes('/tablero/historial-retiros')}">
+                            <i class="fas fa-outdent text-white side-link" :class="{'sidebar-active':this.$page.url.includes('/tablero/historial-retiros')}"></i>
                             Historial de retiros
                         </Link>
                     </li>
@@ -90,7 +92,7 @@
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesProfile}" id="upprofile" @click="toggleMenuProfile('sub-perfil')"></i>
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesProfile}" id="downprofile" @click="toggleMenuProfile('sub-perfil')"></i>
                 <Link :href="route('collaborator.dashboard.profile')" data-toggle="collapse" 
-                    aria-expanded="false" class="dropdown-toggle text-base"  
+                    aria-expanded="false" class="dropdown-toggle text-base link"  
                     :class="{'sidebar-active':routesProfile}"
                 >
                 <img class="inline w-4" style="margin-top:-4px"
@@ -140,7 +142,7 @@
                 </ul>
             </li>
             <li class="mb-3.5">
-                <Link :href="route('logout')" class="text-base">
+                <Link :href="route('logout')" class="text-base link">
                     <img class="inline w-4" style="margin-top:-4px"
                         src="/vendor_asset/img/collaborator/dashboard/icons/cerrar.svg"
                     >
@@ -237,7 +239,8 @@ export default {
             let route2 = url.includes('/tablero/ventas-totales')
             let route3 = url.includes('/tablero/ventas-inmueble')
             let route4 = url.includes('/tablero/historial-retiros')
-            if(route1 || route2 || route3 || route4){
+            let route5 = url.includes('/tablero/ventas-publicidad')
+            if(route1 || route2 || route3 || route4 || route5){
                 this.routesSales = true;
             }
         },

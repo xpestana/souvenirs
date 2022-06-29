@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar fixed-top navbar-light bg-white bg-trans py-0  xl:px-20 2xl:px-32" id="navbar">
+    <nav class="navbar fixed-top navbar-light bg-white bg-trans py-0  lg:px-20 2xl:px-32" id="navbar">
     
         <div class="row justify-content-between w-100">
             <div class="col-6 d-md-none">

@@ -430,7 +430,7 @@ class CollaboratorController extends Controller
         $date = null;
 
         if (!$withdrawal->isEmpty()) {
-            $date = $withdrawal->last()->updated_at; 
+            $date = $withdrawal->first()->updated_at; 
         }
 
         return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders','date'));
@@ -449,12 +449,13 @@ class CollaboratorController extends Controller
             }
         }
 
-        return back();
+        // return back();
+        
     }
     public function withdrawal_history(Request $request){
 
         $hotels = auth()->user()->hotel->load('orders.shippings');
-        $withdrawal = Order::whereIn('hotel_id',$hotels->pluck('id'))
+        $withdrawalsOrders = Order::whereIn('hotel_id',$hotels->pluck('id'))
                     ->where("withdrawal",0)
                     ->where("status","complete")
                     ->with('hotel','shippings')
@@ -468,10 +469,10 @@ class CollaboratorController extends Controller
 
         $date = null;
 
-        if (!$withdrawal->isEmpty()) {
-            $date = $withdrawal->last()->updated_at; 
+        if (!$withdrawalsOrders->isEmpty()) {
+            $date = $withdrawalsOrders->first()->updated_at; 
         }
-        return Inertia::render('Collaborator/Dashboard/Sales/Withdrawals',compact('hotels','orders','date'));
+        return Inertia::render('Collaborator/Dashboard/Sales/Withdrawals',compact('hotels','orders','date','withdrawalsOrders'));
     }
 
     // end sales
