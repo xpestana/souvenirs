@@ -133,8 +133,8 @@
                                     <tr v-for="order in partner" :key="order.id">
                                     <td class="text-center">{{ order.transaction_id }}</td>
                                     <td class="text-center p-0">
-                                         <template v-if="order.returned == 1"> -->
-                                            <select class="rounded py-1 mt-2" name="returned" id="returned">
+                                         <template v-if="order.returned == 1">
+                                            <select class="rounded py-1 mt-2" name="returned" id="returned"  @change="returned(order.id)">
                                                 <option value="1" selected>Si</option>
                                                 <option value="0">No</option>
                                             </select>
@@ -204,14 +204,18 @@ export default {
                 var total_benefits = 0;
 				this.orders = this.orders + this.collaborator.orders.length;
 				this.collaborator.orders.forEach(function(order) {
-                    total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+                    if(order.returned == 0){
+                        total_benefits += Number(order.total);
+                    }
                 });
-                this.total = this.total + (total_benefits*0.20)
+                this.total = total_benefits*0.20
+                
             return {
                 id : col.id,
                 transaction_id : col.transaction_id,
                 email : col.shippings[0].email,
                 created_at : col.created_at,
+                returned: col.returned,
                 total: col.total
             }
             });
@@ -242,7 +246,12 @@ export default {
 					link.click();
 					document.body.removeChild(link);
 			})                
-		}
+		},
+        returned(id){
+            this.$inertia.post(route('admin.order.returned'), {
+            id: id,
+            })
+        },
 	}
 }
 </script>
