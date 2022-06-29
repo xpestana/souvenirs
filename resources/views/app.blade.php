@@ -87,11 +87,11 @@
                 width: 60%;
             }
             .spinner{
-              width: 5rem;
-              height: 5rem;
+              width: 4rem;
+              height: 4rem;
             }
             .preloader__loader > span{
-                font-size: 2rem;
+                font-size: 1.7rem;
             }
         }
     </style>

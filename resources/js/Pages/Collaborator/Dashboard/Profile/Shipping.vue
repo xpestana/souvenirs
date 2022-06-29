@@ -162,7 +162,7 @@
                             ¿Estas seguro que quieres salir?
                         </p>
                         <div class="my-2.5 text-center">
-                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" data-dismiss="modal" aria-label="Close">Seguir editando</button>
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" data-dismiss="modal" @click.prevent="closeModalBack()">Seguir editando</button>
                         </div>
                         <div class="my-2.5 text-center">
                             <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal"  @click.prevent="forceExit()">Salir sin guardar</button>
@@ -208,6 +208,7 @@ export default {
             }),
             forceExitConfirm: false,
             beforeUrl: '',
+            typeBack: '1',
         }
     },
     created () {
@@ -261,9 +262,13 @@ export default {
             })
         },
         forceExit () {
-            setTimeout(() =>{
-                Inertia.get(`${this.beforeUrl}`)
-            }, 500)
+            this.forceExitConfirm = true
+            if (this.typeBack == '2') { window.history.back() }
+            else {
+                setTimeout(() =>{
+                    Inertia.get(`${this.beforeUrl}`)
+                }, 500)
+            }
         },
         updateForm () {
             this.formCollaboratorShipping.document = this.collaboratorShipping.document
@@ -277,8 +282,19 @@ export default {
             this.formCollaboratorShipping.city = this.collaboratorShipping.city
         },
         goBack () {
-            this.forceExitConfirm = true
-            window.history.back()
+            if (!this.formValid) {
+                if (!this.forceExitConfirm) {
+                    this.typeBack = '2'
+                    $('#exit').modal('show')
+                }
+            } else {
+                window.history.back()
+            }
+        },
+        closeModalBack () {
+            this.typeBack = '1'
+            this.forceExitConfirm = false
+            $('#exit').modal('hide')
         }
     },
 }

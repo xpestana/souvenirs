@@ -469,6 +469,10 @@ a[data-toggle="collapse"] {
   border:2px solid #FF9C06;
   color:#FF9C06;
 }
+.btn-outline-white{
+  border:2px solid #FFF;
+  color:#FFF;
+}
 .btn-outline-orange:hover{
   border:2px solid #fac371;
   color:#a26b19;
