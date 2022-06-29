@@ -5,21 +5,34 @@
 	    <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
 	        <div class="col-12 col-md-8 text-left">
 	            <h1 class="font-bold text-lg md:text-3xl text-muted">
-	                <Link
-	                    :href="route('collaborator.home')"
-	                    class="text-muted mr-2"
-	                >
-	                    <i class="fas fa-arrow-left"></i>
-	                </Link>Ventas por inmueble
+	                <i class="cursor-pointer text-muted mr-2 fas fa-arrow-left" @click.prevent="goBack()"></i>
+	                Ventas por inmueble
 	            </h1>
 	        </div>
 	    </div>
-	     <!--END Header-->
+	    <!--END Header-->
+	    <div class="total-saldo row my-8 mx-1.5 lg:mx-0">
+            <div class="col-12 col-lg-8 rounded-xl bg-collaborator-orange py-2.5">
+                <div class="row justify-content-center">
+                    <div class="pt-2 col-12 col-lg-6 text-center text-lg-left">
+                        <h2 class="font-bold inline text-white text-base">Saldo pendiente: </h2><br class="lg:hidden">
+                        <p class="inline text-white text-base">{{ (withdrawal*0.20).toFixed(2) }} €</p>
+                    </div>
+                    <div class="pt-0.5 col-12 col-lg-6 text-center text-lg-right">
+                        <button class="btn bg-white text-orangec lg:ml-auto py-1 lg:mr-2.5 font-bold" @click="requestTransfer">Pedir transferencia</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 text-center text-lg-left pt-2 pt-lg-0">
+                <p class="pt-0.5"><b>Facturación total: </b>{{total}}€</p>
+                <p class=""><b>Beneficio total: </b>{{(total*0.20).toFixed(2)}}€</p>
+            </div>
+        </div>
 	    <!-- Filtro por fecha -->
-	    <div class="row lg:mx-0 mt-8 justify-content-start">
+	    <div class="row lg:mx-0 justify-content-start">
 	    	<div class="col-12 ml-md-0 pl-md-0 col-md-3">
 	    		<div class="md-form md-outline input-with-post-icon datepicker">
-	    		  <label class="font-bold">Mostrar desde:</label>
+	    		  <label class="font-bold mb-1">Mostrar desde:</label>
 				  <input
 				  	v-model="form.from"
 				  	placeholder="Select date"
@@ -31,7 +44,7 @@
 	    	</div>
 	    	<div class="col-12 col-md-3 mt-2.5 mt-md-0">
 	    		<div class="md-form md-outline input-with-post-icon datepicker">
-	    			<label class="font-bold">Hasta:</label>
+	    			<label class="font-bold mb-1">Hasta:</label>
 				  	<input
 				  		v-model="form.to"
 				  		placeholder="Select date"
@@ -43,7 +56,7 @@
 	    </div>
 	    <!-- END Filtro por fecha -->
 		<!-- table -->
-		<div class="mt-8 row">
+		<div class="mt-3.5 row">
 			<div class="col-12">
 				<div class="table-responsive-sm">
 		        	<table class="table table-striped">
@@ -58,7 +71,7 @@
 					  	  </th>
 					    </tr>
 					  </thead>
-					  <tbody class="text-xs" id="tbody">
+					  <tbody class="text-sm" id="tbody">
 					    <tr
 		 					v-for="(item, index) in filterOrders"
 		 					:key="index"
@@ -87,6 +100,101 @@
      		</div> 
         </div>
         <!-- end table -->
+        <!-- Modal Request -->
+        <div class="modal modal-request fade" id="request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-sales mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <div class="flex mt-3.5">
+                            <img src="/vendor_asset/img/collaborator/dashboard/icons/dinero.svg" class="m-auto h-8"
+                            style="filter: invert(53%) sepia(76%) saturate(625%) hue-rotate(354deg) brightness(107%) contrast(104%);"
+                            >
+                        </div>
+                        <h2 class="text-lg text-center font-bold">¿Quieres solicitar el saldo disponible?</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            Envíanos una notificación y nos encargaremos de realizarte la transferencia alrededor
+                            de unos 5 días hábiles.
+                        </p>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" @click="sendNotification">Enviar notificación</button>
+                        </div>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal" aria-label="Close">No enviar todavia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Request  -->
+        <!-- Modal Notification -->
+        <div class="modal modal-notification fade" id="notification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-sales mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <div class="my-2.5 text-center">
+                            <i class="far fa-check-circle text-orangec text-4xl"></i>
+                        </div>
+                        <h2 class="text-lg text-center font-bold">¡Notificación recibida!</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            La transferencia se realizará en 5 días habiles. Para cualquier
+                            consulta ponte en contacto con nosotros.
+                        </p>
+                        <div class="my-3.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  data-dismiss="modal" aria-label="Close">Cerrar mensaje</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Notification  -->
+        <!-- Modal Notice -->
+        <div class="modal modal-notice fade" id="notice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-sales mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <div class="flex mt-3.5">
+                            <img src="/vendor_asset/img/collaborator/dashboard/icons/dinero.svg" class="m-auto h-8"
+                            style="filter: invert(53%) sepia(76%) saturate(625%) hue-rotate(354deg) brightness(107%) contrast(104%);"
+                            >
+                        </div>
+                        <h2 class="text-lg text-center font-bold">Te faltan</h2>
+                        <h3 class="text-lg text-center my-0.5">
+                            <span class="text-4xl text-orangec font-bold">{{remainingDays}}</span> 
+                            <template v-if="Number(this.remainingDays)>1">
+                                días
+                            </template>
+                            <template v-else>
+                                dia
+                            </template>
+                            
+                        </h3>
+                        <h2 class="text-lg text-center font-bold">para poder solicitar una transferencia de saldo</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            Puedes solicitar una transferencia de saldo cada 3 meses.
+                        </p>
+                        <div class="my-3.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  data-dismiss="modal" aria-label="Close">Cerrar mensaje</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Notice  -->
     </div>
 </template>
 
@@ -107,7 +215,9 @@
 	        Paginator,
 	    },
 	    props:{
-	        orders: Object,
+	        hotels:Object,
+	        orders:Object,
+	        date:String,
 	    },
 	    data () {
 	    	return {
@@ -127,6 +237,11 @@
 	    		],
 	    		page:this.$page.url.split('?page=')[1] == undefined ? 1 : this.$page.url.split('?page=')[1],
 	    		showPagination: false,
+	    		total:0,
+            	withdrawal:0,
+            	dateTEST:this.date,
+	            countTest:0,
+	            remainingDays:null,
 	    	}
 	    },
 	    computed:{
@@ -139,7 +254,7 @@
 	    				created_at: moment(item.created_at).format("DD/MM/YYYY"),
 	    				total: total,
 	    				beneficio: beneficio,
-	    				city: item.shippings.length > 0 ? item.shippings[0].city : '',
+	    				city: 'Sevilla',
 	    				province:  item.shippings.length > 0 ? item.shippings[0].city : '',
 	    				alojamiento: item.hotel.address,
 	    				tipoAloj: item.hotel.type,
@@ -148,7 +263,14 @@
 	    		return map
 	    	},
 	    },
-
+	    created () {
+	        this.orders.data.forEach(order =>{
+	            this.total += Number(order.total);
+	            if (order.withdrawal == 0) {
+	                this.withdrawal += Number(order.total);    
+	            }
+    		});
+	    },
 	    mounted(){
 			this.busqueda()
 		},
@@ -185,6 +307,28 @@
 					this.submitDuring()
 				}
 			},
+			requestTransfer(){
+	            let dia = Number(moment(this.dateTEST).format("DD"));
+	            let mes = Number(moment(this.dateTEST).format("MM"));
+	            let año = Number(moment(this.dateTEST).format("YYYY"));
+	            let ago = moment().diff(moment([año,(mes - 1),(dia)]),'days');
+	            this.remainingDays = 90 - ago;
+	            if(Number(ago) > 90){
+	                $('#request').modal('show')
+	            }else{
+	                $('#notice').modal('show')
+	            }
+	        },
+	        sendNotification(){
+	            let request=$('#request');
+	            let noti=$('#notification');
+	            this.$inertia.post(route('collaborator.notify'),{
+	                onSuccess: (page) => {
+	                    request.modal('hide')
+	                    noti.modal('show')
+	                },
+	            })
+	        },
 			submitDuring () {
 				this.orders.data = [];
 				/*let nodos = document.getElementById('tbody').childNodes.length;
@@ -202,6 +346,9 @@
 					});
 				},1500);
 			},
+			goBack () {
+	            window.history.back()
+	        },
 	    },
 	}
 </script>

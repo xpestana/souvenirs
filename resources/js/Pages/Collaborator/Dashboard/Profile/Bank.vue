@@ -5,12 +5,8 @@
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
                 <h1 class="font-bold text-lg md:text-3xl text-muted">
-                    <Link
-                        :href="route('collaborator.home')"
-                        class="text-muted mr-2"
-                    >
-                        <i class="fas fa-arrow-left"></i>
-                    </Link>Información bancaria
+                    <i class="cursor-pointer text-muted mr-2 fas fa-arrow-left" @click.prevent="goBack()"></i>
+                    Información bancaria
                 </h1>
             </div>
         </div>
@@ -71,6 +67,31 @@
                 </form>
             </div>
         </div>
+        <!-- Modal Request -->
+        <div class="modal modal-exit fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content modal-exits modal mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            ¿Estas seguro que quieres salir?
+                        </p>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" data-dismiss="modal" aria-label="Close">Seguir editando</button>
+                        </div>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal"  @click.prevent="forceExit()">Salir sin guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Request  -->
     </div>
 </template>
 
@@ -88,15 +109,18 @@ export default {
         ModalCookies,
         ValidationAlert,
     },
+    props: ['collaboratorBank'],
     data() {
         return {
             windowWidth: window.innerWidth,
             validForm: true,
             formCollaboratorBank: this.$inertia.form({
             	_method: "POST",
-                holder: this.$page.props.collaboratorBank.holder,
-                iban: this.$page.props.collaboratorBank.iban,
+                holder: '',
+                iban: '',
             }),
+            forceExitConfirm: false,
+            beforeUrl: '',
         }
     },
     computed: {
@@ -119,17 +143,41 @@ export default {
             })
             return map
         },
+        formValid () {
+            if (
+                this.formCollaboratorBank.holder === this.collaboratorBank.holder &&
+                this.formCollaboratorBank.iban === this.collaboratorBank.iban
+            ) { return true }
+            return false
+        },
     },
-    created(){
-        console.log(this.$page.props.collaboratorBank)
+    created () {
+        this.updateForm()
+    },
+    mounted () {
+        this.moveConfirm = Inertia.on('before', (event) => {
+            if (!this.formValid ) {
+                if (!this.forceExitConfirm) {
+                    this.beforeUrl = event.detail.visit.url.pathname
+                    $('#exit').modal('show')
+                    event.preventDefault()
+                }
+            }
+        })
+    },
+    unmounted () {
+        this.moveConfirm()
     },
     methods: {
         submit () {
+            this.forceExitConfirm = true
             this.formCollaboratorBank.post(route('collaborator.bank.store'), {
                 preserveScroll: true,
                 errorBag: 'submitBank',
                 onSuccess:()=>{
                     $('#datosModal').modal('hide')
+                    this.updateForm()
+                    this.forceExitConfirm = false
                 }
             })
         },
@@ -140,6 +188,19 @@ export default {
             if (valid) { this.validForm = true }
             else { this.validForm = false }
         },
+        forceExit () {
+            setTimeout(() =>{
+                Inertia.get(`${this.beforeUrl}`)
+            }, 500)
+        },
+        updateForm () {
+            this.formCollaboratorBank.holder = this.collaboratorBank.holder
+            this.formCollaboratorBank.iban = this.collaboratorBank.iban
+        },
+        goBack () {
+            this.forceExitConfirm = true
+            window.history.back()
+        }
     },
 }
 </script>

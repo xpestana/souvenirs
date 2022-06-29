@@ -5,12 +5,10 @@
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
                 <div>
-                    <h1 class="font-bold text-lg md:text-3xl text-muted"><Link
-                        :href="route('collaborator.home')"
-                        class="text-muted mr-2"
-                    >
-                        <i class="fas fa-arrow-left"></i>
-                    </Link>Datos de envío</h1>
+                    <h1 class="font-bold text-lg md:text-3xl text-muted">
+                        <i class="cursor-pointer text-muted mr-2 fas fa-arrow-left" @click.prevent="goBack()"></i>
+                        Datos de envío
+                    </h1>
                 </div>
             </div>
         </div>
@@ -149,6 +147,31 @@
                 </form>
             </div>
         </div>
+         <!-- Modal Request -->
+        <div class="modal modal-notice fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content modal-exits modal mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            ¿Estas seguro que quieres salir?
+                        </p>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" data-dismiss="modal" aria-label="Close">Seguir editando</button>
+                        </div>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal"  @click.prevent="forceExit()">Salir sin guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Request  -->
     </div>
 </template>
 
@@ -166,82 +189,97 @@ export default {
         ModalCookies,
         ValidationAlert,
     },
+    props: ['collaboratorShipping'],
     data() {
         return {
             close: false,
             windowWidth: window.innerWidth,
             formCollaboratorShipping: this.$inertia.form({
             	_method: "POST",
-                document: this.$page.props.collaboratorShipping.document,
-                businessName: this.$page.props.collaboratorShipping.businessName,
-                contactPerson: this.$page.props.collaboratorShipping.contactPerson,
-                phone: this.$page.props.collaboratorShipping.phone,
-                email: this.$page.props.collaboratorShipping.email,
-                deliveryAddress: this.$page.props.collaboratorShipping.deliveryAddress,
-                postalCode: this.$page.props.collaboratorShipping.postalCode,
-                province: this.$page.props.collaboratorShipping.province,
-                city: this.$page.props.collaboratorShipping.city,
+                document: '',
+                businessName: '',
+                contactPerson: '',
+                phone: '',
+                email: '',
+                deliveryAddress: '',
+                postalCode: '',
+                province: '',
+                city: '',
             }),
+            forceExitConfirm: false,
+            beforeUrl: '',
         }
     },
-    created(){
-        console.log(this.$page.props.collaboratorShipping)
+    created () {
+        this.updateForm()
+    },
+    mounted () {
+        this.moveConfirm = Inertia.on('before', (event) => {
+            if (!this.formValid ) {
+                if (!this.forceExitConfirm) {
+                    this.beforeUrl = event.detail.visit.url.pathname
+                    $('#exit').modal('show')
+                    event.preventDefault()
+                }
+            }
+        })
+    },
+    unmounted () {
+        this.moveConfirm()
     },
     computed: {
         errorsKey () {
             var err = this.$page.props.errors.submitShipping ? Object.keys(this.$page.props.errors.submitShipping) : []
             return err
         },
-        formatErrors () {
-            var map = this.errorsKey.map( item => {
-                switch (item) {
-                    case 'document':
-                        return 'Documento de identificación'
-                        break;
-                    case 'businessName':
-                        return 'Razón social'
-                        break;
-                    case 'contactPerson':
-                        return 'Persona de contacto'
-                        break;
-                    case 'phone':
-                        return 'Telefono'
-                        break;
-                    case 'email':
-                        return 'Correo electrónico'
-                        break;
-                    case 'deliveryAddress':
-                        return 'Domicilio de facturación'
-                        break;
-                    case 'postalCode':
-                        return 'Código postal'
-                        break;
-                    case 'province':
-                        return 'Provincia'
-                        break;
-                    case 'city':
-                        return 'Ciudad'
-                        break;
-                    default:
-                    return item
-                }
-            })
-            return map
+        formValid () {
+            if (
+                this.formCollaboratorShipping.document === this.collaboratorShipping.document &&
+                this.formCollaboratorShipping.businessName === this.collaboratorShipping.businessName &&
+                this.formCollaboratorShipping.contactPerson === this.collaboratorShipping.contactPerson &&
+                this.formCollaboratorShipping.phone === this.collaboratorShipping.phone &&
+                this.formCollaboratorShipping.email === this.collaboratorShipping.email &&
+                this.formCollaboratorShipping.deliveryAddress === this.collaboratorShipping.deliveryAddress &&
+                this.formCollaboratorShipping.postalCode === this.collaboratorShipping.postalCode &&
+                this.formCollaboratorShipping.province === this.collaboratorShipping.province &&
+                this.formCollaboratorShipping.city === this.collaboratorShipping.city
+            ) { return true }
+            return false
         },
     },
     methods: {
         submit () {
+            this.forceExitConfirm = true
             this.formCollaboratorShipping.post(route('collaborator.shipping.store'), {
                 preserveScroll: true,
                 errorBag: 'submitShipping',
                 onSuccess:()=>{
                     $('#datosModal').modal('hide')
+                    this.updateForm()
+                    this.forceExitConfirm = false
                 }
             })
         },
-        closeAlertValidation () {
-            this.close = false
+        forceExit () {
+            setTimeout(() =>{
+                Inertia.get(`${this.beforeUrl}`)
+            }, 500)
         },
+        updateForm () {
+            this.formCollaboratorShipping.document = this.collaboratorShipping.document
+            this.formCollaboratorShipping.businessName = this.collaboratorShipping.businessName
+            this.formCollaboratorShipping.contactPerson = this.collaboratorShipping.contactPerson
+            this.formCollaboratorShipping.phone = this.collaboratorShipping.phone
+            this.formCollaboratorShipping.email = this.collaboratorShipping.email
+            this.formCollaboratorShipping.deliveryAddress = this.collaboratorShipping.deliveryAddress
+            this.formCollaboratorShipping.postalCode = this.collaboratorShipping.postalCode
+            this.formCollaboratorShipping.province = this.collaboratorShipping.province
+            this.formCollaboratorShipping.city = this.collaboratorShipping.city
+        },
+        goBack () {
+            this.forceExitConfirm = true
+            window.history.back()
+        }
     },
 }
 </script>

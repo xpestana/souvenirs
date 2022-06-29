@@ -400,9 +400,15 @@ class CollaboratorController extends Controller
                         ->Date($request->from, $request->to)
                         ->orderBy('id', 'desc')
                         ->paginate(8);
-        
         $orders = $model->appends(request()->except('page'));
-        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('orders'));
+
+        $withdrawal = $orders->where("withdrawal",0);
+        $date = null;
+        if (!$withdrawal->isEmpty()) {
+            $date = $withdrawal->last()->updated_at; 
+        }
+
+        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('hotels','orders','date'));
     }
 
     public function sales_publicity (Request $request) {
@@ -415,6 +421,13 @@ class CollaboratorController extends Controller
                         ->orderBy('id', 'desc')
                         ->paginate(8);
         $orders = $model->appends(request()->except('page'));
+
+        $withdrawal = $orders->where("withdrawal",0);
+        $date = null;
+        if (!$withdrawal->isEmpty()) {
+            $date = $withdrawal->last()->updated_at; 
+        }
+
         return Inertia::render('Collaborator/Dashboard/Sales/Publicity',compact('orders'));
     }
 

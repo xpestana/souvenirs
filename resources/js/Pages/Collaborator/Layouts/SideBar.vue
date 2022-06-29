@@ -66,7 +66,7 @@
                                 :class="{'side-icon-active':this.$page.url=='/tablero/ventas-inmueble'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
                             >
-                            Ventas por inmuebles
+                            Ventas por inmueble
                         </Link>
                     </li>
                     <li>
