@@ -15,7 +15,7 @@
         </div>
         <!--END Header section-->
         <!-- Content section-->
-        <div class="home-perfil row mt-3.5 lg:mt-0">
+        <div class="home-perfil row mt-3.5 lg:mt-0" v-if="cont < 4 || hotels.length == 0">
             <div class="col-12 mt-2 mb-1 px-lg-0">
                 <h2 class="font-semibold text-3xl">Primeros pasos</h2>
             </div>
@@ -24,7 +24,12 @@
                     id="perfil-lodging" style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome1.jpg');">
                     <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
                         <h2 class="font-bold text-2xl text-white p-3.5"> Da de alta tu primer alojamiento</h2>
-                        <p class="text-right text-2xl text-white  p-3.5">No realizado</p>
+                        <template v-if="hotels.length == 0">
+                            <p class="text-right text-2xl text-white  p-3.5">No realizado</p>
+                        </template>
+                        <template v-else>
+                            <p class="text-right text-2xl text-white font-semibold p-3.5">¡COMPLETADO!</p>
+                        </template>
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target">
                         <div class="text-white m-auto">
@@ -41,23 +46,28 @@
                     id="perfil-perfil"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome2.jpg');">
                     <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
                         <h2 class="font-bold text-2xl text-white p-3.5">Rellena los datos de tu perfil</h2>
-                        <p class="text-right text-2xl text-white  p-3.5">{{ cont }} de 4</p>
+                        <template v-if="cont < 4">
+                            <p class="text-right text-2xl text-white  p-3.5">{{ cont }} de 4</p>
+                        </template>
+                        <template v-else>
+                            <p class="text-right text-2xl text-white font-semibold p-3.5">¡COMPLETADO!</p>
+                        </template>
+                    </div>
+                    <div class="py-3.5 px-6 absolute top-0 left-0 z-40" id="text-perfil-target">
+                        <Link :href="route('dashboard.profile.info')">
+                            <p class="mb-2"><i class="fas fa-id-card mr-2"></i>Información de perfil</p>
+                        </Link>
+                        <Link :href="route('collaborator.profile.tax')">
+                        <p class="hover:font-bold mb-2"><i class="fas fa-file-alt ml-1 mr-2"></i>Datos fiscales</p>
+                        </Link>
+                        <Link :href="route('collaborator.bank.index')">
+                        <p class="hover:font-bold mb-2"><i class="fas fa-credit-card mr-2"></i>Información bancaria</p>
+                        </Link>
+                        <Link :href="route('collaborator.shipping.index')">
+                        <p class="hover:font-bold mb-2"><i class="fas fa-truck mr-1"></i> Datos de envío</p>
+                        </Link>
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl" id="perfil-perfil-target">
-                        <div class="text-white py-3.5 px-6">
-                            <Link :href="route('dashboard.profile.info')">
-                                <p class="text-white mb-2"><i class="fas fa-id-card text-white mr-2"></i>Información de perfil</p>
-                            </Link>
-                            <Link :href="route('collaborator.profile.tax')">
-                            <p class="text-white hover:font-bold mb-2"><i class="fas fa-file-alt text-white ml-1 mr-2"></i>Datos fiscales</p>
-                            </Link>
-                            <Link :href="route('collaborator.bank.index')">
-                            <p class="text-white hover:font-bold mb-2"><i class="fas fa-credit-card text-white mr-2"></i>Información bancaria</p>
-                            </Link>
-                            <Link :href="route('collaborator.shipping.index')">
-                            <p class="text-white hover:font-bold mb-2"><i class="fas fa-truck text-white mr-1"></i> Datos de envío</p>
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -101,6 +111,53 @@
                 </div>
             </div>
         </div>
+        <div class="home-perfil-full row mt-3.5 lg:mt-0" v-if="cont == 4 && hotels.length > 0">
+            <div class="col-12 mt-8 lg:mt-16 mb-1 px-lg-0">
+                <h2 class="font-semibold text-3xl">Primeros pasos</h2>
+            </div>
+            <div class="col-12 col-lg-6 pl-lg-0 pr-lg-3 lg:h-3/4">
+                <div class="perfil-card w-full h-48 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative" 
+                    id="perfil-lodging-full" style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome1.jpg');">
+                    <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
+                        <h2 class="font-bold text-2xl text-white p-3.5"> Da de alta tu primer alojamiento</h2>
+                        <p class="text-right text-2xl text-white p-3.5 font-semibold">¡COMPLETADO!</p>
+                    </div>
+                    <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target-full">
+                        <div class="text-white m-auto">
+                            <button class="btn rounded-lg text-white border-solid border border-white">
+                                <h3 class="mr-1 inline text-white">+</h3> 
+                                Añadir alojamiento
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 pr-lg-0 pl-lg-3 lg:h-3/4 mt-3.5 lg:mt-0">
+                <div class="perfil-card w-full h-48 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative" 
+                    id="perfil-perfil-full"  style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome2.jpg');">
+                    <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
+                        <h2 class="font-bold text-2xl text-white p-3.5">Rellena los datos de tu perfil</h2>
+                        <p class="text-right text-2xl text-white p-3.5 font-semibold">¡COMPLETADO!</p>
+                    </div>
+                    <div class="py-3.5 px-6 absolute top-0 left-0 z-40" id="text-perfil-target-full">
+                        <Link :href="route('dashboard.profile.info')">
+                            <p class="mb-2"><i class="fas fa-id-card mr-2"></i>Información de perfil</p>
+                        </Link>
+                        <Link :href="route('collaborator.profile.tax')">
+                        <p class="hover:font-bold mb-2"><i class="fas fa-file-alt ml-1 mr-2"></i>Datos fiscales</p>
+                        </Link>
+                        <Link :href="route('collaborator.bank.index')">
+                        <p class="hover:font-bold mb-2"><i class="fas fa-credit-card mr-2"></i>Información bancaria</p>
+                        </Link>
+                        <Link :href="route('collaborator.shipping.index')">
+                        <p class="hover:font-bold mb-2"><i class="fas fa-truck mr-1"></i> Datos de envío</p>
+                        </Link>
+                    </div>
+                    <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl" id="perfil-perfil-target-full">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- END Content section-->
     </section>
 </template>
@@ -121,7 +178,8 @@ export default {
     },
     props: {
     cont: Number,
-    orders:Object
+    orders:Object,
+    hotels:Object
     },
     data(){
         return{
@@ -129,6 +187,7 @@ export default {
         }
     },
     created(){
+        console.log(this.hotels)
         this.orders.forEach(order =>{
             this.total += Number(order.total);
         });
@@ -141,52 +200,69 @@ export default {
 }
 @media(min-width:1024px){
     /*TRANSTION ALTA ALOJAMIENTO*/ 
+    #perfil-lodging-full:hover >
+    #perfil-lodging-target-full,
     #perfil-lodging:hover >
     #perfil-lodging-target{
         height: 100%;
     }
+    #perfil-lodging-full:hover >
+    #perfil-lodging-target-full div,
     #perfil-lodging:hover >
     #perfil-lodging-target div{
         display: block;
     }
+    
+    #perfil-lodging-target-full,
     #perfil-lodging-target{
         height: 0;
-        transition: all 0.6s;
+        transition: all 0.3s;
     }
+    
+    #perfil-lodging-target-full div,
     #perfil-lodging-target div{
         display:none;
         transition: all 0.9s;
     }
     /*TRANSICION DATOS DE PERFIL*/
+    #perfil-perfil-full:hover >
+    #perfil-perfil-target-full,
     #perfil-perfil:hover >
     #perfil-perfil-target{
         height: 100%;
     }
+    #perfil-perfil-full:hover >
+    #text-perfil-target-full p,
     #perfil-perfil:hover >
-    #perfil-perfil-target div{
-        display: block;
+    #text-perfil-target p{
+        color:#fff;
     }
+    #perfil-perfil-target-full,
     #perfil-perfil-target{
         height: 0;
-        transition: all 0.6s;
+        transition: all 0.3s;
     }
-    #perfil-perfil-target div{
-        display:none;
-        transition: all 1s;
+    #text-perfil-target-full p,
+    #text-perfil-target p{
+        color:transparent;
+        transition: all 0.5s;
     }
     /** */
     .benefit-target{
         height: 46%;
     }
+    .home-perfil-full,
     .home-benefit,
     .home-perfil{
         height: 35vh;
     }
 }
 @media(max-width:1023px){
+    #perfil-lodging-target-full div,
     #perfil-lodging-target div{
         display:none;
     }
+    #perfil-perfil-target-full div,
     #perfil-perfil-target div{
         display:none;
     }

@@ -8,12 +8,12 @@
         <MenuMobile/>
     </div>
         <a target="_blank" href="https://api.whatsapp.com/send/?phone=34722193903" class="d-none d-xl-block">
-            <div class="banner-wticon fixed right-6 bottom-16 rounded-md d-flex p-2 z-50">
+            <div class="banner-wticon fixed right-28 2xl:right-40 bottom-16 rounded-md d-flex p-2 z-50">
                 <img src="/vendor_asset/img/collaborator/wticon.svg" class="px-1">
                 <p class="text-white ml-2.5 xl:ml-3.5 leading-4 whitespace-nowrap">¡Contacta con <br>nosotros!</p>
             </div>
         </a>
-        <section id="banner" class="container-fluid xl:px-16 2xl:px-28 mb-28 lg:flex relative">
+        <section id="banner" class="container-fluid lg:px-16 2xl:px-28 mb-28 lg:flex relative">
         <div class="d-xl-none banner-overlay"></div>
         <div class="row pb-14 md:pb-0 my-auto">
             <div class="col-12 col-xl-6 pt-44 pl-8">
@@ -45,7 +45,7 @@
             </div>
         </div>
         </section>
-        <section id="direction" class="container-fluid xl:px-16 2xl:px-28 lg:flex flex-column my-8 lg:my-36">
+        <section id="direction" class="container-fluid lg:px-16 2xl:px-28 lg:flex flex-column my-8 lg:my-36">
             <div class="row justify-content-center mt-auto">
                 <div class="col-12 col-md-9 px-8 md:px-0">
                     <h1 class="text-center text-4xl md:text-5xl font-semibold">¿A quién está dirigido?</h1>
@@ -138,7 +138,7 @@
                 </div>
             </div>
         </section>
-        <section id="slide" class="container-fluid xl:px-16 2xl:px-28  lg:flex flex-column mb-16 lg:mb-14 lg:mt-40 ">
+        <section id="slide" class="container-fluid lg:px-16 2xl:px-28  lg:flex flex-column mb-16 lg:mb-14 lg:mt-40 ">
             <div class="row mt-auto">
                 <div class="col-12">
                     <h1 class="text-4xl md:text-5xl md:pl-24 mb-6 md:mb-4 font-semibold">¿Cómo lo hacemos?</h1>
@@ -322,8 +322,8 @@
                 <div class="md:px-48 hicitty h-32 md:h-96 w-100">
                     <img class="absolute left-0 right-0 md:top-24 lg:top-0 mx-auto 2xl:w-3/4" src="/vendor_asset/img/collaborator/footerhiccity.svg" alt="">
                 </div>
-                <div class="col-12 foot xl:pt-10 xl:px-4 2xl:px-28" style="background-color:#000">
-                    <div class="row justify-content-between pb-8 xl:px-16 2xl:px-28">
+                <div class="col-12 foot xl:pt-10 lg:px-4 2xl:px-28" style="background-color:#000">
+                    <div class="row justify-content-between pb-8 lg:px-16 2xl:px-0">
                         <div class="col-12 col-md-4 col-xl-6">
                             <h1 class="text-4xl md:text-5xl text-white py-8 font-semibold">
                                 Solo ganamos si tu ganas     
@@ -332,7 +332,7 @@
                                 Copyright ©2022 HiCitty. Todos los derechos reservados 
                             </p>
                         </div>
-                        <div class="col-12 col-md-3 col-lg-2 px-8 px-md-2 pt-12 md:pl-24 flex flex-column">
+                        <div class="col-12 col-md-3 col-lg-2 px-8 px-md-2 pt-12 md:pl-24 flex flex-column 2xl:mr-6">
                             <div class="">
                                 <p class="text-white 2xl:text-xl mb-1">Visita nuestra web</p>
                                 <Link :href="route('home')">
