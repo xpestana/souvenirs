@@ -22,7 +22,7 @@
                     	<div class="col-12 col-md-3 md:mr-2">
                     		<div
                     			class=" border-collaborator text-center p-1 text-center cursor-pointer"
-                    			@click.prevent="saveType('lodging')"
+                    			@click.prevent="saveType('apartamento')"
                     		>
                         		<img class="block w-12" style=""
 				                	src="/vendor_asset/img/collaborator/dashboard/icons/lodging/ApartamentoAzul.svg"
@@ -33,7 +33,7 @@
                     	<div class="col-12 col-md-3 md:mr-2">
                     		<div
                     			class="border-collaborator p-1 text-center cursor-pointer"
-                    			@click.prevent="saveType('complejo')"
+                    			@click.prevent="saveType('complejo túristico')"
                     		>
                     			<img class="block w-12" style=""
 			                        src="/vendor_asset/img/collaborator/dashboard/icons/lodging/ComplejoTurAzul.svg"

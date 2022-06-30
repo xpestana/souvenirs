@@ -149,17 +149,6 @@ export default {
             type:'',
             form: this.$inertia.form({
                 tipo: null,
-                nombre_hotel:null,
-                numero_habitaciones:null,
-                calle: null,
-                planta: null,
-                address: null,
-                city: 'Sevilla',
-                cp: null,
-                code: null,
-                url: null,
-                area: null,
-                image: null,
             }),
         }
     },
