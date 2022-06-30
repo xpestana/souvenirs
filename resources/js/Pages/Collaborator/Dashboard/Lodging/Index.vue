@@ -101,7 +101,7 @@
         
         <!-- END Content section-->
         <div class="flex justify-center lg:px-56 mt-3">
-            <button class="bg-collaborator-orange text-white font-semibold block py-1.5 rounded px-4">+ Añadir alojamiento</button>
+            <button @click.prevent="openCreateLodging()" class="bg-collaborator-orange text-white font-semibold block py-1.5 rounded px-4">+ Añadir alojamiento</button>
         </div>
         <div class="row justify-content-center" v-if="hotels.data.length > 0">
             <div class="col-10 col-lg-4 overflow-auto">
@@ -109,18 +109,31 @@
             </div>
         </div>
     </section>
+    <ModalCreateType
+        ref="modalCreateType"
+        :form.sync="form"
+        @clickOpenForm="openFormCreate()"
+    />
+    <ModalCreateForm
+        ref="modalCreateForm"
+        :form.sync="form"
+    />
 </template>
 <script>
 import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
 import { Inertia } from '@inertiajs/inertia'  
 import { Head, Link } from '@inertiajs/inertia-vue3'
 import Paginator from '@/Components/Paginator.vue'
+import ModalCreateType from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateType'
+import ModalCreateForm from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateForm'
 export default {
     layout:TemplateApp,
     components:{
         Head,
         Link,
-        Paginator
+        Paginator,
+        ModalCreateType,
+        ModalCreateForm
     },
     props: {
     hotels: Object,
@@ -133,7 +146,21 @@ export default {
             orders: 0,
             user_id:0,
             search:null,
-            type:''
+            type:'',
+            form: this.$inertia.form({
+                tipo: null,
+                nombre_hotel:null,
+                numero_habitaciones:null,
+                calle: null,
+                planta: null,
+                address: null,
+                city: 'Sevilla',
+                cp: null,
+                code: null,
+                url: null,
+                area: null,
+                image: null,
+            }),
         }
     },
     created(){
@@ -196,6 +223,13 @@ export default {
             let val = url.split(string+"=")
             return val[1].split('&')[0];
         },
+        openCreateLodging () {
+            this.$refs.modalCreateType.openModal()
+        },
+        openFormCreate () {
+            console.log('entro')
+            this.$refs.modalCreateForm.openModal()
+        }
     }
 }
 </script>

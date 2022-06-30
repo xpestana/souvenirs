@@ -119,9 +119,9 @@
 		</div>
 		<div class="row">
 			<div class="col-12 d-inline-flex justify-content-between">
-				<Link :href="route('collaborator.index')" class="btn btn-primary rounded-pill px-3 mt-3">
+				<!-- <Link :href="route('collaborator.index')" class="btn btn-primary rounded-pill px-3 mt-3">
 					Volver
-				</Link>	
+				</Link>	 -->
 				<template v-if="registerLodging || registerHotel">
 				<button type="submit" class="btn btn-primary rounded-pill px-3 mt-3 text-white" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
 					Siguiente
@@ -130,27 +130,6 @@
 			</div>
 		</div>
 		</form>
-		<ModalCreateType
-			ref="modalCreateType"
-			:form.sync="form"
-			@clickOpenForm="openFormCreate()"
-		/>
-		<ModalCreateForm
-			ref="modalCreateForm"
-			:form.sync="form"
-		/>
-		<div class="row justify-content-center">
-			<div class="col-12 mt-11 px-0 text-center">
-                <button
-                    type="submit"
-                    class="btn rounded text-white bg-collaborator-orange py-1 px-6"
-                    @click.prevent="openCreateLodging()"
-                >
-                    <i class="fas fa-plus mr-2 text-white">
-                        </i>Añadir alojamiento
-                </button>
-            </div>
-		</div>
 	</div>
 </template>
 <script>
@@ -159,17 +138,14 @@
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 	import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
 	import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
-	import ModalCreateType from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateType'
-	import ModalCreateForm from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateForm'
+
 	export default {
 		layout:TemplateApp,
 		components:{
             ValidationErrors,
             Head,
             Link,
-			ModalCookies,
-			ModalCreateType,
-			ModalCreateForm,
+			ModalCookies
 		},
 		data() {
         	return {
@@ -252,13 +228,6 @@
                 $('#fileFeatured').html('');
                 this.showF=0;
             },
-            openCreateLodging () {
-            	this.$refs.modalCreateType.openModal()
-            },
-            openFormCreate () {
-            	console.log('entro')
-            	this.$refs.modalCreateForm.openModal()
-            }
     	}
 	}
 </script>
