@@ -290,10 +290,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/colaboradores/notify', [CollaboratorController::class, 'notify'])->name('collaborator.notify');
 });
 
-/*Dashboard Colaborador*/
+/*Dashboard Colaborador viejo*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(function () {
     
-    Route::get('/', [CollaboratorController::class, 'index'])->name('collaborator.index');  
+    Route::get('/', [CollaboratorController::class, 'index'])->name('coll.lodgings.index');  
     Route::get('/crear', [CollaboratorController::class, 'create_hab'])->name('collaborator.create.hab');  
     Route::post('/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');
     Route::get('/edit/{hab}',[CollaboratorController::class, 'edit_hab'])->name('collaborator.edit.hab');

@@ -45,7 +45,7 @@
             </div>
         </div>
         </section>
-        <section id="direction" class="container-fluid lg:px-16 2xl:px-28 lg:flex flex-column my-8 lg:my-36">
+        <section id="direction" class="container-fluid lg:px-16 2xl:px-28 lg:flex flex-column my-8 lg:my-24">
             <div class="row justify-content-center mt-auto">
                 <div class="col-12 col-md-9 px-8 md:px-0">
                     <h1 class="text-center text-4xl md:text-5xl font-semibold">¿A quién está dirigido?</h1>
@@ -138,7 +138,7 @@
                 </div>
             </div>
         </section>
-        <section id="slide" class="container-fluid lg:px-16 2xl:px-28  lg:flex flex-column mb-16 lg:mb-14 lg:mt-40 ">
+        <section id="slide" class="container-fluid lg:px-16 2xl:px-28  lg:flex flex-column mb-16 lg:mb-11 lg:mt-32 ">
             <div class="row mt-auto">
                 <div class="col-12">
                     <h1 class="text-4xl md:text-5xl md:pl-24 mb-6 md:mb-4 font-semibold">¿Cómo lo hacemos?</h1>
@@ -229,7 +229,7 @@
         <!-- <section id="result" class="container-fluid xl:px-16 2xl:px-28 md:flex"> -->
         <section id="resultado" class="relative lg:px-28">
             <img src="/vendor_asset/img/collaborator/result.png" class="img-fondo hidden lg:block absolute top-0 left-0 w-full">
-            <div class="row my-auto  justify-content-around xl:px-8 pt-16 md:pt-48 md:pb-32 mx-0">
+            <div class="row my-auto  justify-content-around xl:px-8 pt-16 md:pt-48 md:pb-28 mx-0">
                 <div class="col-12">
                     <h1 class="text-center text-4xl md:text-5xl text-white mb-12 md:mb-16 lg:pt-14 font-semibold">¿Cuál es el resultado?</h1>
                 </div>
@@ -287,7 +287,7 @@
                 </div>
             </div>
         </section>
-        <section id="win" class="container-fluid xl:px-16 2xl:px-28 lg:flex my-16 lg:my-32">
+        <section id="win" class="container-fluid xl:px-16 2xl:px-28 lg:flex my-16 lg:my-28">
             <div class="row my-auto">
                 <div class="col-12 md:px-48">
                     <h1 class="text-center text-3xl md:text-6xl font-weight-bolder">

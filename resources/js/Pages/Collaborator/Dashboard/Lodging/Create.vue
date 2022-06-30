@@ -119,9 +119,9 @@
 		</div>
 		<div class="row">
 			<div class="col-12 d-inline-flex justify-content-between">
-				<Link :href="route('collaborator.index')" class="btn btn-primary rounded-pill px-3 mt-3">
+				<!-- <Link :href="route('collaborator.index')" class="btn btn-primary rounded-pill px-3 mt-3">
 					Volver
-				</Link>	
+				</Link>	 -->
 				<template v-if="registerLodging || registerHotel">
 				<button type="submit" class="btn btn-primary rounded-pill px-3 mt-3 text-white" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
 					Siguiente
@@ -130,6 +130,7 @@
 			</div>
 		</div>
 		</form>
+<<<<<<< HEAD
 		<ModalCreateType
 			ref="modalCreateType"
 			:form.sync="form"
@@ -201,6 +202,8 @@
             </div>
         </div>
         <!-- Modal Request  -->
+=======
+>>>>>>> dev
 	</div>
 </template>
 <script>
@@ -209,18 +212,20 @@
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 	import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
 	import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
+<<<<<<< HEAD
 	import ModalCreateType from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateType'
 	import ModalCreateForm from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateForm'
 	import Dropzone from 'dropzone'
+=======
+
+>>>>>>> dev
 	export default {
 		layout:TemplateApp,
 		components:{
             ValidationErrors,
             Head,
             Link,
-			ModalCookies,
-			ModalCreateType,
-			ModalCreateForm,
+			ModalCookies
 		},
 		data() {
         	return {
@@ -305,6 +310,7 @@
                 $('#fileFeatured').html('');
                 this.showF=0;
             },
+<<<<<<< HEAD
             openCreateLodging () {
             	this.$refs.modalCreateType.openModal()
             },
@@ -320,6 +326,8 @@
       			this.imagenValue = URL.createObjectURL(this.form.image)
       			console.log(this.imagenValue)
             },
+=======
+>>>>>>> dev
     	}
 	}
 </script>

@@ -330,6 +330,9 @@
   .bg-collaborator{
       background-color:#86bcd9;
   }
+  .text-blue-coll{
+    color:#86bcd9;
+  }
 
   #collaborator-data select{
     color: #bababa;

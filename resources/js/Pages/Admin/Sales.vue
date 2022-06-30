@@ -25,14 +25,21 @@
                             <tbody>
                                 <tr v-for="order in orders.data" :key="order.id">
                                     <td class="text-center">
-                                         <template v-if="order.hotel.user[0]">
+                                         <template v-if="order.hotel">
                                                 {{ order.hotel.user[0].email }}
                                         </template>
                                         <template v-else>
                                             -
                                         </template>
                                     </td>
-                                    <td class="text-center">{{ order.hotel.calle }} {{ order.hotel.panta }}</td>
+                                    <td class="text-center">
+                                        <template v-if="order.hotel">
+                                        {{ order.hotel.calle }} {{ order.hotel.panta }}
+                                        </template>
+                                        <template v-else>
+                                            -
+                                        </template>
+                                    </td>
                                     <td class="text-center">
                                         <template v-if="order.returned == 1">
                                             <select class="rounded py-1" name="returned" id="returned" @change="returned(order.id)">

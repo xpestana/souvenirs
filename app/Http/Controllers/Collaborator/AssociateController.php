@@ -26,11 +26,12 @@ use Image;
 class AssociateController extends Controller
 {
     public function collaborations(){
+        $ordersTotal = Order::where("user_id", auth()->user()->id)->orderBy('created_at','DESC')->get();
         $orders = Order::where("user_id", auth()->user()->id)->orderBy('created_at','DESC')->paginate(10);
         $orders->load('shippings');
         $url = config('app.url');
         $hotels = auth()->user()->hotel->load('orders.shippings');       
-        return Inertia::render('Associates/Dashboard/Collaboration', compact('hotels','orders','url'));
+        return Inertia::render('Associates/Dashboard/Collaboration', compact('hotels','orders','url','ordersTotal'));
     }
 
 }
