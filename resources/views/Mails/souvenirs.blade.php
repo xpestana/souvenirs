@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
 </head>
 <body style="margin: 0;">
-    <div class="main" style="padding: 0 2em;">
+    <div class="main" style="padding: 0 0.5em;">
         <section id="cabecera">
             <div class="container-logo" style="display: flex;flex-direction: column;">
                 <!--<img src="{{asset('/vendor_asset/img/logo/hilogo.png')}}" alt="logo" style="margin: 1em auto;max-width: 12em;">--> 
@@ -25,9 +25,9 @@
             @php
             $shipping = $order->shippings->first();
             @endphp
-            <div style="margin-top: 10px;">
-            <h4 style="margin:0;">Hola:  {{ $shipping->firstname }}</h4>
-            <p>¡Gracias por tu compra! Tu pedido se ha realizado con éxito y te llegará en un breve.</p>
+            <div style="margin-top: 10px;margin-left:1em">
+            <h4 style="margin:0;">Hola {{ $shipping->firstname }}:</h4>
+            <p>¡Gracias por tu compra! Tu pedido se ha realizado con éxito y te llegará en breve.</p>
             </div>
         </section>
 
@@ -41,17 +41,17 @@
                     $articlesTotal = $articlesTotal + $product->quantity; 
                 @endphp
                 @if($product->product->type == 'Souvenirs')
-                    <div class="tarjeta" style="background-color: #ededed;display: flex;padding: 8px; margin-top: 0.7em;flex-wrap: wrap">
-                        <img src="{{asset('/storage/souvenirs'.$product->product->images[0]->url)}}" alt="souvenir" style="width: 7em;height: 5em;margin:auto">
-                        <div class="descripcion" style="margin-left: 1em;display: flex; flex-direction: column;flex-grow:1;text-align:center">
-                            <h4 style="margin:0;">{{ $product->product->title }}</h4>
-                            <div class="cantidad" style="margin-top:auto; ">
-                            <p style="display: inline;margin:0 2px;">Cantidad</p>
+                    <div class="tarjeta" style="background-color: #ededed;display: flex;padding: 8px; margin-top: 0.7em;">
+                        <img src="{{asset('/storage/souvenirs'.$product->product->images[0]->url)}}" alt="souvenir" style="width: 6em;height: 4.9em;margin:auto">
+                        <div class="descripcion" style="margin-left: 0.6em;display: flex; flex-direction: column;flex-grow:1;text-align:left">
+                            <h4 style="margin:0;font-size: 0.85em;">{{ $product->product->title }}</h4>
+                            <div class="cantidad" style="margin-top:auto;font-size: 0.85em; ">
+                            <p style="display: inline;margin:0 1px;font-size: 0.85em;">Cantidad</p>
                             <input type="text" value="{{$product->quantity}}" style="width: 3em;height: 1.5em;border: 1px solid #dbdbdb;border-radius: 5px;outline:none;text-align:center">
                             </div>
                         </div>
-                        <div class="precio" style="margin: 0 2em;flex-grow:2;text-align:center">
-                            <h4 style="margin:0;">{{ $product->quantity*$product->amount }} €</h4>
+                        <div class="precio" style="margin: 0 0.5em;flex-grow:2;text-align:left">
+                            <h4 style="margin:0;font-size: 0.85em;">{{ $product->quantity*$product->amount }} €</h4>
                         </div>
                     </div>
                 @endif
@@ -59,19 +59,20 @@
             <h3 style="margin: 20px 0 0 0;">Actividades</h3>
             @foreach($order->shippings as $product)
                 @if($product->product->type == 'Activities')
-                <div class="tarjeta" style="background-color: #ededed;display: flex;padding: 8px; margin-top: 0.7em;flex-wrap: wrap">
-                        @if($product->product->images->count() > 0)
-                            <img src="{{ asset('/storage/souvenirs'.$product->product->images[0]->name)}}"  style="width: 7em;height: 5em;margin:auto;">
-                        @else
-                            <img src="{{ asset('/vendor_asset/img/bg-image/act-default.jpg')}}"  style="width: 7em;height: 5em;margin:auto;">    
-                        @endif
-                        <div class="descripcion" style="margin-left: 1em;display: flex; flex-direction: column;flex-grow:1;text-align:center">
-                            <h4 style="margin:0;">{{ $product->product->title }}</h4>
-                        </div>
-                        <div class="precio" style="margin: 0 2em;flex-grow:2;text-align:center">
-                            <h4 style="margin:0;">{{ $product->amount }} €</h4>
-                        </div>
+                <div class="tarjeta" style="background-color: #ededed;display: flex;padding: 8px; margin-top: 0.7em;">
+                    @if($product->product->images->count() > 0)
+                        <img src="{{ asset('/storage/souvenirs'.$product->product->images[0]->name)}}"  style="width: 6em;height: 4.9em;margin:auto">
+                    @else
+                        <img src="{{ asset('/vendor_asset/img/bg-image/act-default.jpg')}}"  style="width: 6em;height: 4.9em;margin:auto">    
+                    @endif
+                    <div class="descripcion" style="margin-left: 0.6em;display: flex; flex-direction: column;flex-grow:1;text-align:left;width:7em">
+                        <h4 style="margin:0;font-size: 0.85em;">{{ $product->product->title }}</h4>
                     </div>
+                    <div class="precio" style="margin: 0 0.5em;flex-grow:2;text-align:left">
+                        <h4 style="margin:0;font-size: 0.85em;">{{ $product->amount }} €</h4>
+                    </div>
+                </div>
+
                 @endif
                 
             @endforeach

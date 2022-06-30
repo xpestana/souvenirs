@@ -75,14 +75,14 @@
                 <div class="modal-content modal-exits modal mx-auto px-2">
                     <div class="modal-body p-0 relative">
                         <div>
-                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close"></i>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" @click.prevent="closeModalBack()"></i>
                         </div>
                         <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
                         <p class="px-4 my-2 text-xs text-center">
                             ¿Estas seguro que quieres salir?
                         </p>
                         <div class="my-2.5 text-center">
-                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" data-dismiss="modal" aria-label="Close">Seguir editando</button>
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" data-dismiss="modal" @click.prevent="closeModalBack()">Seguir editando</button>
                         </div>
                         <div class="my-2.5 text-center">
                             <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal"  @click.prevent="forceExit()">Salir sin guardar</button>
@@ -121,6 +121,7 @@ export default {
             }),
             forceExitConfirm: false,
             beforeUrl: '',
+            typeBack: '1',
         }
     },
     computed: {
@@ -156,11 +157,12 @@ export default {
     },
     mounted () {
         this.moveConfirm = Inertia.on('before', (event) => {
-            if (!this.formValid ) {
+            if (!this.formValid) {
                 if (!this.forceExitConfirm) {
                     this.beforeUrl = event.detail.visit.url.pathname
                     $('#exit').modal('show')
                     event.preventDefault()
+                    event.returnValue = ''
                 }
             }
         })
@@ -189,17 +191,32 @@ export default {
             else { this.validForm = false }
         },
         forceExit () {
-            setTimeout(() =>{
-                Inertia.get(`${this.beforeUrl}`)
-            }, 500)
+            this.forceExitConfirm = true
+            if (this.typeBack == '2') { window.history.back() }
+            else {
+                setTimeout(() =>{
+                    Inertia.get(`${this.beforeUrl}`)
+                }, 500)
+            }
         },
         updateForm () {
             this.formCollaboratorBank.holder = this.collaboratorBank.holder
             this.formCollaboratorBank.iban = this.collaboratorBank.iban
         },
         goBack () {
-            this.forceExitConfirm = true
-            window.history.back()
+            if (!this.formValid) {
+                if (!this.forceExitConfirm) {
+                    this.typeBack = '2'
+                    $('#exit').modal('show')
+                }
+            } else {
+                window.history.back()
+            }
+        },
+        closeModalBack () {
+            this.typeBack = '1'
+            this.forceExitConfirm = false
+            $('#exit').modal('hide')
         }
     },
 }

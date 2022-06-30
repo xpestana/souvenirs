@@ -290,10 +290,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/colaboradores/notify', [CollaboratorController::class, 'notify'])->name('collaborator.notify');
 });
 
-/*Dashboard Colaborador*/
+/*Dashboard Colaborador viejo*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(function () {
     
-    Route::get('/', [CollaboratorController::class, 'index'])->name('collaborator.index');  
+    Route::get('/', [CollaboratorController::class, 'index'])->name('coll.lodgings.index');  
     Route::get('/crear', [CollaboratorController::class, 'create_hab'])->name('collaborator.create.hab');  
     Route::post('/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');
     Route::get('/edit/{hab}',[CollaboratorController::class, 'edit_hab'])->name('collaborator.edit.hab');
@@ -334,7 +334,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     Route::get('/perfil-informacion', [CollaboratorController::class, 'profile_info'])->name('dashboard.profile.info'); 
     Route::get('/perfil-inicio', [CollaboratorController::class, 'profile'])->name('collaborator.dashboard.profile');   
     Route::get('/perfil-datos-fiscales', [CollaboratorController::class, 'profile_tax'])->name('collaborator.profile.tax');   
-    Route::get('/bienvenido-ventas', [CollaboratorController::class, 'sales_welcome'])->name('collaborator.dashboard.sales');   
+    Route::get('/bienvenido-ventas', [CollaboratorController::class, 'sales_welcome'])->name('collaborator.dashboard.sales');
     Route::get('/ventas-totales', [CollaboratorController::class, 'sales_total'])->name('dashboard.sales.total'); 
     Route::get('/historial-retiros', [CollaboratorController::class, 'withdrawal_history'])->name('dashboard.withdrawals'); 
     

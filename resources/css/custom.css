@@ -330,6 +330,9 @@
   .bg-collaborator{
       background-color:#86bcd9;
   }
+  .text-blue-coll{
+    color:#86bcd9;
+  }
 
   #collaborator-data select{
     color: #bababa;
@@ -468,6 +471,10 @@ a[data-toggle="collapse"] {
 .btn-outline-orange{
   border:2px solid #FF9C06;
   color:#FF9C06;
+}
+.btn-outline-white{
+  border:2px solid #FFF;
+  color:#FFF;
 }
 .btn-outline-orange:hover{
   border:2px solid #fac371;

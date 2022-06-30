@@ -82,14 +82,22 @@
                                 <tr v-for="venta in ventas" :key="venta.id">
                                     <td class="text-center">{{venta.id_t }}</td>
                                     <td class="text-center">
-                                        <select class="rounded border">
-                                            <option value="1">Si</option>
-                                            <option value="0">No</option>
-                                        </select>
+                                        <template v-if="venta.returned == 1">
+                                            <select class="rounded border py-1" name="returned" id="returned" @change="returned(venta.id)">
+                                                <option value="1" selected>Si</option>
+                                                <option value="0">No</option>
+                                            </select>
+                                        </template>
+                                        <template v-else>
+                                            <select class="rounded border py-1" name="returned" id="returned" @change="returned(venta.id)">
+                                                <option value="1">Si</option>
+                                                <option value="0" selected>No</option>
+                                            </select>
+                                        </template>
                                     </td>
                                     <td class="text-center">{{moment(venta.date).format("DD/MM/YYYY")}}</td>
-                                    <td class="text-center">{{ parseInt(venta.total_benefit*0.20).toFixed(2) }}</td>
                                     <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
+                                    <td class="text-center">{{(venta.total_benefit*0.20).toFixed(2)}}€</td>
                                 </tr>
                                 <tr v-if="ventas.length == 0">
                                     <td colspan="7" class="text-center">Sin ventas</td>
@@ -101,7 +109,7 @@
             </div>
             <div class="row pie justify-content-end">
                 <div class="col-sm-4 col-md-3 mt-4">
-                    <h2 class="text-info"><strong>Total {{total}}€</strong></h2>
+                    <h2 class="text-info"><strong>Total {{total.toFixed(2)}}€</strong></h2>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -124,6 +132,7 @@ export default {
     layout:Layout,
     props:{
         orders:Object,
+        ordersTotal:Object,
         url:String
     },
     components:{
@@ -148,22 +157,34 @@ export default {
                     method: 'GET',
                     responseType: 'blob'
                 })
-                .then((response) => {
-                        const url = window.URL
-                            .createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', `${lodging}.png`);
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                })                
-            }
+            .then((response) => {
+                    const url = window.URL
+                        .createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', `${lodging}.png`);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+            })                
+        },
+        returned(id){
+            this.$inertia.post(route('admin.order.returned'), {
+            id: id,
+            })
+        },
     },
     computed:{
         ventas(){
-            const obj = this.orders.data.map((col)=>{
-            this.total += parseInt(col.total);
+            this.ordersTotal.forEach(col =>{
+                if(col.returned == 0){
+                    this.total += Number(col.total);
+                }else{
+                    console.log('no')
+                }
+                
+            });
+            const obj = this.orders.data.map((col)=>{    
             return {
                 id : col.id,
                 calle: col.calle,
@@ -172,13 +193,13 @@ export default {
                 image : col.image,
                 date : col.created_at,
                 type : col.type,
+                returned: col.returned,
                 shippings : col.shippings,
                 id_t: col.transaction_id,
                 // email : col.shippings[0].email,
-                total_benefit : parseInt(col.total)/100,
+                total_benefit : Number(col.total),
             }
             });
-            this.total = this.total/100;
             return obj;
         },
     }

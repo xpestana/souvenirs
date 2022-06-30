@@ -119,9 +119,9 @@
 		</div>
 		<div class="row">
 			<div class="col-12 d-inline-flex justify-content-between">
-				<Link :href="route('collaborator.index')" class="btn btn-primary rounded-pill px-3 mt-3">
+				<!-- <Link :href="route('collaborator.index')" class="btn btn-primary rounded-pill px-3 mt-3">
 					Volver
-				</Link>	
+				</Link>	 -->
 				<template v-if="registerLodging || registerHotel">
 				<button type="submit" class="btn btn-primary rounded-pill px-3 mt-3 text-white" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
 					Siguiente

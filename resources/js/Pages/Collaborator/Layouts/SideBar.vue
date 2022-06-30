@@ -15,12 +15,13 @@
                 </Link>
             </li>
             <li class="mb-3.5">
-                <a href="#" class="text-base link">
+                <Link :href="route('coll.lodgings.index')" class="text-base link" :class="{'sidebar-active':this.$page.url=='/tablero/alojamientos'}">
                     <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':this.$page.url=='/tablero/alojamientos'}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
                     >
                     Gestión de alojamientos
-                </a>
+                </Link>
             </li>
             <li class="mb-3.5">
                 <a href="#sub-recursos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-base link">
