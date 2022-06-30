@@ -47,13 +47,13 @@
     "/vendor_asset/img/brand/brand-4.png": "/vendor_asset/img/brand/brand-4.png",
     "/vendor_asset/img/brand/brand-5.png": "/vendor_asset/img/brand/brand-5.png",
     "/vendor_asset/img/carts.png": "/vendor_asset/img/carts.png",
-<<<<<<< HEAD
     "/vendor_asset/img/collaborator/banner1.png": "/vendor_asset/img/collaborator/banner1.png",
     "/vendor_asset/img/collaborator/banner2.png": "/vendor_asset/img/collaborator/banner2.png",
     "/vendor_asset/img/collaborator/banner3.png": "/vendor_asset/img/collaborator/banner3.png",
     "/vendor_asset/img/collaborator/bannercenter.png": "/vendor_asset/img/collaborator/bannercenter.png",
     "/vendor_asset/img/collaborator/bannermobile.jpg": "/vendor_asset/img/collaborator/bannermobile.jpg",
     "/vendor_asset/img/collaborator/dashboard/alo1.png": "/vendor_asset/img/collaborator/dashboard/alo1.png",
+    "/vendor_asset/img/collaborator/dashboard/chome3.jpg": "/vendor_asset/img/collaborator/dashboard/chome3.jpg",
     "/vendor_asset/img/collaborator/dashboard/colhome1.jpg": "/vendor_asset/img/collaborator/dashboard/colhome1.jpg",
     "/vendor_asset/img/collaborator/dashboard/colhome2.jpg": "/vendor_asset/img/collaborator/dashboard/colhome2.jpg",
     "/vendor_asset/img/collaborator/dashboard/colhome3.jpg": "/vendor_asset/img/collaborator/dashboard/colhome3.jpg",
@@ -93,6 +93,8 @@
     "/vendor_asset/img/collaborator/hicittylogopequeñon.svg": "/vendor_asset/img/collaborator/hicittylogopequeñon.svg",
     "/vendor_asset/img/collaborator/info.svg": "/vendor_asset/img/collaborator/info.svg",
     "/vendor_asset/img/collaborator/informacion.svg": "/vendor_asset/img/collaborator/informacion.svg",
+    "/vendor_asset/img/collaborator/Informacionn.svg": "/vendor_asset/img/collaborator/Informacionn.svg",
+    "/vendor_asset/img/collaborator/Inquilinosn.svg": "/vendor_asset/img/collaborator/Inquilinosn.svg",
     "/vendor_asset/img/collaborator/itgicon.svg": "/vendor_asset/img/collaborator/itgicon.svg",
     "/vendor_asset/img/collaborator/kayak.svg": "/vendor_asset/img/collaborator/kayak.svg",
     "/vendor_asset/img/collaborator/kayakn.svg": "/vendor_asset/img/collaborator/kayakn.svg",
@@ -112,8 +114,6 @@
     "/vendor_asset/img/collaborator/valoracionn.svg": "/vendor_asset/img/collaborator/valoracionn.svg",
     "/vendor_asset/img/collaborator/viajeros.svg": "/vendor_asset/img/collaborator/viajeros.svg",
     "/vendor_asset/img/collaborator/wticon.svg": "/vendor_asset/img/collaborator/wticon.svg",
-=======
->>>>>>> origin/andres
     "/vendor_asset/img/contact.png": "/vendor_asset/img/contact.png",
     "/vendor_asset/img/default.png": "/vendor_asset/img/default.png",
     "/vendor_asset/img/english.png": "/vendor_asset/img/english.png",

@@ -117,6 +117,7 @@
     <ModalCreateForm
         ref="modalCreateForm"
         :form.sync="form"
+        @clickBackModalType="openCreateLodging()"
     />
 </template>
 <script>
@@ -149,17 +150,6 @@ export default {
             type:'',
             form: this.$inertia.form({
                 tipo: null,
-                nombre_hotel:null,
-                numero_habitaciones:null,
-                calle: null,
-                planta: null,
-                address: null,
-                city: 'Sevilla',
-                cp: null,
-                code: null,
-                url: null,
-                area: null,
-                image: null,
             }),
         }
     },
@@ -205,7 +195,6 @@ export default {
         });
         return obj;
     },
-
     },
     methods: {
         searchFilter(){
@@ -224,10 +213,10 @@ export default {
             return val[1].split('&')[0];
         },
         openCreateLodging () {
+            console.log('open modal type')
             this.$refs.modalCreateType.openModal()
         },
         openFormCreate () {
-            console.log('entro')
             this.$refs.modalCreateForm.openModal()
         }
     }

@@ -192,7 +192,6 @@ export default {
             const toast = this.$toast;
 
             const dropzone = new Dropzone("div#dropRef", { 
-                url: route('activities.update.image'),
                 autoProcessQueue: false,
                 uploadMultiple: true,
                 parallelUploads: 20,

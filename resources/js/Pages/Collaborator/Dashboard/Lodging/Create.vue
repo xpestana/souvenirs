@@ -130,7 +130,6 @@
 			</div>
 		</div>
 		</form>
-<<<<<<< HEAD
 		<ModalCreateType
 			ref="modalCreateType"
 			:form.sync="form"
@@ -170,12 +169,11 @@
                             <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close" ></i>
                         </div>
                         <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
-                        <div class=" rounded-xl mt-4">
+                        <div class=" rounded-xl mt-4 bg-collaborator-orange">
                         	<img
                         		v-if="imagenValue"
-                        		:src="imagenValue"
-                        		height="100%" width="100%"
-                        	/>
+                        		:src="img"
+                        	>
                         	<div
                         	    v-else
                         		class="bg-collaborator-orange py-2.5  px-2 text-center text-white w-100 m-0 rounded-xl"
@@ -184,26 +182,34 @@
                         	  	<i class="fas fa-arrow-down inline-block text-white text-lg md:text-xl"></i>
                         	</div>
                         </div>
-                        <input ref="file" type="file" style="display: none;" @change="changeImage" />
+                        <input
+                        	ref="file"
+                        	type="file"
+                        	id="file"
+                        	style="display: none;"
+                        	@change="changeImage"
+                        />
                         <div
-                        	class=" rounded-xl bg-picker-img py-2.5 mt-4 mb-3 px-2 text-center text-muted cursor-pointer"
+                        	class=" rounded-xl bg-picker-img py-2.5 mt-4 mb-4 px-2 text-center text-muted cursor-pointer"
+                        	@drop.prevent="addFile"
+                        	@dragover.prevent
                         	@click="$refs.file.click()"
                         >
                         	<i class="fas fa-image inline-block text-white text-xl text-muted"></i>
                         	<label class="text-center block font-bold text-muted mt-1">!No has subido una imagen todavía</label>
                         	<p class="text-xs muted mt-1">Tamaño máximo  de la imagen 2MB</p>
                         </div>
-                        <div>
-                        	<label class="text-base">Imagenes del producto</label>
-                    		<div id="dropRef" class="dropzone custom-dropzone"></div>
-                        </div>
+                        <!--<div
+                        	id ="leftContain"style="width:90%; height: 90;"
+                        >
+                        	<img id="img" class="img" align="center" src="" >
+                        	<input type="file" @change="" name="">
+                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
         <!-- Modal Request  -->
-=======
->>>>>>> dev
 	</div>
 </template>
 <script>
@@ -212,20 +218,17 @@
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
 	import ValidationErrors from '@/Pages/Collaborator/components/ValidationErrors.vue'
 	import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
-<<<<<<< HEAD
-	import ModalCreateType from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateType'
 	import ModalCreateForm from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateForm'
+	import DropZoneImage from '@/Components/DropZoneImage'
 	import Dropzone from 'dropzone'
-=======
-
->>>>>>> dev
-	export default {
-		layout:TemplateApp,
-		components:{
+    export default {
+		components: {
+			layout:TemplateApp,
             ValidationErrors,
             Head,
             Link,
-			ModalCookies
+			ModalCookies,
+			DropZoneImage
 		},
 		data() {
         	return {
@@ -254,6 +257,11 @@
                 imagenValue: null,
                 dropzone: null,
         	}
+    	},
+    	computed: {
+    		img () {
+    			return this.imagenValue
+    		}
     	},
     	methods:{
 			showForm(){
@@ -294,7 +302,6 @@
                             this.eraseFeatured();
                         };
                     }
-                	
             	})
         	},
     		selectFeatured(){
@@ -310,7 +317,6 @@
                 $('#fileFeatured').html('');
                 this.showF=0;
             },
-<<<<<<< HEAD
             openCreateLodging () {
             	this.$refs.modalCreateType.openModal()
             },
@@ -324,11 +330,23 @@
             	console.log(value)
             	this.form.image = value.target.files[0]
       			this.imagenValue = URL.createObjectURL(this.form.image)
-      			console.log(this.imagenValue)
             },
-=======
->>>>>>> dev
-    	}
+            toggleActive () {
+
+            },
+            addFile (e) {
+            	this.form.image = e.dataTransfer.files[0]
+            	let file = this.form.image
+            	let reader = new FileReader()
+            	reader.onload = (e) => {
+            		this.imagenValue= e.target.result
+            	}
+            	reader.readAsDataURL(file)
+            	this.imagenValue = URL.createObjectURL(this.form.image)
+            },
+    	},
+    	mounted() {
+        },
 	}
 </script>
 <style scoped>

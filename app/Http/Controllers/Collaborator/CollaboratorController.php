@@ -237,7 +237,7 @@ class CollaboratorController extends Controller
                 'city' => 'required|string',
                 'cp' => 'required|string',
                 'code' => 'nullable|string',
-                'url' => 'nullable|url',
+                'url' => 'nullable|string',
                 'area' => 'nullable|string',
             ]);
         }else{
