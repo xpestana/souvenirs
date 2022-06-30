@@ -47,6 +47,7 @@
     "/vendor_asset/img/brand/brand-4.png": "/vendor_asset/img/brand/brand-4.png",
     "/vendor_asset/img/brand/brand-5.png": "/vendor_asset/img/brand/brand-5.png",
     "/vendor_asset/img/carts.png": "/vendor_asset/img/carts.png",
+<<<<<<< HEAD
     "/vendor_asset/img/collaborator/banner1.png": "/vendor_asset/img/collaborator/banner1.png",
     "/vendor_asset/img/collaborator/banner2.png": "/vendor_asset/img/collaborator/banner2.png",
     "/vendor_asset/img/collaborator/banner3.png": "/vendor_asset/img/collaborator/banner3.png",
@@ -111,6 +112,8 @@
     "/vendor_asset/img/collaborator/valoracionn.svg": "/vendor_asset/img/collaborator/valoracionn.svg",
     "/vendor_asset/img/collaborator/viajeros.svg": "/vendor_asset/img/collaborator/viajeros.svg",
     "/vendor_asset/img/collaborator/wticon.svg": "/vendor_asset/img/collaborator/wticon.svg",
+=======
+>>>>>>> origin/andres
     "/vendor_asset/img/contact.png": "/vendor_asset/img/contact.png",
     "/vendor_asset/img/default.png": "/vendor_asset/img/default.png",
     "/vendor_asset/img/english.png": "/vendor_asset/img/english.png",
