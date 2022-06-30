@@ -51,12 +51,11 @@
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-0">
 			                                    <label class="font-bold">Provincia <span class="required-input">*</span></label>
-			                                    <select
-			                                    	class="w-100 rounded col-form-input py-1.5"
+			                                    <input
+			                                        type="text"
+			                                        class="w-100 rounded col-form-input py-1.5"
 			                                        placeholder="Provincia..."
 			                                    >
-													<option value="-">Select</option>
-												</select>
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <label class="font-bold">Ciudad <span class="required-input">*</span></label>
@@ -90,18 +89,33 @@
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-0">
 			                                    <label class="font-bold">Grupo <span class="required-input">*</span></label>
-			                                    <input
-			                                        type="text"
-			                                        class="w-100 rounded col-form-input py-1.5"
-			                                        placeholder="N habitaciones..."
-			                                    >
+			                                    <select
+			                                    	class="w-100 rounded col-form-input py-1.5"
+			                                        placeholder="Grupo..."
+			                                     >
+													<option
+														v-for="(item, index) in group"
+														:key="index"
+														:value="item"
+													>
+														{{ item }}
+													</option>
+												</select>
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <label class="font-bold">Modalidad <span class="required-input">*</span></label>
-					                        <input
-					                            type="text"
-					                            class="w-100 rounded col-form-input py-1.5" placeholder="Nombre del hotel..."
-					                        >
+					                        <select
+			                                    	class="w-100 rounded col-form-input py-1.5"
+			                                        placeholder="Modalidad..."
+			                                     >
+												<option
+													v-for="(item, index) in modalid"
+													:key="index"
+													:value="item"
+												>
+													{{ item }}
+												</option>
+											</select>
 				                    	</div>
 			                        </div>
 			                    </div>
@@ -109,17 +123,24 @@
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-0">
 			                                    <label class="font-bold">Categoría <span class="required-input">*</span></label>
-			                                    <input
-			                                        type="text"
-			                                        class="w-100 rounded col-form-input py-1.5"
-			                                        placeholder="N habitaciones..."
-			                                    >
+			                                    <select
+			                                    	class="w-100 rounded col-form-input py-1.5"
+			                                        placeholder="Categoría..."
+			                                     >
+													<option
+														v-for="(item, index) in category"
+														:key="index"
+														:value="item"
+													>
+														{{ item }}
+													</option>
+												</select>
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <label class="font-bold">Página Web </label>
 					                        <input
 					                            type="text"
-					                            class="w-100 rounded col-form-input py-1.5" placeholder="Nombre del hotel..."
+					                            class="w-100 rounded col-form-input py-1.5" placeholder="Página web..."
 					                        >
 				                    	</div>
 			                        </div>
@@ -140,7 +161,6 @@
 		                                class="w-100 rounded col-form-input py-1.5"
 		                                placeholder="Otros datos de interés..."
 		                            ></textarea>
-
 			                    </div>
 			                </form>
 			            </div>
@@ -174,6 +194,11 @@
         },
         props: ['form'],
 		data () {
+			return {
+				group: ['Hotel', 'Pensión/Albergue', 'Hostal', 'Apartahotel'],
+				modalid: ['Playa', 'Rural', 'Carretera', 'Ciudad'],
+				category: ['1 Estrella', '2 Estrellas', '3 Estrellas', '3 Estrellas', '4 Estrellas', '5 Estrellas'],
+			}
 		},
 		computed: {
 			formComputed: {
@@ -217,4 +242,13 @@
     .error-input{
         border: solid 2.5px red;
     }
+    option {
+    	background-color: #f5f5f5;
+    	:hover{
+    		background-color: #aad1e6;
+    	}
+    }
+    option::hover{
+		background-color: #aad1e6;
+	}
 </style>

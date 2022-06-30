@@ -151,6 +151,56 @@
                 </button>
             </div>
 		</div>
+		<button
+            type="submit"
+            class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+            @click.prevent="openModalImagen()"
+        >
+            Imagen
+        </button>
+        <!-- Modal Request -->
+        <div class="modal modal-image fade" id="image" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content modal-exits modal mx-auto px-3">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close" ></i>
+                        </div>
+                        <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
+                        <div class=" rounded-xl mt-4">
+                        	<img
+                        		v-if="imagenValue"
+                        		:src="imagenValue"
+                        		height="100%" width="100%"
+                        	/>
+                        	<div
+                        	    v-else
+                        		class="bg-collaborator-orange py-2.5  px-2 text-center text-white w-100 m-0 rounded-xl"
+                        	>
+                        		<h2 class="text-lg md:text-xl text-center mt-3.5 font-bold text-white">!No has subido una imagen todavía</h2>
+                        	  	<i class="fas fa-arrow-down inline-block text-white text-lg md:text-xl"></i>
+                        	</div>
+                        </div>
+                        <input ref="file" type="file" style="display: none;" @change="changeImage" />
+                        <div
+                        	class=" rounded-xl bg-picker-img py-2.5 mt-4 mb-3 px-2 text-center text-muted cursor-pointer"
+                        	@click="$refs.file.click()"
+                        >
+                        	<i class="fas fa-image inline-block text-white text-xl text-muted"></i>
+                        	<label class="text-center block font-bold text-muted mt-1">!No has subido una imagen todavía</label>
+                        	<p class="text-xs muted mt-1">Tamaño máximo  de la imagen 2MB</p>
+                        </div>
+                        <div>
+                        	<label class="text-base">Imagenes del producto</label>
+                    		<div id="dropRef" class="dropzone custom-dropzone"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Request  -->
 	</div>
 </template>
 <script>
@@ -161,6 +211,7 @@
 	import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
 	import ModalCreateType from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateType'
 	import ModalCreateForm from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateForm'
+	import Dropzone from 'dropzone'
 	export default {
 		layout:TemplateApp,
 		components:{
@@ -195,6 +246,8 @@
                     area: null,
                     image: null,
                 }),
+                imagenValue: null,
+                dropzone: null,
         	}
     	},
     	methods:{
@@ -256,9 +309,17 @@
             	this.$refs.modalCreateType.openModal()
             },
             openFormCreate () {
-            	console.log('entro')
             	this.$refs.modalCreateForm.openModal()
-            }
+            },
+            openModalImagen () {
+            	$('#image').modal('show')
+            },
+            changeImage (value) {
+            	console.log(value)
+            	this.form.image = value.target.files[0]
+      			this.imagenValue = URL.createObjectURL(this.form.image)
+      			console.log(this.imagenValue)
+            },
     	}
 	}
 </script>
@@ -269,6 +330,11 @@
 	}
 	button{
 		color: #495057;
+	}
+	.bg-picker-img{
+		background-color: #e7e7e7;
+		border: solid 2px #b3b3b3;
+		border-style: dashed;
 	}
 	@media (max-width:767px){
 		.container-logo img{

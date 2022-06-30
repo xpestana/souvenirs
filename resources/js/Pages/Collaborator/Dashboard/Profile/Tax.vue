@@ -232,6 +232,15 @@ export default {
             this.forceExitConfirm = false
             $('#exit').modal('hide')
         },
+        forceExit () {
+            this.forceExitConfirm = true
+            if (this.typeBack == '2') { window.history.back() }
+            else {
+                setTimeout(() =>{
+                    Inertia.get(`${this.beforeUrl}`)
+                }, 500)
+            }
+        },
     },
     updated(){
     },

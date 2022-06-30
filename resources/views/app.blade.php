@@ -78,8 +78,8 @@
                 width: 31%;
             }
             .spinner{
-              width: 4.5rem;
-              height: 4.5rem;
+              width: 3.7rem;
+              height: 3.7rem;
             }
         }
         @media (max-width: 767px){
@@ -87,11 +87,11 @@
                 width: 60%;
             }
             .spinner{
-              width: 4rem;
-              height: 4rem;
+              width: 3.3rem;
+              height: 3.3rem;
             }
             .preloader__loader > span{
-                font-size: 1.7rem;
+                font-size: 1.3rem;
             }
         }
     </style>

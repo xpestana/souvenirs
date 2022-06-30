@@ -136,12 +136,12 @@
                     </div>
                     <div class="col-12 mt-11 px-0 text-center text-lg-left">
                              <button
-                             type="submit"
-                             class="btn rounded text-white bg-collaborator-orange py-1 px-6"
-                             :class="{ 'opacity-25': formCollaboratorShipping.processing }"
-                             :disabled="formCollaboratorShipping.processing">
-                                <i class="fas fa-save mr-2 text-white">
-                                </i>Guardar cambios
+                                 type="submit"
+                                 class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+                                 :class="{ 'opacity-25': formCollaboratorShipping.processing }"
+                                 :disabled="formCollaboratorShipping.processing">
+                                    <i class="fas fa-save mr-2 text-white">
+                                    </i>Guardar cambios
                             </button>
                     </div>
                 </form>
@@ -155,7 +155,7 @@
                 <div class="modal-content modal-exits modal mx-auto px-2">
                     <div class="modal-body p-0 relative">
                         <div>
-                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close"></i>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" @click.prevent="closeModalBack()"></i>
                         </div>
                         <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
                         <p class="px-4 my-2 text-xs text-center">
@@ -292,6 +292,7 @@ export default {
             }
         },
         closeModalBack () {
+            console.log('back')
             this.typeBack = '1'
             this.forceExitConfirm = false
             $('#exit').modal('hide')
