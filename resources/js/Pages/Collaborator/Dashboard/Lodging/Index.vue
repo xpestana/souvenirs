@@ -1,0 +1,215 @@
+<template>
+    <section id="dashboard-lodgings" class="container py-8 ml-2 md:ml-0 md:px-14">
+        <!-- Header section-->
+        <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+            <div class="col-12 text-left">
+                <h1 class="font-bold text-xl lg:text-3xl text-muted">Gestión de Alojamientos</h1>
+            </div>
+        </div>
+        <!--END Header section-->
+        <!-- Header section-->
+        <div class="lodgings-filter row  my-8 mx-1.5 lg:mx-0 shadow p-1 rounded-xl bg-white">
+            <div class="col-8 col-lg-4">
+                    <div class="row">
+                    <div class="col-2 pr-0">
+                        <i class="fas fa-search text-gray-400 relative top-3 lg:text-lg"></i>
+                    </div>
+                    <div class="col-10 px-0">
+                        <input type="text" v-model="search" class="border-none w-full px-0" placeholder="Busca tu alojamiento...">
+                    </div>
+                </div>
+            </div>
+            <div class="d-none  col-lg-3 border-l-2 border-r-2 d-lg-flex justify-content-around">
+                <div class="dropdown">
+                    <select v-model="type" class="border-none py-0 font-semibold text-gray-400 2xl:text-lg leading-10 2xl:mt-2">
+                        <option value="">Tipo de alojamiento</option>
+                        <option value="apartamento">Apartamento</option>
+                        <option value="hotel">Hotel</option>
+                        <option value="complejo">Complejo túristico</option>
+                    </select>
+                </div>
+                <!-- <i class="fas fa-caret-down relative top-3.5 text-gray-400"></i> -->
+            </div>
+            <div class="d-none  col-lg-3 d-lg-flex justify-content-around">
+                <div class="dropdown">
+                    <select class="border-none py-0 font-semibold text-gray-400 2xl:text-lg leading-10 2xl:mt-2">
+                        <option value="">Ciudad</option>
+                    </select>
+                </div>
+                <!-- <i class="fas fa-caret-down relative top-3.5 text-gray-400"></i> -->
+            </div>
+            <div class="col-4 col-lg-2">
+                <button @click="searchFilter()" class="bg-collaborator-orange text-white rounded px-2 px-lg-4 py-1 py-lg-2 mt-2 mt-lg-1">
+                    Buscar
+                </button>
+            </div>
+        </div>
+        <!--END Header section-->
+        
+         <!-- Content section-->
+        <template v-if="hotels.data.length > 0">
+            <div class="lodgings-card row mx-1.5 lg:mx-0 mb-2" v-for="hotel in hoteles" :key="hotel.id" >
+                <div class="lodgings-card-body my-2.5 lg:my-0 mb-4 col-12 w-full h-60 lg:h-28 rounded-xl shadow relative">
+                    <div class="row h-full rounded-xl realtive bg-cover bg-top">
+                        <div class="d-none d-lg-block col-lg-3 lg:h-auto rounded-l-xl bg-cover bg-center bg-no-repeat relative" :style="'background-image: url(/storage/hotel'+hotel.image+');'">
+                            <div class="rounded-l-xl gradient-lodgings absolute left-0 top-0 w-full h-full"></div>
+                        </div>
+                        <div class="col-12 col-lg-6 h-3/5 lg:h-auto lg:bg-black relative py-lg-2 d-lg-flex flex-column align-items-start justify-content-between ">
+                            <img :src="'/storage/hotel'+hotel.image" class="w-full h-full d-lg-none">
+                            <div class="absolute lg:relative z-30 top-0  pt-4 pl-2 pb-2 pt-lg-0 pl-lg-0 pb-lg-0">
+                                <h2 class="text-2xl lg:text-lg xl:text-xl text-white font-semibold" style="line-height:1.3rem">
+                                    {{hotel.title}}
+                                </h2>
+                                <p class="text-white text-sm lg:text-xs leading-5 lg:leading-4 mt-2 mt-lg-0">
+                                    {{hotel.type}} · {{ hotel.hab }}
+                                    <template v-if="hotel.type == 'hotel'">
+                                        Habitaciones ·
+                                    </template>
+                                    <template v-if="hotel.type == 'complejo turístico'">
+                                        Numero de apartamentos ·
+                                    </template>
+                                    {{ hotel.zone }}
+                                </p>
+                            </div>
+                            <div class="absolute h-full w-full d-lg-none grandient-mobile rounded-t-xl top-1 left-0"></div>
+                            <div class="lodgings-button mt-2 d-none d-lg-block">
+                                <Link :href="route('collaborator.dashboard.sales')" class="btn bg-collaborator-orange font-semibold py-1 xl:px-8 mr-2 text-white">Ver ventas</Link>
+                                <button class="btn bg-collaborator-orange font-semibold py-1 xl:px-4 text-white">Pedir displays</button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 h-2/5 lg:h-auto bg-black rounded-b-xl xl:rounded-r-xl py-lg-2 pl-0 xl:rounded-l-none d-lg-flex flex-column align-items-start justify-content-between relative">
+                            <p class="text-blue-coll text-sm pl-4 pl-lg-0 text-xl lg:text-sm mt-lg-1"><b>Beneficios:</b> {{hotel.total_benefit}} €</p>
+                            <p class="text-blue-coll text-sm pl-4 pl-lg-0 pb-lg-1 text-xl lg:text-sm"><b>Pedidos:</b> {{hotel.total_orders}}</p>
+                            <Link href="#" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold py-1 px-10 mt-2 text-sm">Editar</Link>
+                            <Link href="#" class="d-lg-none btn bg-white absolute bottom-11 right-8 rounded-circle pt-1 pb-0.5 px-2.5">
+                                <i class="fas fa-caret-down  text-3xl leading-4"></i>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </template>
+        <template v-else>
+            <div class="text-center mt-16 lg:mt-32 px-2.5 lg:px-56">
+                <h3 class="text-3xl font-bold">¡Todavía no has dado de alta ningún alojamiento!</h3>
+                <p class="mt-2 text-sm font-medium">
+                    Dar de alta tu primer alojamiento es el primer paso
+                    para empezar a ganar con <b>HiCitty</b>
+                </p>
+            </div>
+        </template>
+        
+        <!-- END Content section-->
+        <div class="flex justify-center lg:px-56 mt-3">
+            <button class="bg-collaborator-orange text-white font-semibold block py-1.5 rounded px-4">+ Añadir alojamiento</button>
+        </div>
+        <div class="row justify-content-center" v-if="hotels.data.length > 0">
+            <div class="col-10 col-lg-4 overflow-auto">
+                <paginator :paginator="hotels" />
+            </div>
+        </div>
+    </section>
+</template>
+<script>
+import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
+import { Inertia } from '@inertiajs/inertia'  
+import { Head, Link } from '@inertiajs/inertia-vue3'
+import Paginator from '@/Components/Paginator.vue'
+export default {
+    layout:TemplateApp,
+    components:{
+        Head,
+        Link,
+        Paginator
+    },
+    props: {
+    hotels: Object,
+    url:String
+    },
+    data(){
+        return{
+            showModal:false,
+            total: 0,
+            orders: 0,
+            user_id:0,
+            search:null,
+            type:''
+        }
+    },
+    created(){
+        console.log(this.hotels)
+        if(this.hotels.length > 0){
+            this.user_id = this.hotels[0].pivot.user_id
+        }
+        let url = this.$page.url.split('?')[1];
+        if(url !== undefined){
+            this.search = this.cleanUrlSearch(url,'buscar')
+            this.type = this.cleanUrlSearch(url,'tipo')
+        }
+    },
+    computed:{
+        hoteles(){
+        const obj = this.hotels.data.map((col)=>{
+            let title = col.calle+' '+col.planta;
+            if(title.length > 48){
+                title = title.substring(0, 48)+'...';
+            }
+            var total_benefit = 0;
+            var i = 0;
+            col.orders.forEach(function(order) {
+                if(order.status == "complete"){
+                    total_benefit = parseInt(total_benefit)  + parseInt(order.total);
+                    i++;
+                }
+                
+            });
+            this.total = this.total + (total_benefit *0.20)
+            this.orders = this.orders + i
+        return {
+            id : col.id,
+            title: title,
+            image : col.image,
+            type : col.type,
+            hab : col.hab,
+            zone : col.zone,
+            total_benefit : (total_benefit*0.20).toFixed(2),
+            total_orders : i
+        }
+        });
+        return obj;
+    },
+
+    },
+    methods: {
+        searchFilter(){
+            this.$inertia.get(route('coll.lodgings.index'), {buscar:this.search,tipo:this.type},
+            { 
+                preserveScroll: true
+            })
+        },
+        lodging(){
+            this.$inertia.get(route('collaborator.create.hab'),{}, {
+                preserveScroll: true
+            })
+        },
+        cleanUrlSearch(url,string){
+            let val = url.split(string+"=")
+            return val[1].split('&')[0];
+        },
+    }
+}
+</script>
+<style scoped>
+select:focus,
+input:focus{
+    --tw-ring-shadow:none;
+}
+.gradient-lodgings{
+    background: linear-gradient(90deg, rgba(134,188,217,0) 63%, rgba(1,1,1,1) 90%);
+}
+@media (max-width:991px){
+    .grandient-mobile {
+        background: linear-gradient(179deg, rgba(134,188,217,0) 0%, rgba(1,1,1,1) 100%);
+    }
+}
+</style>

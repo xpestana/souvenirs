@@ -114,6 +114,20 @@ class CollaboratorController extends Controller
         return Inertia::render('Collaborator/Data');
     }
 
+    public function index()
+    {
+        /*Redirección si no tiene perfil*/
+        if (auth()->user()->profile == null) {
+            return Redirect::route('collaborator.data');
+        }
+        /*******************************/
+        
+        $hotels = auth()->user()->hotel()->paginate(15);
+        $hotels->load('orders.shippings');
+        $url = config('app.url');
+        
+        return Inertia::render('Collaborator/Dashboard/Lodging/Index', compact('hotels','url'));
+    }
     public function register_data(Request $request)
     {
         $request->validate([
