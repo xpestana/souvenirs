@@ -66,7 +66,7 @@ class CollaboratorController extends Controller
     }
 
     public function profile_tax()
-    { 
+    {
         return Inertia::render('Collaborator/Dashboard/Profile/Tax');
     }
 

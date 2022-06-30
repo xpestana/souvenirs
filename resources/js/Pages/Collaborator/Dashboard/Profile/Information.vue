@@ -3,7 +3,7 @@
         <!-- Header section-->
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
-                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="fas fa-arrow-left text-muted mr-2"></i> Información del perfil</h1>
+                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i> Información del perfil</h1>
             </div>
         </div>
         <!--END Header section-->
@@ -44,6 +44,31 @@
             </div>
         </div>
         <!-- END Content section-->
+        <!-- Modal Request -->
+        <div class="modal modal-notice fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content modal-exits modal mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            ¿Estas seguro que quieres salir?
+                        </p>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" data-dismiss="modal" @click.prevent="closeModalBack()">Seguir editando</button>
+                        </div>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal"  @click.prevent="forceExit()">Salir sin guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Request  -->
     </section>
 </template>
 <script>
@@ -55,28 +80,94 @@ export default {
     components:{
         Link
     },
+    props: ['auth'],
     data(){
         return{
             form: this.$inertia.form({
                 _method: "PUT",
-                name: this.$page.props.auth.profile.firstname,
-                email: this.$page.props.auth.user.email,
-                phone: this.$page.props.auth.profile.phone,
+                name: '',
+                email: '',
+                phone: '',
                 password: null,
                 confirm_password: null,
             }),
+            forceExitConfirm: false,
+            beforeUrl: '',
+            typeBack: '1',
         }
+    },
+    computed: {
+        formValid () {
+            if (
+                this.form.name === this.auth.profile.firstname &&
+                this.form.email === this.auth.user.email &&
+                this.form.phone === this.auth.profile.phone
+            ) { return true }
+            return false
+        },
+    },
+    created () {
+        this.updateForm()
+    },
+    mounted () {
+        this.moveConfirm = Inertia.on('before', (event) => {
+            if (!this.formValid ) {
+                if (!this.forceExitConfirm) {
+                    this.beforeUrl = event.detail.visit.url.pathname
+                    $('#exit').modal('show')
+                    event.preventDefault()
+                }
+            }
+        })
+    },
+    unmounted () {
+        this.moveConfirm()
     },
     methods: {
         submitProfile() {
+        this.forceExitConfirm = true
         this.form.put(route('collaborator.profile.update'), {
                 preserveScroll: true,
+                onSuccess:()=>{
+                    $('#datosModal').modal('hide')
+                    this.updateForm()
+                    this.forceExitConfirm = false
+                }
             })
         },    
         showPass: function (id){
             let x = document.getElementById(id);
-            x.type = x.type == 'password' ? 'text' : 'password';            
+            x.type = x.type == 'password' ? 'text' : 'password';
         },
+        forceExit () {
+            this.forceExitConfirm = true
+            if (this.typeBack == '2') { window.history.back() }
+            else {
+                setTimeout(() =>{
+                    Inertia.get(`${this.beforeUrl}`)
+                }, 500)
+            }
+        },
+        updateForm () {
+            this.form.name = this.auth.profile.firstname
+            this.form.email = this.auth.user.email
+            this.form.phone = this.auth.profile.phone
+        },
+        goBack () {
+            if (!this.formValid) {
+                if (!this.forceExitConfirm) {
+                    this.typeBack = '2'
+                    $('#exit').modal('show')
+                }
+            } else {
+                window.history.back()
+            }
+        },
+        closeModalBack () {
+            this.typeBack = '1'
+            this.forceExitConfirm = false
+            $('#exit').modal('hide')
+        }
     }
 }
 </script>

@@ -3,7 +3,7 @@
         <!-- Header section-->
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
-                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="fas fa-arrow-left text-muted mr-2"></i> Datos fiscales</h1>
+                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i> Datos fiscales</h1>
             </div>
         </div>
         <!--END Header section-->
@@ -94,6 +94,31 @@
             
         </div>
         <!-- END Content section-->
+        <!-- Modal Request -->
+        <div class="modal modal-exit fade" id="exit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <!-- Change class .modal-sm to change the size of the modal -->
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content modal-exits modal mx-auto px-2">
+                    <div class="modal-body p-0 relative">
+                        <div>
+                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" data-dismiss="modal" @click.prevent="closeModalBack()"></i>
+                        </div>
+                        <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
+                        <p class="px-4 my-2 text-xs text-center">
+                            ¿Estas seguro que quieres salir?
+                        </p>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" data-dismiss="modal" @click.prevent="closeModalBack()">Seguir editando</button>
+                        </div>
+                        <div class="my-2.5 text-center">
+                            <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" data-dismiss="modal"  @click.prevent="forceExit()">Salir sin guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Request  -->
     </section>
 </template>
 <script>
@@ -107,42 +132,109 @@ export default {
         Link,
         ValidationAlert
     },
+    props: ['auth'],
     data(){
         return{
             form: this.$inertia.form({
             	_method: "PUT",
-                name: this.$page.props.auth.profile.firstname,
-                email: this.$page.props.auth.user.email,
-                phone: this.$page.props.auth.profile.phone,
-                razon: this.$page.props.auth.profile.razon,
-				nif: this.$page.props.auth.profile.nif,
-				identifier: this.$page.props.auth.profile.identify,
-				city: this.$page.props.auth.profile.city,
-				cp: this.$page.props.auth.profile.cp,
-				address: this.$page.props.auth.profile.address,
+                name: '',
+                email: '',
+                phone: '',
+                razon: '',
+				nif: '',
+				identifier: '',
+				city: '',
+				cp: '',
+				address: '',
             }),
+            forceExitConfirm: false,
+            beforeUrl: '',
+            typeBack: '1',
         }
+    },
+    computed: {
+        formValid () {
+            if (
+                this.form.name === this.auth.profile.firstname &&
+                this.form.email === this.auth.user.email &&
+                this.form.phone === this.auth.profile.phone &&
+                this.form.razon === this.auth.profile.razon &&
+                this.form.nif === this.auth.profile.nif &&
+                this.form.identifier === this.auth.profile.identifier &&
+                this.form.city === this.auth.profile.city &&
+                this.form.cp === this.auth.profile.cp &&
+                this.form.address === this.auth.profile.address
+            ) { return true }
+            return false
+        },
+        errorsKey () {
+            var err = this.$page.props.errors ? Object.keys(this.$page.props.errors) : []
+            return err
+        },
+    },
+    created () {
+        this.updateForm()
+    },
+    mounted () {
+        this.moveConfirm = Inertia.on('before', (event) => {
+            if (!this.formValid) {
+                if (!this.forceExitConfirm) {
+                    this.beforeUrl = event.detail.visit.url.pathname
+                    $('#exit').modal('show')
+                    event.preventDefault()
+                    event.returnValue = ''
+                }
+            }
+        })
+    },
+    unmounted () {
+        this.moveConfirm()
     },
     methods: {
         submitProfile() {
-        this.form.put(route('collaborator.fiscal.update'), {
+            this.forceExitConfirm = true
+            this.form.put(route('collaborator.fiscal.update'), {
                 preserveScroll: true,
+                onSuccess:()=>{
+                    $('#datosModal').modal('hide')
+                    this.updateForm()
+                    this.forceExitConfirm = false
+                }
             })
         },    
         showPass: function (id){
             let x = document.getElementById(id);
             x.type = x.type == 'password' ? 'text' : 'password';            
         },
+        updateForm () {
+            this.form.name = this.auth.profile.firstname
+            this.form.email = this.auth.user.email
+            this.form.phone = this.auth.profile.phone
+            this.form.razon = this.auth.profile.razon
+            this.form.nif = this.auth.profile.nif
+            this.form.identifier = this.auth.profile.identifier
+            this.form.city = this.auth.profile.city
+            this.form.cp = this.auth.profile.cp
+            this.form.address = this.auth.profile.address
+        },
+        goBack () {
+            if (!this.formValid) {
+                if (!this.forceExitConfirm) {
+                    this.typeBack = '2'
+                    $('#exit').modal('show')
+                }
+            } else {
+                window.history.back()
+            }
+        },
+        closeModalBack () {
+            this.typeBack = '1'
+            this.forceExitConfirm = false
+            $('#exit').modal('hide')
+        },
     },
     updated(){
-console.log(this.$page.props.errors)
     },
-    computed: {
-        errorsKey () {
-            var err = this.$page.props.errors ? Object.keys(this.$page.props.errors) : []
-            return err
-        },
-    }
 }
 </script>
 <style scoped>
