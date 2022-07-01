@@ -306,7 +306,7 @@ class CollaboratorController extends Controller
             $clientUser->assignRole('Client');
             $clientUser->hotel()->attach($hotel->id, ['manager' => false]);
 
-        return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
+        return Redirect::route('coll.lodgings.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
         } catch (Exception $e) {
             
         }
