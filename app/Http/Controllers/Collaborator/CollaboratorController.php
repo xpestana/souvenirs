@@ -235,7 +235,6 @@ class CollaboratorController extends Controller
                 'calle' => 'required|string',
                 'planta' => 'required|string',
                 'city' => 'required|string',
-                'cp' => 'required|string',
                 'code' => 'nullable|string',
                 'url' => 'nullable|string',
                 'area' => 'nullable|string',
