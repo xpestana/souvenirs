@@ -54,8 +54,8 @@
                         <div class="d-none d-lg-block col-lg-3 lg:h-auto rounded-l-xl bg-cover bg-center bg-no-repeat relative" :style="'background-image: url(/storage/hotel'+hotel.image+');'">
                             <div class="rounded-l-xl gradient-lodgings absolute left-0 top-0 w-full h-full"></div>
                         </div>
-                        <div class="col-12 col-lg-6 h-3/5 lg:h-auto lg:bg-black relative py-lg-2 d-lg-flex flex-column align-items-start justify-content-between ">
-                            <img :src="'/storage/hotel'+hotel.image" class="w-full h-full d-lg-none">
+                        <div class="col-12 col-lg-6 h-3/5 lg:h-auto lg:bg-black relative py-lg-2 px-0 px-lg-3 d-lg-flex flex-column align-items-start justify-content-between ">
+                            <img :src="'/storage/hotel'+hotel.image" class="w-full h-full d-lg-none rounded-t-xl">
                             <div class="absolute lg:relative z-30 top-0  pt-4 pl-2 pb-2 pt-lg-0 pl-lg-0 pb-lg-0">
                                 <h2 class="text-2xl lg:text-lg xl:text-xl text-white font-semibold" style="line-height:1.3rem">
                                     {{hotel.title}}
@@ -74,16 +74,28 @@
                             <div class="absolute h-full w-full d-lg-none grandient-mobile rounded-t-xl top-1 left-0"></div>
                             <div class="lodgings-button mt-2 d-none d-lg-block">
                                 <Link :href="route('collaborator.dashboard.sales')" class="btn bg-collaborator-orange font-semibold py-1 xl:px-8 mr-2 text-white">Ver ventas</Link>
-                                <button class="btn bg-collaborator-orange font-semibold py-1 xl:px-4 text-white">Pedir displays</button>
+                                <button @click="requestDisplay(hotel.id)" class="btn bg-collaborator-orange font-semibold py-1 xl:px-4 text-white">Pedir displays</button>
                             </div>
                         </div>
                         <div class="col-12 col-lg-3 h-2/5 lg:h-auto bg-black rounded-b-xl xl:rounded-r-xl py-lg-2 pl-0 xl:rounded-l-none d-lg-flex flex-column align-items-start justify-content-between relative">
                             <p class="text-blue-coll text-sm pl-4 pl-lg-0 text-xl lg:text-sm mt-lg-1"><b>Beneficios:</b> {{hotel.total_benefit}} €</p>
                             <p class="text-blue-coll text-sm pl-4 pl-lg-0 pb-lg-1 text-xl lg:text-sm"><b>Pedidos:</b> {{hotel.total_orders}}</p>
-                            <Link href="#" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold py-1 px-10 mt-2 text-sm">Editar</Link>
-                            <Link href="#" class="d-lg-none btn bg-white absolute bottom-11 right-8 rounded-circle pt-1 pb-0.5 px-2.5">
+                            <button type="button" data-toggle="modal" :data-target="'#edit'+hotel.id" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold py-1 px-10 mt-2 text-sm">Editar</button>
+                            <ModalEdit :form="hotel" :id="'edit'+hotel.id"/>
+                            <button  class="d-lg-none btn bg-white absolute bottom-11 right-8 rounded-circle pt-1 pb-0.5 px-2.5 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-caret-down  text-3xl leading-4"></i>
-                            </Link>
+                            </button>
+                            <div class="dropdown-menu">
+                                <Link :href="route('collaborator.dashboard.sales')" class="dropdown-item">
+                                    Ver ventas
+                                </Link>
+                                <a href="javascript:void(0)" @click="requestDisplay(hotel.id)" class="dropdown-item">
+                                    Pedir displays
+                                </a>
+                                <a href="javascript:void(0)" data-toggle="modal" :data-target="'#edit'+hotel.id" class="dropdown-item">
+                                    Editar
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,6 +131,44 @@
         :form.sync="form"
         @clickBackModalType="openCreateLodging()"
     />
+    <NotiModal :id="'display'">
+        <template v-slot:header>
+            <i class="fas fa-truck text-orangec text-4xl"></i>
+        </template>
+        <template v-slot:title>
+            ¿Quieres displays para este inmueble?
+        </template>
+        <template v-slot:text>
+            Si la respuesta es "Si",envíanos una notificación
+            y nosotros nos pondremos en contacto contigo lo antes
+            posible.
+        </template>
+        <template v-slot:footer>
+            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  
+                @click="sendRequest"
+            >Enviar notificación
+            </button>
+        </template>
+    </NotiModal>
+    
+    <NotiModal :id="'notidisplay'">
+        <template v-slot:header>
+            <i class="far fa-check-circle text-orangec text-4xl"></i>
+        </template>
+        <template v-slot:title>
+            ¡Notificación recibida!
+        </template>
+        <template v-slot:text>
+            En breve nos pondremos en contacto contigo para hablar de 
+            lo que necesitas.
+        </template>
+        <template v-slot:footer>
+            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  
+                 data-dismiss="modal" aria-label="Close"
+            >Cerrar mensaje
+            </button>
+        </template>
+    </NotiModal>
 </template>
 <script>
 import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
@@ -127,6 +177,8 @@ import { Head, Link } from '@inertiajs/inertia-vue3'
 import Paginator from '@/Components/Paginator.vue'
 import ModalCreateType from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateType'
 import ModalCreateForm from '@/Pages/Collaborator/Dashboard/Lodging/ModalCreateForm'
+import ModalEdit from '@/Pages/Collaborator/Dashboard/Lodging/ModalEdit'
+import NotiModal from '@/Pages/Collaborator/components/NotiModal'
 export default {
     layout:TemplateApp,
     components:{
@@ -134,7 +186,9 @@ export default {
         Link,
         Paginator,
         ModalCreateType,
-        ModalCreateForm
+        ModalCreateForm,
+        ModalEdit,
+        NotiModal
     },
     props: {
     hotels: Object,
@@ -151,6 +205,7 @@ export default {
             form: this.$inertia.form({
                 tipo: null,
             }),
+            idNoti:null
         }
     },
     created(){
@@ -184,6 +239,13 @@ export default {
             this.orders = this.orders + i
         return {
             id : col.id,
+            name : col.name,
+            address : col.address,
+            calle : col.calle,
+            planta : col.planta,
+            code : col.code,
+            url : col.url,
+            hab : col.hab,
             title: title,
             image : col.image,
             type : col.type,
@@ -213,11 +275,25 @@ export default {
             return val[1].split('&')[0];
         },
         openCreateLodging () {
-            console.log('open modal type')
             this.$refs.modalCreateType.openModal()
         },
         openFormCreate () {
             this.$refs.modalCreateForm.openModal()
+        },
+        requestDisplay(id){
+            this.idNoti= id
+            $('#display').modal('show')
+        },
+        sendRequest(){
+            let id = $('#notidisplay');
+            let send = $('#display');
+            this.$inertia.get(route('coll.request.display'),{id:this.idNoti}, {
+                preserveScroll: true,
+                onSuccess: (result) => {
+                    send.modal('hide')
+                    id.modal('show')
+                }
+            })
         }
     }
 }

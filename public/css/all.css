@@ -490,7 +490,7 @@ p,a{
     font-family: 'Montserrat', sans-serif !important; 
 }
 .modal-sales{
-  width:55%;
+  width:40%;
 }
 @media (max-width:767px){
   .modal-sales{

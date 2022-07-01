@@ -171,7 +171,7 @@
                 </section>
             </div>
         </div>
-
+s
     </div>
 </template>
 <script>
@@ -211,14 +211,14 @@
         },
         methods:{
             submit() {
+                console.log(this.hotel.id)
             	this.form.post(route('collaborator.update.hab',{id:this.hotel.id}),{
                 	_token: this.$page.props.csrf_token,
-                	errorBag: 'submit',
+                	errorBag: 'submitEdit',
                     preserveScroll: true,
                     forceFormData: true,
                     onSuccess: (result) => {
                         if(this.$page.props.flash.code == 200){
-                            this.form.reset();
                             this.eraseFeatured();
                         };
                     }

@@ -19,7 +19,7 @@
             </div>
             <div class="titulo" style="display: flex;flex-direction: column;">
             <!--<img src="{{asset('/vendor_asset/img/mailclient.png')}}" alt="tituloimagen" style="margin: 0 auto;" width="100%"> -->
-            <img src="http://test.hicitty.com/vendor_asset/img/mailclient.png" alt="tituloimagen" style="margin: 0 auto;" width="100%">
+            <img src="http://test.hicitty.com/vendor_asset/img/mailclient.png" alt="tituloimagen" style="margin: 0 auto;" width="80%">
 
             </div>
             @php

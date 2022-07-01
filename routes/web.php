@@ -294,6 +294,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(function () {
     
     Route::get('/', [CollaboratorController::class, 'index'])->name('coll.lodgings.index');  
+    Route::get('/request-display', [CollaboratorController::class, 'request_display'])->name('coll.request.display');  
     Route::get('/crear', [CollaboratorController::class, 'create_hab'])->name('collaborator.create.hab');  
     Route::post('/store', [CollaboratorController::class, 'store_hab'])->name('collaborator.store.hab');
     Route::get('/edit/{hab}',[CollaboratorController::class, 'edit_hab'])->name('collaborator.edit.hab');

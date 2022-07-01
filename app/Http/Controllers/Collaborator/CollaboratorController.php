@@ -166,6 +166,10 @@ class CollaboratorController extends Controller
             return Redirect::route('associates.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
         }
     }
+    public function request_display(Request $request){
+        //$request->id;
+        return back();
+    }
     public function create_hab()
     {
         return Inertia::render('Collaborator/Dashboard/Lodging/Create');
