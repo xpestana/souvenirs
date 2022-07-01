@@ -122,7 +122,7 @@ class CollaboratorController extends Controller
         }
         /*******************************/
         
-        $hotels = auth()->user()->hotel()->paginate(15);
+        $hotels = auth()->user()->hotel()->paginate(3);
         $hotels->load('orders.shippings');
         $url = config('app.url');
         
