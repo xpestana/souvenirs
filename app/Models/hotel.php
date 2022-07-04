@@ -27,6 +27,11 @@ class hotel extends Model
         'url',
         'area',
         'hab',
+        'modality',
+        'group',
+        'category',
+        'province',
+        'nllaves',
 
     ];
 

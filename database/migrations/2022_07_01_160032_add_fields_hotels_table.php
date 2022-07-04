@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldsOrdersTable extends Migration
+class AddFieldsHotelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddFieldsOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('hotels', function (Blueprint $table) {
             $table->string('modality')->nullable();
             $table->string('group')->nullable();
             $table->string('category')->nullable();
