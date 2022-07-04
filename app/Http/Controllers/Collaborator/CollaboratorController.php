@@ -484,6 +484,10 @@ class CollaboratorController extends Controller
                     ->where("status","complete")
                     ->with('hotel','shippings')
                     ->Date($request->desde, $request->hasta)->paginate(15);
+        $totalorders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)->get();
         $withdrawal = $orders->where("withdrawal",0);
 
         $date = null;
@@ -492,7 +496,7 @@ class CollaboratorController extends Controller
             $date = $withdrawal->first()->updated_at; 
         }
 
-        return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders','date'));
+        return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders','date','totalorders'));
     }
     public function notify(Request $request){
 

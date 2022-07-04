@@ -144,25 +144,16 @@ export default {
     mounted(){
     	console.log(this.lodging);
         console.log(this.collaborator);
-
-        const obj = this.collaborator.hotel.map((col)=>{
-            var total_orders = 0;
-            var total_benefits = 0;
-            total_orders = total_orders + col.orders.length;
-            col.orders.forEach(function(order) {
-                total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+        this.collaborator.hotel.forEach((col)=>{    
+            col.orders.forEach((order)=>{    
+                this.pedidos++;
+                if(order.status == "complete" && order.returned == 0){
+                    this.total += Number(order.total);
+                }
             });
-            return {
-                total_orders,
-                total_benefits: (total_benefits/100)
-            }
         });
-        if(obj.length > 0){
-            for(let val in obj){
-                this.total = this.total + Number(obj[val].total_benefits);
-                this.pedidos = this.pedidos + Number(obj[val].total_orders);
-            }
-        }
+        this.total = this.total*0.20;
+
     },
     data(){
         return{

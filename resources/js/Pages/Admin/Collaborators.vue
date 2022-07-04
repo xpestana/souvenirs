@@ -42,7 +42,7 @@
 						<div class="d-md-inline-flex mt-3 pb-2 pb-md-0">
 							<div class="pr-md-4 text-md-center">
 								<p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{calcularBeneficio(clbtr.hotel)}}€</p>
+								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.total_benefits}}€</p>
 							</div>
 							<div class="pr-md-4 text-md-center"> 
 								<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
@@ -85,10 +85,18 @@ export default {
 	},
 	computed:{
             colaboradores(){
-            const obj = this.collaborators.data.map((col)=>{
+				console.log(this.collaborators)
+            	const obj = this.collaborators.data.map((col)=>{
                 var total_orders = 0;
+				var total_benefits = 0;
                 col.hotel.forEach(function(hotel) {
                     total_orders = total_orders + hotel.orders.length;
+					hotel.orders.forEach(function(order) {
+						if(order.status == "complete" && order.returned == 0)
+						{
+							total_benefits += Number(order.total);
+						}
+					})
                 });
                 
             return {
@@ -97,7 +105,8 @@ export default {
                 email: col.email,
 				hotel: col.hotel,
                 lodgings : col.hotel.length,
-                total_orders : total_orders
+                total_orders : total_orders,
+				total_benefits: (total_benefits*0.20).toFixed(2)
             }
             });
             return obj;
@@ -106,7 +115,6 @@ export default {
         },
 	mounted(){
 		this.busqueda()
-		console.log(this.collaborators)
 	},
 	data(){
 		return{
@@ -145,30 +153,6 @@ export default {
 					preserveScroll: true,
 				});
 			},1500);
-		},
-		calcularBeneficio(hoteles){
-			const obj = hoteles.map((col)=>{
-                var total_orders = 0;
-                var total_benefits = 0;
-				let orders = orders + col.orders.length;
-				col.orders.forEach(function(order) {
-                    total_benefits = parseInt(total_benefits)  + parseInt(order.total);
-                });
-                
-
-				return{
-					total_benefits: (total_benefits*0.20).toFixed(2),
-				}
-			})
-			
-			if(obj.length > 0){
-				let beneficio = 0;
-				for(let val in obj){
-					beneficio = beneficio + Number(obj[val].total_benefits);
-				}
-				return beneficio;
-			}
-			return 0;
 		}
 	}
 }

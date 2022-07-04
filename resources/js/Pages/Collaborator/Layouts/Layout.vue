@@ -1,6 +1,5 @@
 <template>
 	<div class="wrapper flex" >
-		<Notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
         <!-- Sidebar  -->
         <SideBar/>
         <!-- Page Content  -->
@@ -17,10 +16,11 @@
 			</slot>
 			<div id="layout-collaborator-dashboard"></div>
         </div>
+		<Notify v-if="$page.props.flash.id" :key="$page.props.flash.id"/>
     </div>
 </template>
 <script>
-import Notify from '@/Layouts/Components/Toast.vue'
+import Notify from '@/Pages/Collaborator/Layouts/Notify.vue'
 import SideBar from '@/Pages/Collaborator/Layouts/SideBar.vue'
 export default {
     components: {

@@ -545,8 +545,8 @@ class AdminController extends Controller
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
         $hotel = hotel::find($hab)->load('orders.shippings');
 
-        $shippings = Shipping::join('orders', 'orders.id', '=', 'shippings.order_id')
-                ->select('shippings.*', 'orders.transaction_id', 'orders.total')
+        $shippings = Order::join('shippings', 'orders.id', '=', 'shippings.order_id')
+                ->select('shippings.*', 'orders.transaction_id', 'orders.total', 'orders.returned', 'orders.total_s', 'orders.shipping', 'orders.withdrawal')
                 ->where('orders.hotel_id', $hab)
                 ->where('orders.status', "complete")
                 ->orderBy('orders.created_at','DESC')->get();
@@ -632,7 +632,7 @@ class AdminController extends Controller
                 ->where('del',false)
                 ->with('orders.shippings')
                 ->orderBy('profiles.firstname','ASC')
-                ->paginate(1);
+                ->paginate(10);
         $url = config('app.url');
         return Inertia::render('Admin/Associates/Index',compact('collaborators','url') );
     }

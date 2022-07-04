@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
-                    <p><b>Tu beneficio es de {{ (parseInt(shipping.amount) * 0.2).toFixed(2) }}€</b></p>
+                    <p><b>Tu beneficio es de {{ (Number(shipping.amount) * 0.2).toFixed(2) }}€</b></p>
                 </div>
             </div>
         </div>
@@ -129,7 +129,9 @@ export default {
                 var total_benefits = 0;
                 this.orders = this.orders + col.orders.length;
                 col.orders.forEach(function(order) {
-                    total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+                    if(order.returned == 0 && order.status == "complete"){
+                        total_benefits += Number(order.total);
+                    }
                 });
                 this.total = this.total + (total_benefits*0.20)
             });
