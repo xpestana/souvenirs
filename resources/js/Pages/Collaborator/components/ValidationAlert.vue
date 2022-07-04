@@ -51,13 +51,13 @@
 	            return this.errors.length > 0
 	        },
 	    }, 
-        watch: {
-            hasErrors (val) {
-                console.log(val,'valudate')
-                this.close = val ? true : false
-            },
+        mounted () {
+            this.emitter.on('errors',this.openAlertValidation)
         },
 	    methods: {
+            openAlertValidation () {
+                this.close = true
+            },
 	    	closeAlertValidation () {
 	            this.close = false
 	        },

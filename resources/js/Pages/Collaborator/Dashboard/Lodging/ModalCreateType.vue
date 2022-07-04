@@ -56,7 +56,7 @@
 <script>
     import { Head, Link } from '@inertiajs/inertia-vue3'
     import { Inertia } from '@inertiajs/inertia'
-    import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'  
+    import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
     export default {
         layout:TemplateApp,
         components:{
@@ -76,6 +76,9 @@
                 }
             }
         },
+        mounted () {
+            this.emitter.on('openModalCreateType', this.open)
+        },
         methods: {
             openModal () {
                 $('#create').modal('show')
@@ -84,7 +87,11 @@
                 $('#create').modal('hide')
                 this.formComputed.tipo = value
                 this.$emit('clickOpenForm')
-            }
+            },
+            open () {
+                console.log('open type dede form')
+                $('#create').modal('show')
+            },
         },
     }
 </script>

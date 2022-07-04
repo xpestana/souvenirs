@@ -293,6 +293,7 @@
     		submit() {
             	this.form.post(route('collaborator.store.hab'),{
                 	_token: this.$page.props.csrf_token,
+                	forceFormData: true,
                 	errorBag: 'submit',
                     preserveScroll: true,
                     forceFormData: true,
