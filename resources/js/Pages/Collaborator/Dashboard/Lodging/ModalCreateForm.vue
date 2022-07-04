@@ -263,12 +263,13 @@
                     </div>
 					</form>
                 </div>
-                <div class="modal fade" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-				    <div class="modal-dialog modal-dialog-image modal-dialog-centered" role="document">
-			            <div class="modal-content mx-auto px-3">
+                <!-- Modal para subir imagen -->
+                <div class="modal modal-image fade" id="modalImageCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" style="z-index:1900;">
+				    <div class="modal-dialog modal-dialog-image modal-sm modal-dialog-centered" role="document">
+			            <div class="modal-content modal-images mx-auto px-3">
 			                <div class="modal-body p-0 relative">
 			                    <div>
-			                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer cerrarModal" @click="closeModalImage()"></i>
+			                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer cerrarModal" @click.prevent="closeModalImage()"></i>
 			                    </div>
 			                    <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
 			                    <div class=" rounded-xl mt-3" style="max-height: 120px;">
@@ -281,7 +282,7 @@
 			                    	    v-else
 			                    		class="bg-collaborator-orange py-2.5  px-2 text-center text-white w-100 m-0 rounded-xl"
 			                    	>
-			                    		<h2 class="text-lg md:text-xl text-center mt-3.5 font-bold text-white">!No has subido una imagen todavía</h2>
+			                    		<h2 class="text-lg md:text-xl text-center mt-3.5 font-bold text-white">¡No has subido una imagen todavía!</h2>
 			                    	  	<i class="fas fa-arrow-down inline-block text-white text-lg md:text-xl"></i>
 			                    	</div>
 			                    </div>
@@ -299,15 +300,16 @@
 			                    	@click="$refs.file.click()"
 			                    >
 			                    	<i class="fas fa-image inline-block text-white text-xl text-muted"></i>
-			                    	<label class="text-center block font-bold text-muted mt-1 cursor-pointer">Suelta aquí tu imagen o explora en tus archivos</label>
-			                    	<p class="text-xs muted mt-1">Tamaño máximo  de la imagen 2MB</p>
+			                    	<label class="text-center block font-bold text-muted mt-1 cursor-pointer">Sueltaa aquí tu imagen o explora en tus archivos</label>
+			                    	<p class="text-xs muted mt-1">Tamañoo máximo  de la imagen 2MB</p>
 			                    </div>
 			                </div>
 			            </div>
 		            </div>
 				</div>
+				<!-- Fin modal para subir imagen -->
 				<!-- Modal guardar cambios -->
-		        <div class="modal modal-exit fade" id="modalExit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		        <div class="modal modal-exit fade" id="modalExitCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 		        aria-hidden="true">
 		        <!-- Change class .modal-sm to change the size of the modal -->
 		            <div class="modal-dialog modal-dialog-image modal-sm modal-dialog-centered" role="document">
@@ -533,21 +535,19 @@
             	this.imagenValue = URL.createObjectURL(this.formModal.image)
             },
             changeImage (value) {
-            	console.log(value)
             	this.formModal.image = value.target.files[0]
       			this.imagenValue = URL.createObjectURL(this.formModal.image)
             },
             openModalImagen () {
-            	$('#modalImage').modal('show')
+            	$('#modalImageCreate').modal('show')
             },
             closeModalImage () {
-            	$('#modalImage').modal('hide')
+            	$('#modalImageCreate').modal('hide')
             },
             clickBackModalType () {
             	console.log(this.validExit)
             	if (this.validExit) {
-            		console.log('true')
-            		$('#modalExit').modal('show')
+            		$('#modalExitCreate').modal('show')
             	} else {
             		$('#create-form').modal('hide')
 	            	//this.$emit('clickBackModalType')
@@ -558,10 +558,10 @@
                 this.formModal.reset('image')
             },
             closeModalBack () {
-            	$('#modalExit').modal('hide')
+            	$('#modalExitCreate').modal('hide')
             },
             forceExit () {
-            	$('#modalExit').modal('hide')
+            	$('#modalExitCreate').modal('hide')
             	setTimeout(()=>{
             		$('#create-form').modal('hide')
 	            	//this.$emit('clickBackModalType')

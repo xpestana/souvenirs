@@ -20,17 +20,16 @@
 							<button
 								type="submit"
 								class="btn inline-block rounded btn-outline-white py-1 px-2"
-								@click="openModalImagen"
+								@click="openModalImagen()"
 							>
 							<i class="fas fa-plus mr-2 text-white"></i>Añadir imagen
 							</button>
 						</div>
 					</div>
             	</div>
-            	<pre>{{ errorsKey }}</pre>
                 <div class="modal-body px-3.5 pb-4 ">
 		            
-					<form @submit.prevent="submit" position-relative>
+					<form position-relative>
 					<!--Alert validation -->
 		            <ValidationAlert
 		                :errors="formatErrors"
@@ -42,7 +41,7 @@
 			                <div
 			                    class="row px-0"
 			                >
-			                    <div class="col-12 my-0.5 px-0" v-if="form.type == 'complejo turístico' || form.type == 'hotel'">
+			                    <div class="col-12 my-0.5 px-0" v-if="form.type == 'complejo' || form.type == 'hotel'">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Nombre del {{form.type}} <span class="required-input">*</span></label>
@@ -64,23 +63,36 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-								<div class="col-12 my-0.5 px-0" v-if="form.type == 'complejo turístico'">
+								<div class="col-12 my-0.5 px-0" v-if="form.type == 'complejo'">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
-			                                    <label class="font-bold mb-0.5">Numero de apartamentos <span class="required-input">*</span></label>
+			                                    <label class="font-bold mb-0.5">Número de apartamentos <span class="required-input">*</span></label>
 			                                    <input
 			                                    	v-model="formModal.numero_habitaciones"
-			                                        type="text" id="napart"
+			                                        type="number" id="napart"
 			                                        class="w-100 rounded col-form-input py-1"
-			                                        placeholder="Numero de apartamentos..."
+			                                        placeholder="Número de apartamentos..."
+			                                        :class="{'error-input': errorsKey.includes('numero_habitaciones')}"
 			                                    >
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <label class="font-bold mb-0.5">N° de llaves <span class="required-input">*</span></label>
-					                        <input
-					                            type="text"
-					                            class="w-100 rounded col-form-input py-1" v-model="formModal.nllaves" placeholder="N° de llaves..."
-					                        >
+					                        <select
+		                                    	v-model="formModal.nllaves"
+		                                    	class="w-100 rounded col-form-input py-1"
+		                                        placeholder="N° de llaves..."
+		                                        :class="{'error-input': errorsKey.includes('nllaves')}"
+		                                     >
+		                                     	<option value=""></option>
+												<option
+													v-for="(item, index) in llaves"
+													:key="index"
+													:value="item"
+													:selected="item == formModal.nllaves"
+												>
+													{{ item }}
+												</option>
+											</select>
 				                    	</div>
 			                        </div>
 			                    </div>
@@ -115,7 +127,7 @@
 			                                    	v-model="formModal.calle"
 			                                        type="text"
 			                                        class="w-100 rounded col-form-input py-1"
-			                                        placeholder="N habitaciones..."
+			                                        placeholder="Calle..."
 			                                        :class="{'error-input': errorsKey.includes('calle')}"
 			                                    >
 			                            </div>
@@ -123,7 +135,7 @@
 					                        <label class="font-bold mb-0.5">N - Letra-Piso <span class="required-input">*</span></label>
 					                        <input
 					                            type="text" v-model="formModal.planta"
-					                            class="w-100 rounded col-form-input py-1" placeholder="Nombre del hotel..."
+					                            class="w-100 rounded col-form-input py-1" placeholder="N..."
 					                            :class="{'error-input': errorsKey.includes('planta')}"
 					                        >
 				                    	</div>
@@ -134,11 +146,11 @@
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Otras indicaciones</label>
 			                                    <input
-			                                    	v-model="formModal.otro"
+			                                    	v-model="formModal.address"
 			                                        type="text"
 			                                        class="w-100 rounded col-form-input py-1"
 			                                        placeholder="Otras indicaciones..."
-			                                        :class="{'error-input': errorsKey.includes('otro')}"
+			                                        :class="{'error-input': errorsKey.includes('address')}"
 			                                    >
 			                            </div>
 			                        </div>
@@ -158,6 +170,7 @@
 														v-for="(item, index) in group"
 														:key="index"
 														:value="item"
+														:selected="item == formModal.group"
 													>
 														{{ item }}
 													</option>
@@ -176,6 +189,7 @@
 													v-for="(item, index) in modalid"
 													:key="index"
 													:value="item"
+													:selected="item == formModal.modality"
 												>
 													{{ item }}
 												</option>
@@ -187,6 +201,7 @@
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2" v-if="form.type == 'hotel'">
 			                                    <label class="font-bold mb-0.5">Categoría <span class="required-input">*</span></label>
+			                                    {{ formModal.category }}
 			                                    <select
 			                                    	v-model="formModal.category"
 			                                    	class="w-100 rounded col-form-input py-1"
@@ -198,19 +213,21 @@
 														v-for="(item, index) in category"
 														:key="index"
 														:value="item"
+														:selected="item == formModal.category"
 													>
 														{{ item }}
 													</option>
 												</select>
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
-					                        <label class="font-bold mb-0.5">Página Web </label>
+					                        <label class="font-bold mb-0.5">Página Web  <span v-if="form.type == 'apartamento'" class="required-input">*</span></label>
 					                        <input
 					                            type="text" v-model="formModal.url"
 					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
+					                            :class="{'error-input': form.type == 'apartamento' && errorsKey.includes('url')}"
 					                        >
 				                    	</div>
-										<div class="col-12 col-md-6 pr-md-2" :class="{'mt-2.5':form.type == 'hotel'}">
+										<div class="col-12 col-md-6 pr-md-2" :class="{'mt-2.5': form.type == 'hotel'}">
 			                                    <label class="font-bold mb-0.5">N° de licencia </label>
 			                                    <input
 			                                        type="text" v-model="formModal.code"
@@ -233,7 +250,7 @@
 			            </div>
 			        </div>
                     <div class="mt-1.5 px-2 flex justify-content-between">
-                        <button class="btn px-3.5 text-gray-500 py-1 text-xs font-bold inline-block" data-dismiss="modal"  aria-label="Close">
+                        <button class="btn px-3.5 text-gray-500 py-1 text-xs font-bold inline-block" @click.prevent="closeModalEdit()">
 							<i class="fas fa-reply"></i>
 							Volver
 						</button>
@@ -241,7 +258,8 @@
 		                    type="submit"
 		                    class="btn inline-block rounded text-white bg-collaborator-orange py-1 px-6"
 		                    :class="{ 'opacity-25': formModal.processing }"
-                             :disabled="formModal.processing"
+                            :disabled="formModal.processing"
+                            @click.prevent="submit"
 		                >
 		                    <i class="fas fa-save mr-2 text-white">
 		                        </i>Guardar
@@ -249,58 +267,80 @@
                     </div>
 					</form>
                 </div>
+                <!-- Modal para subir imagen -->
+                <div class="modal modal-image fade" :id="`modalImage${id}`" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" style="z-index:1900;">
+				    <div class="modal-dialog modal-dialog-image modal-sm modal-dialog-centered" role="document">
+			            <div class="modal-content modal-images mx-auto px-3">
+			                <div class="modal-body p-0 relative">
+			                    <div>
+			                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer cerrarModal" @click.prevent="closeModalImage()"></i>
+			                    </div>
+			                    <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
+			                    <div class=" rounded-xl mt-3" style="max-height: 120px;">
+			                    	<img
+			                    		v-if="imagenValue"
+			                    		:src="img"
+			                    		class=" w-full rounded-xl"
+			                    	>
+			                    	<div
+			                    	    v-else
+			                    		class="bg-collaborator-orange py-2.5  px-2 text-center text-white w-100 m-0 rounded-xl"
+			                    	>
+			                    		<h2 class="text-lg md:text-xl text-center mt-3.5 font-bold text-white">¡No has subido una imagen todavía!</h2>
+			                    	  	<i class="fas fa-arrow-down inline-block text-white text-lg md:text-xl"></i>
+			                    	</div>
+			                    </div>
+			                    <input
+			                    	ref="file"
+			                    	type="file"
+			                    	id="file"
+			                    	style="display: none;"
+			                    	@change="changeImage"
+			                    />
+			                    <div
+			                    	class=" rounded-xl bg-picker-img py-2.5 mt-3 mb-3 px-2 text-center text-muted cursor-pointer"
+			                    	@drop.prevent="addFile"
+			                    	@dragover.prevent
+			                    	@click="$refs.file.click()"
+			                    >
+			                    	<i class="fas fa-image inline-block text-white text-xl text-muted"></i>
+			                    	<label class="text-center block font-bold text-muted mt-1 cursor-pointer">Sueltaa aquí tu imagen o explora en tus archivos</label>
+			                    	<p class="text-xs muted mt-1">Tamañoo máximo  de la imagen 2MB</p>
+			                    </div>
+			                </div>
+			            </div>
+		            </div>
+				</div>
+				<!-- Fin modal para subir imagen -->
+				<!-- Modal guardar cambios -->
+		        <div class="modal modal-exit fade" :id="`modalExitEdit${id}`" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		        aria-hidden="true" style="z-index:2900;">
+		        <!-- Change class .modal-sm to change the size of the modal -->
+		            <div class="modal-dialog modal-dialog-image modal-sm modal-dialog-centered" role="document">
+		                <div class="modal-content modal-exits modal mx-auto px-2">
+		                    <div class="modal-body p-0 relative">
+		                        <div>
+		                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" @click.prevent="closeModalBack()"></i>
+		                        </div>
+		                        <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
+		                        <p class="px-4 my-2 text-xs text-center">
+		                            ¿Estas seguro que quieres salir?
+		                        </p>
+		                        <div class="my-2.5 text-center">
+		                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" @click.prevent="closeModalBack()">Seguir editando</button>
+		                        </div>
+		                        <div class="my-2.5 text-center">
+		                            <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" @click.prevent="forceExit()">Salir sin guardar</button>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <!-- Modal guardar cambios  -->
             </div>
         </div>
         
     </div>
-    <!-- Modal Request  -->
-    <!-- Modal upload image -->
-    <div class="modal modal-image fade" id="modalImage" tabindex="-1" role="dialogI" aria-labelledby="myModalLabelImage"
-    aria-hidden="true" style="z-index:1900;">
-    <!-- Change class .modal-sm to change the size of the modal -->
-        <div class="modal-dialog-image modal-dialog-centered" role="document">
-            <div class="modal-content modal-images modal mx-auto px-3">
-                <div class="modal-body p-0 relative">
-                    <div>
-                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer cerrarModal" data-dismiss="modal" @click="closeModalImage()"></i>
-                    </div>
-                    <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
-                    <div class=" rounded-xl mt-3" style="max-height: 120px;">
-                    	<img
-                    		v-if="imagenValue"
-                    		:src="img"
-                    		class=" w-full rounded-xl"
-                    	>
-                    	<div
-                    	    v-else
-                    		class="bg-collaborator-orange py-2.5  px-2 text-center text-white w-100 m-0 rounded-xl"
-                    	>
-                    		<h2 class="text-lg md:text-xl text-center mt-3.5 font-bold text-white">!No has subido una imagen todavía</h2>
-                    	  	<i class="fas fa-arrow-down inline-block text-white text-lg md:text-xl"></i>
-                    	</div>
-                    </div>
-                    <input
-                    	ref="file"
-                    	type="file"
-                    	id="file"
-                    	style="display: none;"
-                    	@change="changeImage"
-                    />
-                    <div
-                    	class=" rounded-xl bg-picker-img py-2.5 mt-3 mb-3 px-2 text-center text-muted cursor-pointer"
-                    	@drop.prevent="addFile"
-                    	@dragover.prevent
-                    	@click="$refs.file.click()"
-                    >
-                    	<i class="fas fa-image inline-block text-white text-xl text-muted"></i>
-                    	<label class="text-center block font-bold text-muted mt-1 cursor-pointer">Suelta aquí tu imagen o explora en tus archivos</label>
-                    	<p class="text-xs muted mt-1">Tamaño máximo  de la imagen 2MB</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal upload image  -->
 </template>
 <script>
 	import { Head, Link } from '@inertiajs/inertia-vue3'
@@ -323,37 +363,43 @@
 				formModal: this.$inertia.form({
                     id: this.form.id,
 					tipo: this.form.type,
-					nombre_hotel:this.form.name,
-					numero_habitaciones:this.form.hab,
+					nombre_hotel: this.form.name,
+					numero_habitaciones: this.form.hab,
 					calle: this.form.calle,
 					planta: this.form.planta,
 					address: this.form.address,
 					city: this.form.zone,
-					cp: 'cp',
+					cp: null,
 					code: this.form.code,
 					url: this.form.url,
 					area: this.form.area,
-					image: null,
-					nllaves:null,
-					otro:null,
-					modality: null,
-					group:null,
-					category:null,
+					image: this.form.img,
+					nllaves: this.form.nllaves,
+					modality: this.form.modality,
+					province: this.form.province,
+					group: this.form.group,
+					category: this.form.category,
 				}),
 				imagenValue: null,
 				group: ['Hotel', 'Pensión/Albergue', 'Hostal', 'Apartahotel'],
 				modalid: ['Playa', 'Rural', 'Carretera', 'Ciudad'],
 				category: ['1 Estrella', '2 Estrellas', '3 Estrellas', '3 Estrellas', '4 Estrellas', '5 Estrellas'],
+				llaves: ['1', '2', '3', '4'],
+				errorsKey: [],
 			}
 		},
 		computed: {
+			formComputed: {
+				get () {
+					return this.form
+				},
+				set (value) {
+					this.$emit('update:form', value)
+				}
+			},
 			img () {
     			return this.imagenValue
     		},
-    		errorsKey () {
-	            var err = this.$page.props.errors.submit ? Object.keys(this.$page.props.errors.submit) : []
-	            return err
-	        },
 	        formatErrors () {
 	            var map = this.errorsKey.map( item => {
 	                switch (item) {
@@ -361,7 +407,7 @@
 			                return 'Nombre del hotel'
 			                break;
 						case 'numero_habitaciones':
-							return 'Número de habitación'
+							return this.form.tipo === 'hotel' ? 'Número de habitaciones' : 'Número de apartamentos'
 							break;
 						case 'calle':
 							return 'Calle'
@@ -385,13 +431,22 @@
 							return 'N- letra-piso'
 							break;
 						case 'address':
-							return 'Otros datos de interés'
-							break;
-						case 'otro':
 							return 'Otras indicaciones'
 							break;
 						case 'nllaves':
 							return 'N de llaves'
+							break;
+						case 'category':
+							return 'Categoría'
+							break;
+						case 'province':
+							return 'Provincia'
+							break;
+						case 'modality':
+							return 'Modalidad'
+							break;
+						case 'group':
+							return 'Grupo'
 							break;
 						case 'category':
 							return 'Categoría'
@@ -402,17 +457,60 @@
 	            })
 	            return map
 	        },
-		},
-		mounted () {
-			$('.cerrarModal').click(function(){
-				$('#modalImage').modal('hide')
-			})
+	        validExit () {
+	        	if (this.formModal.tipo === 'apartamento'){
+	        		if (
+	        			this.formModal.city != this.form.zone ||
+	        			this.formModal.province != this.form.province ||
+	        			this.formModal.calle != this.form.calle ||
+	        			this.formModal.planta != this.form.planta ||
+	        			this.formModal.address != this.form.address ||
+	        			this.formModal.url != this.form.url ||
+	        			this.formModal.code != this.form.code ||
+	        			this.formModal.area != this.form.area
+	        		) return true
+	        		else return false
+	        	} else if (this.formModal.tipo === 'hotel'){
+	        		if (
+	        			this.formModal.nombre_hotel != this.form.name ||
+	        			this.formModal.numero_habitaciones != this.form.hab ||
+	        			this.formModal.province != this.form.province ||
+	        			this.formModal.city != this.form.zone ||
+	        			this.formModal.calle != this.form.calle ||
+	        			this.formModal.planta != this.form.planta ||
+	        			this.formModal.group != this.form.group||
+	        			this.formModal.category != this.form.category ||
+	        			this.formModal.url != this.form.url ||
+	        			this.formModal.code != this.form.code ||
+	        			this.formModal.area != this.form.area
+	        		) return true
+	        		else return false
+	        	} else {
+	        		if (
+	        			this.formModal.nombre_hotel != this.form.name ||
+	        			this.formModal.numero_habitaciones != this.form.hab ||
+	        			this.formModal.nllaves != this.form.nllaves ||
+	        			this.formModal.province != this.form.province ||
+	        			this.formModal.city != this.form.zone ||
+	        			this.formModal.calle != this.form.calle ||
+	        			this.formModal.planta != this.form.planta ||
+	        			this.formModal.url != this.form.url ||
+	        			this.formModal.code != this.form.code ||
+	        			this.formModal.area != this.form.area
+	        		) return true
+	        		else return false
+	        	}
+	        	return false
+	        },
 		},
 		methods: {
 			openModal () {
-				$('#create-form').modal('show')
+				$(`#${this.id}`).modal({show: true, backdrop: 'static', keyboard: false})
 			},
 			submit() {
+				if(this.formModal.tipo == 'complejo túristico'){
+					this.formModal.tipo = 'complejo'
+				}
                 this.formModal.post(route('collaborator.update.hab',{id:this.formModal.id}),{
                 	_token: this.$page.props.csrf_token,
                 	errorBag: 'submit',
@@ -422,11 +520,17 @@
                         console.log('success')
                         if(this.$page.props.flash.code == 200){
                             console.log('222')
-                            this.formModal.reset();
-                            this.eraseFeatured();
-                            $('#edit'+this.formModal.id).modal('hide')
+                            this.formModal.reset()
+                            this.errorsKey = []
+                            this.eraseFeatured()
+                            $('#'+this.id).modal('hide')
                         };
-                    }
+                    },
+                    onError: (errors) => {
+                    	console.log(errors)
+                    	this.getErrorsKey()
+                    	this.emitter.emit('errors')
+                    },
                 	
             	})
                 
@@ -436,20 +540,41 @@
             	this.imagenValue = URL.createObjectURL(this.formModal.image)
             },
             changeImage (value) {
-            	console.log(value)
             	this.formModal.image = value.target.files[0]
       			this.imagenValue = URL.createObjectURL(this.formModal.image)
             },
             openModalImagen () {
-            	$('#modalImage').modal('show')
+            	$(`#modalImage${this.id}`).modal('show')
             },
             closeModalImage () {
-            	$('#modalImage').modal('hide')
+            	$(`#modalImage${this.id}`).modal('hide')
             },
-            clickBackModalType () {
-            	$('#create-form').modal('hide')
-            	this.$emit('clickBackModalType')
-            }
+            closeModalEdit () {
+            	console.log(this.validExit)
+            	if (this.validExit) {
+            		$(`#modalExitEdit${this.id}`).modal('show')
+            	} else {
+            		this.errorsKey = []
+            		$(`#${this.id}`).modal('hide')
+            	}
+            },
+            eraseFeatured(){
+                this.formModal.reset('image')
+            },
+            closeModalBack () {
+            	$(`#modalExitEdit${this.id}`).modal('hide')
+            },
+            forceExit () {
+            	$(`#modalExitEdit${this.id}`).modal('hide')
+            	setTimeout(()=>{
+            		$(`#${this.id}`).modal('hide')
+            		this.errorsKey = []
+            		this.formModal.reset()
+            	},200)
+            },
+            getErrorsKey () {
+	            this.errorsKey = this.$page.props.errors.submit ? Object.keys(this.$page.props.errors.submit) : []
+	        },
 		},
 	}
 </script>
