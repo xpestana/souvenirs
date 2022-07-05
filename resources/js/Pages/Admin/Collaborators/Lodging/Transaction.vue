@@ -34,7 +34,7 @@
         <div class="container mt-5 px-0 px-md-4">
             <div class="row cabeza mx-lg-4">
                 <div class="col-12">
-                    <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-3xl"><strong>Venta "{{ shipping.order.transaction_id }}"</strong></h1>
+                    <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-3xl"><strong>Venta "{{ shippings[0].order.transaction_id }}"</strong></h1>
                 </div>
             </div>
             <div class="row cuerpo mx-lg-4 mt-md-2">
@@ -52,7 +52,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="shipping in shippings" :key="shipping.id">
                                     <td class="text-center">{{ shipping.product.title }}</td>
                                     <td class="text-center">
                                         <template v-if="shipping.returned == 1">
@@ -71,7 +71,7 @@
                                     <td class="text-center">{{ shipping.email }}</td>
                                     <td class="text-center">{{ moment(shipping.created_at).format("DD/MM/YYYY") }}</td>
                                     <td class="text-center">{{ parseInt(shipping.amount) }} €</td>
-                                    <td class="text-center">{{ (parseInt(shipping.amount) * 0.20).toFixed(2) }} €</td>
+                                    <td class="text-center">{{ (parseInt(shipping.amount * shipping.quantity) * 0.20).toFixed(2) }} €</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-12 col-md-4">
                     <h2 class="text-azulc text-2xl font-weight-bolder">Total</h2>
-                    <p><b>Tu beneficio es de {{ (Number(shipping.amount) * 0.2).toFixed(2) }}€</b></p>
+                    <p><b>Tu beneficio es de {{ (Number(amount) * 0.2).toFixed(2) }}€</b></p>
                 </div>
             </div>
         </div>
@@ -100,20 +100,19 @@ export default {
     props:{
         hotel:Object,
         collaborator:Object,
-        shipping:Object,
+        shippings:Object,
     },
     data(){
         return{
             orders:0,
             total:0,
+            amount:0,
         }
     },
     created(){
-        console.log(this.shipping)
         this.datosColaborador();
         this.moment=Moment;
-    },
-    components:{
+        this.datosAmount();
     },
     methods:{
         returned(id){
@@ -133,9 +132,16 @@ export default {
                         total_benefits += Number(order.total);
                     }
                 });
-                this.total = this.total + (total_benefits*0.20)
+                this.total = this.total + (total_benefits*0.20);
             });
         },
+        datosAmount(){
+            var total_amount = 0;
+            const obj2 = this.shippings.map((ship)=>{
+                total_amount = ship.amount * ship.quantity;
+                this.amount += Number(total_amount);
+            });
+        }
     },
     
     

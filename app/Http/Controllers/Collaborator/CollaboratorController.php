@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Collaborator;
 use App\Http\Controllers\Controller;
 use App\Mail\SaleSouvenirReceived;
 use App\Mail\FeedbackReceived;
+use App\Mail\WelcomeReceived;
+use App\Mail\DisplayReceiver;
 use App\Models\hotel;
 use App\Models\User;
 use App\Models\Order;
@@ -18,7 +20,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\Rule;
-use App\Mail\WelcomeReceived;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -167,7 +168,8 @@ class CollaboratorController extends Controller
         }
     }
     public function request_display(Request $request){
-        //$request->id;
+        $user = auth()->user();
+        Mail::to("info@hicitty.es")->send(new DisplayReceiver($user));
         return back();
     }
     public function create_hab()

@@ -75,9 +75,9 @@
                                         </template>
                                     </td>
                                     <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
-                                    <td class="text-center">{{ (Number(order.amount)*0.20).toFixed(2) }} €</td>
+                                    <td class="text-center">{{ (Number(order.total)*0.20).toFixed(2) }} €</td>
                                     <td class="text-center px-0">
-                                        <Link :href="route('admin.hab.transaction',{id:collaborator.id, shipping:order.id})" 
+                                        <Link :href="route('admin.hab.transaction',{id:collaborator.id, shipping:order.order_id})" 
                                             class="btn btn-sm text-white d-inline p-0.5 mx-0" as="button" 
                                             style="background-color: #2b59a2">
                                             Más detalles

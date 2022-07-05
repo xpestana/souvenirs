@@ -286,7 +286,7 @@ class AdminController extends Controller
     }
 
     public function collaborator_details($id)
-    {
+    {   
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
         $url = config('app.url');
         return Inertia::render('Admin/Collaborators/Show',compact('collaborator','url'));
@@ -493,7 +493,6 @@ class AdminController extends Controller
             $products = $products->where('del', 0)->paginate(8);
         }
                             
-                           // dd($products);
         $settings = Settings::all();
         return Inertia::render('Admin/Souvenirs', compact('settings','products'));
     }
@@ -603,13 +602,13 @@ class AdminController extends Controller
         return back()->with(['id'=>$id, 'message' => "Actualizado exitosamente", 'code' => 200, 'status' => 'success']);
     }
     public function transaction($id, $shipping)
-    {   
+    {
         $collaborator = User::find($id)->load('profile','hotel.orders.shippings');
-        $shipping = Shipping::where("id", $shipping)->status()->first();
-        if ($shipping) {
-            $shipping->load('order.hotel', 'product');
+        $shippings = Shipping::where("order_id", $shipping)->status()->get(); 
+        if (!$shippings->isEmpty()) {
+            $shippings->load('order.hotel', 'product');
         }
-        return Inertia::render('Admin/Collaborators/Lodging/Transaction', compact('collaborator', 'shipping'));
+        return Inertia::render('Admin/Collaborators/Lodging/Transaction', compact('collaborator', 'shippings'));
     }
     public function sales()
     {
