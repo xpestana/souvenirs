@@ -122,7 +122,7 @@ class CollaboratorController extends Controller
         }
         /*******************************/
         
-        $hotels = auth()->user()->hotel()->paginate(3);
+        $hotels = auth()->user()->hotel()->paginate(20);
         $hotels->load('orders.shippings');
         $url = config('app.url');
         
@@ -444,7 +444,6 @@ class CollaboratorController extends Controller
                 $hotel->image = $pathName.$name_file;
             }
             $hotel->save();
-        
             return Redirect::route('coll.lodgings.index')->with(['id'=>$id, 'message' => 'Actualizado exitosamente', 'code' => 200, 'status' => 'success']);   
          }catch (Exception $e) 
          {
