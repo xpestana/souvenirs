@@ -453,7 +453,11 @@ class CollaboratorController extends Controller
         
          }
     }
+    //means
 
+    public function means_welcome(){
+        return Inertia::render('Collaborator/Dashboard/Means/Welcome');
+    }
     // Sales
 
     public function sales_welcome(){

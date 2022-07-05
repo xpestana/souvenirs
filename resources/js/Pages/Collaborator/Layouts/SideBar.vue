@@ -9,7 +9,7 @@
                 <Link :href="route('collaborator.dashboard.home')" class="text-base link" :class="{'sidebar-active':this.$page.url=='/tablero'}">
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':this.$page.url=='/tablero'}" 
-                        src="/vendor_asset/img/collaborator/dashboard/icons/inicio.svg"
+                        src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
                     >
                     Inicio
                 </Link>
@@ -23,18 +23,37 @@
                     Gestión de alojamientos
                 </Link>
             </li>
-            <li class="mb-3.5">
-                <a href="#sub-recursos" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle text-base link">
-                <img class="inline w-4" style="margin-top:-4px"
+            <li class="mb-3.5 relative">
+                <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesResources}"  id="downsales" @click="toggleMenuSales('sub-recursos')"></i>
+                <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesResources}" id="upsales" @click="toggleMenuSales('sub-recursos')"></i>
+                <Link :href="route('coll.dashboard.means')" data-toggle="collapse" 
+                    aria-expanded="false" class="dropdown-toggle text-base link"  
+                    :class="{'sidebar-active':routesResources}"
+                >
+                <img class="inline w-5" style="margin-top:-4px"
+                    :class="{'side-icon-active':routesResources}" 
                     src="/vendor_asset/img/collaborator/dashboard/icons/recurso.svg"
                 >
-                Recursos</a>
-                <ul class="collapse list-unstyled pl-4" id="sub-recursos">
+                    Recursos
+                </Link>
+                <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesResources}" id="sub-recursos">
                     <li>
-                        <a href="#">Page 1</a>
+                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-publicidad'}">
+                            <img class="inline w-4" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-publicidad'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/recursoantes.svg"
+                            >
+                            Recursos1
+                        </Link>        
                     </li>
                     <li>
-                        <a href="#">Page 2</a>
+                        <Link href="#" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
+                            <img class="inline w-4" style="margin-top:-4px"
+                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-inmueble'}" 
+                                src="/vendor_asset/img/collaborator/dashboard/icons/recursodurante.svg"
+                            >
+                            Recursos2
+                        </Link>
                     </li>
                 </ul>
             </li>
@@ -207,6 +226,7 @@ export default {
         return {
             routesSales:false,
             routesProfile:false,
+            routesResources:false,
             form: this.$inertia.form({
                 description: null,
             }),
@@ -243,6 +263,13 @@ export default {
             let route5 = url.includes('/tablero/ventas-publicidad')
             if(route1 || route2 || route3 || route4 || route5){
                 this.routesSales = true;
+            }
+        },
+        sales(){
+            let url = this.$page.url;
+            let route1 = url.includes('tablero/recursos')
+            if(route1){
+                this.routesResources = true;
             }
         },
         toggleMenuProfile(id){

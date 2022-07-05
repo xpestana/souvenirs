@@ -240,6 +240,7 @@ export default {
             this.orders = this.orders + i
         return {
             ...col,
+            title,
             total_benefit : (total_benefit*0.20).toFixed(2),
             total_orders : i,
         }
