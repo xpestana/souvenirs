@@ -80,8 +80,8 @@
                         <div class="col-12 col-lg-3 h-2/5 lg:h-auto bg-black rounded-b-xl xl:rounded-r-xl py-lg-2 pl-0 xl:rounded-l-none d-lg-flex flex-column align-items-start justify-content-between relative">
                             <p class="text-blue-coll text-sm pl-4 pl-lg-0 text-xl lg:text-sm mt-lg-1"><b>Beneficios:</b> {{hotel.total_benefit}} €</p>
                             <p class="text-blue-coll text-sm pl-4 pl-lg-0 pb-lg-1 text-xl lg:text-sm"><b>Pedidos:</b> {{hotel.total_orders}}</p>
-                            <button type="button" data-toggle="modal" :data-target="'#edit'+hotel.id" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold py-1 px-10 mt-2 text-sm">Editar</button>
-                            <ModalEdit :form="hotel" :id="'edit'+hotel.id"/>
+                            <button type="button" data-toggle="modal" :data-target="'#edit'+hotel.id" data-backdrop="static" data-keyboard="false" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold py-1 px-10 mt-2 text-sm">Editar</button>
+                            <ModalEdit :form="hotel" :ref="`modalEdit${hotel.id}`" :id="'edit'+hotel.id"/>
                             <button  class="d-lg-none btn bg-white absolute bottom-11 right-8 rounded-circle pt-1 pb-0.5 px-2.5 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-caret-down  text-3xl leading-4"></i>
                             </button>
@@ -92,7 +92,7 @@
                                 <a href="javascript:void(0)" @click="requestDisplay(hotel.id)" class="dropdown-item">
                                     Pedir displays
                                 </a>
-                                <a href="javascript:void(0)" data-toggle="modal" :data-target="'#edit'+hotel.id" class="dropdown-item">
+                                <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" :data-target="'#edit'+hotel.id" data-backdrop="static" data-keyboard="false">
                                     Editar
                                 </a>
                             </div>
@@ -239,21 +239,9 @@ export default {
             this.total = this.total + (total_benefit *0.20)
             this.orders = this.orders + i
         return {
-            id : col.id,
-            name : col.name,
-            address : col.address,
-            calle : col.calle,
-            planta : col.planta,
-            code : col.code,
-            url : col.url,
-            hab : col.hab,
-            title: title,
-            image : col.image,
-            type : col.type,
-            hab : col.hab,
-            zone : col.zone,
+            ...col,
             total_benefit : (total_benefit*0.20).toFixed(2),
-            total_orders : i
+            total_orders : i,
         }
         });
         return obj;
@@ -288,6 +276,10 @@ export default {
         requestDisplay(id){
             this.idNoti= id
             $('#display').modal('show')
+        },
+        openFormEdit (id) {
+            console.log('entro al btn')
+            this.$refs[`modalEdit${id}`].openModal()
         },
         sendRequest(){
             let id = $('#notidisplay');

@@ -354,66 +354,98 @@ class CollaboratorController extends Controller
 
     public function update_hab($id,Request $request){
             
-        if($request->type == 'hotel'){
+        if($request->tipo == 'hotel'){
             $request->validate([
+                'tipo' => 'required|string',
                 'nombre_hotel' => 'required|string',
                 'numero_habitaciones' => 'required|numeric',
                 'calle' => 'required|string',
                 'planta' => 'required|string',
                 'city' => 'required|string',
-                'cp' => 'required|string',
+                'code' => 'nullable|string',
+                'cp' => 'nullable|string',
+                'url' => 'nullable|url',
+                'area' => 'nullable|string',
+                'province' => 'required|string',
+                'group' => 'required|string',
+                'modality' => 'required|string',
+                'category' => 'required|string',
+            ]);
+        }
+        if ($request->tipo == 'apartamento') {
+            $request->validate([
+                'tipo' => 'required|string',
+                'calle' => 'required|string',
+                'planta' => 'required|string',
+                'address' => 'nullable|string',
+                'city' => 'required|string',
+                'province' => 'required|string',
+                'cp' => 'nullable|string',
+                'code' => 'nullable|string',
+                'url' => 'required|url',
+                'area' => 'nullable|string',
+            ]);
+        }
+        if ($request->tipo == 'complejo') {
+            $request->validate([
+                'nombre_hotel' => 'required|string',
+                'numero_habitaciones' => 'required|numeric',
+                'nllaves' => 'required|string',
+                'tipo' => 'required|string',
+                'calle' => 'required|string',
+                'planta' => 'required|string',
+                'city' => 'required|string',
+                'province' => 'required|string',
+                'cp' => 'nullable|string',
                 'code' => 'nullable|string',
                 'url' => 'nullable|url',
                 'area' => 'nullable|string',
             ]);
-        }else{
-            $request->validate([
-            'calle' => 'required|string',
-            'planta' => 'required|string',
-            'address' => 'nullable|string',
-            'city' => 'required|string',
-            'cp' => 'required|string',
-            'code' => 'nullable|string'
-            ]);
         }
 
-         try{
+        try{
             
-         if ($request->image) {
-            $image = $request->image;
-            $msg =$this->valid($image);
-            if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
+            if ($request->file('image')) {
+                $image = $request->image;
+                $msg =$this->valid($image);
+                if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
 
-            $Path = public_path('storage/hotel/');
-            $pathName = '/';
+                $Path = public_path('storage/hotel/');
+                $pathName = '/';
 
-            if (!file_exists($Path)) {
-                mkdir($Path, 777, true);
+                if (!file_exists($Path)) {
+                    mkdir($Path, 777, true);
+                }
+
+                /*$nameFile =$this->FileName($image); //nombre de archivo original
+                $imgFileOriginal = Image::make($image->getRealPath());
+                $imgFileOriginal->save($Path.$nameFile['fileName']);*/
+                $name_file = time() . '-' . $image->getClientOriginalName();
+                $uploadSuccess = $image->move($Path, $name_file);
+
             }
-
-            $nameFile =$this->FileName($image); //nombre de archivo original
-            $imgFileOriginal = Image::make($image->getRealPath());
-            $imgFileOriginal->save($Path.$nameFile['fileName']);
-
-            }
-
             $hotel = hotel::find($id);
-            $hotel->name = ($request->nombre_hotel) ? $request->nombre_hotel : null;
-            $hotel->hab  = ($request->numero_habitaciones) ? $request->numero_habitaciones : null;
+            $hotel->name = $request->nombre_hotel ?? null;
+            $hotel->hab  = $request->numero_habitaciones ?? null;
             $hotel->calle = $request->calle;
-            $hotel->address = $request->address;
+            $hotel->address = $request->address ?? null;
             $hotel->zone = $request->city;
             $hotel->planta = $request->planta;
-            $hotel->cp = $request->cp;
+            $hotel->cp = $request->cp ?? null;
             $hotel->code = $request->code;
             $hotel->url = $request->url;
-            $hotel->area = $request->area;            
-            if ($request->image) {
-                $hotel->image = $pathName.$nameFile['fileName'];
+            $hotel->area = $request->area;
+            $hotel->province = $request->province;
+            $hotel->group = $request->group;
+            $hotel->modality = $request->modality;
+            $hotel->category = $request->category;
+            $hotel->nllaves = $request->nllaves ?? null;
+            if ($request->file('image')) {
+                $hotel->image = $pathName.$name_file;
             }
             $hotel->save();
-
-            return Redirect::route('collaborator.index')->with(['id'=>$id, 'message' => 'Alojamiento actualizado exitosamente!', 'code' => 200, 'status' => 'success']);  
+        
+            return Redirect::route('coll.lodgings.index')->with(['id'=>$id, 'message' => 'Actualizado exitosamente', 'code' => 200, 'status' => 'success']);   
          }catch (Exception $e) 
          {
         
