@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
  
-//mix.disableSuccessNotifications()
+mix.disableSuccessNotifications()
 mix.js('resources/js/app.js', 'public/js')
     .copyDirectory('resources/img', 'public/vendor_asset/img')
 	.copyDirectory('resources/css/custom', 'public/vendor_asset/css')

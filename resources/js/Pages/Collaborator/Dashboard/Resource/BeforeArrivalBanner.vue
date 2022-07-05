@@ -1,0 +1,175 @@
+<template>
+	<section id="dashboard-resource-beforearrival" class="container py-8 ml-2 md:ml-0 md:px-24">
+	 	<div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+            <div class="col-12 col-md-8 text-left">
+                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Banner</h1>
+            </div>
+        </div>
+        <div
+            class="mx-1.5 lg:mx-0 mt-8 mb-3.5"
+        >
+        	<span>Aquí podrás escoger y generar el banner que mejor se adapte a tus necesidades y poder empezar a vender.</span>
+    	</div>
+    	<div
+            class="mx-1.5 lg:mx-0 mb-4"
+        >
+        	<span>Una vez asignes la ciudad  del destino su tamaño y el tamaño del banner, se generará una vista previa y ya solo tendrás que colocarlo en tus <strong>mails, páginas web...</strong> y podrás empezar a ofrecele a tu cliente todos los servicios de la ciudad de destino antes de su llegada.</span>
+    	</div>
+    	<div class="mx-1.5 row lg:mx-0">
+    		<div class="col-12 col-md-4">
+                <form
+                    class="row"
+                >
+                    <!--END Alert validation -->
+                    <div class="col-12 my-1.5 px-0">
+                        <label class="font-bold">Ciudad de destino</label>
+                        <select
+                        	v-model="form.city"
+                        	class="w-100 rounded col-form-input py-1"
+                            placeholder="Ciudad..."
+                         >
+                         	<option value=""></option>
+							<option value="sevilla">Sevilla</option>
+						</select>
+                    </div>
+                    <div class="col-12 my-1.5 px-0">
+                        <label class="font-bold">Tamaño del banner</label>
+                        <select
+                        	v-model="form.width"
+                        	class="w-100 rounded col-form-input py-1"
+                            placeholder="Tamaño..."
+                         >
+                         	<option value=""></option>
+							<option value="200x700">200x700</option>
+							<option value="728x90">728x90</option>
+							<option value="160x600">160x600</option>
+						</select>
+                    </div>
+                    <div class="col-12 mt-4 px-0 text-center text-lg-left">                  
+                        <button
+                             type="submit"
+                             class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+                             :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                             @click.prevent="getBanner()"
+                        >
+                           Generar banner
+                        </button>
+                    </div>
+                </form>
+            </div>
+    	</div>
+    	<div
+    		v-if="url.fullPath"
+    		class="mx-1.5 flex justify-content-between lg:mx-0 mt-4 mb-4"
+    	>
+    		<label class="block font-bold">¡Banner generado con exito!</label>
+    		<span class="block cursor-pointer text-md orange  font-bold" @click.prevent="getUrl()"><i class="fas fa-copy mr-1"></i> Copiar código de Banner</span>
+    	</div>
+    	<img
+    		v-if="url.fullPath"
+    		:src="`/${url.path}`"
+    	>
+    </section>
+</template>
+
+<script>
+	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
+	import { Link } from '@inertiajs/inertia-vue3';
+	export default {
+	    layout:TemplateApp,
+	    components:{
+	        Link
+	    },
+	    props: {
+	    	url: Object,
+	    },
+	    data () {
+	    	return {
+	    		form: this.$inertia.form({
+					city: null,
+					width: null
+				}),
+	    	}
+	    },
+	    methods: {
+	        goBack () {
+	            window.history.back()
+	        },
+	        getBanner () {
+	        	this.form.get(this.route('collaborator.recursos.antes.banner'), {
+	        		errorBag: 'submit',
+					preserveScroll: true,
+					onSuccess: (result) => {
+                        console.log('success')
+                    },
+                    onError: (errors) => {
+                    	console.log(errors)
+                    },
+				});
+	        },
+	        getUrl () {
+	        	var id = "el-id-del-textarea";
+			    var existsTextarea = document.getElementById(id);
+
+			    if(!existsTextarea){
+			        console.log("Creando textarea");
+			        var textarea = document.createElement("textarea");
+			        textarea.id = id;
+			        // Coloca el textarea en el borde superior izquierdo
+			        textarea.style.position = 'fixed';
+			        textarea.style.top = 0;
+			        textarea.style.left = 0;
+
+			        // Asegurate que las dimensiones del textarea son minimas, normalmente 1px 
+			        // 1em no funciona porque esto generate valores negativos en algunos exploradores
+			        textarea.style.width = '1px';
+			        textarea.style.height = '1px';
+
+			        // No se necesita el padding
+			        textarea.style.padding = 0;
+
+			        // Limpiar bordes
+			        textarea.style.border = 'none';
+			        textarea.style.outline = 'none';
+			        textarea.style.boxShadow = 'none';
+
+			        // Evitar el flasheo de la caja blanca al renderizar
+			        textarea.style.background = 'transparent';
+			        document.querySelector("body").appendChild(textarea);
+			        console.log("The textarea now exists :)");
+			        existsTextarea = document.getElementById(id);
+			    }else{
+			        console.log("El textarea ya existe")
+			    }
+			    
+			    existsTextarea.value = this.url.fullPath;
+			    existsTextarea.select();
+
+			    try {
+			        var status = document.execCommand('copy');
+			        if(!status){
+			            console.error("No se pudo copiar el texto");
+			        }else{
+			            console.log("El texto ahora está en el portapapeles");
+			        }
+			    } catch (err) {
+			        console.log('Uy, no se pudo copiar');
+			    }
+	        },
+	    },
+	}
+</script>
+
+<style scoped>
+	option {
+    	background-color: #f5f5f5;
+    	padding: .7rem .3rem;
+    }
+    option:hover{
+		background-color: #aad1e6;
+	}
+	.orange{
+	  color: #FF9C06;
+	}
+
+</style>

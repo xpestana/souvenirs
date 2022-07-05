@@ -304,7 +304,15 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
 
 });
 
-
+//Recursos
+Route::middleware(['auth', 'verified'])->prefix('tablero/recursos')->group(function () {
+    Route::get('/antes-llegada', [CollaboratorController::class, 'index_antes'])->name('collaborator.recursos.antes');
+    Route::get('/antes-llegada-banner', [CollaboratorController::class, 'banner'])->name('collaborator.recursos.antes.banner');
+    Route::get('/antes-llegada-banner/store', [CollaboratorController::class, 'banner'])->name('collaborator.recursos.antes.banner.store');
+    Route::post('/antes-llegada-url', [CollaboratorController::class, 'url'])->name('collaborator.recursos.antes.url');
+    Route::post('/antes-llegada-url/store', [CollaboratorController::class, 'banner'])->name('collaborator.recursos.antes.url.store');
+});
+//Fill recursos
 
 /*Shipping*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/envio')->group(function () {
