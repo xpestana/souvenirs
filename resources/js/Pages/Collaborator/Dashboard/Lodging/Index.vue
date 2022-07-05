@@ -116,7 +116,7 @@
             <button @click.prevent="openCreateLodging()" class="bg-collaborator-orange text-white font-semibold block py-1.5 rounded px-4">+ Añadir alojamiento</button>
         </div>
         <div class="row justify-content-center" v-if="hotels.data.length > 0">
-            <div class="col-10 col-lg-4 overflow-auto">
+            <div class="col-12 col-lg-6">
                 <paginator :paginator="hotels" />
             </div>
         </div>
@@ -228,9 +228,10 @@ export default {
             }
             var total_benefit = 0;
             var i = 0;
+            console.log(col.orders)
             col.orders.forEach(function(order) {
-                if(order.status == "complete"){
-                    total_benefit = parseInt(total_benefit)  + parseInt(order.total);
+                if(order.status == "complete" && order.returned == 0){
+                    total_benefit += Number(order.total);
                     i++;
                 }
                 
@@ -260,7 +261,11 @@ export default {
         },
         cleanUrlSearch(url,string){
             let val = url.split(string+"=")
-            return val[1].split('&')[0];
+            if(val[1] !== undefined){
+                return val[1].split('&')[0];   
+            }else{
+                return '';
+            }
         },
         openCreateLodging () {
             this.$refs.modalCreateType.openModal()

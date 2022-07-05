@@ -13,7 +13,7 @@
 					</div>
                     <div class="mt-md-3 d-flex flex-column flex-md-row justify-content-center justify-content-md-between">
                         <p class="font-weight-bolder text-muted mt-md-3 d-md-inline mx-auto mx-md-4">{{collaborator.email}}</p>
-                        <Link :href="route('admin.associates.edit',collaborator.id)" class="btn btn-sm btn-secondary py-0 px-4 mt-2 mt-md-3 mx-auto">Editar</Link>
+                        <Link :href="route('admin.associates.edit',collaborator.id)" class="btn btn-sm btn-secondary py-0.5 px-4 mt-2 mt-md-3 mx-auto">Editar</Link>
                     </div>
 				</div>
 				<div class="col-12 d-md-inline-flex mt-1">
@@ -190,26 +190,26 @@ export default {
 		url:String
 	},
 	data(){
-            return{
-                total: 0,
-                orders: 0,
-                moment:null
-            }
-        },
+        return{
+            total: 0,
+            orders: 0,
+            moment:null
+        }
+    },
 	computed:{
             partner(){
             const obj = this.collaborator.orders.map((col)=>{
                 console.log(col);
                 var total_orders = 0;
                 var total_benefits = 0;
-				this.orders = this.orders + this.collaborator.orders.length;
 				this.collaborator.orders.forEach(function(order) {
-                    if(order.returned == 0){
+                    if(order.returned == 0 && order.status == "complete"){
+                        total_orders++;
                         total_benefits += Number(order.total);
                     }
                 });
                 this.total = total_benefits*0.20
-                
+                this.orders = total_orders;
             return {
                 id : col.id,
                 transaction_id : col.transaction_id,

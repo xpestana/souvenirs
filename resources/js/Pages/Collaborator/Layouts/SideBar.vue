@@ -15,9 +15,9 @@
                 </Link>
             </li>
             <li class="mb-3.5">
-                <Link :href="route('coll.lodgings.index')" class="text-base link" :class="{'sidebar-active':this.$page.url=='/tablero/alojamientos'}">
+                <Link :href="route('coll.lodgings.index')" class="text-base link" :class="{'sidebar-active':this.$page.url.includes('/tablero/alojamientos')}">
                     <img class="inline w-5" style="margin-top:-4px"
-                        :class="{'side-icon-active':this.$page.url=='/tablero/alojamientos'}" 
+                        :class="{'side-icon-active':this.$page.url.includes('/tablero/alojamientos')}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
                     >
                     Gestión de alojamientos

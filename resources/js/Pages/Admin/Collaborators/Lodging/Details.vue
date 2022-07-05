@@ -75,9 +75,9 @@
                                         </template>
                                     </td>
                                     <td class="text-center">{{ moment(order.created_at).format("DD/MM/YYYY") }}</td>
-                                    <td class="text-center">{{ (parseInt(order.total)*0.20).toFixed(2) }} €</td>
+                                    <td class="text-center">{{ (Number(order.total)*0.20).toFixed(2) }} €</td>
                                     <td class="text-center px-0">
-                                        <Link :href="route('admin.hab.transaction',{id:collaborator.id, shipping:order.id})" 
+                                        <Link :href="route('admin.hab.transaction',{id:collaborator.id, shipping:order.order_id})" 
                                             class="btn btn-sm text-white d-inline p-0.5 mx-0" as="button" 
                                             style="background-color: #2b59a2">
                                             Más detalles
@@ -133,22 +133,22 @@ export default {
     methods:{
         datosColaborador(){
             this.total=0;
-            this.orders=0;
-            const obj = this.collaborator.hotel.map((col)=>{
-                var total_benefits = 0;
-                this.orders = this.orders + col.orders.length;
-                col.orders.forEach(function(order) {
-                    total_benefits = parseInt(total_benefits)  + parseInt(order.total);
+            this.collaborator.hotel.forEach((col)=>{    
+                col.orders.forEach((order)=>{    
+                    this.orders++;
+                    if(order.status == "complete" && order.returned == 0){
+                        this.total += Number(order.total);
+                    }
                 });
-                this.total = this.total + (total_benefits*0.20)
             });
-            let shippingsReturned=0;
-            this.shippings.forEach(order=>{
-                if(order.returned){
-                    shippingsReturned = parseInt(shippingsReturned)  + parseInt(order.total*0.20);
-                }
-            });
-            this.total = this.total - shippingsReturned
+            this.total = this.total*0.20;
+            // let shippingsReturned=0;
+            // this.shippings.forEach(order=>{
+            //     if(order.returned){
+            //         shippingsReturned = Number(shippingsReturned)  + Number(order.total*0.20);
+            //     }
+            // });
+            // this.total = this.total - shippingsReturned
             
         },
         returned(id){
@@ -160,7 +160,7 @@ export default {
     computed:{
         totalBeneficio(){
             let noDevueltos = this.shippings.filter(el => el.returned == 0)
-            const total = noDevueltos.reduce((acc,col)=> acc + parseInt(col.total),0);
+            const total = noDevueltos.reduce((acc,col)=> acc + Number(col.amount*col.quantity),0);
             return (total*0.20)
         },
     }

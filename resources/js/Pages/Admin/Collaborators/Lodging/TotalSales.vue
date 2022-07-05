@@ -73,7 +73,7 @@
                                     <td class="text-center">{{ (venta.total_benefit*0.20).toFixed(2)}}€</td>
                                     <td class="text-center w-28 px-1">
                                         <template v-if="venta.shippings[0] !== undefined">
-                                                <Link :href="route('admin.hab.transaction',[collaborator.id,venta.shippings[0].id])" 
+                                                <Link :href="route('admin.hab.transaction',[collaborator.id,venta.order_id])" 
                                                     class="btn btn-sm text-white d-inline p-0.5" as="button" style="background-color: #2b59a2">
                                                     Más detalles
                                                 </Link>    
@@ -133,11 +133,12 @@ export default {
         ventas(){
             const obj = this.orders.data.map((col)=>{
                 var total_benefits = 0
-                if(col.returned == 0){
-                    total_benefits = parseInt(total_benefits)  + parseInt(col.total);
+                if(col.returned == 0 && col.status == "complete"){
+                    total_benefits = Number(total_benefits)  + Number(col.total);
                 }
                 this.total_benefit = this.total_benefit + (total_benefits)
             return {
+                order_id : col.id,
                 id : col.hotel.id,
                 calle: col.hotel.calle,
                 planta: col.hotel.planta,
@@ -149,7 +150,7 @@ export default {
                 id_t: col.transaction_id,
                 email : (col.shippings[0]) ? col.shippings[0].email : "",
                 returned : col.returned,
-                total_benefit : parseInt(col.total),
+                total_benefit : Number(col.total),
             }
             });
             return obj;
@@ -173,7 +174,7 @@ export default {
                 
                 col.orders.forEach(function(order) {
                     if(order.returned == 0){
-                        total = parseInt(total)  + parseInt(order.total);
+                        total = Number(total)  + Number(order.total);
                     }
                 });
                 this.total = this.total + (total*0.20);

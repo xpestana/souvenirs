@@ -27,7 +27,10 @@ class AssociateController extends Controller
 {
     public function collaborations(){
         $ordersTotal = Order::where("user_id", auth()->user()->id)->orderBy('created_at','DESC')->get();
-        $orders = Order::where("user_id", auth()->user()->id)->orderBy('created_at','DESC')->paginate(10);
+        $orders = Order::where("user_id", auth()->user()->id)
+                    ->where("status","complete")
+                    ->orderBy('created_at','DESC')
+                    ->paginate(10);
         $orders->load('shippings');
         $url = config('app.url');
         $hotels = auth()->user()->hotel->load('orders.shippings');       

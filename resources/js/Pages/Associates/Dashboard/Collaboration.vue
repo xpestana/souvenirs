@@ -177,10 +177,8 @@ export default {
     computed:{
         ventas(){
             this.ordersTotal.forEach(col =>{
-                if(col.returned == 0){
+                if(col.returned == 0 && col.status == "complete"){
                     this.total += Number(col.total);
-                }else{
-                    console.log('no')
                 }
                 
             });

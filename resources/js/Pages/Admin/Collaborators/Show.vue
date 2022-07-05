@@ -155,9 +155,12 @@ export default {
                 var total_benefits = 0;
 				this.orders = this.orders + col.orders.length;
 				col.orders.forEach(function(order) {
-                    total_benefits = parseInt(total_benefits)  + (parseInt(order.total)*0.20);
+					if(order.status == "complete" && order.returned == 0)
+					{
+						total_benefits += Number(order.total);
+					}
                 });
-                this.total = this.total + (total_benefits)
+                this.total += (total_benefits*0.20)
             return {
                 id : col.id,
                 calle: col.calle,
@@ -165,7 +168,7 @@ export default {
                 image : col.image,
                 type : col.type,
                 total_orders : col.orders.length,
-                total_benefits: total_benefits.toFixed(2)
+                total_benefits: (total_benefits*0.20).toFixed(2)
             }
             });
             return obj;

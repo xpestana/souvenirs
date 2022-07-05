@@ -198,6 +198,7 @@ export default {
     props:{
         hotels:Object,
         orders:Object,
+        totalorders:Object,
         date:String,
     },
     data(){
@@ -215,8 +216,10 @@ export default {
     created(){
         console.log(this.date)
         this.moment=Moment;
-        this.orders.data.forEach(order =>{
-            this.total += Number(order.total);
+        this.totalorders.forEach(order =>{
+            if(order.returned == 0 && order.status == "complete"){
+                this.total += Number(order.total);
+            }
             if (order.withdrawal == 0) {
                 this.withdrawal += Number(order.total);    
             }
