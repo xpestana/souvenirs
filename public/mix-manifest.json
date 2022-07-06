@@ -53,14 +53,11 @@
     "/vendor_asset/img/collaborator/bannercenter.png": "/vendor_asset/img/collaborator/bannercenter.png",
     "/vendor_asset/img/collaborator/bannermobile.jpg": "/vendor_asset/img/collaborator/bannermobile.jpg",
     "/vendor_asset/img/collaborator/dashboard/alo1.png": "/vendor_asset/img/collaborator/dashboard/alo1.png",
-<<<<<<< HEAD
+    "/vendor_asset/img/collaborator/dashboard/banners/160x600.png": "/vendor_asset/img/collaborator/dashboard/banners/160x600.png",
+    "/vendor_asset/img/collaborator/dashboard/banners/200x700.png": "/vendor_asset/img/collaborator/dashboard/banners/200x700.png",
+    "/vendor_asset/img/collaborator/dashboard/banners/728x90.png": "/vendor_asset/img/collaborator/dashboard/banners/728x90.png",
     "/vendor_asset/img/collaborator/dashboard/chome1.jpg": "/vendor_asset/img/collaborator/dashboard/chome1.jpg",
     "/vendor_asset/img/collaborator/dashboard/chome2.jpg": "/vendor_asset/img/collaborator/dashboard/chome2.jpg",
-=======
-    "/vendor_asset/img/collaborator/dashboard/BANNERS/160x600.png": "/vendor_asset/img/collaborator/dashboard/BANNERS/160x600.png",
-    "/vendor_asset/img/collaborator/dashboard/BANNERS/200x700.png": "/vendor_asset/img/collaborator/dashboard/BANNERS/200x700.png",
-    "/vendor_asset/img/collaborator/dashboard/BANNERS/728x90.png": "/vendor_asset/img/collaborator/dashboard/BANNERS/728x90.png",
->>>>>>> origin/jhon
     "/vendor_asset/img/collaborator/dashboard/chome3.jpg": "/vendor_asset/img/collaborator/dashboard/chome3.jpg",
     "/vendor_asset/img/collaborator/dashboard/colhome1.jpg": "/vendor_asset/img/collaborator/dashboard/colhome1.jpg",
     "/vendor_asset/img/collaborator/dashboard/colhome2.jpg": "/vendor_asset/img/collaborator/dashboard/colhome2.jpg",
@@ -94,15 +91,12 @@
     "/vendor_asset/img/collaborator/dashboard/icons/perfil.svg": "/vendor_asset/img/collaborator/dashboard/icons/perfil.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/question.svg": "/vendor_asset/img/collaborator/dashboard/icons/question.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/recurso.svg": "/vendor_asset/img/collaborator/dashboard/icons/recurso.svg",
-<<<<<<< HEAD
     "/vendor_asset/img/collaborator/dashboard/icons/recursoantes.svg": "/vendor_asset/img/collaborator/dashboard/icons/recursoantes.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/recursodurante.svg": "/vendor_asset/img/collaborator/dashboard/icons/recursodurante.svg",
-=======
     "/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerBlanco.svg": "/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerBlanco.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerNegro.svg": "/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerNegro.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlBlanco.svg": "/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlBlanco.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg": "/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg",
->>>>>>> origin/jhon
     "/vendor_asset/img/collaborator/dashboard/icons/ventas-antes.svg": "/vendor_asset/img/collaborator/dashboard/icons/ventas-antes.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg": "/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/ventas-totales.svg": "/vendor_asset/img/collaborator/dashboard/icons/ventas-totales.svg",

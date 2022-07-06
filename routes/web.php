@@ -339,7 +339,9 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/ventas-publicidad')->gr
 /*Dashboard profile and sales*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/recursos')->group(function () {
     
-    Route::get('/', [CollaboratorController::class, 'means_welcome'])->name('coll.dashboard.means');  
+    Route::get('/', [CollaboratorController::class, 'resource_welcome'])->name('coll.dashboard.means');  
+    Route::get('/durante-la-estancia', [CollaboratorController::class, 'resource_stay'])->name('coll.dashboard.stay');  
+
 });
 Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     

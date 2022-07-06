@@ -24,8 +24,8 @@
                 </Link>
             </li>
             <li class="mb-3.5 relative">
-                <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesResources}"  id="downsales" @click="toggleMenuSales('sub-recursos')"></i>
-                <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesResources}" id="upsales" @click="toggleMenuSales('sub-recursos')"></i>
+                <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesResources}"  id="downresource" @click="toggleMenuSales('sub-recursos')"></i>
+                <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesResources}" id="upresource" @click="toggleMenuSales('sub-recursos')"></i>
                 <Link :href="route('coll.dashboard.means')" data-toggle="collapse" 
                     aria-expanded="false" class="dropdown-toggle text-base link"  
                     :class="{'sidebar-active':routesResources}"
@@ -38,21 +38,21 @@
                 </Link>
                 <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesResources}" id="sub-recursos">
                     <li>
-                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-publicidad'}">
+                        <Link :href="route('collaborator.recursos.antes')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/recursos/antes-llegada'}">
                             <img class="inline w-4" style="margin-top:-4px"
-                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-publicidad'}" 
+                                :class="{'side-icon-active':this.$page.url=='/tablero/recursos/antes-llegada'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/recursoantes.svg"
                             >
-                            Recursos1
+                            Antes de la llegada
                         </Link>        
                     </li>
                     <li>
-                        <Link href="#" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
+                        <Link :href="route('coll.dashboard.stay')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/recursos/durante-la-estancia'}">
                             <img class="inline w-4" style="margin-top:-4px"
-                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-inmueble'}" 
+                                :class="{'side-icon-active':this.$page.url=='/tablero/recursos/durante-la-estancia'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/recursodurante.svg"
                             >
-                            Recursos2
+                            Durante la estancia
                         </Link>
                     </li>
                 </ul>
@@ -241,6 +241,7 @@ export default {
         this.routesProfile = false
         this.profile()
         this.sales()
+        this.resources()
     },
     methods:{
         profile(){
@@ -265,7 +266,7 @@ export default {
                 this.routesSales = true;
             }
         },
-        sales(){
+        resources(){
             let url = this.$page.url;
             let route1 = url.includes('tablero/recursos')
             if(route1){
@@ -281,6 +282,12 @@ export default {
         toggleMenuSales(id){
             document.getElementById('downsales').classList.toggle('d-none')
             document.getElementById('upsales').classList.toggle('d-none')
+            let ul = document.getElementById(id);
+            ul.classList.toggle('show');
+        },
+        toggleMenuResources(id){
+            document.getElementById('downresource').classList.toggle('d-none')
+            document.getElementById('upresource').classList.toggle('d-none')
             let ul = document.getElementById(id);
             ul.classList.toggle('show');
         },
