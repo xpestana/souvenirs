@@ -45,7 +45,6 @@
             </div>
         </div>
         <!--END Header section-->
-        
          <!-- Content section-->
         <template v-if="hotels.data.length > 0">
             <div class="lodgings-card row mx-1.5 lg:mx-0 mb-2" v-for="hotel in hoteles" :key="hotel.id" >
@@ -65,7 +64,7 @@
                                     <template v-if="hotel.type == 'hotel'">
                                         Habitaciones ·
                                     </template>
-                                    <template v-if="hotel.type == 'complejo turístico'">
+                                    <template v-if="hotel.type == 'complejo'">
                                         Numero de apartamentos ·
                                     </template>
                                     {{ hotel.zone }}
@@ -80,7 +79,7 @@
                         <div class="col-12 col-lg-3 h-2/5 lg:h-auto bg-black rounded-b-xl xl:rounded-r-xl py-lg-2 pl-0 xl:rounded-l-none d-lg-flex flex-column align-items-start justify-content-between relative">
                             <p class="text-blue-coll text-sm pl-4 pl-lg-0 text-xl lg:text-sm mt-lg-1"><b>Beneficios:</b> {{hotel.total_benefit}} €</p>
                             <p class="text-blue-coll text-sm pl-4 pl-lg-0 pb-lg-1 text-xl lg:text-sm"><b>Pedidos:</b> {{hotel.total_orders}}</p>
-                            <button type="button" data-toggle="modal" :data-target="'#edit'+hotel.id" data-backdrop="static" data-keyboard="false" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold py-1 px-10 mt-2 text-sm">Editar</button>
+                            <button type="button" data-toggle="modal" :data-target="'#edit'+hotel.id" data-backdrop="static" data-keyboard="false" @click.prevent="chageFormEdit()" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold py-1 px-10 mt-2 text-sm">Editar</button>
                             <ModalEdit :form="hotel" :ref="`modalEdit${hotel.id}`" :id="'edit'+hotel.id"/>
                             <button  class="d-lg-none btn bg-white absolute bottom-11 right-8 rounded-circle pt-1 pb-0.5 px-2.5 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-caret-down  text-3xl leading-4"></i>
@@ -292,7 +291,10 @@ export default {
                     id.modal('show')
                 }
             })
-        }
+        },
+        chageFormEdit () {
+            this.emitter.emit('chageFormEdit')
+        },
     }
 }
 </script>

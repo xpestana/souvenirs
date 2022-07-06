@@ -297,7 +297,6 @@
   .btn-collaborator p{
     color: #fff;
   }
-  
   .btn-outline-collaborator{
     border:2px solid #FF9C06;
     color:#FF9C06;
@@ -326,6 +325,9 @@
       border: 2px solid #a0cae1;
       outline: none !important;
       --tw-ring-shadow: none;
+  }
+  .bg-collaborator{
+      background-color:#86bcd9;
   }
   .bg-collaborator{
       background-color:#86bcd9;
@@ -457,6 +459,9 @@ a[data-toggle="collapse"] {
 }
 .bg-collaborator-orange{
   background-color: #FF9C06;
+}
+.bg-collaborator-black{
+  background-color: #000;
 }
 .col-form-input {
   border: solid 1.8px #bfbfbf;

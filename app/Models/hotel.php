@@ -32,7 +32,6 @@ class hotel extends Model
         'category',
         'province',
         'nllaves',
-
     ];
 
     /**

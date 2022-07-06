@@ -328,7 +328,7 @@ class CollaboratorController extends Controller
                 'group'       => $request->group,
                 'modality'    => $request->modality,
                 'category'    => $request->category,
-                'nllaves'     => $requiest->nllaves ?? null,
+                'nllaves'     => $request->nllaves ?? null,
             ]);
             $clientUser = User::create([
                 'name' => auth()->user()->email,
@@ -446,7 +446,6 @@ class CollaboratorController extends Controller
                 $hotel->image = $pathName.$name_file;
             }
             $hotel->save();
-        
             return Redirect::route('coll.lodgings.index')->with(['id'=>$id, 'message' => 'Actualizado exitosamente', 'code' => 200, 'status' => 'success']);   
          }catch (Exception $e) 
          {
@@ -678,6 +677,47 @@ class CollaboratorController extends Controller
 
         $id = mt_Rand(1000000, 9999999);
         return Redirect::route('collaborator.bank.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
+    }
+
+    public function index_antes () {
+        return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrival');
+    }
+
+    public function banner (Request $request) {
+        $city = $request->city ?? null;
+        $width = $request->width ?? null;
+        $url = [
+            'path' => null,
+            'fullPath' => null,
+        ];
+        if ($city && $width) {
+            if ($city == 'sevilla' && $width == '160x600') {
+                $url['path'] = 'vendor_asset/img/collaborator/dashboard/BANNERS/160x600.png';
+                $url['fullPath'] = public_path($url['path']);
+            }
+            if ($city == 'sevilla' && $width == '200x700') {
+                $url['path'] = 'vendor_asset/img/collaborator/dashboard/BANNERS/200x700.png';
+                $url['fullPath'] = public_path($url['path']);
+            }
+            if ($city == 'sevilla' && $width == '728x90') {
+                $url['path'] =  'vendor_asset/img/collaborator/dashboard/BANNERS/728x90.png';
+                $url['fullPath'] = public_path($url['path']);
+            }
+        }
+        return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalBanner', compact('url'));
+    }
+
+    public function generateBanner (Request $request) {
+        $province = $reuqest->province ?? null;
+        $width = $reuqest->width ?? null;
+        return dd( $province,$width);
+        $url = null;
+        return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalBanner', compact('url'));
+    }
+
+    public function url (Request $request) {
+        $url = null;
+        return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalUrl', compact('url'));
     }
 
 }

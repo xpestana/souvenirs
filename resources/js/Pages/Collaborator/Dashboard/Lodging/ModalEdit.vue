@@ -28,7 +28,6 @@
 					</div>
             	</div>
                 <div class="modal-body px-3.5 pb-4 ">
-		            
 					<form position-relative>
 					<!--Alert validation -->
 		            <ValidationAlert
@@ -361,24 +360,24 @@
 		data () {
 			return{
 				formModal: this.$inertia.form({
-                    id: this.form.id,
-					tipo: this.form.type,
-					nombre_hotel: this.form.name,
-					numero_habitaciones: this.form.hab,
-					calle: this.form.calle,
-					planta: this.form.planta,
-					address: this.form.address,
-					city: this.form.zone,
+                    id: null,
+					tipo: null,
+					nombre_hotel: null,
+					numero_habitaciones: null,
+					calle: null,
+					planta: null,
+					address: null,
+					city: null,
 					cp: null,
-					code: this.form.code,
-					url: this.form.url,
-					area: this.form.area,
-					image: this.form.img,
-					nllaves: this.form.nllaves,
-					modality: this.form.modality,
-					province: this.form.province,
-					group: this.form.group,
-					category: this.form.category,
+					code: null,
+					url: null,
+					area: null,
+					image: null,
+					nllaves: null,
+					modality: null,
+					province: null,
+					group: null,
+					category: null,
 				}),
 				imagenValue: null,
 				group: ['Hotel', 'Pensión/Albergue', 'Hostal', 'Apartahotel'],
@@ -503,7 +502,30 @@
 	        	return false
 	        },
 		},
+		mounted (){
+			this.emitter.on('chageFormEdit', this.chageFormEdit)
+		},
 		methods: {
+			chageFormEdit () {
+				this.formModal.id = this.form.id
+					this.formModal.tipo = this.form.type
+					this.formModal.nombre_hotel = this.form.name
+					this.formModal.numero_habitaciones = this.form.hab
+					this.formModal.calle = this.form.calle
+					this.formModal.planta = this.form.planta
+					this.formModal.address = this.form.address
+					this.formModal.city = this.form.zone
+					this.formModal.cp = null
+					this.formModal.code = this.form.code
+					this.formModal.url = this.form.url
+					this.formModal.area = this.form.area
+					this.formModal.image = this.form.img
+					this.formModal.nllaves = this.form.nllaves
+					this.formModal.modality = this.form.modality
+					this.formModal.province = this.form.province
+					this.formModal.group = this.form.group
+					this.formModal.category = this.form.category
+			},
 			openModal () {
 				$(`#${this.id}`).modal({show: true, backdrop: 'static', keyboard: false})
 			},
