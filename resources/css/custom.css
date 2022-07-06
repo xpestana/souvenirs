@@ -270,6 +270,25 @@
   .text-collaborator{
     color:#FF9C06;
   }
+  .btn-collaborator{
+    box-shadow: 0 0 6px 0 ff9c06;
+    background-color:#FF9C06;
+    border:2px solid #FF9C06;
+  }
+  .btn-collaborator p{
+    color: #fff;
+  }
+  .btn-outline-collaborator{
+    border:2px solid #FF9C06;
+    color:#FF9C06;
+  }
+
+  .btn-outline-collaborator:hover{
+    background: linear-gradient(180deg, #ff9c06, #86bcd9);
+    color:#fff;
+    border: none;
+    margin: 2px;
+  }
   .btn-collaborator:hover p{
     background-color: #f3ec78;
     background-image: linear-gradient(180deg, #ff9c06, #86bcd9);
@@ -290,23 +309,7 @@
     box-shadow: 2px 1000px 1px #fff inset;
 }
   
-  .btn-collaborator{
-    box-shadow: 0 0 6px 0 ff9c06;
-    background-color:#FF9C06;
-  }
-  .btn-collaborator p{
-    color: #fff;
-  }
-  .btn-outline-collaborator{
-    border:2px solid #FF9C06;
-    color:#FF9C06;
-  }
-
-  .btn-outline-collaborator:hover{
-    background: linear-gradient(180deg, #ff9c06, #86bcd9);
-    color:#fff;
-    border: none;
-  }
+  
   .collaborator-box i,
   .collaborator-input::placeholder{
       color: #bababa;
