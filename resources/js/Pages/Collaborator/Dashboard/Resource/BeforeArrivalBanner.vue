@@ -5,7 +5,7 @@
                 <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Banners</h1>
             </div>
         </div>
-        <div class="header invisible row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+        <div class="md:invisible header-pivot row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
                 <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Banners</h1>
             </div>
@@ -181,9 +181,20 @@
 	a, select {
 		z-index: 10 !important;
 	}
-
-	.header {
-		width: 60vw;
+	.header-pivot {
+		display: none;
+	}
+	.header{
+		z-index: 1000!important;
+	}
+	@media (min-width: 768px){
+		.header-pivot {
+			display: block;
+			width: 60vw;
+		}
+		.header{
+			width: 60vw;
+		}
 	}
 
 	/*img{
