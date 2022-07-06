@@ -122,13 +122,10 @@ export default {
             forceExitConfirm: false,
             beforeUrl: '',
             typeBack: '1',
+            errorsKey: [],
         }
     },
     computed: {
-        errorsKey () {
-            var err = this.$page.props.errors.submitBank ? Object.keys(this.$page.props.errors.submitBank) : []
-            return err
-        },
         formatErrors () {
             var map = this.errorsKey.map( item => {
                 switch (item) {
@@ -180,7 +177,12 @@ export default {
                     $('#datosModal').modal('hide')
                     this.updateForm()
                     this.forceExitConfirm = false
-                }
+                },
+                onError: (errors) => {
+                    console.log(errors)
+                    this.getErrorsKey()
+                    this.emitter.emit('errors')
+                },
             })
         },
         changeValidIban (input) {
@@ -217,7 +219,10 @@ export default {
             this.typeBack = '1'
             this.forceExitConfirm = false
             $('#exit').modal('hide')
-        }
+        },
+        getErrorsKey () {
+            this.errorsKey = this.$page.props.errors.submitBank ? Object.keys(this.$page.props.errors.submitBank) : []
+        },
     },
 }
 </script>

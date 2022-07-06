@@ -12,10 +12,9 @@
         	<div class="row justify-content-center mt-14">
         		<div class="col-12 col-md-6 col-lg-5">
                     <div class="card-before p-3 rounded-xl hover:shadow-xl">
-                        <div class="font-bold text-xl">
-                            <!-- <div id="img-banner" class="w-8"></div> -->
-                            <img src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerNegro.svg" class="w-8 inline-block" style="margin-top: 4px;">
-                            Banner
+                        <div class="font-bold text-xl flex align-items-center">
+                            <div id="img-banner" class="inline-block mr-2"></div>
+                            <div class="inline-block">Banners</div>
                         </div>
                         <div class="mt-2">
                             <span>Te gustaria generar un banner <strong>para el inmueble que haya reservado.</strong></span>
@@ -23,17 +22,16 @@
                         <div class="mt-3">
                             <span>Este banner lo podrás cologar en <strong>tus emails o mensajes de contacto</strong> y será una forma de hacer más atractivos tus mensajes y de que el cliente tenga a mano todos los servicios que ofrecemos desde Hicitty.</span>
                         </div>
-                        <div class="flex justify-content-start mt-4">
-                            <Link :href="route('collaborator.recursos.antes.banner')" class="btn bg-collaborator-black py-1 px-3 font-bold">Descargar banner</Link>
+                        <div class="flex justify-content-center justify-content-md-start mt-4">
+                            <Link :href="route('collaborator.recursos.antes.banner')" class="btn py-1 px-3 font-bold">Descargar banner</Link>
                         </div>
                     </div>
         		</div>
         		<div class="col-12 col-md-6 col-lg-5">
                     <div class="card-before p-3 rounded-xl hover:shadow-xl">
-            			<div class="font-bold text-xl">
-            				<!-- <div id="img-url" class="w-8"></div> -->
-                             <img src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg" class="w-8 inline-block" style="margin-top: 4px;">
-                            Url`s personalizadas
+            			<div class="font-bold text-xl flex align-items-center">
+            				<div id="img-url"  class="inline-block mr-2"></div>
+                            <div class="inline-block">Url`s personalizadas</div>
             			</div>
             			<div class="mt-2">
             				<span class="block">Enlaza nuestros servicios para el inmueble  que hayas reservado es algo muy inportante además de sencillo.</span>
@@ -41,31 +39,31 @@
             			<div class="mt-3">
             				<span class="block">Solo tienes que <strong>generar un enlace desde el botón</strong> que haya más bajo y <strong>colocar esa Url en los elementos que consideres</strong> (Imagenes, links, botones...)</span>
             			</div>
-                        <div class="flex justify-content-start mt-4">
-                            <Link :href="route('collaborator.recursos.antes.url')" class="btn bg-collaborator-black py-1 px-8 font-bold">Generar Url</Link>
+                        <div class="flex justify-content-center justify-content-md-start mt-4">
+                            <Link :href="route('collaborator.recursos.antes.url')" class="btn py-1 px-8 font-bold">Generar Url</Link>
                         </div>
                     </div>
         		</div>
         	</div>
     	</div>
-        <div class="row mx-1.5 mt-9 lg:mx-0">
-            <div class="ventas-card-body my-2.5 lg:my-0 col-12 w-full h-56 lg:h-1/4 rounded-xl shadow relative">
-                <div class="row h-full rounded-xl realtive bg-cover bg-top" id="body-ventas-antes">
-                    <div class="col-12 col-lg-4 lg:h-full lg:bg-black rounded-l-xl flex flex-column px-6 absolute lg:relative z-20 top-6 lg:top-0">
-                        <h2 class="font-bold text-7xl text-orangec">20%</h2>
-                    </div>
-                    <div class="col-12 col-lg-4 lg:bg-black flex absolute lg:relative z-20 bottom-6 lg:bottom-0">
-                        <p class="text-2md text-white font-bold">
-                            de comisión sobre el precio final
-                            de venta de todos los servicios
-                            que adquiera el cliente.
-                        </p>
-                    </div>
-                    <div class="d-none d-lg-block col-lg-4 lg:h-full rounded-r-xl bg-cover bg-center bg-no-repeat relative" style="background-image: url('/vendor_asset/img/collaborator/dashboard/vh-1.jpg');">
-                        <div class="rounded-l-xl gradient-collaborator-before absolute left-0 top-0 w-full h-full"></div>
-                    </div>
-                </div>
-                <div class="absolute left-0 top-0 rounded-xl lg:hidden w-full h-full z-10" style="background: linear-gradient(179deg, rgba(134,188,217,0) 0%, rgba(1,1,1,1) 100%);"></div>
+         <div class="row shadow-2xl rounded-xl mt-6 mx-0 relative">
+            <div class="stay-cards-img col-12 d-block d-lg-none rounded-t-xl bg-center bg-cover px-0 h-36" 
+                style="background-image:url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg')"
+            >
+                <div class="gradient-left w-full h-full rounded-t-xl"></div>
+            </div>
+            <div class="cards-info col-12 col-lg-3 md:bg-black pt-3.5 lg:rounded-l-xl pl-lg-4 h-auto lg:h-28  absolute md:static top-16 z-30">
+                <h1 class="text-7xl text-orangec font-bold">
+                    20%
+                </h1>
+            </div>
+            <div class="cards-info col-12 col-lg-6 bg-black pt-3.5 h-auto lg:h-28 px-lg-0 rounded-b-xl lg:rounded-b-none">
+                <h1 class="text-lg text-white font-bold mb-6 lg:mb-0">
+                    de comisión sobre el precio final de venta de todos los servicios que adquiera el cliente.
+                </h1>
+            </div>
+            <div class="cards-img col-lg-3 d-none d-lg-block rounded-r-xl bg-center bg-cover pl-lg-0 h-28" style="background-image:url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg')">
+                <div class="gradient-left w-full h-full rounded-r-xl"></div>
             </div>
         </div>
 	 </section>
@@ -111,18 +109,35 @@ export default {
             background-image: url('/vendor_asset/img/collaborator/dashboard/vh-3.jpg');
         }
     }
-    .card-before #img-banner{
+    #img-banner{
         background-image: url('/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerNegro.svg');
-        margin-top: 4px;
-        width: 2rem;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 1.8rem;
+        height: 1.8rem;
+        transition: all .4s;
     }
 
-    .card-before #img-url{
+    #img-url{
         background-image: url('/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg');
-        margin-top: 4px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 1.8rem;
+        height: 1.8rem;
+        transition: all .4s;
+    }
+
+    a {
+        background-color: #FF9C06;
+        color: #fff;
     }
 
     @media(min-width:767px){
+        a {
+            background-color: #000;
+            color: #fff;
+        }
+
         .card-before:hover {
             background-color: #FF9C06;
             color: #fff;
@@ -144,6 +159,15 @@ export default {
         .card-before:hover a {
             background-color: #fff;
             color: #FF9C06;
+        }
+    }
+
+    .gradient-left{
+        background: linear-gradient(270deg, rgba(134,188,217,0) 30%, rgba(1,1,1,1) 90%);
+    }
+    @media (max-width:991px){
+        .gradient-left{
+            background: linear-gradient(180deg, rgba(134,188,217,0) 55%, rgba(1,1,1,1) 90%);
         }
     }
 

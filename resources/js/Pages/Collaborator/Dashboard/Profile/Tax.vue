@@ -150,6 +150,7 @@ export default {
             forceExitConfirm: false,
             beforeUrl: '',
             typeBack: '1',
+            errorsKey: [],
         }
     },
     computed: {
@@ -166,10 +167,6 @@ export default {
                 this.form.address === this.auth.profile.address
             ) { return true }
             return false
-        },
-        errorsKey () {
-            var err = this.$page.props.errors ? Object.keys(this.$page.props.errors) : []
-            return err
         },
     },
     created () {
@@ -195,11 +192,17 @@ export default {
             this.forceExitConfirm = true
             this.form.put(route('collaborator.fiscal.update'), {
                 preserveScroll: true,
+                errorBag: 'submitTax',
                 onSuccess:()=>{
                     $('#datosModal').modal('hide')
                     this.updateForm()
                     this.forceExitConfirm = false
-                }
+                },
+                onError: (errors) => {
+                    console.log(errors)
+                    this.getErrorsKey()
+                    this.emitter.emit('errors')
+                },
             })
         },    
         showPass: function (id){
@@ -240,6 +243,9 @@ export default {
                     Inertia.get(`${this.beforeUrl}`)
                 }, 500)
             }
+        },
+        getErrorsKey () {
+            this.errorsKey = this.$page.props.errors.submitTax ? Object.keys(this.$page.props.errors.submitTax) : []
         },
     },
     updated(){

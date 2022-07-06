@@ -696,31 +696,27 @@ class CollaboratorController extends Controller
         if ($city && $width) {
             if ($city == 'sevilla' && $width == '160x600') {
                 $url['path'] = 'vendor_asset/img/collaborator/dashboard/BANNERS/160x600.png';
-                $url['fullPath'] = public_path($url['path']);
+                $url['fullPath'] = url('/'.$url['path']);
             }
             if ($city == 'sevilla' && $width == '200x700') {
                 $url['path'] = 'vendor_asset/img/collaborator/dashboard/BANNERS/200x700.png';
-                $url['fullPath'] = public_path($url['path']);
+                $url['fullPath'] = url('/'.$url['path']);
             }
             if ($city == 'sevilla' && $width == '728x90') {
                 $url['path'] =  'vendor_asset/img/collaborator/dashboard/BANNERS/728x90.png';
-                $url['fullPath'] = public_path($url['path']);
+                $url['fullPath'] = url('/'.$url['path']);
             }
         }
         return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalBanner', compact('url'));
     }
 
-    public function generateBanner (Request $request) {
-        $province = $reuqest->province ?? null;
-        $width = $reuqest->width ?? null;
-        return dd( $province,$width);
-        $url = null;
-        return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalBanner', compact('url'));
-    }
-
     public function url (Request $request) {
+        $city = $request->city ?? null;
         $url = null;
+        if ($city) {
+            $idUser = auth::user()->id;
+            $url = url('?p='.$city.'&c='.$idUser.'&t=2');
+        }
         return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalUrl', compact('url'));
     }
-
 }

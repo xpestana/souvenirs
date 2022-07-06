@@ -209,6 +209,7 @@ export default {
             forceExitConfirm: false,
             beforeUrl: '',
             typeBack: '1',
+            errorsKey: [],
         }
     },
     created () {
@@ -229,9 +230,41 @@ export default {
         this.moveConfirm()
     },
     computed: {
-        errorsKey () {
-            var err = this.$page.props.errors.submitShipping ? Object.keys(this.$page.props.errors.submitShipping) : []
-            return err
+        formatErrors () {
+            var map = this.errorsKey.map( item => {
+                switch (item) {
+                    case 'document':
+                        return 'Nif'
+                        break;
+                    case 'businessName':
+                        return 'Razón soial'
+                        break;
+                    case 'contactPerson':
+                        return 'Persona de contacto'
+                        break;
+                    case 'phone':
+                        return 'Telefono'
+                        break;
+                    case 'email':
+                        return 'Email'
+                        break;
+                    case 'deliveryAddress':
+                        return 'Dirección de envío'
+                        break;
+                    case 'postalCode':
+                        return 'Código postal'
+                        break;
+                    case 'province':
+                        return 'Provincia'
+                        break;
+                    case 'city':
+                        return 'Ciudad'
+                        break;
+                    default:
+                    return item
+                }
+            })
+            return map
         },
         formValid () {
             if (
@@ -258,7 +291,12 @@ export default {
                     $('#datosModal').modal('hide')
                     this.updateForm()
                     this.forceExitConfirm = false
-                }
+                },
+                onError: (errors) => {
+                    console.log(errors)
+                    this.getErrorsKey()
+                    this.emitter.emit('errors')
+                },
             })
         },
         forceExit () {
@@ -296,7 +334,10 @@ export default {
             this.typeBack = '1'
             this.forceExitConfirm = false
             $('#exit').modal('hide')
-        }
+        },
+        getErrorsKey () {
+            this.errorsKey = this.$page.props.errors.submitShipping ? Object.keys(this.$page.props.errors.submitShipping) : []
+        },
     },
 }
 </script>

@@ -1,12 +1,17 @@
 <template>
 	<section id="dashboard-resource-beforearrival" class="container py-8 ml-2 md:ml-0 md:px-24">
-	 	<div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+	 	<div class="md:fixed md:w-30 z-1000 header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
-                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Banner</h1>
+                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Banners</h1>
+            </div>
+        </div>
+        <div class="header invisible row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+            <div class="col-12 col-md-8 text-left">
+                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Banners</h1>
             </div>
         </div>
         <div
-            class="mx-1.5 lg:mx-0 mt-8 mb-3.5"
+            class="mx-1.5 mt-8 md:mt-9 mb-3.5"
         >
         	<span>Aquí podrás escoger y generar el banner que mejor se adapte a tus necesidades y poder empezar a vender.</span>
     	</div>
@@ -30,7 +35,6 @@
 	                        	class="w-100 rounded collaborator-input col-form-input py-1  pl-8"
 	                            placeholder="Ciudad..."
 	                         >
-	                         	<option value=""></option>
 								<option value="sevilla">Sevilla</option>
 							</select>
 						</div>
@@ -42,7 +46,6 @@
                         	class="w-100 rounded col-form-input py-1"
                             placeholder="Tamaño..."
                          >
-                         	<option value=""></option>
 							<option value="200x700">200x700</option>
 							<option value="728x90">728x90</option>
 							<option value="160x600">160x600</option>
@@ -66,7 +69,7 @@
     		class="mx-1.5 flex justify-content-between lg:mx-0 mt-4 mb-4"
     	>
     		<label class="block font-bold">¡Banner generado con exito!</label>
-    		<span class="block cursor-pointer text-md orange  font-bold" @click.prevent="getUrl()"><i class="fas fa-copy mr-1"></i> Copiar código de Banner</span>
+    		<span class="block cursor-pointer text-md orange  font-bold" @click.prevent="copy()"><i class="fas fa-copy mr-1"></i> Copiar código de Banner</span>
     	</div>
     	<img
     		v-if="url.fullPath"
@@ -96,7 +99,7 @@
 	    },
 	    methods: {
 	        goBack () {
-	            window.history.back()
+	        	window.history.back()
 	        },
 	        getBanner () {
 	        	this.form.get(this.route('collaborator.recursos.antes.banner'), {
@@ -110,7 +113,7 @@
                     },
 				});
 	        },
-	        getUrl () {
+	        copy () {
 	        	var id = "el-id-del-textarea";
 			    var existsTextarea = document.getElementById(id);
 
@@ -175,4 +178,16 @@
 	  color: #FF9C06;
 	}
 
+	a, select {
+		z-index: 10 !important;
+	}
+
+	.header {
+		width: 60vw;
+	}
+
+	/*img{
+		width: 100%;
+		height: 100%;
+	}*/
 </style>
