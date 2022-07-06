@@ -452,7 +452,14 @@ class CollaboratorController extends Controller
         
          }
     }
+    //resources
 
+    public function resource_welcome(){
+        return Inertia::render('Collaborator/Dashboard/Resource/Welcome');
+    }
+    public function resource_stay(){
+        return Inertia::render('Collaborator/Dashboard/Resource/Stay');
+    }
     // Sales
 
     public function sales_welcome(){

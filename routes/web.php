@@ -290,7 +290,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/colaboradores/notify', [CollaboratorController::class, 'notify'])->name('collaborator.notify');
 });
 
-/*Dashboard Colaborador viejo*/
+/*Dashboard Colaborador*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(function () {
     
     Route::get('/', [CollaboratorController::class, 'index'])->name('coll.lodgings.index');  
@@ -336,7 +336,13 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/ventas-publicidad')->gr
     Route::get('/', [CollaboratorController::class, 'sales_publicity'])->name('collaborator.sales.publicity');
 });
 
-/*Dashboard Colaborador*/
+/*Dashboard profile and sales*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/recursos')->group(function () {
+    
+    Route::get('/', [CollaboratorController::class, 'resource_welcome'])->name('coll.dashboard.means');  
+    Route::get('/durante-la-estancia', [CollaboratorController::class, 'resource_stay'])->name('coll.dashboard.stay');  
+
+});
 Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     
     Route::get('/', [CollaboratorController::class, 'home'])->name('collaborator.dashboard.home'); 

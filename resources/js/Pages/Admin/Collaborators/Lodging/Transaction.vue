@@ -70,8 +70,8 @@
                                     </td>
                                     <td class="text-center">{{ shipping.email }}</td>
                                     <td class="text-center">{{ moment(shipping.created_at).format("DD/MM/YYYY") }}</td>
-                                    <td class="text-center">{{ parseInt(shipping.amount) }} €</td>
-                                    <td class="text-center">{{ (parseInt(shipping.amount * shipping.quantity) * 0.20).toFixed(2) }} €</td>
+                                    <td class="text-center">{{ Number(shipping.amount) }} €</td>
+                                    <td class="text-center">{{ (Number(shipping.amount * shipping.quantity) * 0.20).toFixed(2) }} €</td>
                                 </tr>
                             </tbody>
                         </table>
