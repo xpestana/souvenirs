@@ -104,9 +104,9 @@
                             de venta de todos los servicios
                             que adquiera el cliente.
                         </p>
-                        <button class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
+                        <Link :href="route('coll.dashboard.means')" class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
                             ¡Empieza a vender!
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

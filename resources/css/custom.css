@@ -495,10 +495,13 @@ p,a{
     font-family: 'Montserrat', sans-serif !important; 
 }
 .modal-sales{
-  width:40%;
+  width:50%;
 }
 @media (max-width:767px){
   .modal-sales{
     width:85%;
   }
+}
+.gradient-coll-down{
+  background: linear-gradient(180deg, rgba(134,188,217,0) 55%, rgba(1,1,1,1) 90%);
 }
