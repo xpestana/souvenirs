@@ -167,7 +167,7 @@
 
         <!-- Js preloader -->
         <script type="text/javascript">
-           $(window).on('load',function() 
+            $(window).on('load',function() 
             {          
                 $("#preloaders").fadeOut(100);
             });

@@ -10,38 +10,40 @@
         >
         	<span>En esta sección encontrarás los recursos online con los que <strong>empezar a ganar beneficios antes de que el cliente llegue al inmueble.</strong></span>
         	<div class="row justify-content-center mt-14">
-        		<div class="col-12 col-md-5">
-        			<div class="font-bold text-xl">
-        				<img class="inline w-8" style="margin-top:-4px" 
-                            src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerNegro.svg"
-                        >
-                        Banners
-        			</div>
-        			<div class="mt-2">
-        				<span>Te gustaria generar un banner <strong>para el inmueble que haya reservado.</strong></span>
-        			</div>
-        			<div class="mt-4">
-        				<span>Este banner lo podrás cologar en <strong>tus emails o mensajes de contacto</strong> y será una forma de hacer más atractivos tus mensajes y de que el cliente tenga a mano todos los servicios que ofrecemos desde Hicitty.</span>
-        			</div>
-        			<div class="flex justify-content-start mt-3.5">
-        				<Link :href="route('collaborator.recursos.antes.banner')" class="btn bg-collaborator-black py-1 px-6 text-white">Descargar banner</Link>
-        			</div>
+        		<div class="col-12 col-md-6 col-lg-5">
+                    <div class="card-before p-3 rounded-xl hover:shadow-xl">
+                        <div class="font-bold text-xl">
+                            <!-- <div id="img-banner" class="w-8"></div> -->
+                            <img src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerNegro.svg" class="w-8 inline-block" style="margin-top: 4px;">
+                            Banner
+                        </div>
+                        <div class="mt-2">
+                            <span>Te gustaria generar un banner <strong>para el inmueble que haya reservado.</strong></span>
+                        </div>
+                        <div class="mt-3">
+                            <span>Este banner lo podrás cologar en <strong>tus emails o mensajes de contacto</strong> y será una forma de hacer más atractivos tus mensajes y de que el cliente tenga a mano todos los servicios que ofrecemos desde Hicitty.</span>
+                        </div>
+                        <div class="flex justify-content-start mt-4">
+                            <Link :href="route('collaborator.recursos.antes.banner')" class="btn bg-collaborator-black py-1 px-3 font-bold">Descargar banner</Link>
+                        </div>
+                    </div>
         		</div>
-        		<div class="col-12 col-md-5">
-        			<div class="font-bold text-xl">
-        				<img class="inline w-8" style="margin-top:-4px" 
-                            src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg"
-                        >
-                        Url`s personalizadas
-        			</div>
-        			<div class="mt-2">
-        				<span class="block">Enlaza nuestros servicios para el inmueble  que hayas reservado es algo muy inportante además de sencillo.</span>
-        			</div>
-        			<div class="mt-4">
-        				<span class="block">Solo tienes que <strong>generar un enlace desde el botón</strong> que haya más bajo y <strong>colocar esa Url en los elementos que consideres</strong> (Imagenes, links, botones...)</span>
-        			</div>
-                    <div class="flex justify-content-start mt-9">
-                        <Link :href="route('collaborator.recursos.antes.url')" class="btn bg-collaborator-black py-1 px-8 text-white">Generar Url</Link>
+        		<div class="col-12 col-md-6 col-lg-5">
+                    <div class="card-before p-3 rounded-xl hover:shadow-xl">
+            			<div class="font-bold text-xl">
+            				<!-- <div id="img-url" class="w-8"></div> -->
+                             <img src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg" class="w-8 inline-block" style="margin-top: 4px;">
+                            Url`s personalizadas
+            			</div>
+            			<div class="mt-2">
+            				<span class="block">Enlaza nuestros servicios para el inmueble  que hayas reservado es algo muy inportante además de sencillo.</span>
+            			</div>
+            			<div class="mt-3">
+            				<span class="block">Solo tienes que <strong>generar un enlace desde el botón</strong> que haya más bajo y <strong>colocar esa Url en los elementos que consideres</strong> (Imagenes, links, botones...)</span>
+            			</div>
+                        <div class="flex justify-content-start mt-4">
+                            <Link :href="route('collaborator.recursos.antes.url')" class="btn bg-collaborator-black py-1 px-8 font-bold">Generar Url</Link>
+                        </div>
                     </div>
         		</div>
         	</div>
@@ -88,6 +90,13 @@ export default {
 }
 </script>
 <style scoped>
+    .card-before {
+        transition: all .4s;
+    }
+    .card-before a {
+        color: #fff;
+    }
+
     .gradient-collaborator-before{
         background: linear-gradient(100deg, rgba(134,188,217,0) 30%, rgba(1,1,1,1) 90%);
     }
@@ -100,6 +109,41 @@ export default {
         }
         #body-ventas-totales{
             background-image: url('/vendor_asset/img/collaborator/dashboard/vh-3.jpg');
+        }
+    }
+    .card-before #img-banner{
+        background-image: url('/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerNegro.svg');
+        margin-top: 4px;
+        width: 2rem;
+    }
+
+    .card-before #img-url{
+        background-image: url('/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg');
+        margin-top: 4px;
+    }
+
+    @media(min-width:767px){
+        .card-before:hover {
+            background-color: #FF9C06;
+            color: #fff;
+        }
+        .card-before:hover #img-banner{
+            background-image: url('/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerBlanco.svg');
+        }
+
+        .card-before:hover #img-url{
+            background-image: url('/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlBlanco.svg');
+        }
+
+        .card-before a {
+            transition: all .4s;
+        }
+
+
+
+        .card-before:hover a {
+            background-color: #fff;
+            color: #FF9C06;
         }
     }
 

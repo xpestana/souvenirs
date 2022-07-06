@@ -23,13 +23,16 @@
                     <!--END Alert validation -->
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold">Ciudad de destino</label>
-                        <select
-                        	class="w-100 rounded col-form-input py-1"
-                            placeholder="Ciudad..."
-                         >
-                         	<option value=""></option>
-							<option value="sevilla">Sevilla</option>
-						</select>
+                         <div class="relative w-100 collaborator-box">
+                            <i class="fas fa-search absolute inset-y-1/3 px-2"></i>
+                            <select
+                            	class="w-100 collaborator-input rounded col-form-input py-1 pl-8"
+                                placeholder="Ciudad..."
+                             >
+                             	<option value=""></option>
+    							<option value="sevilla">Sevilla</option>
+    						</select>
+                        </div>
                     </div>
                     <div class="col-12 mt-4 px-0 text-center text-lg-left">                  
                         <button
