@@ -64,6 +64,7 @@
 </template>
 <script>
 	import { Calendar, DatePicker } from 'v-calendar'
+    import 'v-calendar/dist/style.css';
 	import { Head, Link } from '@inertiajs/inertia-vue3'
     import Checkout from '@/Pages/Checkout_activities.vue'
     import BreezeButton from '@/Components/Button.vue'

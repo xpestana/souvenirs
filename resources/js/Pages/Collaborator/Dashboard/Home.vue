@@ -33,10 +33,10 @@
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target">
                         <div class="text-white m-auto">
-                            <button class="btn rounded-lg text-white border-solid border border-white">
+                            <Link :href="route('coll.lodgings.index')" class="btn rounded-lg text-white border-solid border border-white">
                                 <h3 class="mr-1 inline text-white">+</h3> 
                                 Añadir alojamiento
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -104,9 +104,9 @@
                             de venta de todos los servicios
                             que adquiera el cliente.
                         </p>
-                        <button class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
+                        <Link :href="route('coll.dashboard.means')" class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
                             ¡Empieza a vender!
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -116,19 +116,20 @@
                 <h2 class="font-semibold text-3xl">Primeros pasos</h2>
             </div>
             <div class="col-12 col-lg-6 pl-lg-0 pr-lg-3 lg:h-3/4">
-                <div class="perfil-card w-full h-48 lg:h-full rounded-xl shadow bg-center bg-cover bg-no-repeat relative" 
-                    id="perfil-lodging-full" style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome1.jpg');">
+                <div class="perfil-card w-full h-48 lg:h-full rounded-xl shadow 
+                    bg-center bg-cover bg-no-repeat relative" 
+                    id="perfil-lodging-full" 
+                    style="background-image: url('/vendor_asset/img/collaborator/dashboard/colhome1.jpg');"
+                >
                     <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
                         <h2 class="font-bold text-2xl text-white p-3.5"> Da de alta tu primer alojamiento</h2>
                         <p class="text-right text-2xl text-white p-3.5 font-semibold">¡COMPLETADO!</p>
                     </div>
-                    <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target-full">
-                        <div class="text-white m-auto">
-                            <button class="btn rounded-lg text-white border-solid border border-white">
-                                <h3 class="mr-1 inline text-white">+</h3> 
-                                Añadir alojamiento
-                            </button>
-                        </div>
+                    <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target-full"></div>
+                    <div class="text-white text-center full-button">
+                        <Link id="full-button" :href="route('coll.lodgings.index')" class="absolute top-16 left-28 z-50  btn rounded-lg border-solid">
+                            + Añadir alojamiento
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -205,6 +206,16 @@ export default {
     #perfil-lodging:hover >
     #perfil-lodging-target{
         height: 100%;
+    }
+    #perfil-lodging-full:hover >
+    .full-button #full-button{
+        color: #ffffff;
+        border:solid 1px #ffffff;
+    }
+    #perfil-lodging-full .full-button #full-button{
+        color: #ffffff00;
+        border:solid 1px #ffffff00;
+        transition: all 0.3s;
     }
     #perfil-lodging-full:hover >
     #perfil-lodging-target-full div,

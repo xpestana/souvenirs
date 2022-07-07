@@ -239,6 +239,7 @@ export default {
     updated(){
         this.routesSales = false
         this.routesProfile = false
+        this.routesResources = false
         this.profile()
         this.sales()
         this.resources()
