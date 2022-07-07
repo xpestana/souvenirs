@@ -230,35 +230,58 @@ class CollaboratorController extends Controller
     {
         if($request->tipo == 'hotel'){
             $request->validate([
+                'tipo' => 'required|string',
                 'nombre_hotel' => 'required|string',
                 'numero_habitaciones' => 'required|numeric',
                 'calle' => 'required|string',
                 'planta' => 'required|string',
                 'city' => 'required|string',
                 'code' => 'nullable|string',
-                'url' => 'nullable|string',
+                'cp' => 'nullable|string',
+                'url' => 'nullable|url',
                 'area' => 'nullable|string',
+                'province' => 'required|string',
+                'group' => 'required|string',
+                'modality' => 'required|string',
+                'category' => 'required|string',
             ]);
-        }else{
+        }
+        if ($request->tipo == 'apartamento') {
             $request->validate([
+                'tipo' => 'required|string',
                 'calle' => 'required|string',
                 'planta' => 'required|string',
                 'address' => 'nullable|string',
                 'city' => 'required|string',
-                'cp' => 'required|string',
+                'province' => 'required|string',
+                'cp' => 'nullable|string',
+                'code' => 'nullable|string',
+                'url' => 'required|url',
+                'area' => 'nullable|string',
+            ]);
+        }
+        if ($request->tipo == 'complejo') {
+            $request->validate([
+                'nombre_hotel' => 'required|string',
+                'numero_habitaciones' => 'required|numeric',
+                'nllaves' => 'required|string',
+                'tipo' => 'required|string',
+                'calle' => 'required|string',
+                'planta' => 'required|string',
+                'city' => 'required|string',
+                'province' => 'required|string',
+                'cp' => 'nullable|string',
                 'code' => 'nullable|string',
                 'url' => 'nullable|url',
                 'area' => 'nullable|string',
             ]);
         }
-
         $image = $request->image;
         if ($image) {
             $msg =$this->valid($image);
 
             if ($msg['code']=='404')   return back()->with(['id'=>$msg['id'], 'message' => $msg['msg'], 'code' => $msg['code'], 'status' => 'error']);
         }
-        
 
         try {
             $id = mt_Rand(1000000, 9999999);
@@ -271,30 +294,36 @@ class CollaboratorController extends Controller
             if (!file_exists($Path)) {
                 mkdir($Path, 777, true);
             }
-
             if ($image) {
-                $nameFile =$this->FileName($image); //nombre de archivo original
+                /*$nameFile =$this->FileName($image); //nombre de archivo origin
                 $imgFileOriginal = Image::make($image->getRealPath());
                 $imgFileOriginal->save($Path.$nameFile['fileName']);
-                $name_file = $nameFile['fileName'];
+                $name_file = $nameFile['fileName'];*/
+                $name_file = time() . '-' . $image->getClientOriginalName();
+                $uploadSuccess = $image->move($Path, $name_file);
             }else{
                 $name_file ="default.jpg";
             }
+        
             $hotel = hotel::create([
-                'name'        => ($request->nombre_hotel) ? $request->nombre_hotel : null,
-                'hab'         => ($request->numero_habitaciones) ? $request->numero_habitaciones : null,
+                'name'        => $request->nombre_hotel ?? null,
+                'hab'         => $request->numero_habitaciones ?? null,
                 'calle'       => $request->calle,
                 'type'        => $request->tipo,
-                'address'     => $request->address,
+                'address'     => $request->address ?? null,
                 'zone'        => $request->city,
                 'planta'      => $request->planta,
-                'cp'          => $request->cp,
+                'cp'          => $request->cp ?? null,
                 'code'        => $request->code,
                 'url'         => $request->url,
                 'area'        => $request->area,
                 'image'       => $pathName.$name_file,
+                'province'    => $request->province,
+                'group'       => $request->group,
+                'modality'    => $request->modality,
+                'category'    => $request->category,
+                'nllaves'     => $requiest->nllaves ?? null,
             ]);
-
             $clientUser = User::create([
                 'name' => auth()->user()->email,
                 'email' => auth()->user()->email.$hotel->id,

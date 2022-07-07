@@ -27,10 +27,9 @@
 						</div>
 					</div>
             	</div>
-            	<pre>{{ errorsKey }}</pre>
                 <div class="modal-body px-3.5 pb-4 ">
 		            
-					<form @submit.prevent="submit" position-relative>
+					<form position-relative>
 					<!--Alert validation -->
 		            <ValidationAlert
 		                :errors="formatErrors"
@@ -67,20 +66,32 @@
 								<div class="col-12 my-0.5 px-0" v-if="formComputed.tipo == 'complejo túristico'">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
-			                                    <label class="font-bold mb-0.5">Numero de apartamentos <span class="required-input">*</span></label>
+			                                    <label class="font-bold mb-0.5">Número de apartamentos <span class="required-input">*</span></label>
 			                                    <input
 			                                    	v-model="formModal.numero_habitaciones"
-			                                        type="text" id="napart"
+			                                        type="number" id="napart"
 			                                        class="w-100 rounded col-form-input py-1"
-			                                        placeholder="Numero de apartamentos..."
+			                                        placeholder="Número de apartamentos..."
+			                                        :class="{'error-input': errorsKey.includes('numero_habitaciones')}"
 			                                    >
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <label class="font-bold mb-0.5">N° de llaves <span class="required-input">*</span></label>
-					                        <input
-					                            type="text"
-					                            class="w-100 rounded col-form-input py-1" v-model="formModal.nllaves" placeholder="N° de llaves..."
-					                        >
+					                        <select
+		                                    	v-model="formModal.nllaves"
+		                                    	class="w-100 rounded col-form-input py-1"
+		                                        placeholder="N° de llaves..."
+		                                        :class="{'error-input': errorsKey.includes('nllaves')}"
+		                                     >
+		                                     	<option value=""></option>
+												<option
+													v-for="(item, index) in llaves"
+													:key="index"
+													:value="item"
+												>
+													{{ item }}
+												</option>
+											</select>
 				                    	</div>
 			                        </div>
 			                    </div>
@@ -115,7 +126,7 @@
 			                                    	v-model="formModal.calle"
 			                                        type="text"
 			                                        class="w-100 rounded col-form-input py-1"
-			                                        placeholder="N habitaciones..."
+			                                        placeholder="Calle..."
 			                                        :class="{'error-input': errorsKey.includes('calle')}"
 			                                    >
 			                            </div>
@@ -123,7 +134,7 @@
 					                        <label class="font-bold mb-0.5">N - Letra-Piso <span class="required-input">*</span></label>
 					                        <input
 					                            type="text" v-model="formModal.planta"
-					                            class="w-100 rounded col-form-input py-1" placeholder="Nombre del hotel..."
+					                            class="w-100 rounded col-form-input py-1" placeholder="N..."
 					                            :class="{'error-input': errorsKey.includes('planta')}"
 					                        >
 				                    	</div>
@@ -134,11 +145,11 @@
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Otras indicaciones</label>
 			                                    <input
-			                                    	v-model="formModal.otro"
+			                                    	v-model="formModal.address"
 			                                        type="text"
 			                                        class="w-100 rounded col-form-input py-1"
 			                                        placeholder="Otras indicaciones..."
-			                                        :class="{'error-input': errorsKey.includes('otro')}"
+			                                        :class="{'error-input': errorsKey.includes('address')}"
 			                                    >
 			                            </div>
 			                        </div>
@@ -187,6 +198,7 @@
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2" v-if="formComputed.tipo == 'hotel'">
 			                                    <label class="font-bold mb-0.5">Categoría <span class="required-input">*</span></label>
+			                                    {{ formModal.category }}
 			                                    <select
 			                                    	v-model="formModal.category"
 			                                    	class="w-100 rounded col-form-input py-1"
@@ -204,10 +216,11 @@
 												</select>
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
-					                        <label class="font-bold mb-0.5">Página Web </label>
+					                        <label class="font-bold mb-0.5">Página Web  <span v-if="formComputed.tipo == 'apartamento'" class="required-input">*</span></label>
 					                        <input
 					                            type="text" v-model="formModal.url"
 					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
+					                            :class="{'error-input': formComputed.tipo == 'apartamento' && errorsKey.includes('url')}"
 					                        >
 				                    	</div>
 										<div class="col-12 col-md-6 pr-md-2" :class="{'mt-2.5':formComputed.tipo == 'hotel'}">
@@ -233,7 +246,7 @@
 			            </div>
 			        </div>
                     <div class="mt-1.5 px-2 flex justify-content-between">
-                        <button class="btn px-3.5 text-gray-500 py-1 text-xs font-bold inline-block" data-dismiss="modal"  aria-label="Close">
+                        <button class="btn px-3.5 text-gray-500 py-1 text-xs font-bold inline-block" @click.prevent="clickBackModalType()" >
 							<i class="fas fa-reply"></i>
 							Volver
 						</button>
@@ -242,6 +255,7 @@
 		                    class="btn inline-block rounded text-white bg-collaborator-orange py-1 px-6"
 		                    :class="{ 'opacity-25': formModal.processing }"
                              :disabled="formModal.processing"
+                            @click.prevent="submit"
 		                >
 		                    <i class="fas fa-save mr-2 text-white">
 		                        </i>Guardar
@@ -249,64 +263,84 @@
                     </div>
 					</form>
                 </div>
+                <div class="modal fade" id="modalImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				    <div class="modal-dialog modal-dialog-image modal-dialog-centered" role="document">
+			            <div class="modal-content mx-auto px-3">
+			                <div class="modal-body p-0 relative">
+			                    <div>
+			                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer cerrarModal" @click="closeModalImage()"></i>
+			                    </div>
+			                    <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
+			                    <div class=" rounded-xl mt-3" style="max-height: 120px;">
+			                    	<img
+			                    		v-if="imagenValue"
+			                    		:src="img"
+			                    		class=" w-full rounded-xl"
+			                    	>
+			                    	<div
+			                    	    v-else
+			                    		class="bg-collaborator-orange py-2.5  px-2 text-center text-white w-100 m-0 rounded-xl"
+			                    	>
+			                    		<h2 class="text-lg md:text-xl text-center mt-3.5 font-bold text-white">!No has subido una imagen todavía</h2>
+			                    	  	<i class="fas fa-arrow-down inline-block text-white text-lg md:text-xl"></i>
+			                    	</div>
+			                    </div>
+			                    <input
+			                    	ref="file"
+			                    	type="file"
+			                    	id="file"
+			                    	style="display: none;"
+			                    	@change="changeImage"
+			                    />
+			                    <div
+			                    	class=" rounded-xl bg-picker-img py-2.5 mt-3 mb-3 px-2 text-center text-muted cursor-pointer"
+			                    	@drop.prevent="addFile"
+			                    	@dragover.prevent
+			                    	@click="$refs.file.click()"
+			                    >
+			                    	<i class="fas fa-image inline-block text-white text-xl text-muted"></i>
+			                    	<label class="text-center block font-bold text-muted mt-1 cursor-pointer">Suelta aquí tu imagen o explora en tus archivos</label>
+			                    	<p class="text-xs muted mt-1">Tamaño máximo  de la imagen 2MB</p>
+			                    </div>
+			                </div>
+			            </div>
+		            </div>
+				</div>
+				<!-- Modal guardar cambios -->
+		        <div class="modal modal-exit fade" id="modalExit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+		        aria-hidden="true">
+		        <!-- Change class .modal-sm to change the size of the modal -->
+		            <div class="modal-dialog modal-dialog-image modal-sm modal-dialog-centered" role="document">
+		                <div class="modal-content modal-exits modal mx-auto px-2">
+		                    <div class="modal-body p-0 relative">
+		                        <div>
+		                            <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3" @click.prevent="closeModalBack()"></i>
+		                        </div>
+		                        <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
+		                        <p class="px-4 my-2 text-xs text-center">
+		                            ¿Estas seguro que quieres salir?
+		                        </p>
+		                        <div class="my-2.5 text-center">
+		                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" @click.prevent="closeModalBack()">Seguir editando</button>
+		                        </div>
+		                        <div class="my-2.5 text-center">
+		                            <button class="btn rounded btn-outline-orange px-3.5 py-1 text-xs" @click.prevent="forceExit()">Salir sin guardar</button>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <!-- Modal guardar cambios  -->
             </div>
         </div>
-        
     </div>
-    <!-- Modal Request  -->
-    <!-- Modal upload image -->
-    <div class="modal modal-image fade" id="modalImage" tabindex="-1" role="dialogI" aria-labelledby="myModalLabelImage"
-    aria-hidden="true" style="z-index:1900;">
-    <!-- Change class .modal-sm to change the size of the modal -->
-        <div class="modal-dialog-image modal-dialog-centered" role="document">
-            <div class="modal-content modal-images modal mx-auto px-3">
-                <div class="modal-body p-0 relative">
-                    <div>
-                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer cerrarModal" data-dismiss="modal" @click="closeModalImage()"></i>
-                    </div>
-                    <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
-                    <div class=" rounded-xl mt-3" style="max-height: 120px;">
-                    	<img
-                    		v-if="imagenValue"
-                    		:src="img"
-                    		class=" w-full rounded-xl"
-                    	>
-                    	<div
-                    	    v-else
-                    		class="bg-collaborator-orange py-2.5  px-2 text-center text-white w-100 m-0 rounded-xl"
-                    	>
-                    		<h2 class="text-lg md:text-xl text-center mt-3.5 font-bold text-white">!No has subido una imagen todavía</h2>
-                    	  	<i class="fas fa-arrow-down inline-block text-white text-lg md:text-xl"></i>
-                    	</div>
-                    </div>
-                    <input
-                    	ref="file"
-                    	type="file"
-                    	id="file"
-                    	style="display: none;"
-                    	@change="changeImage"
-                    />
-                    <div
-                    	class=" rounded-xl bg-picker-img py-2.5 mt-3 mb-3 px-2 text-center text-muted cursor-pointer"
-                    	@drop.prevent="addFile"
-                    	@dragover.prevent
-                    	@click="$refs.file.click()"
-                    >
-                    	<i class="fas fa-image inline-block text-white text-xl text-muted"></i>
-                    	<label class="text-center block font-bold text-muted mt-1 cursor-pointer">Suelta aquí tu imagen o explora en tus archivos</label>
-                    	<p class="text-xs muted mt-1">Tamaño máximo  de la imagen 2MB</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal upload image  -->
+    
 </template>
 <script>
 	import { Head, Link } from '@inertiajs/inertia-vue3'
     import { Inertia } from '@inertiajs/inertia'
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
-	import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert' 
+	import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert'
 	export default {
 		layout:TemplateApp,
 		components:{
@@ -317,15 +351,16 @@
         props: ['form'],
 		data () {
 			return{
-				formModal: this.$inertia.form({
+				formModal:  this.$inertia.form({
 					tipo: null,
 					nombre_hotel:null,
 					numero_habitaciones:null,
 					calle: null,
 					planta: null,
 					address: null,
-					city: 'Sevilla',
-					cp: 'cp',
+					city: null,
+					province: null,
+					cp: null,
 					code: null,
 					url: null,
 					area: null,
@@ -340,6 +375,8 @@
 				group: ['Hotel', 'Pensión/Albergue', 'Hostal', 'Apartahotel'],
 				modalid: ['Playa', 'Rural', 'Carretera', 'Ciudad'],
 				category: ['1 Estrella', '2 Estrellas', '3 Estrellas', '3 Estrellas', '4 Estrellas', '5 Estrellas'],
+				llaves: ['1', '2', '3', '4'],
+				errorsKey: [],
 			}
 		},
 		computed: {
@@ -354,10 +391,6 @@
 			img () {
     			return this.imagenValue
     		},
-    		errorsKey () {
-	            var err = this.$page.props.errors.submit ? Object.keys(this.$page.props.errors.submit) : []
-	            return err
-	        },
 	        formatErrors () {
 	            var map = this.errorsKey.map( item => {
 	                switch (item) {
@@ -365,7 +398,7 @@
 			                return 'Nombre del hotel'
 			                break;
 						case 'numero_habitaciones':
-							return 'Número de habitación'
+							return this.form.tipo === 'hotel' ? 'Número de habitaciones' : 'Número de apartamentos'
 							break;
 						case 'calle':
 							return 'Calle'
@@ -389,13 +422,22 @@
 							return 'N- letra-piso'
 							break;
 						case 'address':
-							return 'Otros datos de interés'
-							break;
-						case 'otro':
 							return 'Otras indicaciones'
 							break;
 						case 'nllaves':
 							return 'N de llaves'
+							break;
+						case 'category':
+							return 'Categoría'
+							break;
+						case 'province':
+							return 'Provincia'
+							break;
+						case 'modality':
+							return 'Modalidad'
+							break;
+						case 'group':
+							return 'Grupo'
 							break;
 						case 'category':
 							return 'Categoría'
@@ -406,15 +448,56 @@
 	            })
 	            return map
 	        },
-		},
-		mounted () {
-			$('.cerrarModal').click(function(){
-				$('#modalImage').modal('hide')
-			})
+	        validExit () {
+	        	if (this.formModal.tipo === 'apartamento'){
+	        		if (
+	        			this.formModal.city ||
+	        			this.formModal.province ||
+	        			this.formModal.calle ||
+	        			this.formModal.planta ||
+	        			this.formModal.address ||
+	        			this.formModal.url ||
+	        			this.formModal.code ||
+	        			this.formModal.area
+	        		) return true
+	        		else return false
+	        	} else if (this.formModal.tipo === 'hotel'){
+	        		if (
+	        			this.formModal.nombre_hotel ||
+	        			this.formModal.numero_habitaciones ||
+	        			this.formModal.province ||
+	        			this.formModal.city ||
+	        			this.formModal.calle ||
+	        			this.formModal.planta ||
+	        			this.formModal.group ||
+	        			this.formModal.modality ||
+	        			this.formModal.category ||
+	        			this.formModal.url ||
+	        			this.formModal.code ||
+	        			this.formModal.area
+	        		) return true
+	        		else return false
+	        	} else {
+	        		if (
+	        			this.formModal.nombre_hotel ||
+	        			this.formModal.numero_habitaciones ||
+	        			this.formModal.nllaves ||
+	        			this.formModal.province ||
+	        			this.formModal.city ||
+	        			this.formModal.calle ||
+	        			this.formModal.planta ||
+	        			this.formModal.url ||
+	        			this.formModal.code ||
+	        			this.formModal.area
+	        		) return true
+	        		else return false
+	        	}
+	        	return false
+	        },
 		},
 		methods: {
 			openModal () {
-				$('#create-form').modal('show')
+				$('#create-form').modal({show: true, backdrop: 'static', keyboard: false})
 			},
 			submit() {
 				this.formModal.tipo = this.formComputed.tipo;
@@ -422,6 +505,7 @@
 					this.formModal.numero_habitaciones = document.getElementById('nhab').value
 				}
 				if(this.formModal.tipo == 'complejo túristico'){
+					this.formModal.tipo = 'complejo'
 					this.formModal.numero_habitaciones = document.getElementById('napart').value
 				}
             	this.formModal.post(route('collaborator.store.hab'),{
@@ -430,15 +514,18 @@
                     preserveScroll: true,
                     forceFormData: true,
                     onSuccess: (result) => {
-                    	console.log('success')
                         if(this.$page.props.flash.code == 200){
-                        	console.log('222')
                             this.formModal.reset();
                             this.eraseFeatured();
                             $('#create-form').modal('hide')
                         };
-                    }
-                	
+                    },
+                    onError: (errors) => {
+                    	console.log(errors)
+                    	this.getErrorsKey()
+                    	this.emitter.emit('errors')
+                    },
+
             	})
         	},
         	addFile (e) {
@@ -457,9 +544,33 @@
             	$('#modalImage').modal('hide')
             },
             clickBackModalType () {
-            	$('#create-form').modal('hide')
-            	this.$emit('clickBackModalType')
-            }
+            	console.log(this.validExit)
+            	if (this.validExit) {
+            		console.log('true')
+            		$('#modalExit').modal('show')
+            	} else {
+            		$('#create-form').modal('hide')
+	            	//this.$emit('clickBackModalType')
+	            	this.emitter.emit('openModalCreateType')
+            	}
+            },
+            eraseFeatured(){
+                this.formModal.reset('image')
+            },
+            closeModalBack () {
+            	$('#modalExit').modal('hide')
+            },
+            forceExit () {
+            	$('#modalExit').modal('hide')
+            	setTimeout(()=>{
+            		$('#create-form').modal('hide')
+	            	//this.$emit('clickBackModalType')
+	            	this.emitter.emit('openModalCreateType')
+            	}, 200)
+            },
+            getErrorsKey () {
+	            this.errorsKey = this.$page.props.errors.submit ? Object.keys(this.$page.props.errors.submit) : []
+	        },
 		},
 	}
 </script>
