@@ -3,12 +3,12 @@
         <!-- Header section-->
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
-                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Durante la entancia</h1>
+                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Durante la estancia</h1>
             </div>
         </div>
         <!--END Header section-->
         <div class="stay-text row my-3.5 mx-1.5 lg:mx-0">
-            <div class="col-12">
+            <div class="col-12 px-0">
                 <p>
                     En esta sección encontrarás <b>elementos de impacto</b> que ponemos a tu disposición
                     para que el cliente tenga <b>fácil acceso a los servicios de HiCitty desde tu inmueble.</b>
@@ -22,9 +22,9 @@
             </div>
         </div>
     </section>
-    <section id="resources-stay" class="container ml-3.5 lg:ml-2 md:ml-0 md:px-24 mb-8">
+    <section id="resources-stay" class="container ml-3.5 md:ml-2 md:ml-0 md:px-24 mb-8">
         <div class="stay-title row mx-0">
-            <div class="col-12 text-left">
+            <div class="col-12 text-left pl-0">
                 <h2 class="text-xl font-semibold">Displays físicos</h2>
             </div>
         </div>
@@ -39,8 +39,8 @@
                     <h4 class="text-xs lg:text-lg text-white font-semibold mt-16 lg:mt-36 ml-2.5">Póster</h4>
                 </div>
             </div>
-            <div class="col-5 col-md-3 bg-collaborator-orange rounded-xl shadow h-24 lg:h-44 mx-3.5">
-                <h4 class="text-xs lg:text-lg text-white font-semibold mt-11 lg:mt-14 lg:ml-2.5" id="rotatetext">Proximamente</h4>
+            <div class="col-5 col-md-3 bg-collaborator-orange rounded-xl shadow h-24 lg:h-44 mx-3.5 flex px-0">
+                <h4 class="text-xs lg:text-lg text-white font-semibold m-auto" id="rotatetext">Proximamente</h4>
             </div>
         </div>
         <div class="stay-request-displays row my-6">

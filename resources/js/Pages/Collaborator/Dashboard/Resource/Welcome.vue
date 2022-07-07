@@ -38,9 +38,9 @@
                     comisión por cada compra que realice.
                 </p>
                 <div class="text-center text-lg-left">
-                    <button class="btn bg-collaborator-orange text-white font-semibold py-1 mt-2.5">
+                    <Link :href="route('collaborator.recursos.antes')" class="btn bg-collaborator-orange text-white font-semibold py-1 mt-2.5 sm:mt-8 lg:mt-2.5">
                         ¡Empezar a vender!
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
@@ -60,9 +60,9 @@
                     experiencias durante la entancia de tu cliente y poder ganar aún más.
                 </p>
                 <div class="text-center text-lg-left">
-                    <button class="btn bg-collaborator-orange text-white font-semibold py-1 mt-2.5">
+                    <Link :href="route('coll.dashboard.stay')" class="btn bg-collaborator-orange text-white font-semibold py-1 mt-2.5 sm:mt-8 lg:mt-2.5">
                         ¡Descubrir recursos!
-                    </button>
+                    </Link>
                 </div>
             </div>
             <div class="cards-img col-12 col-lg-7 d-none d-lg-block rounded-r-xl bg-center bg-cover pl-lg-0 h-56" style="background-image:url('/vendor_asset/img/collaborator/dashboard/recursos2.jpg')">

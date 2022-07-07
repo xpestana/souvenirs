@@ -34,7 +34,7 @@
                         <div class="col-12 col-md-3">
                             <div
                                 class="border-collaborator p-1 text-center cursor-pointer"
-                                @click.prevent="saveType('complejo túristico')"
+                                @click.prevent="saveType('complejo turístico')"
                             >
                                 <img class="block w-12" style=""
                                     src="/vendor_asset/img/collaborator/dashboard/icons/lodging/ComplejoTurAzul.svg"

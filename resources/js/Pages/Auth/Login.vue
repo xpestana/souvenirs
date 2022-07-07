@@ -70,14 +70,14 @@
                         </template>
                         <div class="my-3">
                             <button type="submit" class="btn btn-collaborator text-xl w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                <p class="text-xl mb-0">Iniciar sesión</p>
+                                <p class="text-xl mb-0 font-semibold">Iniciar sesión</p>
                             </button>
                         </div>
                         <div class="my-2 text-center">
                             <p class="inline-block text-muted form-collaborator-text relative">¿No tienes una cuenta todavía?</p>
                         </div>
                         <div class="my-3">
-                            <Link :href="route('collaborator.register')" class="btn btn-outline-collaborator text-xl w-100">Crear una cuenta</Link>
+                            <Link :href="route('collaborator.register')" class="btn btn-outline-collaborator text-xl w-100 font-semibold">Crear una cuenta</Link>
                         </div>
                     </form>
                 </div>

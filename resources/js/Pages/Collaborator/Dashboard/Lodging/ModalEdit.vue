@@ -600,7 +600,7 @@
 		},
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.bg-header-colaborator{
         background-color: #f6f6f6;
     }  

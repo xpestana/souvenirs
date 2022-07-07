@@ -55,9 +55,8 @@
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6" v-if="formComputed.tipo == 'hotel'">
 					                        <label class="font-bold mb-0.5">Número de habitaciones <span class="required-input">*</span></label>
 					                        <input
-					                        	v-model="formModal.numero_habitaciones"
 					                            type="number"
-					                            class="w-100 rounded col-form-input py-1" id="nhab" placeholder="N de habitación..."
+					                            class="w-100 rounded col-form-input py-1" v-model="numberhab" placeholder="N de habitación..."
 					                            :class="{'error-input': errorsKey.includes('numero_habitaciones')}"
 					                        >
 				                    	</div>
@@ -68,8 +67,7 @@
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Número de apartamentos <span class="required-input">*</span></label>
 			                                    <input
-			                                    	v-model="formModal.numero_habitaciones"
-			                                        type="number" id="napart"
+			                                        type="number" v-model="numberapart"
 			                                        class="w-100 rounded col-form-input py-1"
 			                                        placeholder="Número de apartamentos..."
 			                                        :class="{'error-input': errorsKey.includes('numero_habitaciones')}"
@@ -379,6 +377,8 @@
 				category: ['1 Estrella', '2 Estrellas', '3 Estrellas', '3 Estrellas', '4 Estrellas', '5 Estrellas'],
 				llaves: ['1', '2', '3', '4'],
 				errorsKey: [],
+				numberhab:null,
+				numberapart:null
 			}
 		},
 		computed: {
@@ -503,12 +503,12 @@
 			},
 			submit() {
 				this.formModal.tipo = this.formComputed.tipo;
-				if(this.formModal.tipo == 'hotel'){
-					this.formModal.numero_habitaciones = document.getElementById('nhab').value
+				if(this.formComputed.tipo == 'hotel'){
+					this.formModal.numero_habitaciones = this.numberhab
 				}
-				if(this.formModal.tipo == 'complejo túristico'){
+				if(this.formComputed.tipo == 'complejo túristico'){
 					this.formModal.tipo = 'complejo'
-					this.formModal.numero_habitaciones = document.getElementById('napart').value
+					this.formModal.numero_habitaciones = this.numberapart
 				}
             	this.formModal.post(route('collaborator.store.hab'),{
                 	_token: this.$page.props.csrf_token,
@@ -574,7 +574,7 @@
 		},
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.bg-header-colaborator{
         background-color: #f6f6f6;
     }  
