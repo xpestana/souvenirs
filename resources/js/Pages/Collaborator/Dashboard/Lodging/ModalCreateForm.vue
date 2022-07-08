@@ -117,7 +117,7 @@
 			                                    	class="w-100 rounded col-form-input py-1"
 			                                        :class="{'error-input': errorsKey.includes('group')}"
 			                                     >
-			                                     	<option value="" hidden selected>Grupo...</option>
+			                                     	<option value="" hidden :selected="formModal.group == ''">Grupo...</option>
 													<option
 														v-for="(item, index) in group"
 														:key="index"
@@ -132,10 +132,10 @@
 					                        <select
 		                                    	v-model="formModal.modality"
 		                                    	class="w-100 rounded col-form-input py-1"
-		                                        :disabled="formModal.group == null"
+		                                        :disabled="formModal.group == ''"
 		                                        :class="{'error-input': errorsKey.includes('modality')}"
 		                                     >
-		                                     	<option  value="" hidden selected>Modalidad....</option>
+		                                     	<option value="" hidden :selected="formModal.group == ''">Modalidad...</option>
 												<option
 													v-for="(item, index) in modalid"
 													:key="index"
@@ -155,10 +155,10 @@
 			                                    <select
 			                                    	v-model="formModal.category"
 			                                    	class="w-100 rounded col-form-input py-1"
-			                                    	:disabled="formModal.group == null || formModal.modality == null"
+			                                    	:disabled="formModal.group == '' || formModal.modality == ''"
 			                                        :class="{'error-input': errorsKey.includes('category')}"
 			                                     >
-			                                     	<option  value="" hidden selected>Categoría...</option>
+			                                     	<option value="" hidden :selected="formModal.category == ''">Categoría...</option>
 													<option
 														v-for="(item, index) in category"
 														:key="index"
@@ -269,7 +269,7 @@
 			                                    >
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
-					                        <label class="font-bold mb-0.5">Página Web  <span class="required-input">*</span></label> <i class="fas fa-exclamation-circle ml-1"></i>
+					                        <label class="font-bold mb-0.5">Página Web <span class="required-input">*</span></label> <span class="fas fa-exclamation-circle ml-1 icon relative"><div class="tooltipp rounded-md shadow text-xs font-light">Escribe aquí el enlace del anuncio de tu apartamento. Booking, Airbnb, Wimdu...</div></span>
 					                        <input
 					                            type="text" v-model="formModal.url"
 					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
@@ -533,11 +533,11 @@
 					url: null,
 					area: null,
 					image: null,
-					nllaves:null,
+					nllaves:'',
 					otro:null,
-					modality: null,
-					group:null,
-					category:null,
+					modality: '',
+					group:'',
+					category:'',
 				}),
 				imagenValue: null,
 				group: ['Hotel', 'Pensión/Albergue', 'Hostal', 'Apartahotel'],
@@ -749,6 +749,39 @@
 	}
 </script>
 <style lang="scss" scoped>
+	.tooltipp{
+		position: absolute;
+		border: none;
+		background-color: #fff;
+		z-index:90000;
+		color: #000;
+		width: 200px;
+		padding: .5rem;
+		text-align: left;
+		min-height: 30px;
+		right: -15px;
+		top: 25px;
+		display: none;
+	}
+	.tooltipp::after{
+		content: '';
+		position: absolute;
+		border-left: 10px solid transparent;
+		border-bottom: 10px solid #fff;
+		border-right: 10px solid transparent;
+		border-top: 10px solid transparent;
+		bottom: 63px;
+		right: 12px;
+	}
+	.icon:hover {
+		color: #ff9c06;
+	}
+	.icon:hover .tooltipp {
+		display: block;
+	}
+	.icon{
+		position: relative;
+	}
 	select:disabled{
 		border: solid 3px #ebebeb;
 		background-color: #ebebeb;
@@ -766,7 +799,7 @@
         diplay: inline-block;
     }
 	.modal-dialog{
-		max-width: 60% !important;
+		max-width: 45% !important;
 		margin: 0.5rem auto  !important;
 	}
 	.modal-dialog-image{

@@ -267,7 +267,7 @@
 			                                    >
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
-					                        <label class="font-bold mb-0.5">Página Web  <span class="required-input">*</span></label> <i class="fas fa-exclamation-circle ml-1"></i>
+					                        <label class="font-bold mb-0.5">Página Web  <span class="required-input">*</span></label> <span class="fas fa-exclamation-circle ml-1 icon relative"><div class="tooltipp rounded-md shadow text-xs font-light">Escribe aquí el enlace del anuncio de tu apartamento. Booking, Airbnb, Wimdu...</div></span>
 					                        <input
 					                            type="text" v-model="formModal.url"
 					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
@@ -642,7 +642,7 @@
 			            <div class="modal-content modal-images mx-auto py-3 px-3">
 			                <div class="modal-body p-0 relative">
 			                    <div>
-			                        <i class="fas fa-times text-muted absoluteright-1 md:right-2 top-1 md:top-2 cursor-pointer cerrarModal" @click.prevent="closeModalImage()"></i>
+			                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-1 md:top-2 cursor-pointer cerrarModal" @click.prevent="closeModalImage()"></i>
 			                    </div>
 			                    <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
 			                    <div class=" rounded-xl mt-3" style="max-height: 120px;">
@@ -976,6 +976,39 @@
 	}
 </script>
 <style lang="scss" scoped>
+	.tooltipp{
+		position: absolute;
+		border: none;
+		background-color: #fff;
+		z-index:90000;
+		color: #000;
+		width: 200px;
+		padding: .5rem;
+		text-align: left;
+		min-height: 30px;
+		right: -15px;
+		top: 25px;
+		display: none;
+	}
+	.tooltipp::after{
+		content: '';
+		position: absolute;
+		border-left: 10px solid transparent;
+		border-bottom: 10px solid #fff;
+		border-right: 10px solid transparent;
+		border-top: 10px solid transparent;
+		bottom: 63px;
+		right: 12px;
+	}
+	.icon:hover {
+		color: #ff9c06;
+	}
+	.icon:hover .tooltipp {
+		display: block;
+	}
+	.icon{
+		position: relative;
+	}
 	.bg-header-colaborator{
         background-color: #f6f6f6;
     }  
@@ -989,7 +1022,7 @@
         diplay: inline-block;
     }
 	.modal-dialog{
-		max-width: 60% !important;
+		max-width: 45% !important;
 		margin: 0.5rem auto  !important;
 	}
 	.modal-dialog-image{
