@@ -76,14 +76,14 @@
                             <ValidationErrors class="my-3" />
                             <div class="my-2">
                                 <button type="submit" :href="route('collaborator.register')" class="btn btn-collaborator text-xl w-100" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                    <p class="text-xl mb-0">Registrarme</p>
+                                    <p class="text-xl mb-0 font-semibold">Registrarme</p>
                                 </button>
                             </div>
                             <div class="my-2 text-center">
                                 <p class="inline-block text-muted form-collaborator-text relative">o si ya tienes una cuenta</p>
                             </div>
                             <div class="my-2">
-                                <Link :href="route('login')" class="btn btn-outline-collaborator text-xl w-100">Iniciar Sesión</Link>
+                                <Link :href="route('login')" class="btn btn-outline-collaborator text-xl w-100 font-semibold">Iniciar Sesión</Link>
                             </div>
                         </form>
                     </div>

@@ -296,4 +296,17 @@ Version: 1.0;
             $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
         });
     });
+    
+    $('#layout-collaborator-dashboard').on('click',function(){
+        $('#collaborator-sidebar').toggleClass('active');
+        $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
+    });
+    
+    $('.sidebar-collapse-menu-mobile').on('click',function(){
+        if(window.screen.width < "1024"){
+            $('#collaborator-sidebar').toggleClass('active');
+            $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
+        }
+    });
+    
 })(jQuery);

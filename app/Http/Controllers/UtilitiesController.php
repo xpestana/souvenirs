@@ -60,6 +60,7 @@ class UtilitiesController extends Controller
     {
         $this->handle_auth($request->h);
         $this->handle_auth_c($request->c);
+        $this->session_type($request->t);
         $search = null;
         $search = $request->search;
         $min_r = (isset($request->price[0])) ? $request->price[0] : 0;
@@ -96,6 +97,7 @@ class UtilitiesController extends Controller
     {
         $this->handle_auth($request->h);
         $this->handle_auth_c($request->c);
+        $this->session_type($request->t);
         $search =  null;
         $showr = null;
         if ($request) {
@@ -127,12 +129,14 @@ class UtilitiesController extends Controller
     {
         $this->handle_auth($request->h);
         $this->handle_auth_c($request->c);
+        $this->session_type($request->t);
         return Inertia::render('Statics/AboutUs');
     }
     public function contact(Request $request)
     {
         $this->handle_auth($request->h);
         $this->handle_auth_c($request->c);
+        $this->session_type($request->t);
         return Inertia::render('Statics/ContactUs');
     }
     public function contact_mail(Request $request)

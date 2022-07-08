@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Redirect;
@@ -34,6 +35,11 @@ class ProfileController extends Controller
         }
         if (auth()->user()->getRoleNames()->first() == 'Admin') {
             return Redirect::route('admin.colaboradores');
+        }
+        if (auth()->user()->getRoleNames()->first() == 'Client') {
+            Auth::logout();
+
+            return Redirect::route('login');
         }
         if (auth()->user()->getRoleNames()->first() == 'Hotel') {
             $hotel = hotel::find(auth()->user()->hotel->first()->id);

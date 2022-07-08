@@ -45,4 +45,24 @@ class hotel extends Model
     {
         return $this->hasMany(Order::class)->where("status","complete");
     }
+
+     /*
+        Scopes
+     */
+    public function scopeSearch($query, $search) 
+    {
+        if ($search) {
+            $query->where('name','like',  ['%'.$search.'%']);
+            $query->orWhere('address','like',  ['%'.$search.'%']);
+            $query->orWhere('calle','like',  ['%'.$search.'%']);
+            $query->orWhere('planta','like',  ['%'.$search.'%']);
+            $query->orWhere('province','like',  ['%'.$search.'%']);
+        }
+    }
+    public function scopeType($query, $type) 
+    {
+        if ($type) {
+            $query->where('type',$type);
+        }
+    }
 }

@@ -49,12 +49,13 @@
         <template v-if="hotels.data.length > 0">
             <div class="lodgings-card row mx-1.5 lg:mx-0 mb-2" v-for="hotel in hoteles" :key="hotel.id" >
                 <div class="lodgings-card-body my-2.5 lg:my-0 mb-4 col-12 w-full h-60 lg:h-28 rounded-xl shadow relative">
-                    <div class="row h-full rounded-xl realtive bg-cover bg-top">
-                        <div class="d-none d-lg-block col-lg-3 lg:h-auto rounded-l-xl bg-cover bg-center bg-no-repeat relative" :style="'background-image: url(/storage/hotel'+hotel.image+');'">
-                            <div class="rounded-l-xl gradient-lodgings absolute left-0 top-0 w-full h-full"></div>
+                    <div class="row h-full rounded-xl relative bg-cover bg-top">
+                        <div class="col-12 col-lg-3 h-3/5 lg:h-auto rounded-l-xl rounded-r-xl lg:rounded-r-none bg-cover bg-center bg-no-repeat relative" 
+                            :style="'background-image: url(/storage/hotel'+hotel.image+');'"
+                        >
+                            <div class="rounded-l-xl gradient-lodgings absolute left-0 top-0 w-full h-full d-none d-lg-block"></div>
                         </div>
-                        <div class="col-12 col-lg-6 h-3/5 lg:h-auto lg:bg-black relative py-lg-2 px-0 px-lg-3 d-lg-flex flex-column align-items-start justify-content-between ">
-                            <img :src="'/storage/hotel'+hotel.image" class="w-full h-full d-lg-none rounded-t-xl">
+                        <div class="col-12 col-lg-6 h-3/5 lg:h-auto lg:bg-black absolute top-0 lg:relative py-lg-2 px-0 px-lg-3 d-lg-flex flex-column align-items-start justify-content-between ">
                             <div class="absolute lg:relative z-30 top-0  pt-4 pl-2 pb-2 pt-lg-0 pl-lg-0 pb-lg-0">
                                 <h2 class="text-2xl lg:text-lg xl:text-xl text-white font-semibold" style="line-height:1.3rem">
                                     {{hotel.title}}
@@ -214,7 +215,10 @@ export default {
         }
         let url = this.$page.url.split('?')[1];
         if(url !== undefined){
-            this.search = this.cleanUrlSearch(url,'buscar')
+            let inputSearch = this.cleanUrlSearch(url,'buscar');
+            const reg = /%20/g;
+            const nuevaStr = inputSearch.replace(reg, " ");
+            this.search = nuevaStr;
             this.type = this.cleanUrlSearch(url,'tipo')
         }
     },

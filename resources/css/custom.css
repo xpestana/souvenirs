@@ -441,7 +441,7 @@ a[data-toggle="collapse"] {
   width:100%;
 }
   #collaborator-sidebar {
-      left: -500px !important;
+      left: -700px !important;
   }
   #collaborator-sidebar.active {
       left: 0 !important;
