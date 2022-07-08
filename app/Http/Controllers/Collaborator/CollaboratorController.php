@@ -107,7 +107,7 @@ class CollaboratorController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('collaborator.dashboard.profile'));
+        return redirect(RouteServiceProvider::HOME);
     }
 
     public function data()
