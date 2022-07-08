@@ -107,7 +107,7 @@ class CollaboratorController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(route('collaborator.dashboard.profile'));
     }
 
     public function data()
@@ -115,7 +115,7 @@ class CollaboratorController extends Controller
         return Inertia::render('Collaborator/Data');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         /*Redirección si no tiene perfil*/
         if (auth()->user()->profile == null) {
@@ -123,10 +123,11 @@ class CollaboratorController extends Controller
         }
         /*******************************/
         
-        $hotels = auth()->user()->hotel()->paginate(10);
+        $hotels = auth()->user()->hotel()->search($request->buscar)->type($request->tipo)->paginate(10);
+        
         $hotels->load('orders.shippings');
         $url = config('app.url');
-        
+            
         return Inertia::render('Collaborator/Dashboard/Lodging/Index', compact('hotels','url'));
     }
     public function register_data(Request $request)
@@ -642,7 +643,7 @@ class CollaboratorController extends Controller
             ]);
         }
         $id = mt_Rand(1000000, 9999999);
-        return Redirect::route('collaborator.shipping.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
+        return Redirect::route('collaborator.dashboard.profile')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
     }
 
     // end shipping
@@ -681,7 +682,7 @@ class CollaboratorController extends Controller
         }
 
         $id = mt_Rand(1000000, 9999999);
-        return Redirect::route('collaborator.bank.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
+        return Redirect::route('collaborator.dashboard.profile')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
     }
 
     public function index_antes () {

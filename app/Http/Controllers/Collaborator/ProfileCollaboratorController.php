@@ -45,7 +45,7 @@ class ProfileCollaboratorController extends Controller
         $profile->firstname = $request->name;
         $profile->phone = $request->phone;
         $profile->save();
-        return back()->with(['id'=>$id, 'message' => 'Actualizado correctamente', 'code' => 200, 'status' => 'success']);
+        return Redirect::route('collaborator.dashboard.profile')->with(['id'=>$id, 'message' => 'Actualizado correctamente', 'code' => 200, 'status' => 'success']);
     }
     public function fiscal(Request $request)
     {
@@ -77,7 +77,7 @@ class ProfileCollaboratorController extends Controller
         $profile->address = $request->address;
         $profile->save();
 
-        return back()->with(['id'=>$id, 'message' => 'Actualizado correctamente', 'code' => 200, 'status' => 'success']);
+        return Redirect::route('collaborator.dashboard.profile')->with(['id'=>$id, 'message' => 'Actualizado correctamente', 'code' => 200, 'status' => 'success']);
     }
 
     public function associate_profile(Request $request)
