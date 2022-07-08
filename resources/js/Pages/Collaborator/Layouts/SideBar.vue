@@ -57,7 +57,16 @@
                     </li>
                 </ul>
             </li>
-            <li class="mb-3.5 relative">
+            <li class="mb-3.5">
+                <Link :href="route('dashboard.sales.total')" class="text-base link  sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url.includes('/tablero/ventas-totales') || this.$page.url.includes('/tablero/ventas-inmueble') || this.$page.url.includes('/tablero/ventas-publicidad')}">
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':this.$page.url.includes('/tablero/ventas-totales') || this.$page.url.includes('/tablero/ventas-inmueble') || this.$page.url.includes('/tablero/ventas-publicidad')}"
+                        src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
+                    >
+                    Ventas
+                </Link>
+            </li>
+            <!--<li class="mb-3.5 relative">
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesSales}"  id="downsales" @click="toggleMenuSales('sub-ventas')"></i>
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesSales}" id="upsales" @click="toggleMenuSales('sub-ventas')"></i>
                 <Link :href="route('collaborator.dashboard.sales')" data-toggle="collapse" 
@@ -107,7 +116,7 @@
                         </Link>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             <li class="mb-3.5 relative">
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesProfile}" id="upprofile" @click="toggleMenuProfile('sub-perfil')"></i>
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesProfile}" id="downprofile" @click="toggleMenuProfile('sub-perfil')"></i>
