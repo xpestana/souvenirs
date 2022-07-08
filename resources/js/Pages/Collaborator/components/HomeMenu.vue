@@ -23,7 +23,7 @@
                 <Link :href="route('collaborator.register')" class="btn btn-collaborator w-48 text-xl mr-4">
                 <p class="text-xl font-semibold">Regístrate</p>
                 </Link>
-                <Link :href="route('login')" class="btn btn-outline-collaborator w-48 text-xl font-semibold">Iniciar Sesión</Link>
+                <Link :href="route('login')" class="btn btn-outline-coll w-48 text-xl font-semibold">Iniciar Sesión</Link>
             </div>
         </div>
     </nav>
@@ -63,8 +63,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #header h3,p{
     font-family:Montserrat;
+}
+.btn-outline-coll{
+    border:2px solid #FF9C06;
+    color:#FF9C06;
+}
+
+.btn-outline-coll:hover{
+    background: linear-gradient(180deg, #ff9c06, #86bcd9);
+    color:#fff;
+    border: none;
 }
 </style>

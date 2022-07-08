@@ -1,12 +1,12 @@
 <template>
-    <nav id="collaborator-sidebar" class="fixed z-30 w-3/4 md:w-1/5 text-white bg-collaborator h-screen rounded-r-3xl flex flex-column overflow-auto">
+    <nav id="collaborator-sidebar" class="fixed z-40 w-3/4 lg:w-1/5 text-white bg-collaborator h-screen rounded-r-3xl flex flex-column overflow-auto">
         <div class="nav-logo flex flex-row">
             <i class="fas fa-times sidebarCollapse text-white cursor-pointer h-12 mt-8 w-12 mx-6 text-xl"></i>
             <img class="w-24 md:w-36 mr-auto grow mt-3.5 lg:mx-auto lg:mt-12" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="">
         </div>
         <ul class="list-unstyled py-4 pl-8 2xl:pl-11 my-auto">  
             <li class="mb-3.5">
-                <Link :href="route('collaborator.dashboard.home')" class="text-base link" :class="{'sidebar-active':this.$page.url=='/tablero'}">
+                <Link :href="route('collaborator.dashboard.home')" class="text-base link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero'}">
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':this.$page.url=='/tablero'}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
@@ -15,7 +15,7 @@
                 </Link>
             </li>
             <li class="mb-3.5">
-                <Link :href="route('coll.lodgings.index')" class="text-base link" :class="{'sidebar-active':this.$page.url.includes('/tablero/alojamientos')}">
+                <Link :href="route('coll.lodgings.index')" class="text-base link  sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url.includes('/tablero/alojamientos')}">
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':this.$page.url.includes('/tablero/alojamientos')}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
@@ -27,7 +27,7 @@
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesResources}"  id="downresource" @click="toggleMenuSales('sub-recursos')"></i>
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesResources}" id="upresource" @click="toggleMenuSales('sub-recursos')"></i>
                 <Link :href="route('coll.dashboard.means')" data-toggle="collapse" 
-                    aria-expanded="false" class="dropdown-toggle text-base link"  
+                    aria-expanded="false" class="dropdown-toggle text-base link  sidebar-collapse-menu-mobile"  
                     :class="{'sidebar-active':routesResources}"
                 >
                 <img class="inline w-5" style="margin-top:-4px"
@@ -38,7 +38,7 @@
                 </Link>
                 <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesResources}" id="sub-recursos">
                     <li>
-                        <Link :href="route('collaborator.recursos.antes')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/recursos/antes-llegada'}">
+                        <Link :href="route('collaborator.recursos.antes')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/recursos/antes-llegada'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/recursos/antes-llegada'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/recursoantes.svg"
@@ -47,7 +47,7 @@
                         </Link>        
                     </li>
                     <li>
-                        <Link :href="route('coll.dashboard.stay')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/recursos/durante-la-estancia'}">
+                        <Link :href="route('coll.dashboard.stay')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/recursos/durante-la-estancia'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/recursos/durante-la-estancia'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/recursodurante.svg"
@@ -61,7 +61,7 @@
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesSales}"  id="downsales" @click="toggleMenuSales('sub-ventas')"></i>
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesSales}" id="upsales" @click="toggleMenuSales('sub-ventas')"></i>
                 <Link :href="route('collaborator.dashboard.sales')" data-toggle="collapse" 
-                    aria-expanded="false" class="dropdown-toggle text-base link"  
+                    aria-expanded="false" class="dropdown-toggle text-base link  sidebar-collapse-menu-mobile"  
                     :class="{'sidebar-active':routesSales}"
                 >
                 <img class="inline w-5" style="margin-top:-4px"
@@ -72,7 +72,7 @@
                 </Link>
                 <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesSales}" id="sub-ventas">
                     <li>
-                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-publicidad'}">
+                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-publicidad'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/ventas-publicidad'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-antes.svg"
@@ -81,7 +81,7 @@
                         </Link>        
                     </li>
                     <li>
-                        <Link :href="route('collaborator.sales.property')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
+                        <Link :href="route('collaborator.sales.property')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/ventas-inmueble'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
@@ -90,7 +90,7 @@
                         </Link>
                     </li>
                     <li>
-                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url.includes('/tablero/ventas-totales')}">
+                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile pl-0.5" :class="{'sidebar-active':this.$page.url.includes('/tablero/ventas-totales')}">
                             <img class="inline w-3.5" style="margin-top:-4px"
                                 :class="{
                                     'side-icon-active':this.$page.url.includes('/tablero/ventas-totales')
@@ -101,7 +101,7 @@
                         </Link>
                     </li>
                     <li>
-                        <Link :href="route('dashboard.withdrawals')" class="text-sm my-2 side-link pl-0.5" :class="{'sidebar-active':this.$page.url.includes('/tablero/historial-retiros')}">
+                        <Link :href="route('dashboard.withdrawals')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile pl-0.5" :class="{'sidebar-active':this.$page.url.includes('/tablero/historial-retiros')}">
                             <i class="fas fa-outdent text-white side-link" :class="{'sidebar-active':this.$page.url.includes('/tablero/historial-retiros')}"></i>
                             Historial de retiros
                         </Link>
@@ -112,7 +112,7 @@
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesProfile}" id="upprofile" @click="toggleMenuProfile('sub-perfil')"></i>
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesProfile}" id="downprofile" @click="toggleMenuProfile('sub-perfil')"></i>
                 <Link :href="route('collaborator.dashboard.profile')" data-toggle="collapse" 
-                    aria-expanded="false" class="dropdown-toggle text-base link"  
+                    aria-expanded="false" class="dropdown-toggle text-base link  sidebar-collapse-menu-mobile"  
                     :class="{'sidebar-active':routesProfile}"
                 >
                 <img class="inline w-4" style="margin-top:-4px"
@@ -124,7 +124,7 @@
                 </Link>
                 <ul class="collapse list-unstyled list-sidebar pl-8" :class="{'show':routesProfile}" id="sub-perfil">
                     <li>
-                        <Link :href="route('dashboard.profile.info')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
+                        <Link :href="route('dashboard.profile.info')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-informacion'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/perfil-informacion'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/info.svg"
@@ -133,7 +133,7 @@
                         </Link>        
                     </li>
                     <li>
-                        <Link :href="route('collaborator.profile.tax')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-datos-fiscales'}">
+                        <Link :href="route('collaborator.profile.tax')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/perfil-datos-fiscales'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/perfil-datos-fiscales'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/fiscales.svg"
@@ -142,7 +142,7 @@
                         </Link>
                     </li>
                     <li>
-                        <Link :href="route('collaborator.bank.index')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/banco'}">
+                        <Link :href="route('collaborator.bank.index')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/banco'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/banco'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/bancaria.svg"
@@ -151,7 +151,7 @@
                         </Link>
                     </li>
                     <li>
-                        <Link :href="route('collaborator.shipping.index')" class="text-sm my-2 side-link" :class="{'sidebar-active':this.$page.url=='/tablero/envio'}">
+                        <Link :href="route('collaborator.shipping.index')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/envio'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/envio'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
@@ -162,7 +162,7 @@
                 </ul>
             </li>
             <li class="mb-3.5">
-                <Link :href="route('logout')" class="text-base link">
+                <Link :href="route('logout')" class="text-base link  sidebar-collapse-menu-mobile">
                     <img class="inline w-4" style="margin-top:-4px"
                         src="/vendor_asset/img/collaborator/dashboard/icons/cerrar.svg"
                     >
@@ -235,6 +235,7 @@ export default {
     created(){
         this.profile()
         this.sales()
+        this.resources()
     },
     updated(){
         this.routesSales = false

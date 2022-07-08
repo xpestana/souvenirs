@@ -1,6 +1,6 @@
 <template>
 <!-- Modal Notification -->
-    <div class="modal modal-notification fade" :id="id" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel"
+    <div class="modal modal-notification fade" :id="id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
     <!-- Change class .modal-sm to change the size of the modal -->
         <div class="modal-dialog modal-dialog-centered" role="document">

@@ -53,7 +53,7 @@
                             <p class="text-right text-2xl text-white font-semibold p-3.5">¡COMPLETADO!</p>
                         </template>
                     </div>
-                    <div class="py-3.5 px-6 absolute top-0 left-0 z-40" id="text-perfil-target">
+                    <div class="py-3.5 px-6 absolute top-0 left-0 z-40 d-none d-lg-block" id="text-perfil-target">
                         <Link :href="route('dashboard.profile.info')">
                             <p class="mb-2"><i class="fas fa-id-card mr-2"></i>Información de perfil</p>
                         </Link>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target-full"></div>
                     <div class="text-white text-center full-button">
-                        <Link id="full-button" :href="route('coll.lodgings.index')" class="absolute top-16 left-28 z-50  btn rounded-lg border-solid">
+                        <Link id="full-button" :href="route('coll.lodgings.index')" class="absolute top-16 left-28 z-50  btn rounded-lg border-solid d-none d-lg-block">
                             + Añadir alojamiento
                         </Link>
                     </div>
@@ -140,7 +140,7 @@
                         <h2 class="font-bold text-2xl text-white p-3.5">Rellena los datos de tu perfil</h2>
                         <p class="text-right text-2xl text-white p-3.5 font-semibold">¡COMPLETADO!</p>
                     </div>
-                    <div class="py-3.5 px-6 absolute top-0 left-0 z-40" id="text-perfil-target-full">
+                    <div class="py-3.5 px-6 absolute top-0 left-0 z-40 d-none d-lg-block" id="text-perfil-target-full">
                         <Link :href="route('dashboard.profile.info')">
                             <p class="mb-2"><i class="fas fa-id-card mr-2"></i>Información de perfil</p>
                         </Link>
