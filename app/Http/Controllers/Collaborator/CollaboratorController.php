@@ -446,7 +446,9 @@ class CollaboratorController extends Controller
                 $hotel->image = $pathName.$name_file;
             }
             $hotel->save();
-            return Redirect::route('coll.lodgings.index')->with(['id'=>$id, 'message' => 'Actualizado exitosamente', 'code' => 200, 'status' => 'success']);   
+
+            $random = mt_Rand(1000000, 9999999);
+            return Redirect::route('coll.lodgings.index')->with(['id'=>$random, 'message' => 'Actualizado exitosamente', 'code' => 200, 'status' => 'success']);   
          }catch (Exception $e) 
          {
         
