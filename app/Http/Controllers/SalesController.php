@@ -128,6 +128,12 @@ class SalesController extends Controller
         $params = $miObj->createMerchantParameters();
         $signature = $miObj->createMerchantSignature($kc);
 
+        // validación de tipo de comprar
+        $type = '1';
+        if (!empty(session('t'))) {
+            $type= '2';
+        }
+
        /*Creando Orden de compra*/
 
        $order = Order::create([ 
@@ -141,6 +147,7 @@ class SalesController extends Controller
                 'status' => "pending",
                 'total_s' => $total_s,
                 'shipping' => $shipping,
+                'type_order' => $type,
             ]);
 
        $products = Cart::getContent();

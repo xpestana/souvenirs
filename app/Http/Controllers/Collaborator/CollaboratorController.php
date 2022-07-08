@@ -123,7 +123,7 @@ class CollaboratorController extends Controller
         }
         /*******************************/
         
-        $hotels = auth()->user()->hotel()->paginate(3);
+        $hotels = auth()->user()->hotel()->paginate(10);
         $hotels->load('orders.shippings');
         $url = config('app.url');
         
@@ -695,21 +695,24 @@ class CollaboratorController extends Controller
             'path' => null,
             'fullPath' => null,
         ];
+        $href = null;
         if ($city && $width) {
+            $idUser = auth::user()->id;
+            $href = url('?p='.$city.'&c='.$idUser.'&t=2');
             if ($city == 'sevilla' && $width == '160x600') {
-                $url['path'] = 'vendor_asset/img/collaborator/dashboard/BANNERS/160x600.png';
+                $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/160x600.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }
             if ($city == 'sevilla' && $width == '200x700') {
-                $url['path'] = 'vendor_asset/img/collaborator/dashboard/BANNERS/200x700.png';
+                $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/200x700.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }
             if ($city == 'sevilla' && $width == '728x90') {
-                $url['path'] =  'vendor_asset/img/collaborator/dashboard/BANNERS/728x90.png';
+                $url['path'] =  'vendor_asset/img/collaborator/dashboard/banners/728x90.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }
         }
-        return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalBanner', compact('url'));
+        return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalBanner', compact('url', 'href'));
     }
 
     public function url (Request $request) {

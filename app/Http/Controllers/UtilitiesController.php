@@ -40,10 +40,20 @@ class UtilitiesController extends Controller
             }
         }
     }
+    public function session_type($t)
+    {
+        if ($t){
+            $session = session('t');
+            if (empty($session)) {
+                session(['t'=>'2']);
+            }
+        }
+    }
     public function home(Request $request)
     {   
         $this->handle_auth($request->h);
         $this->handle_auth_c($request->c);
+        $this->session_type($request->t);
         return Inertia::render('Statics/Home');
     }
     public function activities(Request $request)

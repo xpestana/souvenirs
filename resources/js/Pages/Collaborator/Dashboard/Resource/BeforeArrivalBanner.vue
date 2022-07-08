@@ -35,7 +35,7 @@
 	                        	class="w-100 rounded collaborator-input col-form-input py-1  pl-8"
 	                            placeholder="Ciudad..."
 	                         >
-								<option value="sevilla">Sevilla</option>
+								<option value="sevilla" :selected="form.city == 'sevilla'">Sevilla</option>
 							</select>
 						</div>
                     </div>
@@ -69,12 +69,14 @@
     		class="mx-1.5 flex justify-content-between lg:mx-0 mt-4 mb-4"
     	>
     		<label class="block font-bold">¡Banner generado con exito!</label>
-    		<span class="block cursor-pointer text-md orange  font-bold" @click.prevent="copy()"><i class="fas fa-copy mr-1"></i> Copiar código de Banner</span>
+    		<div>
+    			<span class="block cursor-pointer text-md orange  font-bold" @click.prevent="copy()"><i class="fas fa-copy mr-1"></i> Copiar código de Banner</span>
+    			<span v-if="message" class="block text-sm mt-1">{{message}}</span>
+    		</div>
     	</div>
-    	<img
-    		v-if="url.fullPath"
-    		:src="`/${url.path}`"
-    	>
+    	<div v-if="url.fullPath">
+    		<a :href="href"><img :src="url.fullPath"></a>
+    	</div>
     </section>
 </template>
 
@@ -88,14 +90,27 @@
 	    },
 	    props: {
 	    	url: Object,
+	    	href: String,
 	    },
 	    data () {
 	    	return {
 	    		form: this.$inertia.form({
-					city: null,
-					width: null
+					city: 'sevilla',
+					width: null,
 				}),
+				message: null,
 	    	}
+	    },
+	    computed: {
+	    	img () {
+	    		if (this.url.fullPath) {
+	    			var u = this.href
+		    		var h = `${this.url.fullPath}`
+		    		var a = `<a href="${u}"><img src="${h}"></a>`
+		    		return a
+	    		}
+	    		return ''
+	    	},
 	    },
 	    methods: {
 	        goBack () {
@@ -148,19 +163,28 @@
 			        console.log("El textarea ya existe")
 			    }
 			    
-			    existsTextarea.value = this.url.fullPath;
+			    existsTextarea.value = this.img;
 			    existsTextarea.select();
 
 			    try {
 			        var status = document.execCommand('copy');
 			        if(!status){
+			        	this.alertCopy('No se pudo copiar')
 			            console.error("No se pudo copiar el texto");
 			        }else{
+			        	this.alertCopy('¡Copiado en el portapapeles!')
 			            console.log("El texto ahora está en el portapapeles");
 			        }
 			    } catch (err) {
+			    	this.alertCopy('No se pudo copiar')
 			        console.log('Uy, no se pudo copiar');
 			    }
+	        },
+	        alertCopy (m) {
+	        	this.message = m
+	        	setTimeout(()=>{
+	        		this.message = null
+	        	}, 4000)
 	        },
 	    },
 	}
