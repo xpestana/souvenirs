@@ -77,7 +77,7 @@
         data () {
             return {
                 form: this.$inertia.form({
-                    city: null,
+                    city: 'sevilla',
                 }),
             }
         },

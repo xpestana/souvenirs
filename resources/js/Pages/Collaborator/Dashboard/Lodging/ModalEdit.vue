@@ -11,9 +11,9 @@
 						<div class="col-12 col-md-5 text-center text-md-left mb-2 mb-md-0">
 							<h1 class="font-bold text-white inline-block text-lg lg:text-2xl">
 							<img class="inline w-7 mr-2" style="margin-top:-4px;"
-									:src="'/vendor_asset/img/collaborator/dashboard/icons/lodging/'+form.type+'.svg'"
+									:src="'/vendor_asset/img/collaborator/dashboard/icons/lodging/'+nameImage+'.svg'"
 								>
-								Editar {{form.type}}
+								Editar {{ formatName }}
 							</h1>
 						</div>
 						<div class="col-12 col-md-5  text-center text-md-right">
@@ -37,7 +37,379 @@
 			            class="form-lodging row mx-1.5 lg:mx-0 mt-3.5 justify-content-center"
 			        >
 			            <div class="col-12 col-md-12">
+			            	<div
+			                	v-if="formComputed.type == 'hotel'"
+			                    class="row px-0"
+			                >
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Nombre del hotel <span class="required-input">*</span></label>
+			                                    <input
+			                                        type="text" v-model="formModal.nombre_hotel"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        :placeholder="'Nombre del hotel...'"
+			                                         :class="{'error-input': errorsKey.includes('nombre_hotel')}"
+			                                    >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">Número de habitaciones <span class="required-input">*</span></label>
+					                        <input
+					                            type="number"
+					                            class="w-100 rounded col-form-input py-1" v-model="formModal.numero_habitaciones" placeholder="N° habitaciones..."
+					                            :class="{'error-input': errorsKey.includes('numero_habitaciones')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Provincia <span class="required-input">*</span></label>
+												 <input
+						                            type="text"
+						                            class="w-100 rounded col-form-input py-1"
+						                            v-model="formModal.province" placeholder="Provincia..."
+						                            :class="{'error-input': errorsKey.includes('province')}"
+						                        >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">Ciudad <span class="required-input">*</span></label>
+					                        <input
+					                        	v-model="formModal.city"
+					                            type="text"
+					                            class="w-100 rounded col-form-input py-1"
+					                            placeholder="Ciudad..."
+					                            :class="{'error-input': errorsKey.includes('city')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Calle <span class="required-input">*</span></label>
+			                                    <input
+			                                    	v-model="formModal.calle"
+			                                        type="text"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        placeholder="Calle..."
+			                                        :class="{'error-input': errorsKey.includes('calle')}"
+			                                    >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">N° - Letra-Piso <span class="required-input">*</span></label>
+					                        <input
+					                            type="text" v-model="formModal.planta"
+					                            class="w-100 rounded col-form-input py-1" placeholder="N..."
+					                            :class="{'error-input': errorsKey.includes('planta')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Grupo <span class="required-input">*</span></label>
+			                                    <select
+			                                    	v-model="formModal.group"
+			                                    	class="w-100 rounded col-form-input py-1"
+			                                        :class="{'error-input': errorsKey.includes('group')}"
+			                                     >
+			                                     	<option value="" hidden selected>Grupo...</option>
+													<option
+														v-for="(item, index) in group"
+														:key="index"
+														:value="item"
+													>
+														{{ item }}
+													</option>
+												</select>
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">Modalidad <span class="required-input">*</span></label>
+					                        <select
+		                                    	v-model="formModal.modality"
+		                                    	class="w-100 rounded col-form-input py-1"
+		                                        :disabled="formModal.group == null"
+		                                        :class="{'error-input': errorsKey.includes('modality')}"
+		                                     >
+		                                     	<option  value="" hidden selected>Modalidad....</option>
+												<option
+													v-for="(item, index) in modalid"
+													:key="index"
+													:value="item"
+												>
+													{{ item }}
+												</option>
+											</select>
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Categoría <span class="required-input">*</span></label>
+			                                    {{ formModal.category }}
+			                                    <select
+			                                    	v-model="formModal.category"
+			                                    	class="w-100 rounded col-form-input py-1"
+			                                    	:disabled="formModal.group == null || formModal.modality == null"
+			                                        :class="{'error-input': errorsKey.includes('category')}"
+			                                     >
+			                                     	<option  value="" hidden selected>Categoría...</option>
+													<option
+														v-for="(item, index) in category"
+														:key="index"
+														:value="item"
+													>
+														{{ item }}
+													</option>
+												</select>
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">Página Web  <span v-if="formComputed.tipo == 'apartamento'" class="required-input">*</span></label>
+					                        <input
+					                            type="text" v-model="formModal.url"
+					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
+					                            :class="{'error-input': formComputed.tipo == 'apartamento' && errorsKey.includes('url')}"
+					                        >
+				                    	</div>
+										<div class="col-12 col-md-6 pr-md-2" :class="{'mt-2.5':formComputed.tipo == 'hotel'}">
+			                                    <label class="font-bold mb-0.5">N° de licencia </label>
+			                                    <input
+			                                        type="text" v-model="formModal.code"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        placeholder="Ej:AT/SE/00002"
+			                                    >
+			                            </div>
+			                        </div>
+			                    </div>
+	                    		<div class="col-md-5"></div>
+	                    		<div class="col-12 my-0.5 px-0">
+		                            <label class="font-bold mb-0.5">Otros datos de interés
+		                            </label>
+		                            <textarea
+		                                class="w-100 rounded col-form-input py-1"
+		                                placeholder="Otros datos de interés..." v-model="formModal.area"
+		                            ></textarea>
+			                    </div>
+			                </div>
 			                <div
+			                	v-if="formComputed.type == 'apartamento'"
+			                    class="row px-0"
+			                >
+			                	<div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Calle <span class="required-input">*</span></label>
+			                                    <input
+			                                    	v-model="formModal.calle"
+			                                        type="text"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        placeholder="Calle..."
+			                                        :class="{'error-input': errorsKey.includes('calle')}"
+			                                    >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">N° - Letra-Piso <span class="required-input">*</span></label>
+					                        <input
+					                            type="text" v-model="formModal.planta"
+					                            class="w-100 rounded col-form-input py-1" placeholder="N°..."
+					                            :class="{'error-input': errorsKey.includes('planta')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Otras indicaciones</label>
+			                                    <input
+			                                    	v-model="formModal.address"
+			                                        type="text"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        placeholder="Otros..."
+			                                        :class="{'error-input': errorsKey.includes('address')}"
+			                                    >
+			                            </div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Provincia <span class="required-input">*</span></label>
+												 <input
+						                            type="text"
+						                            class="w-100 rounded col-form-input py-1"
+						                            v-model="formModal.province" placeholder="Provincia..."
+						                            :class="{'error-input': errorsKey.includes('province')}"
+						                        >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">Ciudad <span class="required-input">*</span></label>
+					                        <input
+					                        	v-model="formModal.city"
+					                            type="text"
+					                            class="w-100 rounded col-form-input py-1"
+					                            placeholder="Ciudad..."
+					                            :class="{'error-input': errorsKey.includes('city')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+										<div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">N° de licencia </label>
+			                                    <input
+			                                        type="text" v-model="formModal.code"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        placeholder="Ej:AT/SE/00002"
+			                                    >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">Página Web  <span class="required-input">*</span></label> <i class="fas fa-circle-exclamation"></i>
+					                        <input
+					                            type="text" v-model="formModal.url"
+					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
+					                            :class="{'error-input': errorsKey.includes('url')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+	                    		<div class="col-12 my-0.5 px-0">
+		                            <textarea
+		                                class="w-100 rounded col-form-input py-1"
+		                                placeholder="Otros datos de interés..." v-model="formModal.area"
+		                            ></textarea>
+		                            <label class="font-bold mt-0.5">Otros datos de interés
+		                            </label>
+			                    </div>
+			                </div>
+			                <div
+			                	v-if="formComputed.type == 'complejo'"
+			                    class="row px-0"
+			                >
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Nombre del Complejo turístico<span class="required-input">*</span></label>
+			                                    <input
+			                                        type="text" v-model="formModal.nombre_hotel"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        :placeholder="'Nombre del hotel...'"
+			                                         :class="{'error-input': errorsKey.includes('nombre_hotel')}"
+			                                    >
+			                            </div>
+			                        </div>
+			                    </div>
+								<div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Número de apartamentos <span class="required-input">*</span></label>
+			                                    <input
+			                                        type="number" v-model="formModal.numero_habitaciones"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        placeholder="Número de apartamentos..."
+			                                        :class="{'error-input': errorsKey.includes('numero_habitaciones')}"
+			                                    >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">N° de llaves <span class="required-input">*</span></label>
+					                        <select
+		                                    	v-model="formModal.nllaves"
+		                                    	class="w-100 rounded col-form-input py-1"
+		                                        placeholder="N° de llaves..."
+		                                        :class="{'error-input': errorsKey.includes('nllaves')}"
+		                                     >
+		                                     	<option value="" hidden selected>N° de llaves...</option>
+												<option
+													v-for="(item, index) in llaves"
+													:key="index"
+													:value="item"
+												>
+													{{ item }}
+												</option>
+											</select>
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Provincia <span class="required-input">*</span></label>
+												 <input
+						                            type="text"
+						                            class="w-100 rounded col-form-input py-1"
+						                            v-model="formModal.province" placeholder="Provincia..."
+						                            :class="{'error-input': errorsKey.includes('province')}"
+						                        >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">Ciudad <span class="required-input">*</span></label>
+					                        <input
+					                        	v-model="formModal.city"
+					                            type="text"
+					                            class="w-100 rounded col-form-input py-1"
+					                            placeholder="Ciudad..."
+					                            :class="{'error-input': errorsKey.includes('city')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+			                            <div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">Calle <span class="required-input">*</span></label>
+			                                    <input
+			                                    	v-model="formModal.calle"
+			                                        type="text"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        placeholder="Calle..."
+			                                        :class="{'error-input': errorsKey.includes('calle')}"
+			                                    >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">N° - Letra-Piso <span class="required-input">*</span></label>
+					                        <input
+					                            type="text" v-model="formModal.planta"
+					                            class="w-100 rounded col-form-input py-1" placeholder="N°, letra, piso..."
+					                            :class="{'error-input': errorsKey.includes('planta')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+			                    <div class="col-12 my-0.5 px-0">
+			                        <div class="row px-0">
+										<div class="col-12 col-md-6 pr-md-2">
+			                                    <label class="font-bold mb-0.5">N° de licencia </label>
+			                                    <input
+			                                        type="text" v-model="formModal.code"
+			                                        class="w-100 rounded col-form-input py-1"
+			                                        placeholder="Ej:AT/SE/00002"
+			                                    >
+			                            </div>
+			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
+					                        <label class="font-bold mb-0.5">Página Web</label>
+					                        <input
+					                            type="text" v-model="formModal.url"
+					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
+					                            :class="{'error-input': formComputed.tipo == 'apartamento' && errorsKey.includes('url')}"
+					                        >
+				                    	</div>
+			                        </div>
+			                    </div>
+	                    		<div class="col-12 my-0.5 px-0">
+		                            <label class="font-bold mb-0.5">Otros datos de interés
+		                            </label>
+		                            <textarea
+		                                class="w-100 rounded col-form-input py-1"
+		                                placeholder="Otros datos de interés..." v-model="formModal.area"
+		                            ></textarea>
+			                    </div>
+			                </div>
+			                <!--<div
 			                    class="row px-0"
 			                >
 			                    <div class="col-12 my-0.5 px-0" v-if="form.type == 'complejo' || form.type == 'hotel'">
@@ -245,7 +617,7 @@
 		                                placeholder="Otros datos de interés..." v-model="formModal.area"
 		                            ></textarea>
 			                    </div>
-			                </div>
+			                </div>-->
 			            </div>
 			        </div>
                     <div class="mt-1.5 px-2 flex justify-content-between">
@@ -501,6 +873,14 @@
 	        	}
 	        	return false
 	        },
+	        formatName () {
+	        	if (this.form.type == 'complejo') return 'complejo turístico'
+	        	return this.form.type
+	        },
+	        nameImage () {
+	        	if (this.form.type == 'complejo') return 'complejo túristico'
+	        	return this.form.type
+	        },
 		},
 		mounted (){
 			this.emitter.on('chageFormEdit', this.chageFormEdit)
@@ -508,31 +888,28 @@
 		methods: {
 			chageFormEdit () {
 				this.formModal.id = this.form.id
-					this.formModal.tipo = this.form.type
-					this.formModal.nombre_hotel = this.form.name
-					this.formModal.numero_habitaciones = this.form.hab
-					this.formModal.calle = this.form.calle
-					this.formModal.planta = this.form.planta
-					this.formModal.address = this.form.address
-					this.formModal.city = this.form.zone
-					this.formModal.cp = null
-					this.formModal.code = this.form.code
-					this.formModal.url = this.form.url
-					this.formModal.area = this.form.area
-					this.formModal.image = this.form.img
-					this.formModal.nllaves = this.form.nllaves
-					this.formModal.modality = this.form.modality
-					this.formModal.province = this.form.province
-					this.formModal.group = this.form.group
-					this.formModal.category = this.form.category
+				this.formModal.tipo = this.form.type
+				this.formModal.nombre_hotel = this.form.name
+				this.formModal.numero_habitaciones = this.form.hab
+				this.formModal.calle = this.form.calle
+				this.formModal.planta = this.form.planta
+				this.formModal.address = this.form.address
+				this.formModal.city = this.form.zone
+				this.formModal.cp = null
+				this.formModal.code = this.form.code
+				this.formModal.url = this.form.url
+				this.formModal.area = this.form.area
+				this.formModal.image = this.form.img
+				this.formModal.nllaves = this.form.nllaves
+				this.formModal.modality = this.form.modality
+				this.formModal.province = this.form.province
+				this.formModal.group = this.form.group
+				this.formModal.category = this.form.category
 			},
 			openModal () {
 				$(`#${this.id}`).modal({show: true, backdrop: 'static', keyboard: false})
 			},
 			submit() {
-				if(this.formModal.tipo == 'complejo túristico'){
-					this.formModal.tipo = 'complejo'
-				}
                 this.formModal.post(route('collaborator.update.hab',{id:this.formModal.id}),{
                 	_token: this.$page.props.csrf_token,
                 	errorBag: 'submit',
@@ -600,7 +977,7 @@
 		},
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.bg-header-colaborator{
         background-color: #f6f6f6;
     }  

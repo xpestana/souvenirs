@@ -25,7 +25,7 @@
                         <option value="">Tipo de alojamiento</option>
                         <option value="apartamento">Apartamento</option>
                         <option value="hotel">Hotel</option>
-                        <option value="complejo">Complejo túristico</option>
+                        <option value="complejo">Complejo turístico</option>
                     </select>
                 </div>
                 <!-- <i class="fas fa-caret-down relative top-3.5 text-gray-400"></i> -->

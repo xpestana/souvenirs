@@ -70,7 +70,7 @@
             font-size: 1.5rem;
             color: #fff;
             margin-top: 2rem;
-            font-family: 'Monserrat', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             text-align: center;
         }
         @media (max-width: 1200px){
@@ -119,6 +119,10 @@
 
         <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
         <!--<link rel="stylesheet" href="/vendor_asset/css/default.css">-->
         <!-- Main css -->
