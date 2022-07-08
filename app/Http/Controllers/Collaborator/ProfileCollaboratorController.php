@@ -80,10 +80,6 @@ class ProfileCollaboratorController extends Controller
         return Redirect::route('collaborator.dashboard.profile')->with(['id'=>$id, 'message' => 'Actualizado correctamente', 'code' => 200, 'status' => 'success']);
     }
 
-    public function associate_profile(Request $request)
-    {
-        return Inertia::render('Associates/Dashboard/ServicesProvided');
-    }
     
     public function associate_settings()
     {

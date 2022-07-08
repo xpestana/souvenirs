@@ -31,7 +31,7 @@ class ProfileController extends Controller
             return Redirect::route('collaborator.dashboard.home');
         }
         if (auth()->user()->getRoleNames()->first() == 'Associate') {
-            return Redirect::route('associates.index');
+            return Redirect::route('associates.home');
         }
         if (auth()->user()->getRoleNames()->first() == 'Admin') {
             return Redirect::route('admin.colaboradores');

@@ -1,7 +1,12 @@
 <template>
 	<div class="wrapper flex" >
         <!-- Sidebar  -->
-        <SideBar/>
+		<template v-if="this.$page.props.auth.role == 'Associate'">
+			<SideBarAssociate/>
+		</template>
+		<template v-else>
+        	<SideBar/>
+		</template>
         <!-- Page Content  -->
         <div id="content" class="ml-auto">
 			<div class="bg-collaborator row lg:hidden sidebarCollapse">
@@ -22,11 +27,15 @@
 <script>
 import Notify from '@/Pages/Collaborator/Layouts/Notify.vue'
 import SideBar from '@/Pages/Collaborator/Layouts/SideBar.vue'
+import SideBarAssociate from '@/Pages/Associates/Layouts/SideBar.vue'
 export default {
     components: {
         Notify,
-		SideBar
+		SideBar,
+		SideBarAssociate
 	},
+	created(){
+	}
 }
 </script>
 <style scoped>

@@ -50,17 +50,22 @@
             <div class="lodgings-card row mx-1.5 lg:mx-0 mb-2" v-for="hotel in hoteles" :key="hotel.id" >
                 <div class="lodgings-card-body my-2.5 lg:my-0 mb-4 col-12 w-full h-60 lg:h-28 rounded-xl shadow relative">
                     <div class="row h-full rounded-xl relative bg-cover bg-top">
-                        <div class="col-12 col-lg-3 h-3/5 lg:h-auto rounded-l-xl rounded-r-xl lg:rounded-r-none bg-cover bg-center bg-no-repeat relative" 
+                        <div class="col-12 col-lg-5 h-3/5 lg:h-auto rounded-l-xl rounded-r-xl lg:rounded-r-none bg-cover bg-center bg-no-repeat relative" 
                             :style="'background-image: url(/storage/hotel'+hotel.image+');'"
                         >
                             <div class="rounded-l-xl gradient-lodgings absolute left-0 top-0 w-full h-full d-none d-lg-block"></div>
                         </div>
-                        <div class="col-12 col-lg-6 h-3/5 lg:h-auto lg:bg-black absolute top-0 lg:relative py-lg-2 px-0 px-lg-3 d-lg-flex flex-column align-items-start justify-content-between ">
+                        <div class="col-12 col-lg-4 h-3/5 lg:h-auto lg:bg-black absolute top-0 lg:relative py-lg-2 px-0">
                             <div class="absolute lg:relative z-30 top-0  pt-4 pl-2 pb-2 pt-lg-0 pl-lg-0 pb-lg-0">
-                                <h2 class="text-2xl lg:text-lg xl:text-xl text-white font-semibold" style="line-height:1.3rem">
-                                    {{hotel.title}}
+                                <h2 class="text-2xl lg:text-lg xl:text-xl text-white font-semibold lg:truncate capitalize " style="line-height:1.3rem">
+                                    <template v-if="hotel.type == 'apartamento'">
+                                        {{hotel.calle}} {{hotel.planta}}
+                                    </template>
+                                    <template v-else>
+                                        {{hotel.name}}
+                                    </template>
                                 </h2>
-                                <p class="text-white text-sm lg:text-xs leading-5 lg:leading-4 mt-2 mt-lg-0">
+                                <p class="text-white text-sm lg:text-xs leading-5 lg:leading-4 mt-1 mt-lg-1 lg:truncate">
                                     {{hotel.type}} · {{ hotel.hab }}
                                     <template v-if="hotel.type == 'hotel'">
                                         Habitaciones ·
@@ -72,15 +77,19 @@
                                 </p>
                             </div>
                             <div class="absolute h-full w-full d-lg-none grandient-mobile rounded-t-xl top-1 left-0"></div>
-                            <div class="lodgings-button mt-2 d-none d-lg-block">
+                            <div class="lodgings-button mt-4 d-none d-lg-block">
                                 <Link :href="route('collaborator.dashboard.sales')" class="btn bg-collaborator-orange font-semibold py-1 xl:px-8 mr-2 text-white">Ver ventas</Link>
-                                <button @click="requestDisplay(hotel.id)" class="btn bg-collaborator-orange font-semibold py-1 xl:px-4 text-white">Pedir displays</button>
+                                <button @click="requestDisplay(hotel.id)" class="btn bg-collaborator-orange font-semibold py-1 xl:px-4 text-white ml-lg-1">Pedir displays</button>
                             </div>
                         </div>
-                        <div class="col-12 col-lg-3 h-2/5 lg:h-auto bg-black rounded-b-xl xl:rounded-r-xl py-lg-2 pl-0 xl:rounded-l-none d-lg-flex flex-column align-items-start justify-content-between relative">
-                            <p class="text-blue-coll text-sm pl-4 pl-lg-0 text-xl lg:text-sm mt-lg-1"><b>Beneficios:</b> {{hotel.total_benefit}} €</p>
-                            <p class="text-blue-coll text-sm pl-4 pl-lg-0 pb-lg-1 text-xl lg:text-sm"><b>Pedidos:</b> {{hotel.total_orders}}</p>
-                            <button type="button" data-toggle="modal" :data-target="'#edit'+hotel.id" data-backdrop="static" data-keyboard="false" @click.prevent="chageFormEdit()" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold py-1 px-10 mt-2 text-sm">Editar</button>
+                        <div class="col-12 col-lg-3 h-2/5 lg:h-auto bg-black rounded-b-xl xl:rounded-r-xl py-lg-2 pl-0 pl-lg-2 xl:rounded-l-none relative">
+                            <p class="text-blue-coll text-sm pl-4 pl-lg-0 text-xl lg:text-sm"><b>Beneficios:</b> {{hotel.total_benefit}} €</p>
+                            <p class="text-blue-coll text-sm pl-4 pl-lg-0 text-xl lg:text-sm"><b>Pedidos:</b> {{hotel.total_orders}}</p>
+                            <button type="button" data-toggle="modal" :data-target="'#edit'+hotel.id" data-backdrop="static" data-keyboard="false" @click.prevent="chageFormEdit()" class="d-none d-lg-inline-block btn btn-outline-orange font-semibold mt-4 text-sm"
+                                style="padding: 0.3rem 3rem;"    
+                            >
+                                Editar
+                            </button>
                             <ModalEdit :form="hotel" :ref="`modalEdit${hotel.id}`" :id="'edit'+hotel.id"/>
                             <button  class="d-lg-none btn bg-white absolute bottom-11 right-8 rounded-circle pt-1 pb-0.5 px-2.5 dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-caret-down  text-3xl leading-4"></i>
@@ -225,10 +234,10 @@ export default {
     computed:{
         hoteles(){
         const obj = this.hotels.data.map((col)=>{
-            let title = col.calle+' '+col.planta;
-            if(title.length > 48){
-                title = title.substring(0, 48)+'...';
-            }
+            // let title = col.calle+' '+col.planta;
+            // if(title.length > 48){
+            //     title = title.substring(0, 48)+'...';
+            // }
             var total_benefit = 0;
             var i = 0;
             console.log(col.orders)
@@ -243,7 +252,6 @@ export default {
             this.orders = this.orders + i
         return {
             ...col,
-            title,
             total_benefit : (total_benefit*0.20).toFixed(2),
             total_orders : i,
         }

@@ -54,7 +54,7 @@ class CollaboratorController extends Controller
         $details = $request->description;
         Mail::to("info@hicitty.es")->send(new FeedbackReceived($user,$details));
     
-    return Redirect::route('collaborator.dashboard.home')->with(['id'=>$id, 'message' => 'Enviado con exito', 'code' => 200, 'status' => 'success']);
+    return back()->with(['id'=>$id, 'message' => 'Enviado con exito', 'code' => 200, 'status' => 'success']);
     }
     public function profile()
     {
@@ -165,7 +165,7 @@ class CollaboratorController extends Controller
             ]);
 
             $userClient->assignRole('Client');
-            return Redirect::route('associates.index')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
+            return Redirect::route('associates.home')->with(['id'=>auth()->user()->id, 'message' => 'Registro exitoso', 'code' => 200, 'status' => 'success']);
         }
     }
     public function request_display(Request $request){

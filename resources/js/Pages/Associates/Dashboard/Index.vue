@@ -4,16 +4,16 @@
     </div>
 </template>
 <script>
-import Paginator from '@/Components/Paginator'
-import { Link } from '@inertiajs/inertia-vue3'
-import Layout from '@/Pages/Associates/Layouts/Layout'
-export default {
-	layout:Layout,
-	components: {
-		Paginator,
-		Link
-	}
-}
+// import Paginator from '@/Components/Paginator'
+// import { Link } from '@inertiajs/inertia-vue3'
+// import Layout from '@/Pages/Associates/Layouts/Layout'
+// export default {
+// 	layout:Layout,
+// 	components: {
+// 		Paginator,
+// 		Link
+// 	}
+// }
 
 </script>
 <style scoped>

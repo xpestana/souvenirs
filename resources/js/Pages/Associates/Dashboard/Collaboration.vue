@@ -121,87 +121,87 @@
     </div>
 </template>
 <script>
-import { Inertia } from '@inertiajs/inertia'
-import Layout from '@/Pages/Associates/Layouts/Layout.vue'  
-import { Head, Link } from '@inertiajs/inertia-vue3'
-import Paginator from '@/Components/Paginator'
-import Moment from 'moment'
-import QRCodeVue3 from "qrcode-vue3"
+// import { Inertia } from '@inertiajs/inertia'
+// import Layout from '@/Pages/Associates/Layouts/Layout.vue'  
+// import { Head, Link } from '@inertiajs/inertia-vue3'
+// import Paginator from '@/Components/Paginator'
+// import Moment from 'moment'
+// import QRCodeVue3 from "qrcode-vue3"
 
-export default {
-    layout:Layout,
-    props:{
-        orders:Object,
-        ordersTotal:Object,
-        url:String
-    },
-    components:{
-        Head,
-        Link,
-        Paginator,
-        QRCodeVue3
-    },
-    data(){
-        return{
-            total:0
-        }
-    },
-    created(){
-        this.moment=Moment;
-    },
-    methods:{
-        souvenirs_btn(id,lodging){
-            var urlItem = $('.souvenirs_img'+id).attr('src');
-            axios({
-                    url: urlItem,
-                    method: 'GET',
-                    responseType: 'blob'
-                })
-            .then((response) => {
-                    const url = window.URL
-                        .createObjectURL(new Blob([response.data]));
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.setAttribute('download', `${lodging}.png`);
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-            })                
-        },
-        returned(id){
-            this.$inertia.post(route('admin.order.returned'), {
-            id: id,
-            })
-        },
-    },
-    computed:{
-        ventas(){
-            this.ordersTotal.forEach(col =>{
-                if(col.returned == 0 && col.status == "complete"){
-                    this.total += Number(col.total);
-                }
+// export default {
+//     layout:Layout,
+//     props:{
+//         orders:Object,
+//         ordersTotal:Object,
+//         url:String
+//     },
+//     components:{
+//         Head,
+//         Link,
+//         Paginator,
+//         QRCodeVue3
+//     },
+//     data(){
+//         return{
+//             total:0
+//         }
+//     },
+//     created(){
+//         this.moment=Moment;
+//     },
+//     methods:{
+//         souvenirs_btn(id,lodging){
+//             var urlItem = $('.souvenirs_img'+id).attr('src');
+//             axios({
+//                     url: urlItem,
+//                     method: 'GET',
+//                     responseType: 'blob'
+//                 })
+//             .then((response) => {
+//                     const url = window.URL
+//                         .createObjectURL(new Blob([response.data]));
+//                     const link = document.createElement('a');
+//                     link.href = url;
+//                     link.setAttribute('download', `${lodging}.png`);
+//                     document.body.appendChild(link);
+//                     link.click();
+//                     document.body.removeChild(link);
+//             })                
+//         },
+//         returned(id){
+//             this.$inertia.post(route('admin.order.returned'), {
+//             id: id,
+//             })
+//         },
+//     },
+//     computed:{
+//         ventas(){
+//             this.ordersTotal.forEach(col =>{
+//                 if(col.returned == 0 && col.status == "complete"){
+//                     this.total += Number(col.total);
+//                 }
                 
-            });
-            const obj = this.orders.data.map((col)=>{    
-            return {
-                id : col.id,
-                calle: col.calle,
-                planta: col.planta,
-                address: col.address,
-                image : col.image,
-                date : col.created_at,
-                type : col.type,
-                returned: col.returned,
-                shippings : col.shippings,
-                id_t: col.transaction_id,
-                // email : col.shippings[0].email,
-                total_benefit : Number(col.total),
-            }
-            });
-            return obj;
-        },
-    }
-}
+//             });
+//             const obj = this.orders.data.map((col)=>{    
+//             return {
+//                 id : col.id,
+//                 calle: col.calle,
+//                 planta: col.planta,
+//                 address: col.address,
+//                 image : col.image,
+//                 date : col.created_at,
+//                 type : col.type,
+//                 returned: col.returned,
+//                 shippings : col.shippings,
+//                 id_t: col.transaction_id,
+//                 // email : col.shippings[0].email,
+//                 total_benefit : Number(col.total),
+//             }
+//             });
+//             return obj;
+//         },
+//     }
+// }
 </script>
 
 <style scope>

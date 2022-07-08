@@ -126,73 +126,73 @@
 	</div>
 </template>
 <script>
-	import { Head, Link } from '@inertiajs/inertia-vue3'
-    import { Inertia } from '@inertiajs/inertia'
-	import LayoutAssociate from '@/Pages/Associates/Layouts/Layout'  
-    import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
-	export default {
-		layout:LayoutAssociate,
-		components:{
-            Head,
-            Link,
-            ModalCookies
-		},
-		data() {
-        	return {
-            formP: this.$inertia.form({
-            	_method: "PUT",
-                name: this.$page.props.auth.profile.firstname,
-                email: this.$page.props.auth.user.email,
-                phone: this.$page.props.auth.profile.phone,
-                password: null,
-            }),
-            formF: this.$inertia.form({
-            	_method: "PUT",
-                razon: this.$page.props.auth.profile.razon,
-				nif: this.$page.props.auth.profile.nif,
-				identifier: this.$page.props.auth.profile.identify,
-				city: this.$page.props.auth.profile.city,
-				cp: this.$page.props.auth.profile.cp,
-				address: this.$page.props.auth.profile.address,
-            }),
-        }
-    	},
-        created(){
-            console.log(this.$page.props.auth.user)
-        },
-    	methods:{
-            showPass: function (id){
-                let x = document.getElementById(id);
-                x.type = x.type == 'password' ? 'text' : 'password';            
-            },
-    		submitProfile() {
-            this.formP.put(route('collaborator.profile.update'), {
-                preserveScroll: true,
-                errorBag: 'submitProfile',
-                })
-            },
-            submitFiscal() {
-                this.formF.nif = $('#nif').val();
-                this.formF.put(route('collaborator.fiscal.update'), {
-                    preserveScroll: true,
-                    errorBag: 'submitFiscal',
-                    onSuccess:()=>{
-                        $('#datosModal').modal('hide')
-                    }
-                })
-            },
-            logout(){
-                this.$inertia.post(route('logout'), {
-                    _token: this.$page.props.csrf_token,
-                })
-            }
-    	},
-        computed: {
-            errors() {
-                return this.$page.props.errors
-            },
-        }
-	}
+	// import { Head, Link } from '@inertiajs/inertia-vue3'
+    // import { Inertia } from '@inertiajs/inertia'
+	// import LayoutAssociate from '@/Pages/Associates/Layouts/Layout'  
+    // import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'  
+	// export default {
+	// 	layout:LayoutAssociate,
+	// 	components:{
+    //         Head,
+    //         Link,
+    //         ModalCookies
+	// 	},
+	// 	data() {
+    //     	return {
+    //         formP: this.$inertia.form({
+    //         	_method: "PUT",
+    //             name: this.$page.props.auth.profile.firstname,
+    //             email: this.$page.props.auth.user.email,
+    //             phone: this.$page.props.auth.profile.phone,
+    //             password: null,
+    //         }),
+    //         formF: this.$inertia.form({
+    //         	_method: "PUT",
+    //             razon: this.$page.props.auth.profile.razon,
+	// 			nif: this.$page.props.auth.profile.nif,
+	// 			identifier: this.$page.props.auth.profile.identify,
+	// 			city: this.$page.props.auth.profile.city,
+	// 			cp: this.$page.props.auth.profile.cp,
+	// 			address: this.$page.props.auth.profile.address,
+    //         }),
+    //     }
+    // 	},
+    //     created(){
+    //         console.log(this.$page.props.auth.user)
+    //     },
+    // 	methods:{
+    //         showPass: function (id){
+    //             let x = document.getElementById(id);
+    //             x.type = x.type == 'password' ? 'text' : 'password';            
+    //         },
+    // 		submitProfile() {
+    //         this.formP.put(route('collaborator.profile.update'), {
+    //             preserveScroll: true,
+    //             errorBag: 'submitProfile',
+    //             })
+    //         },
+    //         submitFiscal() {
+    //             this.formF.nif = $('#nif').val();
+    //             this.formF.put(route('collaborator.fiscal.update'), {
+    //                 preserveScroll: true,
+    //                 errorBag: 'submitFiscal',
+    //                 onSuccess:()=>{
+    //                     $('#datosModal').modal('hide')
+    //                 }
+    //             })
+    //         },
+    //         logout(){
+    //             this.$inertia.post(route('logout'), {
+    //                 _token: this.$page.props.csrf_token,
+    //             })
+    //         }
+    // 	},
+    //     computed: {
+    //         errors() {
+    //             return this.$page.props.errors
+    //         },
+    //     }
+	// }
 </script>
 <style scoped>
 .input-datos{

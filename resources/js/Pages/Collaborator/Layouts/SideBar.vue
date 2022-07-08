@@ -294,10 +294,16 @@ export default {
             ul.classList.toggle('show');
         },
         sendFeedback(){
+            let modal = $('#feedback')
             this.form.post(route('collaborator.feedback'),{
                     _token: this.$page.props.csrf_token,
                     errorBag: 'sendFeedback',
                     preserveScroll: true,
+                    onSuccess:()=>{
+                        this.form.reset()
+                        modal.modal('hide')
+                        console.log('asdasd')
+                    }
                 })
         }
     },
