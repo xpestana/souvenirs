@@ -2,16 +2,16 @@
     <div class="select-box">
         <div
             v-if="showOptions"
-            class="options-container"
+            class="options-container shadow"
         >
             <div
                 v-for="(option, index) in options"
                 :key="index"
-                class="option py-2  pl-2 hover:active cursor-pointer"
+                class="option py-2 px-2 hover:active cursor-pointer relative"
                 @click.prevent="selectOption(option.value)"
                 @mouseover="hoverOption = true"
                 @mouseleave="hoverOption = false"
-                :class="{'active': (option.value == city) && !hoverOption}"
+                :class="{'active': (option.value == modelValue) && !hoverOption, 'border-option': (index + 1) < options.length}"
             >
                 <input
                     type="radio"
@@ -26,12 +26,13 @@
             </div>
         </div>
         <div
-            class="selected w-100 rounded py-2 pr-3  pl-2 inline-block flex justify-content-between"
+            class="selected w-100 rounded py-2 pr-3 inline-block flex justify-content-between relative collaborator-box"
             @click.prevent="openOptions()"
-            :class="{'error-input': error, 'disabled-input': disabled,  'cursor-pointer': !disabled }"
+            :class="{'disabled-input': disabled, 'error-input': error,  'cursor-pointer': !disabled, 'pl-8': icon, 'pl-2': !icon}"
         >
+            <i v-if="icon" class="fas fa-search absolute inset-y-1/3 px-2"></i>
             <span class="inline-block">{{ labelSelect }}</span>
-             <i class="fas fa-caret-up text-black inline-block"></i>
+            <i class="fas fa-angle-down inline-block"></i>
         </div>
     </div>
 </template>
@@ -40,16 +41,11 @@
 export default {
     data() {
         return {
-            city: 'sevilla',
             showOptions: false,
-            options: [
-                {label: 'Madrid', value: 'madrid'},
-                 {label: 'Barcelona', value: 'barcelona'},
-                  {label: 'Sevilla', value: 'sevilla'},
-            ],
             hoverOption: false,
         }
     },
+    emits: ['update:modelValue'],
     props: {
         error:{
             type: Boolean,
@@ -63,10 +59,22 @@ export default {
             type: String,
             default: '',
         },
+        modelValue: {
+            type: String,
+            default: '',
+        },
+        options: {
+            type: Array,
+            default: () => ([]),
+        },
+        icon: {
+            type: String,
+            default: '',
+        }
     },
     computed: {
         label () {
-            var lb = this.options.find(item => this.city === item.value)
+            var lb = this.options.find(item => this.modelValue === item.value)
             var text = lb ? lb.label : null
             return text
         },
@@ -78,6 +86,7 @@ export default {
         openOptions (){
             if (!this.disabled) {
                 this.showOptions = !this.showOptions
+                console.log(this.showOptions)
                 this.hoverOption = false
             } else {
                  this.showOptions = false
@@ -86,7 +95,7 @@ export default {
         },
         selectOption (value) {
            var op = this.options.find(item => item.value === value)
-           this.city = op.value
+           this.$emit('update:modelValue', op.value)
             this.showOptions = false
         }
     },
@@ -111,6 +120,10 @@ export default {
 		overflow: hidden;
 		order: 1;
 	}
+
+    .border-option{
+        border-bottom: 1 solid#c2c2c2;
+    }
 
 	.select-box .options-container .active {
 		/*max-height: 240px;
@@ -143,7 +156,7 @@ export default {
 	}
     
     .select-box .error-input{
-        border: solid 2.5px red;
+        border: solid 2.5px red !important;
     }
     
     .select-box .disabled-input{

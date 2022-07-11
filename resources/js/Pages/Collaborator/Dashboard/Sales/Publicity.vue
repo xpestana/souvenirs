@@ -249,7 +249,7 @@
 	import ModalCookies from '@/Pages/Collaborator/components/ModalCookies'
 	import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert'
 	import Paginator from '@/Components/Paginator.vue'
-	import moment from 'moment'
+	import Moment from 'moment'
 	export default {
 		layout:TemplateApp,
 	    components:{
@@ -293,7 +293,7 @@
 	    			var beneficio = (total * 0.2).toFixed(2);
 	    			return {
 	    				transactionId: item.transaction_id,
-	    				created_at: moment(item.created_at).format("DD/MM/YYYY"),
+	    				created_at: this.moment(item.created_at).format("DD/MM/YYYY"),
 	    				total: total,
 	    				beneficio: beneficio,
 	    				city: 'Sevilla',
@@ -303,6 +303,7 @@
 	    	},
 	    },
 	    created () {
+			this.moment = Moment
 	    	this.orders.data.forEach(order =>{
 	            this.total += Number(order.total);
 	            if (order.withdrawal == 0) {
@@ -329,7 +330,7 @@
 			},
 	    	validFilterPublicity() {
 	    		if (this.form.to && this.form.from) {
-					if (moment(this.form.to).isAfter(this.form.from)) {
+					if (this.moment(this.form.to).isAfter(this.form.from)) {
 						this.submitPublicity()
 					} else {
 						this.$swal({
@@ -365,10 +366,10 @@
 				},1500);
 			},
 			requestTransfer(){
-	            let dia = Number(moment(this.dateTEST).format("DD"));
-	            let mes = Number(moment(this.dateTEST).format("MM"));
-	            let año = Number(moment(this.dateTEST).format("YYYY"));
-	            let ago = moment().diff(moment([año,(mes - 1),(dia)]),'days');
+	            let dia = Number(this.moment(this.dateTEST).format("DD"));
+	            let mes = Number(this.moment(this.dateTEST).format("MM"));
+	            let año = Number(this.moment(this.dateTEST).format("YYYY"));
+	            let ago = this.moment().diff(this.moment([año,(mes - 1),(dia)]),'days');
 	            this.remainingDays = 90 - ago;
 	            if(Number(ago) > 90){
 	                $('#request').modal('show')

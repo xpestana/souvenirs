@@ -359,7 +359,15 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/asociado')->group(funct
     
     Route::get('/', [AssociateController::class, 'associate_home'])->name('associates.home');  
     Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
-    Route::get('/colaboraciones', [AssociateController::class, 'collaborations'])->name('associates.collaborations');  
+    Route::get('/colaboraciones', [AssociateController::class, 'collaborations'])->name('associates.collaborations');
+});
+
+/*Resources asociados*/
+Route::middleware(['auth', 'verified'])->prefix('tablero/recursos-asociados')->group(function () {
+    Route::get('/', [AssociateController::class, 'resource_index'])->name('associates.resource.index');
+    Route::get('/displays', [AssociateController::class, 'resource_display'])->name('associates.resource.display');
+    Route::get('/banners', [AssociateController::class, 'resource_banner'])->name('associates.resource.banner');
+    Route::get('/urls', [AssociateController::class, 'resource_url'])->name('associates.resource.url');
 });
 
 /*Ajustes*/

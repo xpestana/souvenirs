@@ -111,7 +111,7 @@
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Grupo <span class="required-input">*</span></label>
-			                                    <select
+			                                    <!--<select
 			                                    	v-model="formModal.group"
 			                                    	class="w-100 rounded col-form-input py-1"
 			                                        :class="{'error-input': errorsKey.includes('group')}"
@@ -124,11 +124,17 @@
 													>
 														{{ item }}
 													</option>
-												</select>
+												</select>-->
+												<Select
+													v-model="formModal.group"
+													:options="group"
+													textLabel="Grupo..."
+													:error="errorsKey.includes('group')"
+												/>
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <label class="font-bold mb-0.5">Modalidad <span class="required-input">*</span></label>
-					                        <select
+					                        <!--<select
 		                                    	v-model="formModal.modality"
 		                                    	class="w-100 rounded col-form-input py-1"
 		                                        :disabled="formModal.group == null"
@@ -142,7 +148,14 @@
 												>
 													{{ item }}
 												</option>
-											</select>
+											</select>-->
+											<Select
+												v-model="formModal.modality"
+												:options="modalid"
+												textLabel="Modalidad..."
+												:error="errorsKey.includes('modality')"
+												:disabled="formModal.group == null"
+											/>
 				                    	</div>
 			                        </div>
 			                    </div>
@@ -150,7 +163,7 @@
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Categoría <span class="required-input">*</span></label>
-			                                    <select
+			                                    <!--<select
 			                                    	v-model="formModal.category"
 			                                    	class="w-100 rounded col-form-input py-1"
 			                                    	:disabled="formModal.group == null || formModal.modality == null"
@@ -164,7 +177,14 @@
 													>
 														{{ item }}
 													</option>
-												</select>
+												</select>-->
+												<Select
+													v-model="formModal.category"
+													:options="category"
+													textLabel="Categoría..."
+													:error="errorsKey.includes('category')"
+													:disabled="formModal.group == null || formModal.modality == null"
+												/>
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <label class="font-bold mb-0.5">Página Web  <span v-if="formComputed.tipo == 'apartamento'" class="required-input">*</span></label>
@@ -267,7 +287,10 @@
 			                                    >
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
-					                        <label class="font-bold mb-0.5">Página Web  <span class="required-input">*</span></label> <span class="fas fa-exclamation-circle ml-1 icon relative"><div class="tooltipp rounded-md shadow text-xs font-light">Escribe aquí el enlace del anuncio de tu apartamento. Booking, Airbnb, Wimdu...</div></span>
+					                        <div class="flex justify-content-between justify-content-md-start">
+												 <label class="font-bold mb-0.5 inline-block">Página Web <span class="required-input">*</span></label> 
+												<span class="fas fa-exclamation-circle ml-md-1 icon mb-1 relative inline-block"><div class="tooltipp rounded-md shadow text-xs font-light">Escribe aquí el enlace del anuncio de tu apartamento. Booking, Airbnb, Wimdu...</div></span>
+											</div>
 					                        <input
 					                            type="text" v-model="formModal.url"
 					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
@@ -315,7 +338,7 @@
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <label class="font-bold mb-0.5">N° de llaves <span class="required-input">*</span></label>
-					                        <select
+					                        <!--<select
 		                                    	v-model="formModal.nllaves"
 		                                    	class="w-100 rounded col-form-input py-1"
 		                                        placeholder="N° de llaves..."
@@ -329,7 +352,13 @@
 												>
 													{{ item }}
 												</option>
-											</select>
+											</select>-->
+											<Select
+												v-model="formModal.nllaves"
+												:options="llaves"
+												textLabel="N° de llaves..."
+												:error="errorsKey.includes('nllaves')"
+											/>
 				                    	</div>
 			                        </div>
 			                    </div>
@@ -715,13 +744,15 @@
 	import { Head, Link } from '@inertiajs/inertia-vue3'
     import { Inertia } from '@inertiajs/inertia'
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
-	import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert' 
+	import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert'
+	import Select from '@/Components/Select'
 	export default {
 		layout:TemplateApp,
 		components:{
             Head,
             Link,
-            ValidationAlert,
+			ValidationAlert,
+			Select,
         },
         props: {
             form: Object,
@@ -750,10 +781,10 @@
 					category: null,
 				}),
 				imagenValue: null,
-				group: ['Hotel', 'Pensión/Albergue', 'Hostal', 'Apartahotel'],
-				modalid: ['Playa', 'Rural', 'Carretera', 'Ciudad'],
-				category: ['1 Estrella', '2 Estrellas', '3 Estrellas', '3 Estrellas', '4 Estrellas', '5 Estrellas'],
-				llaves: ['1', '2', '3', '4'],
+				group: [{label: 'Hotel', value: 'Hotel'}, {label: 'Pensión/Albergue', value: 'Pensión/Albergue'}, {label: 'Apartahotel',  value: 'Apartahotel'}],
+				modalid: [{label: 'Playa', value: 'Playa'}, {label: 'Rural', value: 'Rural'}, {label: 'Carretera',  value: 'Carretera'}, {label: 'Ciudad',  value: 'Ciudad'}],
+				category: [{label: '1 Estrella', value: '1 Estrella'}, {label: '2 Estrellas', value: '2 Estrellas'}, {label: '3 Estrellas', value: '3 Estrellas'}, {label: '4 Estrellas',  value: '4 Estrellas'}, {label: '5 Estrellas',  value: '5 Estrellas'}],
+				llaves: [{label: '1', value: '1'}, {label: '2', value: '2'}, {label: '3',  value: '3'}, {label: '4',  value: '4'}, {label: '5',  value: '5'}],
 				errorsKey: [],
 			}
 		},
@@ -876,7 +907,7 @@
 	        	return this.form.type
 	        },
 	        nameImage () {
-	        	if (this.form.type == 'complejo') return 'complejo túristico'
+	        	if (this.form.type == 'complejo') return 'complejo turístico'
 	        	return this.form.type
 	        },
 		},
@@ -1008,6 +1039,7 @@
 	}
 	.icon{
 		position: relative;
+		//transform: rotate(180deg);
 	}
 	.bg-header-colaborator{
         background-color: #f6f6f6;
@@ -1022,7 +1054,7 @@
         diplay: inline-block;
     }
 	.modal-dialog{
-		max-width: 45% !important;
+		max-width: 55% !important;
 		margin: 0.5rem auto  !important;
 	}
 	.modal-dialog-image{

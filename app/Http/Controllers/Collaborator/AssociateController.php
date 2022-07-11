@@ -47,4 +47,58 @@ class AssociateController extends Controller
         return Inertia::render('Associates/Dashboard/Home', compact('cont','hotels','url','orders'));
     }
 
+    public function resource_index (Request $request) {
+        return Inertia::render('Associates/Dashboard/Resource/Welcome');
+    }
+
+    public function resource_display (Request $request) {
+        return Inertia::render('Associates/Dashboard/Resource/Display');
+    }
+
+    public function resource_banner (Request $request) {
+        $city = $request->city ?? null;
+        $width = $request->width ?? null;
+        $url = [
+            'path' => null,
+            'fullPath' => null,
+        ];
+        $href = null;
+        if ($city && $width) {
+            $idUser = auth::user()->id;
+            $href = url('?p='.$city.'&c='.$idUser.'&t=2');
+            if ($city == 'sevilla' && $width == '160x600') {
+                $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/160x600.png';
+                $url['fullPath'] = url('/'.$url['path']);
+            }
+            if ($city == 'sevilla' && $width == '200x700') {
+                $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/200x700.png';
+                $url['fullPath'] = url('/'.$url['path']);
+            }
+            if ($city == 'sevilla' && $width == '728x90') {
+                $url['path'] =  'vendor_asset/img/collaborator/dashboard/banners/728x90.png';
+                $url['fullPath'] = url('/'.$url['path']);
+            }
+        }
+        return Inertia::render('Associates/Dashboard/Resource/Banner', compact('url', 'href'));
+    }
+
+    public function resource_url (Request $request) {
+        $city = $request->city ?? null;
+        $url = null;
+        if ($city) {
+            $idUser = auth::user()->id;
+            $url = url('?p='.$city.'&c='.$idUser.'&t=2');
+        }
+        return Inertia::render('Associates/Dashboard/Resource/Url', compact('url'));
+    }
+
+    public function resource_request_display(Request $request){
+        $request->validate([
+            'city' => 'required|string',
+            'display' => 'required|array'
+        ]);
+        return dd($request->display);
+        return back();
+    }
+
 }

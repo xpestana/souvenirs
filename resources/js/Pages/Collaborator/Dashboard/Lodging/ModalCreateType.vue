@@ -20,7 +20,7 @@
                                 <span class="inline-block mt-1 text-xs text-collaborator">Hotel</span>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 md:mr-1 mt-3 md:mt-0 flex justify-content-center">
+                        <div class="col-12 col-md-3 md:mr-1 mt-3 mt-md-0 flex justify-content-center">
                             <div
                                 class=" border-collaborator text-center p-1 text-center cursor-pointer"
                                 @click.prevent="saveType('apartamento')"
@@ -31,7 +31,7 @@
                                 <span class="inline-block mt-1 text-xs text-collaborator">Apartamento</span>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 mt-3 md:mt-0 flex justify-content-center">
+                        <div class="col-12 col-md-3 mt-3 mt-md-0 flex justify-content-center">
                             <div
                                 class="border-collaborator p-1 text-center cursor-pointer"
                                 @click.prevent="saveType('complejo')"
@@ -111,7 +111,7 @@
         color: #86bcd9;
     }
     .modal-dialog{
-        max-width: 40% !important;
+        max-width: 50% !important;
     }
     @media (max-width:767px) {
         .modal-dialog{
