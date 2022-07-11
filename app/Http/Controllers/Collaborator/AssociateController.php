@@ -37,4 +37,14 @@ class AssociateController extends Controller
         return Inertia::render('Associates/Dashboard/Collaboration', compact('hotels','orders','url','ordersTotal'));
     }
 
+    public function associate_home(Request $request)
+    {
+        $url = config('app.url');
+        $cont = 4;
+        $hotels = auth()->user()->hotel->load('orders.shippings');
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status","complete")
+                    ->with('hotel','shippings')->get();
+        return Inertia::render('Associates/Dashboard/Home', compact('cont','hotels','url','orders'));
+    }
+
 }

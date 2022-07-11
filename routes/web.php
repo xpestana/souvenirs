@@ -355,9 +355,9 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
     
 });
 /*Dashboard asociados*/
-Route::middleware(['auth', 'verified'])->prefix('tablero/asociado/')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('tablero/asociado')->group(function () {
     
-    Route::get('/servicios', [ProfileCollaboratorController::class, 'associate_profile'])->name('associates.index');  
+    Route::get('/', [AssociateController::class, 'associate_home'])->name('associates.home');  
     Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
     Route::get('/colaboraciones', [AssociateController::class, 'collaborations'])->name('associates.collaborations');  
 });

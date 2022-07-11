@@ -127,7 +127,7 @@
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target-full"></div>
                     <div class="text-white text-center full-button">
-                        <Link id="full-button" :href="route('coll.lodgings.index')" class="absolute top-16 left-28 z-50  btn rounded-lg border-solid d-none d-lg-block">
+                        <Link id="full-button" :href="route('coll.lodgings.index')" class="absolute top-16 left-28 2xl:top-28 2xl:left-40 z-50 btn rounded-lg border-solid d-none d-lg-block">
                             + Añadir alojamiento
                         </Link>
                     </div>
