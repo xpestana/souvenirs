@@ -11,8 +11,8 @@
         </div>
         <!--END Header section-->
         
-        <div class="total-saldo row my-8 justify-content-lg-between mx-1.5 lg:mx-0">
-            <div class="col-12 col-lg-auto rounded-xl bg-collaborator-grey py-2.5 lg:mr-2">
+        <div class="total-saldo lg:flex my-8 mx-1.5 lg:mx-0">
+            <div class="rounded-xl w-55 bg-collaborator-grey py-2.5 px-2 lg:mr-4">
                 <div class="flex">
                     <div class="">
                         <Link
@@ -39,7 +39,7 @@
                                 'shadow':this.$page.url=='/tablero/ventas-publicidad',
                             }"
                         >
-                            Ventas antes
+                            Ventas publicidad
                         </Link>
                     </div>
                     <div class="">
@@ -53,18 +53,18 @@
                                 'shadow':this.$page.url=='/tablero/ventas-inmueble',
                             }"
                         >
-                            Ventas durante
+                            Ventas inmueble
                         </Link>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-6 mt-4 mt-lg-0 mt-xl-0 rounded-xl bg-collaborator-orange py-2.5">
-                <div class="row justify-content-center">
-                    <div class="pt-2 col-6 text-left">
+            <div class="mt-4 mt-lg-0 w-auto mt-xl-0 rounded-xl bg-collaborator-orange px-2 py-2.5">
+                <div class="lg:flex justify-content-center justify-content-lg-between">
+                    <div class="pt-2 text-left lg:mr-5">
                         <h2 class="font-bold inline text-white text-base">Saldo pendiente: </h2><br class="lg:hidden">
                         <p class="inline text-white text-base">{{ (withdrawal*0.20).toFixed(2) }} €</p>
                     </div>
-                    <div class="pt-0.5 col-6 text-right">
+                    <div class="pt-0.5 text-right">
                         <button class="btn bg-white text-orangec lg:ml-auto py-1 lg:mr-2.5 font-bold" @click="requestTransfer">Pedir transferencia</button>
                     </div>
                 </div>

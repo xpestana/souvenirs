@@ -36,6 +36,7 @@
 	                            placeholder="Ciudad..."
 	                         >
 								<option value="sevilla" :selected="form.city == 'sevilla'">Sevilla</option>
+								<option value="madrid" :selected="form.city == 'madrid'">Madrid</option>
 							</select>
 						</div>
                     </div>
@@ -83,10 +84,12 @@
 <script>
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
 	import { Link } from '@inertiajs/inertia-vue3';
+	import SelectCollaborator from '@/Pages/Collaborator/components/SelectCollaborator'
 	export default {
 	    layout:TemplateApp,
 	    components:{
-	        Link
+			Link,
+			SelectCollaborator,
 	    },
 	    props: {
 	    	url: Object,
@@ -100,7 +103,7 @@
 				}),
 				message: null,
 	    	}
-	    },
+		},
 	    computed: {
 	    	img () {
 	    		if (this.url.fullPath) {
@@ -193,7 +196,8 @@
 <style scoped>
 	option {
     	background-color: #f5f5f5;
-    	padding: .7rem .3rem;
+    	padding: .5rem .3rem;
+		margin-top:1rem;
     }
     option:hover{
 		background-color: #aad1e6;
@@ -201,6 +205,10 @@
 	.orange{
 	  color: #FF9C06;
 	}
+
+	.error-input{
+        border: solid 2.5px red;
+    }
 
 	a, select {
 		z-index: 10 !important;
