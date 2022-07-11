@@ -28,7 +28,7 @@
                 <h2 class="text-xl font-semibold">Displays físicos</h2>
             </div>
         </div>
-        <div class="stay-displays row mt-1.5 mb-2.5 justify-content-center flex-nowrap overflow-x-auto pl-16 pl-lg-0 mx-0">
+        <div class="stay-displays row mt-3.5 mb-2.5 justify-content-center flex-nowrap overflow-x-auto pl-16 pl-lg-0 mx-0">
             <div class="col-5 col-md-3 bg-collaborator-orange rounded-xl shadow h-24 lg:h-44 mx-3.5 relative">
                 <div class="absolute bottom-0 left-0 w-full h-full gradient-coll-down z-30 rounded-b-xl">
                     <h4 class="text-xs lg:text-lg text-white font-semibold mt-16 lg:mt-36 ml-2.5">MarcoQR</h4>
@@ -54,17 +54,17 @@
             >
                 <div class="gradient-left w-full h-full rounded-t-xl"></div>
             </div>
-            <div class="cards-info col-12 col-lg-3 md:bg-black pt-3.5 lg:rounded-l-xl pl-lg-4 h-auto lg:h-28  absolute md:static top-16 z-30">
-                <h1 class="text-7xl text-orangec font-bold">
+            <div class="cards-info col-12 col-lg-4 md:bg-black pt-1.5 lg:rounded-l-xl pl-lg-4 h-auto lg:h-28  absolute md:static top-16 z-30">
+                <h1 class="text-8xl text-orangec font-bold lg:text-center mb-2.5 lg:mb-0">
                     20%
                 </h1>
             </div>
-            <div class="cards-info col-12 col-lg-6 bg-black pt-3.5 h-auto lg:h-28 px-lg-0 rounded-b-xl lg:rounded-b-none">
-                <h1 class="text-lg text-white font-bold mb-6 lg:mb-0">
+            <div class="cards-info col-12 col-lg-4 bg-black pt-2.5 h-auto lg:h-28 px-lg-0 rounded-b-xl lg:rounded-b-none">
+                <h1 class="text-lg text-white font-bold mb-6 lg:mb-0 leading-6 pl-6">
                     de comisión sobre el precio final de venta de todos los servicios que adquiera el cliente.
                 </h1>
             </div>
-            <div class="cards-img col-lg-3 d-none d-lg-block rounded-r-xl bg-center bg-cover pl-lg-0 h-28" style="background-image:url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg')">
+            <div class="cards-img col-lg-4 d-none d-lg-block rounded-r-xl bg-center bg-cover pl-lg-0 h-28" style="background-image:url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg')">
                 <div class="gradient-left w-full h-full rounded-r-xl"></div>
             </div>
         </div>

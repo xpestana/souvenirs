@@ -23,14 +23,25 @@
                                         <div class="single-aboss-product mb-3">
                                             <div class="pro-img">
                                                 <Link :href="route('product.souvenir.show',{product : product.product.id})">
-                                                    <div :style="'background:url(/storage/souvenirs/'+product.product.images[0].url+')'" class="img-prod"></div>
+                                                    <div v-if="product.product.type == 'Souvenirs'" :style="'background:url(/storage/souvenirs/'+product.product.images[0].url+')'" class="img-prod"></div>
+                                                    <template v-if="product.product.type == 'Activities'">
+                                                            <div v-if="product.product.images.length > 0" 
+                                                                :style="'background:url(/storage/souvenirs/'+product.product.images[0].name+')'" 
+                                                                class="img-prod"
+                                                            ></div>
+                                                            <div v-else 
+                                                                :style="'background:url(/vendor_asset/img/bg-image/act-default.jpg)'" 
+                                                                class="img-prod"
+                                                            ></div>
+                                                    </template>
+                                                    
                                                 </Link>
                                                 <div class="pro-actions">
                                                     <Link class="quick-view" :href="route('product.souvenir.show',{product : product.product.id})"><i class="icon-zoom"></i></Link>
                                                 </div>
                                             </div>
                                             <div class="pro-content">
-                                                <h4><Link :href="route('product.souvenir.show',{product : product.product.id})">{{ product.product.title }}</Link></h4>
+                                                <h4 class="truncate"><Link :href="route('product.souvenir.show',{product : product.product.id})">{{ product.product.title }}</Link></h4>
                                             </div>
                                         </div>
                                         <!-- Single Product End -->
