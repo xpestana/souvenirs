@@ -339,6 +339,10 @@
     color:#86bcd9;
   }
 
+  .bg-collaborator-grey {
+      background-color:  #ebebeb;
+  }
+
   #collaborator-data select{
     color: #bababa;
     font-weight: 500;

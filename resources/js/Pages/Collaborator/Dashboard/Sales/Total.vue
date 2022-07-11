@@ -11,22 +11,69 @@
         </div>
         <!--END Header section-->
         
-        <div class="total-saldo row my-8 mx-1.5 lg:mx-0">
-            <div class="col-12 col-lg-8 rounded-xl bg-collaborator-orange py-2.5">
-                <div class="row justify-content-center">
-                    <div class="pt-2 col-12 col-lg-6 text-center text-lg-left">
+        <div class="total-saldo lg:flex my-8 mx-1.5 lg:mx-0">
+            <div class="rounded-xl w-55 bg-collaborator-grey py-2.5 px-2 lg:mr-4">
+                <div class="flex">
+                    <div class="">
+                        <Link
+                            :href="route('dashboard.sales.total')"
+                            class="btn  bg-collaborator-grey ml-auto py-1 mr-2.5 font-bold"
+                            :class="{
+                                'bg-collaborator-orange':this.$page.url=='/tablero/ventas-totales',
+                                'text-white':this.$page.url=='/tablero/ventas-totales',
+                                'text-muted':this.$page.url!='/tablero/ventas-totales',
+                                'shadow':this.$page.url=='/tablero/ventas-totales',
+                            }"
+                        >
+                            Ventas totales
+                        </Link>
+                    </div>
+                    <div class="">
+                        <Link
+                            :href="route('collaborator.sales.publicity')"
+                            class="btn bg-collaborator-grey ml-auto py-1 mr-2.5 font-bold"
+                            :class="{
+                                'bg-collaborator-orange':this.$page.url=='/tablero/ventas-publicidad',
+                                'text-white':this.$page.url=='/tablero/ventas-publicidad',
+                                'text-muted':this.$page.url!='/tablero/ventas-publicidad',
+                                'shadow':this.$page.url=='/tablero/ventas-publicidad',
+                            }"
+                        >
+                            Ventas publicidad
+                        </Link>
+                    </div>
+                    <div class="">
+                        <Link
+                            :href="route('collaborator.sales.property')"
+                            class="btn bg-collaborator-grey ml-auto py-1 mr-2.5 font-bold"
+                            :class="{
+                                'bg-collaborator-orange':this.$page.url=='/tablero/ventas-inmueble',
+                                'text-white':this.$page.url=='/tablero/ventas-inmueble',
+                                'text-muted':this.$page.url!='/tablero/ventas-inmueble',
+                                'shadow':this.$page.url=='/tablero/ventas-inmueble',
+                            }"
+                        >
+                            Ventas inmueble
+                        </Link>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 mt-lg-0 w-auto mt-xl-0 rounded-xl bg-collaborator-orange px-2 py-2.5">
+                <div class="lg:flex justify-content-center justify-content-lg-between">
+                    <div class="pt-2 text-left lg:mr-5">
                         <h2 class="font-bold inline text-white text-base">Saldo pendiente: </h2><br class="lg:hidden">
                         <p class="inline text-white text-base">{{ (withdrawal*0.20).toFixed(2) }} €</p>
                     </div>
-                    <div class="pt-0.5 col-12 col-lg-6 text-center text-lg-right">
+                    <div class="pt-0.5 text-right">
                         <button class="btn bg-white text-orangec lg:ml-auto py-1 lg:mr-2.5 font-bold" @click="requestTransfer">Pedir transferencia</button>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 text-center text-lg-left pt-2 pt-lg-0">
-                <p class="pt-0.5"><b>Facturación total: </b>{{total.toFixed(2)}}€</p>
-                <p class=""><b>Beneficio total: </b>{{(total*0.20).toFixed(2)}}€</p>
-            </div>
+        </div>
+        <div class="lg:flex mb-8 justify-content-lg-start text-lg-left pt-2 pt-lg-0">
+            <p class="block mr-4"><b>Facturación total: </b>{{total.toFixed(2)}}€</p>
+            <p class="block mr-4"><b>Beneficio total: </b>{{(total*0.20).toFixed(2)}}€</p>
+            <p v-if="dateLast" class="block"><b>Última tranferencia de saldo realizada: </b>{{moment(dateLast).format('DD/MM/YYYY')}}</p>
         </div>
         <!-- Content section-->
         <div class="total-fechas row mb-3.5">
@@ -200,6 +247,7 @@ export default {
         orders:Object,
         totalorders:Object,
         date:String,
+        dateLast: String,
     },
     data(){
         return{
@@ -294,6 +342,10 @@ export default {
 }
 </script>
 <style scoped>
+a:focus{
+    ouline: none;
+    box-shadow: none;
+}
 .tabla-collaborator > tbody > tr > td ,
 .tabla-collaborator > thead > tr  > th {
     border-left: 2px solid #4d778e;

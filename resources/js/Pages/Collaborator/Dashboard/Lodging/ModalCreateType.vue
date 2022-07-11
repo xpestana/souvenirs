@@ -9,7 +9,7 @@
                 <div class="modal-body p-0">
                     <h2 class="text-lg md:text-xl text-center mt-3.5 font-bold">¿Que tipo de inmueble vas a registrar?</h2>
                     <div class="row justify-content-center my-3">
-                        <div class="col-12 col-md-3 md:mr-1">
+                        <div class="col-12 col-md-3 md:mr-1 flex justify-content-center">
                             <div
                                 class="border-collaborator text-center p-1 text-center cursor-pointer"
                                 @click.prevent="saveType('hotel')"
@@ -20,7 +20,7 @@
                                 <span class="inline-block mt-1 text-xs text-collaborator">Hotel</span>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3 md:mr-1">
+                        <div class="col-12 col-md-3 md:mr-1 mt-3 md:mt-0 flex justify-content-center">
                             <div
                                 class=" border-collaborator text-center p-1 text-center cursor-pointer"
                                 @click.prevent="saveType('apartamento')"
@@ -31,7 +31,7 @@
                                 <span class="inline-block mt-1 text-xs text-collaborator">Apartamento</span>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-3 mt-3 md:mt-0 flex justify-content-center">
                             <div
                                 class="border-collaborator p-1 text-center cursor-pointer"
                                 @click.prevent="saveType('complejo')"

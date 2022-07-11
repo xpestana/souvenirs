@@ -491,13 +491,20 @@ class CollaboratorController extends Controller
                         ->paginate(8);
         $orders = $model->appends(request()->except('page'));
 
+         $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)
+                    ->where("withdrawal",1)->orderBy('id', 'desc')->first();
+        $dateLast = $orderLast ? $orderLast->updated_at : null;
+
         $withdrawal = $orders->where("withdrawal",0);
         $date = null;
         if (!$withdrawal->isEmpty()) {
             $date = $withdrawal->last()->updated_at; 
         }
 
-        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('hotels','orders','date'));
+        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('hotels','orders','date', 'dateLast'));
     }
 
     public function sales_publicity (Request $request) {
@@ -511,13 +518,20 @@ class CollaboratorController extends Controller
                         ->paginate(8);
         $orders = $model->appends(request()->except('page'));
 
+        $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)
+                    ->where("withdrawal",1)->orderBy('id', 'desc')->first();
+        $dateLast = $orderLast ? $orderLast->updated_at : null;
+
         $withdrawal = $orders->where("withdrawal",0);
         $date = null;
         if (!$withdrawal->isEmpty()) {
             $date = $withdrawal->last()->updated_at; 
         }
 
-        return Inertia::render('Collaborator/Dashboard/Sales/Publicity',compact('orders'));
+        return Inertia::render('Collaborator/Dashboard/Sales/Publicity',compact('orders', 'dateLast', 'date', 'hotels'));
     }
 
     public function sales_total(Request $request){
@@ -533,13 +547,20 @@ class CollaboratorController extends Controller
                     ->Date($request->desde, $request->hasta)->get();
         $withdrawal = $orders->where("withdrawal",0);
 
+        $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)
+                    ->where("withdrawal",1)->orderBy('id', 'desc')->first();
+        $dateLast = $orderLast ? $orderLast->updated_at : null;
+
         $date = null;
 
         if (!$withdrawal->isEmpty()) {
-            $date = $withdrawal->first()->updated_at; 
+            $date = $withdrawal->first()->updated_at;
         }
 
-        return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders','date','totalorders'));
+        return Inertia::render('Collaborator/Dashboard/Sales/Total',compact('hotels','orders','date','totalorders', 'dateLast'));
     }
     public function notify(Request $request){
 

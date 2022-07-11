@@ -8,15 +8,15 @@
             <div class="modal-content modal-create-lodging modal mx-auto">
             	<div class="modal-header py-3 pr-3 pl-11 m-0 bg-collaborator-orange">
             		<div class="row justify-content-md-between w-100">
-						<div class="col-12 col-md-5 text-center text-md-left mb-2 mb-md-0">
+						<div class="col-12 col-md-4 text-center text-md-left mb-2 mb-md-0">
 							<h1 class="font-bold text-white inline-block text-lg lg:text-2xl">
-							<img class="inline w-7 mr-2" style="margin-top:-4px;"
+								<img class="inline w-7 mr-2" style="margin-top:-4px;"
 									:src="'/vendor_asset/img/collaborator/dashboard/icons/lodging/'+nameImage+'.svg'"
 								>
 								Registrar {{ formatName }}
 							</h1>
 						</div>
-						<div class="col-12 col-md-5  text-center text-md-right">
+						<div class="col-12 col-md-6  text-center text-md-right">
 							<button
 								type="submit"
 								class="btn inline-block rounded btn-outline-white py-1 px-2"
@@ -42,7 +42,7 @@
 			                	v-if="formComputed.tipo == 'hotel'"
 			                    class="row px-0"
 			                >
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Nombre del hotel <span class="required-input">*</span></label>
@@ -63,7 +63,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Provincia <span class="required-input">*</span></label>
@@ -86,7 +86,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Calle <span class="required-input">*</span></label>
@@ -108,7 +108,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Grupo <span class="required-input">*</span></label>
@@ -117,7 +117,7 @@
 			                                    	class="w-100 rounded col-form-input py-1"
 			                                        :class="{'error-input': errorsKey.includes('group')}"
 			                                     >
-			                                     	<option value="" hidden selected>Grupo...</option>
+			                                     	<option value="" hidden :selected="formModal.group == ''">Grupo...</option>
 													<option
 														v-for="(item, index) in group"
 														:key="index"
@@ -132,10 +132,10 @@
 					                        <select
 		                                    	v-model="formModal.modality"
 		                                    	class="w-100 rounded col-form-input py-1"
-		                                        :disabled="formModal.group == null"
+		                                        :disabled="formModal.group == ''"
 		                                        :class="{'error-input': errorsKey.includes('modality')}"
 		                                     >
-		                                     	<option  value="" hidden selected>Modalidad....</option>
+		                                     	<option value="" hidden :selected="formModal.group == ''">Modalidad...</option>
 												<option
 													v-for="(item, index) in modalid"
 													:key="index"
@@ -147,7 +147,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Categoría <span class="required-input">*</span></label>
@@ -155,10 +155,10 @@
 			                                    <select
 			                                    	v-model="formModal.category"
 			                                    	class="w-100 rounded col-form-input py-1"
-			                                    	:disabled="formModal.group == null || formModal.modality == null"
+			                                    	:disabled="formModal.group == '' || formModal.modality == ''"
 			                                        :class="{'error-input': errorsKey.includes('category')}"
 			                                     >
-			                                     	<option  value="" hidden selected>Categoría...</option>
+			                                     	<option value="" hidden :selected="formModal.category == ''">Categoría...</option>
 													<option
 														v-for="(item, index) in category"
 														:key="index"
@@ -186,8 +186,7 @@
 			                            </div>
 			                        </div>
 			                    </div>
-	                    		<div class="col-md-5"></div>
-	                    		<div class="col-12 my-0.5 px-0">
+	                    		<div class="col-12 my-1.5 px-0">
 		                            <label class="font-bold mb-0.5">Otros datos de interés
 		                            </label>
 		                            <textarea
@@ -200,7 +199,7 @@
 			                	v-if="formComputed.tipo == 'apartamento'"
 			                    class="row px-0"
 			                >
-			                	<div class="col-12 my-0.5 px-0">
+			                	<div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Calle <span class="required-input">*</span></label>
@@ -222,7 +221,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Otras indicaciones</label>
@@ -236,7 +235,7 @@
 			                            </div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Provincia <span class="required-input">*</span></label>
@@ -259,8 +258,8 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
-			                        <div class="row px-0">
+			                    <div class="col-12 my-1.5 px-0">
+			                        <div class="row px-0">	
 										<div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">N° de licencia </label>
 			                                    <input
@@ -270,7 +269,7 @@
 			                                    >
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
-					                        <label class="font-bold mb-0.5">Página Web  <span class="required-input">*</span></label> <i class="fas fa-circle-exclamation"></i>
+					                        <label class="font-bold mb-0.5">Página Web <span class="required-input">*</span></label> <span class="fas fa-exclamation-circle ml-1 icon relative"><div class="tooltipp rounded-md shadow text-xs font-light">Escribe aquí el enlace del anuncio de tu apartamento. Booking, Airbnb, Wimdu...</div></span>
 					                        <input
 					                            type="text" v-model="formModal.url"
 					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
@@ -279,7 +278,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-	                    		<div class="col-12 my-0.5 px-0">
+	                    		<div class="col-12 mb-1.5 mt-2 px-0">
 		                            <textarea
 		                                class="w-100 rounded col-form-input py-1"
 		                                placeholder="Otros datos de interés..." v-model="formModal.area"
@@ -292,7 +291,7 @@
 			                	v-if="formComputed.tipo == 'complejo'"
 			                    class="row px-0"
 			                >
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Nombre del Complejo turístico<span class="required-input">*</span></label>
@@ -305,7 +304,7 @@
 			                            </div>
 			                        </div>
 			                    </div>
-								<div class="col-12 my-0.5 px-0">
+								<div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Número de apartamentos <span class="required-input">*</span></label>
@@ -336,7 +335,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Provincia <span class="required-input">*</span></label>
@@ -359,7 +358,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">Calle <span class="required-input">*</span></label>
@@ -381,7 +380,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-			                    <div class="col-12 my-0.5 px-0">
+			                    <div class="col-12 my-1.5 px-0">
 			                        <div class="row px-0">
 										<div class="col-12 col-md-6 pr-md-2">
 			                                    <label class="font-bold mb-0.5">N° de licencia </label>
@@ -401,7 +400,7 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-	                    		<div class="col-12 my-0.5 px-0">
+	                    		<div class="col-12 my-1.5 px-0">
 		                            <label class="font-bold mb-0.5">Otros datos de interés
 		                            </label>
 		                            <textarea
@@ -433,12 +432,12 @@
                 <!-- Modal para subir imagen -->
                 <div class="modal modal-image fade" id="modalImageCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" style="z-index:1900;">
 				    <div class="modal-dialog modal-dialog-image modal-sm modal-dialog-centered" role="document">
-			            <div class="modal-content modal-images mx-auto px-3">
+			            <div class="modal-content modal-images mx-auto py-3 px-3">
 			                <div class="modal-body p-0 relative">
 			                    <div>
-			                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer cerrarModal" @click.prevent="closeModalImage()"></i>
+			                        <i class="fas fa-times text-muted absolute right-1 md:right-2 top-1 md:top-2 cursor-pointer cerrarModal" @click.prevent="closeModalImage()"></i>
 			                    </div>
-			                    <h2 class="text-md text-left mt-3 font-bold">Vista previa</h2>
+			                    <h2 class="text-md text-left font-bold">Vista previa</h2>
 			                    <div class=" rounded-xl mt-3" style="max-height: 120px;">
 			                    	<img
 			                    		v-if="imagenValue"
@@ -534,11 +533,11 @@
 					url: null,
 					area: null,
 					image: null,
-					nllaves:null,
+					nllaves:'',
 					otro:null,
-					modality: null,
-					group:null,
-					category:null,
+					modality: '',
+					group:'',
+					category:'',
 				}),
 				imagenValue: null,
 				group: ['Hotel', 'Pensión/Albergue', 'Hostal', 'Apartahotel'],
@@ -750,6 +749,39 @@
 	}
 </script>
 <style lang="scss" scoped>
+	.tooltipp{
+		position: absolute;
+		border: none;
+		background-color: #fff;
+		z-index:90000;
+		color: #000;
+		width: 200px;
+		padding: .5rem;
+		text-align: left;
+		min-height: 30px;
+		right: -15px;
+		top: 25px;
+		display: none;
+	}
+	.tooltipp::after{
+		content: '';
+		position: absolute;
+		border-left: 10px solid transparent;
+		border-bottom: 10px solid #fff;
+		border-right: 10px solid transparent;
+		border-top: 10px solid transparent;
+		bottom: 63px;
+		right: 12px;
+	}
+	.icon:hover {
+		color: #ff9c06;
+	}
+	.icon:hover .tooltipp {
+		display: block;
+	}
+	.icon{
+		position: relative;
+	}
 	select:disabled{
 		border: solid 3px #ebebeb;
 		background-color: #ebebeb;
@@ -767,7 +799,7 @@
         diplay: inline-block;
     }
 	.modal-dialog{
-		max-width: 60% !important;
+		max-width: 45% !important;
 		margin: 0.5rem auto  !important;
 	}
 	.modal-dialog-image{
