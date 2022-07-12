@@ -59,7 +59,7 @@
                 this.close = true
                 setTimeout(()=> {
                     this.close = false
-                }, 4000)
+                }, 5000)
             },
 	    	closeAlertValidation () {
 	            this.close = false

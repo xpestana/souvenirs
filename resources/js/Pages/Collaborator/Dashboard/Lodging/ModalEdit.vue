@@ -8,8 +8,8 @@
             <div class="modal-content modal-create-lodging modal mx-auto">
             	<div class="modal-header py-3 pr-3 pl-11 m-0 bg-collaborator-orange">
             		<div class="row justify-content-md-between w-100">
-						<div class="col-12 col-md-6 text-center text-md-left mb-2 mb-md-0">
-							<h1 class="font-bold text-white inline-block text-lg lg:text-2xl">
+						<div class="col-12 col-md-auto text-center text-md-left mb-2 mb-md-0">
+							<h1 class="font-bold text-white inline-block text-lg lg:text-xl">
 							<img class="inline w-7 mr-2" style="margin-top:-4px;"
 									:src="'/vendor_asset/img/collaborator/dashboard/icons/lodging/'+nameImage+'.svg'"
 								>

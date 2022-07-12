@@ -308,9 +308,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/alojamientos')->group(f
 Route::middleware(['auth', 'verified'])->prefix('tablero/recursos')->group(function () {
     Route::get('/antes-llegada', [CollaboratorController::class, 'index_antes'])->name('collaborator.recursos.antes');
     Route::get('/antes-llegada-banner', [CollaboratorController::class, 'banner'])->name('collaborator.recursos.antes.banner');
-    /*Route::get('/antes-llegada-banner/store', [CollaboratorController::class, 'gbanner'])->name('collaborator.recursos.antes.banner.store');*/
     Route::get('/antes-llegada-url', [CollaboratorController::class, 'url'])->name('collaborator.recursos.antes.url');
-    /*Route::post('/antes-llegada-url/store', [CollaboratorController::class, 'banner'])->name('collaborator.recursos.antes.url.store');*/
 });
 //Fill recursos
 
@@ -357,7 +355,8 @@ Route::middleware(['auth', 'verified'])->prefix('tablero')->group(function () {
 /*Dashboard asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/asociado')->group(function () {
     
-    Route::get('/', [AssociateController::class, 'associate_home'])->name('associates.home');  
+    Route::get('/', [AssociateController::class, 'associate_home'])->name('associates.home');
+    Route::get('/enlazar-servicios', [AssociateController::class, 'services'])->name('associates.services');
     Route::get('/colaboracion/ventas', [AssociateController::class, 'sales'])->name('associates.sales');  
     Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
     Route::get('/colaboracion', [AssociateController::class, 'collaboration'])->name('associates.collaboration');  
@@ -368,6 +367,7 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/asociado')->group(funct
 Route::middleware(['auth', 'verified'])->prefix('tablero/recursos-asociados')->group(function () {
     Route::get('/', [AssociateController::class, 'resource_index'])->name('associates.resource.index');
     Route::get('/displays', [AssociateController::class, 'resource_display'])->name('associates.resource.display');
+    Route::post('/send-request-displays', [AssociateController::class, 'send_resource_display'])->name('associates.resource.send.display');
     Route::get('/banners', [AssociateController::class, 'resource_banner'])->name('associates.resource.banner');
     Route::get('/urls', [AssociateController::class, 'resource_url'])->name('associates.resource.url');
 });

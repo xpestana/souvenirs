@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class DisplayReceiver extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+    public $data;
     public $appName;
     public $appUrl;
     /**
@@ -18,9 +18,9 @@ class DisplayReceiver extends Mailable
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($data)
     {
-        $this->user = $user;
+        $this->data = $data;
         $this->appName = config('app.name');
         $this->appUrl = config('app.url');
     }
@@ -32,6 +32,6 @@ class DisplayReceiver extends Mailable
      */
     public function build()
     {
-        return $this->subject(config('app.name') . " - Requerimiento de Display ". $this->user->name)->view('Mails.display');
+        return $this->subject(config('app.name') . " - Requerimiento de Display ". $this->data['user']['name'])->view('Mails.display');
     }
 }

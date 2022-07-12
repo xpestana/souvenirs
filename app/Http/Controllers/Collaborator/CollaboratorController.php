@@ -170,7 +170,10 @@ class CollaboratorController extends Controller
     }
     public function request_display(Request $request){
         $user = auth()->user();
-        Mail::to("info@hicitty.es")->send(new DisplayReceiver($user));
+        $data = [
+            'user' => $user,
+        ];
+        Mail::to("info@hicitty.es")->send(new DisplayReceiver($data));
         return back();
     }
     public function create_hab()

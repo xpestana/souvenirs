@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\profile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\DisplayReceiver;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -118,13 +119,23 @@ class AssociateController extends Controller
         return Inertia::render('Associates/Dashboard/Resource/Url', compact('url'));
     }
 
-    public function resource_request_display(Request $request){
+    public function send_resource_display (Request $request) {
         $request->validate([
             'city' => 'required|string',
-            'display' => 'required|array'
+            'displays' => 'required|array'
         ]);
-        return dd($request->display);
+        $user = auth()->user();
+        $data = [
+            'user' => $user,
+            'city' => $request->city ?? null,
+            'displays' => $request->displays ?? null,
+        ];
+        Mail::to("info@hicitty.es")->send(new DisplayReceiver($data));
         return back();
+    }
+
+    public function services () {
+        return Inertia::render('Associates/Dashboard/Services');
     }
 
 }

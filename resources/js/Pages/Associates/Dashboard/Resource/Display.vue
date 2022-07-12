@@ -6,9 +6,12 @@
             </div>
         </div>
         <div
-            class="mx-1.5 lg:mx-0 mt-8 mb-3.5"
+            class="mx-1.5 lg:mx-0 mt-8 mb-3.5 position-relative"
         >
         	<span>Descubre los <strong>displays</strong> que te ofrecemos para <strong>captar la atención del cliente</strong> y que pueda <strong>acceder facilmente a los servicios</strong> que ofrecemos.</span>
+            <ValidationAlert
+                :errors="formatErrors"
+            />
     	</div>
     	<div
             class="mx-1.5 lg:mx-0 mb-4"
@@ -17,7 +20,7 @@
     	</div>
     	<div class="mx-1.5 row lg:mx-0">
     		<div class="col-12">
-                <div
+                <form
                     class="row"
                 >
                     <!--END Alert validation -->
@@ -28,6 +31,7 @@
                             :options="citys"
                             textLabel="Buscar ciudad..."
                             icon="icon"
+                            :error="errorsKey.includes('city')"
                         />
                     </div>
                      <div class="col-12 my-1.5 mt-8 px-0">
@@ -42,14 +46,19 @@
                                         :class="form.displays.includes(item) ? 'border-display-active' : 'border-display'"
                                         @click.prevent="selectDisplay(item)"
                                     >
-                                        <div class="rounded-xl h-32 bg-black">ddd</div>
+                                        <div class="rounded-xl h-32 bg-black position-relative">
+                                            <div
+                                                v-if="form.displays.includes(item) && windowWidth <= 768"
+                                                class="circle-display position-absolute top-3 right-3"
+                                            />
+                                        </div>
                                     </div>
                                     <div
                                         class="col-7 col-md-5 col-lg-4 text-left p-0 mt-3 mt-md-0"
                                     >
-                                        <label class="font-bold">Flyers</label>
+                                        <label class="font-bold">{{ item.title }}</label>
                                         <div>
-                                            Display físico de facíl  distribución. Haz que el cliente tenga al alcance de la mano todos los servicios de la ciudad
+                                            {{ item.content }}
                                         </div>
                                     </div>
                                 </div>
@@ -65,19 +74,9 @@
                            Pedir Displays
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
     	</div>
-        <div
-            v-if="url"
-            class="mx-1.5 mt-8"
-        >
-            <h3 class="font-bold text-xl">¡Enlace generado con éxito!</h3>
-            <div class="flex justify-content-between mt-3">
-                <span class="block">{{url}}</span>
-                <span class="block cursor-pointer text-md orange  font-bold" @click.prevent="copy()"><i class="fas fa-copy orange mr-1"></i> Copiar Enlace</span>
-            </div>
-        </div>
         
     </section>
     <NotiModal :id="'request-display-associate'">
@@ -88,95 +87,163 @@
             ¿Son correctos los datos pedidos?
         </template>
         <template v-slot:text>
-           ¿Son correctos los datos pedidos?
+            <div class="w-100 rounded bg-grey p-2 text-left">
+                <div class="mb-3">
+                <span class="block">Ciudad de destino:</span>
+                <span class="block font-bold">Sevilla</span>
+                </div>
+                 <div>
+                    <span class="block">Displays seleccionados:</span>
+                    <span
+                        v-for="(item, index) in form.displays"
+                        class="block font-bold"
+                    >
+                        {{ item.title }}
+                    </span>
+                </div>
+            </div>
+        </template>
+        <template v-slot:footer>
+            <button
+                class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 mt-2 text-xs mb-2"
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+                @click="sendRequestDisplay"
+            >Enviar notificación
+            </button>
+             <button
+                class="btn rounded btn-outline-orange px-3.5 py-1 text-xs"
+                data-dismiss="modal" aria-label="Close"
+            >Cambiar opciones
+            </button>
+        </template>
+    </NotiModal>
+     <NotiModal :id="'notidisplay-associate'">
+        <template v-slot:header>
+            <i class="far fa-check-circle text-orangec text-4xl"></i>
+        </template>
+        <template v-slot:title>
+             ¡Pedido recibido!
+        </template>
+        <template v-slot:text>
+            Te mandaremos un correo electrónico para confirmarte cuando el pedido haya sido enviado.
         </template>
         <template v-slot:footer>
             <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  
-                @click="sendRequestDisplay"
-            >Enviar notificación
+                 data-dismiss="modal" aria-label="Close"
+            >Cerrar mensaje
             </button>
         </template>
     </NotiModal>
 </template>
 
 <script>
-    import { Link } from '@inertiajs/inertia-vue3'
+   import { Head, Link } from '@inertiajs/inertia-vue3'
+    import { Inertia } from '@inertiajs/inertia'
     import Select from '@/Components/Select'
     import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
     import NotiModal from '@/Pages/Collaborator/components/NotiModal'
+    import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert'
 	export default {
 	    layout:TemplateApp,
 	    components:{
             Link,
             Select,
-            NotiModal
+            NotiModal,
+            ValidationAlert,
 	    },
 	    props:['url'],
         data () {
             return {
                 form: this.$inertia.form({
-                    city: '',
+                    city: 'Sevilla',
                     displays: [],
                 }),
                 displays: [
                     {title: 'Flyers', content: 'Display físico de facíl distribución. Haz que el cliente tenga al alcance de la mano todos los servicios de la ciudad'},
-                    {title: 'Flyers1', content: 'Display físico de facíl distribución. Haz que el cliente tenga al alcance de la mano todos los servicios de la ciudad'},
+                    {title: 'Flyers', content: 'Display físico de facíl distribución. Haz que el cliente tenga al alcance de la mano todos los servicios de la ciudad.'},
                 ],
                 citys: [
-					{label: 'Sevilla', value: 'sevilla'},
-				],
+					{label: 'Sevilla', value: 'Sevilla'},
+                ],
+                errorsKey: [],
+                windowWidth: window.innerWidth,
             }
+        },
+        computed: {
+            formatErrors () {
+                var map = this.errorsKey.map( item => {
+                    switch (item) {
+                        case 'city':
+                            return 'Ciudad de destino'
+                            break;
+                        case 'displays':
+                            return 'Al menos una opción de "Displays'
+                            break;
+                        default:
+                        return item
+                    }
+                })
+                return map
+            },
         },
 	    methods: {
 	        goBack () {
 	            window.history.back()
-	        },
-            getUrl () {
-                this.form.get(this.route('collaborator.recursos.antes.url'), {
-                    errorBag: 'submit',
-                    preserveScroll: true,
-                    
-                    onSuccess: (result) => {
-                        console.log('success')
-                    },
-                    onError: (errors) => {
-                        console.log(errors)
-                    },
-                });
             },
-            selectDisplay (item) {
-                var existDisplay = this.form.displays.includes(item)
+            selectDisplay (value) {
+                var existDisplay = this.form.displays.includes(value)
                 if (existDisplay) {
-                    var index = this.form.displays.indexOf(item)
+                    var index = this.form.displays.indexOf(value)
                     this.form.displays.splice(index, 1)
                 } else {
-                    this.form.displays.push(item)
+                    this.form.displays.push(value)
                 }
             },
             openModalConfirm (){
                 $('#request-display-associate').modal('show')
-                console.log('modal')
             },
             sendRequestDisplay () {
-
-            }
-            
+                let id = $('#notidisplay-associate')
+                let send = $('#request-display-associate')
+                this.form.displays = this.form.displays.map(item => item.title)
+                this.form.post(route('associates.resource.send.display'), {
+                    preserveScroll: true,
+                    errorBag: 'submit',
+                    onSuccess: (result) => {
+                        send.modal('hide')
+                        setTimeout(()=>{
+                            id.modal('show')
+                        }, 1000)
+                    },
+                    onError: (errors) => {
+                        send.modal('hide')
+                        this.getErrorsKey()
+                        this.emitter.emit('errors')
+                    },
+                })
+            },
+            getErrorsKey () {
+                this.errorsKey = this.$page.props.errors.submit ? Object.keys(this.$page.props.errors.submit) : []
+            },
 	    },
 	}
 </script>
 
 <style scoped>
-	option {
-    	background-color: #f5f5f5;
-    	padding: .7rem .3rem;
-    }
-    option:hover{
-		background-color: #aad1e6;
-	}
     .border-display-active{
       border: 4px solid #FF9C06;
     }
     .border-display{
       border: 4px solid transparent;
+    }
+    .bg-grey{
+        background-color: #e9e9e9;
+    }
+    .circle-display{
+        width: 12px;
+        height: 12px;
+        background-color: #FF9C06;
+        border-radius: 50%;
     }
 </style>

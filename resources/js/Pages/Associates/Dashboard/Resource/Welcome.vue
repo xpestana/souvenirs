@@ -51,8 +51,8 @@
                 <div class="col-12 col-md-6 col-lg-5">
                     <div class="card-before p-3 rounded-xl hover:shadow-xl">
                         <div class="font-bold text-xl flex align-items-center">
-                            <div id="img-banner" class="inline-block mr-2"></div>
-                            <div class="inline-block">Displayer</div>
+                            <div id="img-display" class="inline-block mr-2"></div>
+                            <div class="inline-block">Displays</div>
                         </div>
                         <div class="mt-2">
                             <span>Descubre los <strong>displays</strong> que te ofrecemos para <strong>captar la atención del cliente</strong> y que pueda <strong>acceder facilmente a los servicios</strong> que ofrecemos.</span>
@@ -147,6 +147,16 @@ export default {
         transition: all .4s;
     }
 
+    #img-display{
+        background-image: url('/vendor_asset/img/collaborator/dashboard/icons/recursodurante.svg');
+        filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 1.8rem;
+        height: 1.8rem;
+        transition: all .4s;
+    }
+
     a {
         background-color: #FF9C06;
         color: #fff;
@@ -168,6 +178,10 @@ export default {
 
         .card-before:hover #img-url{
             background-image: url('/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlBlanco.svg');
+        }
+
+        .card-before:hover #img-display{
+            filter: none;
         }
 
         .card-before a {
