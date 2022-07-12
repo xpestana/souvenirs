@@ -24,13 +24,13 @@
                 </Link>
             </li>
             <li class="mb-3.5 relative">
-                <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesResources}"  id="downresource" @click="toggleMenuSales('sub-recursos')"></i>
-                <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesResources}" id="upresource" @click="toggleMenuSales('sub-recursos')"></i>
+                <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesResources}"  id="downresource" @click="toggleMenuResources('sub-recursos')"></i>
+                <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesResources}" id="upresource" @click="toggleMenuResources('sub-recursos')"></i>
                 <Link :href="route('coll.dashboard.means')" data-toggle="collapse" 
                     aria-expanded="false" class="dropdown-toggle text-base link  sidebar-collapse-menu-mobile"  
                     :class="{'sidebar-active':routesResources}"
                 >
-                <img class="inline w-5" style="margin-top:-4px"
+                <img class="inline w-4" style="margin-top:-4px"
                     :class="{'side-icon-active':routesResources}" 
                     src="/vendor_asset/img/collaborator/dashboard/icons/recurso.svg"
                 >
@@ -61,7 +61,7 @@
                 <Link :href="route('dashboard.sales.total')" class="text-base link  sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url.includes('/tablero/ventas-totales') || this.$page.url.includes('/tablero/ventas-inmueble') || this.$page.url.includes('/tablero/ventas-publicidad')}">
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':this.$page.url.includes('/tablero/ventas-totales') || this.$page.url.includes('/tablero/ventas-inmueble') || this.$page.url.includes('/tablero/ventas-publicidad')}"
-                        src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
+                        src="/vendor_asset/img/collaborator/dashboard/icons/ventas.svg"
                     >
                     Ventas
                 </Link>

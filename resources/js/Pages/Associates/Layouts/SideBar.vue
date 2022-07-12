@@ -30,30 +30,31 @@ route('associates.settings')-->
             <li class="mb-3.5 relative pl-0.5">
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesColaboracion}"  id="downcol" @click="toggleColaboracion('sub-colaboracion')"></i>
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesColaboracion}" id="upcol" @click="toggleColaboracion('sub-colaboracion')"></i>
-                <Link href="#" data-toggle="collapse" 
+                <Link :href="route('associates.collaboration')" data-toggle="collapse" 
                     aria-expanded="false" class="dropdown-toggle text-base link  sidebar-collapse-menu-mobile"  
-                    :class="{'sidebar-active':routesResources}"
+                    :class="{'sidebar-active':this.$page.url.includes('colaboracion')}"
                 >
                 <img class="inline w-3.5" style="margin-top:-4px"
-                    :class="{'side-icon-active':routesResources}" 
+                    :class="{'side-icon-active':this.$page.url.includes('colaboracion')}" 
                     src="/vendor_asset/img/collaborator/dashboard/icons/recurso.svg"
                 >
                     Colaboración
                 </Link>
-                <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesColaboracion}" id="sub-colaboracion">
+                <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':this.$page.url.includes('colaboracion')}" id="sub-colaboracion">
                     <li>
-                        <Link href="#" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/recursos/antes-llegada'}">
+                        <Link href="#" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/asociado/colaboracion/recursos'}">
                             <img class="inline w-4" style="margin-top:-4px"
-                                :class="{'side-icon-active':this.$page.url=='/tablero/recursos/antes-llegada'}" 
+                                :class="{'side-icon-active':this.$page.url=='/tablero/asociado/colaboracion/recursos'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/recurso.svg"
                             >
                             Recursos
                         </Link>        
                     </li>
                     <li>
-                        <Link href="#" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/recursos/durante-la-estancia'}">
+                        <Link :href="route('associates.sales')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile"
+                             :class="{'sidebar-active':this.$page.url.includes('/tablero/asociado/colaboracion/ventas')}">
                             <img class="inline w-5" style="margin-top:-4px"
-                                :class="{'side-icon-active':this.$page.url=='/tablero/recursos/durante-la-estancia'}" 
+                                :class="{'side-icon-active':this.$page.url.includes('/tablero/asociado/colaboracion/ventas')}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/ventas.svg"
                             >
                             Ventas
@@ -186,11 +187,13 @@ export default {
     },
     created(){
         this.profile()
-        console.log(this.$page.url)
+        this.colaboracion()
     },
     updated(){
         this.routesProfile = false
+        this.routesColaboracion = false
         this.profile()
+        this.colaboracion()
     },
     methods:{
         profile(){
@@ -202,6 +205,13 @@ export default {
             let route5 = url.includes('tablero/perfil-datos-fiscales')
             if(route1 || route2 || route3 || route4 || route5){
                 this.routesProfile = true;
+            }
+        },
+        colaboracion(){
+            let url = this.$page.url;
+            let route1 = url.includes('tablero/asociado/colaboracion')
+            if(route1){
+                this.routesColaboracion = true;
             }
         },
         toggleMenuProfile(id){
