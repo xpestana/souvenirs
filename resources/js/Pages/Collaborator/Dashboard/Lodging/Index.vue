@@ -8,7 +8,7 @@
         </div>
         <!--END Header section-->
         <!-- Header section-->
-        <div class="lodgings-filter row  my-8 mx-1.5 lg:mx-0 shadow p-1 rounded-xl bg-white">
+        <div class="lodgings-filter row  my-4 mx-1.5 lg:mx-0 shadow p-1 rounded-xl bg-white">
             <div class="col-8 col-lg-4">
                     <div class="row">
                     <div class="col-2 pr-0">
@@ -47,7 +47,7 @@
         <!--END Header section-->
          <!-- Content section-->
         <template v-if="hotels.data.length > 0">
-            <div class="lodgings-card row mx-1.5 lg:mx-0 mb-2" v-for="hotel in hoteles" :key="hotel.id" >
+            <div class="lodgings-card row mx-1.5 lg:mx-0" v-for="hotel in hoteles" :key="hotel.id" >
                 <div class="lodgings-card-body my-2.5 lg:my-0 mb-4 col-12 w-full h-60 lg:h-28 rounded-xl shadow relative">
                     <div class="row h-full rounded-xl relative bg-cover bg-top">
                         <div class="col-12 col-lg-5 h-3/5 lg:h-auto rounded-l-xl rounded-r-xl lg:rounded-r-none bg-cover bg-center bg-no-repeat relative" 
@@ -121,7 +121,7 @@
         </template>
         
         <!-- END Content section-->
-        <div class="flex justify-center lg:px-56 mt-3">
+        <div class="flex justify-center lg:px-56 my-2">
             <button @click.prevent="openCreateLodging()" class="bg-collaborator-orange text-white font-semibold block py-1.5 rounded px-4">+ Añadir alojamiento</button>
         </div>
         <div class="row justify-content-center" v-if="hotels.data.length > 0">

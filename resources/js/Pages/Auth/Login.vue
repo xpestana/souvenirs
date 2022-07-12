@@ -206,7 +206,7 @@ export default {
         status: Boolean,
     },
     created(){
-        console.log(this.$page.props.flash)
+      
     },
     updated(){
         if(this.$page.props.flash.mensaje){

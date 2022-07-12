@@ -34,9 +34,9 @@ route('associates.settings')-->
                     aria-expanded="false" class="dropdown-toggle text-base link  sidebar-collapse-menu-mobile"  
                     :class="{'sidebar-active':this.$page.url.includes('colaboracion')}"
                 >
-                <img class="inline w-3.5" style="margin-top:-4px"
+                <img class="inline w-5" style="margin-top:-4px"
                     :class="{'side-icon-active':this.$page.url.includes('colaboracion')}" 
-                    src="/vendor_asset/img/collaborator/dashboard/icons/recurso.svg"
+                    src="/vendor_asset/img/collaborator/dashboard/icons/colaboracion.svg"
                 >
                     Colaboración
                 </Link>
@@ -114,6 +114,15 @@ route('associates.settings')-->
                         </Link>
                     </li>
                 </ul>
+            </li>
+            <li class="mb-3.5">
+                <Link :href="route('associates.withdrawals')" class="text-base link  sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url.includes('/tablero/asociado/historial-de-retiros')}">
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':this.$page.url.includes('/tablero/asociado/historial-de-retiros')}" 
+                        src="/vendor_asset/img/collaborator/dashboard/icons/enlazarservicios.svg"
+                    >
+                    Historial de retiros
+                </Link>
             </li>
             <li class="mb-3.5">
                 <Link :href="route('logout')" class="text-base link  sidebar-collapse-menu-mobile">

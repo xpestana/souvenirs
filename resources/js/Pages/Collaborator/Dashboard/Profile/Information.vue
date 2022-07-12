@@ -11,30 +11,43 @@
         <div class="perfil-infor row mx-1.5 lg:mx-0 mt-8 justify-content-start">
             <div class="col-12 col-md-6">
                 <form @submit.prevent="submitProfile" class="row">
+                    <ValidationAlert
+                        :errors="errorsKey"
+                    />
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold"><i class="fas fa-user mr-1"></i>Nombre</label>
-                        <input type="text" v-model="form.name" class="w-100 rounded col-form-input py-1.5" placeholder="Nombre...">
+                        <input type="text" class="w-100 rounded col-form-input py-1.5" placeholder="Nombre..."
+                        :class="{'error-input': errorsKey.includes('name')}" v-model="form.name"
+                        >
                     </div>
                     <div class="col-12 my-1.5 px-0">
                         <label  class="font-bold"><i class="fas fa-envelope mr-1"></i>Correo eléctronico</label>
-                        <input type="text" v-model="form.email" class="w-100 rounded col-form-input py-1.5" placeholder="Correo eléctronico...">
+                        <input type="text" v-model="form.email" class="w-100 rounded col-form-input py-1.5" placeholder="Correo eléctronico..."
+                            :class="{'error-input': errorsKey.includes('email')}"
+                        >
                     </div>
                     <div class="col-12 my-1.5 px-0">
                         <label  class="font-bold"><i class="fas fa-phone-alt mr-1"></i>Número de telefono</label>
-                        <input type="text"  v-model="form.phone" class="w-100 rounded col-form-input py-1.5" placeholder="Número de telefono...">
+                        <input type="text"  v-model="form.phone" class="w-100 rounded col-form-input py-1.5" placeholder="Número de telefono..."
+                        :class="{'error-input': errorsKey.includes('phone')}"
+                        >
                     </div>
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold"><i class="fas fa-key mr-1"></i>Cambiar contraseña</label>
                         <div class="relative w-100">
                             <i class="far fa-eye cursor-pointer absolute left-0 inset-y-1/3 my-auto px-2.5" v-on:click="showPass('password')"></i>
-                            <input v-model="form.password" type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="password" placeholder="********">
+                            <input v-model="form.password" type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="password" placeholder="********"
+                            :class="{'error-input': errorsKey.includes('password')}"
+                            >
                         </div>
                     </div>
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold"><i class="fas fa-key mr-1"></i>Confirmar contraseña</label>
                         <div class="relative w-100">
                             <i class="far fa-eye cursor-pointer absolute left-0 inset-y-1/3 my-auto px-2.5" v-on:click="showPass('confirm-password')"></i>
-                            <input v-model="form.confirm_password" type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="confirm-password" placeholder="********">
+                            <input v-model="form.confirm_password" type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="confirm-password" placeholder="********"
+                            :class="{'error-input': errorsKey.includes('confirm_password')}"
+                            >
                         </div>
                     </div>
                     <div class="col-12 mt-11 px-0 text-center text-lg-left">
@@ -75,10 +88,12 @@
 import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
 import { Inertia } from '@inertiajs/inertia'
 import { Link } from '@inertiajs/inertia-vue3';
+import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert'
 export default {
     layout:TemplateApp,
     components:{
-        Link
+        Link,
+        ValidationAlert
     },
     props: ['auth'],
     data(){
@@ -94,6 +109,7 @@ export default {
             forceExitConfirm: false,
             beforeUrl: '',
             typeBack: '1',
+            errorsKey: [],
         }
     },
     computed: {
@@ -108,6 +124,7 @@ export default {
     },
     created () {
         this.updateForm()
+        console.log(this.errorsKey)
     },
     mounted () {
         this.moveConfirm = Inertia.on('before', (event) => {
@@ -128,6 +145,7 @@ export default {
         this.forceExitConfirm = true
         this.form.put(route('collaborator.profile.update'), {
                 preserveScroll: true,
+                errorBag: 'submitProfile',
                 onSuccess:()=>{
                     $('#datosModal').modal('hide')
                     this.updateForm()
@@ -167,7 +185,10 @@ export default {
             this.typeBack = '1'
             this.forceExitConfirm = false
             $('#exit').modal('hide')
-        }
+        },
+        getErrorsKey () {
+            this.errorsKey = this.$page.props.errors.submitProfile ? Object.keys(this.$page.props.errors.submitProfile) : []
+        },
     }
 }
 </script>

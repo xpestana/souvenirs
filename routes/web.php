@@ -361,6 +361,8 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/asociado')->group(funct
     Route::get('/colaboracion/ventas', [AssociateController::class, 'sales'])->name('associates.sales');  
     Route::get('/ajustes', [ProfileCollaboratorController::class, 'associate_settings'])->name('associates.settings');  
     Route::get('/colaboracion', [AssociateController::class, 'collaboration'])->name('associates.collaboration');  
+    Route::get('/historial-de-retiros', [AssociateController::class, 'withdrawal'])->name('associates.withdrawals');  
+    Route::post('/notify-associate', [AssociateController::class, 'notify_associate'])->name('associates.notify');  
     
 });
 

@@ -73,4 +73,49 @@ class AssociateController extends Controller
         return Inertia::render('Associates/Dashboard/Collaboration/Sales', compact('hotels','orders','totalOrders'));
     }
 
+    public function withdrawal(Request $request){ 
+        $orders = Order::where('user_id',auth()->user()->id)
+                    ->where("status","complete")
+                    ->where("returned",0)
+                    ->where('withdrawal',1)
+                    ->with('shippings')
+                    ->Date($request->desde, $request->hasta)->paginate(15);
+        $totalOrders = Order::where('user_id',auth()->user()->id)
+                    ->where("status","complete")
+                    ->where("returned",0)
+                    ->with('shippings')->get();
+        $nowithdrawal = Order::where('user_id',auth()->user()->id)
+                    ->where("status","complete")
+                    ->where("returned",0)
+                    ->where("withdrawal",0)
+                    ->orderBy('updated_at','ASC')->first();
+        $withdrawal = $totalOrders->where("withdrawal",1);
+
+        $date = null;
+        
+        if (!$withdrawal->isEmpty()){
+            $date = $withdrawal->last()->updated_at;
+        }
+        if ($nowithdrawal !== null && $date == null){
+            $date = $nowithdrawal->updated_at;
+        }
+        return Inertia::render('Associates/Dashboard/Withdrawal', compact('orders','date','totalOrders'));
+    }
+
+    public function notify_associate(Request $request){
+            $orders = Order::where('user_id',auth()->user()->id)
+                ->where("status","complete")
+                ->where("returned",0)
+                ->where("withdrawal",0)
+                ->get();
+            
+            foreach ($orders as $order) {
+                $updt = Order::find($order->id);
+                $updt->withdrawal = 1;
+                $updt->save();
+            }
+
+        // return back();
+        
+    }
 }

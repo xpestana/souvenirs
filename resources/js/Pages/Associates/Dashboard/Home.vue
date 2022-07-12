@@ -188,7 +188,6 @@ export default {
         }
     },
     created(){
-        console.log(this.hotels)
         this.orders.forEach(order =>{
             this.total += Number(order.total);
         });
