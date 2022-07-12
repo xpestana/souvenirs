@@ -42,8 +42,8 @@
                 @endphp
                 @if($product->product->type == 'Souvenirs')
                     <div class="tarjeta" style="background-color: #ededed;display: flex;padding: 8px; margin-top: 0.7em;">
-                        <img src="{{asset('/storage/souvenirs'.$product->product->images[0]->url)}}" alt="souvenir" style="width: 6em;height: 4.9em;margin:auto">
-                        <div class="descripcion" style="margin-left: 0.6em;display: flex; flex-direction: column;flex-grow:1;text-align:left">
+                        <img src="{{asset('/storage/souvenirs'.$product->product->images[0]->url)}}" alt="souvenir" style="width: 6em;height: 4.9em;margin:auto 0">
+                        <div class="descripcion" style="margin-left: 0.6em;display: flex; flex-direction: column;flex-grow:1;text-align:left;width:7em">
                             <h4 style="margin:0;font-size: 0.85em;">{{ $product->product->title }}</h4>
                             <div class="cantidad" style="margin-top:auto;font-size: 0.85em; ">
                             <p style="display: inline;margin:0 1px;font-size: 0.85em;">Cantidad</p>
@@ -61,9 +61,9 @@
                 @if($product->product->type == 'Activities')
                 <div class="tarjeta" style="background-color: #ededed;display: flex;padding: 8px; margin-top: 0.7em;">
                     @if($product->product->images->count() > 0)
-                        <img src="{{ asset('/storage/souvenirs'.$product->product->images[0]->name)}}"  style="width: 6em;height: 4.9em;margin:auto">
+                        <img src="{{ asset('/storage/souvenirs'.$product->product->images[0]->name)}}"  style="width: 6em;height: 4.9em;margin:auto 0">
                     @else
-                        <img src="{{ asset('/vendor_asset/img/bg-image/act-default.jpg')}}"  style="width: 6em;height: 4.9em;margin:auto">    
+                        <img src="{{ asset('/vendor_asset/img/bg-image/act-default.jpg')}}"  style="width: 6em;height: 4.9em;margin:auto 0">    
                     @endif
                     <div class="descripcion" style="margin-left: 0.6em;display: flex; flex-direction: column;flex-grow:1;text-align:left;width:7em">
                         <h4 style="margin:0;font-size: 0.85em;">{{ $product->product->title }}</h4>

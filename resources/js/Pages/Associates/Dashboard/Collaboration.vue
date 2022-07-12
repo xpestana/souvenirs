@@ -1,218 +1,98 @@
 <template>
-    <div class="detalles">
-        <div class="container mt-16 px-md-5">
-            <div class="row titulo">
-                <div class="col-12">
-                    <h1 class="text-center mb-4 titulo text-azulc text-2xl md:text-4xl"><strong>Ventas de las <br>colaboraciones</strong></h1>
+    <section id="dashboard-means-header" class="container pt-8 pb-1.5 ml-2 md:ml-0 md:px-24">
+        <!-- Header section-->
+        <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+            <div class="col-4 col-md-4 text-left">
+                <h1 class="font-bold text-3xl text-muted">Colaboración</h1>
+            </div>
+        </div>
+        <!--END Header section-->
+        <div class="ventas-text row my-3.5 mx-1.5 lg:mx-0">
+            <div class="col-12 px-0 lg:py-1.5">
+                <p class="leading-4">
+                    En esta sección podrás encontrar desde todos los <b>recursos que te 
+                    permitirán conseguir beneficios por colaborar con nosotros</b>
+                    hasta ver un <b>desgloce de las ventas conseguidas que han sido
+                    fruto de esta colaboración.</b>
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="dashboard-means-cards" class="container  ml-2 md:ml-0 md:px-24 mb-8">
+        <div class="means-cards row shadow-2xl rounded-xl  mx-0">
+            <div class="cards-img col-12 col-lg-6 rounded-t-xl lg:rounded-t-xl lg:rounded-l-xl bg-center bg-cover pr-0 pl-0 pr-lg-0 h-36 lg:h-56" 
+                style="background-image:url('/vendor_asset/img/collaborator/dashboard/recursos1.jpg')"
+            >
+                <div class="gradient-right w-full h-full rounded-l-none lg:rounded-l-xl rounded-t-xl lg:rounded-t-none">
                 </div>
             </div>
-            <div class="row justify-content-around my-4">
-                <div class="col-12 col-md-4">
-                    <button class="btn btn-lg btn-secondaryc w-100">Pedir flayer</button>
-                </div>
-                <div class="col-12 col-md-4 mt-3 mt-md-0">
-                    <button class="btn btn-lg btn-secondaryc w-100"  data-toggle="modal" data-target="#AssociateQR">Obtener QR</button>
-                    <div class="modal fade" id="AssociateQR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                aria-hidden="true">
-                    <!-- Change class .modal-sm to change the size of the modal -->
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content mx-auto">
-                                <div class="modal-body p-0">
-                                    <div class="row mt-5 mb-2">
-                                        <div class="col-12 my-4 d-flex justify-content-center">
-                                            <QRCodeVue3
-                                                :width="1080"
-                                                :height="1080"
-                                                :imgclass="'souvenirs_img'+this.$page.props.auth.user.id"
-                                                style="max-width: 50%;"
-                                                :value="url+'?c='+this.$page.props.auth.user.id"
-                                                :qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
-                                                :imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
-                                                :dotsOptions="{
-                                                    type: 'square',
-                                                    color: '#B4CEE2',
-                                                    gradient: {
-                                                    type: 'linear',
-                                                    rotation: 0,
-                                                    colorStops: [
-                                                        { offset: 0, color: '#B4CEE2' },
-                                                        { offset: 1, color: '#B4CEE2' },
-                                                    ],
-                                                },
-                                                }"
-                                                fileExt="png"
-                                                :backgroundOptions="{ color: '#ffffff' }"
-                                                :cornersSquareOptions="{ type: 'dot', color: '#B4CEE2' }"
-                                                :cornersDotOptions="{ type: undefined, color: '#B4CEE2' }"
-                                                :download="false"
-                                                downloadButton="view-cart bg-info mt-3 souvenirs_btn"
-                                                :downloadOptions="{ name: 'souvenirs', extension: 'png' }"
-                                                crossOrigin="anonymous"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="row px-3 pt-4 pb-5">
-                                        <div class="col-6 text-left">
-                                            <a class="btn text-white btn-azulc rounded-pill px-4 py-1" href="#" data-dismiss="modal" >Volver</a>
-                                        </div>
-                                        <div class="col-6 text-right">
-                                            <a class="btn text-white btn-azulc rounded-pill px-4 py-1" href="javascript:void(0)" @click="souvenirs_btn(this.$page.props.auth.user.id,this.$page.props.auth.profile.firstname)">Descargar</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row tabla">
-                <div class="col-12">
-                    <div class="table-responsive-md">
-                        <table class="table table-striped">
-                            <thead class="thead-light" >
-                                <tr>
-                                    <th scope="col" class="text-center">ID de transacción</th>
-                                    <th scope="col" class="text-center">Devuelto</th>
-                                    <th scope="col" class="text-center">Fecha</th>
-                                    <th scope="col" class="text-center">Total</th>
-                                    <th scope="col" class="text-center">Beneficio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="venta in ventas" :key="venta.id">
-                                    <td class="text-center">{{venta.id_t }}</td>
-                                    <td class="text-center">
-                                        <template v-if="venta.returned == 1">
-                                            <select class="rounded border py-1" name="returned" id="returned" @change="returned(venta.id)">
-                                                <option value="1" selected>Si</option>
-                                                <option value="0">No</option>
-                                            </select>
-                                        </template>
-                                        <template v-else>
-                                            <select class="rounded border py-1" name="returned" id="returned" @change="returned(venta.id)">
-                                                <option value="1">Si</option>
-                                                <option value="0" selected>No</option>
-                                            </select>
-                                        </template>
-                                    </td>
-                                    <td class="text-center">{{moment(venta.date).format("DD/MM/YYYY")}}</td>
-                                    <td class="text-center">{{venta.total_benefit.toFixed(2)}}€</td>
-                                    <td class="text-center">{{(venta.total_benefit*0.20).toFixed(2)}}€</td>
-                                </tr>
-                                <tr v-if="ventas.length == 0">
-                                    <td colspan="7" class="text-center">Sin ventas</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row pie justify-content-end">
-                <div class="col-sm-4 col-md-3 mt-4">
-                    <h2 class="text-info"><strong>Total {{total.toFixed(2)}}€</strong></h2>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-10 col-md-4">
-                    <paginator :paginator="orders" />
+            <div class="cards-info col-12 col-lg-6 bg-black pt-3.5 rounded-b-xl lg:rounded-l-none lg:rounded-r-xl h-60 lg:h-56 lg:pl-16 lg:pr-2.5">
+                <h1 class="text-xl text-white font-semibold  leading-6">
+                    Quiero ver los recursos disponibles
+                </h1>
+                <p class="mt-1.5 text-white leading-5">
+                    Desde banners, url personalizadas y displays como flyers o marcos con qr, son algunos
+                    de los recursos que te permitirán aumentar los beneficios gracias a colaborar con nosotros.
+                </p>
+                <div class="text-center text-lg-left">
+                    <Link href="#" class="btn bg-collaborator-orange text-white font-semibold py-1 mt-2.5 sm:mt-8 lg:mt-2.5">
+                        ¡Descubrir recursos!
+                    </Link>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="means-cards row shadow-2xl rounded-xl mt-6 mx-0">
+            <div class="cards-img col-12 d-block d-lg-none rounded-t-xl bg-center bg-cover px-0 h-36" 
+                style="background-image:url('/vendor_asset/img/collaborator/dashboard/recursos1.jpg')"
+            >
+                <div class="gradient-left w-full h-full rounded-t-xl"></div>
+            </div>
+            <div class="cards-info col-12 col-lg-5 bg-black pt-3.5 rounded-b-xl lg:rounded-b-none lg:rounded-l-xl pl-lg-4  h-60 lg:h-56">
+                <h1 class="text-xl text-white font-semibold  leading-6">
+                    Quiero ver todas las ventas de la colaboración
+                </h1>
+                <p class="mt-1.5 text-white leading-5">
+                    Te ofrecemos con todo detalle un desglose de las ventas que se han realizado 
+                    mediante tu colaboración con nosotros.
+                </p>
+                <div class="text-center text-lg-left">
+                    <Link :href="route('associates.sales')" class="btn bg-collaborator-orange text-white font-semibold py-1 mt-2.5 sm:mt-8 lg:mt-2.5 px-10">
+                        Ver ventas
+                    </Link>
+                </div>
+            </div>
+            <div class="cards-img col-12 col-lg-7 d-none d-lg-block rounded-r-xl bg-center bg-cover pl-lg-0 h-56" style="background-image:url('/vendor_asset/img/collaborator/dashboard/recursos1.jpg')">
+                <div class="gradient-left w-full h-full rounded-r-xl"></div>
+            </div>
+        </div>
+    </section>
 </template>
 <script>
-// import { Inertia } from '@inertiajs/inertia'
-// import Layout from '@/Pages/Associates/Layouts/Layout.vue'  
-// import { Head, Link } from '@inertiajs/inertia-vue3'
-// import Paginator from '@/Components/Paginator'
-// import Moment from 'moment'
-// import QRCodeVue3 from "qrcode-vue3"
-
-// export default {
-//     layout:Layout,
-//     props:{
-//         orders:Object,
-//         ordersTotal:Object,
-//         url:String
-//     },
-//     components:{
-//         Head,
-//         Link,
-//         Paginator,
-//         QRCodeVue3
-//     },
-//     data(){
-//         return{
-//             total:0
-//         }
-//     },
-//     created(){
-//         this.moment=Moment;
-//     },
-//     methods:{
-//         souvenirs_btn(id,lodging){
-//             var urlItem = $('.souvenirs_img'+id).attr('src');
-//             axios({
-//                     url: urlItem,
-//                     method: 'GET',
-//                     responseType: 'blob'
-//                 })
-//             .then((response) => {
-//                     const url = window.URL
-//                         .createObjectURL(new Blob([response.data]));
-//                     const link = document.createElement('a');
-//                     link.href = url;
-//                     link.setAttribute('download', `${lodging}.png`);
-//                     document.body.appendChild(link);
-//                     link.click();
-//                     document.body.removeChild(link);
-//             })                
-//         },
-//         returned(id){
-//             this.$inertia.post(route('admin.order.returned'), {
-//             id: id,
-//             })
-//         },
-//     },
-//     computed:{
-//         ventas(){
-//             this.ordersTotal.forEach(col =>{
-//                 if(col.returned == 0 && col.status == "complete"){
-//                     this.total += Number(col.total);
-//                 }
-                
-//             });
-//             const obj = this.orders.data.map((col)=>{    
-//             return {
-//                 id : col.id,
-//                 calle: col.calle,
-//                 planta: col.planta,
-//                 address: col.address,
-//                 image : col.image,
-//                 date : col.created_at,
-//                 type : col.type,
-//                 returned: col.returned,
-//                 shippings : col.shippings,
-//                 id_t: col.transaction_id,
-//                 // email : col.shippings[0].email,
-//                 total_benefit : Number(col.total),
-//             }
-//             });
-//             return obj;
-//         },
-//     }
-// }
+import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
+import { Link } from '@inertiajs/inertia-vue3';
+export default {
+    layout:TemplateApp,
+    components:{
+        Link
+    },
+    created(){
+        
+    }
+}
 </script>
+<style scoped>
+.gradient-right{
+    background: linear-gradient(90deg, rgba(134,188,217,0) 63%, rgba(1,1,1,1) 90%);
+}
+.gradient-left{
+    background: linear-gradient(270deg, rgba(134,188,217,0) 63%, rgba(1,1,1,1) 100%);
+}
+@media (max-width:991px){
+    .gradient-right,
+    .gradient-left{
+        background: linear-gradient(180deg, rgba(134,188,217,0) 55%, rgba(1,1,1,1) 90%);
+    }
+}
 
-<style scope>
-strong{
-    font-weight: bold;
-}
-.pie h2{
-    font-size: 2em;
-}
-.btn-secondaryc{
-    background-color: #aaaaaa;
-    color: #fff;
-}
 </style>
