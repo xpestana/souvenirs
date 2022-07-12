@@ -17,7 +17,7 @@
     	</div>
     	<div class="mx-1.5 row lg:mx-0">
     		<div class="col-12">
-                <form
+                <div
                     class="row"
                 >
                     <!--END Alert validation -->
@@ -58,15 +58,14 @@
                     </div>
                     <div class="col-12 mt-4 px-0 text-center text-lg-left">                  
                         <button
-                             type="submit"
+                            type="button"
                              class="btn rounded text-white bg-collaborator-orange py-1 px-6"
-                             :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                             data-toggle="modal" data-target="#request-display"
+                             @click.prevent="openModalConfirm"
                         >
                            Pedir Displays
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
     	</div>
         <div
@@ -79,37 +78,38 @@
                 <span class="block cursor-pointer text-md orange  font-bold" @click.prevent="copy()"><i class="fas fa-copy orange mr-1"></i> Copiar Enlace</span>
             </div>
         </div>
-        <!--<NotiModal :id="'request-display'">
-            <template v-slot:header>
-                <i class="fas fa-truck text-orangec text-4xl"></i>
-            </template>
-            <template v-slot:title>
-                ¿Ya te has decidido?
-            </template>
-            <template v-slot:text>
-                Si la respuesta es "Si",envíanos una notificación
-                y nosotros nos pondremos en contacto contigo lo antes
-                posible.
-            </template>
-            <template v-slot:footer>
-                <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  
-                    @click="sendRequestDisplay"
-                >Enviar notificación
-                </button>
-            </template>
-        </NotiModal>-->
+        
     </section>
+    <NotiModal :id="'request-display-associate'">
+        <template v-slot:header>
+            <i class="fas fa-truck text-orangec text-4xl"></i>
+        </template>
+        <template v-slot:title>
+            ¿Son correctos los datos pedidos?
+        </template>
+        <template v-slot:text>
+           ¿Son correctos los datos pedidos?
+        </template>
+        <template v-slot:footer>
+            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  
+                @click="sendRequestDisplay"
+            >Enviar notificación
+            </button>
+        </template>
+    </NotiModal>
 </template>
 
 <script>
     import { Link } from '@inertiajs/inertia-vue3'
     import Select from '@/Components/Select'
     import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
+    import NotiModal from '@/Pages/Collaborator/components/NotiModal'
 	export default {
 	    layout:TemplateApp,
 	    components:{
             Link,
             Select,
+            NotiModal
 	    },
 	    props:['url'],
         data () {
@@ -152,6 +152,10 @@
                 } else {
                     this.form.displays.push(item)
                 }
+            },
+            openModalConfirm (){
+                $('#request-display-associate').modal('show')
+                console.log('modal')
             },
             sendRequestDisplay () {
 
