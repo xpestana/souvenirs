@@ -104,7 +104,7 @@
                             de venta de todos los servicios
                             que adquiera el cliente.
                         </p>
-                        <Link href="#" class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
+                        <Link :href="route('associates.resource.index')" class="btn mt-2 lg:mt-0 rounded-lg text-white border-solid border border-white ml-auto py-1">
                             ¡Empieza a vender!
                         </Link>
                     </div>
@@ -127,7 +127,7 @@
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target-full"></div>
                     <div class="text-white text-center full-button">
-                        <Link id="full-button" href="#" class="absolute top-16 left-28 z-50  btn rounded-lg border-solid d-none d-lg-block">
+                        <Link :href="route('associates.services')" id="full-button" class="absolute top-16 left-28 z-50  btn rounded-lg border-solid d-none d-lg-block">
                             + Enlazar el servicio
                         </Link>
                     </div>
@@ -180,7 +180,6 @@ export default {
     props: {
     cont: Number,
     orders:Object,
-    hotels:Object,
     associate: Boolean,
     },
     data(){

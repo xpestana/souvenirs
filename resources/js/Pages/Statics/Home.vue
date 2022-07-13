@@ -77,7 +77,7 @@
                     <div class="tarjeta-cuerpo py-2 px-1 d-flex flex-column">
                         <div class="mb-auto h-6 md:h-16 overflow-hidden">
                           <Link :href="route('product.activities.show',{product : product.id})" >
-                            <p class="font-weight-bolder text-center mb-1 text-wrap px-1">{{ product.title }}</p>
+                            <p class="font-weight-bolder text-center mb-1 text-wrap px-1 leading-5">{{ product.title }}</p>
                           </Link>
                         </div>
                         <div class="">

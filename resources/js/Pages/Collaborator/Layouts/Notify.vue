@@ -10,13 +10,22 @@
                         <i class="fas fa-times text-muted absolute right-1 md:right-2 top-3 cursor-pointer" data-dismiss="modal" aria-label="Close"></i>
                     </div>
                     <div class="my-2.5 text-center">
-                        <i class="far fa-check-circle text-orangec text-4xl"></i>
+                        <template v-if="status == 'success'">
+                            <i class="far fa-check-circle text-orangec text-4xl"></i>
+                        </template>
+                        <template v-if="status == 'error'">
+                            <i class="far fa-times-circle text-danger text-4xl"></i>    
+                        </template>
                     </div>
                     <h2 class="text-base text-center font-bold">
                         {{message}}
                     </h2>
                     <div class="my-3.5 text-center">
-                        <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs"  
+                        <button class="btn rounded text-white px-3.5 py-1 text-xs"  
+                                :class="{
+                                    'bg-collaborator-orange':status!=='error',
+                                    'btn-danger':status=='error'
+                                }"
                                 data-dismiss="modal" aria-label="Close"
                         >
                             Cerrar mensaje

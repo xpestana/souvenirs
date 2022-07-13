@@ -43,37 +43,33 @@ class AssociateController extends Controller
     {
         $url = config('app.url');
         $cont = step();
-        $hotels = auth()->user()->hotel->load('orders.shippings');
-        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status","complete")
-                    ->with('hotel','shippings')->get();
+        $orders = Order::where('user_id',auth()->user()->id)
+                    ->where("status","complete")
+                    ->where("returned",0)
+                    ->with('shippings')->get();
         $associate = auth()->user()->associate; 
-        return Inertia::render('Associates/Dashboard/Home', compact('cont','hotels','url','orders','associate'));
+        return Inertia::render('Associates/Dashboard/Home', compact('cont','url','orders','associate'));
     }
     public function sales(Request $request){
-        $hotels = auth()->user()->hotel->load('orders.shippings');
-        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+        $orders = Order::where('user_id',auth()->user()->id)
                     ->where("status","complete")
-                    ->with('hotel','shippings')
+                    ->where("returned",0)
+                    ->with('shippings')
                     ->Date($request->desde, $request->hasta)->paginate(15);
         $totalOrders = Order::where('user_id',auth()->user()->id)
                 ->where("status","complete")
-                ->with('hotel','shippings')
+                ->where("returned",0)
+                ->with('shippings')
                 ->Date($request->desde, $request->hasta)->get();
         $withdrawal = $orders->where("withdrawal",0);
 
-        $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
-                    ->where("status","complete")
-                    ->with('hotel','shippings')
-                    ->Date($request->desde, $request->hasta)
-                    ->where("withdrawal",1)->orderBy('id', 'desc')->first();
-        $dateLast = $orderLast ? $orderLast->updated_at : null;
-
+        
         $date = null;
 
         if (!$withdrawal->isEmpty()) {
             $date = $withdrawal->first()->updated_at;
         }
-        return Inertia::render('Associates/Dashboard/Collaboration/Sales', compact('hotels','orders','totalOrders'));
+        return Inertia::render('Associates/Dashboard/Collaboration/Sales', compact('orders','totalOrders'));
     }
 
     public function resource_index (Request $request) {

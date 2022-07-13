@@ -19,9 +19,11 @@ route('associates.settings')-->
                 </Link>
             </li>
             <li class="mb-3.5">
-                <Link :href="route('associates.services')" class="text-base link  sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url.includes('/tablero/alojamientos')}">
+                <Link :href="route('associates.services')" class="text-base link  sidebar-collapse-menu-mobile" 
+                    :class="{'sidebar-active':this.$page.url.includes('/tablero/asociado/enlazar-servicios')}"
+                >
                     <img class="inline w-5" style="margin-top:-4px"
-                        :class="{'side-icon-active':this.$page.url.includes('/tablero/alojamientos')}" 
+                        :class="{'side-icon-active':this.$page.url.includes('/tablero/asociado/enlazar-servicios')}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/enlazarservicios.svg"
                     >
                     Enlazar servicios
@@ -42,8 +44,10 @@ route('associates.settings')-->
                 </Link>
                 <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':this.$page.url.includes('colaboracion')}" id="sub-colaboracion">
                     <li>
-                        <Link :href="route('associates.resource.index')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/asociado/colaboracion/recursos'}">
-                            <img class="inline w-4" style="margin-top:-4px"
+                        <Link :href="route('associates.resource.index')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" 
+                            :class="{'sidebar-active':this.$page.url=='/tablero/asociado/colaboracion/recursos'}"
+                        >
+                            <img class="inline w-3.5" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/asociado/colaboracion/recursos'}" 
                                 src="/vendor_asset/img/collaborator/dashboard/icons/recurso.svg"
                             >
@@ -197,6 +201,12 @@ export default {
     created(){
         this.profile()
         this.colaboracion()
+    },
+    mounted(){
+        $('.sidebarCollapse').on('click', function () {
+            $('#collaborator-sidebar').toggleClass('active');
+            $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
+        });
     },
     updated(){
         this.routesProfile = false

@@ -254,6 +254,12 @@ export default {
         this.sales()
         this.resources()
     },
+    mounted(){
+        $('.sidebarCollapse').on('click', function () {
+            $('#collaborator-sidebar').toggleClass('active');
+            $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
+        });
+    },
     methods:{
         profile(){
             let url = this.$page.url;
