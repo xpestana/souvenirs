@@ -28,21 +28,26 @@
                     <!--END Alert validation -->
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold">Ciudad de destino</label>
-                        <div class="relative w-100 collaborator-box">
-                            <i class="fas fa-search absolute inset-y-1/3 px-2"></i>
-	                        <select
+                        <div class="w-100 collaborator-box">
+							<Select
+								v-model="form.city"
+								:options="citys"
+								textLabel="Ciudad..."
+								icon="icon"
+							/>
+	                        <!--<select
 	                        	v-model="form.city"
 	                        	class="w-100 rounded collaborator-input col-form-input py-1  pl-8"
 	                            placeholder="Ciudad..."
 	                         >
 								<option value="sevilla" :selected="form.city == 'sevilla'">Sevilla</option>
 								<option value="madrid" :selected="form.city == 'madrid'">Madrid</option>
-							</select>
+							</select>-->
 						</div>
                     </div>
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold">Tamaño del banner</label>
-                        <select
+                        <!--<select
                         	v-model="form.width"
                         	class="w-100 rounded col-form-input py-1"
                             placeholder="Tamaño..."
@@ -50,7 +55,12 @@
 							<option value="200x700">200x700</option>
 							<option value="728x90">728x90</option>
 							<option value="160x600">160x600</option>
-						</select>
+						</select>-->
+						<Select
+							v-model="form.width"
+							:options="banners"
+							textLabel="Tamaño..."
+						/>
                     </div>
                     <div class="col-12 mt-4 px-0 text-center text-lg-left">                  
                         <button
@@ -84,12 +94,12 @@
 <script>
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
 	import { Link } from '@inertiajs/inertia-vue3';
-	import SelectCollaborator from '@/Pages/Collaborator/components/SelectCollaborator'
+	import Select from '@/Components/Select'
 	export default {
 	    layout:TemplateApp,
 	    components:{
 			Link,
-			SelectCollaborator,
+			Select,
 	    },
 	    props: {
 	    	url: Object,
@@ -102,6 +112,14 @@
 					width: null,
 				}),
 				message: null,
+				citys: [
+					{label: 'Sevilla', value: 'sevilla'},
+				],
+				banners: [
+					{label: '200x700', value: '200x700'},
+					{label: '728x90', value: '728x90'},
+					{label: '160x600', value: '160x600'},
+				]
 	    	}
 		},
 	    computed: {

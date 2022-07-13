@@ -23,21 +23,12 @@
                     <!--END Alert validation -->
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold">Ciudad de destino</label>
-                         <div class="relative w-100 collaborator-box">
-                            <i class="fas fa-search absolute inset-y-1/3 px-2"></i>
-                            <select
-                                v-model="form.city"
-                            	class="w-100 collaborator-input rounded col-form-input py-1 pl-8"
-                                placeholder="Ciudad..."
-                             >
-    							<option
-                                    value="sevilla"
-                                    :selected="form.city == 'sevilla'"
-                                >
-                                    Sevilla
-                                </option>
-    						</select>
-                        </div>
+                        <Select
+                            v-model="form.city"
+                            :options="citys"
+                            textLabel="Buscar ciudad..."
+                            icon="icon"
+                        />
                     </div>
                     <div class="col-12 mt-4 px-0 text-center text-lg-left">                  
                         <button
@@ -67,11 +58,13 @@
 
 <script>
 	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
-	import { Link } from '@inertiajs/inertia-vue3';
+    import { Link } from '@inertiajs/inertia-vue3';
+    import Select from '@/Components/Select'
 	export default {
 	    layout:TemplateApp,
 	    components:{
-	        Link
+            Link,
+            Select
 	    },
 	    props:['url'],
         data () {
@@ -79,6 +72,9 @@
                 form: this.$inertia.form({
                     city: 'sevilla',
                 }),
+                 citys: [
+					{label: 'Sevilla', value: 'sevilla'},
+				],
             }
         },
 	    methods: {

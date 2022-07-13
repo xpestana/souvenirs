@@ -50,13 +50,16 @@
 	        hasErrors() {
 	            return this.errors.length > 0
 	        },
-	    }, 
+	    },
         mounted () {
             this.emitter.on('errors',this.openAlertValidation)
         },
 	    methods: {
             openAlertValidation () {
                 this.close = true
+                setTimeout(()=> {
+                    this.close = false
+                }, 5000)
             },
 	    	closeAlertValidation () {
 	            this.close = false
