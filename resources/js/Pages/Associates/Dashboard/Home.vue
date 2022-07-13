@@ -15,7 +15,7 @@
         </div>
         <!--END Header section-->
         <!-- Content section-->
-        <div class="home-perfil row mt-3.5 lg:mt-0" v-if="cont < 4 || hotels.length == 0">
+        <div class="home-perfil row mt-3.5 lg:mt-0" v-if="cont < 4 || associate == 0">
             <div class="col-12 mt-2 mb-1 px-lg-0">
                 <h2 class="font-semibold text-3xl">Primeros pasos</h2>
             </div>
@@ -24,7 +24,7 @@
                     id="perfil-lodging" style="background-image: url('/vendor_asset/img/collaborator/dashboard/inicioenlazar.png');">
                     <div class="absolute w-full h-full flex flex-column justify-between rounded-xl" style="background-color:#00000069">
                         <h2 class="font-bold text-2xl text-white p-3.5"> Enlaza todos los servicios que ofreces</h2>
-                        <template v-if="hotels.length == 0">
+                        <template v-if="associate == 0">
                             <p class="text-right text-2xl text-white  p-3.5">No realizado</p>
                         </template>
                         <template v-else>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="bg-collaborator-orange w-full bottom-0 absolute rounded-xl flex" id="perfil-lodging-target">
                         <div class="text-white m-auto">
-                            <Link href="#" class="btn rounded-lg text-white border-solid border border-white">
+                            <Link :href="route('associates.services')" class="btn rounded-lg text-white border-solid border border-white">
                                 <h3 class="mr-1 inline text-white">+</h3> 
                                 Enlazar el servicio
                             </Link>
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <div class="home-perfil-full row mt-3.5 lg:mt-0" v-if="cont == 4 && hotels.length > 0">
+        <div class="home-perfil-full row mt-3.5 lg:mt-0" v-if="cont == 4 && associate > 0">
             <div class="col-12 mt-8 lg:mt-16 mb-1 px-lg-0">
                 <h2 class="font-semibold text-3xl">Primeros pasos</h2>
             </div>
@@ -180,7 +180,8 @@ export default {
     props: {
     cont: Number,
     orders:Object,
-    hotels:Object
+    hotels:Object,
+    associate: Boolean,
     },
     data(){
         return{

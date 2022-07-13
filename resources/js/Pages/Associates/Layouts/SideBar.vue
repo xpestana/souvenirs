@@ -19,7 +19,7 @@ route('associates.settings')-->
                 </Link>
             </li>
             <li class="mb-3.5">
-                <Link :href="route('associate.services')" class="text-base link  sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url.includes('/tablero/alojamientos')}">
+                <Link :href="route('associates.services')" class="text-base link  sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url.includes('/tablero/alojamientos')}">
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':this.$page.url.includes('/tablero/alojamientos')}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/enlazarservicios.svg"

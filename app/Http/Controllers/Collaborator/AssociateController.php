@@ -34,18 +34,20 @@ class AssociateController extends Controller
                     ->paginate(10);
         $orders->load('shippings');
         $url = config('app.url');
-        $hotels = auth()->user()->hotel->load('orders.shippings');       
+        $hotels = auth()->user()->hotel->load('orders.shippings'); 
+        
         return Inertia::render('Associates/Dashboard/Collaboration', compact('hotels','orders','url','ordersTotal'));
     }
 
     public function associate_home(Request $request)
     {
         $url = config('app.url');
-        $cont = 4;
+        $cont = step();
         $hotels = auth()->user()->hotel->load('orders.shippings');
         $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))->where("status","complete")
                     ->with('hotel','shippings')->get();
-        return Inertia::render('Associates/Dashboard/Home', compact('cont','hotels','url','orders'));
+        $associate = auth()->user()->associate; 
+        return Inertia::render('Associates/Dashboard/Home', compact('cont','hotels','url','orders','associate'));
     }
     public function sales(Request $request){
         $hotels = auth()->user()->hotel->load('orders.shippings');
