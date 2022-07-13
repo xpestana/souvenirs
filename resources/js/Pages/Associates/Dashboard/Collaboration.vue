@@ -35,7 +35,7 @@
                     de los recursos que te permitirán aumentar los beneficios gracias a colaborar con nosotros.
                 </p>
                 <div class="text-center text-lg-left">
-                    <Link href="#" class="btn bg-collaborator-orange text-white font-semibold py-1 mt-2.5 sm:mt-8 lg:mt-2.5">
+                    <Link :href="route('associates.resource.index')" class="btn bg-collaborator-orange text-white font-semibold py-1 mt-2.5 sm:mt-8 lg:mt-2.5">
                         ¡Descubrir recursos!
                     </Link>
                 </div>

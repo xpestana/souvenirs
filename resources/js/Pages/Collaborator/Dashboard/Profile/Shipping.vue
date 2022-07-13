@@ -234,7 +234,7 @@ export default {
             var map = this.errorsKey.map( item => {
                 switch (item) {
                     case 'document':
-                        return 'Nif'
+                        return 'Documento de identificación'
                         break;
                     case 'businessName':
                         return 'Razón soial'
@@ -246,7 +246,7 @@ export default {
                         return 'Telefono'
                         break;
                     case 'email':
-                        return 'Email'
+                        return 'Correo eletrónico'
                         break;
                     case 'deliveryAddress':
                         return 'Dirección de envío'
@@ -288,12 +288,12 @@ export default {
                 preserveScroll: true,
                 errorBag: 'submitShipping',
                 onSuccess:()=>{
+                    this.forceExitConfirm = false
                     $('#datosModal').modal('hide')
                     this.updateForm()
-                    this.forceExitConfirm = false
                 },
                 onError: (errors) => {
-                    console.log(errors)
+                    this.forceExitConfirm = false
                     this.getErrorsKey()
                     this.emitter.emit('errors')
                 },

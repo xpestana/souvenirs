@@ -133,7 +133,7 @@ export default {
                         return 'Titulo de la cuenta'
                         break;
                     case 'iban':
-                        return 'iban'
+                        return 'Iban'
                         break;
                     default:
                     return item
@@ -174,12 +174,12 @@ export default {
                 preserveScroll: true,
                 errorBag: 'submitBank',
                 onSuccess:()=>{
+                    this.forceExitConfirm = false
                     $('#datosModal').modal('hide')
                     this.updateForm()
-                    this.forceExitConfirm = false
                 },
                 onError: (errors) => {
-                    console.log(errors)
+                    this.forceExitConfirm = false
                     this.getErrorsKey()
                     this.emitter.emit('errors')
                 },

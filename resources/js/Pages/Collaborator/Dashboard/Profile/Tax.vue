@@ -11,7 +11,7 @@
         <div class="perfil-tax row mx-1.5 lg:mx-0 mt-8">
             <form @submit.prevent="submitProfile" class="col-12 col-md-9">
                 <ValidationAlert
-                    :errors="errorsKey"
+                    :errors="formatErrors"
                 />
                 <div class="row">
                     <div class="col-12 col-md-6 my-1.5 pl-0 pr-0 pr-lg-2">
@@ -75,13 +75,16 @@
                 <div class="row">
                     <div class="col-12 col-md-6 my-1.5 pl-0 pr-0 pr-lg-2">
                         <label class="font-bold">Provincia <span class="text-orangec">*</span></label>
-                        <input type="text" class="w-100 rounded col-form-input py-1.5" placeholder="Provincia...">
+                        <input type="text" class="w-100 rounded col-form-input py-1.5" placeholder="Provincia..."
+                            v-model="form.province" 
+                            :class="{'error-input': errorsKey.includes('province')}"
+                        >
                     </div>
                     <div class="col-12 col-md-6 my-1.5 pl-0 pl-lg-2 pr-0">
                         <label class="font-bold">Ciudad <span class="text-orangec">*</span></label>
                         <input type="text" class="w-100 rounded col-form-input py-1.5" placeholder="Ciudad..."
                             v-model="form.city" 
-                            :class="{'error-input': errorsKey.includes('cp')}"
+                            :class="{'error-input': errorsKey.includes('city')}"
                         >
                     </div>
                 </div>
@@ -142,7 +145,8 @@ export default {
                 phone: '',
                 razon: '',
 				nif: '',
-				identifier: '',
+                identifier: '',
+                province: '',
 				city: '',
 				cp: '',
 				address: '',
@@ -161,12 +165,51 @@ export default {
                 this.form.phone === this.auth.profile.phone &&
                 this.form.razon === this.auth.profile.razon &&
                 this.form.nif === this.auth.profile.nif &&
-                this.form.identifier === this.auth.profile.identifier &&
+                this.form.identifier === this.auth.profile.identify &&
                 this.form.city === this.auth.profile.city &&
                 this.form.cp === this.auth.profile.cp &&
                 this.form.address === this.auth.profile.address
             ) { return true }
             return false
+        },
+        formatErrors () {
+            var map = this.errorsKey.map( item => {
+                switch (item) {
+                    case 'name':
+                        return 'Nombre'
+                        break;
+                    case 'email':
+                        return 'Correo electrónico'
+                        break;
+                    case 'phone':
+                        return 'Telefono'
+                        break;
+                    case 'razon':
+                        return 'Razón social'
+                        break;
+                    case 'nif':
+                        return 'Documento de identificación'
+                        break;
+                    case 'identifier':
+                        return 'Persona de contacto'
+                        break;
+                    case 'city':
+                        return 'Ciudad'
+                        break;
+                    case 'province':
+                        return 'Provincia'
+                        break;
+                    case 'cp':
+                        return 'Código postal'
+                        break;
+                    case 'address':
+                        return 'Domicilio de facturación'
+                        break;
+                    default:
+                    return item
+                }
+            })
+            return map
         },
     },
     created () {
@@ -194,12 +237,12 @@ export default {
                 preserveScroll: true,
                 errorBag: 'submitTax',
                 onSuccess:()=>{
+                    this.forceExitConfirm = false
                     $('#datosModal').modal('hide')
                     this.updateForm()
-                    this.forceExitConfirm = false
                 },
                 onError: (errors) => {
-                    console.log(errors)
+                    this.forceExitConfirm = false
                     this.getErrorsKey()
                     this.emitter.emit('errors')
                 },
@@ -215,7 +258,7 @@ export default {
             this.form.phone = this.auth.profile.phone
             this.form.razon = this.auth.profile.razon
             this.form.nif = this.auth.profile.nif
-            this.form.identifier = this.auth.profile.identifier
+            this.form.identifier = this.auth.profile.identify
             this.form.city = this.auth.profile.city
             this.form.cp = this.auth.profile.cp
             this.form.address = this.auth.profile.address

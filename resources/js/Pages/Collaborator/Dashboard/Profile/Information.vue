@@ -1,5 +1,5 @@
 <template>
-    <section id="dashboard-perfil-infor" class="container py-8 ml-2 md:ml-0 md:px-24">
+    <section id="dashboard-perfil-infor" class="container py-8 ml-2 md:ml-0 md:px-24" :class="{'position-relative': windowWidth < 768}">
         <!-- Header section-->
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
@@ -8,12 +8,16 @@
         </div>
         <!--END Header section-->
          <!-- Content section-->
-        <div class="perfil-infor row mx-1.5 lg:mx-0 mt-8 justify-content-start">
+        <div
+            class="perfil-infor row mx-1.5 lg:mx-0 mt-8 justify-content-start"
+            :class="{'position-relative': windowWidth >= 768}"
+        >
+            <!--Alert validation -->
+            <ValidationAlert
+                :errors="formatErrors"
+            />
             <div class="col-12 col-md-6">
                 <form @submit.prevent="submitProfile" class="row">
-                    <ValidationAlert
-                        :errors="errorsKey"
-                    />
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold"><i class="fas fa-user mr-1"></i>Nombre</label>
                         <input type="text" class="w-100 rounded col-form-input py-1.5" placeholder="Nombre..."
@@ -110,6 +114,7 @@ export default {
             beforeUrl: '',
             typeBack: '1',
             errorsKey: [],
+            windowWidth: window.innerWidth,
         }
     },
     computed: {
@@ -120,6 +125,24 @@ export default {
                 this.form.phone === this.auth.profile.phone
             ) { return true }
             return false
+        },
+        formatErrors () {
+            var map = this.errorsKey.map( item => {
+                switch (item) {
+                    case 'name':
+                        return 'Nombre'
+                        break;
+                    case 'email':
+                        return 'Correo electrónico'
+                        break;
+                    case 'phone':
+                        return 'Telefono'
+                        break;
+                    default:
+                    return item
+                }
+            })
+            return map
         },
     },
     created () {
@@ -147,10 +170,15 @@ export default {
                 preserveScroll: true,
                 errorBag: 'submitProfile',
                 onSuccess:()=>{
+                    this.forceExitConfirm = false
                     $('#datosModal').modal('hide')
                     this.updateForm()
+                },
+                onError: (errors) => {
                     this.forceExitConfirm = false
-                }
+                    this.getErrorsKey()
+                    this.emitter.emit('errors')
+                },
             })
         },    
         showPass: function (id){

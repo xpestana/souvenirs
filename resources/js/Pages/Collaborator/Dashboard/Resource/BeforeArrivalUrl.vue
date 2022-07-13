@@ -50,7 +50,10 @@
             <h3 class="font-bold text-xl">¡Enlace generado con éxito!</h3>
             <div class="flex justify-content-between mt-3">
                 <span class="block">{{url}}</span>
-                <span class="block cursor-pointer text-md orange  font-bold" @click.prevent="copy()"><i class="fas fa-copy orange mr-1"></i> Copiar Enlace</span>
+                <div>
+                    <span class="block cursor-pointer text-md orange  font-bold" @click.prevent="copy()"><i class="fas fa-copy orange mr-1"></i> Copiar Enlace</span>
+                    <span v-if="message" class="block text-sm mt-1">{{message}}</span>
+                </div>
             </div>
         </div>
     </section>
@@ -70,11 +73,12 @@
         data () {
             return {
                 form: this.$inertia.form({
-                    city: 'sevilla',
+                    city: 'Sevilla',
                 }),
                  citys: [
-					{label: 'Sevilla', value: 'sevilla'},
-				],
+					{label: 'Sevilla', value: 'Sevilla'},
+                ],
+                message: null,
             }
         },
 	    methods: {
@@ -135,14 +139,22 @@
                 try {
                     var status = document.execCommand('copy');
                     if(!status){
+                        this.alertCopy('No se pudo copiar')
                         console.error("No se pudo copiar el texto");
                     }else{
+                        this.alertCopy('¡Copiado en el portapapeles!')
                         console.log("El texto ahora está en el portapapeles");
                     }
                 } catch (err) {
                     console.log('Uy, no se pudo copiar');
                 }
             },
+            alertCopy (m) {
+	        	this.message = m
+	        	setTimeout(()=>{
+	        		this.message = null
+	        	}, 4000)
+	        },
 	    },
 	}
 </script>

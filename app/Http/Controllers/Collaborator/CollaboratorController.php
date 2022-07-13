@@ -345,7 +345,7 @@ class CollaboratorController extends Controller
             $clientUser->assignRole('Client');
             $clientUser->hotel()->attach($hotel->id, ['manager' => false]);
 
-        return Redirect::route('coll.lodgings.index')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
+        return back()->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);  
         } catch (Exception $e) {
             
         }
@@ -452,8 +452,8 @@ class CollaboratorController extends Controller
             $hotel->save();
 
             $random = mt_Rand(1000000, 9999999);
-            return Redirect::route('coll.lodgings.index')->with(['id'=>$random, 'message' => 'Actualizado exitosamente', 'code' => 200, 'status' => 'success']);   
-         }catch (Exception $e) 
+            return back()->with(['id'=>$random, 'message' => 'Actualizado exitosamente', 'code' => 200, 'status' => 'success']);   
+         }catch (Exception $e)
          {
         
          }

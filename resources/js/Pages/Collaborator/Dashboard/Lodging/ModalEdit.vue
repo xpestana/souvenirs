@@ -1,7 +1,6 @@
 <template>
 	<!-- Modal Request -->
     <div class="modal modal-create fade" :id="id" tabindex="-1" role="dialog" aria-labelledby="myModalType"
-    style="z-index:1500;"
     aria-hidden="true">
     <!-- Change class .modal-sm to change the size of the modal -->
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -101,7 +100,7 @@
 					                        <label class="font-bold mb-0.5">N° - Letra-Piso <span class="required-input">*</span></label>
 					                        <input
 					                            type="text" v-model="formModal.planta"
-					                            class="w-100 rounded col-form-input py-1" placeholder="N..."
+					                            class="w-100 rounded col-form-input py-1" placeholder="N°..."
 					                            :class="{'error-input': errorsKey.includes('planta')}"
 					                        >
 				                    	</div>
@@ -187,11 +186,10 @@
 												/>
 			                            </div>
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
-					                        <label class="font-bold mb-0.5">Página Web  <span v-if="formComputed.tipo == 'apartamento'" class="required-input">*</span></label>
+					                        <label class="font-bold mb-0.5">Página Web</label>
 					                        <input
 					                            type="text" v-model="formModal.url"
 					                            class="w-100 rounded col-form-input py-1" placeholder="Página Web..."
-					                            :class="{'error-input': formComputed.tipo == 'apartamento' && errorsKey.includes('url')}"
 					                        >
 				                    	</div>
 										<div class="col-12 col-md-6 pr-md-2 mt-2.5">
@@ -289,7 +287,7 @@
 			                            <div class="col-12 mt-2.5 mt-md-0 col-md-6">
 					                        <div class="flex justify-content-between justify-content-md-start">
 												 <label class="font-bold mb-0.5 inline-block">Página Web <span class="required-input">*</span></label> 
-												<span class="fas fa-exclamation-circle ml-md-1 icon mb-1 relative inline-block"><div class="tooltipp rounded-md shadow text-xs font-light">Escribe aquí el enlace del anuncio de tu apartamento. Booking, Airbnb, Wimdu...</div></span>
+												<span class="ml-md-2 mb-1 icon relative inline-block"><i><i class="fas fa-exclamation-circle icon__fas"></i></i> <div class="tooltipp rounded-md shadow text-xs font-light">Escribe aquí el enlace del anuncio de tu apartamento. Booking, Airbnb, Wimdu...</div></span>
 											</div>
 					                        <input
 					                            type="text" v-model="formModal.url"
@@ -299,13 +297,13 @@
 				                    	</div>
 			                        </div>
 			                    </div>
-	                    		<div class="col-12 my-2 px-0">
+								<div class="col-12 my-1.5 px-0">
+									<label class="font-bold mb-0.5">Otros datos de interés
+		                            </label>
 		                            <textarea
 		                                class="w-100 rounded col-form-input py-1"
 		                                placeholder="Otros datos de interés..." v-model="formModal.area"
 		                            ></textarea>
-		                            <label class="font-bold mt-0.5">Otros datos de interés
-		                            </label>
 			                    </div>
 			                </div>
 			                <div
@@ -315,7 +313,7 @@
 			                    <div class="col-12 my-0.5 px-0">
 			                        <div class="row px-0">
 			                            <div class="col-12 col-md-6 pr-md-2">
-			                                    <label class="font-bold mb-0.5">Nombre del Complejo turístico<span class="required-input">*</span></label>
+			                                    <label class="font-bold mb-0.5">Nombre del complejo turístico<span class="required-input">*</span></label>
 			                                    <input
 			                                        type="text" v-model="formModal.nombre_hotel"
 			                                        class="w-100 rounded col-form-input py-1"
@@ -702,8 +700,8 @@
 			                    	@click="$refs.file.click()"
 			                    >
 			                    	<i class="fas fa-image inline-block text-white text-xl text-muted"></i>
-			                    	<label class="text-center block font-bold text-muted mt-1 cursor-pointer">Sueltaa aquí tu imagen o explora en tus archivos</label>
-			                    	<p class="text-xs muted mt-1">Tamañoo máximo  de la imagen 2MB</p>
+			                    	<label class="text-center block font-bold text-muted mt-1 cursor-pointer">Suelta aquí tu imagen o explora en tus archivos</label>
+			                    	<p class="text-xs muted mt-1">Tamaño máximo  de la imagen 2MB</p>
 			                    </div>
 			                </div>
 			            </div>
@@ -722,7 +720,7 @@
 		                        </div>
 		                        <h2 class="text-lg text-center mt-3.5 font-bold">Hay cambios sin guardar</h2>
 		                        <p class="px-4 my-2 text-xs text-center">
-		                            ¿Estas seguro que quieres salir?
+		                            ¿Estás seguro que quieres salir?
 		                        </p>
 		                        <div class="my-2.5 text-center">
 		                            <button class="btn rounded bg-collaborator-orange text-white px-3.5 py-1 text-xs" @click.prevent="closeModalBack()">Seguir editando</button>
@@ -783,7 +781,7 @@
 				imagenValue: null,
 				group: [{label: 'Hotel', value: 'Hotel'}, {label: 'Pensión/Albergue', value: 'Pensión/Albergue'}, {label: 'Apartahotel',  value: 'Apartahotel'}],
 				modalid: [{label: 'Playa', value: 'Playa'}, {label: 'Rural', value: 'Rural'}, {label: 'Carretera',  value: 'Carretera'}, {label: 'Ciudad',  value: 'Ciudad'}],
-				category: [{label: '1 Estrella', value: '1 Estrella'}, {label: '2 Estrellas', value: '2 Estrellas'}, {label: '3 Estrellas', value: '3 Estrellas'}, {label: '4 Estrellas',  value: '4 Estrellas'}, {label: '5 Estrellas',  value: '5 Estrellas'}],
+				category: [{label: '1 Estrella', value: '1 Estrella'}, {label: '2 Estrellas', value: '2 Estrellas'}, {label: '3 Estrellas', value: '3 Estrellas'}, {label: '4 Estrellas',  value: '4 Estrellas'}, {label: '5 Estrellas',  value: '5 Estrellas'}, {label: '5 Estrellas gran lujo',  value: '5 Estrellas gran lujo'}],
 				llaves: [{label: '1', value: '1'}, {label: '2', value: '2'}, {label: '3',  value: '3'}, {label: '4',  value: '4'}, {label: '5',  value: '5'}],
 				errorsKey: [],
 			}
@@ -947,11 +945,10 @@
                     onSuccess: (result) => {
                         console.log('success')
                         if(this.$page.props.flash.code == 200){
-                            console.log('222')
                             this.formModal.reset()
                             this.errorsKey = []
                             this.eraseFeatured()
-                            $('#'+this.id).modal('hide')
+                            $(`#${this.id}`).modal('hide')
                         };
                     },
                     onError: (errors) => {
@@ -978,7 +975,6 @@
             	$(`#modalImage${this.id}`).modal('hide')
             },
             closeModalEdit () {
-            	console.log(this.validExit)
             	if (this.validExit) {
             		$(`#modalExitEdit${this.id}`).modal('show')
             	} else {
@@ -995,7 +991,7 @@
             forceExit () {
             	$(`#modalExitEdit${this.id}`).modal('hide')
             	setTimeout(()=>{
-            		$(`#${this.id}`).modal('hide')
+					$(`#${this.id}`).modal('hide')
             		this.errorsKey = []
             		this.formModal.reset()
             	},200)
@@ -1031,16 +1027,19 @@
 		bottom: 63px;
 		right: 12px;
 	}
+
 	.icon:hover {
 		color: #ff9c06;
 	}
+
 	.icon:hover .tooltipp {
 		display: block;
 	}
-	.icon{
-		position: relative;
-		//transform: rotate(180deg);
+	
+	.icon__fas{
+		transform: rotate(180deg);
 	}
+
 	.bg-header-colaborator{
         background-color: #f6f6f6;
     }  

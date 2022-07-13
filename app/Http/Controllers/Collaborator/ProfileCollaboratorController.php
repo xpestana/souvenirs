@@ -25,6 +25,7 @@ class ProfileCollaboratorController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'phone' => 'required|string',
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore(auth()->user()->id)],
             'password' => ['nullable', 
                 Rules\Password::min(8)

@@ -66,12 +66,12 @@
                                     </template>
                                 </h2>
                                 <p class="text-white text-sm lg:text-xs leading-5 lg:leading-4 mt-1 mt-lg-1 lg:truncate">
-                                    {{hotel.type}} · {{ hotel.hab }}
+                                    {{hotel.type === 'complejo' ? 'complejo turístico' : hotel.type}} · {{ hotel.hab }}
                                     <template v-if="hotel.type == 'hotel'">
                                         Habitaciones ·
                                     </template>
                                     <template v-if="hotel.type == 'complejo'">
-                                        Numero de apartamentos ·
+                                        Apartamentos ·
                                     </template>
                                     {{ hotel.zone }}
                                 </p>
@@ -101,7 +101,7 @@
                                 <a href="javascript:void(0)" @click="requestDisplay(hotel.id)" class="dropdown-item">
                                     Pedir displays
                                 </a>
-                                <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" :data-target="'#edit'+hotel.id" data-backdrop="static" data-keyboard="false">
+                                <a href="javascript:void(0)"  class="dropdown-item"  data-toggle="modal" :data-target="'#edit'+hotel.id" data-backdrop="static" data-keyboard="false" @click.prevent="chageFormEdit()">
                                     Editar
                                 </a>
                             </div>

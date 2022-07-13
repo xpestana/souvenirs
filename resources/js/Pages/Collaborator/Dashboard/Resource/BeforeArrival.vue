@@ -46,23 +46,23 @@
         		</div>
         	</div>
     	</div>
-         <div class="row shadow-2xl rounded-xl mt-6 mx-0 relative">
+        <div class="row shadow-2xl rounded-xl mt-6 mx-0 relative">
             <div class="stay-cards-img col-12 d-block d-lg-none rounded-t-xl bg-center bg-cover px-0 h-36" 
                 style="background-image:url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg')"
             >
                 <div class="gradient-left w-full h-full rounded-t-xl"></div>
             </div>
-            <div class="cards-info col-12 col-lg-3 md:bg-black pt-3.5 lg:rounded-l-xl pl-lg-4 h-auto lg:h-28  absolute md:static top-16 z-30">
-                <h1 class="text-7xl text-orangec font-bold">
+            <div class="cards-info col-12 col-lg-4 md:bg-black pt-1.5 lg:rounded-l-xl pl-lg-4 h-auto lg:h-28  absolute md:static top-16 z-30">
+                <h1 class="text-8xl text-orangec font-bold lg:text-center mb-2.5 lg:mb-0">
                     20%
                 </h1>
             </div>
-            <div class="cards-info col-12 col-lg-6 bg-black pt-3.5 h-auto lg:h-28 px-lg-0 rounded-b-xl lg:rounded-b-none">
-                <h1 class="text-lg text-white font-bold mb-6 lg:mb-0">
+            <div class="cards-info col-12 col-lg-4 bg-black pt-2.5 h-auto lg:h-28 px-lg-0 rounded-b-xl lg:rounded-b-none">
+                <h1 class="text-lg text-white font-bold mb-6 lg:mb-0 leading-6 pl-6">
                     de comisión sobre el precio final de venta de todos los servicios que adquiera el cliente.
                 </h1>
             </div>
-            <div class="cards-img col-lg-3 d-none d-lg-block rounded-r-xl bg-center bg-cover pl-lg-0 h-28" style="background-image:url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg')">
+            <div class="cards-img col-lg-4 d-none d-lg-block rounded-r-xl bg-center bg-cover pl-lg-0 h-28" style="background-image:url('/vendor_asset/img/collaborator/dashboard/colhome3.jpg')">
                 <div class="gradient-left w-full h-full rounded-r-xl"></div>
             </div>
         </div>
