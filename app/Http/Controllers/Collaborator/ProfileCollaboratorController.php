@@ -60,6 +60,7 @@ class ProfileCollaboratorController extends Controller
             'address' => 'required|string',
             'identifier' => 'required|string',
             'city' => 'required|string',
+            'province' => 'required|string',
             'cp' => 'required|string',
         ]);
 
@@ -74,6 +75,7 @@ class ProfileCollaboratorController extends Controller
         $profile->nif = $request->nif;
         $profile->identify = $request->identifier;
         $profile->city = $request->city;
+        $profile->province = $request->province;
         $profile->cp = $request->cp;
         $profile->address = $request->address;
         $profile->save();

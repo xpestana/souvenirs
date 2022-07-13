@@ -26,6 +26,7 @@ class profile extends Model
         'city',
         'cp',
         'address',
+        'province',
     ];
 
     /**

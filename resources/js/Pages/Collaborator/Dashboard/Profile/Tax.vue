@@ -167,6 +167,7 @@ export default {
                 this.form.nif === this.auth.profile.nif &&
                 this.form.identifier === this.auth.profile.identify &&
                 this.form.city === this.auth.profile.city &&
+                 this.form.province === this.auth.profile.province &&
                 this.form.cp === this.auth.profile.cp &&
                 this.form.address === this.auth.profile.address
             ) { return true }
@@ -260,6 +261,7 @@ export default {
             this.form.nif = this.auth.profile.nif
             this.form.identifier = this.auth.profile.identify
             this.form.city = this.auth.profile.city
+            this.form.province = this.auth.profile.province
             this.form.cp = this.auth.profile.cp
             this.form.address = this.auth.profile.address
         },

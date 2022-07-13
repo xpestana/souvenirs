@@ -543,7 +543,7 @@ class CollaboratorController extends Controller
         $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
                     ->where("status","complete")
                     ->with('hotel','shippings')
-                    ->Date($request->desde, $request->hasta)->paginate(15);
+                    ->Date($request->desde, $request->hasta)->paginate(8);
         $totalorders = Order::whereIn('hotel_id',$hotels->pluck('id'))
                     ->where("status","complete")
                     ->with('hotel','shippings')

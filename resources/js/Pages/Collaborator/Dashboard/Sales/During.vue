@@ -73,7 +73,7 @@
         <div class="lg:flex mb-8 justify-content-lg-start text-lg-left pt-2 pt-lg-0">
             <p class="block mr-4"><b>Facturación total: </b>{{total.toFixed(2)}}€</p>
             <p class="block mr-4"><b>Beneficio total: </b>{{(total*0.20).toFixed(2)}}€</p>
-            <p v-if="dateLast" class="block"><b>Última tranferencia de saldo realizada: </b>{{moment(dateLast).format('DD/MM/YYYY')}}</p>
+            <p class="block"><b>Última tranferencia de saldo realizada: </b>{{dateLast ? moment(dateLast).format('DD/MM/YYYY') : 'sin retiros'}}</p>
         </div>
 	    <!-- Filtro por fecha -->
 	    <div class="row lg:mx-0 justify-content-start">
@@ -134,7 +134,7 @@
 					      <td class="text-center">{{ item.beneficio }}€</td>
 					    </tr>
 					    <tr v-if="filterOrders.length < 1">
-							<td colspan="8" class="text-center">No hay resultados para la busqueda</td>
+							<td colspan="8" class="text-center">Sin resultados</td>
 						</tr>
 					  </tbody>
 					</table>
