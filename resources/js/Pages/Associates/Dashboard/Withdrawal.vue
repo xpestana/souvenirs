@@ -71,7 +71,7 @@
                             <tr v-for="order in orders.data" :key="order.id">
                                 <td class="text-center font-bold">{{order.transaction_id}}</td>
                                 <td class="text-center">{{moment(order.updated_at).format("DD/MM/YYYY")}}</td>
-                                <td class="text-center">{{order.total*0.20}}</td>
+                                <td class="text-center">{{order.total*0.20}}€</td>
                             </tr>
                             <tr v-if="orders.data.length == 0">
                                 <td colspan="5" class="text-center">Sin resultados</td>
