@@ -10,7 +10,7 @@
         </div>
         <!--END Header section-->
         
-        <div class="total-saldo row my-8 mx-1.5 lg:mx-0 justify-content-between">
+        <div class="total-saldo row my-4 lg:my-8 mx-1.5 lg:mx-0 justify-content-between">
             <div class="col-12 d-lg-none text-left text-lg-left py-2.5  px-lg-0">
                 <p class="pt-1.5"><b>Facturación total: </b>{{total.toFixed(2)}}€</p>
                 <p class="pt-1.5"><b>Beneficio total: </b>{{(total*0.20).toFixed(2)}}€</p>
@@ -28,7 +28,7 @@
                 </div>        
             </div>
             <div class="d-none d-lg-block col-lg-4 text-center text-lg-left py-2.5  px-lg-0">
-                <p class="pt-1.5"><b>Facturación total: </b>{{total.toFixed(2)}}€</p>
+                <p class="pt-1.5 lg:pt-3.5"><b>Facturación total: </b>{{total.toFixed(2)}}€</p>
                 <p class="pt-1.5"><b>Beneficio total: </b>{{(total*0.20).toFixed(2)}}€</p>
             </div>
         </div>
@@ -50,7 +50,7 @@
                         <tbody>
                             <tr v-for="order in orders.data" :key="order.id">
                                 <td class="text-center font-bold">{{order.transaction_id}}</td>
-                                <td class="text-center">{{order.hotel.zone}}</td>
+                                <td class="text-center">{{$page.props.auth.profile.city}}</td>
                                 <td class="text-center">{{moment(order.created_at).format("DD/MM/YYYY")}}</td>
                                 <td class="text-center">{{order.total}}</td>
                                 <td class="text-center">{{(order.total*0.20).toFixed(2)}}€</td>
@@ -86,7 +86,6 @@ export default {
         ModalSales
     },
     props:{
-        hotels:Object,
         orders:Object,
         date:String,
         totalOrders:Object
@@ -104,8 +103,8 @@ export default {
     },
     created(){
         this.moment=Moment;
-        console.log(this.totalOrders)
-        this.orders.data.forEach(order =>{
+        // console.log(this.$page.props.auth)
+        this.totalOrders.forEach(order =>{
             this.total += Number(order.total); 
         });
         if (this.totalOrders.length > 0) {

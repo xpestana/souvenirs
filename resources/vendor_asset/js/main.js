@@ -291,10 +291,10 @@ Version: 1.0;
         hide collapse sidebar collaborators
     -----------------------------------------------------*/
     $(document).ready(function () {
-        $('.sidebarCollapse').on('click', function () {
-            $('#collaborator-sidebar').toggleClass('active');
-            $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
-        });
+        // $('.sidebarCollapse').on('click', function () {
+        //     $('#collaborator-sidebar').toggleClass('active');
+        //     $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
+        // });
     });
     
     $('#layout-collaborator-dashboard').on('click',function(){

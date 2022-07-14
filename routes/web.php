@@ -362,12 +362,12 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/asociado')->group(funct
     Route::get('/colaboracion', [AssociateController::class, 'collaboration'])->name('associates.collaboration');  
     Route::get('/historial-de-retiros', [AssociateController::class, 'withdrawal'])->name('associates.withdrawals');  
     Route::post('/notify-associate', [AssociateController::class, 'notify_associate'])->name('associates.notify');  
+    Route::get('/colaboracion/recursos', [AssociateController::class, 'resource_index'])->name('associates.resource.index');
     
 });
 
 /*Resources asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/recursos-asociados')->group(function () {
-    Route::get('/', [AssociateController::class, 'resource_index'])->name('associates.resource.index');
     Route::get('/displays', [AssociateController::class, 'resource_display'])->name('associates.resource.display');
     Route::post('/send-request-displays', [AssociateController::class, 'send_resource_display'])->name('associates.resource.send.display');
     Route::get('/banners', [AssociateController::class, 'resource_banner'])->name('associates.resource.banner');
@@ -454,7 +454,7 @@ Route::resource(
 Route::get('/update/api', [ActivitiesController::class, 'api'])->name('update.api');
 /*Pruebas (las rutas de abajo se debe eliminar es solo para pruebas)*/
 Route::get('test', function(){
-    $order = Order::find(14);
+    $order = Order::find(34);
     return view('Mails/souvenirs',compact('order'));
 });
 

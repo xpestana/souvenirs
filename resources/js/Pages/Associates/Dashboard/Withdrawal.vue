@@ -15,16 +15,16 @@
                 <div class="row bg-collaborator-orange rounded-xl justify-content-between py-2.5 py-1.5">
                     <div class="col-12 col-lg-6">
                         <p class="text-white text-center lg:text-left mt-lg-1">
-                            <b>Saldo pendiente:</b> <br class="d-lg-none"> {{withdrawal.toFixed(2)}}€
+                            <b>Saldo pendiente:</b> <br class="d-lg-none"> {{(withdrawal*0.20).toFixed(2)}}€
                         </p>
                     </div>
                     <div class="col-12 col-lg-5  text-center lg:text-right">
-                        <button  @click="requestTransfer" class="btn bg-white text-orangec py-1 mt-1 mt-lg-0">Pedir transferencia</button>
+                        <button  @click="requestTransfer" class="btn bg-white text-orangec py-1 mt-1 mt-lg-0 font-semibold">Pedir transferencia</button>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-lg-7 mt-6 px-0">
-                <p><b>Última transferencia de saldo realizada:</b>
+                <p><b>Última transferencia de saldo realizada: </b>
                 <template v-if="orders.data.length > 0">
                     {{moment(dateTEST).format("DD/MM/YYYY")}}
                 </template>
@@ -71,7 +71,7 @@
                             <tr v-for="order in orders.data" :key="order.id">
                                 <td class="text-center font-bold">{{order.transaction_id}}</td>
                                 <td class="text-center">{{moment(order.updated_at).format("DD/MM/YYYY")}}</td>
-                                <td class="text-center">{{order.total}}</td>
+                                <td class="text-center">{{order.total*0.20}}€</td>
                             </tr>
                             <tr v-if="orders.data.length == 0">
                                 <td colspan="5" class="text-center">Sin resultados</td>
