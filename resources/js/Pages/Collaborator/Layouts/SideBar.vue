@@ -66,57 +66,6 @@
                     Ventas
                 </Link>
             </li>
-            <!--<li class="mb-3.5 relative">
-                <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesSales}"  id="downsales" @click="toggleMenuSales('sub-ventas')"></i>
-                <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesSales}" id="upsales" @click="toggleMenuSales('sub-ventas')"></i>
-                <Link :href="route('collaborator.dashboard.sales')" data-toggle="collapse" 
-                    aria-expanded="false" class="dropdown-toggle text-base link  sidebar-collapse-menu-mobile"  
-                    :class="{'sidebar-active':routesSales}"
-                >
-                <img class="inline w-5" style="margin-top:-4px"
-                    :class="{'side-icon-active':routesSales}" 
-                    src="/vendor_asset/img/collaborator/dashboard/icons/ventas.svg"
-                >
-                    Ventas
-                </Link>
-                <ul class="collapse list-unstyled list-sidebar pl-4"  :class="{'show':routesSales}" id="sub-ventas">
-                    <li>
-                        <Link :href="route('collaborator.sales.publicity')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-publicidad'}">
-                            <img class="inline w-4" style="margin-top:-4px"
-                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-publicidad'}" 
-                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-antes.svg"
-                            >
-                            Ventas por publicidad
-                        </Link>        
-                    </li>
-                    <li>
-                        <Link :href="route('collaborator.sales.property')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/ventas-inmueble'}">
-                            <img class="inline w-4" style="margin-top:-4px"
-                                :class="{'side-icon-active':this.$page.url=='/tablero/ventas-inmueble'}" 
-                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-durante.svg"
-                            >
-                            Ventas por inmueble
-                        </Link>
-                    </li>
-                    <li>
-                        <Link :href="route('dashboard.sales.total')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile pl-0.5" :class="{'sidebar-active':this.$page.url.includes('/tablero/ventas-totales')}">
-                            <img class="inline w-3.5" style="margin-top:-4px"
-                                :class="{
-                                    'side-icon-active':this.$page.url.includes('/tablero/ventas-totales')
-                                    }" 
-                                src="/vendor_asset/img/collaborator/dashboard/icons/ventas-totales.svg"
-                            >
-                            Ventas totales
-                        </Link>
-                    </li>
-                    <li>
-                        <Link :href="route('dashboard.withdrawals')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile pl-0.5" :class="{'sidebar-active':this.$page.url.includes('/tablero/historial-retiros')}">
-                            <i class="fas fa-outdent text-white side-link" :class="{'sidebar-active':this.$page.url.includes('/tablero/historial-retiros')}"></i>
-                            Historial de retiros
-                        </Link>
-                    </li>
-                </ul>
-            </li>-->
             <li class="mb-3.5 relative">
                 <i class="fas fa-caret-up absolute right-6 top-1 text-black cursor-pointer" :class="{'d-none':!routesProfile}" id="upprofile" @click="toggleMenuProfile('sub-perfil')"></i>
                 <i class="fas fa-caret-down absolute right-6 top-1 cursor-pointer" :class="{'d-none':routesProfile}" id="downprofile" @click="toggleMenuProfile('sub-perfil')"></i>

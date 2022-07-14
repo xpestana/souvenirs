@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			</div>
-		<div class="container px-0 cuerpo">
+		<div class="container px-1 cuerpo">
 				<Link v-for="clbtr in colaboradores" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
 				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light justify-content-center justify-content-md-between" >
 					<div class="col-10 col-md-6">

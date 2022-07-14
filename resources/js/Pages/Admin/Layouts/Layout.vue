@@ -1,42 +1,52 @@
 <template>
-    <div class="pantalla">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-2 p-0" id="sidebar">
-                    <SideBar/>
-                    <MenuMobile/>
-                </div>
-                <div class="col-12 col-md-10 pt-100 p-md-2" id="contenido">
-                    <notify v-if="$page.props.flash" :key="$page.props.flash.id"/>
-                    <slot></slot>
-                </div>
-            </div>
+	<div class="wrapper flex" >
+        <!-- Sidebar  -->
+        <SideBar/>
+        <!-- Page Content  -->
+        <div id="content" class="ml-auto">
+			<div class="bg-collaborator row lg:hidden sidebarCollapse">
+				<div class="col-1">
+					<i class="fas fa-bars text-white p-3 cursor-pointe"></i>
+				</div>
+				<div class="col-10">
+					<img class="w-24 mx-auto py-2" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="">
+				</div>
+			</div>    
+			<slot>
+			</slot>
+			<div id="layout-collaborator-dashboard"></div>
         </div>
+		<Notify v-if="$page.props.flash.id" :key="$page.props.flash.id"/>
     </div>
 </template>
-
 <script>
-import SideBar from '@/Pages/Admin/Layouts/SideBar'
-import MenuMobile from '@/Pages/Admin/Layouts/MenuMobile'
-import Notify from '@/Layouts/Components/Toast.vue'
+import Notify from '@/Pages/Collaborator/Layouts/Notify.vue'
+import SideBar from '@/Pages/Admin/Layouts/SideBar.vue'
 export default {
-    components:{
-        SideBar,
-        MenuMobile,
-        Notify
-    },
+    components: {
+        Notify,
+		SideBar,
+	},
+	created(){
+	}
 }
 </script>
-
 <style scoped>
-#contenido{
-    overflow-wrap: break-word;
+.wrapper{
+	width: 98.86%;
 }
-@media (min-width: 768px){
-    #contenido{
-        flex: 0 0 83.33333333%;
-        max-width: 82.8%;
-    }
+#content {
+    width:80%;
+    transition: all 0.3s;
 }
-
+@media (max-width: 1024px) {
+	#content {
+		width:100%;
+	}
+}
+@media (max-width: 767px) {
+	.wrapper{
+		width: 96%;
+	}
+}
 </style>

@@ -1,75 +1,104 @@
 <template>
-<aside id="sidebar" class="d-none d-md-block px-lg-3">
-    <div class="logo pb-4 pt-16 mb-5">
-        <img class="m-auto" src="/vendor_asset/img/logo/hilogo.png" alt="logo">
-    </div>
-    <div class="items">
-        <ul>
-            <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.colaboradores')" class="link" :class="{ 'active': urlColaboradores}">
-                    <div class="d-inline-flex">
-                        <i class="fas fa-city my-auto pr-1"></i>
-                        <p class="p-2" :class="{ 'active': urlColaboradores}">Gestor de <br> alojamientos</p>
-                    </div>
-                </Link>
-            </li> 
-            <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.associates')" class="link" :class="{ 'active': this.$page.url.includes('/admin/asociados')}">
-                    <div class="d-inline-flex">
-                        <i class="fas fa-user-friends my-auto pr-1"></i>
-                        <p class="p-2" :class="{ 'active': this.$page.url.includes('/admin/asociados')}">Gestor de <br> asociados</p>
-                    </div>
-                </Link>
-            </li>
-            <li class="mb-3 item pl-2 pb-2">    
-                <Link :href="route('admin.activities')" class="link" :class="{ 'active': urlActividades}">
-                    <div class="d-inline-flex">
-                        <i class="fas fa-biking my-auto pr-1"></i>
-                        <p class="p-2" :class="{ 'active': urlActividades}">Gestión de <br> actividades</p>
-                    </div>
+<!-- route('admin.colaboradores')
+route('admin.associates')
+route('admin.activities')
+route('admin.souvenirs')
+route('admin.sales')
+route('admin.administradores')" -->
+                
+    <nav id="collaborator-sidebar" class="fixed z-40 w-3/4 lg:w-1/5 text-white bg-collaborator h-screen rounded-r-3xl flex flex-column overflow-auto">
+        <div class="nav-logo flex flex-row mb-11">
+            <i class="fas fa-times sidebarCollapse text-white cursor-pointer h-12 mt-8 w-12 mx-6 text-xl"></i>
+            <img class="w-24 md:w-36 mr-auto grow mt-3.5 lg:mx-auto lg:mt-12" src="/vendor_asset/img/collaborator/logocompleto.svg" alt="">
+        </div>
+        <ul class="list-unstyled py-4 pl-8 2xl:pl-11 mb-auto">  
+            <li class="mb-6">
+                <Link :href="route('admin.colaboradores')" class="text-base link sidebar-collapse-menu-mobile" 
+                    :class="{'sidebar-active':urlColaboradores}">
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':urlColaboradores}" 
+                        src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
+                    >
+                    Gestión de anfitriones
                 </Link>
             </li>
-            <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.souvenirs')"  class="link" :class="{ 'active': urlSouvenirs}">
-                    <div class="d-inline-flex">
-                        <i class="fas fa-gift my-auto pr-1"></i>
-                        <p class="p-2" :class="{ 'active': urlSouvenirs}">Gestión de <br>souvenirs</p>
-                    </div>
+            <li class="mb-6">
+                <Link :href="route('admin.associates')" class="text-base link sidebar-collapse-menu-mobile" 
+                    :class="{'sidebar-active':this.$page.url.includes('/admin/asociados')}"
+                >
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':this.$page.url.includes('/admin/asociados')}" 
+                        src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
+                    >
+                    Gestión de partners
                 </Link>
             </li>
-            <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.sales')"  class="link" :class="{ 'active': urlVentas}">
-                    <div class="d-inline-flex">
-                        <i class="fas fa-shopping-cart my-auto pr-1"></i>
-                        <p class="p-2" :class="{ 'active': urlVentas}">Mis ventas</p>
-                    </div>
+            <li class="mb-6">
+                <Link :href="route('admin.activities')" class="text-base link sidebar-collapse-menu-mobile" 
+                        :class="{'sidebar-active':urlActividades}"
+                >
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':urlActividades}" 
+                        src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
+                    >
+                    Gestión de experiencias
                 </Link>
             </li>
-            <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('admin.administradores')"  class="link" :class="{ 'active': urlLimpiarPagination === '/admin/ajustes/administradores'}">
-                    <div class="d-inline-flex">
-                        <i class="fas fa-cog my-auto pr-1"></i>
-                        <p class="p-2" :class="{ 'active': urlLimpiarPagination === '/admin/ajustes/administradores'}">Ajustes</p>
-                    </div>
+            <li class="mb-6">
+                <Link :href="route('admin.souvenirs')" class="text-base link sidebar-collapse-menu-mobile" 
+                    :class="{'sidebar-active':urlSouvenirs}">
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':urlSouvenirs}" 
+                        src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
+                    >
+                    Gestión de souvenirs
                 </Link>
             </li>
-            <li class="mb-3 item pl-2 pb-2">
-                <Link :href="route('logout')"  class="link">
-                    <div class="d-inline-flex">
-                        <i class="fas fa-power-off my-auto pr-1"></i>
-                        <p class="p-2">Cerrar Sesión</p>
-                    </div>
+            <li class="mb-6">
+                <Link :href="route('admin.sales')" class="text-base link sidebar-collapse-menu-mobile" 
+                    :class="{'sidebar-active':urlVentas}"
+                >
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':urlVentas}"
+                        src="/vendor_asset/img/collaborator/dashboard/icons/ventas.svg"
+                    >
+                    Mis ventas
+                </Link>
+            </li>
+            <li class="mb-6">
+                <Link :href="route('admin.administradores')" class="text-base link sidebar-collapse-menu-mobile" 
+                    :class="{'sidebar-active':urlLimpiarPagination === '/admin/ajustes/administradores'}"
+                >
+                    <img class="inline w-5" style="margin-top:-4px"
+                        :class="{'side-icon-active':urlLimpiarPagination === '/admin/ajustes/administradores'}"
+                        src="/vendor_asset/img/collaborator/dashboard/icons/ventas.svg"
+                    >
+                    Ajustes
+                </Link>
+            </li>
+            <li class="mb-6">
+                <Link :href="route('logout')" class="text-base link  sidebar-collapse-menu-mobile">
+                    <img class="inline w-4" style="margin-top:-4px"
+                        src="/vendor_asset/img/collaborator/dashboard/icons/cerrar.svg"
+                    >
+                    Cerrar Sesión
                 </Link>
             </li>
         </ul>
-    </div>
-</aside>
+    </nav>
+ 
 </template>
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
 export default {
     components:{
         Link
+    },
+    mounted(){
+        $('.sidebarCollapse').on('click', function () {
+            $('#collaborator-sidebar').toggleClass('active');
+            $('#layout-collaborator-dashboard').toggleClass('collaborator-dashboard-overlay');
+        });
     },
     computed:{
         urlLimpiarPagination(){
@@ -118,34 +147,27 @@ export default {
     }
 }
 </script>
-
 <style scoped>
-.active{
-    color:#70baf7;
+nav::-webkit-scrollbar {display: none;}
+.sidebar-active{
+    color:#000 !important;
 }
-#sidebar{
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    left: 0;
-    background-color: #fafafa;
+.side-icon-active{ 
+  filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
 }
-#sidebar .items li p{
-    line-height: 20px;
+.icon-active{
+    filter: invert(0%) sepia(0%) saturate(7465%) hue-rotate(248deg) brightness(95%) contrast(109%);
 }
-#sidebar .items .link:hover,
-#sidebar .items p:hover{
-    color: #70baf7;
+.icon-img:hover{
+    filter: invert(0%) sepia(0%) saturate(7465%) hue-rotate(248deg) brightness(95%) contrast(109%);
 }
-@media (min-width:1300px){
-    #sidebar .items li i{
-        font-size: 20px;
-    }
-    #sidebar .items li p{
-        font-size: 16px;
-    }
-    #sidebar .items .item{
-        margin: 16px 0;
+.bg-collaborator-orange{
+    background-color: #FF9C06;
+}
+@media (min-width: 1024px){
+    .nav-logo i{
+        display: none;
     }
 }
 </style>
+                
