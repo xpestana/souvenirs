@@ -24,10 +24,10 @@ route('admin.administradores')" -->
             </li>
             <li class="mb-6">
                 <Link :href="route('admin.associates')" class="text-base link sidebar-collapse-menu-mobile" 
-                    :class="{'sidebar-active':this.$page.url.includes('/admin/asociados')}"
+                    :class="{'sidebar-active':urlAssociates}"
                 >
                     <img class="inline w-5" style="margin-top:-4px"
-                        :class="{'side-icon-active':this.$page.url.includes('/admin/asociados')}" 
+                        :class="{'side-icon-active':urlAssociates}" 
                         src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
                     >
                     Gestión de partners
@@ -140,6 +140,14 @@ export default {
             let url = this.$page.url;
             let url1 = url.includes('/admin/ventas')
             if(url1){
+                return true;
+            }
+            return false;
+        },
+        urlAssociates(){
+            let url1 = this.$page.url.includes('/admin/asociados')
+            let url2 = this.$page.url.includes('/admin/asociado')
+            if(url1 || url2){
                 return true;
             }
             return false;

@@ -395,6 +395,10 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
 
     /*Asociados*/
     Route::get('/asociados', [AdminController::class, 'associates'])->name('admin.associates');
+    Route::get('/asociado/{user}/informacion-del-perfil', [AdminController::class, 'associate_profile'])->name('admin.associate.profile');
+    Route::get('/asociado/{user}/datos-fiscales', [AdminController::class, 'associate_tax'])->name('admin.associate.tax');
+    Route::get('/asociado/{user}/datos-bancarios', [AdminController::class, 'associate_bank'])->name('admin.associate.bank');
+    Route::get('/asociado/{user}/datos-de-envio', [AdminController::class, 'associate_shipping'])->name('admin.associate.shipping');
     Route::get('/asociados/crear-asociado', [AdminController::class, 'associates_create'])->name('admin.associates.create');
      Route::post('/asociados/store', [AdminController::class, 'associates_store'])->name('admin.associates.store');
     Route::get('/asociados/editar-asociado/{user}', [AdminController::class, 'associates_edit'])->name('admin.associates.edit');

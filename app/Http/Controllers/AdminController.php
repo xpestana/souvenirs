@@ -631,9 +631,44 @@ class AdminController extends Controller
                 ->where('del',false)
                 ->with('orders.shippings')
                 ->orderBy('profiles.firstname','ASC')
-                ->paginate(10);
+                ->paginate(4);
         $url = config('app.url');
+        foreach ($collaborators->items() as $key => $user) {
+            //Valid information perfil
+            $validInformation = !empty($user->profile->firstname) && !empty($user->email) && !empty($user->profile->phone);
+            $collaborators->items()[$key]['completInformation'] = $validInformation;
+
+            //Valid information nif
+            $validNif = !empty($user->profile->identify) && !empty($user->profile->nif) && !empty($user->profile->address) && !empty($user->profile->city);
+            $collaborators->items()[$key]['completedNif'] = $validNif;
+
+            //Valid information shipping
+            $validShipping = !$user->collaboratorShippings->isEmpty();
+            $collaborators->items()[$key]['completedShipping'] = $validShipping;
+
+            //Valid information banck
+            $validBank = !$user->collaboratorBanks->isEmpty();
+            $collaborators->items()[$key]['completedBank'] = $validBank;
+        }
         return Inertia::render('Admin/Associates/Index',compact('collaborators','url') );
+    }
+
+    public function associate_profile(User $user)
+    {
+        $user->load('profile');
+        return Inertia::render('Admin/Associates/Profile/Info',compact('user'));   
+    }
+    public function associate_tax()
+    {
+        return Inertia::render('Admin/Associates/Profile/Tax');   
+    }
+    public function associate_bank()
+    {
+        return Inertia::render('Admin/Associates/Profile/Bank');   
+    }
+    public function associate_shipping()
+    {
+        return Inertia::render('Admin/Associates/Profile/Shipping');      
     }
 
     public function associates_create(Request $request)

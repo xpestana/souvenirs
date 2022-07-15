@@ -112,7 +112,7 @@
                         <Link :href="route('collaborator.shipping.index')" class="text-sm my-2 side-link sidebar-collapse-menu-mobile" :class="{'sidebar-active':this.$page.url=='/tablero/envio'}">
                             <img class="inline w-4" style="margin-top:-4px"
                                 :class="{'side-icon-active':this.$page.url=='/tablero/envio'}" 
-                                src="   "
+                                src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
                             >
                             Datos de envío
                         </Link>
