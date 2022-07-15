@@ -7,6 +7,7 @@ use Inertia\Inertia;
 /*Controladores*/
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminCollaboratorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UtilitiesController;
@@ -385,12 +386,12 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
 
 Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(function () {
 
-    Route::get('/colaboradores', [AdminController::class, 'colaboradores'])->name('admin.colaboradores');
+    Route::get('/colaboradores', [AdminCollaboratorController::class, 'index'])->name('admin.colaboradores');
     Route::get('/crear/colaborador', [AdminController::class, 'collaborator_create'])->name('admin.collaborator.create');
     Route::get('/editar/colaborador/{id}', [AdminController::class, 'collaborator_edit'])->name('admin.collaborator.edit');
     Route::put('/actualizar/colaborador/{id}', [AdminController::class, 'collaborator_updt'])->name('admin.collaborator.updt');
     Route::delete('/eliminar/colaborador/{id}', [AdminController::class, 'collaborator_delete'])->name('admin.collaborator.delete');
-    Route::post('/colaborador/store', [AdminController::class, 'collaborator_store'])->name('admin.collaborator.store');
+    Route::post('/colaborador/store', [AdminCollaboratorController::class, 'store'])->name('admin.collaborator.store');
     Route::get('/colaborador/{id}', [AdminController::class, 'collaborator_details'])->name('admin.collaborator.show');
 
     /*Asociados*/

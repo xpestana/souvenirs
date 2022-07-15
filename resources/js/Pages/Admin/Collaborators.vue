@@ -1,208 +1,493 @@
 <template>
-	<section id="section">
-		<div class="container cabeza">
-			<div class="row titulo">
-				<div class="col-12 p-3 p-md-5 text-center">
-					<h1 class="text-azulc font-weight-bolder display-4">Gestor de colaboradores</h1>
-				</div>
-			</div>
-			<div class="row justify-content-around opciones w-75 mx-auto align-items-center">
-				<div class="col-12 col-md-5 col-lg-5 my-lg-2 my-md-0 my-2 px-0">
-					<a type="button" class="btn btn-azulc text-white py-1 px-xl-2 agregar" @click.prevent="createCollaborator" >Agregar colaborador<i class="fas fa-plus px-1 px-lg-3"></i></a>
-				</div>
-				<div class="col-12 col-md-4 col-lg-4 my-lg-2 my-md-0 my-2 px-0">
-					<div class="input-search m-0">
-						<span class="fa fa-search text-muted position-absolute d-block text-center"></span>
-						<input type="text" class="form-control rounded-sm" placeholder="Search" v-model="formSearch.search" @keyup.prevent="search">
-					</div>
-				</div>
-				<div class="col-12 col-md-3 col-lg-3 pl-md-5 my-lg-2 my-md-0 my-2 px-0 select-aloj">
-					<div class="dropdown">
-						<button class="text-muted dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Alojamiento
-						</button>
-						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" type="button" @click="tipo('hotel')">Hotel</a>
-							<a class="dropdown-item" type="button" @click="tipo('apartamento')">Apartamento</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			</div>
-		<div class="container px-1 cuerpo">
-				<Link v-for="clbtr in colaboradores" :key="clbtr.id" :href="route('admin.collaborator.show',clbtr.id)">
-				<div class="row colaborador my-4 p-2 w-75 mx-auto bg-light justify-content-center justify-content-md-between" >
-					<div class="col-10 col-md-6">
-						<h1 class="font-weight-bolder text-center text-md-left">{{clbtr.firstname}} </h1>
-					</div>
-					<div class="col-10 col-md-6">
-						<p class="font-weight-bolder text-muted mt-3 text-center text-md-left">{{clbtr.email}}</p>
-					</div>
-					<div class="col-12">
-						<div class="d-md-inline-flex mt-3 pb-2 pb-md-0">
-							<div class="pr-md-4 text-md-center">
-								<p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.total_benefits}}€</p>
-							</div>
-							<div class="pr-md-4 text-md-center"> 
-								<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
-								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.total_orders }}</p>
-							</div>
-							<div class="pr-md-4 text-md-center"> 
-								<p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
-								<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{clbtr.lodgings}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				</Link>
-			
-			<div class="row justify-content-center mt-5" v-if="collaborators.data.length <= 0">
-				<div class="col-4 text-center">
-					<h3 class="text-muted">No existen resultados</h3>
-				</div>
-			</div>
-			<div class="row justify-content-center mb-3" v-if="collaborators.data.length > 0">
-            	<div class="col-10 col-sm-6 col-lg-4 px-0 py-4 paginate_scroll">
-                	<paginator :paginator="collaborators"/>
+    <section id="admin-collaborator" class="container pt-8 pb-4 ml-2 md:ml-0 md:px-14">
+        <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+	        <div class="col-12 col-md-8 text-left">
+	            <h1 class="font-bold text-lg md:text-3xl text-muted">
+                    Gestión de anfitriones
+	            </h1>
+	        </div>
+	    </div>
+        <div class="my-4 mx-1.5 lg:mx-0 row justify-content-lg-between">
+            <div class="col-12 col-lg-8">
+                <div class="search-admin w-100 rounded-xl shadow px-2 py-3 relative collaborator-box">
+                    <i class="fas fa-search absolute left-0 inset-y-1/3 px-2"></i>
+                    <input
+						v-model="formSearch.search"
+                        class="w-100 pl-6"
+                        placeholder="Buscar anfitrión"
+						@keyup.enter="submitSearch"
+                    >
                 </div>
             </div>
+            <div class=" col-12 col-lg-3 text-right pt-2 pl-lg-0 flex justify-content-center align-items-center mt-4 mt-md-0">
+                 <button class="w-full bg-collaborator-orange text-white rounded px-2 px-lg-4 py-1 py-lg-2 font-semibold" @click.prevent="openModalRegister">+ Añadir anfitrión</button>
+            </div>
+        </div>
+    </section>
+	<section class="ml-2 md:ml-0 md:px-14 table-responsive-md">
+		<div class="w-mobile-collaborator">
+			<div class="row mx-0 justify-content-start w-mobile-collaborator">
+				<div class="col-3 text-left text-gray-400 font-semibold">
+					Usuario
+				</div>
+				<div class="col-5 text-left text-gray-400 font-semibold">
+					Estado
+				</div>
+				<div class="col-1 text-center text-gray-400 font-semibold">
+					Inmuebles
+				</div>
+				<div class="col-1 text-center text-gray-400 font-semibold">
+					Pedidos
+				</div>
+					<div class="col-2 text-center text-gray-400 font-semibold">
+					Beneficios
+				</div>
+			</div>
+			<div
+				v-for="(item, index) in mapCollaborators"
+				:key="index"
+				class="admin-card-anfitrion row mx-1.5 lg:mx-0 shadow px-2 rounded-xl bg-header-collaborator py-2.5 mb-6 w-mobile-collaborator"
+			>
+				<div class="col-3 text-left border-r border-gray-300">
+					<div class="font-bold">{{ item.firstname }}</div>
+					<p class="mt-1">{{ item.email }}</p>
+				</div>
+				<div class="col-5 text-center px-0 border-r border-gray-300">
+					<div class="dropdown inline-block mr-2">
+						<a
+							class="btn rounded px-3 dropdown-toggle"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+							id="dropdown-profile"
+							:class="item.completInformation && item.completedNif && item.completedShipping && item.completedBank ? 'btn-collaborator-full' : 'btn-collaborator-incomplete'"
+						>
+							<span  class="inline-block">
+								{{ item.completInformation && item.completedNif && item.completedShipping && item.completedBank ? 'Perfil completo' : 'Perfil incompleto' }}
+							</span>
+							<i class="fas fa-caret-down inline-block ml-1"></i>
+						</a>
+						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md" aria-labelledby="dropdown-profile">
+							<div class="bg-collaborator-orange rounded-t-md py-2 px-2 font-bold text-white">
+								Ajustes del perfil
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item flex justify-content-between">
+									<span class="text-black">
+										<img
+											class="inline w-4 icon-filter"
+											style="margin-top:-4px; margin-right: 2px;"  
+											src="/vendor_asset/img/collaborator/dashboard/icons/info.svg"
+										>
+										Información de perfil
+									</span>
+									<i v-if="item.completInformation" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+								</li>
+								<li class="list-group-item flex justify-content-between">
+									<span class="text-black">
+										<img
+											class="inline w-4 icon-filter"
+											style="margin-top:-4px; margin-right: 2px;"  
+											src="/vendor_asset/img/collaborator/dashboard/icons/fiscales.svg"
+										>
+										Datos fiscales {{ item.completedNif }}
+									</span>
+									<i v-if="item.completedNif" class="fas fa-check-circle w-3  text-success" style="margin-top:3px"></i>
+									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+								</li>
+								<li class="list-group-item flex justify-content-between">
+									<span class="text-black">
+										<img
+											class="inline w-4 icon-filter"
+											style="margin-top:-4px; margin-right: 2px;"  
+											src="/vendor_asset/img/collaborator/dashboard/icons/bancaria.svg"
+										>
+										Información bancaria
+									</span>
+									<i v-if="item.completedShipping" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+								</li>
+								<li class="list-group-item flex justify-content-between">
+									<span class="text-black">
+										<img
+											class="inline w-4 icon-filter"
+											style="margin-top:-4px; margin-right: 2px;"  
+											src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
+										>
+										Datos de envío
+									</span>
+									<i v-if="item.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="dropdown inline-block">
+						<a
+							class="btn rounded px-3 dropdown-toggle"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+							id="dropdown-resource"
+							:class="item.completedBanner && item.completedUrl && item.completedRequestDisplay && item.completedReseivedDisplay ? 'btn-collaborator-full' : 'btn-collaborator-incomplete'"
+						>
+							<span class="inline-block">
+								{{item.completedBanner && item.completedUrl && item.completedRequestDisplay && item.completedReseivedDisplay ? 'Recursos usados' : 'Recursos por usar'}}
+							</span>
+							<i class="fas fa-caret-down inline-block ml-1"></i>
+						</a>
+						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md text-xs" aria-labelledby="dropdown-resource">
+							<div class="bg-collaborator-orange rounded-t-md py-2 px-2 font-bold text-white">
+								Recursos
+							</div>
+							<ul class="list-group">
+								<li class="list-group-item flex justify-content-between">
+									<span class="text-black">
+										<img
+											class="inline w-3 icon-filter"
+											style="margin-top:-4px" 
+											src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerBlanco.svg"
+										>
+										Banner descargado
+									</span>
+									<i v-if="item.completedBanner" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								</li>
+								<li class="list-group-item flex justify-content-between">
+									<span class="text-black">
+										<img
+											class="inline w-3 icon-filter"
+											style="margin-top:-4px" 
+											src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlBlanco.svg"
+										>
+										Url generada    
+									</span>
+									<i v-if="item.completedUrl" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								</li>
+								<li class="list-group-item flex justify-content-between">
+									<span class="text-black">
+										<img
+											class="inline w-3 icon-filter"
+											style="margin-top:-4px" 
+											src="/vendor_asset/img/collaborator/dashboard/icons/bancaria.svg"
+										>
+										Displays pedidos
+									</span>
+									<i v-if="item.completedRequestDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								</li>
+								<li class="list-group-item flex justify-content-between">
+									<span class="text-black">
+										<img
+											class="inline w-3 icon-filter"
+											style="margin-top:-4px" 
+											src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
+										>
+										Displays enviados
+									</span>
+									<i v-if="item.completedReseivedDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-1 flex justify-content-center align-items-center border-r border-gray-300">
+					<span class="font-bold inline-block">{{ item.countHotels }}</span>
+				</div>
+				<div class="col-1 flex justify-content-center align-items-center border-r border-gray-300">
+					<span class="inline-block">{{ item.countOrders}}</span>
+				</div>
+				<div class="col-2 flex justify-content-center align-items-center border-r border-gray-300">
+					<span class="inline-block">{{ item.benefit }} €</span>
+				</div>
+			</div>
+		</div>
+		<div
+			v-if="collaborators.data.length > 0"
+			class="row justify-content-center mb-8"
+		>
+			<div class="col-12 col-lg-6">
+				<paginator :paginator="collaborators" />
+			</div>
 		</div>
 	</section>
+	<div class="modal modal-notification fade" id="register-collaborator" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content modal-register mx-auto">
+				<div class="modal-header rounded-t-xl py-2 px-2 m-0 bg-collaborator-orange">
+					<h1 class="font-bold text-white inline-block text-lg lg:text-xl">
+						<img class="inline w-7 mr-2" style="margin-top:-4px;"
+							src="/vendor_asset/img/collaborator/dashboard/icons/gestionaloj.svg"
+						>
+						Registrar anfitrión
+					</h1>
+				</div>
+				<div class="modal-body px-2 py-2">
+					<div class="row">
+						<div class="col-12">
+							<div class="row justify-content-center">
+								<div class="col-10 my-1.5 px-0">
+									<!--Alert validation -->
+									<ValidationAlert
+										:errors="formatErrors"
+									/>
+									<label  class="font-bold">Correo electrónico <span class="required-input">*</span></label>
+									<div class="collaborator-box relative">
+										<i class="fas fa-envelope absolute left-0 inset-y-1/3 px-2"></i>
+										<input
+											v-model="formCollaborator.email"
+											type="text"
+											class="w-100 rounded col-form-input py-1.5 pl-8"
+											placeholder="Correo electrónico..."
+											:class="{'error-input': errorsKey.includes('holder')}"
+										>
+									</div>
+								</div>
+								<div class="col-10 my-1.5 px-0">
+									<label  class="font-bold">Contraseña <span class="required-input">*</span></label>
+									<div class="collaborator-box relative">
+										<i
+											class="cursor-pointer absolute right-0 inset-y-1/3 px-2"
+											:class="showPass ? 'fas fa-eye-slash' : 'fas fa-eye'"
+											@click="showPass = !showPass"
+										></i>
+										<i class="fas fa-key absolute left-0 inset-y-1/3 px-2"></i>
+										<input
+											v-model="formCollaborator.password"
+											:type="showPass ? 'text' : 'password'"
+											class="w-100 rounded col-form-input py-1.5 pl-8 pr-8"
+											placeholder="********"
+											:class="{'error-input': errorsKey.includes('holder')}"
+										>
+									</div>
+								</div>
+								<div class="col-10 my-1.5 px-0">
+									<label  class="font-bold">Nombre <span class="required-input">*</span></label>
+										<div class="collaborator-box relative">
+										<i class="fas fa-user absolute left-0 inset-y-1/3 px-2"></i>
+										<input
+											v-model="formCollaborator.name"
+											type="text"
+											class="w-100 rounded col-form-input py-1.5 pl-8"
+											placeholder="Nombre..."
+											:class="{'error-input': errorsKey.includes('holder')}"
+										>
+									</div>
+								</div>
+								<div class="col-10 my-1.5 px-0">
+									<label  class="font-bold">Número de contacto <span class="required-input">*</span></label>
+									<div class="collaborator-box relative">
+										<i class="fas fa-phone-alt absolute left-0 inset-y-1/3 px-2"></i>
+										<input
+											v-model="formCollaborator.phone"
+											type="text"
+											class="w-100 rounded col-form-input py-1.5 pl-8"
+											placeholder="Número de contacto..."
+											:class="{'error-input': errorsKey.includes('holder')}"
+										>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="mt-1.5 px-2 flex justify-content-between">
+						<button class="btn px-3.5 text-gray-500 py-1 text-xs font-bold inline-block" @click="closeModalRegister">
+							<i class="fas fa-reply"></i>
+							Volver
+						</button>
+						<button
+							type="submit"
+							class="btn inline-block rounded text-white bg-collaborator-orange py-1 px-6"
+							:class="{ 'opacity-25': formCollaborator.processing }"
+                            :disabled="formCollaborator.processing"
+							@click.prevent="submitCreate"
+
+						>
+							<i class="fas fa-save mr-2 text-white">
+								</i>Guardar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </template>
+
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
 import Paginator from '@/Components/Paginator.vue'
 import { Link } from '@inertiajs/inertia-vue3'
+import ValidationAlert from '@/Pages/Collaborator/components/ValidationAlert'
 export default {
-	layout:Layout,
+    layout:Layout, 
 	components: {
 		Paginator,
-		Link
-	},
-	props: {
-	collaborators: Object
-	},
-	computed:{
-            colaboradores(){
-				console.log(this.collaborators)
-            	const obj = this.collaborators.data.map((col)=>{
-                var total_orders = 0;
-				var total_benefits = 0;
-                col.hotel.forEach(function(hotel) {
-                    total_orders = total_orders + hotel.orders.length;
-					hotel.orders.forEach(function(order) {
-						if(order.status == "complete" && order.returned == 0)
-						{
-							total_benefits += Number(order.total);
-						}
-					})
-                });
-                
-            return {
-                id : col.id,
-                firstname: col.firstname,
-                email: col.email,
-				hotel: col.hotel,
-                lodgings : col.hotel.length,
-                total_orders : total_orders,
-				total_benefits: (total_benefits*0.20).toFixed(2)
-            }
-            });
-            return obj;
-        },
-
-        },
-	mounted(){
-		this.busqueda()
-	},
-	data(){
-		return{
+		Link,
+		ValidationAlert,
+    },
+    props: {
+        collaborators: {
+            type: Array,
+            default: () => ([]),
+        }
+    },
+    data() {
+        return {
 			formSearch: this.$inertia.form({
 				search: null,
 			}),
-			total:0
-		}
+			formCollaborator: this.$inertia.form({
+				name: null,
+				email: null,
+				phone: null,
+				password: null,
+			}),
+			showPass: false,
+			errorsKey: [],
+        }
 	},
-	methods:{
+	computed: {
+		formatErrors () {
+            var map = this.errorsKey.map( item => {
+                switch (item) {
+                    case 'name':
+                        return 'Nombre'
+                        break;
+                    case 'phone':
+                        return 'Telefono'
+						break;
+					case 'email':
+                        return 'Correo electrónico'
+						break;
+					case 'password':
+                        return 'Contraseña'
+                        break;
+                    default:
+                    return item
+                }
+            })
+            return map
+        },
+		mapCollaborators () {
+			const coll = this.collaborators.data.map(item => {
+				var benefit = 0
+				var countOrders = 0
+				var countHotels = item.hotel.length
+				item.hotel.forEach(item1 => {
+					countOrders += item1.orders.length
+					item1.orders.forEach(item2 =>{
+						benefit += item2.total * 0.20
+					})
+				})
+				return {
+					...item,
+					countOrders,
+					countHotels,
+					benefit: benefit.toFixed(2),
+				}
+			})
+			return coll
+		},
+	},
+	mounted(){
+		this.busqueda()
+	},
+    methods: {
 		busqueda(){
-			let input = this.$page.url.split("?search=","2")[1];
-			if(input !== undefined){
-				this.formSearch.search = input;	
+			let search = this.$page.url.split("search=","2")[1];
+			if(search !== undefined ){
+				let limpioSearch = search.slice(0)
+				this.formSearch.search = limpioSearch
 			}
 		},
-		createCollaborator(){
-			this.$inertia.get(route('admin.collaborator.create'),{}, {
-				preserveScroll: true
-			})
-		},
-		search() {
-			this.collaborators.data = {};
-				let template =`
-					<div class="row mt-5 justify-content-center">
-						<div class="col-4 text-center">
-							<div class="spinner-border text-info" role="status">
-								<span class="sr-only">Loading...</span>
-							</div>
-						</div>
-					</div>
-					`
-				$('.cuerpo').html(template);
+		submitSearch (value) {
+			this.collaborators.data = []
 			setTimeout(()=>{
 				this.formSearch.get(this.route('admin.colaboradores'), {
 					preserveScroll: true,
 				});
 			},1500);
-		}
-	}
+		},
+		submitCreate () {
+			this.formCollaborator.post(this.route('admin.collaborator.store'), {
+				preserveScroll: true,
+				errorBag: 'submitCreate',
+                onSuccess:()=>{
+                    $('#register-collaborator').modal('hide')
+                },
+                onError: (errors) => {
+                    this.getErrorsKey()
+                    this.emitter.emit('errors')
+                },
+			})
+		},
+        openModalRegister () {
+            $('#register-collaborator').modal({show: true, backdrop: 'static', keyboard: false})
+        },
+        closeModalRegister () {
+            $('#register-collaborator').modal('hide')
+		},
+		getErrorsKey () {
+            this.errorsKey = this.$page.props.errors.submitCreate ? Object.keys(this.$page.props.errors.submitCreate) : []
+        },
+    },
 }
 </script>
-<style scoped>
-#section{
-	background-color: #fff;
-}
-.opciones .input-search span{
-    z-index: 2;
-    width: 2.375rem;
-    height: 2.375rem;
-    line-height: 2.375rem;
-    pointer-events: none;
-}
-.opciones .form-control{
-	border: 1px solid #dedede;
-	height: 2.3em;
-	padding-left:2.3em;
-}
-.opciones .form-control:hover{
-	border: 1px solid #b3b3b3;
-}
-.opciones .dropdown button{
-	font-size: 23px;
-}
-.cuerpo .colaborador{
-    box-shadow: 1px 1px 3px 3px rgba(0 0 0 / 20%);
-}
-.cuerpo .colaborador h1{
-    font-size: 30px;
-}
-.cabeza .agregar{
-	font-size: 17px;
-}
-@media (max-width: 900px)
-{
-	.cabeza .titulo h1{
-	 font-size: 2.5em;
-	}
-}
-@media (max-width: 1025px)
-{
-	#section .row{
-	 width: 100% !important;
-	}
-}
-@media (max-width: 800px){
-        .paginate_scroll{
-            overflow-x: scroll;
-        }
+
+<style lang="scss" scoped>
+    .bg-item{
+        background-color: #d9d9d9;
     }
+   
+    .btn-collaborator-full{
+		background-color: #b7ffc7;
+		color: #6d966d;
+		font-weight: 600;
+		font-size: 1em;
+	}
+	.btn-collaborator-incomplete{
+		background-color: #ff7878;
+		color: #ffdada;
+		font-weight: 600;
+		font-size: 1em;
+	}
+
+    .setting-profile {
+        top: 3.2rem;
+        left: 0;
+        width: 250px;
+    }
+
+	.error-input{
+        border: solid 2.5px red;
+    }
+
+    .icon-filter{
+        filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
+    }
+
+	.w{
+		min-width: 600px;
+	}
+	.modal-dialog{
+		max-width: 27%;
+	}
+
+    @media(max-width:767px){
+		.modal-dialog{
+			max-width: 90%;
+		}
+		.w{
+			min-width: 900px;
+		}
+		.w-mobile-collaborator{
+			min-width:1100px ;
+		}
+    }
+
 </style>

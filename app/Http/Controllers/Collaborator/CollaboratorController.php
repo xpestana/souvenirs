@@ -11,6 +11,7 @@ use App\Models\hotel;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\profile;
+use App\Models\resource;
 use App\Models\CollaboratorShipping;
 use App\Models\CollaboratorBank;
 use Illuminate\Support\Facades\Hash;
@@ -173,6 +174,11 @@ class CollaboratorController extends Controller
         $data = [
             'user' => $user,
         ];
+        $user->resources()->createMany([
+            ['name' => 'request-display', ],
+            ['name' => 'received-display'],
+
+        ]);
         Mail::to("info@hicitty.es")->send(new DisplayReceiver($data));
         return back();
     }
@@ -737,6 +743,12 @@ class CollaboratorController extends Controller
                 $url['fullPath'] = url('/'.$url['path']);
             }
         }
+
+        $user = auth()->user();
+        $user->resources()->create([
+            'name' => 'banner',
+        ]);
+
         return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalBanner', compact('url', 'href'));
     }
 
@@ -747,6 +759,12 @@ class CollaboratorController extends Controller
             $idUser = auth::user()->id;
             $url = url('?p='.$city.'&c='.$idUser.'&t=2');
         }
+
+        $user = auth()->user();
+        $user->resources()->create([
+            'name' => 'url',
+        ]);
+
         return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrivalUrl', compact('url'));
     }
 }
