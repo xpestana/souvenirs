@@ -78,6 +78,11 @@ class User extends Authenticatable
         return $this->hasMany(CollaboratorBank::class);
     }
 
+    public function resources()
+    {
+        return $this->hasMany(Resource::class);
+    }
+
 
     /*
         Scopes

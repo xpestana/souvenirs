@@ -390,7 +390,7 @@
 					document.getElementById('tbody').insertAdjacentHTML("afterbegin",tr);
 				}*/
 				setTimeout(()=>{
-					this.form.get(this.route('collaborator.sales.inmueble'), {
+					this.form.get(this.route(''), {
 						preserveScroll: true,
 					});
 				},1500);
