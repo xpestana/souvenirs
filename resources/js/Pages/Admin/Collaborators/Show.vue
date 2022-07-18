@@ -1,233 +1,205 @@
 <template>
-	<div class="container px-lg-5 mt-4">	
-		<section id="colaborador">
-			<div class="row">
-				<div class="col-3 ">
-					<Link :href="route('admin.colaboradores')"><i class="fas fa-angle-left bg-info text-white px-2 py-1"></i></Link>	
-				</div>
-			</div>
-			<div class="row ficha mx-lg-4 my-4 p-2 bg-light border">
-				<div class="col-12 col-md-9">
-					<div class="d-flex flex-column flex-md-row justify-content-between">
-						<h1 class="pt-1 pb-2 font-weight-bolder text-center text-md-left">{{ collaborator.profile.firstname}}</h1>
-						<p class="font-weight-bolder text-muted mt-md-3 text-center text-md-left">{{collaborator.email}}</p>
-					</div>
-					<div class="d-md-inline-flex mt-1">
-						<div class="pr-md-4 text-md-center">
-							<p class="font-weight-bolder text-muted d-inline d-md-block">Benefecio total</p> 
-							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ total.toFixed(2) }}€</p>
-						</div>
-						<div class="pr-md-4 text-md-center"> 
-							<p class="font-weight-bolder text-muted d-inline d-md-block">Pedidos totales:</p>
-							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{ orders }}</p>
-						</div>
-						<div class="pr-md-4 text-md-center"> 
-							<p class="font-weight-bolder text-muted d-inline d-md-block">Alojamientos registrados:</p>
-							<p class="font-weight-bolder text-muted d-inline d-md-block pl-2 pl-md-0">{{collaborator.hotel.length}}</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-12 col-md-3 text-right mt-5">
-					<Link :href="route('admin.collaborator.edit',collaborator.id)" class="btn btn-sm btn-secondary py-0 px-2 mt-3 px-4">Editar</Link>
-				</div>
-			</div>
-		</section>
-		<section id="info">
-			<div class="row justify-content-lg-between mx-lg-4 mt-md-5 align-items-end">
-				<div class="col-12 col-md-12 col-lg-5 my-2 my-md-0">
-					<Link :href="route('admin.lodging.create',collaborator.id)" type="button" class="btn btn-azulc text-white px-2 px-md-4 py-1">Añadir apartamento<i class="fas fa-plus pl-2"></i></Link>
-					<h5 v-if="collaborator.hotel.length > 0" class="text-info mt-1 p-1 font-weight-bolder"><Link :href="route('admin.sales.hab',{id: collaborator.id})">Ventas totales<i class="fas fa-angle-right p-1"></i></Link></h5>
-				</div>
-				<div class="col-12 col-md-5 col-lg-4   my-1 my-md-0">
-					<h4 class="text-info font-weight-bolder pl-0 pl-xl-4">Total</h4><br>
-					<h4 class="font-weight-bolder pl-0 pl-xl-4">Beneficio {{ total.toFixed(2) }}€</h4><br>
-				</div>
-				<div class="col-12 col-md-4 col-lg-3">
-					<h4 class="font-weight-bolder">Pedidos {{ orders }}</h4><br>
-				</div>
-			</div>
-		</section>
-	</div>
-	<div class="container px-lg-5">
-		<section id="alojamientos">
-			<div v-for="hotel in hoteles" :key="hotel.id" class="row tarjeta my-4 p-3 mx-lg-4 ">
-				<div class="col-12 col-md-2 p-0">
-					<img class="img-foto w-100" :src="'/storage/hotel/'+hotel.image" >
-				</div>
-				<div class="col-12 col-md-8 texto">
-					<p class="text-muted text-uppercase">{{hotel.type}}</p>
-					<h1 class="pb-3 pt-1 font-weight-bolder">{{hotel.calle}} {{hotel.planta}}</h1>
-					<div class="d-md-inline-flex">
-						<p class="pr-md-2 font-weight-bolder text-muted">Benefecio total {{ hotel.total_benefits }}€</p>
-						<p class="pl-md-2 pr-md-3 font-weight-bolder text-muted">Pedidos totales: {{ hotel.total_orders }}</p>
-						<button class="btn btn-link p-0" data-toggle="modal" :data-target="'#modalLodging'+hotel.id">Obtener QR</button>
-                                            <!-- Central Modal Small -->
-						<div class="modal fade" :id="'modalLodging'+hotel.id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-						aria-hidden="true">
-						<!-- Change class .modal-sm to change the size of the modal -->
-							<div class="modal-dialog modal-dialog-centered" role="document">
-								<div class="modal-content mx-auto">
-									<div class="modal-body p-0">
-										<div class="row mt-5 mb-2">
-											<div class="col-12 my-4 d-flex justify-content-center">
-												<QRCodeVue3
-													:width="1080"
-													:height="1080"
-													style="max-width: 50%;"
-													:imgclass="'souvenirs_img'+hotel.id"
-													:value="url+'?h='+hotel.id"
-													:qrOptions="{ typeNumber: 0, mode: 'Byte', errorCorrectionLevel: 'H' }"
-													:imageOptions="{ hideBackgroundDots: true, imageSize: 0.4, margin: 0 }"
-													:dotsOptions="{
-														type: 'square',
-														color: '#31516B',
-														gradient: {
-														type: 'linear',
-														rotation: 0,
-														colorStops: [
-															{ offset: 0, color: '#B4CEE2' },
-															{ offset: 1, color: '#B4CEE2' },
-														],
-													},
-													}"
-													fileExt="png"
-													:backgroundOptions="{ color: '#ffffff' }"
-													:cornersSquareOptions="{ type: 'dot', color: '#B4CEE2' }"
-													:cornersDotOptions="{ type: undefined, color: '#B4CEE2' }"
-													:download="false"
-													downloadButton="bg-info mt-3 souvenirs_btn"
-													:downloadOptions="{ name: 'souvenirs', extension: 'png' }"
-													crossOrigin="anonymous"
-												/>
-											</div>
-										</div>
-										<div class="row px-3 py-4 mb-3">
-											<div class="col-6 text-left">
-												<a class="bnt btn-primary-c text-white rounded-pill px-2 px-md-5 py-1" href="#" data-dismiss="modal" >Volver</a>
-											</div>
-											<div class="col-6 text-right">
-												<a class="bnt btn-primary-c text-white rounded-pill px-2 px-md-5 py-1" href="javascript:void(0)" @click="souvenirs_btn(hotel.id,hotel.calle+'-'+hotel.planta)">Descargar</a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Central Modal Small -->
-					</div>
-				</div>
-				<div class="col-12 col-md-2 p-0 mt-auto px-auto text-center">
-					<Link :href="route('admin.hotel.details',[hotel.id,collaborator.id])" class="btn btn-sm btn-info w-75 my-1 py-0 text-white">Ver más</Link>
-					<Link  :href="route('admin.lodging.edit',[hotel.id,collaborator.id])" class="btn btn-sm btn-secondary w-75 py-0">Editar</Link>
-				</div>
-			</div>
-			<div class="text-center mt-5" v-if="collaborator.hotel.length == 0">
-				<h1 class="text-muted font-font-weight-bolder pb-5">No hay alojamientos registrados para este usuario</h1>
-			</div>
-		</section>	
-	</div>  
-	
+    <section id="admin-collaborator-show" class="container pt-8 pb-4 ml-2 md:ml-0 md:px-14">
+        <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
+	        <div class="col-12 col-md-8 text-left">
+	            <h1 class="font-bold text-lg md:text-3xl text-muted">
+                    <i class="cursor-pointer text-muted mr-2 fas fa-arrow-left" @click.prevent="goBack()"></i>
+                    Usuario {{ user.id }}
+	            </h1>
+	        </div>
+	    </div>
+        <div class="my-4 mx-1.5 lg:mx-0">
+             <span class="text-muted font-light">Gestor de anfitrión</span> <span class="text-muted font-bold">/ Usuario {{ user.id }}</span>
+        </div>
+        <div class="mx-1.5 lg:mx-0 lg:flex mb-8 justify-content-lg-start text-lg-left pt-2 pt-lg-0">
+            <p class="block mr-4"><b>Facturación total: </b>{{ order.total.toFixed(2) }}€</p>
+            <p class="block mr-4"><b>Beneficio total: </b>{{( order.total*0.20).toFixed(2) }}€</p>
+            <p class="block"><b>Pedidos totales: </b>{{ order.count }}</p>
+        </div>
+        <div class="row mx-1.5 lg:mx-0 justify-center">
+            <div class="card-profile col-12 col-md-5 bg-header-collaborator mr-md-5 mr-0 mt-2 mb-4 px-4 py-4 rounded">
+                <div class="text-lg md:text-xl font-bold">
+                    <i class="mr-2 fas fa-user"></i>
+                    Datos del perfil
+                </div>
+                <div class="mt-4 ml-4 md:text-lg">
+                    <div class="flex justify-content-between mb-4 px-4">
+                        <Link
+                            href="#"
+                            class="text-muted font-regular"
+                        >
+                            Información de perfil
+                        </Link>
+                        <i v-if="user.completInformation" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+                    </div>
+                    <div class="flex justify-content-between mb-4 px-4">
+                        <Link
+                            href="#"
+                            class="text-muted font-regular"
+                        >
+                            Datos fiscales
+                        </Link>
+                        <i v-if="user.completedNif" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+                    </div>
+                    <div class="flex justify-content-between mb-4 px-4">
+                        <Link
+                            href="#"
+                            class="text-muted font-regular"
+                        >
+                            Información bancaria
+                        </Link>
+                        <i v-if="user.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+                    </div>
+                    <div class="flex justify-content-between px-4">
+                        <Link
+                            href="#"
+                            class="text-muted font-regular"
+                        >
+                            Datos de envio
+                        </Link>
+                        <i v-if="user.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-resource col-12 col-md-5 bg-header-collaborator mr-0 mt-2 mb-4 px-4 py-4 rounded">
+                <div class="text-lg md:text-xl font-bold">
+                    <i class="mr-2 fas fa-file"></i>
+                    Recursos
+                </div>
+                <div class="mt-4 ml-4 md:text-lg">
+                    <div class="flex justify-content-between mb-4 px-4">
+                        <Link
+                            href="#"
+                            class="text-muted font-regular"
+                        >
+                            Banner descargado
+                        </Link>
+                        <i v-if="user.completedBanner" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+                    </div>
+                    <div class="flex justify-content-between mb-4 px-4">
+                        <Link
+                            href="#"
+                            class="text-muted font-regular"
+                        >
+                            Url generada
+                        </Link>
+                        <i v-if="user.completedUrl" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+                    </div>
+                    <div class="flex justify-content-between mb-4 px-4">
+                        <Link
+                            href="#"
+                            class="text-muted font-regular"
+                        >
+                            Displays pedidos
+                        </Link>
+                        <i v-if="user.completedRequestDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+                    </div>
+                    <div class="flex justify-content-between px-4">
+                        <Link
+                            href="#"
+                            class="text-muted font-regular"
+                        >
+                            Displays enviados
+                        </Link>
+                        <i v-if="user.completedReseivedDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-5 bg-header-collaborator mr-0 mr-md-5 mt-2 mb-2 px-4 py-4 rounded">
+                <div class="text-lg md:text-xl font-bold">
+                    <i class="mr-2 fas fa-file"></i>
+                    Alojamientos
+                </div>
+                <div class="mt-2 ml-4 md:text-lg">
+                    <div class="flex justify-content-between mb-4 px-4">
+                        <span class="text-grey-400">Dados de alta: {{user.hotel.length}}</span>
+                    </div>
+                </div>
+                <div class="md:text-lg mt-4 text-center text-md-right">
+                    <Link
+                        :href="`/admin/colaborador/${user.id}/alojamientos`"
+                        class="font-bold"
+                    >
+                        Ver alojamientos
+                    </Link>
+                </div>
+            </div>
+            <div class="col-12 col-md-5 bg-header-collaborator mr-0 mt-2 mb-2 px-4 py-4 rounded">
+                <div class="text-lg md:text-xl md:text-xl font-bold">
+                    <i class="mr-2 fas fa-file"></i>
+                    Informe de ventas
+                </div>
+                <div class="mt-2 ml-4 md:text-lg">
+                    <div class="flex invisible justify-content-between mb-4 px-4">
+                        <span class="text-muted font-semibold">#</span>
+                    </div>
+                </div>
+                <div class="text-lg md:text-xl mt-4 text-center text-md-right">
+                    <Link
+                        href="#"
+                        class="font-bold"
+                    >
+                        Ver desglose de ventas
+                    </Link>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
+
 <script>
 import Layout from '@/Pages/Admin/Layouts/Layout'
+import Paginator from '@/Components/Paginator.vue'
 import { Link } from '@inertiajs/inertia-vue3'
-import QRCodeVue3 from "qrcode-vue3"
 export default {
-	layout:Layout,
-	components:{
+    layout:Layout, 
+	components: {
+		Paginator,
 		Link,
-		QRCodeVue3
+    },
+    props: {
+        user: {
+            type: Object,
+            default: () => ({}),
+        }
+    },
+    data() {
+        return {
+        }
 	},
-	props: {
-		collaborator: Object,
-		url:String
+	computed: {
+        order () {
+            var value = {count: 0, total: 0}
+            this.user.hotel.forEach(item => {
+                value.count += item.orders.length
+                value.total = item.orders.length > 0 ? hotel.item.reduce((acum, currentItem) => {
+                    acum += currentValue.total
+                }, 0) : 0
+            })
+            return value
+        },
 	},
-	data(){
-            return{
-                total: 0,
-                orders: 0
-            }
-        },
-	computed:{
-            hoteles(){
-            const obj = this.collaborator.hotel.map((col)=>{
-                var total_orders = 0;
-                var total_benefits = 0;
-				this.orders = this.orders + col.orders.length;
-				col.orders.forEach(function(order) {
-					if(order.status == "complete" && order.returned == 0)
-					{
-						total_benefits += Number(order.total);
-					}
-                });
-                this.total += (total_benefits*0.20)
-            return {
-                id : col.id,
-                calle: col.calle,
-                planta: col.planta,
-                image : col.image,
-                type : col.type,
-                total_orders : col.orders.length,
-                total_benefits: (total_benefits*0.20).toFixed(2)
-            }
-            });
-            return obj;
-        },
-
-        },
-	created(){
-		console.log(this.collaborator);
+	mounted(){
 	},
-	methods:{
-		souvenirs_btn(id,lodging){
-		var urlItem = $('.souvenirs_img'+id).attr('src');
-		axios({
-				url: urlItem,
-				method: 'GET',
-				responseType: 'blob'
-			})
-			.then((response) => {
-					const url = window.URL
-						.createObjectURL(new Blob([response.data]));
-					console.log(url);
-					const link = document.createElement('a');
-					link.href = url;
-					link.setAttribute('download',`${lodging}.png`);
-					document.body.appendChild(link);
-					link.click();
-					document.body.removeChild(link);
-			})                
-		}
-	}
+    methods: {
+        goBack () {
+            window.history.back()
+        },
+    },
 }
 </script>
-<style scoped>
-.modal-content {
-    width: 100% !important;
-}
-#colaborador .ficha h1{
-	font-size: 30px;
-}
-#colaborador .ficha{
-	border: 1px solid #d5d5d5;
-}
-#info h4{
-    line-height: 0.5;
-    font-size: 1.7em;
-}
-#alojamientos .tarjeta{
-    box-shadow: 1px 1px 3px 3px rgba(0 0 0 / 20%);
-}
-#alojamientos .tarjeta .img-foto{
-    max-height: 100px;
-}
-#alojamientos .tarjeta h1{
-	font-size: 20px;
-}
-@media (max-width:767px)
-{
-	#alojamientos .tarjeta img{
-		min-height: 210px;
-	}
-}
+
+<style lang="scss" scoped>
+    .card-profile a:hover, .card-resource a:hover{
+        color: #FF9C06 !important;
+        font-weight: 600;
+    }
 </style>

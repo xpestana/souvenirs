@@ -49,7 +49,12 @@
 				class="admin-card-anfitrion row mx-1.5 lg:mx-0 shadow px-2 rounded-xl bg-header-collaborator py-2.5 mb-6 w-mobile-collaborator"
 			>
 				<div class="col-3 text-left border-r border-gray-300">
-					<div class="font-bold">{{ item.firstname }}</div>
+					<Link
+                        :href="`/admin/colaborador/${item.id}`"
+                        class="font-bold"
+                    >
+                        {{ item.firstname }}
+                    </Link>
 					<p class="mt-1">{{ item.email }}</p>
 				</div>
 				<div class="col-5 text-center px-0 border-r border-gray-300">
@@ -59,7 +64,7 @@
 							data-toggle="dropdown"
 							aria-haspopup="true"
 							aria-expanded="false"
-							id="dropdown-profile"
+							:id="`dropdown-profile-${item.id}`"
 							:class="item.completInformation && item.completedNif && item.completedShipping && item.completedBank ? 'btn-collaborator-full' : 'btn-collaborator-incomplete'"
 						>
 							<span  class="inline-block">
@@ -67,60 +72,58 @@
 							</span>
 							<i class="fas fa-caret-down inline-block ml-1"></i>
 						</a>
-						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md" aria-labelledby="dropdown-profile">
+						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md" :aria-labelledby="`dropdown-profile-${item.id}`">
 							<div class="bg-collaborator-orange rounded-t-md py-2 px-2 font-bold text-white">
 								Ajustes del perfil
 							</div>
-							<ul class="list-group">
-								<li class="list-group-item flex justify-content-between">
-									<span class="text-black">
-										<img
-											class="inline w-4 icon-filter"
-											style="margin-top:-4px; margin-right: 2px;"  
-											src="/vendor_asset/img/collaborator/dashboard/icons/info.svg"
-										>
-										Información de perfil
-									</span>
-									<i v-if="item.completInformation" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-								</li>
-								<li class="list-group-item flex justify-content-between">
-									<span class="text-black">
-										<img
-											class="inline w-4 icon-filter"
-											style="margin-top:-4px; margin-right: 2px;"  
-											src="/vendor_asset/img/collaborator/dashboard/icons/fiscales.svg"
-										>
-										Datos fiscales {{ item.completedNif }}
-									</span>
-									<i v-if="item.completedNif" class="fas fa-check-circle w-3  text-success" style="margin-top:3px"></i>
-									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-								</li>
-								<li class="list-group-item flex justify-content-between">
-									<span class="text-black">
-										<img
-											class="inline w-4 icon-filter"
-											style="margin-top:-4px; margin-right: 2px;"  
-											src="/vendor_asset/img/collaborator/dashboard/icons/bancaria.svg"
-										>
-										Información bancaria
-									</span>
-									<i v-if="item.completedShipping" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-								</li>
-								<li class="list-group-item flex justify-content-between">
-									<span class="text-black">
-										<img
-											class="inline w-4 icon-filter"
-											style="margin-top:-4px; margin-right: 2px;"  
-											src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
-										>
-										Datos de envío
-									</span>
-									<i v-if="item.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
-								</li>
-							</ul>
+							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.profile',{id:item.id})">
+								<span class="text-black">
+									<img
+										class="inline w-4 icon-filter"
+										style="margin-top:-4px; margin-right: 2px;"
+										src="/vendor_asset/img/collaborator/dashboard/icons/info.svg"
+									>
+									Información de perfil
+								</span>
+								<i v-if="item.completInformation" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+							</Link>
+							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+								<span class="text-black">
+									<img
+										class="inline w-4 icon-filter"
+										style="margin-top:-4px; margin-right: 2px;"  
+										src="/vendor_asset/img/collaborator/dashboard/icons/fiscales.svg"
+									>
+									Datos fiscales
+								</span>
+								<i v-if="item.completedNif" class="fas fa-check-circle w-3  text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+							</Link>
+							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.bank',{id:item.id})">
+								<span class="text-black">
+									<img
+										class="inline w-4 icon-filter"
+										style="margin-top:-4px; margin-right: 2px;"  
+										src="/vendor_asset/img/collaborator/dashboard/icons/bancaria.svg"
+									>
+									Información bancaria
+								</span>
+								<i v-if="item.completedShipping" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+							</Link>
+							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.shipping',{id:item.id})">
+								<span class="text-black">
+									<img
+										class="inline w-4 icon-filter"
+										style="margin-top:-4px; margin-right: 2px;"  
+										src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
+									>
+									Datos de envío
+								</span>
+								<i v-if="item.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+							</Link>
 						</div>
 					</div>
 					<div class="dropdown inline-block">
@@ -129,7 +132,7 @@
 							data-toggle="dropdown"
 							aria-haspopup="true"
 							aria-expanded="false"
-							id="dropdown-resource"
+							:id="`dropdown-resource-${item.id}`"
 							:class="item.completedBanner && item.completedUrl && item.completedRequestDisplay && item.completedReseivedDisplay ? 'btn-collaborator-full' : 'btn-collaborator-incomplete'"
 						>
 							<span class="inline-block">
@@ -137,60 +140,58 @@
 							</span>
 							<i class="fas fa-caret-down inline-block ml-1"></i>
 						</a>
-						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md text-xs" aria-labelledby="dropdown-resource">
+						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md text-xs" :aria-labelledby="`dropdown-resource-${item.id}`">
 							<div class="bg-collaborator-orange rounded-t-md py-2 px-2 font-bold text-white">
 								Recursos
 							</div>
-							<ul class="list-group">
-								<li class="list-group-item flex justify-content-between">
-									<span class="text-black">
-										<img
-											class="inline w-3 icon-filter"
-											style="margin-top:-4px" 
-											src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerBlanco.svg"
-										>
-										Banner descargado
-									</span>
-									<i v-if="item.completedBanner" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
-								</li>
-								<li class="list-group-item flex justify-content-between">
-									<span class="text-black">
-										<img
-											class="inline w-3 icon-filter"
-											style="margin-top:-4px" 
-											src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlBlanco.svg"
-										>
-										Url generada    
-									</span>
-									<i v-if="item.completedUrl" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
-								</li>
-								<li class="list-group-item flex justify-content-between">
-									<span class="text-black">
-										<img
-											class="inline w-3 icon-filter"
-											style="margin-top:-4px" 
-											src="/vendor_asset/img/collaborator/dashboard/icons/bancaria.svg"
-										>
-										Displays pedidos
-									</span>
-									<i v-if="item.completedRequestDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
-								</li>
-								<li class="list-group-item flex justify-content-between">
-									<span class="text-black">
-										<img
-											class="inline w-3 icon-filter"
-											style="margin-top:-4px" 
-											src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
-										>
-										Displays enviados
-									</span>
-									<i v-if="item.completedReseivedDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-									<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
-								</li>
-							</ul>
+							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+								<span class="text-black">
+									<img
+										class="inline w-4 icon-filter"
+										style="margin-top:-4px" 
+										src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_BannerBlanco.svg"
+									>
+									Banner descargado
+								</span>
+								<i v-if="item.completedBanner" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+							</Link>
+							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+								<span class="text-black">
+									<img
+										class="inline w-4 icon-filter"
+										style="margin-top:-4px" 
+										src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlBlanco.svg"
+									>
+									Url generada    
+								</span>
+								<i v-if="item.completedUrl" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+							</Link>
+							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+								<span class="text-black">
+									<img
+										class="inline w-4 icon-filter"
+										style="margin-top:-4px" 
+										src="/vendor_asset/img/collaborator/dashboard/icons/bancaria.svg"
+									>
+									Displays pedidos
+								</span>
+								<i v-if="item.completedRequestDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+							</Link>
+							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+								<span class="text-black">
+									<img
+										class="inline w-4 icon-filter"
+										style="margin-top:-4px" 
+										src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
+									>
+									Displays enviados
+								</span>
+								<i v-if="item.completedReseivedDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+							</Link>
 						</div>
 					</div>
 				</div>
