@@ -168,6 +168,11 @@ class AssociateController extends Controller
             'displays' => 'required|array'
         ]);
         $user = auth()->user();
+        $user->resources()->createMany([
+            ['name' => 'request-display', ],
+            ['name' => 'received-display'],
+
+        ]);
         $data = [
             'user' => $user,
             'city' => $request->city ?? null,

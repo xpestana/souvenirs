@@ -12,10 +12,15 @@
                 </div>
             </div>
         </div>
+        <div class="breadcrumb-associate row mx-1.5 lg:mx-0 py-3">
+            <div class="col-12 text-left px-0">
+                <p class="text-gray-500">Gestión de partners / {{user.profile.firstname}} / <b>Datos de envío</b></p>
+            </div>
+        </div>
          <!--END Header-->
         <!--Formulario de envio -->
         <div
-            class="perfil-shipping row mx-1.5 lg:mx-0 mt-8 justify-content-start"
+            class="perfil-shipping row mx-1.5 lg:mx-0 justify-content-start"
             :class="{'position-relative': windowWidth >= 768}"
         >
             <!--Alert validation -->
@@ -189,13 +194,13 @@ export default {
         ModalCookies,
         ValidationAlert,
     },
-    props: ['collaboratorShipping'],
+    props: ['collaboratorShipping','user'],
     data() {
         return {
             close: false,
             windowWidth: window.innerWidth,
             formCollaboratorShipping: this.$inertia.form({
-            	_method: "POST",
+            	user_id:this.user.id,
                 document: '',
                 businessName: '',
                 contactPerson: '',
@@ -284,7 +289,7 @@ export default {
     methods: {
         submit () {
             this.forceExitConfirm = true
-            this.formCollaboratorShipping.post(route('collaborator.shipping.store'), {
+            this.formCollaboratorShipping.post(route('admin.associate.update.shipping'), {
                 preserveScroll: true,
                 errorBag: 'submitShipping',
                 onSuccess:()=>{
