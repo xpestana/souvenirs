@@ -281,7 +281,76 @@ class AdminAssociateController extends Controller {
 
     public function show_associate(User $user){
         $user->load('profile');
-        return Inertia::render('Admin/Associates/Show', compact('user'));      
+        $orders = Order::where('user_id',$user->id)
+                    ->where("status","complete")
+                    ->where("returned",0)
+                    ->get();
+        $associate = User::join('profiles', 'profiles.user_id', '=', 'users.id')
+                ->select('users.*', 'profiles.firstname','profiles.lastname')
+                ->role('Associate')
+                ->where('del',false)
+                ->with('hotel.orders.shippings')
+                ->findOrFail($user->id);
+        
+        //Valid information perfil
+        $validInformation = !empty($associate->profile->firstname) && !empty($associate->email) && !empty($associate->profile->phone);
+        $associate['completInformation'] = $validInformation;
+
+        //Valid information nif
+        $validNif = !empty($associate->profile->identify) && !empty($associate->profile->nif) && !empty($associate->profile->address) && !empty($associate->profile->city);
+        $associate['completedNif'] = $validNif;
+
+        //Valid information shipping
+        $validShipping = !$associate->collaboratorShippings->isEmpty();
+        $associate['completedShipping'] = $validShipping;
+
+        //Valid information banck
+        $validBank = !$associate->collaboratorBanks->isEmpty();
+        $associate['completedBank'] = $validBank;
+
+        //Valid banner
+        $validBanner = $associate->resources()->where('name', 'banner')->first();
+        $associate['completedBanner'] = !empty($validBanner);
+
+        //Valid url
+        $validUrl = $associate->resources()->where('name', 'url')->first();
+        $associate['completedUrl'] = !empty($validUrl);
+
+        //Valid request-display
+        $validRequestDisplay = $associate->resources()->where('name', 'request-display')->first();
+        $associate['completedRequestDisplay'] = !empty($validRequestDisplay);
+
+        //Valid received-display
+        $validReseivedDisplay = $associate->resources()->where('name', 'received-display')->first();
+        $associate['completedReseivedDisplay'] = !empty($validReseivedDisplay);
+            
+        return Inertia::render('Admin/Associates/Show', compact('user','orders','associate'));      
+    }
+
+    public function sales_associate(Request $request, User $user){
+        $orders = Order::where('user_id',$user->id)
+                    ->where("status","complete")
+                    ->where("returned",0)
+                    ->with('shippings')
+                    ->orderBy("created_at",'DESC')
+                    ->Date($request->desde, $request->hasta)->paginate(15);
+                    
+        $totalOrders = Order::where('user_id',$user->id)
+                ->where("status","complete")
+                ->where("returned",0)
+                ->orderBy("updated_at",'DESC')
+                ->with('shippings')
+                ->get();
+        $withdrawal = $totalOrders->where("withdrawal",1);
+
+
+        $date = null;
+
+        if (!$withdrawal->isEmpty()) {
+            $date = $withdrawal->first()->updated_at;
+        }
+        $user->load('profile');
+        return Inertia::render('Admin/Associates/Sales/Total', compact('orders','user','totalOrders','date'));
     }
 
 }

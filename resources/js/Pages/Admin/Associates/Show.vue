@@ -5,7 +5,7 @@
             <div class="col-12 col-md-8 text-left">
                 <h1 class="font-bold text-lg md:text-3xl text-muted">
                     <i class="cursor-pointer text-muted mr-2 fas fa-arrow-left" @click.prevent="goBack()"></i>
-                    Parnert {{user.id}}
+                    {{user.profile.firstname}}
                 </h1>
             </div>
         </div>
@@ -15,11 +15,11 @@
             </div>
         </div>
          <!--END Header-->
-         <div class="benefit-associate row mx-1.5 lg:mx-0 py-3">
+        <div class="benefit-associate row mx-1.5 lg:mx-0 py-3">
             <div class="col-12 text-left px-0">
-                <p class="d-lg-inline mr-lg-4"><b>Facturación total:</b>12345.54€</p>
-                <p class="d-lg-inline mr-lg-4"><b>Beneficio total:</b>12345.54€</p>
-                <p class="d-lg-inline"><b>Pedidos totales:</b>123</p>
+                <p class="d-lg-inline mr-lg-4"><b>Facturación total: </b>{{ total.toFixed(2) }}€</p>
+                <p class="d-lg-inline mr-lg-4"><b>Beneficio total: </b>{{ (total*0.20).toFixed(2) }}€</p>
+                <p class="d-lg-inline"><b>Pedidos totales: </b>{{ orders.length}}</p>
             </div>
         </div>
        
@@ -27,59 +27,99 @@
 
     <section id="show-associate-body" class="container  ml-2 md:ml-0 md:px-24" >
        <div class="row">
-        <div class="col-12 col-lg-6 pr-8">
+        <div class="col-12 col-lg-6 lg:pr-8">
             <div class="body-card bg-gray-100 p-4 rounded-md">
                 <i class="fas fa-user inline-block mr-2.5 text-lg"></i>
                 <h2 class="font-semibold text-lg inline-block text-negro">Datos del perfil</h2>
                 <div class="pl-8">
-                    <Link class="py-2 relative block text-muted" :href="route('admin.associate.profile',{user:user.id})">
-                        Información perfil
-                        <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
+                        Información del perfil
+                        <template v-if="associate.completInformation">
+                            <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        </template>
+                        <template v-else>
+                            <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.tax',{user:user.id})">
                         Datos fiscales
-                        <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        <template v-if="associate.completedNif">
+                            <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        </template>
+                        <template v-else>
+                            <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.bank',{user:user.id})">
                         Información bancaria
-                        <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        <template v-if="associate.completedBank">
+                            <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        </template>
+                        <template v-else>
+                            <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted" :href="route('admin.associate.profile',{user:user.id})">
-                        Datos envío
-                        <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.shipping',{user:user.id})">
+                        Datos de envío
+                        <template v-if="associate.completedShipping">
+                            <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        </template>
+                        <template v-else>
+                            <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        </template>
                     </Link>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 pr-8">
+        <div class="col-12 col-lg-6 lg:pr-8 mt-4 mt-lg-0">
             <div class="body-card bg-gray-100 p-4 rounded-md">
                 <img class="inline w-4 mr-2.5" style="margin-top:-4px"
                     src="/vendor_asset/img/admin/icons/adminrecursos.svg"
                 >
                 <h2 class="font-semibold text-lg inline-block text-negro">Recursos</h2>
                 <div class="pl-8">
-                    <Link class="py-2 relative block text-muted" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
                         Banner descargado
-                        <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        <template v-if="associate.completedBanner">
+                            <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        </template>
+                        <template v-else>
+                            <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
                         QR Generado
-                        <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        <template v-if="associate.completedUrl">
+                            <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        </template>
+                        <template v-else>
+                            <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
                         Displays pedidos
-                        <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        <template v-if="associate.completedRequestDisplay">
+                            <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        </template>
+                        <template v-else>
+                            <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
                         Displays enviados
-                        <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        <template v-if="associate.completedReseivedDisplay">
+                            <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        </template>
+                        <template v-else>
+                            <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                        </template>
                     </Link>
                 </div>
             </div>
         </div>
        </div>
        <div class="row mt-4">
-        <div class="col-12 col-lg-6 pr-8">
+        <div class="col-12 col-lg-6 lg:pr-8">
             <div class="body-card bg-gray-100 p-4 rounded-md h-36">
                 <img class="inline w-5 mr-2.5" style="margin-top:-4px"
                     src="/vendor_asset/img/admin/icons/adminalojamiento.svg"
@@ -90,14 +130,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 pr-8">
+        <div class="col-12 col-lg-6 lg:pr-8 my-4 my-lg-0">
             <div class="body-card bg-gray-100 p-4 rounded-md h-36">
                 <img class="inline w-4 mr-2.5" style="margin-top:-4px"
                     src="/vendor_asset/img/admin/icons/adminventas.svg"
                 >
                 <h2 class="font-semibold text-lg inline-block text-negro">Informe de ventas</h2>
                 <div class="">
-                    <p class="font-semibold text-right mt-14">Ver desglose de ventas</p>
+                    <Link :href="route('admin.associate.sales',{user:user.id})" class="block font-semibold text-right mt-14 associate-link">Ver desglose de ventas</Link>
                 </div>
             </div>
         </div>
@@ -114,10 +154,21 @@ export default {
     components:{
         Link,
     },
-    props: ['user'],
+    props: {
+        orders:Object,
+        user:Object,
+        associate:Object
+    },
     data() {
         return {
+            total:0
         }
+    },
+    created(){
+        this.orders.forEach(order =>{
+            this.total += Number(order.total); 
+        });
+        console.log(this.associate)
     },
     methods:{
         goBack () {
@@ -131,5 +182,9 @@ export default {
 <style scoped>
 .text-negro{
     color:#000;
+}
+.associate-link:hover,
+.associate-link:active{
+    color:#FF9C06 !important;
 }
 </style>

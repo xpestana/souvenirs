@@ -28,7 +28,7 @@ route('admin.administradores')" -->
                 >
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':urlAssociates}" 
-                        src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
+                        src="/vendor_asset/img/admin/icons/partners.svg"
                     >
                     Gestión de partners
                 </Link>
@@ -39,7 +39,7 @@ route('admin.administradores')" -->
                 >
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':urlActividades}" 
-                        src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
+                        src="/vendor_asset/img/admin/icons/experiencias.svg"
                     >
                     Gestión de experiencias
                 </Link>
@@ -47,9 +47,9 @@ route('admin.administradores')" -->
             <li class="mb-6">
                 <Link :href="route('admin.souvenirs')" class="text-base link sidebar-collapse-menu-mobile" 
                     :class="{'sidebar-active':urlSouvenirs}">
-                    <img class="inline w-5" style="margin-top:-4px"
+                    <img class="inline w-4" style="margin-top:-4px"
                         :class="{'side-icon-active':urlSouvenirs}" 
-                        src="/vendor_asset/img/collaborator/dashboard/icons/inicioo.svg"
+                        src="/vendor_asset/img/admin/icons/souvenirs.svg"
                     >
                     Gestión de souvenirs
                 </Link>
@@ -71,7 +71,7 @@ route('admin.administradores')" -->
                 >
                     <img class="inline w-5" style="margin-top:-4px"
                         :class="{'side-icon-active':urlLimpiarPagination === '/admin/ajustes/administradores'}"
-                        src="/vendor_asset/img/collaborator/dashboard/icons/ventas.svg"
+                        src="/vendor_asset/img/admin/icons/ajustes.svg"
                     >
                     Ajustes
                 </Link>
