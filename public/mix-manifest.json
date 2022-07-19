@@ -1,6 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/vendor_asset/img/admin/icons/adminalojamiento.svg": "/vendor_asset/img/admin/icons/adminalojamiento.svg",
+    "/vendor_asset/img/admin/icons/adminrecursos.svg": "/vendor_asset/img/admin/icons/adminrecursos.svg",
+    "/vendor_asset/img/admin/icons/adminventas.svg": "/vendor_asset/img/admin/icons/adminventas.svg",
     "/vendor_asset/img/banner/b9.jpg": "/vendor_asset/img/banner/b9.jpg",
     "/vendor_asset/img/banner/hop-banner-1.jpg": "/vendor_asset/img/banner/hop-banner-1.jpg",
     "/vendor_asset/img/banner/hop-banner-10.jpg": "/vendor_asset/img/banner/hop-banner-10.jpg",

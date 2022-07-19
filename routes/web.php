@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Products\CartController;
 use App\Http\Controllers\Admin\RyderController;
 use App\Http\Controllers\Ryders\ShippingController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\AdminAssociateController;
 
 
 
@@ -395,16 +397,19 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/colaborador/{id}', [AdminController::class, 'collaborator_details'])->name('admin.collaborator.show');
 
     /*Asociados*/
-    Route::get('/asociados', [AdminController::class, 'associates'])->name('admin.associates');
-    Route::get('/asociado/{user}/informacion-del-perfil', [AdminController::class, 'associate_profile'])->name('admin.associate.profile');
-    Route::get('/asociado/{user}/datos-fiscales', [AdminController::class, 'associate_tax'])->name('admin.associate.tax');
-    Route::get('/asociado/{user}/datos-bancarios', [AdminController::class, 'associate_bank'])->name('admin.associate.bank');
-    Route::get('/asociado/{user}/datos-de-envio', [AdminController::class, 'associate_shipping'])->name('admin.associate.shipping');
-    Route::get('/asociados/crear-asociado', [AdminController::class, 'associates_create'])->name('admin.associates.create');
-     Route::post('/asociados/store', [AdminController::class, 'associates_store'])->name('admin.associates.store');
-    Route::get('/asociados/editar-asociado/{user}', [AdminController::class, 'associates_edit'])->name('admin.associates.edit');
-     Route::put('/asociados/updt/{id}', [AdminController::class, 'associates_updt'])->name('admin.associates.updt');
-    Route::get('/asociados/detalle/{id}', [AdminController::class, 'associate_details'])->name('admin.associates.show');
+    Route::get('/asociados', [AdminAssociateController::class, 'associates'])->name('admin.associates');
+    Route::get('/asociado/{user}/informacion-del-perfil', [AdminAssociateController::class, 'associate_profile'])->name('admin.associate.profile');
+    Route::post('/editar-perfil/{profile}', [AdminAssociateController::class, 'update_profile'])->name('admin.associate.updt.profile');
+    Route::get('/asociado/{user}/datos-fiscales', [AdminAssociateController::class, 'associate_tax'])->name('admin.associate.tax');
+    Route::post('/editar-datos-fiscales/', [AdminAssociateController::class, 'update_tax'])->name('admin.associate.update.tax');
+    Route::get('/asociado/{user}/datos-bancarios', [AdminAssociateController::class, 'associate_bank'])->name('admin.associate.bank');
+    Route::post('/editar-datos-bancarios/', [AdminAssociateController::class, 'update_bank'])->name('admin.associate.update.bank');
+    Route::get('/asociado/{user}/datos-de-envio', [AdminAssociateController::class, 'associate_shipping'])->name('admin.associate.shipping');
+    Route::post('/editar-datos-de-envio/', [AdminAssociateController::class, 'update_shipping'])->name('admin.associate.update.shipping');
+    Route::post('/crear-asociado', [AdminAssociateController::class, 'store'])->name('admin.associates.create');
+    Route::get('/asociado/{user}', [AdminAssociateController::class, 'show_associate'])->name('admin.associate.show');
+
+    
     /*Alojamientos*/
     Route::get('/crear/alojamiento/{collaborator}', [AdminController::class, 'lodging_create'])->name('admin.lodging.create');
     Route::post('/store/alojamiento', [AdminController::class, 'lodging_store'])->name('admin.lodging.store');

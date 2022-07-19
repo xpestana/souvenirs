@@ -6,7 +6,7 @@
                 <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i> Información del perfil</h1>
             </div>
         </div>
-        <div class="header row mx-1.5 lg:mx-0 py-3">
+        <div class="breadcrumb-associate row mx-1.5 lg:mx-0 py-3">
             <div class="col-12 text-left px-0">
                 <p class="text-gray-500">Gestión de partners / {{user.profile.firstname}} / <b>Información del perfil</b></p>
             </div>
@@ -54,10 +54,13 @@
                         <label class="font-bold"><i class="fas fa-key mr-1"></i>Confirmar contraseña</label>
                         <div class="relative w-100">
                             <i class="far fa-eye cursor-pointer absolute left-0 inset-y-1/3 my-auto px-2.5" v-on:click="showPass('confirm-password')"></i>
-                            <input v-model="form.confirm_password" type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="confirm-password" placeholder="********"
-                            :class="{'error-input': errorsKey.includes('confirm_password')}"
+                            <input v-model="form.password_confirmation" type="password" class="col-form-input w-100 rounded pl-8 py-1.5" id="confirm-password" placeholder="********"
+                            :class="{'error-input': errorsKey.includes('password_confirmation')}"
                             >
                         </div>
+                    </div>
+                    <div class="col-12 py-2">
+                        <p class="text-danger" v-for="error in errorMsg" :key="error">{{error}}</p><br>
                     </div>
                     <div class="col-12 mt-11 px-0 text-center text-lg-left">
                         <button type="submit" class="btn rounded text-white bg-collaborator-orange py-1 px-6" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"><i class="fas fa-save mr-2 text-white"></i>Guardar cambios</button>
@@ -108,17 +111,17 @@ export default {
     data(){
         return{
             form: this.$inertia.form({
-                _method: "PUT",
                 name: '',
                 email: '',
                 phone: '',
                 password: null,
-                confirm_password: null,
+                password_confirmation: null,
             }),
             forceExitConfirm: false,
             beforeUrl: '',
             typeBack: '1',
             errorsKey: [],
+            errorMsg:[],
             windowWidth: window.innerWidth,
         }
     },
@@ -152,7 +155,6 @@ export default {
     },
     created () {
         this.updateForm()
-        console.log(this.errorsKey)
     },
     mounted () {
         this.moveConfirm = Inertia.on('before', (event) => {
@@ -171,7 +173,7 @@ export default {
     methods: {
         submitProfile() {
         this.forceExitConfirm = true
-        this.form.put(route('collaborator.profile.update'), {
+        this.form.post(route('admin.associate.updt.profile',{profile:this.user.profile.id}), {
                 preserveScroll: true,
                 errorBag: 'submitProfile',
                 onSuccess:()=>{
@@ -221,9 +223,14 @@ export default {
         },
         getErrorsKey () {
             this.errorsKey = this.$page.props.errors.submitProfile ? Object.keys(this.$page.props.errors.submitProfile) : []
+            this.errorMsg = this.$page.props.errors.submitProfile ? Object.values(this.$page.props.errors.submitProfile) : []
+            console.log(this.errorsKey)
         },
     }
 }
 </script>
 <style scoped>
+.error-input {
+    border: solid 2px red;
+}
 </style>

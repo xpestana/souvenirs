@@ -621,61 +621,6 @@ class AdminController extends Controller
         return Inertia::render('Admin/Sales_details', compact('order'));
     }
 
-     public function associates(Request $request)
-    {
-        $collaborators = User::join('profiles', 'profiles.user_id', '=', 'users.id')
-                ->select('users.*', 'profiles.firstname','profiles.lastname','profiles.city')
-                ->role('Associate')
-                ->search($request->search)
-                ->email($request->search, 'Associate')
-                ->where('del',false)
-                ->with('orders.shippings')
-                ->orderBy('profiles.firstname','ASC')
-                ->paginate(4);
-        $url = config('app.url');
-        foreach ($collaborators->items() as $key => $user) {
-            //Valid information perfil
-            $validInformation = !empty($user->profile->firstname) && !empty($user->email) && !empty($user->profile->phone);
-            $collaborators->items()[$key]['completInformation'] = $validInformation;
-
-            //Valid information nif
-            $validNif = !empty($user->profile->identify) && !empty($user->profile->nif) && !empty($user->profile->address) && !empty($user->profile->city);
-            $collaborators->items()[$key]['completedNif'] = $validNif;
-
-            //Valid information shipping
-            $validShipping = !$user->collaboratorShippings->isEmpty();
-            $collaborators->items()[$key]['completedShipping'] = $validShipping;
-
-            //Valid information banck
-            $validBank = !$user->collaboratorBanks->isEmpty();
-            $collaborators->items()[$key]['completedBank'] = $validBank;
-        }
-        return Inertia::render('Admin/Associates/Index',compact('collaborators','url') );
-    }
-
-    public function associate_profile(User $user)
-    {
-        $user->load('profile');
-        return Inertia::render('Admin/Associates/Profile/Info',compact('user'));   
-    }
-    public function associate_tax()
-    {
-        return Inertia::render('Admin/Associates/Profile/Tax');   
-    }
-    public function associate_bank()
-    {
-        return Inertia::render('Admin/Associates/Profile/Bank');   
-    }
-    public function associate_shipping()
-    {
-        return Inertia::render('Admin/Associates/Profile/Shipping');      
-    }
-
-    public function associates_create(Request $request)
-    {
-        return Inertia::render('Admin/Associates/Create');   
-    }
-
     public function associates_store(Request $request){
     
     $request->validate([
@@ -728,63 +673,5 @@ class AdminController extends Controller
     Mail::to($user->email)->send(new WelcomeReceived($user, $request->password));
 
     return redirect()->route('admin.associates')->with(['id'=>$user->id, 'message' => "Registro exitoso", 'code' => 200, 'status' => 'success']);
-    }
-
-    public function associate_details($id)
-    {
-        $collaborator = User::find($id)->load('profile','orders.shippings');
-        $url = config('app.url');
-        return Inertia::render('Admin/Associates/Details',compact('collaborator','url'));
-    }
-
-    public function associates_edit(User $user)
-    {
-        $user->load('profile');
-        return Inertia::render('Admin/Associates/Edit', compact('user'));
-    }
-    
-
-    public function associates_updt(Request $request, $id){
-        $request->validate([
-            'email' => ['nullable', 'email', 'confirmed', 'max:255', Rule::unique('users')->ignore($id)],
-            'password' => 
-            ['nullable', 
-                Rules\Password::min(8)
-                ->mixedCase()
-                ->numbers()
-                ->uncompromised()
-            ],
-            'name' => 'required|string',
-            'phone' => 'required|string',
-            'gestor' => ['required','string', Rule::in([1, 2])],
-            'razon' => 'required|string',
-            'nif' => 'required|string',
-            'id' => 'required|string',
-            'city' => 'required|string',
-            'cp' => 'required|string',
-            'address' => 'required|string',
-        ]);
-
-        $user = User::find($id);
-        $user->name = $request->email;
-        $user->email = $request->email;
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
-        }
-        $user->save();
-        
-        $profile = profile::find($user->profile->id);
-        $profile->firstname = $request->name;
-        $profile->phone = $request->phone;
-        $profile->gestor = $request->gestor;
-        $profile->razon = $request->razon;
-        $profile->nif = $request->nif;
-        $profile->identify = $request->id;
-        $profile->city = $request->city;
-        $profile->cp = $request->cp;
-        $profile->address = $request->address;
-        $profile->save();
-
-        return Redirect::route('admin.associates.show',$id)->with(['id'=>$user->id, 'message' => "Actualizacion exitosa", 'code' => 200, 'status' => 'success']);
     }
 }
