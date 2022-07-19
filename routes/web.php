@@ -389,12 +389,20 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/')->group(function () {
 Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(function () {
 
     Route::get('/colaboradores', [AdminCollaboratorController::class, 'index'])->name('admin.colaboradores');
+    Route::get('/colaborador/{id}', [AdminCollaboratorController::class, 'show_details'])->name('admin.collaborator.show');
+    Route::post('/colaborador/alojamientos/store', [AdminCollaboratorController::class, 'store_lodging'])->name('admin.collaborator.lodging.store');
+    Route::get('/colaborador/{id}/alojamientos', [AdminCollaboratorController::class, 'index_lodging'])->name('admin.collaborator.lodging');
+    Route::post('/colaborador/alojamientos/update', [AdminCollaboratorController::class, 'update_lodging'])->name('admin.collaborator.lodging.update');
+    Route::get('/colaborador/alojamientos/request-display', [CollaboratorController::class, 'request_display'])->name('admin.collaborator.lodging.display');
+    Route::get('/colaborador/{id}/informacion-del-perfil', [AdminCollaboratorController::class, 'create_profile'])->name('admin.collaborator.profile');
+    Route::get('/colaborador/{id}/datos-fiscales', [AdminCollaboratorController::class, 'create_tax'])->name('admin.collaborator.tax');
+    Route::get('/colaborador/{id}/datos-bancarios', [AdminCollaboratorController::class, 'create_bank'])->name('admin.collaborator.bank');
+    Route::get('/colaborador/{id}/datos-de-envio', [AdminCollaboratorController::class, 'create_shipping'])->name('admin.collaborator.shipping');
     Route::get('/crear/colaborador', [AdminController::class, 'collaborator_create'])->name('admin.collaborator.create');
     Route::get('/editar/colaborador/{id}', [AdminController::class, 'collaborator_edit'])->name('admin.collaborator.edit');
     Route::put('/actualizar/colaborador/{id}', [AdminController::class, 'collaborator_updt'])->name('admin.collaborator.updt');
     Route::delete('/eliminar/colaborador/{id}', [AdminController::class, 'collaborator_delete'])->name('admin.collaborator.delete');
     Route::post('/colaborador/store', [AdminCollaboratorController::class, 'store'])->name('admin.collaborator.store');
-    Route::get('/colaborador/{id}', [AdminController::class, 'collaborator_details'])->name('admin.collaborator.show');
 
     /*Asociados*/
     Route::get('/asociados', [AdminAssociateController::class, 'associates'])->name('admin.associates');
