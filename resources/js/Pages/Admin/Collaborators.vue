@@ -7,26 +7,33 @@
 	            </h1>
 	        </div>
 	    </div>
-        <div class="my-4 mx-1.5 lg:mx-0 row justify-content-lg-between">
-            <div class="col-12 col-lg-8">
-                <div class="search-admin w-100 rounded-xl shadow px-2 py-3 relative collaborator-box">
-                    <i class="fas fa-search absolute left-0 inset-y-1/3 px-2"></i>
-                    <input
-						v-model="formSearch.search"
-                        class="w-100 pl-6"
-                        placeholder="Buscar anfitrión"
-						@keyup.enter="submitSearch"
-                    >
+		<div class="lodgings-filter row  my-4 mx-1.5 lg:mx-0 justify-content-lg-between">
+            <div class="col-12 col-lg-8 shadow p-1 rounded-xl bg-white pr-lg-0">
+                    <div class="row py-1">
+                    <div class="col-2 col-md-1 pl-4 pr-0">
+                        <i class="fas fa-search text-gray-400 relative top-3 lg:text-lg"></i>
+                    </div>
+                    <div class="col-10 px-0 relative">
+                        <input v-model="formSearch.search" @keyup.enter="submitSearch" type="text"  class="border-none w-full pl-1 pr-0" placeholder="Busca tu anfitrión...">
+                        <div v-if="searching" class="spinner-border spinner-border-sm absolute right-4 md:right-0 top-3 text-orangec" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class=" col-12 col-lg-3 text-right pt-2 pl-lg-0 flex justify-content-center align-items-center mt-4 mt-md-0">
-                 <button class="w-full bg-collaborator-orange text-white rounded px-2 px-lg-4 py-1 py-lg-2 font-semibold" @click.prevent="openModalRegister">+ Añadir anfitrión</button>
+            <div class="col-12 col-lg-3 text-right pt-2 pl-lg-0 text-center text-lg-right">
+                <button
+					class="lg:w-full bg-collaborator-orange text-white rounded px-4 lg:px-2 px-lg-4 py-2 py-lg-1 py-lg-2 mt-2 mt-lg-1 font-semibold"
+					@click="openModalRegister"
+				>
+                    + Añadir anfitrión
+                </button>
             </div>
         </div>
     </section>
 	<section class="ml-2 md:ml-0 md:px-14 table-responsive-md">
 		<div class="w-mobile-collaborator">
-			<div class="row mx-0 justify-content-start w-mobile-collaborator">
+			<div class="row mx-0 justify-content-start py-1 w-mobile-collaborator">
 				<div class="col-3 text-left text-gray-400 font-semibold">
 					Usuario
 				</div>
@@ -109,7 +116,7 @@
 									>
 									Información bancaria
 								</span>
-								<i v-if="item.completedShipping" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-if="item.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
 								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
 							</Link>
 							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.shipping',{id:item.id})">
@@ -121,7 +128,7 @@
 									>
 									Datos de envío
 								</span>
-								<i v-if="item.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
+								<i v-if="item.completedShipping" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
 								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
 							</Link>
 						</div>
@@ -350,6 +357,7 @@ export default {
 			}),
 			showPass: false,
 			errorsKey: [],
+			searching:false,
         }
 	},
 	computed: {
@@ -407,12 +415,14 @@ export default {
 			}
 		},
 		submitSearch (value) {
+			this.searching = true
 			this.collaborators.data = []
-			setTimeout(()=>{
-				this.formSearch.get(this.route('admin.colaboradores'), {
-					preserveScroll: true,
-				});
-			},1500);
+			this.formSearch.get(this.route('admin.colaboradores'), {
+				preserveScroll: true,
+				onFinish: ()=>{
+					this.searching = true
+				},
+			})
 		},
 		submitCreate () {
 			this.formCollaborator.post(this.route('admin.collaborator.store'), {

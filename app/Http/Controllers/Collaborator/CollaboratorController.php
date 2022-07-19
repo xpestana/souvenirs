@@ -500,7 +500,14 @@ class CollaboratorController extends Controller
                         ->paginate(8);
         $orders = $model->appends(request()->except('page'));
 
+        $totalorders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where('type_order', '1')
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)->get();
+
          $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where('type_order', '1')
                     ->where("status","complete")
                     ->with('hotel','shippings')
                     ->Date($request->desde, $request->hasta)
@@ -513,7 +520,7 @@ class CollaboratorController extends Controller
             $date = $withdrawal->last()->updated_at; 
         }
 
-        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('hotels','orders','date', 'dateLast'));
+        return Inertia::render('Collaborator/Dashboard/Sales/During',compact('hotels','orders','date', 'dateLast', 'totalorders'));
     }
 
     public function sales_publicity (Request $request) {
@@ -527,7 +534,14 @@ class CollaboratorController extends Controller
                         ->paginate(8);
         $orders = $model->appends(request()->except('page'));
 
+        $totalorders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where('type_order', '2')
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)->get();
+
         $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where('type_order', '2')
                     ->where("status","complete")
                     ->with('hotel','shippings')
                     ->Date($request->desde, $request->hasta)
@@ -540,7 +554,7 @@ class CollaboratorController extends Controller
             $date = $withdrawal->last()->updated_at; 
         }
 
-        return Inertia::render('Collaborator/Dashboard/Sales/Publicity',compact('orders', 'dateLast', 'date', 'hotels'));
+        return Inertia::render('Collaborator/Dashboard/Sales/Publicity',compact('orders', 'dateLast', 'date', 'hotels', 'totalorders'));
     }
 
     public function sales_total(Request $request){
@@ -549,7 +563,9 @@ class CollaboratorController extends Controller
         $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
                     ->where("status","complete")
                     ->with('hotel','shippings')
-                    ->Date($request->desde, $request->hasta)->paginate(8);
+                    ->Date($request->desde, $request->hasta)
+                    ->paginate(8)
+                    ->appends(request()->except('page'));
         $totalorders = Order::whereIn('hotel_id',$hotels->pluck('id'))
                     ->where("status","complete")
                     ->with('hotel','shippings')
@@ -714,6 +730,8 @@ class CollaboratorController extends Controller
         $id = mt_Rand(1000000, 9999999);
         return Redirect::route('collaborator.dashboard.profile')->with(['id'=>$id, 'message' => 'Guardado exitosamente', 'code' => 200, 'status' => 'success']);
     }
+
+    // end bank
 
     public function index_antes () {
         return Inertia::render('Collaborator/Dashboard/Resource/BeforeArrival');

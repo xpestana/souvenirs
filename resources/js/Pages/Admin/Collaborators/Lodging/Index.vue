@@ -5,18 +5,20 @@
             <div class="col-12 text-left">
                 <h1 class="font-bold text-xl lg:text-3xl text-muted">
                     <i class="cursor-pointer text-muted mr-2 fas fa-arrow-left" @click.prevent="goBack()"></i>
-                    Gestión de Alojamientos
+                    Gestión de alojamientos
                 </h1>
             </div>
         </div>
         <!--END Header section-->
-        <!-- Miga de pan -->
-        <div class="my-4 mx-1.5 lg:mx-0">
-            <p class="text-muted font-light">Gestor de anfitrión / Usuario {{ user.id }} <span class="text-muted font-bold"> / Alojamientos</span></p>
+        <!-- MIGA DE PAN -->
+		<div class="header row mx-1.5 lg:mx-0 py-3">
+            <div class="col-12 text-left px-0">
+                <p class="text-gray-500">Gestión de anfitriones / {{user.profile.firstname}} / <b>Gestión de alojamientos</b></p>
+            </div>
         </div>
-        <!-- Din de miga de pagn -->
+		<!-- END MIGA DE PAN -->
         <!-- Header section-->
-        <div class="lodgings-filter row  my-4 mx-1.5 lg:mx-0 shadow p-1 rounded-xl bg-white">
+        <div class="lodgings-filter row mt-2  mb-4 mx-1.5 lg:mx-0 shadow p-1 rounded-xl bg-white">
             <div class="col-8 col-lg-4">
                     <div class="row">
                     <div class="col-2 pr-0">

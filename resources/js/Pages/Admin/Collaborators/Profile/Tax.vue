@@ -6,9 +6,14 @@
                 <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i> Datos fiscales</h1>
             </div>
         </div>
+        <div class="header row mx-1.5 lg:mx-0 py-3">
+            <div class="col-12 text-left px-0">
+                <p class="text-gray-500">Gestión de anfitriones / {{user.profile.firstname}} / <b>Datos fiscales</b></p>
+            </div>
+        </div>
         <!--END Header section-->
          <!-- Content section-->
-        <div class="perfil-tax row mx-1.5 lg:mx-0 mt-8">
+        <div class="perfil-tax row mx-1.5 lg:mx-0 mt-2">
             <form @submit.prevent="submitProfile" class="col-12 col-md-9">
                 <ValidationAlert
                     :errors="formatErrors"
@@ -135,11 +140,12 @@ export default {
         Link,
         ValidationAlert
     },
-    props: ['auth'],
+    props: ['auth','user'],
     data(){
         return{
             form: this.$inertia.form({
-            	_method: "PUT",
+                user_id:this.user.id,
+                profile_id:this.user.profile.id,
                 name: '',
                 email: '',
                 phone: '',
@@ -160,16 +166,16 @@ export default {
     computed: {
         formValid () {
             if (
-                this.form.name === this.auth.profile.firstname &&
-                this.form.email === this.auth.user.email &&
-                this.form.phone === this.auth.profile.phone &&
-                this.form.razon === this.auth.profile.razon &&
-                this.form.nif === this.auth.profile.nif &&
-                this.form.identifier === this.auth.profile.identify &&
-                this.form.city === this.auth.profile.city &&
-                 this.form.province === this.auth.profile.province &&
-                this.form.cp === this.auth.profile.cp &&
-                this.form.address === this.auth.profile.address
+                this.form.name === this.user.profile.firstname &&
+                this.form.email === this.user.email &&
+                this.form.phone === this.user.profile.phone &&
+                this.form.razon === this.user.profile.razon &&
+                this.form.nif === this.user.profile.nif &&
+                this.form.identifier === this.user.profile.identify &&
+                this.form.city === this.user.profile.city &&
+                 this.form.province === this.user.profile.province &&
+                this.form.cp === this.user.profile.cp &&
+                this.form.address === this.user.profile.address
             ) { return true }
             return false
         },
@@ -234,7 +240,7 @@ export default {
     methods: {
         submitProfile() {
             this.forceExitConfirm = true
-            /*this.form.put(route('collaborator.fiscal.update'), {
+            this.form.post(route('admin.collaborator.update.tax'), {
                 preserveScroll: true,
                 errorBag: 'submitTax',
                 onSuccess:()=>{
@@ -247,23 +253,23 @@ export default {
                     this.getErrorsKey()
                     this.emitter.emit('errors')
                 },
-            })*/
+            })
         },    
         showPass: function (id){
             let x = document.getElementById(id);
             x.type = x.type == 'password' ? 'text' : 'password';            
         },
         updateForm () {
-            this.form.name = this.auth.profile.firstname
-            this.form.email = this.auth.user.email
-            this.form.phone = this.auth.profile.phone
-            this.form.razon = this.auth.profile.razon
-            this.form.nif = this.auth.profile.nif
-            this.form.identifier = this.auth.profile.identify
-            this.form.city = this.auth.profile.city
-            this.form.province = this.auth.profile.province
-            this.form.cp = this.auth.profile.cp
-            this.form.address = this.auth.profile.address
+            this.form.name = this.user.profile.firstname
+            this.form.email = this.user.email
+            this.form.phone = this.user.profile.phone
+            this.form.razon = this.user.profile.razon
+            this.form.nif = this.user.profile.nif
+            this.form.identifier = this.user.profile.identify
+            this.form.city = this.user.profile.city
+            this.form.province = this.user.profile.province
+            this.form.cp = this.user.profile.cp
+            this.form.address = this.user.profile.address
         },
         goBack () {
             if (!this.formValid) {
