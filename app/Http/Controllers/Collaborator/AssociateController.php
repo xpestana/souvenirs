@@ -104,7 +104,29 @@ class AssociateController extends Controller
                 $url['fullPath'] = url('/'.$url['path']);
             }
         }
+
+        $user = auth()->user();
+        $user->resources()->create([
+            'name' => 'banner',
+        ]);
+
         return Inertia::render('Associates/Dashboard/Resource/Banner', compact('url', 'href'));
+    }
+
+    public function resource_url (Request $request) {
+        $city = $request->city ?? null;
+        $url = null;
+        if ($city) {
+            $idUser = auth::user()->id;
+            $url = url('?p='.$city.'&c='.$idUser.'&t=2');
+        }
+
+        $user = auth()->user();
+        $user->resources()->create([
+            'name' => 'url',
+        ]);
+
+        return Inertia::render('Associates/Dashboard/Resource/Url', compact('url'));
     }
 
      public function withdrawal(Request $request){ 
@@ -151,15 +173,6 @@ class AssociateController extends Controller
 
         // return back();
         
-    }
-    public function resource_url (Request $request) {
-        $city = $request->city ?? null;
-        $url = null;
-        if ($city) {
-            $idUser = auth::user()->id;
-            $url = url('?p='.$city.'&c='.$idUser.'&t=2');
-        }
-        return Inertia::render('Associates/Dashboard/Resource/Url', compact('url'));
     }
 
     public function send_resource_display (Request $request) {

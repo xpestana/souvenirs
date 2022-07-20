@@ -83,7 +83,7 @@
 							<div class="bg-collaborator-orange rounded-t-md py-2 px-2 font-bold text-white">
 								Ajustes del perfil
 							</div>
-							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.profile',{id:item.id})">
+							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.profile',{id:item.id})">
 								<span class="text-black">
 									<img
 										class="inline w-4 icon-filter"
@@ -95,7 +95,7 @@
 								<i v-if="item.completInformation" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
 								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
 							</Link>
-							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
 								<span class="text-black">
 									<img
 										class="inline w-4 icon-filter"
@@ -107,7 +107,7 @@
 								<i v-if="item.completedNif" class="fas fa-check-circle w-3  text-success" style="margin-top:3px"></i>
 								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
 							</Link>
-							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.bank',{id:item.id})">
+							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.bank',{id:item.id})">
 								<span class="text-black">
 									<img
 										class="inline w-4 icon-filter"
@@ -119,7 +119,7 @@
 								<i v-if="item.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
 								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
 							</Link>
-							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.shipping',{id:item.id})">
+							<Link class="flex dropdown-item link py-2 justify-content-between" :href="route('admin.collaborator.shipping',{id:item.id})">
 								<span class="text-black">
 									<img
 										class="inline w-4 icon-filter"
@@ -147,11 +147,11 @@
 							</span>
 							<i class="fas fa-caret-down inline-block ml-1"></i>
 						</a>
-						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md text-xs" :aria-labelledby="`dropdown-resource-${item.id}`">
+						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md" :aria-labelledby="`dropdown-resource-${item.id}`">
 							<div class="bg-collaborator-orange rounded-t-md py-2 px-2 font-bold text-white">
 								Recursos
 							</div>
-							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.resource',{id:item.id})">
 								<span class="text-black">
 									<img
 										class="inline w-4 icon-filter"
@@ -163,7 +163,7 @@
 								<i v-if="item.completedBanner" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
 								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
 							</Link>
-							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.resource',{id:item.id})">
 								<span class="text-black">
 									<img
 										class="inline w-4 icon-filter"
@@ -175,7 +175,7 @@
 								<i v-if="item.completedUrl" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
 								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
 							</Link>
-							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+							<Link class="flex dropdown-item link py-2 justify-content-between" :href="route('admin.collaborator.resource',{id:item.id})">
 								<span class="text-black">
 									<img
 										class="inline w-4 icon-filter"
@@ -187,7 +187,7 @@
 								<i v-if="item.completedRequestDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
 								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
 							</Link>
-							<Link class="flex dropdown-item link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
+							<Link class="flex dropdown-item link py-2 justify-content-between" :href="route('admin.collaborator.resource',{id:item.id})">
 								<span class="text-black">
 									<img
 										class="inline w-4 icon-filter"
@@ -206,10 +206,10 @@
 					<span class="font-bold inline-block">{{ item.countHotels }}</span>
 				</div>
 				<div class="col-1 flex justify-content-center align-items-center border-r border-gray-300">
-					<span class="inline-block">{{ item.countOrders}}</span>
+					<span class="font-bold inline-block">{{ item.countOrders}}</span>
 				</div>
 				<div class="col-2 flex justify-content-center align-items-center border-r border-gray-300">
-					<span class="inline-block">{{ item.benefit }} €</span>
+					<span class="font-bold inline-block">{{ item.benefit }} €</span>
 				</div>
 			</div>
 		</div>
@@ -225,7 +225,7 @@
 	<div class="modal modal-notification fade" id="register-collaborator" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content modal-register mx-auto">
+			<div class="modal-content modal-register mx-auto w-full md:w-3/4">
 				<div class="modal-header rounded-t-xl py-2 px-2 m-0 bg-collaborator-orange">
 					<h1 class="font-bold text-white inline-block text-lg lg:text-xl">
 						<img class="inline w-7 mr-2" style="margin-top:-4px;"
@@ -485,14 +485,8 @@ export default {
 	.w{
 		min-width: 600px;
 	}
-	.modal-dialog{
-		max-width: 27%;
-	}
 
     @media(max-width:767px){
-		.modal-dialog{
-			max-width: 90%;
-		}
 		.w{
 			min-width: 900px;
 		}

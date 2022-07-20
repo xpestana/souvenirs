@@ -2,7 +2,7 @@
 	<section id="admin-collaborator-resource" class="container py-8 ml-2 md:ml-0 md:px-24">
 	 	<div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
             <div class="col-12 col-md-8 text-left">
-                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Url`s personalizadas</h1>
+                <h1 class="font-bold text-lg md:text-3xl text-muted"><i class="cursor-pointer fas fa-arrow-left text-muted mr-2" @click.prevent="goBack()"></i>Recursos</h1>
             </div>
         </div>
         <!-- MIGA DE PAN -->
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-12 my-2 px-0">
                         <span v-if="statusResources.completedBanner" class="font-bold text-success">Este usuario ya ha generado algún banner desde su registro en HiCitty</span>
-                        <span v-else class="font-bold text-danger">Este usuario no ha generado algún banner desde su registro en HiCitty</span>
+                        <span v-else class="font-bold text-danger">Este usuario no ha generado un banner desde su registro en HiCitty</span>
                     </div>
                 </div>
                 <form
@@ -54,7 +54,7 @@
 							textLabel="Tamaño..."
 						/>
                     </div>
-                    <div class="col-12 mt-4 px-0 text-center text-lg-left">                  
+                    <div class="col-12 mt-2 px-0 text-center text-lg-left">                  
                         <button
                             class="btn rounded text-white bg-collaborator-orange py-1 px-6"
                             :class="{ 'opacity-25': loading }" :disabled="loading"
@@ -91,8 +91,8 @@
             <span v-if="message" class="block text-sm mt-1">{{message}}</span>
         </div>
         <!-- END GENERATE BANNER -->
-        <!-- GENERATE URL -->
-    	<div class="section-url mx-1.5 row lg:mx-0">
+        <!-- SEND GENERATE URL -->
+    	<div class="section-url mx-1.5  mt-8 row lg:mx-0">
             <div class="col-12 col-md-4">
                 <div class="row">
                     <div class="font-bold col-12 px-0 text-xl flex align-items-center">
@@ -106,8 +106,8 @@
                         <i v-else class="fas fa-times-circle pl-1 ml-4 text-xs text-danger"></i>
                     </div>
                     <div class="col-12 my-2 px-0">
-                        <span v-if="statusResources.completedUrl" class="font-bold text-success">Este usuario ya ha generado algún banner desde su registro en HiCitty</span>
-                        <span v-else class="font-bold text-danger">Este usuario no ha generado algún banner desde su registro en HiCitty</span>
+                        <span v-if="statusResources.completedUrl" class="font-bold text-success">Este usuario ya ha generado una url desde su registro en HiCitty</span>
+                        <span v-else class="font-bold text-danger">Este usuario no ha generado una url desde su registro en HiCitty</span>
                     </div>
                 </div>
                 <form
@@ -122,7 +122,7 @@
                             icon="icon"
                         />
                     </div>
-                    <div class="col-12 mt-4 px-0 text-center text-lg-left">                  
+                    <div class="col-12 mt-2 px-0 text-center text-lg-left">                  
                         <button
                             class="btn rounded text-white bg-collaborator-orange py-1 px-6"
                             :class="{ 'opacity-25': loading }" :disabled="loading"
@@ -134,20 +134,77 @@
                 </form>
             </div>
     	</div>
-        <div
-            v-if="url"
-            class="mx-1.5 mt-8"
-        >
-            <h3 class="font-bold text-xl">¡Enlace generado con éxito!</h3>
-            <div class="flex justify-content-between mt-3">
-                <span class="block">{{url}}</span>
-                <div>
-                    <span class="block cursor-pointer text-md text-orangec  font-bold" @click.prevent="copy()"><i class="fas fa-copy orange mr-1"></i> Copiar Enlace</span>
-                    <span v-if="message" class="block text-sm mt-1">{{message}}</span>
-                </div>
-            </div>
-        </div>
         <!-- END GENERATE URL -->
+        <!-- REQUEST DISPLAY -->
+    	<div class="section-url mx-1.5 mt-8 row lg:mx-0">
+            <div class="col-12 col-md-4">
+                <div class="row">
+                    <div class="font-bold col-12 px-0 text-xl flex align-items-center">
+                        <img
+                            class="w-6 mr-2"
+                            src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg"
+                            alt="icon"
+                        >
+                        <div class="inline-block">Displays pedidos</div>
+                    <i v-if="statusResources.completedRequestDisplay" class="fas fa-check-circle pl-1 text-xs ml-4 text-success"></i>
+                        <i v-else class="fas fa-times-circle pl-1 ml-4 text-xs text-danger"></i>
+                    </div>
+                    <div class="col-12 my-2 px-0">
+                        <span v-if="statusResources.completedRequestDisplay" class="font-bold text-success">Este usuario ya ha pedido displays desde su registro en HiCitty</span>
+                        <span v-else class="font-bold text-danger">Este usuario todavía no ha pedido displays desde su registro en Hicitty</span>
+                    </div>
+                </div>
+                <form
+                    class="row"
+                >
+                    <div class="col-12 mt-2 px-0 text-center text-lg-left">                  
+                        <button
+                            class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+                            :class="{ 'opacity-25': loading }" :disabled="loading"
+                            @click.prevent="submitRequestDisplay()"
+                        >
+                            Cambiar estado
+                        </button>
+                    </div>
+                </form>
+            </div>
+    	</div>
+        <!-- END  REQUEST DISPLAY -->
+        <!-- SEND DISPLAY -->
+    	<div class="section-url mx-1.5  mt-8 row lg:mx-0">
+            <div class="col-12 col-md-4">
+                <div class="row">
+                    <div class="font-bold col-12 px-0 text-xl flex align-items-center">
+                        <img
+                            class="w-6 mr-2"
+                            src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg"
+                            alt="icon"
+                        >
+                        <div class="inline-block">Displays enviados</div>
+                        <i v-if="statusResources.completedReseivedDisplay" class="fas fa-check-circle pl-1 text-xs ml-4 text-success"></i>
+                        <i v-else class="fas fa-times-circle pl-1 ml-4 text-xs text-danger"></i>
+                    </div>
+                    <div class="col-12 my-2 px-0">
+                        <span v-if="statusResources.completedReseivedDisplay" class="font-bold text-success">Este usuario  ya se le ha enviado su pedido de displays desde su registro en HiCitty</span>
+                        <span v-else class="font-bold text-danger">Este usuario no se le ha enviado su pedido de displays desde su registro en HiCitty</span>
+                    </div>
+                </div>
+                <form
+                    class="row"
+                >
+                    <div class="col-12 mt-2 px-0 text-center text-lg-left">                  
+                        <button
+                            class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+                            :class="{ 'opacity-25': loading }" :disabled="loading"
+                            @click.prevent="submitReseiveDisplay()"
+                        >
+                            Cambiar estado
+                        </button>
+                    </div>
+                </form>
+            </div>
+    	</div>
+        <!-- END SEND DISPLAY -->
     </section>
 </template>
 
@@ -242,6 +299,12 @@
                 .finally(()=>{
                     this.loading = false
                 })
+            },
+            submitRequestDisplay () {
+
+            },
+            submitReseiveDisplay () {
+
             },
             copy () {
                 var id = "el-id-del-textarea";

@@ -122,7 +122,7 @@
 	        	window.history.back()
 	        },
 	        getBanner () {
-	        	this.form.get(this.route('collaborator.recursos.antes.banner'), {
+	        	this.form.get(this.route('associates.resource.banner'), {
 	        		errorBag: 'submit',
 					preserveScroll: true,
 					onSuccess: (result) => {
