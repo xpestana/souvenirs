@@ -175,9 +175,7 @@ class CollaboratorController extends Controller
             'user' => $user,
         ];
         $user->resources()->createMany([
-            ['name' => 'request-display', ],
-            ['name' => 'received-display'],
-
+            ['name' => 'request-display'],
         ]);
         Mail::to("info@hicitty.es")->send(new DisplayReceiver($data));
         return back();

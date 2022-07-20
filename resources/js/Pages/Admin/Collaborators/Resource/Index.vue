@@ -301,10 +301,40 @@
                 })
             },
             submitRequestDisplay () {
-
+                this.loading = true
+                axios({
+                    url: route('admin.collaborator.resource.request-displays'),
+                    method: 'POST',
+                    data: { user_id: this.user.id },
+                })
+                .then( res => {
+                    console.log(res)
+                    this.statusResources.completedRequestDisplay = res.data.completedRequestDisplay
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+                .finally(()=>{
+                    this.loading = false
+                })
             },
             submitReseiveDisplay () {
-
+                this.loading = true
+                axios({
+                    url: route('admin.collaborator.resource.received-displays'),
+                    method: 'POST',
+                    data: { user_id: this.user.id },
+                })
+                .then( res => {
+                    console.log(res)
+                    this.statusResources.completedReseivedDisplay = res.data.completedReseivedDisplay
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+                .finally(()=>{
+                    this.loading = false
+                })
             },
             copy () {
                 var id = "el-id-del-textarea";

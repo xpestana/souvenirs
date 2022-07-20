@@ -370,9 +370,7 @@ class AdminCollaboratorController extends Controller {
             'user' => $user,
         ];
         $user->resources()->createMany([
-            ['name' => 'request-display', ],
-            ['name' => 'received-display'],
-
+            ['name' => 'request-display'],
         ]);
         Mail::to("info@hicitty.es")->send(new DisplayReceiver($data));
         return back();
@@ -747,6 +745,28 @@ class AdminCollaboratorController extends Controller {
          $completedBanner = !empty($validBanner); 
 
         return response()->json(['url' => $url, 'completedBanner' => $completedBanner]);
+    }
+
+    public function change_status_request_display (Request $request) {
+        $user = User::findOrFail($request->user_id);
+        $user->resources()->create(['name' => 'request-display']);
+
+        //Valid request-display
+        $validRequestDisplay = $user->resources()->where('name', 'request-display')->first();
+        $completedRequestDisplay = !empty($validRequestDisplay);
+
+        return response()->json(['completedRequestDisplay' => $completedRequestDisplay]);
+    }
+
+    public function change_status_received_display (Request $request) {
+        $user = User::findOrFail($request->user_id);
+        $user->resources()->create(['name' => 'received-display']);
+
+        //Valid received-display
+        $validReseivedDisplay = $user->resources()->where('name', 'received-display')->first();
+        $completedReseivedDisplay = !empty($validReseivedDisplay);
+
+        return response()->json(['completedReseivedDisplay' => $completedReseivedDisplay]);
     }
 
 }

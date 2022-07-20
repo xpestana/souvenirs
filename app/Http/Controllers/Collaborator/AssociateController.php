@@ -182,8 +182,7 @@ class AssociateController extends Controller
         ]);
         $user = auth()->user();
         $user->resources()->createMany([
-            ['name' => 'request-display', ],
-            ['name' => 'received-display'],
+            ['name' => 'request-display'],
 
         ]);
         $data = [
