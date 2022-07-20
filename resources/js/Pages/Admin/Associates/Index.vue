@@ -145,7 +145,7 @@
                         <div class="bg-collaborator-orange p-2 rounded-t-xl">
                             <h2 class="text-white font-semibold ml-1.5">Recursos</h2>
                         </div>
-                        <a class="dropdown-item py-2 relative" href="javascript:void(0)">
+                        <Link :href="route('admin.associate.resources',{user:clbtr.id})" class="dropdown-item py-2 relative" href="javascript:void(0)">
                             <img
                                 class="inline w-4"
                                 style="margin-top:-4px" 
@@ -158,8 +158,8 @@
                             <template v-else>
                                 <i class="fas fa-times-circle pl-1 absolute right-5 top-2.5 text-xs text-danger"></i>
                             </template>
-                        </a>
-                        <a class="dropdown-item py-2 relative" href="javascript:void(0)">
+                        </Link>
+                        <Link :href="route('admin.associate.resources',{user:clbtr.id})" class="dropdown-item py-2 relative" href="javascript:void(0)">
                             <img
                                 class="inline w-4"
                                 style="margin-top:-4px" 
@@ -172,8 +172,8 @@
                             <template v-else>
                                 <i class="fas fa-times-circle pl-1 absolute right-5 top-2.5 text-xs text-danger"></i>
                             </template>
-                        </a>
-                        <a class="dropdown-item py-2 relative" href="javascript:void(0)">
+                        </Link>
+                        <Link :href="route('admin.associate.resources',{user:clbtr.id})" class="dropdown-item py-2 relative" href="javascript:void(0)">
                             <img
                                 class="inline w-4"
                                 style="margin-top:-4px" 
@@ -186,8 +186,8 @@
                             <template v-else>
                                 <i class="fas fa-times-circle pl-1 absolute right-5 top-2.5 text-xs text-danger"></i>
                             </template>
-                        </a>
-                        <a class="dropdown-item py-2 relative" href="javascript:void(0)">
+                        </Link>
+                        <Link :href="route('admin.associate.resources',{user:clbtr.id})" class="dropdown-item py-2 relative" href="javascript:void(0)">
                             <img class="inline w-4" style="margin-top:-4px"
                                 src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
                             >
@@ -198,7 +198,7 @@
                             <template v-else>
                                 <i class="fas fa-times-circle pl-1 absolute right-5 top-2.5 text-xs text-danger"></i>
                             </template>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

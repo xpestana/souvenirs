@@ -78,7 +78,7 @@
                 >
                 <h2 class="font-semibold text-lg inline-block text-negro">Recursos</h2>
                 <div class="pl-8">
-                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id})">
                         Banner descargado
                         <template v-if="associate.completedBanner">
                             <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -87,8 +87,8 @@
                             <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
                         </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
-                        QR Generado
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id})">
+                        URL Generada
                         <template v-if="associate.completedUrl">
                             <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
                         </template>
@@ -96,7 +96,7 @@
                             <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
                         </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id})">
                         Displays pedidos
                         <template v-if="associate.completedRequestDisplay">
                             <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -105,7 +105,7 @@
                             <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
                         </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.profile',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id})">
                         Displays enviados
                         <template v-if="associate.completedReseivedDisplay">
                             <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>

@@ -427,6 +427,10 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
 
     Route::get('/asociado/ventas/{user}', [AdminAssociateController::class, 'sales_associate'])->name('admin.associate.sales');
 
+    Route::get('/asociado/{user}/recursos', [AdminAssociateController::class, 'resources_associate'])->name('admin.associate.resources');
+    Route::post('/url-recursos', [AdminAssociateController::class, 'url'])->name('admin.associate.url');
+    Route::post('/banner-recursos', [AdminAssociateController::class, 'banner'])->name('admin.associate.banner');
+
     
     /*Alojamientos*/
     Route::get('/crear/alojamiento/{collaborator}', [AdminController::class, 'lodging_create'])->name('admin.lodging.create');
