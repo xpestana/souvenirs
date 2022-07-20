@@ -35,27 +35,10 @@
 								textLabel="Ciudad..."
 								icon="icon"
 							/>
-	                        <!--<select
-	                        	v-model="form.city"
-	                        	class="w-100 rounded collaborator-input col-form-input py-1  pl-8"
-	                            placeholder="Ciudad..."
-	                         >
-								<option value="sevilla" :selected="form.city == 'sevilla'">Sevilla</option>
-								<option value="madrid" :selected="form.city == 'madrid'">Madrid</option>
-							</select>-->
 						</div>
                     </div>
                     <div class="col-12 my-1.5 px-0">
                         <label class="font-bold">Tamaño del banner</label>
-                        <!--<select
-                        	v-model="form.width"
-                        	class="w-100 rounded col-form-input py-1"
-                            placeholder="Tamaño..."
-                         >
-							<option value="200x700">200x700</option>
-							<option value="728x90">728x90</option>
-							<option value="160x600">160x600</option>
-						</select>-->
 						<Select
 							v-model="form.width"
 							:options="banners"

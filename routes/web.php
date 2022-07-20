@@ -407,6 +407,9 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/colaborador/{id}/ventas-inmueble', [AdminCollaboratorController::class, 'index_sales_property'])->name('admin.collaborator.sales-property');
     Route::get('/colaborador/{id}/ventas-publicidad', [AdminCollaboratorController::class, 'index_sales_publicity'])->name('admin.collaborator.sales-publicity');
     Route::post('/colaborador/solcitud-notificacion', [AdminCollaboratorController::class, 'send_notify'])->name('admin.collaborator.request-notify');
+    Route::get('/colaborador/{id}/recursos', [AdminCollaboratorController::class, 'create_resource'])->name('admin.collaborator.resource');
+    Route::post('/colaborador/recursos/banner', [AdminCollaboratorController::class, 'banner'])->name('admin.collaborator.resource.banner');
+    Route::post('/colaborador/recursos/url', [AdminCollaboratorController::class, 'url'])->name('admin.collaborator.resource.url');
     /*Route::get('/crear/colaborador', [AdminController::class, 'collaborator_create'])->name('admin.collaborator.create');
     Route::get('/editar/colaborador/{id}', [AdminController::class, 'collaborator_edit'])->name('admin.collaborator.edit');
     Route::put('/actualizar/colaborador/{id}', [AdminController::class, 'collaborator_updt'])->name('admin.collaborator.updt');

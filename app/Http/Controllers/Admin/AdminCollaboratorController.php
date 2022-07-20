@@ -145,6 +145,7 @@ class AdminCollaboratorController extends Controller {
         //Valid received-display
         $validReseivedDisplay = $user->resources()->where('name', 'received-display')->first();
         $user['completedReseivedDisplay'] = !empty($validReseivedDisplay);
+
         return Inertia::render('Admin/Collaborators/Show',compact('user'));
     }
 
@@ -667,6 +668,85 @@ class AdminCollaboratorController extends Controller {
 
         // return back();
         
+    }
+
+    public function create_resource ($id) {
+        $user = User::with('profile')->findOrFail($id);
+
+        //Valid banner
+        $validBanner = $user->resources()->where('name', 'banner')->first();
+        $user['completedBanner'] = !empty($validBanner);
+
+        //Valid url
+        $validUrl = $user->resources()->where('name', 'url')->first();
+        $user['completedUrl'] = !empty($validUrl);
+
+        //Valid request-display
+        $validRequestDisplay = $user->resources()->where('name', 'request-display')->first();
+        $user['completedRequestDisplay'] = !empty($validRequestDisplay);
+
+        //Valid received-display
+        $validReseivedDisplay = $user->resources()->where('name', 'received-display')->first();
+        $user['completedReseivedDisplay'] = !empty($validReseivedDisplay);
+
+        return Inertia::render('Admin/Collaborators/Resource/Index',compact('user'));
+    }
+
+    public function url (Request $request) {
+        $city = $request->city ?? null;
+        $url = null;
+        $user = User::with('profile')->findOrFail($request->user_id);
+        if ($city) {
+            $idUser = $user->id;
+            $url = url('?p='.$city.'&c='.$idUser.'&t=2');
+        }
+
+        $user->resources()->create([
+            'name' => 'url',
+        ]);
+
+        //Valid url
+        $validUrl = $user->resources()->where('name', 'url')->first();
+        $completedUrl = !empty($validUrl);
+
+        return response()->json(['url' => $url, 'completedUrl' => $completedUrl]);
+    }
+
+    public function banner (Request $request) {
+        $city = $request->city ?? null;
+        $width = $request->width ?? null;
+        $url = [
+            'path' => null,
+            'fullPath' => null,
+            'href' => null,
+        ];
+        $user = User::with('profile')->findOrFail($request->user_id);
+        if ($city && $width) {
+            $idUser = $user->id;
+            $url['href'] = url('?p='.$city.'&c='.$idUser.'&t=2');
+            if ($city == 'Sevilla' && $width == '160x600') {
+                $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/160x600.png';
+                $url['fullPath'] = url('/'.$url['path']);
+            }
+            if ($city == 'Sevilla' && $width == '200x700') {
+                $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/200x700.png';
+                $url['fullPath'] = url('/'.$url['path']);
+            }
+            if ($city == 'Sevilla' && $width == '728x90') {
+                $url['path'] =  'vendor_asset/img/collaborator/dashboard/banners/728x90.png';
+                $url['fullPath'] = url('/'.$url['path']);
+            }
+        }
+        
+        $user->resources()->create([
+            'name' => 'banner',
+        ]);
+
+         //Valid url
+         $validBanner = $user->resources()->where('name', 'banner')->first();
+         $completedBanner = !empty($validBanner); 
+
+        return response()->json(['url' => $url, 'completedBanner' => $completedBanner]);
     }
 
 }
