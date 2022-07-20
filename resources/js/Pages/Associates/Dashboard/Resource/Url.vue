@@ -70,10 +70,10 @@
         data () {
             return {
                 form: this.$inertia.form({
-                    city: 'sevilla',
+                    city: 'Sevilla',
                 }),
                  citys: [
-					{label: 'Sevilla', value: 'sevilla'},
+					{label: 'Sevilla', value: 'Sevilla'},
 				],
             }
         },

@@ -152,11 +152,11 @@
 </template>
 
 <script>
-	import TemplateApp from '@/Pages/Collaborator/Layouts/Layout.vue'
+	import Layout from '@/Pages/Admin/Layouts/Layout'
     import { Link } from '@inertiajs/inertia-vue3';
     import Select from '@/Components/Select'
 	export default {
-	    layout:TemplateApp,
+	    layout:Layout,
 	    components:{
             Link,
             Select
