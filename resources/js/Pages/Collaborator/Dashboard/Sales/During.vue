@@ -18,12 +18,7 @@
                         <Link
                             :href="route('dashboard.sales.total')"
                             class="btn  bg-collaborator-grey ml-auto py-1 mr-2.5 font-bold"
-                            :class="{
-                                'bg-collaborator-orange':this.$page.url=='/tablero/ventas-totales',
-                                'text-white':this.$page.url=='/tablero/ventas-totales',
-                                'text-muted':this.$page.url!='/tablero/ventas-totales',
-                                'shadow':this.$page.url=='/tablero/ventas-totales',
-                            }"
+							:class="filterUrl ==`/tablero/ventas-totales` ? 'bg-collaborator-orange text-white shadow' : 'text-muted'"
                         >
                             Ventas totales
                         </Link>
@@ -32,12 +27,7 @@
                         <Link
                             :href="route('collaborator.sales.publicity')"
                             class="btn bg-collaborator-grey ml-auto py-1 mr-2.5 font-bold"
-                            :class="{
-                                'bg-collaborator-orange':this.$page.url=='/tablero/ventas-publicidad',
-                                'text-white':this.$page.url=='/tablero/ventas-publicidad',
-                                'text-muted':this.$page.url!='/tablero/ventas-publicidad',
-                                'shadow':this.$page.url=='/tablero/ventas-publicidad',
-                            }"
+							:class="filterUrl ==`/tablero/ventas-publicidad` ? 'bg-collaborator-orange text-white shadow' : 'text-muted'"
                         >
                             Ventas publicidad
                         </Link>
@@ -46,12 +36,7 @@
                         <Link
                             :href="route('collaborator.sales.property')"
                             class="btn bg-collaborator-grey ml-auto py-1 mr-2.5 font-bold"
-                            :class="{
-                                'bg-collaborator-orange':this.$page.url=='/tablero/ventas-inmueble',
-                                'text-white':this.$page.url=='/tablero/ventas-inmueble',
-                                'text-muted':this.$page.url!='/tablero/ventas-inmueble',
-                                'shadow':this.$page.url=='/tablero/ventas-inmueble',
-                            }"
+							:class="filterUrl ==`/tablero/ventas-inmueble` ? 'bg-collaborator-orange text-white shadow' : 'text-muted'"
                         >
                             Ventas inmueble
                         </Link>
@@ -263,7 +248,8 @@
 	    },
 	    props:{
 	        hotels:Object,
-	        orders:Object,
+			orders:Object,
+			totalorders: Array,
 	        date:String,
 	        dateLast: String,
 	    },
@@ -309,11 +295,15 @@
 	    			}
 	    		})
 	    		return map
-	    	},
+			},
+			filterUrl () {
+				var url = this.$page.url.split('?')[0]
+				return url
+			},
 	    },
 	    created () {
 			this.moment=Moment
-	        this.orders.data.forEach(order =>{
+	        this.totalorders.forEach(order =>{
 	            this.total += Number(order.total);
 	            if (order.withdrawal == 0) {
 	                this.withdrawal += Number(order.total);    

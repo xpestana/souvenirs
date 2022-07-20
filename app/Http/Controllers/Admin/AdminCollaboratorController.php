@@ -24,14 +24,14 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Image;
-
+use App\Models\CollaboratorBank;
+use App\Models\CollaboratorShipping;
 
 class AdminCollaboratorController extends Controller {
 
     public function index(Request $request)
     {
         $search = $request->search ?? null;
-
         $model = User::join('profiles', 'profiles.user_id', '=', 'users.id')
                 ->select('users.*', 'profiles.firstname','profiles.lastname')
                 ->role('Hotel')
@@ -145,12 +145,11 @@ class AdminCollaboratorController extends Controller {
         //Valid received-display
         $validReseivedDisplay = $user->resources()->where('name', 'received-display')->first();
         $user['completedReseivedDisplay'] = !empty($validReseivedDisplay);
-        
         return Inertia::render('Admin/Collaborators/Show',compact('user'));
     }
 
     public function index_lodging (Request $request, $id) {
-        $user = User::findOrFail($id);
+        $user = User::with('profile')->findOrFail($id);
         $hotels = $user->hotel()->search($request->buscar)->type($request->tipo)->paginate(3);
         $hotels->load('orders.shippings');
         $url = config('app.url');
@@ -383,12 +382,80 @@ class AdminCollaboratorController extends Controller {
         return Inertia::render('Admin/Collaborators/Profile/Info',compact('user'));
     }
 
+    public function update_profile(Request $request, $profile)
+    {
+        $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+        ]);
+        $id = mt_Rand(1000000, 9999999);
+        if ($request->password) {
+            $request->validate([
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+        }
+        $profile = profile::find($profile);
+        $profile->firstname = $request->name;
+        $profile->phone = $request->phone;
+        $profile->save();
+
+        $profile->user()->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ]);
+        if ($request->password) {
+            $profile->user()->update([
+                    'password' => Hash::make($request->password),
+                ]);  
+        }
+        return Redirect::route('admin.colaboradores')->with(['id'=>$id, 'message' => 'Datos actualizados correctamente', 'code' => 200, 'status' => 'success']);
+    }
+
+
     public function create_tax ($id) {
-        return Inertia::render('Admin/Collaborators/Profile/Tax');
+        $user = User::findOrFail($id);
+        $user->load('profile');
+        return Inertia::render('Admin/Collaborators/Profile/Tax',compact('user'));
+    }
+
+    public function update_tax(Request $request)
+    {
+        $id = mt_Rand(1000000, 9999999);
+
+        $request->validate([
+            'nif' => 'required|string',
+            'razon' => 'required|string',
+            'phone' => 'required|numeric',
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($request->user_id)],
+            'address' => 'required|string',
+            'identifier' => 'required|string',
+            'city' => 'required|string',
+            'province' => 'required|string',
+            'cp' => 'required|string',
+        ]);
+
+        $user = User::find($request->user_id);
+        $user->email = $request->email;
+        $user->save();
+
+        $profile = profile::find($request->profile_id);
+        $profile->firstname = $request->name;
+        $profile->phone = $request->phone;
+        $profile->razon = $request->razon;
+        $profile->nif = $request->nif;
+        $profile->identify = $request->identifier;
+        $profile->city = $request->city;
+        $profile->province = $request->province;
+        $profile->cp = $request->cp;
+        $profile->address = $request->address;
+        $profile->save();
+        return Redirect::route('admin.colaboradores')->with(['id'=>$id, 'message' => 'Datos actualizados correctamente', 'code' => 200, 'status' => 'success']);
     }
 
     public function create_bank ($id) {
-        $collaboratorBanks = User::findOrFail($id)->collaboratorBanks;
+        $user = User::with('profile')->findOrFail($id);
+        $collaboratorBanks = $user->collaboratorBanks;
         if ($collaboratorBanks->count() > 0) {
             $collaboratorBank = $collaboratorBanks[0];
         } else {
@@ -397,11 +464,34 @@ class AdminCollaboratorController extends Controller {
                 'iban' => '',
             ];
         }
-        return Inertia::render('Admin/Collaborators/Profile/Bank',compact('collaboratorBank'));
+        return Inertia::render('Admin/Collaborators/Profile/Bank',compact('collaboratorBank', 'user'));
+    }
+
+    public function update_bank(Request $request){
+        $request->validate([
+            'holder' => 'required|string',
+            'iban' => 'required|string',
+        ]);
+        $collaboratorBank = CollaboratorBank::where('user_id', $request->user_id)->first();
+        if ($collaboratorBank) {
+            $collaboratorBank->holder = $request->holder;
+            $collaboratorBank->iban = $request->iban;
+            $collaboratorBank->save();
+        } else {
+            $collaboratorBank = CollaboratorBank::create([
+                'user_id' => $request->user_id,
+                'holder' => $request->holder,
+                'iban' => $request->iban,
+            ]);
+        }
+
+        $id = mt_Rand(1000000, 9999999);
+        return Redirect::route('admin.colaboradores')->with(['id'=>$id, 'message' => 'Datos actualizados correctamente', 'code' => 200, 'status' => 'success']);
     }
     
     public function create_shipping ($id) {
-        $collaboratorShippings = User::findOrFail($id)->collaboratorShippings;
+        $user = User::with('profile')->findOrFail($id);
+        $collaboratorShippings = $user->collaboratorShippings;
         if ($collaboratorShippings->count() > 0) {
             $collaboratorShipping = $collaboratorShippings[0];
         } else {
@@ -416,8 +506,167 @@ class AdminCollaboratorController extends Controller {
                 'city' => '',
             ];
         }
-        return Inertia::render('Admin/Collaborators/Profile/Shipping',compact('collaboratorShipping'));
+        return Inertia::render('Admin/Collaborators/Profile/Shipping',compact('collaboratorShipping', 'user'));
     }
 
+    public function update_shipping(Request $request){
+        $request->validate([
+            'document' => 'required|string',
+            'businessName' => 'required|string',
+            'contactPerson' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|string|email',
+            'deliveryAddress' => 'required|string',
+            'postalCode' => 'required|string',
+            'province' => 'required|string',
+            'city' => 'required|string',
+        ]);
+        $collaboratorShipping = CollaboratorShipping::where('user_id', $request->user_id)->first();
+        if ($collaboratorShipping) {
+            $collaboratorShipping->document = $request->document;
+            $collaboratorShipping->businessName = $request->businessName;
+            $collaboratorShipping->contactPerson = $request->contactPerson;
+            $collaboratorShipping->phone = $request->phone;
+            $collaboratorShipping->email = $request->email;
+            $collaboratorShipping->deliveryAddress = $request->deliveryAddress;
+            $collaboratorShipping->province = $request->province;
+            $collaboratorShipping->city = $request->city;
+            $collaboratorShipping->postalCode = $request->postalCode;
+            $collaboratorShipping->save();
+        } else {
+            $collaboratorShipping = CollaboratorShipping::create([
+                'user_id' => $request->user_id,
+                'document' => $request->email,
+                'businessName' => $request->businessName,
+                'contactPerson' => $request->businessName,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'deliveryAddress' => $request->deliveryAddress,
+                'province' => $request->province,
+                'postalCode' => $request->postalCode,
+                'city' => $request->city,
+            ]);
+        }
+        $id = mt_Rand(1000000, 9999999);
+        return Redirect::route('admin.colaboradores')->with(['id'=>$id, 'message' => 'Datos actualizados correctamente', 'code' => 200, 'status' => 'success']);
+    }
+
+    public function index_sales_property (Request $request, $id) {
+        $user = User::with('profile')->findOrFail($id);
+    	$hotels = $user->hotel->load('orders.shippings'); 
+        $model = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                        ->where('type_order', '1')
+                        ->where("status", "complete")
+                        ->with('hotel', 'shippings')
+                        ->Date($request->from, $request->to)
+                        ->orderBy('id', 'desc')
+                        ->paginate(8);
+        $orders = $model->appends(request()->except('page'));
+
+        $totalorders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                        ->where('type_order', '1')
+                        ->where("status","complete")
+                        ->with('hotel','shippings')
+                        ->Date($request->desde, $request->hasta)->get();
+
+         $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where('type_order', '1')
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)
+                    ->where("withdrawal",1)->orderBy('id', 'desc')->first();
+        $dateLast = $orderLast ? $orderLast->updated_at : null;
+
+        $withdrawal = $orders->where("withdrawal",0);
+        $date = null;
+        if (!$withdrawal->isEmpty()) {
+            $date = $withdrawal->last()->updated_at; 
+        }
+
+        return Inertia::render('Admin/Collaborators/Sales/During',compact('hotels','orders','date', 'dateLast', 'user', 'totalorders'));
+    }
+
+    public function index_sales_publicity (Request $request, $id) {
+        $user = User::with('profile')->findOrFail($id);
+    	$hotels = $user->hotel->load('orders.shippings'); 
+        $model = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                        ->where('type_order', '2')
+                        ->where("status", "complete")
+                        ->with('hotel', 'shippings')
+                        ->Date($request->from, $request->to)
+                        ->orderBy('id', 'desc')
+                        ->paginate(8);
+        $orders = $model->appends(request()->except('page'));
+
+        $totalorders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                        ->where('type_order', '2')
+                        ->where("status","complete")
+                        ->with('hotel','shippings')
+                        ->Date($request->desde, $request->hasta)->get();
+        
+        $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where('type_order', '2')
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)
+                    ->where("withdrawal",1)->orderBy('id', 'desc')->first();
+        $dateLast = $orderLast ? $orderLast->updated_at : null;
+
+        $withdrawal = $orders->where("withdrawal",0);
+        $date = null;
+        if (!$withdrawal->isEmpty()) {
+            $date = $withdrawal->last()->updated_at; 
+        }
+
+        return Inertia::render('Admin/Collaborators/Sales/Publicity',compact('orders', 'dateLast', 'date', 'hotels', 'totalorders', 'user'));
+    }
+
+    public function index_sales_total(Request $request, $id){
+        $user = User::with('profile')->findOrFail($id);
+        $hotels = $user->hotel->load('orders.shippings');
+        $orders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)
+                    ->paginate(8)
+                    ->appends(request()->except('page'));
+        $totalorders = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)->get();
+        $withdrawal = $orders->where("withdrawal",0);
+
+        $orderLast = Order::whereIn('hotel_id',$hotels->pluck('id'))
+                    ->where("status","complete")
+                    ->with('hotel','shippings')
+                    ->Date($request->desde, $request->hasta)
+                    ->where("withdrawal",1)->orderBy('id', 'desc')->first();
+        $dateLast = $orderLast ? $orderLast->updated_at : null;
+
+        $date = null;
+
+        if (!$withdrawal->isEmpty()) {
+            $date = $withdrawal->first()->updated_at;
+        }
+        return Inertia::render('Admin/Collaborators/Sales/Total',compact('hotels','orders','date','totalorders', 'dateLast', 'user'));
+    }
+
+    public function send_notify(Request $request){
+        $user = User::findOrFail($request->id);
+        $hotels = $user->hotel->load('orders.shippings');
+
+        foreach ($hotels as $hotel) {
+            $orders = Order::where('hotel_id',$hotel->id)->where("status","complete")->get();
+
+            foreach ($orders as $order) {
+                $updt = Order::find($order->id);
+                $updt->withdrawal = 1;
+                $updt->save();
+            }
+        }
+
+        // return back();
+        
+    }
 
 }

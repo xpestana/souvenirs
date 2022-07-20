@@ -1,157 +1,156 @@
 <template>
-    <section id="admin-collaborator-show" class="container pt-8 pb-4 ml-2 md:ml-0 md:px-14">
+    <section id="admin-show-anfitrion" class="container pt-8  ml-2 md:ml-0 md:px-24" >
+        <!-- HEADER -->
         <div class="header row mx-1.5 lg:mx-0 justify-content-start shadow p-2 rounded-xl bg-header-collaborator py-3">
-	        <div class="col-12 col-md-8 text-left">
-	            <h1 class="font-bold text-lg md:text-3xl text-muted">
+            <div class="col-12 col-md-8 text-left">
+                <h1 class="font-bold text-lg md:text-3xl text-muted">
                     <i class="cursor-pointer text-muted mr-2 fas fa-arrow-left" @click.prevent="goBack()"></i>
-                    Usuario {{ user.id }}
-	            </h1>
-	        </div>
-	    </div>
-        <div class="my-4 mx-1.5 lg:mx-0">
-             <span class="text-muted font-light">Gestor de anfitrión</span> <span class="text-muted font-bold">/ Usuario {{ user.id }}</span>
+                    {{ user.profile.firstname }} {{user.id}}
+                </h1>
+            </div>
         </div>
-        <div class="mx-1.5 lg:mx-0 lg:flex mb-8 justify-content-lg-start text-lg-left pt-2 pt-lg-0">
-            <p class="block mr-4"><b>Facturación total: </b>{{ order.total.toFixed(2) }}€</p>
-            <p class="block mr-4"><b>Beneficio total: </b>{{( order.total*0.20).toFixed(2) }}€</p>
-            <p class="block"><b>Pedidos totales: </b>{{ order.count }}</p>
+        <div class="breadcrumb-associate row mx-1.5 lg:mx-0 py-3">
+            <div class="col-12 text-left px-0">
+                <p class="text-gray-500">Gestión de anfitriones / <b>{{user.profile.firstname}}</b></p>
+            </div>
         </div>
-        <div class="row mx-1.5 lg:mx-0 justify-center">
-            <div class="card-profile col-12 col-md-5 bg-header-collaborator mr-md-5 mr-0 mt-2 mb-4 px-4 py-4 rounded">
-                <div class="text-lg md:text-xl font-bold">
-                    <i class="mr-2 fas fa-user"></i>
-                    Datos del perfil
-                </div>
-                <div class="mt-4 ml-4 md:text-lg">
-                    <div class="flex justify-content-between mb-4 px-4">
-                        <Link
-                            href="#"
-                            class="text-muted font-regular"
-                        >
-                            Información de perfil
-                        </Link>
-                        <i v-if="user.completInformation" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-                    </div>
-                    <div class="flex justify-content-between mb-4 px-4">
-                        <Link
-                            href="#"
-                            class="text-muted font-regular"
-                        >
-                            Datos fiscales
-                        </Link>
-                        <i v-if="user.completedNif" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-                    </div>
-                    <div class="flex justify-content-between mb-4 px-4">
-                        <Link
-                            href="#"
-                            class="text-muted font-regular"
-                        >
-                            Información bancaria
-                        </Link>
-                        <i v-if="user.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-                    </div>
-                    <div class="flex justify-content-between px-4">
-                        <Link
-                            href="#"
-                            class="text-muted font-regular"
-                        >
-                            Datos de envio
-                        </Link>
-                        <i v-if="user.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-                    </div>
+         <!--END Header-->
+         <div class="benefit-associate row mx-1.5 lg:mx-0 py-3">
+            <div class="col-12 text-left px-0">
+                <p class="d-lg-inline mr-lg-4"><b>Facturación total:</b>{{ order.total.toFixed(2) }}€</p>
+                <p class="d-lg-inline mr-lg-4"><b>Beneficio total:</b>{{( order.total*0.20).toFixed(2) }}€</p>
+                <p class="d-lg-inline"><b>Pedidos totales:</b>{{ order.count }}</p>
+            </div>
+        </div>
+       
+    </section>
+    <section id="show-associate-body" class="container  ml-2 md:ml-0 md:px-24" >
+       <div class="row">
+        <div class="card-profile mb-4 mb-md-0 col-12 col-lg-6 pr-8">
+            <div class="body-card bg-gray-100 p-4 rounded-md">
+                <i class="fas fa-user inline-block mr-2.5 text-lg"></i>
+                <h2 class="font-semibold text-lg inline-block text-negro">Datos del perfil</h2>
+                <div class="pl-8">
+                    <Link
+                        class="py-2 relative block text-muted"
+                        :href="route('admin.collaborator.profile',{id: user.id})"
+                    >
+                        Información perfil
+                        <i v-if="user.completInformation" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+						<i v-else class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    </Link>
+                    <Link
+                        class="py-2 relative block text-muted"
+                        :href="route('admin.collaborator.tax',{id: user.id})"
+                    >
+                        Datos fiscales
+                        <i v-if="user.completedNif" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+						<i v-else class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    </Link>
+                    <Link
+                        class="py-2 relative block text-muted"
+                        :href="route('admin.collaborator.bank',{id: user.id})"
+                    >
+                        Informacion bancaria
+                        <i v-if="user.completedBank" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+						<i v-else class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    </Link>
+                    <Link
+                        class="py-2 relative block text-muted"
+                        :href="route('admin.collaborator.shipping',{id: user.id})"
+                    >
+                        Datos de envío
+                        <i v-if="user.completedShipping" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+						<i v-else class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    </Link>
                 </div>
             </div>
-            <div class="card-resource col-12 col-md-5 bg-header-collaborator mr-0 mt-2 mb-4 px-4 py-4 rounded">
-                <div class="text-lg md:text-xl font-bold">
-                    <i class="mr-2 fas fa-file"></i>
-                    Recursos
-                </div>
-                <div class="mt-4 ml-4 md:text-lg">
-                    <div class="flex justify-content-between mb-4 px-4">
-                        <Link
-                            href="#"
-                            class="text-muted font-regular"
-                        >
-                            Banner descargado
-                        </Link>
-                        <i v-if="user.completedBanner" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-                    </div>
-                    <div class="flex justify-content-between mb-4 px-4">
-                        <Link
-                            href="#"
-                            class="text-muted font-regular"
-                        >
-                            Url generada
-                        </Link>
-                        <i v-if="user.completedUrl" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-                    </div>
-                    <div class="flex justify-content-between mb-4 px-4">
-                        <Link
-                            href="#"
-                            class="text-muted font-regular"
-                        >
-                            Displays pedidos
-                        </Link>
-                        <i v-if="user.completedRequestDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-                    </div>
-                    <div class="flex justify-content-between px-4">
-                        <Link
-                            href="#"
-                            class="text-muted font-regular"
-                        >
-                            Displays enviados
-                        </Link>
-                        <i v-if="user.completedReseivedDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-						<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
-                    </div>
+        </div>
+        <div class="card-resource col-12 col-lg-6 pr-8">
+            <div class="body-card bg-gray-100 p-4 rounded-md">
+                <img class="inline w-4 mr-2.5" style="margin-top:-4px"
+                    src="/vendor_asset/img/admin/icons/adminrecursos.svg"
+                >
+                <h2 class="font-semibold text-lg inline-block text-negro">Recursos</h2>
+                <div class="pl-8">
+                    <Link
+                        class="py-2 relative block text-muted"
+                        :href="route('admin.collaborator.profile',{id:user.id})"
+                    >
+                        Banner descargado
+                        <i v-if="user.completedBanner" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        <i v-else class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    </Link>
+                    <Link
+                        class="py-2 relative block text-muted"
+                        :href="route('admin.collaborator.profile',{id:user.id})"
+                    >
+                        Url generada
+                        <i v-if="user.completedUrl" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        <i v-else class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    </Link>
+                    <Link
+                        class="py-2 relative block text-muted"
+                        :href="route('admin.collaborator.profile',{id:user.id})"
+                    >
+                        Displays pedidos
+                        <i v-if="user.completedRequestDisplay" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        <i v-else class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    </Link>
+                    <Link
+                        class="py-2 relative block text-muted"
+                        :href="route('admin.collaborator.profile',{id:user.id})"
+                    >
+                        Displays enviados
+                        <i v-if="user.completedReseivedDisplay" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
+                        <i v-else class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
+                    </Link>
                 </div>
             </div>
-            <div class="col-12 col-md-5 bg-header-collaborator mr-0 mr-md-5 mt-2 mb-2 px-4 py-4 rounded">
-                <div class="text-lg md:text-xl font-bold">
-                    <i class="mr-2 fas fa-file"></i>
-                    Alojamientos
+        </div>
+       </div>
+       <div class="row mt-4">
+        <div class="col-12 col-lg-6 pr-8 mb-4 mb-md-0">
+            <div class="body-card bg-gray-100 p-4 rounded-md h-36">
+                <img class="inline w-5 mr-2.5" style="margin-top:-4px"
+                    src="/vendor_asset/img/admin/icons/adminalojamiento.svg"
+                >
+                <h2 class="font-semibold text-lg inline-block text-negro">Alojamientos</h2>
+                <div claSs="my-4 text-left">
+                    <span class="text-grey-400">Dados de alta: {{user.hotel.length}}</span>
                 </div>
-                <div class="mt-2 ml-4 md:text-lg">
-                    <div class="flex justify-content-between mb-4 px-4">
-                        <span class="text-grey-400">Dados de alta: {{user.hotel.length}}</span>
-                    </div>
-                </div>
-                <div class="md:text-lg mt-4 text-center text-md-right">
+                <div class="text-center text-md-right">
                     <Link
                         :href="`/admin/colaborador/${user.id}/alojamientos`"
-                        class="font-bold"
+                        class="font-semibold text-right mt-14"
                     >
                         Ver alojamientos
                     </Link>
                 </div>
             </div>
-            <div class="col-12 col-md-5 bg-header-collaborator mr-0 mt-2 mb-2 px-4 py-4 rounded">
-                <div class="text-lg md:text-xl md:text-xl font-bold">
-                    <i class="mr-2 fas fa-file"></i>
-                    Informe de ventas
+        </div>
+        <div class="col-12 col-lg-6 pr-8">
+            <div class="body-card bg-gray-100 p-4 rounded-md">
+                <div>
+                    <img class="inline w-4 mr-2.5" style="margin-top:-4px"
+                        src="/vendor_asset/img/admin/icons/adminventas.svg"
+                    >
+                    <h2 class="font-semibold text-lg inline-block text-negro">Informe de ventas</h2>
                 </div>
-                <div class="mt-2 ml-4 md:text-lg">
-                    <div class="flex invisible justify-content-between mb-4 px-4">
-                        <span class="text-muted font-semibold">#</span>
-                    </div>
+                <div clasS="my-4 invisible">
+                    #222
                 </div>
-                <div class="text-lg md:text-xl mt-4 text-center text-md-right">
+                <div class="text-center text-md-right">
                     <Link
-                        href="#"
-                        class="font-bold"
+                        :href="route('admin.collaborator.sales-total', {id: user.id})"
+                        class="font-semibold"
                     >
                         Ver desglose de ventas
                     </Link>
                 </div>
             </div>
         </div>
+       </div>
     </section>
 </template>
 
@@ -180,8 +179,9 @@ export default {
             var value = {count: 0, total: 0}
             this.user.hotel.forEach(item => {
                 value.count += item.orders.length
-                value.total = item.orders.length > 0 ? hotel.item.reduce((acum, currentItem) => {
-                    acum += currentValue.total
+                value.total += item.orders.length > 0 ? item.orders.reduce((acum, currentItem) => {
+                    acum += Number(currentItem.total)
+                    return acum
                 }, 0) : 0
             })
             return value

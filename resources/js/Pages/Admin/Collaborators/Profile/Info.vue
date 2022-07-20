@@ -8,7 +8,7 @@
         </div>
         <div class="header row mx-1.5 lg:mx-0 py-3">
             <div class="col-12 text-left px-0">
-                <p class="text-gray-500">Gestión de partners / {{user.profile.firstname}} / <b>Información del perfil</b></p>
+                <p class="text-gray-500">Gestión de anfitriones / {{user.profile.firstname}} / <b>Información del perfil</b></p>
             </div>
         </div>
         <!--END Header section-->
@@ -170,8 +170,9 @@ export default {
     },
     methods: {
         submitProfile() {
+            console.log('entro')
             this.forceExitConfirm = true
-            /*this.form.put(route('collaborator.profile.update'), {
+            this.form.put(route('admin.collaborator.update.profile',{profile:this.user.profile.id}), {
                 preserveScroll: true,
                 errorBag: 'submitProfile',
                 onSuccess:()=>{
@@ -184,7 +185,7 @@ export default {
                     this.getErrorsKey()
                     this.emitter.emit('errors')
                 },
-            })*/
+            })
         },    
         showPass: function (id){
             let x = document.getElementById(id);

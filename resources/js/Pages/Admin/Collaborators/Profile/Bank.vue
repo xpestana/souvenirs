@@ -10,10 +10,18 @@
                 </h1>
             </div>
         </div>
-         <!--END Header-->
+        
+        <!--END Header-->
+        <!-- MIGA DE PAN -->
+		<div class="header row mx-1.5 lg:mx-0 py-3">
+            <div class="col-12 text-left px-0">
+                <p class="text-gray-500">Gestión de anfitriones / {{user.profile.firstname}} / <b>Información bancaria</b></p>
+            </div>
+        </div>
+		<!-- END MIGA DE PAN -->
         <!--Formulario de banck -->
         <div
-            class="perfil-shipping row mx-1.5 lg:mx-0 mt-8 justify-content-start"
+            class="perfil-shipping row mx-1.5 mt-2 lg:mx-0 justify-content-start"
             :class="{'position-relative': windowWidth >= 768}"
         >
             <!--Alert validation -->
@@ -109,15 +117,15 @@ export default {
         ModalCookies,
         ValidationAlert,
     },
-    props: ['collaboratorBank'],
+    props: ['collaboratorBank', 'user'],
     data() {
         return {
             windowWidth: window.innerWidth,
             validForm: true,
             formCollaboratorBank: this.$inertia.form({
-            	_method: "POST",
                 holder: '',
                 iban: '',
+                user_id:this.user.id,
             }),
             forceExitConfirm: false,
             beforeUrl: '',
@@ -170,7 +178,7 @@ export default {
     methods: {
         submit () {
             this.forceExitConfirm = true
-            /*this.formCollaboratorBank.post(route('collaborator.bank.store'), {
+            this.formCollaboratorBank.post(route('admin.collaborator.update.bank'), {
                 preserveScroll: true,
                 errorBag: 'submitBank',
                 onSuccess:()=>{
@@ -183,7 +191,7 @@ export default {
                     this.getErrorsKey()
                     this.emitter.emit('errors')
                 },
-            })*/
+            })
         },
         changeValidIban (input) {
             var value = input.target.value
