@@ -75,7 +75,7 @@
                 <div class="pl-8">
                     <Link
                         class="py-2 relative block text-muted"
-                        :href="route('admin.collaborator.profile',{id:user.id})"
+                       :href="route('admin.collaborator.resource',{id:user.id})"
                     >
                         Banner descargado
                         <i v-if="user.completedBanner" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -83,7 +83,7 @@
                     </Link>
                     <Link
                         class="py-2 relative block text-muted"
-                        :href="route('admin.collaborator.profile',{id:user.id})"
+                        :href="route('admin.collaborator.resource',{id:user.id})"
                     >
                         Url generada
                         <i v-if="user.completedUrl" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -91,7 +91,7 @@
                     </Link>
                     <Link
                         class="py-2 relative block text-muted"
-                        :href="route('admin.collaborator.profile',{id:user.id})"
+                        :href="route('admin.collaborator.resource',{id:user.id})"
                     >
                         Displays pedidos
                         <i v-if="user.completedRequestDisplay" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -99,7 +99,7 @@
                     </Link>
                     <Link
                         class="py-2 relative block text-muted"
-                        :href="route('admin.collaborator.profile',{id:user.id})"
+                        :href="route('admin.collaborator.resource',{id:user.id})"
                     >
                         Displays enviados
                         <i v-if="user.completedReseivedDisplay" class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>

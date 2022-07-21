@@ -92,12 +92,12 @@
 	    data () {
 	    	return {
 	    		form: this.$inertia.form({
-					city: 'sevilla',
+					city: 'Sevilla',
 					width: null,
 				}),
 				message: null,
 				citys: [
-					{label: 'Sevilla', value: 'sevilla'},
+					{label: 'Sevilla', value: 'Sevilla'},
 				],
 				banners: [
 					{label: '200x700', value: '200x700'},
@@ -122,7 +122,7 @@
 	        	window.history.back()
 	        },
 	        getBanner () {
-	        	this.form.get(this.route('collaborator.recursos.antes.banner'), {
+	        	this.form.get(this.route('associates.resource.banner'), {
 	        		errorBag: 'submit',
 					preserveScroll: true,
 					onSuccess: (result) => {

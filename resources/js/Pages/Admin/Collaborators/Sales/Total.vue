@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-4 mt-lg-0 w-auto mt-xl-0 rounded-xl bg-collaborator-orange px-2 py-2.5">
+            <!--<div class="mt-4 mt-lg-0 w-auto mt-xl-0 rounded-xl bg-collaborator-orange px-2 py-2.5">
                 <div class="lg:flex justify-content-center justify-content-lg-between">
                     <div class="pt-2 text-left lg:mr-5">
                         <h2 class="font-bold inline text-white text-base">Saldo pendiente: </h2><br class="lg:hidden">
@@ -59,7 +59,7 @@
                         <button class="btn bg-white text-orangec lg:ml-auto py-1 lg:mr-2.5 font-bold" @click="requestTransfer">Pedir transferencia</button>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="lg:flex mb-8 justify-content-lg-start text-lg-left pt-2 pt-lg-0">
             <p class="block mr-4"><b>Facturación total: </b>{{total.toFixed(2)}}€</p>

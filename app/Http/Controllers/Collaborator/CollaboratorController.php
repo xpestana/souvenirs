@@ -175,9 +175,7 @@ class CollaboratorController extends Controller
             'user' => $user,
         ];
         $user->resources()->createMany([
-            ['name' => 'request-display', ],
-            ['name' => 'received-display'],
-
+            ['name' => 'request-display'],
         ]);
         Mail::to("info@hicitty.es")->send(new DisplayReceiver($data));
         return back();
@@ -748,15 +746,15 @@ class CollaboratorController extends Controller
         if ($city && $width) {
             $idUser = auth::user()->id;
             $href = url('?p='.$city.'&c='.$idUser.'&t=2');
-            if ($city == 'sevilla' && $width == '160x600') {
+            if ($city == 'Sevilla' && $width == '160x600') {
                 $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/160x600.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }
-            if ($city == 'sevilla' && $width == '200x700') {
+            if ($city == 'Sevilla' && $width == '200x700') {
                 $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/200x700.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }
-            if ($city == 'sevilla' && $width == '728x90') {
+            if ($city == 'Sevilla' && $width == '728x90') {
                 $url['path'] =  'vendor_asset/img/collaborator/dashboard/banners/728x90.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }

@@ -91,20 +91,42 @@ class AssociateController extends Controller
         if ($city && $width) {
             $idUser = auth::user()->id;
             $href = url('?p='.$city.'&c='.$idUser.'&t=2');
-            if ($city == 'sevilla' && $width == '160x600') {
+            if ($city == 'Sevilla' && $width == '160x600') {
                 $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/160x600.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }
-            if ($city == 'sevilla' && $width == '200x700') {
+            if ($city == 'Sevilla' && $width == '200x700') {
                 $url['path'] = 'vendor_asset/img/collaborator/dashboard/banners/200x700.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }
-            if ($city == 'sevilla' && $width == '728x90') {
+            if ($city == 'Sevilla' && $width == '728x90') {
                 $url['path'] =  'vendor_asset/img/collaborator/dashboard/banners/728x90.png';
                 $url['fullPath'] = url('/'.$url['path']);
             }
         }
+
+        $user = auth()->user();
+        $user->resources()->create([
+            'name' => 'banner',
+        ]);
+
         return Inertia::render('Associates/Dashboard/Resource/Banner', compact('url', 'href'));
+    }
+
+    public function resource_url (Request $request) {
+        $city = $request->city ?? null;
+        $url = null;
+        if ($city) {
+            $idUser = auth::user()->id;
+            $url = url('?p='.$city.'&c='.$idUser.'&t=2');
+        }
+
+        $user = auth()->user();
+        $user->resources()->create([
+            'name' => 'url',
+        ]);
+
+        return Inertia::render('Associates/Dashboard/Resource/Url', compact('url'));
     }
 
      public function withdrawal(Request $request){ 
@@ -152,15 +174,6 @@ class AssociateController extends Controller
         // return back();
         
     }
-    public function resource_url (Request $request) {
-        $city = $request->city ?? null;
-        $url = null;
-        if ($city) {
-            $idUser = auth::user()->id;
-            $url = url('?p='.$city.'&c='.$idUser.'&t=2');
-        }
-        return Inertia::render('Associates/Dashboard/Resource/Url', compact('url'));
-    }
 
     public function send_resource_display (Request $request) {
         $request->validate([
@@ -169,8 +182,7 @@ class AssociateController extends Controller
         ]);
         $user = auth()->user();
         $user->resources()->createMany([
-            ['name' => 'request-display', ],
-            ['name' => 'received-display'],
+            ['name' => 'request-display'],
 
         ]);
         $data = [

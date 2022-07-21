@@ -70,10 +70,10 @@
         data () {
             return {
                 form: this.$inertia.form({
-                    city: 'sevilla',
+                    city: 'Sevilla',
                 }),
                  citys: [
-					{label: 'Sevilla', value: 'sevilla'},
+					{label: 'Sevilla', value: 'Sevilla'},
 				],
             }
         },
@@ -82,7 +82,7 @@
 	            window.history.back()
 	        },
             getUrl () {
-                this.form.get(this.route('collaborator.recursos.antes.url'), {
+                this.form.get(this.route('associates.resource.url'), {
                     errorBag: 'submit',
                     preserveScroll: true,
                     
