@@ -10,6 +10,7 @@
             <div class="col-12 text-left px-0">
                 <p class="text-gray-500">Gestión de anfitriones / {{user.profile.firstname}} / <b>Recursos</b></p>
             </div>
+            {{}}
         </div>
 		<!-- END MIGA DE PAN -->
         <!-- GENERATE BANNER -->
@@ -176,8 +177,8 @@
                 <div class="row">
                     <div class="font-bold col-12 px-0 text-xl flex align-items-center">
                         <img
-                            class="w-6 mr-2"
-                            src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg"
+                            class="w-6 mr-2 icon-filter"
+                            src="/vendor_asset/img/collaborator/dashboard/icons/datosenvio.svg"
                             alt="icon"
                         >
                         <div class="inline-block">Displays enviados</div>
@@ -210,15 +211,16 @@
 
 <script>
 	import Layout from '@/Pages/Admin/Layouts/Layout'
-    import { Link } from '@inertiajs/inertia-vue3';
+    import { Link } from '@inertiajs/inertia-vue3'
+    import { Inertia } from '@inertiajs/inertia'
     import Select from '@/Components/Select'
 	export default {
 	    layout:Layout,
 	    components:{
             Link,
-            Select
+            Select,
 	    },
-	    props:['user'],
+	    props:['user', 'urlPrevious'],
         data () {
             return {
                 windowWidth: window.innerWidth,
@@ -263,7 +265,9 @@
         },
 	    methods: {
 	        goBack () {
-	            window.history.back()
+                //window.history.back()
+                var url = `/admin/${this.urlPrevious.split('/admin/')[1]}`
+                Inertia.get(url)``
 	        },
             submitUrl () {
                 this.loading = true
@@ -398,5 +402,7 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .icon-filter{
+        filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
+    }
 </style>
