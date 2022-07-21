@@ -366,15 +366,18 @@ Route::middleware(['auth', 'verified'])->prefix('tablero/asociado')->group(funct
     Route::get('/historial-de-retiros', [AssociateController::class, 'withdrawal'])->name('associates.withdrawals');  
     Route::post('/notify-associate', [AssociateController::class, 'notify_associate'])->name('associates.notify');  
     Route::get('/colaboracion/recursos', [AssociateController::class, 'resource_index'])->name('associates.resource.index');
+
+    Route::get('/colaboracion/recursos/banners', [AssociateController::class, 'resource_banner'])->name('associates.resource.banner');
+    Route::get('/colaboracion/recursos/displays', [AssociateController::class, 'resource_display'])->name('associates.resource.display');
+    Route::get('/colaboracion/recursos/urls', [AssociateController::class, 'resource_url'])->name('associates.resource.url');
     
 });
 
 /*Resources asociados*/
 Route::middleware(['auth', 'verified'])->prefix('tablero/recursos-asociados')->group(function () {
-    Route::get('/displays', [AssociateController::class, 'resource_display'])->name('associates.resource.display');
+    
     Route::post('/send-request-displays', [AssociateController::class, 'send_resource_display'])->name('associates.resource.send.display');
-    Route::get('/banners', [AssociateController::class, 'resource_banner'])->name('associates.resource.banner');
-    Route::get('/urls', [AssociateController::class, 'resource_url'])->name('associates.resource.url');
+    
 });
 
 /*Ajustes*/
@@ -435,6 +438,8 @@ Route::middleware(['auth', 'verified', 'role:Admin'])->prefix('admin')->group(fu
     Route::get('/asociado/{user}/recursos', [AdminAssociateController::class, 'resources_associate'])->name('admin.associate.resources');
     Route::post('/url-recursos', [AdminAssociateController::class, 'url'])->name('admin.associate.url');
     Route::post('/banner-recursos', [AdminAssociateController::class, 'banner'])->name('admin.associate.banner');
+    Route::post('/asociado/recursos/request-displays', [AdminAssociateController::class, 'change_status_request_display'])->name('admin.associate.resource.request-displays');
+    Route::post('/asociado/recursos/received-displays', [AdminAssociateController::class, 'change_status_received_display'])->name('admin.associate.resource.received-displays');
 
     
     /*Alojamientos*/

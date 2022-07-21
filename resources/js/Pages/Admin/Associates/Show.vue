@@ -78,7 +78,7 @@
                 >
                 <h2 class="font-semibold text-lg inline-block text-negro">Recursos</h2>
                 <div class="pl-8">
-                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id,o:'s'})">
                         Banner descargado
                         <template v-if="associate.completedBanner">
                             <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -87,7 +87,7 @@
                             <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
                         </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id,o:'s'})">
                         URL Generada
                         <template v-if="associate.completedUrl">
                             <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -96,7 +96,7 @@
                             <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
                         </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id,o:'s'})">
                         Displays pedidos
                         <template v-if="associate.completedRequestDisplay">
                             <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -105,7 +105,7 @@
                             <i class="fas fa-times-circle pl-1 absolute right-6 top-2.5 text-xs text-danger"></i>
                         </template>
                     </Link>
-                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id})">
+                    <Link class="py-2 relative block text-muted associate-link" :href="route('admin.associate.resources',{user:user.id,o:'s'})">
                         Displays enviados
                         <template v-if="associate.completedReseivedDisplay">
                             <i class="fas fa-check-circle pl-1 absolute right-6 top-2.5 text-xs text-success"></i>
@@ -121,12 +121,12 @@
        <div class="row mt-4">
         <div class="col-12 col-lg-6 lg:pr-8">
             <div class="body-card bg-gray-100 p-4 rounded-md h-36">
-                <img class="inline w-5 mr-2.5" style="margin-top:-4px"
+                <img class="inline w-5 mr-2.5" style="margin-top:-60px"
                     src="/vendor_asset/img/admin/icons/adminalojamiento.svg"
                 >
-                <h2 class="font-semibold text-lg inline-block text-negro">SERVICIOS ENLAZADOS</h2>
+                <h2 class="font-semibold text-lg inline-block text-negro">SERVICIOS <br> ENLAZADOS?</h2>
                 <div class="">
-                    <p class="font-semibold text-right text-lg-center mt-6">Próximamente</p>
+                    <p class="font-semibold text-right text-lg-center mt-3">Próximamente</p>
                 </div>
             </div>
         </div>
@@ -172,7 +172,8 @@ export default {
     },
     methods:{
         goBack () {
-            window.history.back()
+            Inertia.get(route('admin.associates'))
+            // window.history.back()
         },
     }
    

@@ -152,6 +152,76 @@
             </div>
         </div>
         <!-- END GENERATE URL -->
+         <!-- REQUEST DISPLAY -->
+    	<div class="section-url mx-1.5 mt-8 row lg:mx-0">
+            <div class="col-12 col-md-4">
+                <div class="row">
+                    <div class="font-bold col-12 px-0 text-xl flex align-items-center">
+                        <img
+                            class="w-6 mr-2"
+                            src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg"
+                            alt="icon"
+                        >
+                        <div class="inline-block">Displays pedidos</div>
+                    <i v-if="statusResources.completedRequestDisplay" class="fas fa-check-circle pl-1 text-xs ml-4 text-success"></i>
+                        <i v-else class="fas fa-times-circle pl-1 ml-4 text-xs text-danger"></i>
+                    </div>
+                    <div class="col-12 my-2 px-0">
+                        <span v-if="statusResources.completedRequestDisplay" class="font-bold text-success">Este usuario ya ha pedido displays desde su registro en HiCitty</span>
+                        <span v-else class="font-bold text-danger">Este usuario todavía no ha pedido displays desde su registro en Hicitty</span>
+                    </div>
+                </div>
+                <form
+                    class="row"
+                >
+                    <div class="col-12 mt-2 px-0 text-center text-lg-left">                  
+                        <button
+                            class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+                            :class="{ 'opacity-25': loading }" :disabled="loading"
+                            @click.prevent="submitRequestDisplay()"
+                        >
+                            Cambiar estado
+                        </button>
+                    </div>
+                </form>
+            </div>
+    	</div>
+        <!-- END  REQUEST DISPLAY -->
+        <!-- SEND DISPLAY -->
+    	<div class="section-url mx-1.5  mt-8 row lg:mx-0">
+            <div class="col-12 col-md-4">
+                <div class="row">
+                    <div class="font-bold col-12 px-0 text-xl flex align-items-center">
+                        <img
+                            class="w-6 mr-2"
+                            src="/vendor_asset/img/admin/icons/envionegro.svg"
+                            alt="icon"
+                        >
+                        <div class="inline-block">Displays enviados</div>
+                        <i v-if="statusResources.completedReseivedDisplay" class="fas fa-check-circle pl-1 text-xs ml-4 text-success"></i>
+                        <i v-else class="fas fa-times-circle pl-1 ml-4 text-xs text-danger"></i>
+                    </div>
+                    <div class="col-12 my-2 px-0">
+                        <span v-if="statusResources.completedReseivedDisplay" class="font-bold text-success">Este usuario  ya se le ha enviado su pedido de displays desde su registro en HiCitty</span>
+                        <span v-else class="font-bold text-danger">Este usuario no se le ha enviado su pedido de displays desde su registro en HiCitty</span>
+                    </div>
+                </div>
+                <form
+                    class="row"
+                >
+                    <div class="col-12 mt-2 px-0 text-center text-lg-left">                  
+                        <button
+                            class="btn rounded text-white bg-collaborator-orange py-1 px-6"
+                            :class="{ 'opacity-25': loading }" :disabled="loading"
+                            @click.prevent="submitReseiveDisplay()"
+                        >
+                            Cambiar estado
+                        </button>
+                    </div>
+                </form>
+            </div>
+    	</div>
+        <!-- END SEND DISPLAY -->
     </section>
 </template>
 
@@ -159,13 +229,14 @@
 	import Layout from '@/Pages/Admin/Layouts/Layout'
     import { Link } from '@inertiajs/inertia-vue3';
     import Select from '@/Components/Select'
+    import { Inertia } from '@inertiajs/inertia'
 	export default {
 	    layout:Layout,
 	    components:{
             Link,
             Select
 	    },
-	    props:['user'],
+	    props:['user','urlPrevious'],
         data () {
             return {
                 windowWidth: window.innerWidth,
@@ -203,6 +274,7 @@
             }
         },
         created () {
+            console.log('/admin/'+this.urlPrevious.split('/admin/')[1])
             this.statusResources.completedBanner = this.user.completedBanner
             this.statusResources.completedUrl = this.user.completedUrl
             this.statusResources.completedRequestDisplay = this.user.completedRequestDisplay
@@ -210,7 +282,9 @@
         },
 	    methods: {
 	        goBack () {
-	            window.history.back()
+                Inertia.get('/admin/'+this.urlPrevious.split('/admin/')[1])
+                
+	            //window.history.back()
 	        },
             submitUrl () {
                 this.loading = true
@@ -239,6 +313,42 @@
                     console.log(res)
                     this.urlBanner = res.data.url
                     this.statusResources.completedBanner = res.data.completedBanner
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+                .finally(()=>{
+                    this.loading = false
+                })
+            },
+            submitRequestDisplay () {
+                this.loading = true
+                axios({
+                    url: route('admin.associate.resource.request-displays'),
+                    method: 'POST',
+                    data: { user_id: this.user.id },
+                })
+                .then( res => {
+                    console.log(res)
+                    this.statusResources.completedRequestDisplay = res.data.completedRequestDisplay
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+                .finally(()=>{
+                    this.loading = false
+                })
+            },
+            submitReseiveDisplay () {
+                this.loading = true
+                axios({
+                    url: route('admin.associate.resource.received-displays'),
+                    method: 'POST',
+                    data: { user_id: this.user.id },
+                })
+                .then( res => {
+                    console.log(res)
+                    this.statusResources.completedReseivedDisplay = res.data.completedReseivedDisplay
                 })
                 .catch(error => {
                     console.log(error)

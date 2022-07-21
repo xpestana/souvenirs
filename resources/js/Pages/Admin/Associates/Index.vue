@@ -28,7 +28,7 @@
         </div>
     </section>
 
-    <section id="admin-associates-body" class="ml-2 md:ml-0 md:px-14 overflow-x-auto">
+    <section id="admin-associates-body" class="ml-2 md:ml-0 md:px-14 overflow-x-auto lg:overflow-visible">
         <div class="header-cards-associate row mx-1.5 lg:mx-0 px-2 py-1 w-mobile-associate">
             <div class="col-3 text-left">
                 <p class="text-gray-400 font-semibold">Usuario</p>
@@ -48,7 +48,7 @@
                 <Link class="font-bold" :href="route('admin.associate.show',{user:clbtr.id})">
                     {{clbtr.firstname}}
                 </Link>
-                <p>{{clbtr.email}}</p>
+                <p class="truncate">{{clbtr.email}}</p>
             </div>
             <div class="col-5 text-center border-r border-gray-300 pt-0.5 px-0">
                 <div class="dropdown inline-block">
@@ -250,7 +250,7 @@
                             </label>
                             <div class="relative w-100 collaborator-box">
                                 <i class="fas fa-envelope absolute inset-y-1/3  pl-2.5 pr-2"></i>
-                                <input v-model="formAssociate.email" type="email" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Email...." autocomplete="on" required>
+                                <input v-model="formAssociate.email" type="email" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Correo electrónico...." autocomplete="on">
                             </div>
                         </div>
                         <div class="col-12 my-1.5 px-0">
@@ -258,7 +258,7 @@
                             <div class="relative w-100 collaborator-box">
                                 <i class="fas fa-key absolute inset-y-1/3  pl-2.5 pr-2"></i>
                                 <i class="far fa-eye cursor-pointer absolute right-0 inset-y-1/3 px-3" v-on:click="showPass('password')"></i>
-                                <input  v-model="formAssociate.contraseña" type="password" class="collaborator-input bg-light w-100 rounded py-1 pl-8" id="password" placeholder="********" required>
+                                <input  v-model="formAssociate.contraseña" type="password" class="collaborator-input bg-light w-100 rounded py-1 pl-8" id="password" placeholder="********">
                             </div>
                         </div>
                         <div class="col-12 my-1.5 px-0">
@@ -268,7 +268,7 @@
                             </label>
                             <div class="relative w-100 collaborator-box">
                                 <i class="fas fa-user absolute inset-y-1/3  pl-2.5 pr-2"></i>
-                                <input v-model="formAssociate.nombre" type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Nombre...." autocomplete="on" required>
+                                <input v-model="formAssociate.nombre" type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Nombre...." autocomplete="on">
                             </div>
                         </div>
                         <div class="col-12 my-1.5 px-0">
@@ -278,7 +278,7 @@
                             </label>
                             <div class="relative w-100 collaborator-box">
                                 <i class="fas fa-phone-alt absolute inset-y-1/3  pl-2.5 pr-2"></i>
-                                <input v-model="formAssociate.contacto" type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Número de contacto...." autocomplete="on" required>
+                                <input v-model="formAssociate.contacto" type="text" class="collaborator-input bg-light w-100 rounded py-1 pl-8" placeholder="Número de contacto...." autocomplete="on">
                             </div>
                         </div>
                         <div class="col-12 mt-3 px-0 text-center text-lg-left">
@@ -499,5 +499,10 @@ input:focus{
 }
 .collaborator-input{
     background-color: #e7f6ff !important;
+}
+.validator-alert{
+    z-index: 1500 !important;    
+    right: 2px;
+    top: 2px;
 }
 </style>
