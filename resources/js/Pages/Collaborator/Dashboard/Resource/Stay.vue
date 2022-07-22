@@ -25,7 +25,10 @@
     <section id="resources-stay" class="container ml-3.5 md:ml-2 md:ml-0 md:px-24 mb-8">
         <div class="stay-title row mx-0">
             <div class="col-12 text-left pl-0">
-                <h2 class="text-xl font-semibold">Displays físicos</h2>
+                <h2 class="text-xl font-semibold">
+                    <img class="w-8 inline" src="/vendor_asset/img/collaborator/dashboard/icons/displays.svg" alt="">
+                    Displays físicos
+                </h2>
             </div>
         </div>
         <div class="stay-displays row mt-3.5 mb-2.5 justify-content-center flex-nowrap overflow-x-auto pl-16 pl-lg-0 mx-0">
@@ -150,5 +153,4 @@ export default {
         background: linear-gradient(180deg, rgba(134,188,217,0) 55%, rgba(1,1,1,1) 90%);
     }
 }
-
 </style>

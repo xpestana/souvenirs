@@ -25,8 +25,8 @@
                         <div class="rounded-l-xl gradient-collaborator absolute left-0 top-0 w-full h-full"></div>
                     </div>
                     <div class="col-12 col-lg-7 lg:h-full lg:bg-black flex flex-column px-6 absolute lg:relative z-20 top-6 lg:top-0">
-                        <h2 class="text-2xl text-white mt-auto leading-6">Información del perfil</h2>
-                        <p class="text-white mb-auto text-sm lg:text-xs leading-5 lg:leading-4 mt-1.5 lg:mt-0">
+                        <h2 class="text-2xl 2xl:text-3xl text-white mt-auto leading-6 font-semibold">Información del perfil</h2>
+                        <p class="text-white mb-auto text-sm lg:text-xs 2xl:text-base leading-5 lg:leading-4 2xl:leading-5 mt-1.5 lg:mt-0.5">
                             Aquí encontrarás toda la información relacionada con tu usuario de la plataforma
                             de HiCitty
                         </p>
@@ -43,8 +43,8 @@
                         <div class="rounded-l-xl gradient-collaborator absolute left-0 top-0 w-full h-full"></div>
                     </div>
                     <div class="col-12 col-lg-7 lg:h-full lg:bg-black flex flex-column px-6 absolute lg:relative z-20 top-6 lg:top-0">
-                        <h2 class="text-2xl text-white mt-auto leading-6">Datos de envío</h2>
-                        <p class="text-white mb-auto text-sm lg:text-xs leading-5 lg:leading-4 mt-1.5 lg:mt-0">
+                        <h2 class="text-2xl 2xl:text-3xl text-white mt-auto leading-6 font-semibold">Datos de envío</h2>
+                        <p class="text-white mb-auto text-sm lg:text-xs 2xl:text-base leading-5 lg:leading-4 2xl:leading-5 mt-1.5 lg:mt-0.5">
                             Información necesaria para que podamos realizar los envios de los recursos
                             que te ofrecemos.
                         </p>
@@ -61,8 +61,8 @@
                         <div class="rounded-l-xl gradient-collaborator absolute left-0 top-0 w-full h-full"></div>
                     </div>
                     <div class="col-12 col-lg-7 lg:h-full lg:bg-black flex flex-column px-6 absolute lg:relative z-20 top-6 lg:top-0">
-                        <h2 class="text-2xl text-white mt-auto leading-6">Datos fiscales</h2>
-                        <p class="text-white mb-auto text-sm lg:text-xs leading-5 lg:leading-4 mt-1.5 lg:mt-0">
+                        <h2 class="text-2xl 2xl:text-3xl text-white mt-auto leading-6 font-semibold">Datos fiscales</h2>
+                        <p class="text-white mb-auto text-sm lg:text-xs 2xl:text-base leading-5 lg:leading-4 2xl:leading-5 mt-1.5 lg:mt-0.5">
                             Información necesaria para acreditar tu negocio y poder facturar como profesional
                             o empresa.
                         </p>
@@ -79,8 +79,8 @@
                         <div class="rounded-l-xl absolute left-0 top-0 w-full h-full"></div>
                     </div>
                     <div class="col-12 col-lg-7 lg:h-full lg:bg-black flex flex-column px-6  absolute lg:relative z-20 top-6 lg:top-0">
-                        <h2 class="text-2xl text-white mt-auto leading-6">Información bancaria</h2>
-                        <p class="text-white mb-auto text-sm lg:text-xs leading-5 lg:leading-4 mt-1.5 lg:mt-0">
+                        <h2 class="text-2xl 2xl:text-3xl text-white mt-auto leading-6 font-semibold">Información bancaria</h2>
+                        <p class="text-white mb-auto text-sm lg:text-xs 2xl:text-base leading-5 lg:leading-4 2xl:leading-5 mt-1.5 lg:mt-0.5">
                             Información del titular e IBAN de la cuenta para poder realizar los ingresos
                             de tus beneficios.
                         </p>
@@ -112,6 +112,12 @@ export default {
 @media(min-width:1024px){
     .perfil-card{
         height:65vh;
+    }
+}
+
+@media(min-width:1300px){
+    .btn-outline-orange {
+        border: 3px solid #FF9C06;
     }
 }
 @media(max-width:1023px){

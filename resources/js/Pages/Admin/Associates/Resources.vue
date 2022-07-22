@@ -157,11 +157,12 @@
             <div class="col-12 col-md-4">
                 <div class="row">
                     <div class="font-bold col-12 px-0 text-xl flex align-items-center">
-                        <img
+                        <!-- <img
                             class="w-6 mr-2"
                             src="/vendor_asset/img/collaborator/dashboard/icons/Recursos_UrlNegro.svg"
                             alt="icon"
-                        >
+                        > -->
+                        <i class="far fa-file mr-2"></i>
                         <div class="inline-block">Displays pedidos</div>
                     <i v-if="statusResources.completedRequestDisplay" class="fas fa-check-circle pl-1 text-xs ml-4 text-success"></i>
                         <i v-else class="fas fa-times-circle pl-1 ml-4 text-xs text-danger"></i>
