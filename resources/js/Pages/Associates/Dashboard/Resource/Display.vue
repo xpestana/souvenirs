@@ -16,7 +16,7 @@
     	<div
             class="mx-1.5 lg:mx-0 mb-4"
         >
-        	<span><strong>Escoge el display</strong> que mejor se adacte a ti, <strong>la ciudad de destino y te los enviaremos</strong> a tu dirección ára que puedas empezar a vemder.</span>
+        	<span><strong>Escoge el display</strong> que mejor se adacte a ti, <strong>la ciudad de destino y te los enviaremos</strong> a tu dirección para que puedas empezar a ven+der.</span>
     	</div>
     	<div class="mx-1.5 row lg:mx-0">
     		<div class="col-12">

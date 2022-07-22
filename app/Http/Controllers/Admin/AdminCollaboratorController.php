@@ -113,7 +113,7 @@ class AdminCollaboratorController extends Controller {
                 ->where('del',false)
                 ->with('hotel.orders.shippings')
                 ->findOrFail($id);
-        
+
         //Valid information perfil
         $validInformation = !empty($user->profile->firstname) && !empty($user->email) && !empty($user->profile->phone);
         $user['completInformation'] = $validInformation;
@@ -145,7 +145,7 @@ class AdminCollaboratorController extends Controller {
         //Valid received-display
         $validReseivedDisplay = $user->resources()->where('name', 'received-display')->first();
         $user['completedReseivedDisplay'] = !empty($validReseivedDisplay);
-
+        
         return Inertia::render('Admin/Collaborators/Show',compact('user'));
     }
 
@@ -687,7 +687,11 @@ class AdminCollaboratorController extends Controller {
         $validReseivedDisplay = $user->resources()->where('name', 'received-display')->first();
         $user['completedReseivedDisplay'] = !empty($validReseivedDisplay);
 
-        return Inertia::render('Admin/Collaborators/Resource/Index',compact('user'));
+        //URL previus
+        $urlPrevious = url()->previous();
+        
+
+        return Inertia::render('Admin/Collaborators/Resource/Index',compact('user', 'urlPrevious'));
     }
 
     public function url (Request $request) {
