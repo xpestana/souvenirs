@@ -87,7 +87,7 @@
                             </div>
                             <div class="absolute h-full w-full d-lg-none grandient-mobile rounded-t-xl top-1 left-0"></div>
                             <div class="lodgings-button mt-4 d-none d-lg-block">
-                                <Link :href="'#'" class="btn bg-collaborator-orange font-semibold py-1 xl:px-8 mr-2 text-white">Ver ventas</Link>
+                                <Link :href="route('admin.collaborator.sales-total', {id: user.id})" class="btn bg-collaborator-orange font-semibold py-1 xl:px-8 mr-2 text-white">Ver ventas</Link>
                                 <button @click="requestDisplay(hotel.id)" class="btn bg-collaborator-orange font-semibold py-1 xl:px-4 text-white ml-lg-1">Pedir displays</button>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                 <i class="fas fa-caret-down  text-3xl leading-4"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <Link :href="'#'" class="dropdown-item">
+                                <Link :href="route('admin.collaborator.sales-total', {id: user.id})" class="dropdown-item">
                                     Ver ventas
                                 </Link>
                                 <a href="javascript:void(0)" @click="requestDisplay(hotel.id)" class="dropdown-item">
@@ -207,12 +207,13 @@ export default {
         ModalCreateType,
         ModalCreateForm,
         ModalEdit,
-        NotiModal
+        NotiModal,
     },
     props: {
-    hotels: Object,
-    url:String,
-    user: Object,
+        hotels: Object,
+        url: String,
+        user: Object,
+        urlPrevious: String,
     },
     data(){
         return{
@@ -268,8 +269,8 @@ export default {
     },
     methods: {
         searchFilter(){
-            this.$inertia.get(route('coll.lodgings.index'), {buscar:this.search,tipo:this.type},
-            { 
+            this.$inertia.get(route('admin.collaborator.lodging', {id: this.user.id}), {buscar:this.search,tipo:this.type},
+            {
                 preserveScroll: true
             })
         },
@@ -315,7 +316,9 @@ export default {
             this.emitter.emit('chageFormEdit')
         },
         goBack () {
-            window.history.back()
+            //window.history.back()
+            var url = `/admin/${this.urlPrevious.split('/admin/')[1]}`
+            Inertia.get(url)
         },
     }
 }

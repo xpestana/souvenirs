@@ -154,7 +154,11 @@ class AdminCollaboratorController extends Controller {
         $hotels = $user->hotel()->search($request->buscar)->type($request->tipo)->paginate(3);
         $hotels->load('orders.shippings');
         $url = config('app.url');
-        return Inertia::render('Admin/Collaborators/Lodging/Index', compact('hotels','url', 'user'));
+        
+        //URL previus
+        $urlPrevious = url()->previous();
+
+        return Inertia::render('Admin/Collaborators/Lodging/Index', compact('hotels','url', 'user', 'urlPrevious'));
     }
 
     public function store_lodging (Request $request) {
@@ -680,13 +684,13 @@ class AdminCollaboratorController extends Controller {
         $user['completedUrl'] = !empty($validUrl);
 
         //Valid request-display
-        $validRequestDisplay = $user->resources()->where('name', 'request-display')->first();
-        $user['completedRequestDisplay'] = !empty($validRequestDisplay);
+        $lastRequestDisplay = $user->resources()->where('name', 'request-display')->orderBy('id', 'desc')->first();
+        $user['completedRequestDisplay'] = $lastRequestDisplay->created_at ?? null;
 
         //Valid received-display
-        $validReseivedDisplay = $user->resources()->where('name', 'received-display')->first();
-        $user['completedReseivedDisplay'] = !empty($validReseivedDisplay);
-
+        $lastReseivedDisplay = $user->resources()->where('name', 'received-display')->orderBy('id', 'desc')->first();
+        $user['completedReseivedDisplay'] = $lastReseivedDisplay->created_at ?? null;
+        
         //URL previus
         $urlPrevious = url()->previous();
         
@@ -755,9 +759,9 @@ class AdminCollaboratorController extends Controller {
         $user = User::findOrFail($request->user_id);
         $user->resources()->create(['name' => 'request-display']);
 
-        //Valid request-display
-        $validRequestDisplay = $user->resources()->where('name', 'request-display')->first();
-        $completedRequestDisplay = !empty($validRequestDisplay);
+         //Valid request-display
+         $lastRequestDisplay = $user->resources()->where('name', 'request-display')->orderBy('id', 'desc')->first();
+         $completedRequestDisplay = $lastRequestDisplay->created_at ?? null;
 
         return response()->json(['completedRequestDisplay' => $completedRequestDisplay]);
     }
@@ -767,8 +771,8 @@ class AdminCollaboratorController extends Controller {
         $user->resources()->create(['name' => 'received-display']);
 
         //Valid received-display
-        $validReseivedDisplay = $user->resources()->where('name', 'received-display')->first();
-        $completedReseivedDisplay = !empty($validReseivedDisplay);
+        $lastReseivedDisplay = $user->resources()->where('name', 'received-display')->orderBy('id', 'desc')->first();
+        $completedReseivedDisplay = $lastReseivedDisplay->created_at ?? null;
 
         return response()->json(['completedReseivedDisplay' => $completedReseivedDisplay]);
     }

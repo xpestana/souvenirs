@@ -151,7 +151,7 @@
                         <i v-else class="fas fa-times-circle pl-1 ml-4 text-xs text-danger"></i>
                     </div>
                     <div class="col-12 my-2 px-0">
-                        <span v-if="statusResources.completedRequestDisplay" class="font-bold text-success">Este usuario ya ha pedido displays desde su registro en HiCitty</span>
+                        <span v-if="statusResources.completedRequestDisplay" class="font-bold text-success">El ultimo pedido fue el {{ statusResources.completedRequestDisplay }}</span>
                         <span v-else class="font-bold text-danger">Este usuario todavía no ha pedido displays desde su registro en Hicitty</span>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
                         <i v-else class="fas fa-times-circle pl-1 ml-4 text-xs text-danger"></i>
                     </div>
                     <div class="col-12 my-2 px-0">
-                        <span v-if="statusResources.completedReseivedDisplay" class="font-bold text-success">Este usuario  ya se le ha enviado su pedido de displays desde su registro en HiCitty</span>
+                        <span v-if="statusResources.completedReseivedDisplay" class="font-bold text-success">El ultimo envio de pedido fue el {{ statusResources.completedReseivedDisplay }}</span>
                         <span v-else class="font-bold text-danger">Este usuario no se le ha enviado su pedido de displays desde su registro en HiCitty</span>
                     </div>
                 </div>
@@ -214,6 +214,7 @@
     import { Link } from '@inertiajs/inertia-vue3'
     import { Inertia } from '@inertiajs/inertia'
     import Select from '@/Components/Select'
+    import Moment from 'moment'
 	export default {
 	    layout:Layout,
 	    components:{
@@ -258,16 +259,18 @@
             }
         },
         created () {
+            this.moment=Moment
+
             this.statusResources.completedBanner = this.user.completedBanner
             this.statusResources.completedUrl = this.user.completedUrl
-            this.statusResources.completedRequestDisplay = this.user.completedRequestDisplay
-            this.statusResources.completedReseivedDisplay = this.user.completedReseivedDisplay
+            this.statusResources.completedRequestDisplay = this.user.completedRequestDisplay  ? this.moment(this.user.completedRequestDisplay).format('DD/MM/YYYY') : null
+            this.statusResources.completedReseivedDisplay = this.user.completedReseivedDisplay  ? this.moment(this.user.completedReseivedDisplay).format('DD/MM/YYYY') : null
         },
 	    methods: {
 	        goBack () {
                 //window.history.back()
                 var url = `/admin/${this.urlPrevious.split('/admin/')[1]}`
-                Inertia.get(url)``
+                Inertia.get(url)
 	        },
             submitUrl () {
                 this.loading = true
@@ -293,7 +296,6 @@
                     data: { ...this.formBanner },
                 })
                 .then( res => {
-                    console.log(res)
                     this.urlBanner = res.data.url
                     this.statusResources.completedBanner = res.data.completedBanner
                 })
@@ -312,8 +314,7 @@
                     data: { user_id: this.user.id },
                 })
                 .then( res => {
-                    console.log(res)
-                    this.statusResources.completedRequestDisplay = res.data.completedRequestDisplay
+                    this.statusResources.completedRequestDisplay = res.data.completedRequestDisplay  ? this.moment(res.data.completedRequestDisplay).format('DD/MM/YYYY') : null
                 })
                 .catch(error => {
                     console.log(error)
@@ -330,8 +331,7 @@
                     data: { user_id: this.user.id },
                 })
                 .then( res => {
-                    console.log(res)
-                    this.statusResources.completedReseivedDisplay = res.data.completedReseivedDisplay
+                    this.statusResources.completedReseivedDisplay = res.data.completedReseivedDisplay  ? this.moment(res.data.completedReseivedDisplay).format('DD/MM/YYYY') : null
                 })
                 .catch(error => {
                     console.log(error)
@@ -345,7 +345,6 @@
                 var existsTextarea = document.getElementById(id);
 
                 if(!existsTextarea){
-                    console.log("Creando textarea");
                     var textarea = document.createElement("textarea");
                     textarea.id = id;
                     // Coloca el textarea en el borde superior izquierdo
@@ -382,10 +381,8 @@
                     var status = document.execCommand('copy');
                     if(!status){
                         this.alertCopy('No se pudo copiar')
-                        console.error("No se pudo copiar el texto");
                     }else{
                         this.alertCopy('¡Copiado en el portapapeles!')
-                        console.log("El texto ahora está en el portapapeles");
                     }
                 } catch (err) {
                     console.log('Uy, no se pudo copiar');

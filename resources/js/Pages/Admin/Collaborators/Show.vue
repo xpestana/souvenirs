@@ -138,7 +138,7 @@
                     <h2 class="font-semibold text-lg inline-block text-negro">Informe de ventas</h2>
                 </div>
                 <div clasS="my-4 invisible">
-                    #222
+                    #
                 </div>
                 <div class="text-center text-md-right">
                     <Link

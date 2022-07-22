@@ -5,6 +5,7 @@
     "/vendor_asset/img/admin/icons/adminrecursos.svg": "/vendor_asset/img/admin/icons/adminrecursos.svg",
     "/vendor_asset/img/admin/icons/adminventas.svg": "/vendor_asset/img/admin/icons/adminventas.svg",
     "/vendor_asset/img/admin/icons/ajustes.svg": "/vendor_asset/img/admin/icons/ajustes.svg",
+    "/vendor_asset/img/admin/icons/envionegro.svg": "/vendor_asset/img/admin/icons/envionegro.svg",
     "/vendor_asset/img/admin/icons/experiencias.svg": "/vendor_asset/img/admin/icons/experiencias.svg",
     "/vendor_asset/img/admin/icons/partners.svg": "/vendor_asset/img/admin/icons/partners.svg",
     "/vendor_asset/img/admin/icons/souvenirs.svg": "/vendor_asset/img/admin/icons/souvenirs.svg",
@@ -85,18 +86,10 @@
     "/vendor_asset/img/collaborator/dashboard/icons/kayak.svg": "/vendor_asset/img/collaborator/dashboard/icons/kayak.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/lodging/apartamento.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/apartamento.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/lodging/ApartamentoAzul.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/ApartamentoAzul.svg",
-    "/vendor_asset/img/collaborator/dashboard/icons/lodging/ApartamentoBlanco.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/ApartamentoBlanco.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/lodging/complejo turístico.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/complejo turístico.svg",
-    "/vendor_asset/img/collaborator/dashboard/icons/lodging/complejo túristico.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/complejo túristico.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/lodging/ComplejoTurAzul.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/ComplejoTurAzul.svg",
-    "/vendor_asset/img/collaborator/dashboard/icons/lodging/ComplejoTurBlanco.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/ComplejoTurBlanco.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/lodging/hotel.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/hotel.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/lodging/HotelAzul.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/HotelAzul.svg",
-<<<<<<< HEAD
-    "/vendor_asset/img/collaborator/dashboard/icons/lodging/HotelBlanco.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/HotelBlanco.svg",
-    "/vendor_asset/img/collaborator/dashboard/icons/lodging/rename.svg": "/vendor_asset/img/collaborator/dashboard/icons/lodging/rename.svg",
-=======
->>>>>>> origin/jhon
     "/vendor_asset/img/collaborator/dashboard/icons/LupaGris.svg": "/vendor_asset/img/collaborator/dashboard/icons/LupaGris.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/perfil.svg": "/vendor_asset/img/collaborator/dashboard/icons/perfil.svg",
     "/vendor_asset/img/collaborator/dashboard/icons/question.svg": "/vendor_asset/img/collaborator/dashboard/icons/question.svg",
@@ -295,6 +288,5 @@
     "/vendor_asset/js/plugins.js": "/vendor_asset/js/plugins.js",
     "/vendor_asset/js/vendor/jquery-3.2.1.min.js": "/vendor_asset/js/vendor/jquery-3.2.1.min.js",
     "/vendor_asset/js/vendor/modernizr-3.5.0.min.js": "/vendor_asset/js/vendor/modernizr-3.5.0.min.js",
-    "/css/all.css": "/css/all.css",
-    "/vendor_asset/img/admin/icons/envionegro.svg": "/vendor_asset/img/admin/icons/envionegro.svg"
+    "/css/all.css": "/css/all.css"
 }

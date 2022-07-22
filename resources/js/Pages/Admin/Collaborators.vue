@@ -10,16 +10,21 @@
 		<div class="lodgings-filter row  my-4 mx-1.5 lg:mx-0 justify-content-lg-between">
             <div class="col-12 col-lg-8 shadow p-1 rounded-xl bg-white pr-lg-0">
                     <div class="row py-1">
-                    <div class="col-2 col-md-1 pl-4 pr-0">
-                        <i class="fas fa-search text-gray-400 relative top-3 lg:text-lg"></i>
-                    </div>
-                    <div class="col-10 px-0 relative">
-                        <input v-model="formSearch.search" @keyup.enter="submitSearch" type="text"  class="border-none w-full pl-1 pr-0" placeholder="Busca tu anfitrión...">
-                        <div v-if="searching" class="spinner-border spinner-border-sm absolute right-4 md:right-0 top-3 text-orangec" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                </div>
+						<div class="col-2 col-md-1 pl-4 pr-0">
+							<i class="fas fa-search text-gray-400 relative top-3 lg:text-lg"></i>
+						</div>
+						<div class="col-6 col-md-10 px-0 relative">
+							<input v-model="formSearch.search" @keyup.enter="submitSearch" type="text"  class="border-none w-full pl-1 pr-0" placeholder="Busca tu anfitrión...">
+							<div v-if="searching" class="spinner-border spinner-border-sm absolute right-4 md:right-0 top-3 text-orangec" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+						</div>
+						<div class="col-2 md:hidden">
+							<button @click="submitSearch()" class="bg-collaborator-orange text-white rounded px-2 px-lg-4 py-1 py-lg-2 mt-2 mt-lg-1">
+								Buscar
+							</button>
+						</div>
+					</div>
             </div>
             <div class="col-12 col-lg-3 text-right pt-2 pl-lg-0 text-center text-lg-right">
                 <button
@@ -79,12 +84,12 @@
 							</span>
 							<i class="fas fa-caret-down inline-block ml-1"></i>
 						</a>
-						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md" :aria-labelledby="`dropdown-profile-${item.id}`">
-							<div class="bg-collaborator-orange rounded-t-md py-2 px-2 font-bold text-white">
+						<div class="dropdown-menu pt-0 rounded-xl shadow-xl mt-2 py-0 w-60" :aria-labelledby="`dropdown-profile-${item.id}`">
+							<div class="bg-collaborator-orange rounded-t-xl p-2 font-bold text-white">
 								Ajustes del perfil
 							</div>
 							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.profile',{id:item.id})">
-								<span class="text-black">
+								<span class="">
 									<img
 										class="inline w-4 icon-filter"
 										style="margin-top:-4px; margin-right: 2px;"
@@ -92,11 +97,11 @@
 									>
 									Información de perfil
 								</span>
-								<i v-if="item.completInformation" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+								<i v-if="item.completInformation" class="fas fa-check-circle text-xs pl-1 text-success ml-1" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle text-xs text-danger pl-1 ml-1" style="margin-top:3px"></i>
 							</Link>
 							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.tax',{id:item.id})">
-								<span class="text-black">
+								<span class="">
 									<img
 										class="inline w-4 icon-filter"
 										style="margin-top:-4px; margin-right: 2px;"  
@@ -104,8 +109,8 @@
 									>
 									Datos fiscales
 								</span>
-								<i v-if="item.completedNif" class="fas fa-check-circle w-3  text-success" style="margin-top:3px"></i>
-								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+								<i v-if="item.completedNif" class="fas fa-check-circle text-xs  text-success pl-1" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle text-xs text-danger pl-1" style="margin-top:3px"></i>
 							</Link>
 							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.bank',{id:item.id})">
 								<span class="text-black">
@@ -116,8 +121,8 @@
 									>
 									Información bancaria
 								</span>
-								<i v-if="item.completedBank" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:2px"></i>
+								<i v-if="item.completedBank" class="fas fa-check-circle text-xs text-success pl-1" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle text-xs text-danger pl-1" style="margin-top:3px"></i>
 							</Link>
 							<Link class="flex dropdown-item link py-2 justify-content-between" :href="route('admin.collaborator.shipping',{id:item.id})">
 								<span class="text-black">
@@ -128,8 +133,8 @@
 									>
 									Datos de envío
 								</span>
-								<i v-if="item.completedShipping" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								<i v-if="item.completedShipping" class="fas fa-check-circle text-xs text-success pl-1" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle text-xs text-danger pl-1" style="margin-top:3px"></i>
 							</Link>
 						</div>
 					</div>
@@ -147,8 +152,8 @@
 							</span>
 							<i class="fas fa-caret-down inline-block ml-1"></i>
 						</a>
-						<div class="dropdown-menu setting-profile pt-0 rounded-md shadow-md" :aria-labelledby="`dropdown-resource-${item.id}`">
-							<div class="bg-collaborator-orange rounded-t-md py-2 px-2 font-bold text-white">
+						<div class="dropdown-menu pt-0 rounded-xl shadow-xl mt-2 py-0 w-60" :aria-labelledby="`dropdown-resource-${item.id}`">
+							<div class="bg-collaborator-orange rounded-t-xl p-2 font-bold text-white">
 								Recursos
 							</div>
 							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.resource',{id:item.id})">
@@ -160,8 +165,8 @@
 									>
 									Banner descargado
 								</span>
-								<i v-if="item.completedBanner" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								<i v-if="item.completedBanner" class="fas fa-check-circle text-xs text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle text-xs text-danger" style="margin-top:3px"></i>
 							</Link>
 							<Link class="flex dropdown-item py-2 link justify-content-between" :href="route('admin.collaborator.resource',{id:item.id})">
 								<span class="text-black">
@@ -172,8 +177,8 @@
 									>
 									Url generada    
 								</span>
-								<i v-if="item.completedUrl" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								<i v-if="item.completedUrl" class="fas fa-check-circle text-xs text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle text-xs text-danger" style="margin-top:3px"></i>
 							</Link>
 							<Link class="flex dropdown-item link py-2 justify-content-between" :href="route('admin.collaborator.resource',{id:item.id})">
 								<span class="text-black">
@@ -184,8 +189,8 @@
 									>
 									Displays pedidos
 								</span>
-								<i v-if="item.completedRequestDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								<i v-if="item.completedRequestDisplay" class="fas fa-check-circle text-xs text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle text-xs text-danger" style="margin-top:3px"></i>
 							</Link>
 							<Link class="flex dropdown-item link py-2 justify-content-between" :href="route('admin.collaborator.resource',{id:item.id})">
 								<span class="text-black">
@@ -196,8 +201,8 @@
 									>
 									Displays enviados
 								</span>
-								<i v-if="item.completedReseivedDisplay" class="fas fa-check-circle w-3 text-success" style="margin-top:3px"></i>
-								<i v-else class="fas fa-times-circle w-3 text-danger" style="margin-top:1px"></i>
+								<i v-if="item.completedReseivedDisplay" class="fas fa-check-circle text-xs text-success" style="margin-top:3px"></i>
+								<i v-else class="fas fa-times-circle text-xs text-danger" style="margin-top:3px"></i>
 							</Link>
 						</div>
 					</div>
@@ -468,12 +473,6 @@ export default {
 		font-size: 1em;
 	}
 
-    .setting-profile {
-        top: 3.2rem;
-        left: 0;
-        width: 250px;
-    }
-
 	.error-input{
         border: solid 2.5px red;
     }
@@ -481,6 +480,10 @@ export default {
     .icon-filter{
         filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(330deg) brightness(100%) contrast(57%);
     }
+
+	input {
+		outline: none;
+	}
 
 	.w{
 		min-width: 600px;
